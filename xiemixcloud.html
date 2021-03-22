@@ -1,0 +1,55 @@
+<SCRIPT>
+function passWord() {
+var testV = 1;
+var pass1 = prompt('Vui lòng nhập mã truy cập',' ');
+while (testV < 3) {
+if (!pass1)
+history.go(-1);
+if (pass1.toLowerCase() == "cdtdk14") {
+alert('Đang truy cập');
+window.open('protectpage.html');
+break;
+}
+testV+=1;
+var pass1 =
+prompt('Sai mã truy cập vui lòng thử lại.','Mã truy cập');
+}
+if (pass1.toLowerCase()!="password" & testV ==3)
+history.go(-1);
+return " ";
+}
+</SCRIPT>
+<div class="card-container">
+<link rel="stylesheet" href="style.css">
+	<span class="pro">PRO</span>
+	<img class="round" src="img/Xiemix.png" width="127" height="128" alt="user" />
+	<h3>Xiemix Cloud.</h3>
+	<h6>@XiemixCloud</h6>
+	<p>Lưu trữ không giới hạn <br>*Chỉ dành cho những ai có mã truy cập</p>
+	<div class="buttons">
+		<CENTER>
+<FORM>
+<input type="button" value="Truy cập" onClick="passWord()">
+</FORM>
+</CENTER>
+	</div>
+	<div class="skills">
+		<form>
+  <h6>Mã truy cập nhanh ( chỉ Admin )</h6>
+  <input type="password" id="error" name="code"><br>
+  <center>
+  <input type="button" class="buttons" value="Mở khóa" onclick="error()">
+</form>
+</center>
+		<ul>
+			<center>
+			<li>Power by <a href="https://www.instagram.com/Chd308">Chesino HD</a></li>
+		</center>
+		</ul>
+		<script>
+function error() {
+  alert("Chưa hoạt động.");
+}
+</script>
+	</div>
+</div>
