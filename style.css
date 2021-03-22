@@ -19,6 +19,7 @@ body {
 
 h3 {
 	margin: 10px 0;
+	color: #38b6ff;
 }
 
 h6 {
@@ -38,14 +39,14 @@ p {
 	color: #B3B8CD;
 	padding-top: 30px;
 	position: relative;
-	width: 350px;
+	width: 500px;
 	max-width: 100%;
 	text-align: center;
 }
 
 .card-container .pro {
 	color: #231E39;
-	background-color: #FEBB0B;
+	background-color: #38b6ff;;
 	border-radius: 3px;
 	font-family: verdana;
 	font-size: 14px;
@@ -132,8 +133,7 @@ footer a {
     text-decoration: none;
 }
 input[type=button] {
-  width: 100%;
-  background-color: #03bfcb;
+  background-color: #38b6ff;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -149,4 +149,25 @@ input[type=password], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+a:link {
+  color: #38b6ff;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: #38b6ff;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
 }
