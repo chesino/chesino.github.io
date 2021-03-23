@@ -1,18 +1,18 @@
 <SCRIPT>
 function passWord() {
 var testV = 1;
-var pass1 = prompt('Vui lòng nhập mã truy cập',' ');
+var pass1 = prompt('Vui lòng nhập mã giới thiệu',' ');
 while (testV < 3) {
 if (!pass1)
 history.go(-1);
-if (pass1.toLowerCase() == "hungdinh") {
+if (pass1.toLowerCase() == "dinhmanhhung") {
 alert('Đang truy cập');
-window.open('123cloudxiemix.html');
+window.open('files.html');
 break;
 }
 testV+=1;
 var pass1 =
-prompt('Sai mã truy cập vui lòng thử lại.','Mã truy cập');
+prompt('Sai mã truy cập vui lòng thử lại.','Mã giới thiệu');
 }
 if (pass1.toLowerCase()!="password" & testV ==3)
 history.go(-1);
@@ -25,7 +25,7 @@ return " ";
 	<img class="round" src="img/Xiemix.png" width="127" height="128" alt="user" />
 	<h3>Xiemix Cloud.</h3>
 	<h6>@XiemixCloud</h6>
-	<p>Lưu trữ không giới hạn <br>*Chỉ dành cho những ai có mã truy cập</p>
+	<p>Lưu trữ không giới hạn <br>*Chỉ dành cho những ai có mã giới thiệu</p>
 	<div class="buttons">
 		<CENTER>
 <FORM>
