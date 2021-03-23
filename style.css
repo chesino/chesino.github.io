@@ -171,3 +171,39 @@ a:active {
   background-color: transparent;
   text-decoration: underline;
 }
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #03BFCB;
+  border: 2px solid white;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 0px;
+}
+
+.dropdown-content a {
+  color: black;
+  font-size: 15px;
+  padding: 5px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  border-radius: 5px;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
