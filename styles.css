@@ -99,3 +99,21 @@ input:checked + .slider:before {
 	font-family: 'Teko', sans-serif;
 	font-size: 35px;
 }
+
+
+.fa {
+	position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+}
+.button1 {
+  background-color: White; /* Green */
+  border: none;
+  color: #242424;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
