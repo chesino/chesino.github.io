@@ -14,14 +14,18 @@
 </style>
 </head>
 <body>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="charging" class="fa"></div>
+
 <center>
 <div class="header">
   <h1>XiemixTools</h1>
   <p>Power by ChesinoHD</p>
 </div>
+</div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div id="charging" class="fa"></div>
+<div class="midle">
 
 <label class="switch-dark-mode">
   <input type="checkbox" onclick="darkmode()">
@@ -60,8 +64,8 @@ function chargebattery() {
 chargebattery();
 setInterval(chargebattery, 5000);
 </script>
-
-<button onclick="showtxt()">Click me</button>
+<br>
+<!---button class="button1" onclick="showtxt()">Click me</button><-->
 
 <p id="showtext"></p>
 
@@ -78,7 +82,7 @@ function showtxt() {
   }
 }
 </script> 
-
+</div>
 
 
 </body>
