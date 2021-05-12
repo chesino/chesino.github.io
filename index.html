@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="logo.png" href="img/logo.png"/>
+<title>Xiemix Tools.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+
+</style>
+</head>
+<body>
+<center>
+<div class="header">
+  <h1>XiemixTools</h1>
+  <p>Power by ChesinoHD</p>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="charging" class="fa"></div>
+
+<label class="switch-dark-mode">
+  <input type="checkbox" onclick="darkmode()">
+  <span class="slider round"></span>
+</label>
+
+
+<!-- script Dark Mode -->
+<script>
+function darkmode() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");  
+}
+</script>
+<!-- /Dark Mode -->
+
+
+<script>
+function chargebattery() {
+  var a;
+  a = document.getElementById("charging");
+  a.innerHTML = "&#xf244;";
+  setTimeout(function () {
+    a.innerHTML = "&#xf243;";
+  }, 1000);
+  setTimeout(function () {
+    a.innerHTML = "&#xf242;";
+  }, 2000);
+  setTimeout(function () {
+    a.innerHTML = "&#xf241;";
+  }, 3000);
+  setTimeout(function () {
+    a.innerHTML = "&#xf240;";
+  }, 4000);
+}
+chargebattery();
+setInterval(chargebattery, 5000);
+</script>
+
+<button onclick="showtxt()">Click me</button>
+
+<p id="showtext"></p>
+
+<script>
+var i = 0;
+var txt = 'Đang phát hành....';
+var speed = 10;
+
+function showtxt() {
+  if (i < txt.length) {
+    document.getElementById("showtext").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(showtxt, speed);
+  }
+}
+</script> 
+
+<p class="txt1" id="demo"></p>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Oct 1, 2021 00:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "D " + hours + "H "
+  + minutes + "M " + seconds + "S ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
