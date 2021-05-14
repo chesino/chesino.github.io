@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<!---Nguồn cấp-->
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="logo.png" href="img/logo.png"/>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<title>Xiemix Tools.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+
+  <!--Tiêu Đề-->
+<div class="top">
+    <h1>XiemixTools</h1>
+    <p>Power by ChesinoHD</p>
+</div>
+
+<!---Nhập dữ liệu-->
+<div class="box">
+  <form class="example">
+    <input class="pssw" type="password" placeholder="Nhập mật khẩu.." value="" id="search" onchange="openPage()">
+    <button type="submit" onclick="openPage()"><i class="fa fa-search"></i></button>
+  </form>
+</div>
+<br>
+<br>
+<!---Chế độ tối-->
+<div class="darkmodestyle">
+<label class="switch-dark-mode">
+  <input type="checkbox" onclick="darkmode()">
+  <span class="slider round"></span>
+</label>
+<br>
+<br>
+<label class="switch-dark-mode">
+  <input type="checkbox"  onclick="darkmode2()">
+  <span class="slider round"></span>
+</label>
+</div>
+</br>
+
+<!-- script Dark Mode -->
+<div class="darkmodestyle">
+<script>
+function darkmode() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");  
+}
+</script>
+
+<script>
+function darkmode2() {
+   var element = document.body;
+   element.classList.toggle("dark-mode2");  
+}
+</script>
+</div>
+
+
+<!-- /Dark Mode -->
+
+<div>
+    <script>
+        function openPage() {
+            var x = document.getElementById("search").value;
+
+            if (x === "300801") {
+                window.open("/300801.html");
+            }
+
+            if (x === "191204") {
+                window.open("/191204.html");
+            }
+
+        }
+    </script>
+</div>
+</body>
+
+</html>
+
+</body>
+</html>
