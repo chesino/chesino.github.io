@@ -78,6 +78,10 @@ input:checked + .slider:before {
   text-align: center;
 }
 
+.darkmodestyle2 {
+  text-align: center;
+}
+
 table {
     font-family: -apple-system, 
                 BlinkMacSystemFont, sans-serif;
@@ -91,6 +95,10 @@ td, th {
   padding: 10px;
 }
 
+.hef {
+  color: greenyellow;
+}
+
 h2{
     text-align: center;
     font-family: -apple-system, 
@@ -102,4 +110,20 @@ p{
     font-size: 15px;
     font-family: -apple-system, 
                 BlinkMacSystemFont, sans-serif;
+}
+
+a:link {
+  color: red;
+}
+
+a:visited {
+  color: greenyellow;
+}
+
+a:hover {
+  color: hotpink;
+}0
+
+a:active {
+  color: blue;
 }
