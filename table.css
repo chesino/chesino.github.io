@@ -1,9 +1,8 @@
 
 body {
-    padding: 25px;
     background-color: #242424;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
   }
   
   .dark-mode {
@@ -99,7 +98,7 @@ h2{
 }
 
 p{
-    text-align: right;
+    text-align: center;
     font-family: -apple-system, 
                 BlinkMacSystemFont, sans-serif;
 }
