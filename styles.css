@@ -17,8 +17,8 @@ body {
   }
   
   .dark-mode {
-    background-color: white;
-    color: #242424;
+    background-image: url(/img/wall.jpg);
+    color: white;
   }
   
   .dark-mode2 {
