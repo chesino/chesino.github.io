@@ -24,3 +24,26 @@ function BarScroll() {
     document.getElementById("myBar").style.width = scrolled + "%";
   }
 
+
+
+
+  moveOnMax =function (field, nextFieldID) {
+    if (field.value.length == 1) {
+        document.getElementById(nextFieldID).focus();
+    }
+}
+
+
+function openPage() {
+  var x = document.getElementById("search").value;
+
+  if (x === "300801") {
+      window.open("/300801.html");
+  }
+
+  if (x === "TCN") {
+      window.open("/191204.html");
+  }
+  
+
+}
