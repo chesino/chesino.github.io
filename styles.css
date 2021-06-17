@@ -118,10 +118,8 @@ font-size: 60%;
 }
 
 button {
-padding: 0px 130px 0px ;
 font-family: 'Anonymous Pro', monospace;
 font-size: 25px;
-width: auto;
 background-color: transparent;
 border: transparent;
 color: currentColor;
@@ -147,7 +145,7 @@ hr:hover {
 input {
 text-align: center;
 color: currentColor;
-width: 100%;
+width: 90%;
 font-size: 25px;
 background: transparent;
 border: 2px solid currentColor;
@@ -231,3 +229,4 @@ a:hover {
 .search {
   padding-bottom: 5px;
 }
+
