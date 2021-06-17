@@ -1,54 +1,237 @@
 body {
-	position: relative;
-	width: 375px;
-	height: 812px;
-	background: #242424;
-	border-radius: 20px;
-	overflow: hidden;
+  text-align: center;
+  background-color: #242424;
+  color: greenyellow;
+  font-family: 'Anonymous Pro', monospace;
 }
-.rectangle {
-	position: absolute;
-  width: 375px;
-  height: 298px;
-  left: 0px;
+.darkmode {
+  background-color: white;
+  color: black;
+}
+
+
+
+.barScroll {
+  position: fixed;
   top: 0px;
-  background: #1BD6FF;
-  border-radius: 20px;
-  }
-.img {
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: rgba(29, 29, 29, 0.507);
+}
+
+.barScroll-action {
+  height: 5px;
+  background: currentColor;
+  width: 0%;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: greenyellow;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a.class1 {
+  text-decoration: none;
+  font-size: 20px;
+  color: red;
+  display: block;
+  transition: 0.3s;
+}
+
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closeMenu {
   position: absolute;
-  width: 220px;
-  height: 217.07px;
-  left: 78px;
-  top: 26px;
-  background: url(/img/img2.png);
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-right: 50px;
+}
+
+.menu {
+  left: 0;
+  top: 15px;
+  padding: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: inherit;
+  color: unset;
+  padding: 10px 15px;
+  border: solid 3px currentColor;
+}
+
+.menu:hover {
+  background-color: unset;
+  color: red;
+}
+
+#menu {
+  transition: margin-left .5s;
+  padding: 15px;
+}
+
+h3.bio {
+font-size: 100%;
+}
+
+
+a.link {
+text-decoration: none;
+color: black;
+background-color: greenyellow;
+}
+
+a.link:hover {
+background-color: red;
+}
+
+
+::selection {
+background: greenyellow; 
+color: black;
 }
 
 .login {
-	position: absolute;
-    width: 335px;
-    height: 292px;
-    left: 20px;
-    top: 383px;
+padding: 5%;
+text-align: center;
+font-size: 60%;
 }
 
-input[type=text], select {
-	position: absolute;
-	width: 335px;
-	height: 56px;
-	left: 20px;
-	top: 307px;	
-	background: #EDEBF7;
-	border-radius: 8px;
+button {
+font-family: 'Anonymous Pro', monospace;
+font-size: 25px;
+height: 30%;
+width: auto;
+background-color: transparent;
+border: transparent;
+color: currentColor;
+border: 2px solid currentColor;
+
 }
 
-input[type=submit] {
-	position: absolute;
-width: 335px;
-height: 56px;
-left: 20px;
-top: 400px;
+button.btn1:hover {
+border: 2px solid red;
+color: red;
+}
 
-background: #1BD6FF;
-border-radius: 8px;
+
+label {
+font-size: 26px;
+border: 2px solid currentColor;
+}
+
+label:hover {
+border: 2px solid red;
+color: red;
+}
+
+hr {
+width: 70%;
+height: 2px;
+background-color: currentColor;
+border: 2px solid currentColor;
+}
+hr:hover {
+  background-color: red;
+  border: 2px solid red;
+}
+input {
+text-align: center;
+color: currentColor;
+width: 50%;
+font-size: 25px;
+background: transparent;
+border: 2px solid currentColor;
+}
+
+input:hover {
+border: 2px solid red;
+color: red;
+}
+
+.header {
+position: -webkit-sticky; /* Safari */
+position: sticky;
+top: 2%;
+overflow: hidden;
+background-color: rgba(0, 0, 0, 0.356); 
+padding: 15px 15px;
+border: 3px solid currentColor;
+}
+
+.welcome {
+
+text-align: center;
+}
+
+h1.welcome {
+padding: auto;
+font-size: 55px;
+background-color: greenyellow;
+color: #242424;
+}
+
+h1.welcome:hover {
+background-color: red;
+color: white;
+}
+
+p {
+  font-size:15px
+}
+
+h1 {
+  font-size: 26px;
+  background-color: greenyellow;
+  color: #242424;
+}
+
+h1:hover {
+  background-color: red;
+  color: white;
+  }
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+    font-size: 17px;
+  }
+
+.blog {
+  padding-bottom: 50px;
+}
+
+.tools {
+  padding-bottom: 50px;
+}
+
+a {
+  color: currentColor;
+}
+
+a:hover {
+  color: red;
 }
