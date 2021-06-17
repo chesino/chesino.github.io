@@ -1,39 +1,62 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html>
+  <head>
 
-<!---Nguồn cấp-->
-<link rel="stylesheet" href="test.css">
-<link rel="icon" type="logo.png" href="img/logo.png"/>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chesino HD</title>
+  </head>
+  <body>
 
-<title>Xiemix Tools.</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<body>
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closeMenu" onclick="closeMenu()">×</a>
+      <a href="/beta.html">Trang chủ</a>
+      <a href="#">Công cụ</a>
+      <a href="#">Đăng nhập</a>
+      <a href="#">Đăng ký</a>
+      <a class="class1" onclick="darkmode()" href="#">Chế độ sáng</a>
+    </div>
 
+    <div class="barScroll">
+      <div class="barScroll-action" id="myBar"></div>
+    </div>  
 
+    <div id="menu">
+      <div class="header"> 
+      <button class="menu" onclick="openMenu()">☰ CHESINO HD</button> 
+      <h3 class="bio">Trang chính thức của <a class="link" href="https:www.facebook.com/CHD308">Chesino HD</a></h3>
+    </div>
 
-<form action="" class="search-bar">
-	<input class="pssw" type="password"  pattern=".*\S.*" required value="" id="search" onchange="openPage()">
-	<button class="search-btn" type="submit" onclick="openPage()"></button>
-</form>
+      <div class="welcome">
+        <h1 class="welcome">Chesino HD</h1>
+        <h3>Nhà phát triển chính của XIEMIX TOOLS.</h3>
+      <hr></hr>
+        <h1>Tra cứu dữ liệu XieCLOUD</h1>
+        <h3>Chỉ những dữ liệu ở chế độ công khai</h3>
+        <p>( Hiện không có dữ liệu nào được công khai.)</p>
+      </div>
 
-<div>
-    <script>
-        function openPage() {
-            var x = document.getElementById("search").value;
+      <div class="login">
+        <form>
+          <input type="password" value="" id="search" onchange="openPage()">
+          <button class="btn1" onclick="openPage()" >Tra Cứu</button>
+        </form>
+          </div>
+    <div class="blog">
+      <h1>Bài Viết</h1>
+      <h3>Không có bài viết</h3>
+    </div>
+    <div class="tools">
+      <h1>Cung cụ</h1>
+      <h3>Không có dữ liệu</h3>
+    </div>
+    <div class="info">
+      <h1>Thông tin trang</h1>
+      <h2>Thiết kế và lập trình bởi <a href="https://www.facebook.com/HunqD" >Đinh Mạnh Hùng</a></h2>
+    </div>
 
-            if (x === "300801") {
-                window.open("/300801.html");
-            }
-
-            if (x === "191204") {
-                window.open("/191204.html");
-            
-
-        }
-    </script>
-</div>
+  </body>
+</html>
