@@ -1,7 +1,7 @@
 body {
   background-color: #242424;
   color: greenyellow;
-  font-family: 'Anonymous Pro', monospace;
+  font-family: 'Source Code Pro', monospace;
 }
 .darkmode {
   background-color: white;
@@ -39,6 +39,7 @@ body {
 }
 
 .sidebar a {
+  font-weight: bold;
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 20px;
@@ -119,7 +120,7 @@ font-size: 60%;
 }
 
 button {
-font-family: 'Anonymous Pro', monospace;
+font-family: 'Source Code Pro', monospace;
 font-size: 25px;
 background-color: transparent;
 border: transparent;
