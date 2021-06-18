@@ -48,6 +48,6 @@ function openPage() {
   if (x === "HUY123") {
     window.open("/gif001.html");
 }
-  
+ 
 
 }
