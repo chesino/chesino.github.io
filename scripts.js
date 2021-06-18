@@ -44,6 +44,10 @@ function openPage() {
   if (x === "TCN") {
       window.open("/191204.html");
   }
+
+  if (x === "HUY123") {
+    window.open("/gif001.html");
+}
   
 
 }
