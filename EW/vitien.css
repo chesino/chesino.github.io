@@ -1,0 +1,107 @@
+body {
+    background-color: #242424;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+  }
+.head {
+    position: sticky;
+    padding: 20px;
+    background-color: rgb(6, 6, 15);
+}
+.logo {
+    text-align: left;
+}
+.menu {
+    margin-left: 320px;
+    width: 30px;
+}
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+  
+  /* Loại bỏ các lề thừa bên trái và bên phải do có phần đệm */
+  .row {margin: 0 -5px;}
+  /* Xóa số nổi sau các cộtXóa số nổi sau các cột */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Các cột đáp ứng  */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Tạo kiểu cho thẻ truy cập */
+  .card {
+    line-height: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    background-color: #282929;
+  }
+ 
+  .dck {
+    color: greenyellow;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    background-color: #282929;
+  }
+  .lichsu {
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    background-color: #282929;
+  }
+button.btnck {
+  text-align: center;
+  padding: 10px 14px;
+    font-size: 18px;
+    background-color: greenyellow;
+    border: none;
+}
+h1 {
+  text-align: center;
+    padding-left: 10px;
+    color: greenyellow;
+    font-size: 20px;
+}
+
+h4 {
+  border: 2px solid black;  
+    background-color: greenyellow;
+    color: black;
+}
+
+h4.trutien {
+  background-color: rgb(255, 17, 17);
+  color: black;
+}
+
+h1.wel {
+    text-align: center;
+    font-size: 50px;
+}
+h3 {
+  text-align: center;
+  font-size: 20px;
+}
+
+input {
+  text-align: center;
+  padding: 10px 5px;
+  width: 65%;
+  color: greenyellow;
+  font-size: 15px;
+  background-color: transparent;
+  border: 3px solid greenyellow;
+}
