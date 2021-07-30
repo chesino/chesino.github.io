@@ -1,11 +1,11 @@
 body {
   background-color: #242424;
-  color: greenyellow;
-  font-family: 'Source Code Pro', monospace;
+  color: white;
+  font-family: Verdana, Tahoma, sans-serif
 }
 .darkmode {
-  background-color: white;
-  color: black;
+  background-image: url(/img/bg3.png);
+  color: white;
 }
 
 
@@ -21,7 +21,7 @@ body {
 
 .barScroll-action {
   height: 5px;
-  background: red;
+  background: #24fec4;
   width: 0%;
 }
 
@@ -130,16 +130,7 @@ border: 2px solid currentColor;
 }
 
 
-hr {
-width: 70%;
-height: 1px;
-background-color: currentColor;
-border: 2px solid currentColor;
-}
-hr:hover {
-  background-color: red;
-  border: 2px solid red;
-}
+
 input {
 text-align: center;
 color: currentColor;
@@ -162,22 +153,7 @@ padding: 15px 15px;
 border: 3px solid currentColor;
 }
 
-.welcome {
 
-text-align: center;
-}
-
-h1.welcome {
-padding: auto;
-font-size: 55px;
-background-color: greenyellow;
-color: #242424;
-}
-
-h1.welcome:hover {
-background-color: red;
-color: white;
-}
 
 p {
   font-size:15px;
@@ -185,20 +161,23 @@ p {
 }
 
 h1 {
-  text-align: center;
-  font-size: 26px;
-  background-color: greenyellow;
+  font-size: 20px;
+  background-color: white;
   color: #242424;
 }
 
-h1:hover {
-  background-color: red;
-  color: white;
-  }
 
+
+.free {
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+}
 h2 {
   font-size: 22px;
-  text-align: center;
+  text-align: left;
 }
 
 h2.end {
@@ -217,6 +196,7 @@ h3.bio {
   }
 
 .blog {
+  text-align: center;
   padding-bottom: 50px;
 }
 
