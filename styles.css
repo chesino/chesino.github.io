@@ -1,0 +1,259 @@
+body {
+  background-color: #242424;
+  color: white;
+  font-family: Verdana, Tahoma, sans-serif
+}
+.darkmode {
+  background-image: url(/img/bgm.jpg);
+  color: white;
+}
+
+
+
+.barScroll {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: currentColor;
+}
+
+.barScroll-action {
+  height: 5px;
+  background: greenyellow;
+  width: 0%;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  font-weight: bold;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: greenyellow;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a.class1 {
+  text-decoration: none;
+  font-size: 20px;
+  background-color: greenyellow;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closeMenu {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-right: 50px;
+}
+
+.menu {
+  left: 0;
+  top: 15px;
+  padding: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: inherit;
+  color: unset;
+  padding: 10px 15px;
+  border: solid 3px currentColor;
+}
+
+.menu:hover {
+  background-color: unset;
+  color: red;
+}
+
+#menu {
+  transition: margin-left .5s;
+  padding: 15px;
+}
+
+
+
+a.link {
+text-decoration: none;
+color: black;
+background-color: greenyellow;
+}
+
+a.link:hover {
+  color: black;
+background-color: white;
+}
+
+
+::selection {
+background: greenyellow; 
+color: black;
+}
+
+.login {
+padding: 5%;
+text-align: center;
+font-size: 60%;
+}
+
+button {
+font-family: 'Source Code Pro', monospace;
+font-size: 25px;
+background-color: transparent;
+border: transparent;
+color: currentColor;
+border: 2px solid currentColor;
+
+}
+
+
+
+input {
+text-align: center;
+color: currentColor;
+width: 50%;
+font-size: 25px;
+background: transparent;
+border: 2px solid currentColor;
+}
+
+input:hover {
+border: 2px solid red;
+color: red;
+}
+
+.header {
+top: 2%;
+overflow: hidden;
+background-color: rgba(0, 0, 0, 0.356); 
+padding: 15px 15px;
+border: 3px solid currentColor;
+}
+
+
+
+p {
+  font-size:15px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 19px;
+  background-color: white;
+  border-radius: 3px;
+  color: #242424;
+}
+
+a.linkon {
+  font-size: x-large;
+}
+
+a.server1 {
+  color: black;
+  background-color: greenyellow;
+}
+
+a.server2 {
+  color: black;
+  background-color: red;
+}
+.free {
+  text-align: center;
+ padding-bottom: 25px; 
+}
+
+h4 {
+  text-align: center;
+}
+h2 {
+  font-size: 22px;
+  text-align: left;
+}
+
+h2.end {
+  font-size: 14px;
+  text-align: center;
+}
+
+h3 {
+    font-size: 17px;
+    text-align: center;
+  }
+
+h3.bio {
+    font-size: 15px;
+    text-align: left;
+  }
+
+.blog {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.tools {
+  padding-bottom: 50px;
+}
+
+a {
+  color: currentColor;
+}
+
+a:hover {
+  color: white;
+}
+
+
+.search {
+  padding-bottom: 5px;
+}
+
+a.sign {
+  font-size: 20px;
+  border-bottom: 2px solid currentColor;
+}
+
+.id {
+  padding-bottom: 10px;
+}
+
+h3.wel:hover {
+  background-color: greenyellow;
+  color: #242424;
+}
+
+
+.update {
+    text-align: center;
+}
+.update2 {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+h5.note {
+  color: greenyellow;
+  text-align: center;
+  border-left: 5px solid yellowgreen;
+
+}
