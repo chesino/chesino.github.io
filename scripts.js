@@ -48,6 +48,10 @@ function openPage() {
   if (x === "HUY123") {
     window.open("/gif001.html");
 }
- 
+  
 
+}
+
+function server2() {
+  alert("Máy chủ không hoạt động");
 }
