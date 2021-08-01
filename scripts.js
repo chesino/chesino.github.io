@@ -59,6 +59,6 @@ function server2() {
 function servervip() {
   if (window.confirm('Bạn không thể truy cập máy chủ này. \nĐây là máy chủ dành riêng cho thành viên trả phí \nNhấn "OK" để mua thành viên trả phí')) 
 {
-window.location.href='#';
+window.location.href='https://m.me/hunqD';
 };
 }
