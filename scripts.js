@@ -55,3 +55,10 @@ function openPage() {
 function server2() {
   alert("Máy chủ không hoạt động");
 }
+
+function servervip() {
+  if (window.confirm('Bạn không thể truy cập máy chủ này. \nĐây là máy chủ dành riêng cho thành viên trả phí \nNhấn "OK" để mua thành viên trả phí')) 
+{
+window.location.href='#';
+};
+}

@@ -11,8 +11,8 @@ body {
 
 
 .barScroll {
-  position: fixed;
-  top: 0px;
+  position:fixed;
+  bottom: 0px;
   left: 0;
   width: 100%;
   height: 5px;
@@ -178,6 +178,12 @@ a.server2 {
   color: black;
   background-color: red;
 }
+
+a.servervip {
+  color: black;
+  background-image: url(/img/7.gif);
+}
+
 .free {
   text-align: center;
  padding-bottom: 25px; 
@@ -253,7 +259,18 @@ h3.wel:hover {
 
 h5.note {
   color: greenyellow;
-  text-align: center;
+  background-color: #00000073;
+  padding-left: 5px;
+  text-align: left;
   border-left: 5px solid yellowgreen;
+
+}
+
+h5.note2 {
+  color: red;
+  background-color: #00000073;
+  padding-left: 5px;
+  text-align: left;
+  border-left: 5px solid red;
 
 }
