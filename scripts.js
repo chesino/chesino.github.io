@@ -62,3 +62,32 @@ function servervip() {
 window.location.href='https://m.me/hunqD';
 };
 }
+
+
+
+var time = 30;
+var page = "https://docs.google.com/forms/d/1zhn6z1mjn3a-wl_SFSnz04u6g8Vnj6u7iBtNcuI0stI/viewform?edit_requested=true";
+
+function countDown(){
+time--;
+gett("container").innerHTML = time;
+if(time == 0){
+window.location = page;
+}
+}
+function gett(id){
+if(document.getElementById) return document.getElementById(id);
+if(document.all) return document.all.id;
+if(document.layers) return document.layers.id;
+if(window.opera) return window.opera.id;
+}
+function init(){
+if(gett('container')){
+setInterval(countDown, 1000);
+gett("container").innerHTML = time;
+}
+else{
+setTimeout(init, 0);
+}
+}
+document.onload = init();
