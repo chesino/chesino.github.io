@@ -15,12 +15,12 @@ body {
   bottom: 0px;
   left: 0;
   width: 100%;
-  height: 5px;
+  height: 7px;
   background: currentColor;
 }
 
 .barScroll-action {
-  height: 5px;
+  height: 7px;
   background: greenyellow;
   width: 0%;
 }
@@ -274,3 +274,27 @@ h5.note2 {
   border-left: 5px solid red;
 
 }
+
+h1.note {
+  color: red;
+  font-size: 15px;
+}
+
+h1.note2 {
+  color: red;
+  font-size: 15px;
+}
+
+a.linkgr {
+  color: blue;
+  font-size: 15px;
+}
+
+p.p1 {
+  font-size: 20px;
+  text-align: left;
+  font-family: 'Source Sans Pro', sans-serif;
+  white-space:pre-line;
+}
+
+
