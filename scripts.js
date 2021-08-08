@@ -61,6 +61,72 @@ window.location.href='https://m.me/hunqD';
 };
 }
 
+function ChangeSize(obj) {
+  document.getElementById("p_content").className = obj.value;
+}
+
+function show1() {
+  var x = document.getElementById("hp1");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+function show2() {
+      var x = document.getElementById("hp2");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+ 
 
 
+function show3() {
+  var x = document.getElementById("hp3");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+function show4() {
+  var x = document.getElementById("hp4");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+function show5() {
+  var x = document.getElementById("hp5");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+function show6() {
+  var x = document.getElementById("hp6");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+function show7() {
+  var x = document.getElementById("hp7");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
 

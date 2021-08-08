@@ -290,11 +290,34 @@ a.linkgr {
   font-size: 15px;
 }
 
-p.p1 {
-  font-size: 20px;
-  text-align: left;
-  font-family: 'Source Sans Pro', sans-serif;
+
+.Hign { font-size:1.9em; 
   white-space:pre-line;
-}
+  text-align: left;
+  font-family: 'Source Sans Pro', sans-serif;}
+.Medium { font-size:20px;
+  white-space:pre-line;
+  text-align: left;
+  font-family: 'Source Sans Pro', sans-serif;}
+.Low { font-size:1.2em; 
+  white-space:pre-line;
+  text-align: left;
+  font-family: 'Source Sans Pro', sans-serif; }
 
+.gotopbtn{
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background: greenyellow;
+    bottom: 15px;
+    right: 5px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size:20px;
+  }
 
+  html{
+    scroll-behavior: smooth;
+  }
