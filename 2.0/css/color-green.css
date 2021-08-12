@@ -1,0 +1,78 @@
+/*-----------------
+* [Master Stylesheet]
+*
+* Theme    : WillyWonka
+* Version  : 1.0
+* Author   : sujal
+* 
+------------------*/
+::-webkit-scrollbar{
+    width: 4px;
+    color:rgb(1, 128, 11);
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(1, 128, 11); 
+    border-radius: 4px;
+    width: 4px;
+  }
+  #breaker{
+      background-color: rgb(1, 128, 11);
+  }
+  .color{
+      color: rgb(1, 128, 11);
+  }
+  #about-content a{
+      color:rgb(1, 128, 11) ;
+  }
+  .cv a button{
+      background:rgb(1, 128, 11);
+  }
+  .service-img img{
+    background: rgb(1, 128, 11);
+    box-shadow:0px 0px 0px 0px rgb(1, 128, 11) ;
+  }
+  .service:hover .service-img img{
+    box-shadow:0px 0px 0px 400px rgb(1, 128, 11) ;
+}
+.html-progress{
+    background: rgb(1, 128, 11);
+}
+.js-progress{
+    background: rgb(1, 128, 11);
+}
+.adobe-progress{
+    background: rgb(1, 128, 11);
+}
+.php-progress{
+    background: rgb(1, 128, 11);
+}
+.jquery-progress{
+    background: rgb(1, 128, 11);
+}
+.seo-progress{
+    background: rgb(1, 128, 11);
+}
+.portfolio-text h2{
+    color: rgb(1, 128, 11);
+}
+.portfolio-text button{
+    color: rgb(1, 128, 11);
+    border: 1.5px solid rgb(1, 128, 11);
+}
+.portfolio-text button::before{
+    background: rgb(1, 128, 11);
+}
+.portfolio-image img::before{
+    background: rgb(1, 128, 11);
+}
+.blog-date{
+    background: rgb(1, 128, 11);
+}
+form button{
+    background: rgb(1, 128, 11);
+}
+@media all and (max-width: 550px) and (min-width: 5px){
+    .service:hover .service-img img{
+        box-shadow:0px 0px 0px 0px #c70039 ;
+    }
+}
