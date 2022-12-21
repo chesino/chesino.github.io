@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+}
+
+body {
+    background-image: url(/Data/IMG/Wallpaper.jpg);
+    background-size: cover;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+}
+
+.BaoTri {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    width: 90%;
+    color: red;
+    background-color: rgba(255, 255, 255, 0.74);
+    font-size: 30px;
+    text-align: center;
+    margin: 50px 10px;
+    padding: 20px 0 30px 0;
+    border-radius: 20px;
+}
+
+.BaoTri h1 {
+    background-color: #fff;
+    padding: 2px 0 5px 0;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+.BaoTri iframe {
+    border-radius: 20px;
+    margin: 30px 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .BaoTri {
+        font-size: 10px;
+    }
+
+    .BaoTri iframe {
+        max-width: 80%;
+        height: 165px;
+        max-height: fit-content;
+        border-radius: 20px;
+        margin: 30px 0;
+    }
+}
