@@ -1,0 +1,97 @@
+*{
+  margin: 0;
+}
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 0 10px ;
+}
+.Welcome {
+  text-align: center;
+  margin: 10px 0 20px 0;
+}
+.Welcome h1 {
+  font-size: 25px;
+}
+.Home {
+  display: grid;
+  grid-template-rows: auto auto;
+
+}
+.Banner {
+  height: 120px;
+  width: 100%;
+  border-radius: 15px;
+  margin: 10px 0 10px 0;
+}
+.Banner .Weather {
+  height: 120px;
+  color: #fff;
+  background-image: url(/Data/IMG/GIF/MerryChristmas.gif);
+  background-size: cover;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  padding: 10px 20px;
+}
+.Weather #weatherContainer {
+  text-shadow: #FC0 2px 0 10px;
+  background-color: rgba(0, 0, 0, 0.274);
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 8px 0;
+  border-radius: 10px;
+  padding: 0 20px ;
+}
+.Functions {
+  width: 100%;
+  overflow-x: scroll;
+  margin:0 auto 20px auto;
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px 80px 80px;
+  gap: 10px;
+  text-align: center;
+}
+.Functions div {
+  background-color: #FC0;
+  height: 80px;
+  width: 80px;
+  margin: auto;
+  border-radius: 15px;
+}
+.Functions div img {
+  margin: 15px 0;
+  width: 50px;
+  height: 50px;
+}
+.Block .tabcontent {
+  display: none;
+}
+.Block .Show {
+  display: block ;
+}
+
+.inPC .Detail {
+  background-color: #FC0;
+  margin: 10px 0;
+  display: grid;
+  grid-template-columns: 80px  auto;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 10px 5px ;
+}
+.Detail .Name {
+  margin: 5px 0;
+}
+.Detail .Name h1 {
+  text-transform: uppercase;
+}
+.Detail .Name p {
+  text-transform: capitalize;
+}
+.inPC .Detail img {
+  width: 80px;
+}
+@media only screen and (max-width: 600px) {
+  .Banner {
+    height: 150px;
+  }
+}

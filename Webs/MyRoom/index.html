@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+<html>
+<head>
+    <!-- Tiêu đề trang -->
+    <title>Chesino</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Data/CSS/Style.css" />
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="Welcome">
+        <h1>Chào mừng tới phòng của tôi.</h1>
+        <p>Thoảt mái - tiện ích - gọn gàng</p>
+    </div>
+    <div class="Home">
+      <div class="Banner">
+        <div class="Weather">
+            <div id="weatherContainer">
+              <div>
+                <h1 id="cityName">LongThanh</h1>
+                <span id="temp">°C</span>
+                <span id="main">Mây</span>
+                <p id="discription">Nhiều Mây</p>
+              </div>
+              <div> 
+                <img id="image" src="https://openweathermap.org/img/wn/02n@2x.png">
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="Functions">
+        <div class="tablinks" onclick="openTAB(event, 'PC')">
+          <img src="./Data/IMG/Icon/computer-game.png" alt="" srcset="">
+        </div>
+        <div class="tablinks" onclick="openTAB(event, 'ECO')">
+          <img src="./Data/IMG/Icon/eco-house.png" alt="" srcset="">
+        </div>
+        <div class="tablinks" onclick="openTAB(event, 'BOX')">
+          <img src="./Data/IMG/Icon/boxes.png" alt="" srcset="">
+        </div>
+        <div class="tablinks" onclick="openTAB(event, 'WIFI')">
+          <img src="./Data/IMG/Icon/wifi.png" alt="" srcset="">
+        </div>
+        <div class="tablinks" onclick="openTAB(event, 'MUSIC')">
+          <img src="./Data/IMG/Icon/listen.png" alt="" srcset="">
+        </div>
+        <div class="tablinks" onclick="openTAB(event, 'SETTING')">
+          <img src="./Data/IMG/Icon/settings.png" alt="" srcset="">
+        </div>
+      </div>
+
+    </div>
+    <div class="Block">
+      <div id="PC" class="tabcontent Show">
+        <h3>Máy tính của tôi</h3>
+        <div class="inPC">
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/pc-tower.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Case</h1>
+              <p>Xigmatek aero 2F Black</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/motherboard.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>mainboard</h1>
+              <p>Asus prime h310m-cs r2.0</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/cpu-tower.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>CPU</h1>
+              <p>Intel® Core™ i3-9100F</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/graphics-card.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>GPU</h1>
+              <p>Galax GTX 1050Ti 4G [ 2 Fan ]</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/ram.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>RAM</h1>
+              <p>Apacer Panther 8GB [ x2 ]</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/ssd-drive.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>SSD</h1>
+              <p>WD Green 240Gb</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/hdd.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>HDD</h1>
+              <p>Seagate 500Gb 7200rpm</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/power-supply.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>PSU</h1>
+              <p>XIGMATEK X-POWER II 500</p>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+
+      <div id="ECO" class="tabcontent">
+        <h3>Điện</h3>
+       
+      </div>
+      <div id="BOX" class="tabcontent">
+        <h3>Hộp</h3>
+
+      </div>
+      <div id="WIFI" class="tabcontent">
+        <h3>WiFi</h3>
+       
+      </div>
+      <div id="MUSIC" class="tabcontent">
+        <h3>Nhạc</h3>
+
+      </div>
+      <div id="SETTING" class="tabcontent">
+        <form id="input">
+          <input type="text" id="city" placeholder="Tên Thành Phố Của Bạn ?">
+          <input type="submit" value="Cập Nhật">
+        </form>
+      </div>
+    </div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="./Data/JS/File.js"></script>
+<script src="./Data/JS/Weather.js"></script>
+</html>
