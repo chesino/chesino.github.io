@@ -18,6 +18,10 @@
 </head>
 
 <body>
+  
+  <div class="TEST">
+   
+  </div>
 
     <div class="Welcome">
         <h1>Chào mừng tới phòng của tôi.</h1>
@@ -192,9 +196,12 @@
 
       </div>
 
-      <div id="WIFI" class="tabcontent">
+      <div id="WIFI" class="tabcontent" style="text-align: center;">
         <h3>WiFi</h3>
-       
+        <input type="button" onclick="ShareWiFi()" value="Lấy Mã QR">
+        <br>
+        <br>
+    <div id="id_qrcode" ></div>
       </div>
 
       <div id="MUSIC" class="tabcontent">
@@ -211,8 +218,10 @@
 
     </div>
 
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/JS/File.js"></script>
 <script src="./Data/JS/Weather.js"></script>
+<script type="text/javascript" src="./Data/JS/qrcode.min.js"></script>
 </html>

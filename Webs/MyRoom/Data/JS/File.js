@@ -21,3 +21,14 @@ function openTAB(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
+function ShareWiFi()
+  {
+    var qrcode = new QRCode("id_qrcode", {
+      text:"WIFI:T:WPA;S:HunqD;P:12345679$;H:;;",
+      width:150,
+      height:150,
+      colorDark:"#000000",
+      colorLight:"#ffffff",
+      correctLevel:QRCode.CorrectLevel.H
+    });
+}
