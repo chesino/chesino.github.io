@@ -41,7 +41,7 @@ body {
 .Functions {
   height: 110px;
   width: 100%;
-  overflow-x: auto;
+  overflow-x: scroll;
   margin:0 auto 20px auto;
   display: grid;
   grid-template-columns: 80px 80px 80px 80px 80px 80px;
