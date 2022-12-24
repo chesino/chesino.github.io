@@ -18,10 +18,7 @@
 </head>
 
 <body>
-  
-  <div class="TEST">
-   
-  </div>
+
 
     <div class="Welcome">
         <h1>Chào mừng tới phòng của tôi.</h1>
@@ -188,7 +185,15 @@
 
       <div id="ECO" class="tabcontent">
         <h3>Điện</h3>
-
+        <div class="inECO">
+            <div class="OcamDien">
+              <div class="Line">
+                <div class="Blue">N</div>
+                <div class="Red">L</div>
+              </div>
+              <img src="./Data/IconECO/Ocam.PNG" alt="" srcset="">
+            </div>
+        </div>
       </div>
 
       <div id="BOX" class="tabcontent">
@@ -206,7 +211,9 @@
 
       <div id="MUSIC" class="tabcontent">
         <h3>Nhạc</h3>
-
+        <p>Phòng sử dụng hệ thống âm thanh 4.1 vật lý cho trải nghiệm cực kì tốt</p>
+        <br>
+        <img style="border-radius: 10px;" src="./Data/IconECO/4.1.png" alt="" srcset="">
       </div>
 
       <div id="SETTING" class="tabcontent">
@@ -214,6 +221,7 @@
           <input type="text" id="city" placeholder="Tên Thành Phố Của Bạn ?">
           <input type="submit" value="Cập Nhật">
         </form>
+        <button onclick="DarkModeOff()">Chế độ tối</button>
       </div>
 
     </div>

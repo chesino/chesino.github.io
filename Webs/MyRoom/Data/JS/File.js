@@ -1,8 +1,25 @@
-// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-//   document.body.style.backgroundColor = '#111' ;
-//   document.body.style.color = '#eee' ;
-// }
+var vDarkMode = 0;
 
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  vDarkMode = 1;
+  DarkMode();
+}
+function DarkModeOff() {
+  if (vDarkMode == 2) {
+    vDarkMode--;
+  }else {
+    vDarkMode++;
+  }
+  DarkMode();
+}
+
+function DarkMode() {
+  if (vDarkMode == 1) {
+    document.body.classList.add('DarkMode') ;
+  } else {
+    document.body.classList.remove('DarkMode') ;
+  }
+}
 
 
 
