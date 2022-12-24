@@ -12,13 +12,9 @@ body {
 .Welcome h1 {
   font-size: 25px;
 }
-.Home {
-  display: grid;
-  grid-template-rows: auto auto;
 
-}
 .Banner {
-  height: 120px;
+  height: 140px;
   width: 100%;
   border-radius: 15px;
   margin: 10px 0 10px 0;
@@ -26,7 +22,8 @@ body {
 .Banner .Weather {
   height: 120px;
   color: #fff;
-  background-image: url(/Data/IMG/GIF/MerryChristmas.gif);
+  /* background-image: url(/Data/IMG/GIF/MerryChristmas.gif); */
+  background-image: url(/Webs/MyRoom/Data/IMG/GIF/MerryChristmas.gif);
   background-size: cover;
   border: 2px solid #fff;
   border-radius: 15px;
@@ -42,6 +39,7 @@ body {
   padding: 0 20px ;
 }
 .Functions {
+  height: 110px;
   width: 100%;
   overflow-x: scroll;
   margin:0 auto 20px auto;
@@ -78,7 +76,12 @@ body {
   border-radius: 10px;
   padding: 10px 5px ;
 }
+.Detail .Icon {
+
+  margin: auto;
+}
 .Detail .Name {
+  color: #000;
   margin: 5px 0;
 }
 .Detail .Name h1 {
@@ -88,7 +91,7 @@ body {
   text-transform: capitalize;
 }
 .inPC .Detail img {
-  width: 80px;
+  width: 60px;
 }
 @media only screen and (max-width: 600px) {
   .Banner {
