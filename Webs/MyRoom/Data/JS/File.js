@@ -37,9 +37,12 @@ function openTAB(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+var vQRCODE = 0 ;
 
-function ShareWiFi()
-  {
+
+function ShareWiFi(){
+  vQRCODE++;
+  if (vQRCODE == 1) {
     var qrcode = new QRCode("id_qrcode", {
       text:"WIFI:T:WPA;S:HunqD;P:12345679$;H:;;",
       width:150,
@@ -48,4 +51,8 @@ function ShareWiFi()
       colorLight:"#ffffff",
       correctLevel:QRCode.CorrectLevel.H
     });
+  } else {
+    document.getElementById('QRCode').innerText = 'Đã tạo mã rồi không thể tạo nữa !'
+  }
+    
 }
