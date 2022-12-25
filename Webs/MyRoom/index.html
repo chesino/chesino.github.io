@@ -71,7 +71,7 @@
 
     </div>
     <div class="Block">
-      <div id="PC" class="tabcontent Show">
+      <div id="PC" class="tabcontent">
         <h3>Máy tính của tôi</h3>
         <div class="inList">
           <div class="Detail">
@@ -343,13 +343,11 @@
 
       <div id="WIFI" class="tabcontent">
         <h3>WiFi</h3>
-        <div>
-          <button onclick="ShareWiFi()">Lấy Mã QR WiFi</button>
-        </div>
-        
-
         <div class="QRWIFI" id="id_qrcode" >
-          <p id="QRCode" style="color: #000; font-weight: bold; margin: 10px 0;" >Vui lòng bấm "Lấy Mã QR WiFi" ở trên.</p>
+          <p style="color: #000; font-weight: bold; margin: 10px 0;" >Vui lòng bấm "Lấy Mã QR WiFi" ở trên.</p>
+        </div>
+        <div>
+          <button onclick="ShareWiFi()" id="QRCode">Lấy Mã QR WiFi</button>
         </div>
       </div>
 
@@ -375,10 +373,45 @@
 
       <div id="TOOLBOX" class="tabcontent">
         <h3>Hộp dụng cụ</h3>
+        <div class="inList">
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconToolBox/voltmeter.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Đồng hồ đo điện</h1>
+              <p>Kyoritsu 1009</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconToolBox/screwdriver.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Tua vít</h1>
+              <p>Tua vít 3 ke</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconToolBox/tool.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Lục giác</h1>
+              <p>Bộ lục giác</p>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      <div id="APPS" class="tabcontent">
+      <div id="APPS" class="tabcontent Show">
         <h3>Ứng dụng</h3>
+        
+
       </div>
 
       <div id="SETTING" class="tabcontent">

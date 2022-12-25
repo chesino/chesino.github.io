@@ -51,8 +51,9 @@ function ShareWiFi(){
       colorLight:"#ffffff",
       correctLevel:QRCode.CorrectLevel.H
     });
+    document.getElementById('QRCode').innerText = 'Đã tạo QR thành công !'
   } else {
-    document.getElementById('QRCode').innerText = 'Đã tạo mã rồi không thể tạo nữa !'
+    document.getElementById('QRCode').innerText = 'Không thể tạo thêm !'
   }
     
 }
