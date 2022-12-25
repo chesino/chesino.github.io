@@ -1,6 +1,8 @@
 :root {
   --Color: #000;
   --Background: #fff;
+
+  --MainColor: #FC0;
 }
 
 
@@ -27,7 +29,12 @@ body {
 }
 
 .Welcome h1 {
-  font-size: 25px;
+  color: var(--MainColor);
+  text-transform: uppercase;
+  font-size: 22px;
+}
+.Welcome p {
+  text-transform:lowercase;
 }
 
 .Banner {
@@ -49,7 +56,7 @@ body {
 }
 
 .Weather #weatherContainer {
-  text-shadow: #FC0 2px 0 10px;
+  text-shadow: var(--MainColor) 2px 0 10px;
   background-color: rgba(0, 0, 0, 0.274);
   display: grid;
   grid-template-columns: auto auto;
@@ -64,13 +71,13 @@ body {
   overflow-x: scroll;
   margin: 0 auto 20px auto;
   display: grid;
-  grid-template-columns: 80px 80px 80px 80px 80px 80px;
+  grid-template-columns: 80px 80px 80px 80px 80px 80px 80px 80px;
   gap: 14px;
   text-align: center;
 }
 
 .Functions div {
-  background-color: #FC0;
+  background-color: var(--MainColor);
   border: 3px solid var(--Color);
   height: 80px;
   width: 80px;
@@ -83,7 +90,10 @@ body {
   width: 50px;
   height: 50px;
 }
-
+.tablinks.active {
+  background-color: #fff !important;
+  border: 3px solid var(--MainColor);
+}
 .Block .tabcontent {
   display: none;
 }
@@ -97,7 +107,7 @@ body {
 }
 
 .inList .Detail {
-  background-color: #FC0;
+  background-color: var(--MainColor);
   margin: 10px 0;
   display: grid;
   grid-template-columns: 80px auto;
@@ -132,7 +142,7 @@ body {
 #WIFI div ,.Card {
   color: #000;
   text-align: center;
-  background-color: #FC0;
+  background-color: var(--MainColor);
   margin: 10px 0;
   border-radius: 10px;
   padding: 10px 5px;
@@ -157,14 +167,26 @@ body {
   border: 4px solid #fff;
 }
 
-#SETTING input {
-  width: 100%;
+#SETTING input[type="text"] {
+  font-size: 18px;
+  color: var(--Background);
+  background-color: var(--MainColor);
+  width: calc(100% - 30px);
   height: 30px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 0 10px;
 }
 
 #SETTING button {
+  font-size: 18px;
+  text-transform: capitalize;
+  color: var(--MainColor);
+  background-color: var(--Background);
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 5px 10px;
   width: 100%;
-  height: 30px;
   margin: 10px 0;
 }
 

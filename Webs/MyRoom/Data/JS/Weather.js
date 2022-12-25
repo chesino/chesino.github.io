@@ -25,7 +25,7 @@ weatherUpdate = (city) => {
   xhr.send();
   xhr.onload = () => {
     if (xhr.status === 404) {
-      alert("Place not found");
+      alert("Không tìm thấy");
     } else {
       var data = JSON.parse(xhr.response);
       cityName.innerHTML = data.name;

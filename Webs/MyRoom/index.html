@@ -43,7 +43,7 @@
       </div>
 
       <div class="Functions">
-        <div class="tablinks" onclick="openTAB(event, 'PC')">
+        <div class="tablinks active" onclick="openTAB(event, 'PC')">
           <img src="./Data/IMG/Icon/computer-game.png" alt="" srcset="">
         </div>
         <div class="tablinks" onclick="openTAB(event, 'ECO')">
@@ -58,6 +58,12 @@
         <div class="tablinks" onclick="openTAB(event, 'MUSIC')">
           <img src="./Data/IMG/Icon/listen.png" alt="" srcset="">
         </div>
+        <div class="tablinks" onclick="openTAB(event, 'TOOLBOX')">
+          <img src="./Data/IMG/Icon/tool-box.png" alt="" srcset="">
+        </div>
+        <div class="tablinks" onclick="openTAB(event, 'APPS')">
+          <img src="./Data/IMG/Icon/apps.png" alt="" srcset="">
+        </div>
         <div class="tablinks" onclick="openTAB(event, 'SETTING')">
           <img src="./Data/IMG/Icon/settings.png" alt="" srcset="">
         </div>
@@ -65,7 +71,7 @@
 
     </div>
     <div class="Block">
-      <div id="PC" class="tabcontent">
+      <div id="PC" class="tabcontent Show">
         <h3>Máy tính của tôi</h3>
         <div class="inList">
           <div class="Detail">
@@ -221,7 +227,7 @@
               <img src="./Data/IMG/IconECO/breaker.png" alt="" srcset="">
             </div>
             <div class="Name">
-              <h1>Circuit Breaker</h1>
+              <h1>Cầu dao</h1>
               <p>Cấp nguồn máy máy lạnh</p>
             </div>
           </div>
@@ -347,7 +353,7 @@
         </div>
       </div>
 
-      <div id="MUSIC" class="tabcontent Show">
+      <div id="MUSIC" class="tabcontent">
         <h3>Nhạc</h3>
         <div class="inList">
           <div class="Detail">
@@ -367,12 +373,28 @@
         </div>
       </div>
 
+      <div id="TOOLBOX" class="tabcontent">
+        <h3>Hộp dụng cụ</h3>
+      </div>
+
+      <div id="APPS" class="tabcontent">
+        <h3>Ứng dụng</h3>
+      </div>
+
       <div id="SETTING" class="tabcontent">
-        <form id="input">
-          <input type="text" id="city" placeholder="Tên Thành Phố Của Bạn ?">
-          <input type="submit" value="Cập Nhật">
-        </form>
-        <button onclick="DarkModeOff()">Chế độ tối</button>
+        <h3>Thời tiết</h3>
+        <div class="Card">
+          <form id="input">
+            <input type="text" id="city" placeholder="Tên Thành Phố Của Bạn ?">
+            <button type="submit" >Cập Nhật</button>
+          </form>
+        </div>
+        <h3>Chế độ tối</h3>
+        <div class="Card">
+          <button onclick="DarkModeOff()">Chế độ tối</button>
+        </div>
+       
+      
       </div>
 
     </div>
