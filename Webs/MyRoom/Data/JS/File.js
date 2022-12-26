@@ -57,3 +57,7 @@ function ShareWiFi(){
   }
     
 }
+
+function ClickPC() {
+  document.getElementById('ClickPC').click();
+}

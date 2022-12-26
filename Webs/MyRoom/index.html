@@ -43,7 +43,10 @@
       </div>
 
       <div class="Functions">
-        <div class="tablinks active" onclick="openTAB(event, 'PC')">
+        <div class="tablinks active" onclick="openTAB(event, 'MYROOM')">
+          <img src="./Data/IMG/Icon/bedroom.png" alt="" srcset="">
+        </div>
+        <div class="tablinks" onclick="openTAB(event, 'PC')" id="ClickPC">
           <img src="./Data/IMG/Icon/computer-game.png" alt="" srcset="">
         </div>
         <div class="tablinks" onclick="openTAB(event, 'ECO')">
@@ -54,9 +57,6 @@
         </div>
         <div class="tablinks" onclick="openTAB(event, 'WIFI')">
           <img src="./Data/IMG/Icon/wifi.png" alt="" srcset="">
-        </div>
-        <div class="tablinks" onclick="openTAB(event, 'MUSIC')">
-          <img src="./Data/IMG/Icon/listen.png" alt="" srcset="">
         </div>
         <div class="tablinks" onclick="openTAB(event, 'TOOLBOX')">
           <img src="./Data/IMG/Icon/tool-box.png" alt="" srcset="">
@@ -71,9 +71,74 @@
 
     </div>
     <div class="Block">
-      <div id="PC" class="tabcontent">
-        <h3>Máy tính của tôi</h3>
+      <div id="MYROOM" class="tabcontent Show">
+        <h3>Trang bị hiện tại</h3>
         <div class="inList">
+
+          <div class="Detail" onclick="ClickPC()">
+            <div class="Icon">
+              <img src="./Data/IMG/IconMyRoom/computer.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Máy tính</h1>
+              <p>Bấm để xem chi tiết cấu hình</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconMyRoom/speaker.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Loa 4.1</h1>
+              <p>Phòng sử dụng âm thanh 4.1 đem lại trải nghiệm tốt nhất.</p>
+            </div>
+          </div>
+          
+        </div>
+
+        <h3>Nâng cấp, cần mua sắp tới</h3>
+        <div class="inList">
+
+          <div class="Detail" >
+            <div class="Icon">
+              <img src="./Data/IMG/IconMyRoom/helmet.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Mũ bảo hiểm 3/4</h1>
+              <p>Royal</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconMyRoom/air-purifier.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Máy lọc không khí</h1>
+              <p>Gợi ý: XIAOMI GEN 4 [3.690.000đ]</p>
+            </div>
+          </div>
+
+          <div class="Detail" >
+            <div class="Icon">
+              <img src="./Data/IMG/IconMyRoom/computer.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Máy tính phụ</h1>
+              <p>Cho đứa em</p>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+
+      <div id="PC" class="tabcontent ">
+        <h1>Máy tính của tôi</h1>
+        <br>
+        <div class="inList">
+          <h3>Bảo dưỡng</h3>
           <div class="Detail">
             <div class="Icon">
               <img src="./Data/IMG/IconPC/clean.png" alt="" srcset="">
@@ -84,6 +149,70 @@
             </div>
           </div>
 
+          <h3>Màn hình</h3>
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/display.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Màn hình chính</h1>
+              <p>LG 27AE73 FullHD [Có loa]</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/display.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Màn hình phụ</h1>
+              <p>PHL 243V5 FullHD</p>
+            </div>
+          </div>
+
+          <h3>Bàn phím</h3>
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/computer-keyboard.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Bàn phím dây</h1>
+              <p>E-Dra EK3104 Black</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/keyboard.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Bàn phím không dây</h1>
+              <p>AJAZZ K685T RGB [3 chế độ]</p>
+            </div>
+          </div>
+
+          <h3>Chuột</h3>
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/computer-mouse.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Chuột có dây</h1>
+              <p>Logitech G502 Hero</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconPC/mouse.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Chuột Bluetooth</h1>
+              <p>Logitech M337</p>
+            </div>
+          </div>
+
+          <h3>Cấu hình máy tính</h3>
           <div class="Detail">
             <div class="Icon">
               <img src="./Data/IMG/IconPC/computer-case.png" alt="" srcset="">
@@ -164,6 +293,7 @@
             </div>
           </div>
 
+          <h3>Phụ kiện</h3>
           <div class="Detail">
             <div class="Icon">
               <img src="./Data/IMG/IconPC/rgb.png" alt="" srcset="">
@@ -251,6 +381,31 @@
       </div>
 
       <div id="BOX" class="tabcontent ">
+        
+        <h3>Mũ bảo hiểm</h3>
+        <div class="inList">
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconBox/racing-helmet.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>FullFace</h1>
+              <p>ROC RO1</p>
+            </div>
+          </div>
+
+          <div class="Detail">
+            <div class="Icon">
+              <img src="./Data/IMG/IconBox/protective.png" alt="" srcset="">
+            </div>
+            <div class="Name">
+              <h1>Mũ 1/2</h1>
+              <p>Nón Sơn Đen [x2]</p>
+            </div>
+          </div>
+
+        </div>
+
         <h3>Hộp 1</h3>
         <div class="inList">
           <div class="Detail">
@@ -351,26 +506,6 @@
         </div>
       </div>
 
-      <div id="MUSIC" class="tabcontent">
-        <h3>Nhạc</h3>
-        <div class="inList">
-          <div class="Detail">
-            <div class="Icon">
-              <img src="./Data/IMG/speaker.png" alt="" srcset="">
-            </div>
-            <div class="Name">
-              <h1>Loa 4.1</h1>
-              <p>Phòng sử dụng âm thanh 4.1 đem lại trải nghiệm tốt nhất.</p>
-            </div>
-          </div>
-        </div>
-
-        <h3>Mở nhạc ngay</h3>
-        <div class="Card">
-          <h2>Tính năng đang phát triển</h2>
-        </div>
-      </div>
-
       <div id="TOOLBOX" class="tabcontent">
         <h3>Hộp dụng cụ</h3>
         <div class="inList">
@@ -408,9 +543,15 @@
         </div>
       </div>
 
-      <div id="APPS" class="tabcontent Show">
+      <div id="APPS" class="tabcontent">
         <h3>Ứng dụng</h3>
-        
+        <div id="PHANTRAM">
+          <h1>Tính phần trăm</h1>
+          <div>
+            <h3>Tính phần trăm của một giá trị</h3>
+            <input type="number">
+          </div>
+        </div>
 
       </div>
 
