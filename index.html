@@ -19,88 +19,75 @@
 </head>
 
 <body>
-    <div class="TabMenu">
-        <div class="MenuBar">
-            <div class="iMenu">
-                <div onclick="Menu()" class="hamburger-menu"></div>
-            </div>
-            <div class="Logo">
-                <h1>HunqD</h1>
-            </div>
-            <div class="iUser" >
-                <img onclick="Setting()" id="AvatarMini" src="./Data/IMG/icon/guest.png" alt="" srcset="">
-            </div>
+    <div class="header">
+        <h1>Chesino CV</h1>
+    </div>
+    <div class="Menu" >
+        <i onclick="Menu()" id="iconMenu" class="fa-solid fa-arrows-up-down-left-right"></i>
+        <div class="NavMenu" id="NavMenu">
+            <a href="#info">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="#rank"  class="active">
+                <i class="fa-solid fa-ranking-star"></i>
+            </a>
+            <a href="javascript:void(0);" onclick="Messenger()" >
+                <i class="fa-brands fa-facebook-messenger"></i>
+            </a>
+            <a id="fDarkMode" href="javascript:void(0);">
+                <i id="iDarkMode" class="fa-solid fa-moon"></i>
+            </a>
         </div>
-    
-        <div class="Menu" id="Menu">
-            <a href="#Home">Trang chủ</a>
-            <a href="#Contact">Liên hệ</a>
-            <a href="#about">Giới thiệu</a>
-        </div>
-        <div class="Setting Hide" id="Setting">
-            <div class="User">
-                <div class="Avatar">
-                    <img id="Avatar" src="./Data/IMG/icon/guest.png" alt="Avatar">
-                </div>
-                <div class="Info">
-                    <h5 id="TypeFacebook">Khách</h5>
-                    <h1 id="NameFacebook"> </h1>
-                </div>
-                <div class="SignIn">
-                    <i onclick="LogIn()" class="fa-solid fa-right-to-bracket"></i>
-                </div>
-            </div>
-            <div class="LogIn Hide" id="LogIn">
-                <div class="Note">
-                    <p>ID chỉ là dãy số giúp tôi có thể biết bạn là ai trên Facebook. Và tôi không thể hack hay truy cập vào
-                        tài khoản của bạn.
-                        <a href="https://www.thegioididong.com/game-app/cach-lay-id-facebook-cua-ai-do-tren-dien-thoai-may-tinh-don-gian-nhat-1282223"
-                            target="_blank">Tìm hiểu thêm</a>.
-                    </p>
-                    <p>Tôi sử dụng ID của bạn với mục đích sau:
-                    <ul>
-                        <li>Xác minh bạn là ai</li>
-                        <li>Cập nhật ảnh đại diện của bạn trên trang của tôi</li>
-                    </ul>
-                    </p>
-                    <p><b>
-                        Tuyên bố từ chối mọi trách nhiệm về tài khoản của bạn.
-                    </b>
-                    </p>
-                    <input type="checkbox" name="DongYDieuKhoan" id="DongYDieuKhoan" onchange="DieuKhoan()">
-                    <span>Tôi đồng ý</span>
-                </div>
-                <div class="FormLogin Hide" id="FormLogin">
-                    <h2>ID Facebook</h2>
-                    <input type="number" name="IDFacebook" id="IDFacebook" placeholder="Nhập ID Facebook">
-                    <button onclick="SetIDFacebook()"> 
-                        <i class="fa-solid fa-rotate"></i></button>
-                </div>
-    
-            </div>
-            <hr>
-            <div class="DarkMode">
-                <span>Chế độ tối</span>
-                <label class="switch">
-                    <input id="iDarkMode" type="checkbox">
-                    <span class="slider round"></span>
-                </label>
+        <div class="Alert" id="Alert">
+            <div class="Notifi" >
+                <i id="iNotifi" class="fa-solid fa-bell"></i>
+                <p id="pNotifi">Đây là thông báo</p>
             </div>
         </div>
     </div>
-    
 
-    <br>
-    <!-- <div class="Alert">
-        <h1 id="TitleAlert">Tiêu đề</h1>
-        <p id="ContentAlert">Nội dung</p>
-    </div> -->
-    <div class="Container">
-        <h1>Trang đang bảo trì.</h1>
+    <div class="info">
+        <div class="BlockAbout">
+            <div class="Card Avatar">
+                <img src="./Data/IMG/Avatar.jpg" alt="Avatar" >
+            </div>
+            <div class="Card About">
+                <h1>Đinh Mạnh Hùng</h1>
+                <h3>Nhà sáng tạo nội dung</h3>
+                <br>
+                <h2>Giới thiệu</h2>
+                <p>Sinh viên <b>Cơ Điện Tử</b>.
+                <br>Tốt nghiệp <b>Điện Công Nghiệp</b>.
+                <br>Lập trình <b>Front End</b>.</p>
+            </div>
+        </div>
+        <div class="BlockJob">
+            <div class="Card">
+                <div class="ExpJob">
+                    <div class="Icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h1>Kinh nghiệm làm việc</h1>
+                </div>
+                <p>Đang cập nhật</p>
+            
+                
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <div class="TestDiv">
     </div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/JS/File.js"></script>
+<script src="./Data/JS/Alert.js"></script>
 
 </html>

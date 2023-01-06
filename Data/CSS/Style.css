@@ -1,320 +1,234 @@
 :root {
-  --Background: rgb(219, 219, 219);
-  --Color:#000;
-  --Menu: #fff;
-  --Container: var(--Background);
+--Background: rgb(0,97,255);
+  --Linear-Gradient: linear-gradient(90deg, rgba(0,97,255,1) 0%, rgba(96,239,255,1) 100%);
+
+  --Color: #fff;
+  --Menu: black;
+  --ColorMenu: #fff;
+
+  --Card: #fff;
+}
+
+.darkmode {
+  --Background: rgb(98,132,252);
+  --Linear-Gradient: linear-gradient(90deg, rgba(98,132,252,1) 0%, rgba(244,146,240,1) 100%) ;
+  
+  --Color: #000;
+  --Menu: black;
+  --ColorMenu: #fff;
 
 }
+
 * {
   margin: 0;
 }
 
 body {
-  background-color: var(--Background);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--Background) ;
+  background: var(--Linear-Gradient);
+  padding: 0 5px;
+}
+
+.Menu {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+.Menu i {
+  color: var(--Menu);
+  font-size: 35px;
+  margin: auto;
+  cursor: pointer;
+  rotate: 0deg;
+  transition: 0.2s;
+}
+.NavMenu {
+  text-align: center;
+  display: none;
+  position: fixed;
+  right: 50px;
+  top: 10px;
+  width: calc(100% - 65px);
+  background-color: var(--Menu);
+  border-radius: 5px;
+}
+.NavMenu a {
+  float: left;
+  color: var(--ColorMenu);
+  text-align: center;
+  padding: 7px 14px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.NavMenu i {
+  color: var(--ColorMenu);
+  font-size: 17px ;
+}
+#fDarkMode {
+  float: right;
+}
+.Alert {
+  display: none;
+  color: var(--ColorMenu);
+  text-align: center;
+  position: fixed;
+  right: 10px;
+  top: 50px;
+  width: calc(100% - 25px);
+  background-color: var(--Menu);
+  border-radius: 5px;
+}
+
+.Notifi {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 40px auto auto;
+}
+.Notifi i {
+  font-size: 18px;
+  padding: 10px ;
+  color: var(--ColorMenu);
+}
+.Notifi p {
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 7px 0;
+}
+
+.header {
+  color: var(--Card);
+  padding: 5px 10px ;
+}
+
+
+
+.info .BlockAbout {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin-top: 10px;
+}
+.Card {
+  background-color: var(--Card);
+  margin: 10px 5px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.Card.Avatar {
+  text-align: center;
+}
+.Card.Avatar img {
+  width: 100%;
+  min-height: 100%;
+  border-radius: 8px;
+  margin: auto;
+}
+.Card.About {
+  padding: 5px 10px;
+}
+.Card.About h1 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.Card.About h2 {
+  font-size: 15px;
+}
+.Card.About h3 {
+  font-size: 12px;
+  font-weight: 500;
+}
+.Card.About p {
+  font-size: 12px;
+
+}
+.BlockJob .Card {
+  padding: 10px;
+}
+.BlockJob .Card .Icon {
+  text-align: center;
+  background-color: var(--Background);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 5px 10px 5px 10px;
+
+}
+.BlockJob .Card .Icon i {
+  color: var(--Card);
+  font-size: 20px;
   margin: 10px;
 }
 
-.darkmode {
-  --Background: #000;
-  --Color:#eee;
-  --Menu: #1e1f20;
-  --Container: var(--Background);
-  
-}
-.Hide {
-  display: none;
-}
-.Alert {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  width: calc(100% - 50px);
-  font-size: 17px;
-  padding: 5px 15px;
-  color: var(--Color);
-  background-color: green;
-  text-decoration: none;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.Alert h1 {
-  font-size: 16px;
-}
-.Alert p {
-  font-size: 14px;
-
-}
-.TabMenu {
-  position: fixed;
-  width: calc(100% - 20px);
-}
-.MenuBar {
-  color: var(--Color);
-  background-color: var(--Menu);
-  width: 100%;
-  height: 50px;
+.ExpJob {
   display: grid;
-  grid-template-columns: 50px auto 50px;
-  text-align: center;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  grid-template-columns: 60px auto;
 }
-.MenuBar div {
-  cursor: pointer;
-}
-.MenuBar .iUser img {
-  width: 30px;
-  height: 30px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 2px solid var(--Color);
-}
-
-.MenuBar .Logo h1 {
-  font-size: 25px;
-  font-weight: 500;
-  margin: 6px auto auto auto;
-  text-align: left;
-}
-.Menu {
-  display: none;
-  font-size: 17px;
-  padding: 10px 15px;
-  color: var(--Color);
-  background-color: var(--Menu);
-  text-decoration: none;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.Menu a {
-  color: var(--Color);
-  text-decoration: none;
-  font-size: 17px;
-  padding: 5px;
-  font-weight: 500;
-  display: block;
-}
-
-.Menu a:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-.Setting {
-  font-size: 17px;
-  padding: 10px 15px;
-  color: var(--Color);
-  background-color: var(--Menu);
-  text-decoration: none;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.Setting .User {
-  display: grid;
-  grid-template-columns: 60px auto 60px;
-  gap: 5px;
-  height: 60px;
-  margin: 10px 0;
-}
-.Setting .User .Avatar {
-  text-align: center;
-  margin: auto;
-}
-.Setting .User .Avatar img {
-  width: 46px;
-  height: 46px;
-  border: 2px solid var(--Color);
-  border-radius: 50%;
-}
-.Setting .Info {
-  margin: auto 0;
-}
-.Setting .Info h1 {
-  font-size: 22px;
-  text-overflow: ellipsis;
-  overflow: hidden; 
-  width: 200px; 
-  height: 1.2em; 
-  white-space: nowrap;
-}
-
-.Setting .SignIn i {
-  font-size: 30px;
-  margin: 15px;
-}
-.Setting .LogIn .Note {
-  margin: 10px 0;
-}
-.Setting .LogIn .Note p {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-.Setting .LogIn .Note input[type="checkbox"] {
-  height: 18px;
-  width: 18px;
-}
-.Setting .LogIn .Note span {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.Setting .LogIn input[type="number"]{
-  font-size: 18px;
-  width: calc(100% - 55px);
-  color: var(--Color);
-  border: 2px solid var(--Color);
-  background-color: var(--Menu);
-  border-radius: 5px;
-  padding: 5px;
-}
-.Setting .LogIn button{
-  height: 35px;
-  width: 35px;
-  font-size: 18px;
-  color: var(--Menu);
-  background-color: var(--Color);
-  border: 2px solid var(--Color);
-  border-radius: 5px;
-}
-.Setting hr {
-  width: 90%;
-  margin: 20px auto;
-  height: 2px;
-  border: none;
-  background-color: var(--Color);
-}
-.Setting .DarkMode {
-  text-align: center;
-  margin: 10px auto;
-}
-.Setting .DarkMode span {
+.ExpJob h1 {
+  text-transform: uppercase;
   font-size: 20px;
-  font-weight: 500;
+  margin: 10px 0;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
 
-input:checked+.slider {
-  background-color: black;
-}
 
-input:focus+.slider {
-  box-shadow: 0 0 2px var(--Color);
-}
 
-input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-.Container {
-  text-align: center;
-  background-color: var(--Container);
-  width: 80%;
-  margin: 40px 0 0 0 ;
-  height: 200vh;
-  border-radius: 10px;
-}
-
-@media only screen and (max-width: 1000px) {
-  .Container {
-    width: 100%;
+@media only screen and (min-width: 1000px) { 
+  body {
+    padding: 10px 200px;
   }
+  .Menu i {
+    font-size: 50px;
+  }
+  .NavMenu {
+    text-align: center;
+    display: none;
+    position: fixed;
+    right: 70px;
+    top: 15px;
+    width: calc(100% - 85px);
+    background-color: var(--Menu);
+    border-radius: 5px;
+  }
+  .NavMenu a {
+    float: left;
+    color: var(--ColorMenu);
+    text-align: center;
+    padding: 10px 14px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .NavMenu i {
+    color: var(--ColorMenu);
+    font-size: 20px ;
+  }
+  
+.Alert {
+  right: 10px;
+  top: 70px;
+  width: calc(100% - 25px);
 }
 
-.hamburger-menu,
-.hamburger-menu:after,
-.hamburger-menu:before {
-  width: 20px;
-  height: 2px;
+.Notifi i {
+  font-size: 20px;
+  padding: 10px ;
+  color: var(--ColorMenu);
+}
+.Notifi p {
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 7px 0;
+}
 }
 
-.hamburger-menu {
-  position: relative;
-  transform: translateY(25px);
-  background: transparent;
-  transition: all 0ms 300ms;
-  margin: auto;
-  cursor: pointer;
-}
-
-.hamburger-menu.animate {
-  background: rgba(255, 255, 255, 0);
-}
-
-.hamburger-menu:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 4px;
-  background: var(--Color);
-  transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.hamburger-menu:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  background: var(--Color);
-  transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.hamburger-menu.animate:after {
-  top: 0;
-  transform: rotate(45deg);
-  transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.hamburger-menu.animate:before {
-  bottom: 0;
-  transform: rotate(-45deg);
-  transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+.TestDiv {
+  height: 100vh;
+  width: 100%;
 }
