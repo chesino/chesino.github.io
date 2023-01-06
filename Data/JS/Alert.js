@@ -2,6 +2,8 @@
 var vAlert = document.getElementById('Alert');
 var iNotifi = document.getElementById('iNotifi');
 var pNotifi = document.getElementById('pNotifi');
+var linkNotifi = document.getElementById('pNotifi');
+
 
 function TimeLeft(x) {
     var timeleft = x;
@@ -26,12 +28,16 @@ function Messenger() {
     Alert();
     var tMess = 5;
     iNotifi.className = 'fa-brands fa-facebook-messenger';
-    pNotifi.innerHTML = 'Mở Messenger sau <b id="TimeLeft" ></b>'
+    pNotifi.innerHTML = 'Đang kiểm tra ChatBot <b id="TimeLeft" ></b>'
     TimeLeft(tMess);
     setTimeout(() => {
-        pNotifi.innerHTML = 'Đã chuyển sang Messenger'
-        window.open('https://m.me/DMHunq','_blank');
-        setTimeout(AlertOFF,1000);
+      linkNotifi.href = 'https://m.me/DMHunq';
+      linkNotifi.innerText = 'Nhắn tin ngay';
+      
+        setTimeout(() => {
+          linkNotifi.click();
+        }, 1000);
+        
     }, tMess*1000);
     
 }

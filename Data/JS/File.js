@@ -57,7 +57,8 @@ function Menu() {
 	} else {
 		iconMenu.style.rotate = '45deg';
 		iconMenu.className = 'fa-solid fa-arrows-to-dot';
-		
+
+
 		setTimeout(() => {
 			NavMenu.style.display = 'block';
 		}, 150);
