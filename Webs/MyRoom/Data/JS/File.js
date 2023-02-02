@@ -21,7 +21,7 @@ function DarkMode() {
   }
 }
 
-
+  
 
 
 function openTAB(evt, tabName) {
@@ -37,8 +37,11 @@ function openTAB(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-var vQRCODE = 0 ;
 
+
+
+
+var vQRCODE = 0 ;
 
 function ShareWiFi(){
   vQRCODE++;

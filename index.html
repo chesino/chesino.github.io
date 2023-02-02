@@ -19,120 +19,147 @@
 </head>
 
 <body>
-    <div class="header">
-        <h1>Chesino CV</h1>
-    </div>
-    <div class="Menu" >
-        <i onclick="Menu()" id="iconMenu" class="fa-solid fa-arrows-up-down-left-right"></i>
-        <div class="NavMenu" id="NavMenu">
-            <a href="#info">
-                <i class="fa-solid fa-user"></i>
-            </a>
-            <a href="#rank"  class="active">
-                <i class="fa-solid fa-ranking-star"></i>
-            </a>
-            <a href="javascript:void(0);" onclick="Messenger()" >
-                <i class="fa-brands fa-facebook-messenger"></i>
-            </a>
+    <div class="Container">
+        <div class="Card Top">
+            <div class="Music">
+                <audio id="myAudio">
+                    <source src="./Data/Music/Rival x Cadmium - Seasons (feat. Harley Bird) [NCS Release].mp3"
+                        type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+                <i id="iMusic" onclick="PlayMusic()" class="fa-solid fa-circle-play"></i>
+                <marquee>Rival x Cadmium - Seasons (feat. Harley Bird)</marquee>
+                <i id="iLyrics" onclick="Lyrics()" class="fa-solid fa-quote-left"></i>
+            </div>
+
+        </div>
+        <div>
             <a id="fDarkMode" href="javascript:void(0);">
                 <i id="iDarkMode" class="fa-solid fa-moon"></i>
             </a>
         </div>
-        <div class="Alert" id="Alert">
-            <div class="Notifi" >
-                <i id="iNotifi" class="fa-solid fa-bell"></i>
-                <p id="pNotifi">
-                    <a href="#" id="linkNotifi" target="_blank" ></a>
-                </p>
-                
-            </div>
-        </div>
-    </div>
 
-    <div class="info">
-        <div class="BlockAbout">
-            <div class="Card Avatar">
-                <img src="./Data/IMG/Avatar.jpg" alt="Avatar" >
+        <div class="Card Midle" id="Midle">
+            <h1>Lời bài hát</h1>
+            <br>
+            <div>
+                <div jsname="WbKHeb"><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Các mùa đến và đi như những suy nghĩ của bạn
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">The seasons come and go like thoughts of you
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Như con sóng trở về biển xanh
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Like a wave returns to the sea into the blue
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Họ thay đổi nhưng trong một chu kỳ mà tôi không thể đánh mất
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">They change but in a cycle that I can’t lose
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Mỗi đau đớn nhưng thú vị để sống qua</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Each painful but delightful to live through</span></div><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Bạn bước vào cuộc sống của tôi
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">You came into my life
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Cũng giống như một mùa khác
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Just like another season
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Không lâu, chỉ một thời gian
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Not for long, just a time
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Cũng giống như một mùa khác</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Just like another season</span></div><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Có lẽ giờ này năm sau bạn sẽ xuất hiện trở lại mà không có lý do
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Maybe this time next year you’ll reappear for no reason
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Nhưng tôi sẽ trân trọng mỗi ngày cho đến khi bạn đến theo cách của tôi trong mùa này</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">But I’ll cherish everyday till you come my way this season</span></div><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Các mùa quay và thay đổi giống như tâm trí của bạn
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">The seasons turn and change just like your mind
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Như mặt trời đưa vào mặt trăng
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Like the sun gives into the moon
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>vào ban đêm
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Into the night
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Thời gian vẫn tiếp tục hành quân
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Time continues marching
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Nó từ từ bò
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">It slowly crawls
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Với mỗi cái mới bắt đầu
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">With each new one starting
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>tôi gọi lại</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">I recall</span></div><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Bạn bước vào cuộc sống của tôi
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">You came into my life
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Cũng giống như một mùa khác
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Just like another season
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Không lâu, chỉ một thời gian
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Not for long, just a time
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Cũng giống như một mùa khác</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Just like another season</span></div><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Có lẽ giờ này năm sau bạn sẽ xuất hiện trở lại mà không có lý do
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Maybe this time next year you’ll reappear for no reason
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Nhưng tôi sẽ trân trọng mỗi ngày cho đến khi bạn đến theo cách của tôi trong mùa này</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">But I’ll cherish everyday till you come my way this season</span></div><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Mỗi thời điểm trong năm mang theo những kỷ niệm
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Each time of year carries memories
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Như một lời thì thầm không bao giờ tắt trong gió
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Like an ever fading whisper in the breeze
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Ồ, chúng tôi sẽ tiếp tục thay đổi tất cả một lần nữa
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Oh we will keep on changing all over again
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Vâng, chúng tôi sẽ tiếp tục thay đổi
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Yeah we will keep on changing
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Cũng giống như một mùa khác</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Just like another season</span></div><div jsname="U8S5sf" class="ujudUb"><span jsname="UVGAte"><span>Không muốn thêm một ngày không có em bên cạnh
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Don’t want another day without you by my side
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>một mùa khác</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Another season</span></div><div jsname="U8S5sf" class="ujudUb WRZytc"><span jsname="UVGAte"><span>Bạn bước vào cuộc sống của tôi
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">You came into my life
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Cũng giống như một mùa khác
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Just like another season
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Không lâu, chỉ một thời gian
+                </span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Not for long, just a time
+                </span><br aria-hidden="true"><br aria-hidden="true"><span jsname="UVGAte"><span>Cũng giống như một mùa khác</span><br aria-hidden="true"></span><span jsname="YS01Ge" class="gOGZsb">Just like another season</span></div></div>
             </div>
-            <div class="Card About">
-                <h1>Đinh Mạnh Hùng</h1>
-                <h3>Nhà sáng tạo nội dung</h3>
-                <br>
-                <h2>Giới thiệu</h2>
-                <p>Sinh viên <b>Cơ Điện Tử</b>.
-                <br>Tốt nghiệp <b>Điện Công Nghiệp</b>.
-                <br>Lập trình <b>Front End</b>.</p>
-            </div>
+            <br>
+            <b>Nguồn Google</b>
+            
         </div>
-        <div class="BlockJob">
-            <div class="Card">
-                <div class="ExpJob">
-                    <div class="Icon">
-                        <i class="fa-solid fa-briefcase"></i>
+
+        <div class="Card Bottom">
+            <div class="Profile">
+                <div class="Block One">
+                    <div class="Avatar">
+                        <img src="./Data/IMG/Hunq/Avatar.jpg" alt="Avatar">
                     </div>
-                    <h1>Kinh nghiệm làm việc</h1>
-                </div>
-                <p style="text-align: center;">Đã Ẩn</p>
-            </div>
-        </div>
-
-        <div class="BlockJob">
-            <div class="Card">
-                <div class="ExpJob">
-                    <div class="Icon">
-                        <i class="fa-solid fa-bars-progress"></i>
+                    <div class="InfoName">
+                        <div class="Name">Đinh Mạnh Hùng <span><i class="fa-solid fa-circle-check"></i></span></div>
+                        <div class="Username">@HunqD</div>
                     </div>
-                    <h1>Kĩ năng</h1>
+                </div>
+                <div class="Block Two">
+                    <div class="InfoSocial">
+                        <div class="Friends">
+                            <i class="fa-solid fa-user-group"></i>
+                            <p>Ẩn</p>
+                        </div>
+                        <div class="Followers">
+                            <i class="fa-solid fa-rss"></i>
+                            <p>11K+</p>
+                        </div>
+                        <div class="Viewers">
+                            <i class="fa-solid fa-eye"></i>
+                            <p>150+</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Block Three">
+                    <h1>Tin nổi bật</h1>
+                    <div class="Story">
+
+                        <div class="IMGStory">
+                            <img  onclick="lightbox_open();" src="./Data/IMG/Hunq/Story/ST1.jpg" alt="" srcset="">
+                        </div>
+
+                        <div>
+                            <div id="light">
+                                <!-- <a class="boxclose" id="boxclose" onclick="lightbox_close();"></a> -->
+                                <video id="VisaChipCardVideo" width="100%" controls>
+                                    <source src="./Data/Video/4597529217335988566.mp4" type="video/mp4">
+                                    <!--Browser does not support <video> tag -->
+                                </video>
+                                <h1>🖤</h1>
+                            </div>
+                            <div id="fade" onClick="lightbox_close();"></div>
+                        </div> 
+                    </div>
                 </div>
 
-                <h3>Điện</h3>
-                <ul>
-                    <li><b>Điện Dân Dụng</b>.</li>
-                    <li><b>Điện Lạnh</b>.</li>
-                    <li>Trung cấp <b>Điện Công Nghiệp</b>.</li>
-                    <li>Cao đẳng <b>Cơ Điện Tử</b>.</li>
-                </ul>
-                <br>
-                <h3>Giao tiếp</h3>
-                <ul>
-                    <li>Tiếng anh <b>B2 CEFR</b>.</li>
-                </ul>
-                <br>
-                <h3>Phần mềm</h3>
-                <ul>
-                    <li><b>Cài Win Miễn Phí 🔥</b>.</li>
-                    <li>Lập trình <b>Web ( Front End )</b>.</li>
-                    <li>Lập trình <b>C, C++</b> cơ bản.</li>
-                    <li>Lập trình <b>Python</b> cơ bản.</li>
-                    <li>Lập trình <b>Unity</b> cơ bản.</li>
-                    <li><b>Tin Học Văn Phòng</b> cơ bản.</li>
-                    <li>Thiết kế <b>UI & UX</b> cơ bản.</li>
-                    <li><b>Photoshop</b> cơ bản.</li>
-                </ul>
-                <br>
-                <h3>Khác</h3>
-                <ul>
-                    <li><b>Sáng tạo nội dung</b>.</li>
-                    <li><b>Thiết Kế Chiếu Sáng</b> cơ bản.</li>
-                </ul>
-                
+
+
 
             </div>
+            
         </div>
-
-    </div>
-
-
-
-
-
-
-    <div class="TestDiv">
     </div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/JS/File.js"></script>
-<script src="./Data/JS/Alert.js"></script>
 
 </html>
