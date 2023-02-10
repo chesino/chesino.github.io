@@ -49,4 +49,19 @@ function typeWriter() {
     i++;
     setTimeout(typeWriter, speed);
   }
+};
+
+
+function openCity(evt, cityName) {
+  var i, tabcontent, Function;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  Function = document.getElementsByClassName("Function");
+  for (i = 0; i < Function.length; i++) {
+    Function[i].className = Function[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
 }
