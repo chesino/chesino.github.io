@@ -66,7 +66,7 @@ function typeWriter() {
 };
 
 
-function openCity(evt, cityName) {
+function openTab(evt, tabName) {
   var i, tabcontent, Function;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
@@ -74,8 +74,8 @@ function openCity(evt, cityName) {
   }
   Function = document.getElementsByClassName("Function");
   for (i = 0; i < Function.length; i++) {
-    Function[i].className = Function[i].className.replace(" active", "");
+    Function[i].className = Function[i].className.replace(" Active", "");
   }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " Active";
 }
