@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div class="Page Welcome Hide" id="Welcome">
+    <div class="Page Welcome" id="Welcome">
         <div>
             <h1>HunqD</h1>
             <p id="typing1"></p>
@@ -41,9 +41,12 @@
             <div class="Function" onclick="openCity(event, 'BlockList')">
                 <img src="./Data/IMG/Func/block.png" alt="" srcset="">
             </div>
+            <div class="Function" id="fDarkMode">
+                <img id="iDarkMode" src="./Data/IMG/Func/eye-glasses.png" alt="" srcset="">
+            </div>
         </div>
         <div class="Tab">
-            <div class="tabcontent Show" id="AddFriends">
+            <div class="tabcontent" id="AddFriends">
                 <h1>Kết bạn</h1>
                 <p>
                     Không phải người nổi tiếng hay chảnh 🐶 nhưng Hùng không muốn danh sách bạn bè mình bị kém chất
@@ -80,58 +83,62 @@
             </div>
             <div class="tabcontent" id="Ranking">
                 <h1>Bảng xếp hạng tương tác</h1>
+                <div class="UserTop">
+                    <div class="Avatar">
+                        <img class="imgA" src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
+                    </div>
+                    <div class="Name">
+                        <h1>Đinh Mạnh Hùng</h1>
+                        <p>Chiến Thần Tương Tác</p>
+                    </div>
+                    <div class="Rank">
+                        <img  class="imgA" src="./Data/IMG/Rank/one.png" alt="" srcset="">
+                    </div>
+                </div>
 
-                <table id="TableRank">
-                    <tr>
-                        <th>
-                            <img src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                        </th>
-                        <th>Đinh Mạnh Hùng
-                            <br>
-                            <span>1000</span>
-                        </th>
-                        <th><img src="./Data/IMG/Rank/first-place-medal.png" alt="" srcset=""></th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                        </td>
-                        <td>Đinh Mạnh Hùng
-                            <br>
-                            <span>1000</span></td>
-                        <td><img src="./Data/IMG/Rank/second-place-medal.png" alt="" srcset=""></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                        </td>
-                        <td>Đinh Mạnh Hùng
-                            <br>
-                            <span>1000</span></td>
-                        <td><img src="./Data/IMG/Rank/third-place-medal.png" alt="" srcset=""></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                        </td>
-                        <td>Đinh Mạnh Hùng
-                            <br>
-                            <span>1000</span></td>
-                        <td><img src="./Data/IMG/Rank/gold-medal.png" alt="" srcset=""></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                        </td>
-                        <td>Đinh Mạnh Hùng
-                            <br>
-                            <span>1000</span></td>
-                        <td>5</td>
-                    </tr>
-                </table>
+                <div class="UserTop">
+                    <div class="Avatar">
+                        <img class="imgA" src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
+                    </div>
+                    <div class="Name">
+                        <h1>Đinh Mạnh Hùng</h1>
+                        <p>Chiến Thần Tương Tác</p>
+                    </div>
+                    <div class="Rank">
+                        <img src="./Data/IMG/Rank/second-place-medal.png" alt="" srcset="">
+                    </div>
+                </div>
+
+                <div class="UserTop">
+                    <div class="Avatar">
+                        <img  class="imgA" src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
+                    </div>
+                    <div class="Name">
+                        <h1>Đinh Mạnh Hùng</h1>
+                        <p>Chiến Thần Tương Tác</p>
+                    </div>
+                    <div class="Rank">
+                        <img src="./Data/IMG/Rank/third-place-medal.png" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="UserTop">
+                    <div class="Avatar">
+                        <img  class="imgA" src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
+                    </div>
+                    <div class="Name">
+                        <h1>Đinh Mạnh Hùng</h1>
+                        <p>Chiến Thần Tương Tác</p>
+                    </div>
+                    <div class="Rank">
+                        <img src="./Data/IMG/Rank/gold-medal.png" alt="" srcset="">
+                    </div>
+                </div>
+                
+
             </div>
             <div class="tabcontent" id="BlockList">
                 <h1>Danh sách hạn chế</h1>
+                <p>Đang cập nhật...</p>
             </div>
         </div>
 

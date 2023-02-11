@@ -1,6 +1,6 @@
 :root {
---Background: #000;
-  --Linear-Gradient: linear-gradient(90deg, rgba(0,97,255,1) 0%, rgba(96,239,255,1) 100%);
+  --Background: #111;
+  --Linear-Gradient: linear-gradient(90deg, rgba(0, 97, 255, 1) 0%, rgba(96, 239, 255, 1) 100%);
 
   --Color: #fff;
   --Menu: black;
@@ -14,8 +14,8 @@
 
 .darkmode {
   --Background: #6284fc;
-  --Linear-Gradient: linear-gradient(90deg, rgba(98,132,252,1) 0%, rgba(244,146,240,1) 100%) ;
-  
+  --Linear-Gradient: linear-gradient(90deg, rgba(98, 132, 252, 1) 0%, rgba(244, 146, 240, 1) 100%);
+
   --Color: #000;
   --Menu: #fff;
   --ColorMenu: #111;
@@ -27,9 +27,9 @@
 }
 
 * {
-  padding:0;
-  margin:0;
-  box-sizing:border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -37,21 +37,27 @@ body {
   background-color: var(--Background);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   /* background: var(--Background) ; */
-  background: var(--Linear-Gradient);
+  /* background: var(--Linear-Gradient); */
+
 }
+
 .Hide {
   display: none !important;
 }
+
 .Show {
   display: block ;
 }
+
 .Page {
   height: 100vh;
   width: 100%;
 }
+
 .Page img {
   width: 100%;
 }
+
 .Welcome {
   text-align: center;
   background-image: url(/Data/IMG/Wallpaper/W2.jpg);
@@ -61,13 +67,15 @@ body {
   align-items: flex-end;
 
 }
+
 .Welcome div {
   margin-bottom: 100px;
-  width: calc(100% - 20px );
+  width: calc(100% - 20px);
   background-color: rgba(0, 0, 0, 0.74);
   padding: 20px 0;
   border-radius: 10px;
 }
+
 .Welcome div button {
   margin: 10px 0;
   color: var(--Color);
@@ -77,24 +85,29 @@ body {
   border-radius: 20px;
   border: 2px solid var(--Color);
 }
+
 .Two {
   padding: 10px;
 }
+
 .Two img {
   width: 100%;
   border-radius: 20px;
 }
+
 .Two .Banner {
   width: 100%;
   margin: 5px 0 10px 0;
 }
+
 .Two .ToolsBox {
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   gap: 10px;
   margin: auto;
 }
+
 .ToolsBox .Function {
   text-align: center;
   margin: auto;
@@ -103,11 +116,13 @@ body {
   border-radius: 20px;
   background-color: var(--Card);
 }
+
 .ToolsBox .Function img {
   width: 70%;
 }
 
 .Tab h1 {
+  text-align: center;
   font-size: 20px;
   margin: 5px 0 10px 0;
 }
@@ -116,39 +131,56 @@ body {
 .Tab .tabcontent {
   display: none;
 }
-.Tab .tabcontent ol {
-  margin-left: 20px ;
+
+#AddFriends ol{
+  margin-left: 15px;
 }
-
-#TableRank {
-  font-family: Arial, Helvetica, sans-serif;
-  width: 100%;
-  border-collapse:collapse; 
-}
-
-#TableRank td, #TableRank th {
-  border-bottom: 2px solid #ddd;
-  padding: 5px 0;
-}
-
-#TableRank tr:hover {background-color: #ddd;}
-
-#TableRank tr {
+#Ranking .UserTop {
+  display: grid;
+  grid-template-columns: auto auto auto;
   background-color: var(--Card);
-}
-#TableRank th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: red;
-  color: white;
-}
-#TableRank tr th, #TableRank tr td {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 20px;
   text-align: center;
 }
-#TableRank tr th img, #TableRank tr td img {
-  border-radius: 50%;
-  height: 60px;
-  width: 60px;
+#Ranking .UserTop:nth-child(2) {
+  grid-template-columns: auto ;
 }
 
+#Ranking .UserTop:nth-child(2) {
+  background: #fc00ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #00dbde, #fc00ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #00dbde, #fc00ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+
+#Ranking .UserTop .Avatar .imgA {
+  height: 50px;
+  width: 50px;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+
+#Ranking .UserTop:nth-child(2) .Avatar .imgA {
+  height: 80px;
+  width: 80px;
+  border: 4px solid gold;
+}
+
+#Ranking .UserTop .Rank img {
+  height: 50px;
+  width: 50px;
+}
+
+#Ranking .UserTop:nth-child(2) .Rank img {
+  height: 80px;
+  width: 80px;
+}
+#Ranking .UserTop .Name h1 {
+  margin: 0;
+}
+#Ranking .UserTop .Name p {
+  font-size: 14px;
+}

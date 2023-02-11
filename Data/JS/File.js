@@ -2,32 +2,32 @@ window.onload = function()
 {
   typeWriter();
 };
-// let darkMode = localStorage.getItem('darkMode');
-// var iconDarkMode = document.getElementById("iDarkMode");
-// const darkModeToggle = document.querySelector('#fDarkMode');
-// const enableDarkMode = () => {
-//     document.body.classList.add('darkmode');
-//     localStorage.setItem('darkMode', 'enabled');
-//     document.getElementById("fDarkMode").checked = true;
-//     iconDarkMode.className = "fa-solid fa-moon";
-// }
-// const disableDarkMode = () => {
-//     document.body.classList.remove('darkmode');
-//     localStorage.setItem('darkMode', null);
-// 	document.getElementById("fDarkMode").checked = false;
-// 	iconDarkMode.className = "fa-solid fa-sun";
-// }
-// if (darkMode === 'enabled') {
-//     enableDarkMode();
-// }
-// darkModeToggle.addEventListener('click', () => {
-//     darkMode = localStorage.getItem('darkMode');
-//     if (darkMode !== 'enabled') {
-//         enableDarkMode();
-//     } else {
-//         disableDarkMode();
-//     }
-// });
+let darkMode = localStorage.getItem('darkMode');
+var iconDarkMode = document.getElementById("iDarkMode");
+const darkModeToggle = document.querySelector('#fDarkMode');
+const enableDarkMode = () => {
+    document.body.classList.add('darkmode');
+    localStorage.setItem('darkMode', 'enabled');
+    document.getElementById("fDarkMode").checked = true;
+    iconDarkMode.src = './Data/IMG/Func/eye-glasses.png';
+}
+const disableDarkMode = () => {
+    document.body.classList.remove('darkmode');
+    localStorage.setItem('darkMode', null);
+	document.getElementById("fDarkMode").checked = false;
+  iconDarkMode.src = './Data/IMG/Func/moon.png';
+}
+if (darkMode === 'enabled') {
+    enableDarkMode();
+}
+darkModeToggle.addEventListener('click', () => {
+    darkMode = localStorage.getItem('darkMode');
+    if (darkMode !== 'enabled') {
+        enableDarkMode();
+    } else {
+        disableDarkMode();
+    }
+});
 
 $(document).ready(function() {
   $("a[href*='#']:not([href='#])").click(function() {
