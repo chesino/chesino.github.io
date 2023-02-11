@@ -1,7 +1,21 @@
 window.onload = function()
 {
   typeWriter();
+  Banner();
 };
+
+
+
+var imgBanner = document.getElementById('Banner');
+
+function Banner() {
+  var BannerX = Math.floor(Math.random() * 3);
+  imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
+}
+
+
+
+
 let darkMode = localStorage.getItem('darkMode');
 var iconDarkMode = document.getElementById("iDarkMode");
 const darkModeToggle = document.querySelector('#fDarkMode');
