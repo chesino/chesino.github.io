@@ -4,7 +4,13 @@ window.onload = function()
   Banner();
 };
 
-
+var Welcome = document.getElementById('Welcome');
+function Two() {
+  setTimeout(() => {
+    Welcome.style.display='none'
+  }, 1000);
+  ;
+}
 
 var imgBanner = document.getElementById('Banner');
 

@@ -16,14 +16,15 @@
 
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+    
 </head>
 
 <body>
-    <div class="Page Welcome" id="Welcome">
+    <div class="Page Welcome Hide" id="Welcome">
         <div>
             <h1>HunqD</h1>
             <p id="typing1"></p>
-            <a href="#Two"><button>Xem Thêm</button></a>
+            <a href="#Two" onclick="Two()"><button>Xem Thêm</button></a>
         </div>
     </div>
 
@@ -32,11 +33,11 @@
             <img id="Banner" src="./Data/IMG/Banner/1.png" alt="" srcset="">
         </div>
         <div class="ToolsBox">
-            <div class="Function" onclick="openTab(event, 'AddFriends')">
-                <img src="./Data/IMG/Func/add-friend.png" alt="" srcset="">
-            </div>
             <div class="Function Active" onclick="openTab(event, 'Ranking')">
                 <img src="./Data/IMG/Func/growth-graph.png" alt="" srcset="">
+            </div>
+            <div class="Function" onclick="openTab(event, 'AddFriends')">
+                <img src="./Data/IMG/Func/add-friend.png" alt="" srcset="">
             </div>
             <div class="Function" onclick="openTab(event, 'BlockList')">
                 <img src="./Data/IMG/Func/block.png" alt="" srcset="">
@@ -46,119 +47,31 @@
             </div>
         </div>
         <div class="Tab">
+            
+            <div class="tabcontent" id="Ranking" style="display: block;">
+
+             
+            </div>
             <div class="tabcontent" id="AddFriends">
                 <h1>Kết bạn</h1>
-                <p>
-                    Không phải người nổi tiếng hay chảnh 🐶 nhưng Hùng không muốn danh sách bạn bè mình bị kém chất
-                    lượng cũng như tài khoản ảo làm rác bảng tin cũng như kém bảo mật !
-                    Toàn bộ lượt kết bạn sẽ được hệ thống tự động xác nhận khi đủ điều kiện sau:
-                </p>
-                <ol>
-                    <li>
-                        Có bạn bè chung ít nhất là 2 người
-                    </li>
-                    <li>
-                        Có ảnh đại diện ( trường hợp không có sẽ được chính tay Hùng xem xét sau )
-                    </li>
-                    <li>
-                        Có ảnh đại diện ( trường hợp không có sẽ được chính tay Hùng xem xét sau )
-                    </li>
-                    <li>
-                        Trên 17 tuổi ( đây cũng là tuổi Facebook cho phép bạn sử dụng nền tảng này không bị giới hạn )
-                    </li>
-                    <li>Không có bài đăng nội dung rác kể cả bị tag tên ( vay tiền, lô đề, lộ link, link rác,…)</li>
-                </ol>
-                <br>
-                Những tài khoản bị từ chối hoặc bị xoá bạn bè vì những lý do sau:
-                <ol>
-                    <li>Tài khoản ảo</li>
-                    <li>Tài khoản bị tag tên vào bài đăng rác ( quá 24 tiếng )</li>
-                    <li>Có ngôn ngữ đả kích, xúc phạm, phản động, lừa đảo,…</li>
-                    <li>Không có bài đăng hay hoạt động trong vòng 1 tháng</li>
-                    <li>Tài khoản bị Hack</li>
-                </ol>
-
-                <br>
-
-            </div>
-            <div class="tabcontent" id="Ranking" style="display: block;">
-                <h1>Bảng xếp hạng tương tác</h1>
-                <div class="UserTop">
-                    <div class="Avatar">
-                        <img class="imgA" src="https://graph.facebook.com/100089227729627/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                    </div>
-                    <div class="Name">
-                        <h1>Phạm Đạt</h1>
-                        <p>Chiến Thần Tương Tác</p>
-                    </div>
-                    <div class="Rank">
-                        <img  class="imgA" src="./Data/IMG/Rank/one.png" alt="" srcset="">
-                    </div>
-                </div>
-
-                <div class="UserTop">
-                    <div class="Avatar">
-                        <img class="imgA" src="https://graph.facebook.com/100067058574264/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                    </div>
-                    <div class="Name">
-                        <h1>Phạm Nhi</h1>
-                        <p>Kẻ huỷ diệt nút ❤</p>
-                    </div>
-                    <div class="Rank">
-                        <img src="./Data/IMG/Rank/second-place-medal.png" alt="" srcset="">
-                    </div>
-                </div>
-
-                <div class="UserTop">
-                    <div class="Avatar">
-                        <img  class="imgA" src="https://graph.facebook.com/100025837573553/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                    </div>
-                    <div class="Name">
-                        <h1>Văn Hậu</h1>
-                        <p>Kẻ haha dạo</p>
-                    </div>
-                    <div class="Rank">
-                        <img src="./Data/IMG/Rank/third-place-medal.png" alt="" srcset="">
-                    </div>
-                </div>
-                <div class="UserTop">
-                    <div class="Avatar">
-                        <img  class="imgA" src="https://graph.facebook.com/100022538442079/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                    </div>
-                    <div class="Name">
-                        <h1>Đỗ Vân</h1>
-                        <p>Chuyên gia rep story</p>
-                    </div>
-                    <div class="Rank">
-                        <img src="./Data/IMG/Rank/gold-medal.png" alt="" srcset="">
-                    </div>
-                </div>
-                <div class="UserTop">
-                    <div class="Avatar">
-                        <img  class="imgA" src="https://graph.facebook.com/100022625414871/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
-                    </div>
-                    <div class="Name">
-                        <h1>Bùi Thanh Hiền</h1>
-                        <p>SadBoiz</p>
-                    </div>
-                    <div class="Rank">
-                        <img src="./Data/IMG/Rank/SadBoiz.png" alt="" srcset="">
-                    </div>
-                </div>
-                
-
+                <p>Tính năng đang hạn chế</p>
+                <h5>6:00.12/02/23 - Đã thêm 15 Bạn bè mới</h5>
             </div>
             <div class="tabcontent" id="BlockList">
                 <h1>Danh sách hạn chế</h1>
-                <p>Đang cập nhật...</p>
+                <input type="number" placeholder="Tính năng đang cập nhật">
             </div>
         </div>
 
     </div>
+
 </body>
 
+
+  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/JS/File.js"></script>
+<script src="./Data/JS/Rank.js"></script>
 
 
 </html>
