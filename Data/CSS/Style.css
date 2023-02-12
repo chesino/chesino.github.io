@@ -57,7 +57,7 @@ body {
 }
 
 .Page {
-
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -66,7 +66,6 @@ body {
 }
 
 .Welcome {
-  height: 100vh;
   text-align: center;
   background-image: url(/Data/IMG/Wallpaper/W2.jpg);
   background-size: cover;
@@ -109,7 +108,8 @@ body {
   width: 100%;
   margin: 5px 0 10px 0;
   border-radius: 20px;
-   cursor: pointer;
+  cursor: pointer;
+
 }
 
 .Two .ToolsBox {

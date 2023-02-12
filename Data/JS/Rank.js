@@ -27,7 +27,7 @@ var data = `{
     "Top": {
         "uid1": 100089227729627 ,
         "name1": "Phạm Đạt",
-        "note1": "Chiến Thần Tương Tác 🐱‍🏍",
+        "note1": "Chiến Thần Tương Tác 😎",
 
         "uid2": 100067058574264 ,
         "name2": "Phạm Nhi",

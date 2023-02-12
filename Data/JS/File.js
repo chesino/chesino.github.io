@@ -8,15 +8,26 @@ var Welcome = document.getElementById('Welcome');
 function Two() {
   setTimeout(() => {
     Welcome.style.display='none'
-  }, 1000);
+  }, 2000);
   ;
 }
 
 var imgBanner = document.getElementById('Banner');
 
+var BannerX = 0
 function Banner() {
-  var BannerX = Math.floor(Math.random() * 3);
-  imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
+  if (BannerX <= 2) {
+    BannerX++;
+    imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
+    setTimeout(Banner,5000);
+
+  } else {
+    BannerX = 0;
+    setTimeout(Banner,5000);
+    imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
+  }
+  console.log(BannerX);
+  
 }
 
 
@@ -61,7 +72,7 @@ $(document).ready(function() {
 
 var i = 0;
 var txt = "Chào mừng bạn ghé thăm trang quản lý của Hùng, tại đây Hùng chia sẻ bảng xếp hạng tương tác, xác nhận kết bạn, danh sách bị hạn chế,... ";
-var speed = 50;
+var speed = 20;
 
 function typeWriter() {
   if (i < txt.length) {
