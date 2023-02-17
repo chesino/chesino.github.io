@@ -1,4 +1,19 @@
 :root {
+--Background: #6284fc;
+  --Linear-Gradient: linear-gradient(90deg, rgba(98, 132, 252, 1) 0%, rgba(244, 146, 240, 1) 100%);
+
+  --Color: #000;
+  --Menu: #fff;
+  --ColorMenu: #111;
+
+  --ColorCard: #000;
+  --Card: #fff;
+
+  --Shadow: #000;
+  --Link: greenyellow;
+}
+
+.darkmode {
   --Background: #111;
   --Linear-Gradient: linear-gradient(90deg, rgba(0, 97, 255, 1) 0%, rgba(96, 239, 255, 1) 100%);
 
@@ -10,20 +25,7 @@
   --Card: #000;
 
   --Shadow: #eee;
-}
-
-.darkmode {
-  --Background: #6284fc;
-  --Linear-Gradient: linear-gradient(90deg, rgba(98, 132, 252, 1) 0%, rgba(244, 146, 240, 1) 100%);
-
-  --Color: #000;
-  --Menu: #fff;
-  --ColorMenu: #111;
-
-  --ColorCard: #000;
-  --Card: #fff;
-
-  --Shadow: #000;
+  --Link: #008cff;
 }
 
 * {
@@ -87,11 +89,11 @@ body {
   font-weight: bold;
   margin: 10px 0;
   color: var(--Color);
-  background-color: #6284fc;
+  background-color: var(--Link);
   height: 50px;
-  width: 200px;
   border-radius: 20px;
   border: 2px solid var(--Color);
+  padding: 0 15px ;
 }
 
 .Two {
@@ -115,7 +117,7 @@ body {
 .Two .ToolsBox {
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto ;
   gap: 10px;
   margin: auto;
 }
@@ -146,6 +148,7 @@ body {
 
 .Tab .tabcontent {
   display: none;
+  text-align: center;
 }
 
 #AddFriends ol{
@@ -154,17 +157,17 @@ body {
 #Ranking .UserTop {
   display: grid;
   grid-template-columns: 60px auto 60px;
+  gap: 2px;
   background-color: var(--Card);
   margin: 10px 0;
   padding: 10px;
   border-radius: 20px;
   text-align: center;
 }
-#Ranking .UserTop:nth-child(2) {
-  grid-template-columns: auto ;
-}
 
 #Ranking .UserTop:nth-child(2) {
+  grid-template-columns: auto ;
+  border: 3px solid var(--Card);
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
@@ -225,10 +228,36 @@ body {
 }
 
 #BlockList input {
+  color: var(--Color);
   font-size: 18px;
   padding: 0 5px;
   width: 100%;
-  height: 30px;
-  border: 2px solid #000;
+  height: 40px;
   border-radius: 10px;
+  border: 2px solid var(--Color);
+  background-color: var(--Card);
+}
+#BlockList button {
+  color: var(--Card);
+  font-size: 20px;
+  height: 40px;
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 2px solid var(--Card);
+  background-color: var(--Color);
+}
+#BlockList {
+  text-align: center;
+}
+.Info {
+  font-size: 12px;
+  text-align: center;
+  margin: 10px 0 20px 0;
+}
+.Info a {
+  font-weight: bold;
+  color: var(--Link);
+  font-size: 15px;
+  text-decoration: none;
 }

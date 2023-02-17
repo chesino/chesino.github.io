@@ -1,52 +1,28 @@
-// var data = `{
-//     "Top": {
-//         "uid1": 100067058574264 ,
-//         "name1": "Phạm Nhi",
-//         "note1": "Kẻ huỷ diệt nút Love ❤",
-
-//         "uid2": 100067058574264 ,
-//         "name2": "Phạm Đạt",
-//         "note2": "Kẻ huỷ diệt nút Love ❤",
-
-//         "uid3": 0 ,
-//         "name3": "Tên ở đây",
-//         "note3": 5000 ,
-
-//         "uid4": 0 ,
-//         "name4": "Tên ở đây",
-//         "note4": 5000 ,
-
-//         "uid5": 0 ,
-//         "name5": "Tên ở đây",
-//         "note5": 5000 
-//     }
-
-// }`;
-
 var data = `{
     "Top": {
-        "uid1": 100089227729627 ,
-        "name1": "Phạm Đạt",
-        "note1": "Chiến Thần Tương Tác 😎",
+        "uid1": 100067058574264 ,
+        "name1": "Phạm Nhi",
+        "note1": "Bà hoàng thả tim ❤",
 
-        "uid2": 100067058574264 ,
-        "name2": "Phạm Nhi",
-        "note2": "Bà hoàng thả tim ❤",
+        "uid2": 100013708202721 ,
+        "name2": "Tô Phương Thuý",
+        "note2": "Chuyên gia Haha 🤣",
 
-        "uid3": 100025837573553 ,
-        "name3": "Văn Hậu",
-        "note3": "Trùm Like Dạo 👍",
+        "uid3": 100089227729627 ,
+        "name3": "Phạm Đạt",
+        "note3": "Kẻ bán nụ cười 😂" ,
 
-        "uid4": 100022538442079 ,
-        "name4": "Đồ Vân",
-        "note4": "Chuyên gia rep story ✨" ,
+        "uid4": 100075076793753 ,
+        "name4": "Chính Nguyễn",
+        "note4": "Fan cứng mới nổi" ,
 
-        "uid5": 100022625414871 ,
-        "name5": "Bùi Thanh Hiền",
-        "note5": "Sadboiz"
+        "uid5": 100088260422422 ,
+        "name5": "Trần Ngọc Ánh",
+        "note5": "Chuyên gia rep story ✨" 
     }
 
 }`;
+
 
 var TOP = JSON.parse(data);
 
@@ -125,7 +101,7 @@ Ranking.innerHTML =
     '                        <p>' + NO4 + '</p>' +
     '                    </div>' +
     '                    <div class="Rank">' +
-    '                        <img src="./Data/IMG/Rank/gold-medal.png" alt="" srcset="">' +
+    '                        <img src="./Data/IMG/Rank/FanCung.png" alt="" srcset="">' +
     '                    </div>' +
     '                </div>' +
     '                <div class="UserTop">' +
@@ -137,7 +113,7 @@ Ranking.innerHTML =
     '                        <p>' + NO5 + '</p>' +
     '                    </div>' +
     '                    <div class="Rank">' +
-    '                        <img src="./Data/IMG/Rank/gold-medal.png" alt="" srcset="">' +
+    '                        <img src="./Data/IMG/Rank/Chat.png" alt="" srcset="">' +
     '                    </div>' +
     '                </div>' +
     '   <h5>Cập nhật mỗi T7 hàng tuần</h5> '

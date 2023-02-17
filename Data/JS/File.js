@@ -1,7 +1,6 @@
 window.onload = function()
 {
   typeWriter();
-  Banner();
 };
 
 var Welcome = document.getElementById('Welcome');
@@ -16,17 +15,13 @@ var imgBanner = document.getElementById('Banner');
 
 var BannerX = 0
 function Banner() {
-  if (BannerX <= 2) {
+  if (BannerX < 3) {
     BannerX++;
     imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
-    setTimeout(Banner,5000);
-
   } else {
     BannerX = 0;
-    setTimeout(Banner,5000);
     imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
   }
-  console.log(BannerX);
   
 }
 
@@ -40,13 +35,14 @@ const enableDarkMode = () => {
     document.body.classList.add('darkmode');
     localStorage.setItem('darkMode', 'enabled');
     document.getElementById("fDarkMode").checked = true;
-    iconDarkMode.src = './Data/IMG/Func/eye-glasses.png';
+    iconDarkMode.src = './Data/IMG/Func/moon.png';
 }
 const disableDarkMode = () => {
     document.body.classList.remove('darkmode');
     localStorage.setItem('darkMode', null);
 	document.getElementById("fDarkMode").checked = false;
-  iconDarkMode.src = './Data/IMG/Func/moon.png';
+
+  iconDarkMode.src = './Data/IMG/Func/eye-glasses.png';
 }
 if (darkMode === 'enabled') {
     enableDarkMode();

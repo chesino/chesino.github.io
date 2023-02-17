@@ -24,20 +24,20 @@
         <div>
             <h1>HunqD</h1>
             <p id="typing1"></p>
-            <a href="#Two" ><button>Xem Thêm</button></a>
+            <a href="#Two" ><button>Xem bảng xếp hạng</button></a>
         </div>
     </div>
 
     <div class="Page Two" id="Two">
         <div class="Banner"  onclick="Banner()">
-            <img id="Banner" src="./Data/IMG/Banner/1.png" alt="" srcset="">
+            <img id="Banner" src="./Data/IMG/Banner/3.png" alt="" srcset="">
         </div>
         <div class="ToolsBox">
             <div class="Function Active" onclick="openTab(event, 'Ranking')">
                 <img src="./Data/IMG/Func/growth-graph.png" alt="" srcset="">
             </div>
-            <div class="Function" onclick="openTab(event, 'AddFriends')">
-                <img src="./Data/IMG/Func/add-friend.png" alt="" srcset="">
+            <div class="Function" onclick="openTab(event, 'Mess')">
+                <img src="./Data/IMG/Func/Chat.png" alt="" srcset="">
             </div>
             <div class="Function" onclick="openTab(event, 'BlockList')">
                 <img src="./Data/IMG/Func/block.png" alt="" srcset="">
@@ -48,21 +48,27 @@
         </div>
         <div class="Tab">
             
-            <div class="tabcontent" id="Ranking" style="display: block;">
-
-             
+            <div class="tabcontent" style="display: block;">
+                <div id="Ranking"></div>
+                <p style="font-size: 12px;">Nếu như không hiện thị bảng xếp hạng hãy tải lại trang</p>
             </div>
-            <div class="tabcontent" id="AddFriends">
-                <h1>Kết bạn</h1>
-                <p>Tính năng đang hạn chế</p>
-                <h5>6:00.12/02/23 - Đã thêm 15 Bạn bè mới</h5>
+            <div class="tabcontent" id="Mess">
+                <h1>Xem thông kê tin nhắn</h1>
+                <p>Ở đây bạn có thể xem số lượng tin nhắn đã gửi cho Hùng ✨, Tính năng này sẽ được cập nhật sau nhưng không lâu đâu 😁</p>
             </div>
             <div class="tabcontent" id="BlockList">
                 <h1>Danh sách hạn chế</h1>
-                <input type="number" placeholder="Tính năng đang cập nhật">
+                <p>Hiện tại đang có <b>10 tài khoản</b>  bị hạn chế.</p>
+                <br>
+                <input type="text" id="getBlock" placeholder="Điền đầy đủ tên facebook để kiểm tra">
+                <button onclick="CheckBlock()">Kiểm Tra</button>
+                <h5 id="showBlock"></h5>
             </div>
         </div>
 
+    </div>
+    <div class="Info">
+        Trang được thiết kế bởi <a href="https://www.facebook.com/HunqD/">Đinh Mạnh Hùng</a>
     </div>
 
 </body>
@@ -72,6 +78,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/JS/File.js"></script>
 <script src="./Data/JS/Rank.js"></script>
+<script src="./Data/JS/Blocks.js"></script>
 
 
 </html>
