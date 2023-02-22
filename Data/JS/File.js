@@ -1,94 +1,77 @@
-window.onload = function()
-{
-  typeWriter();
-};
+// Lấy nút nhấn và thêm sự kiện nhấn vào
+const button = document.getElementById('toggle-button');
+button.addEventListener('click', toggleMode);
 
-var Welcome = document.getElementById('Welcome');
-function Two() {
-  setTimeout(() => {
-    Welcome.style.display='none'
-  }, 2000);
-  ;
+// Khởi tạo chế độ mặc định và lưu vào local storage (nếu chưa có)
+let mode = parseInt(localStorage.getItem('mode')) || 1;
+setMode(mode);
+
+// Hàm chuyển đổi chế độ
+function toggleMode() {
+  // Tăng chế độ lên 1 và quay về chế độ 1 nếu chế độ hiện tại là 3
+  mode = mode < 3 ? mode + 1 : 1;
+  setMode(mode);
+  // Lưu chế độ vào local storage
+  localStorage.setItem('mode', mode);
 }
 
-var imgBanner = document.getElementById('Banner');
+// Hàm thiết lập chế độ
+function setMode(mode) {
+  switch (mode) {
+    case 1:
+      button.style.backgroundImage = 'url(/Data/Images/DarkMode/Sun.gif)';
+      // Chạy hàm cho chế độ 1
+      mode1();
+      break;
+    case 2:
+      button.style.backgroundImage = 'url(/Data/Images/DarkMode/Moon.gif)';
+      // Chạy hàm cho chế độ 2
+      mode2();
+      break;
+    case 3:
+      button.style.backgroundImage = 'url(/Data/Images/DarkMode/Device.png)';
+      // Chạy hàm cho chế độ 3
+      mode3();
+      break;
+    default:
+      break;
+  }
+}
 
-var BannerX = 0
-function Banner() {
-  if (BannerX < 3) {
-    BannerX++;
-    imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
+// Hàm cho chế độ 1 chế độ sáng
+function mode1() {
+  console.log('Chế độ 1');
+
+  var body = document.querySelector('body');
+  body.classList.remove('dark-mode');
+}
+
+// Hàm cho chế độ 2 chế độ tối
+function mode2() {
+  console.log('Chế độ 2');
+
+  var body = document.querySelector('body');
+  body.classList.add('dark-mode');
+}
+
+// Hàm cho chế độ 3 chế độ sáng / tối
+function mode3() {
+  console.log('Chế độ 3');
+
+  var body = document.querySelector('body');
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    body.classList.add('dark-mode');
   } else {
-    BannerX = 0;
-    imgBanner.src = './Data/IMG/Banner/'+ BannerX +'.png'
+   body.classList.remove('dark-mode');
   }
-  
 }
 
 
-
-
-let darkMode = localStorage.getItem('darkMode');
-var iconDarkMode = document.getElementById("iDarkMode");
-const darkModeToggle = document.querySelector('#fDarkMode');
-const enableDarkMode = () => {
-    document.body.classList.add('darkmode');
-    localStorage.setItem('darkMode', 'enabled');
-    document.getElementById("fDarkMode").checked = true;
-    iconDarkMode.src = './Data/IMG/Func/moon.png';
+/* JavaScript cho nút 3 gạch */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
 }
-const disableDarkMode = () => {
-    document.body.classList.remove('darkmode');
-    localStorage.setItem('darkMode', null);
-	document.getElementById("fDarkMode").checked = false;
 
-  iconDarkMode.src = './Data/IMG/Func/eye-glasses.png';
-}
-if (darkMode === 'enabled') {
-    enableDarkMode();
-}
-darkModeToggle.addEventListener('click', () => {
-    darkMode = localStorage.getItem('darkMode');
-    if (darkMode !== 'enabled') {
-        enableDarkMode();
-    } else {
-        disableDarkMode();
-    }
-});
-
-$(document).ready(function() {
-  $("a[href*='#']:not([href='#])").click(function() {
-    let target = $(this).attr("href");
-    $('html,body').stop().animate({
-      scrollTop: $(target).offset().top
-    }, 1000);
-    event.preventDefault();
-  });
-});
-
-var i = 0;
-var txt = "Chào mừng bạn ghé thăm trang quản lý của Hùng, tại đây Hùng chia sẻ bảng xếp hạng tương tác, xác nhận kết bạn, danh sách bị hạn chế,... ";
-var speed = 20;
-
-function typeWriter() {
-  if (i < txt.length) {
-    document.getElementById("typing1").innerHTML += txt.charAt(i);
-    i++;
-    setTimeout(typeWriter, speed);
-  }
-};
-
-
-function openTab(evt, tabName) {
-  var i, tabcontent, Function;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  Function = document.getElementsByClassName("Function");
-  for (i = 0; i < Function.length; i++) {
-    Function[i].className = Function[i].className.replace(" Active", "");
-  }
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " Active";
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
 }
