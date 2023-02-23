@@ -1,3 +1,13 @@
+// Kiểm tra xem trình duyệt có phải là trình duyệt trên điện thoại không
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (isMobile) {
+  console.log("Đây là trình duyệt trên điện thoại");
+} else {
+  console.log("Đây là trình duyệt trên máy tính");
+}
+
+
 // Lấy nút nhấn và thêm sự kiện nhấn vào
 const button = document.getElementById('toggle-button');
 button.addEventListener('click', toggleMode);
@@ -19,17 +29,35 @@ function toggleMode() {
 function setMode(mode) {
   switch (mode) {
     case 1:
-      button.style.backgroundImage = 'url(/Data/Images/DarkMode/Sun.gif)';
+      button.innerHTML = '<i class="fa-regular fa-sun"></i>';
+      button.style.backgroundColor = '#40c3da';
+      button.style.color = '#000';
+
+      
+
       // Chạy hàm cho chế độ 1
       mode1();
       break;
     case 2:
-      button.style.backgroundImage = 'url(/Data/Images/DarkMode/Moon.gif)';
+      button.innerHTML = '<i class="fa-regular fa-moon"></i>';
+      button.style.backgroundColor = '#211e2c';
+      button.style.color = '#eee';
+
       // Chạy hàm cho chế độ 2
       mode2();
       break;
     case 3:
-      button.style.backgroundImage = 'url(/Data/Images/DarkMode/Device.png)';
+      
+      button.style.backgroundColor = '#f5c85d';
+      button.style.color = '#000';
+
+    if (isMobile) {
+      button.innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i>';
+    } else {
+      button.innerHTML = '<i class="fa-solid fa-desktop"></i>';
+    }
+
+      
       // Chạy hàm cho chế độ 3
       mode3();
       break;
@@ -67,11 +95,4 @@ function mode3() {
 }
 
 
-/* JavaScript cho nút 3 gạch */
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-}
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
