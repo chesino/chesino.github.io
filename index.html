@@ -28,19 +28,19 @@
             <i class="fa-solid fa-house"></i>
         </div>
 
-        <div class="Function" onclick="openTab(event, 'Info')">
-            <i class="fa-solid fa-id-badge"></i>
+        <div class="Function " onclick="openTab(event, 'MyProjects')">
+            <i class="fa-solid fa-diagram-project"></i>
         </div>
 
-        <div class="Function" onclick="openTab(event, 'MyProjects')">
-            <i class="fa-solid fa-diagram-project"></i>
+        <div class="Function" onclick="openTab(event, 'Info')">
+            <i class="fa-solid fa-circle-question"></i>
         </div>
 
         <div class="Function" onclick="openTab(event, 'Setting')">
             <i class="fa-solid fa-gear"></i>
         </div>
 
-        <div class="Function" id="Capture" onclick="capture(Home)">
+        <div class="Function" id="Capture" onclick="capture()">
             <i class="fa-solid fa-camera"></i>
         </div>
         
@@ -48,7 +48,7 @@
     </div>
 
 
-    <div class="Page One" id="Home" style="display: block;">
+    <div class="Page One" id="Home" >
         <div class="VideoBG">
             <video class="video"autoplay loop muted playsinline >
                 <source src="./Data/Video/video_2.mp4" type="video/mp4">
@@ -64,12 +64,45 @@
          
           
     </div>
-    <div class="Page Two" id="Info">
-        <h1>Trang thông tin</h1>
+   
+    <div class="Page Two" id="MyProjects" >
+        <h1>Các dự án</h1>
+        <div class="CardBox">
+            <div class="Card">
+                <a href="./HunqD/index.html" target="_blank" >
+                    <img src="./HunqD/Data/IMG/Banner/0.png" alt="" srcset="">
+                </a>
+                Thống kê trang cá nhân
+            </div>
+            <div class="Card" onclick="alert('đang bảo trì')">
+                <img src="./Data/Images/Projects/TKB.png" alt="" srcset="">
+                Thời khoá biểu
+            </div>
+            <div class="Card" onclick="alert('sắp ra mắt')">
+                <img src="./Data/Images/Projects/TTĐ.png" alt="" srcset="">
+                Tính toán điện
+            </div>
+            <!-- <div class="Card"></div>
+            <div class="Card"></div>
+            <div class="Card"></div>
+            <div class="Card"></div> -->
+        </div>
+
+        <h1>Tài liệu cơ điện tử</h1>
+        <div class="CardBox">
+            <div class="Card">
+                <img src="./Data/Images/TaiLieu/TL.png" alt="" srcset="">
+                Tài liệu cơ điện tử cơ bản
+            </div>
+        </div>
     </div>
-    <div class="Page Three" id="MyProjects">
-        <h1>Các dự án của tôi</h1>
-        
+
+    <div class="Page Three" id="Info">
+        <h1>Trang thông tin</h1>
+        <p>Website này được lập ra với mục đích phi lợi nhuận và tập trung vào việc hỗ trợ trong việc học tập và cá nhân. Trang web có thể cung cấp các tài liệu, bài viết, hướng dẫn và công cụ hữu ích để giúp người dùng cải thiện kỹ năng và kiến thức của mình.</p>
+        <p>Các nội dung trên trang bao gồm những chủ đề về cơ điện tử và nhiều lĩnh vực đời sống khác.</p>
+        <p>Với sự đóng góp của cộng đồng và sự hỗ trợ của các công cụ học tập và nghiên cứu trực tuyến, trang web này có thể là một nguồn tài nguyên hữu ích cho những ai đang tìm kiếm kiến ​​thức và muốn phát triển bản thân trong lĩnh vực cơ điện tử.</p>
+        <hr>
     </div>
     
     <div class="Page" id="Setting">

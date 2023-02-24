@@ -19,7 +19,7 @@ h1 {
 	bottom: 0;
 	text-align: center;
 	display: grid;
-	grid-template-columns: 50px auto auto auto auto 50px ;
+	grid-template-columns: 50px auto auto auto auto 50px;
 	gap: 4px;
 	background-color: black;
 	width: calc(100% - 20px);
@@ -27,14 +27,14 @@ h1 {
 	border-radius: 12px;
 	border: 2px solid #000;
 	box-shadow: 0px 0px 0px 2px #000,
-				0px 0px 0px 1px #000;
+		0px 0px 0px 1px #000;
 	transition: box-shadow 0.3s ease-in-out;
 }
 
 .MenuBar:hover {
 	border: 2px solid #000;
 	box-shadow: 0px 0px 0px 2px #04AA6D,
-				0px 0px 0px 1px #000;
+		0px 0px 0px 1px #000;
 }
 
 .MenuBar .Function {
@@ -46,7 +46,7 @@ h1 {
 
 .MenuBar .Function:last-child {
 	color: #000;
-	background-color: #04AA6D ;
+	background-color: #04aa57;
 	border-bottom-right-radius: 10px;
 	border-top-right-radius: 10px;
 }
@@ -56,6 +56,7 @@ h1 {
 	border-top-left-radius: 10px;
 
 }
+
 .MenuBar .Function.Active {
 	background-color: #04AA6D;
 	color: #000;
@@ -69,11 +70,31 @@ h1 {
 
 .Page {
 	height: 100vh;
-
+	padding: 10px 20px;
 }
+
+.Page h1 {
+	font-size: 22px;
+	text-transform: uppercase;
+	margin: 15px 0 5px 0;
+}
+
+.Page p {
+	font-size: 18px;
+	margin: 0;
+	margin-bottom: 15px;
+}
+
+.Page hr {
+	background-color: #fff;
+	border: none;
+	height: 2px;
+}
+
 .One {
 	padding: 20px 10px;
 }
+
 .Three {
 	background-color: #04AA6D;
 }
@@ -91,10 +112,37 @@ h1 {
 
 .Welcome {
 	background-color: #04aa6d;
-	padding: 10px 10px ;
+	padding: 10px 10px;
 	border-radius: 12px;
 }
+
 #text {
 	white-space: pre-line;
-  }
-  
+}
+
+
+.CardBox {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: scroll;
+}
+
+.Card {
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	width: 80%;
+	color: #000;
+	background-color: #f2f2f2;
+	border-radius: 10px;
+	margin: auto 0;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	padding: 2px 0 4px 0;
+	flex-shrink: 0;
+}
+.Card img {
+	max-width: calc(100% - 8px);
+	border-radius: 10px;
+	padding: 2px 4px;
+}
