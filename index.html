@@ -22,6 +22,8 @@
 <body>
 
     <div class="MenuBar">
+        <div class="Function" id="toggle-button" >
+        </div>
         <div class="Function Active"  onclick="openTab(event, 'Home')">
             <i class="fa-solid fa-house"></i>
         </div>
@@ -34,30 +36,26 @@
             <i class="fa-solid fa-diagram-project"></i>
         </div>
 
-       
-
         <div class="Function" onclick="openTab(event, 'Setting')">
             <i class="fa-solid fa-gear"></i>
         </div>
         
-        <div class="Function" id="toggle-button" >
-           
-        </div>
+       
     </div>
 
-
-    
 
     <div class="Page One" id="Home" style="display: block;">
         <div class="VideoBG">
             <video class="video"autoplay loop muted playsinline >
-                <source src="./Data/Video/video.mp4" type="video/mp4">
+                <source src="./Data/Video/video_2.mp4" type="video/mp4">
                 Your browser does not support HTML5 video.
             </video>
               
         </div>
         <div class="Welcome">
             <h1>Trang đang cập nhật</h1>
+            <p id="text"></p>
+
         </div>
          
           

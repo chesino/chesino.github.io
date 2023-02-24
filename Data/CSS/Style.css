@@ -19,12 +19,13 @@ h1 {
 	bottom: 0;
 	text-align: center;
 	display: grid;
-	grid-template-columns: auto auto auto auto 50px;
+	grid-template-columns: 50px auto auto auto 50px ;
+	gap: 4px;
 	background-color: black;
 	width: calc(100% - 20px);
 	margin: 10px;
 	border-radius: 12px;
-	border: 2px solid #0000004d;
+	border: 2px solid #000;
 	box-shadow: 0px 0px 0px 2px #000,
 				0px 0px 0px 1px #000;
 	transition: box-shadow 0.3s ease-in-out;
@@ -32,11 +33,13 @@ h1 {
 
 .MenuBar:hover {
 	border: 2px solid #000;
-	box-shadow: 0px 0px 0px 4px #0000004d,
-				0px 0px 2px 1px #000;
+	box-shadow: 0px 0px 0px 2px #04AA6D,
+				0px 0px 0px 1px #000;
 }
 
 .MenuBar .Function {
+	cursor: pointer;
+	background-color: transparent;
 	color: white;
 	padding: 14px 0;
 }
@@ -50,24 +53,23 @@ h1 {
 	border-bottom-left-radius: 10px;
 	border-top-left-radius: 10px;
 }
-
-
-
 .MenuBar .Function.Active {
 	background-color: #04AA6D;
 	color: #000;
 	transition: 0.5s;
 }
 
-.MenuBar .Function:nth-child(5) {
-	float: right;
-	color: #000;
-	background-color: #40c3da;
+.MenuBar .Function:hover:not(.Active) {
+	background-color: #111;
 }
+
 
 .Page {
 	height: 100vh;
 
+}
+.One {
+	padding: 20px 10px;
 }
 .Three {
 	background-color: #04AA6D;
@@ -76,8 +78,20 @@ h1 {
 .video {
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	bottom: -15px;
 	min-width: 100%;
 	min-height: 100%;
 	z-index: -99;
 }
+
+
+
+.Welcome {
+	background-color: #04aa6d;
+	padding: 10px 10px ;
+	border-radius: 12px;
+}
+#text {
+	white-space: pre-line;
+  }
+  

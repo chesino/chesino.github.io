@@ -1,3 +1,9 @@
+window.onload = function()
+{
+  typeWriter();
+};
+
+
 // Kiểm tra xem trình duyệt có phải là trình duyệt trên điện thoại không
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -119,3 +125,18 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " Active";
 }
 
+
+// Viết chữ 
+var i = 0;
+const text = "Chào mừng bạn đến với trang web cá nhân của tôi!\n \n Tôi là Hùng, còn được biết đến với nickname HunqD.\n \n Hiện tại, tôi đang là sinh viên chuyên ngành cơ điện tử. Trang web cá nhân của tôi được thiết kế để chia sẻ về những kiến thức và kinh nghiệm của tôi. tôi cũng muốn sử dụng trang web cá nhân của mình như một nơi để ghi chép lại những kinh nghiệm và học hỏi của mình trong cuộc sống.\n \n Cảm ơn bạn đã ghé thăm trang web của tôi và mong được sự ủng hộ của bạn trong tương lai!";
+let index = 0;
+
+function type() {
+  document.getElementById("text").textContent += text.charAt(index);
+  index++;
+  if (index < text.length) {
+    setTimeout(type, 20);
+  }
+}
+
+type();
