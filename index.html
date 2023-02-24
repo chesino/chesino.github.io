@@ -39,6 +39,10 @@
         <div class="Function" onclick="openTab(event, 'Setting')">
             <i class="fa-solid fa-gear"></i>
         </div>
+
+        <div class="Function" id="Capture" onclick="capture(Home)">
+            <i class="fa-solid fa-camera"></i>
+        </div>
         
        
     </div>
@@ -65,13 +69,18 @@
     </div>
     <div class="Page Three" id="MyProjects">
         <h1>Các dự án của tôi</h1>
+        
     </div>
     
     <div class="Page" id="Setting">
         <h1>Cài đặt</h1>
+        <button onclick="shareFacebook()">Chia sẻ Facebook</button>
     </div>
 
 </body>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./Data/JS/File.js"></script>
 

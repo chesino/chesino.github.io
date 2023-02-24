@@ -1,9 +1,3 @@
-window.onload = function()
-{
-  typeWriter();
-};
-
-
 // Kiểm tra xem trình duyệt có phải là trình duyệt trên điện thoại không
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -38,9 +32,6 @@ function setMode(mode) {
       button.innerHTML = '<i class="fa-regular fa-sun"></i>';
       button.style.backgroundColor = '#40c3da';
       button.style.color = '#000';
-
-      
-
       // Chạy hàm cho chế độ 1
       mode1();
       break;
@@ -53,17 +44,17 @@ function setMode(mode) {
       mode2();
       break;
     case 3:
-      
+
       button.style.backgroundColor = '#f5c85d';
       button.style.color = '#000';
 
-    if (isMobile) {
-      button.innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i>';
-    } else {
-      button.innerHTML = '<i class="fa-solid fa-desktop"></i>';
-    }
+      if (isMobile) {
+        button.innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i>';
+      } else {
+        button.innerHTML = '<i class="fa-solid fa-desktop"></i>';
+      }
 
-      
+
       // Chạy hàm cho chế độ 3
       mode3();
       break;
@@ -96,7 +87,7 @@ function mode3() {
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     body.classList.add('dark-mode');
   } else {
-   body.classList.remove('dark-mode');
+    body.classList.remove('dark-mode');
   }
 }
 
@@ -138,5 +129,53 @@ function type() {
     setTimeout(type, 20);
   }
 }
-
 type();
+
+// Chụp màn hình
+var screenshot;
+var funcCap = 0; 
+var iCapture = document.getElementById('Capture');
+var element = document.getElementById("text");
+
+function capture() {
+  funcCap++;
+  if (funcCap == 1) {
+    
+    iCapture.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>';
+   
+    html2canvas(element).then(function (canvas) {
+      screenshot = canvas.toDataURL();
+    });
+  }
+  if (funcCap == 2) {
+    save();
+    funcCap = 0; 
+    iCapture.innerHTML = '<i class="fa-solid fa-camera"></i>';
+  }
+}
+
+function save() {
+  
+  if (!screenshot) {
+    alert("Please take a screenshot first.");
+    return;
+  }
+
+  var blob = dataURItoBlob(screenshot);
+  saveAs(blob, 'HunqD.png');
+  
+}
+
+function dataURItoBlob(dataURI) {
+  var byteString = atob(dataURI.split(',')[1]);
+  var ab = new ArrayBuffer(byteString.length);
+  var ia = new Uint8Array(ab);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+  return new Blob([ab], { type: 'image/png' });
+}
+
+function shareFacebook() {
+  window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href), "facebook-share-dialog", "width=626,height=436");
+}

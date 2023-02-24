@@ -19,7 +19,7 @@ h1 {
 	bottom: 0;
 	text-align: center;
 	display: grid;
-	grid-template-columns: 50px auto auto auto 50px ;
+	grid-template-columns: 50px auto auto auto auto 50px ;
 	gap: 4px;
 	background-color: black;
 	width: calc(100% - 20px);
@@ -45,6 +45,8 @@ h1 {
 }
 
 .MenuBar .Function:last-child {
+	color: #000;
+	background-color: #04AA6D ;
 	border-bottom-right-radius: 10px;
 	border-top-right-radius: 10px;
 }
@@ -52,6 +54,7 @@ h1 {
 .MenuBar .Function:first-child {
 	border-bottom-left-radius: 10px;
 	border-top-left-radius: 10px;
+
 }
 .MenuBar .Function.Active {
 	background-color: #04AA6D;
