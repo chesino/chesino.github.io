@@ -22,22 +22,58 @@
 <body>
 
     <div class="MenuBar">
-        <a class="active" href="#home"><i class="fa-solid fa-house"></i></a>
-        <a href="#news"><i class="fa-solid fa-diagram-project"></i></a>
-        <a href="#contact"><i class="fa-solid fa-id-badge"></i></a>
-        <a href="#setting"><i class="fa-solid fa-gear"></i></a>
-        <a id="toggle-button" href="#DarkMode">About</a>
+        <div class="Function Active"  onclick="openTab(event, 'Home')">
+            <i class="fa-solid fa-house"></i>
+        </div>
+
+        <div class="Function" onclick="openTab(event, 'Info')">
+            <i class="fa-solid fa-id-badge"></i>
+        </div>
+
+        <div class="Function" onclick="openTab(event, 'MyProjects')">
+            <i class="fa-solid fa-diagram-project"></i>
+        </div>
+
+       
+
+        <div class="Function" onclick="openTab(event, 'Setting')">
+            <i class="fa-solid fa-gear"></i>
+        </div>
+        
+        <div class="Function" id="toggle-button" >
+           
+        </div>
     </div>
 
-    <div class="Page One">
-        <video autoplay muted loop class="BackgroundVideo">
-            <source src="./Data/Video/video.mp4" type="video/mp4">
-            Your browser does not support HTML5 video.
-          </video>
+
+    
+
+    <div class="Page One" id="Home" style="display: block;">
+        <div class="VideoBG">
+            <video class="video" muted="muted" loop="loop" autoplay="autoplay">
+                <source src="./Data/Video/video.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+                </video>
+                  
+                <canvas class="canvas"></canvas>      
+        </div>
+        <div class="Welcome">
+            <h1>Trang đang cập nhật</h1>
+        </div>
+         
+          
     </div>
-    <div class="Page">
-        
+    <div class="Page Two" id="Info">
+        <h1>Trang thông tin</h1>
     </div>
+    <div class="Page Three" id="MyProjects">
+        <h1>Các dự án của tôi</h1>
+    </div>
+    
+    <div class="Page" id="Setting">
+        <h1>Cài đặt</h1>
+    </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./Data/JS/File.js"></script>

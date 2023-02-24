@@ -19,37 +19,47 @@ h1 {
 	bottom: 0;
 	text-align: center;
 	display: grid;
-	grid-template-columns: auto auto auto auto auto;
-	background-color: #000;
+	grid-template-columns: auto auto auto auto 50px;
+	background-color: black;
 	width: calc(100% - 20px);
 	margin: 10px;
-	border-radius: 10px;
+	border-radius: 12px;
+	border: 2px solid #0000004d;
+	box-shadow: 0px 0px 0px 2px #000,
+				0px 0px 0px 1px #000;
+	transition: box-shadow 0.3s ease-in-out;
 }
 
-.MenuBar a {
+.MenuBar:hover {
+	border: 2px solid #000;
+	box-shadow: 0px 0px 0px 4px #0000004d,
+				0px 0px 2px 1px #000;
+}
+
+.MenuBar .Function {
 	color: white;
-	padding: 14px 16px;
+	padding: 14px 0;
 }
 
-.MenuBar a:last-child {
+.MenuBar .Function:last-child {
 	border-bottom-right-radius: 10px;
 	border-top-right-radius: 10px;
 }
 
-.MenuBar a:first-child {
+.MenuBar .Function:first-child {
 	border-bottom-left-radius: 10px;
 	border-top-left-radius: 10px;
 }
 
-.MenuBar a:hover:not(.active) {
-	background-color: red;
-}
 
-.MenuBar a.active {
+
+.MenuBar .Function.Active {
 	background-color: #04AA6D;
+	color: #000;
+	transition: 0.5s;
 }
 
-.MenuBar a:nth-child(5) {
+.MenuBar .Function:nth-child(5) {
 	float: right;
 	color: #000;
 	background-color: #40c3da;
@@ -59,12 +69,17 @@ h1 {
 	height: 100vh;
 
 }
+.Three {
+	background-color: #04AA6D;
+}
 
-.BackgroundVideo {
+
+.canvas,
+.video {
 	position: absolute;
 	right: 0;
 	bottom: 0;
 	min-width: 100%;
 	min-height: 100%;
-	z-index: -1;
+	z-index: -99;
 }
