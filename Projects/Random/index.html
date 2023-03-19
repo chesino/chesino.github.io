@@ -22,9 +22,25 @@
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <div class="user-box">
+        <div class="BG-user">
+            <div class="pyro" id="pyro"><div class="before"></div><div class="after"></div></div>
+            <img class="user-image" src="https://scontent.xx.fbcdn.net/v/t1.15752-9/299104073_2848938178748462_7454617949080401483_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-7&_nc_sid=4de414&_nc_ohc=HYzVa1-sS50AX9dFs6q&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRIkhrulla401PoLt2wtQd0AmsnOc4Su59qLTxs8Blqew&oe=643D804C" alt="User Image">
+            <h2 class="user-name">Cơ Điện Tử Đức K14</h2>
+            <button class="random-button" >Hôm nay ai trực nhật</button>
+        </div>
+    </div>
+    
+
+
+
     <div class="Info">
         <h1>Thông tin</h1>
-        <p>Tên và Hình ảnh các thành viên được cập nhật tự động bằng API tích hợp.</p>
+        <p>Trang này được tạo ra với mục đích cá nhân và không quảng cáo không chứa dữ liệu độc hại.</p>
+        <p>Được chọn ngẫu nhiên và không có sự can thiệp tỉ lệ mỗi thành viên.</p>
+        <p>Các thành viên khi được chọn trước đó sẽ không bị lặp lại cho tới chọn hết thành viên của lớp</p>
+        <p>Tên và ảnh của mỗi thành viên được đặt theo Facebook và tự động cập nhật bằng API tích hợp.</p>
         <h1>Tính minh bạch</h1>
         <p>
             Nhằm tránh tình trạng anh em trong lớp bảo thằng lập trình <b>Hùng</b> 
@@ -36,20 +52,14 @@ var randomIndex = Math.floor(Math.random() * userData.length);
 while (usedIndexes.includes(randomIndex)) {  
 randomIndex = Math.floor(Math.random() * userData.length);  
 }
-            </pre>
+</pre>
         </code>
-        <p>Đây là đoạn js sử dụng hàm random nên sẽ không có sự bịp gì ở đây nhé. 😉</p>
+        <p>Một đoạn Javascript chính đóng vai trò chọn ngẫu nhiên một thành viên trong lớp.</p>
         <div class="theme-switcher">
             <button class="theme-switcher-button"><i class="fa-solid fa-moon"></i></button>
           </div>
-    </div>
 
-    <div class="user-box">
-        <div class="BG-user">
-            <img class="user-image" src="https://scontent.xx.fbcdn.net/v/t1.15752-9/299104073_2848938178748462_7454617949080401483_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-7&_nc_sid=4de414&_nc_ohc=HYzVa1-sS50AX9dFs6q&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRIkhrulla401PoLt2wtQd0AmsnOc4Su59qLTxs8Blqew&oe=643D804C" alt="User Image">
-            <h2 class="user-name">Cơ Điện Tử Đức K14</h2>
-            <button class="random-button">Hôm nay ai trực nhật</button>
-        </div>
+          
     </div>
     
    
