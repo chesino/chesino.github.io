@@ -21,29 +21,66 @@
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
     <div class="user-box">
+        
         <div class="BG-user">
-            <div class="pyro" id="pyro"><div class="before"></div><div class="after"></div></div>
-            <img class="user-image" src="https://scontent.xx.fbcdn.net/v/t1.15752-9/299104073_2848938178748462_7454617949080401483_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-7&_nc_sid=4de414&_nc_ohc=HYzVa1-sS50AX9dFs6q&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRIkhrulla401PoLt2wtQd0AmsnOc4Su59qLTxs8Blqew&oe=643D804C" alt="User Image">
+            <div class="pyro" id="pyro">
+                <div class="before"></div>
+                <div class="after"></div>
+            </div>
+            <img class="user-image"
+                src="https://scontent.xx.fbcdn.net/v/t1.15752-9/299104073_2848938178748462_7454617949080401483_n.jpg?stp=dst-jpg_p100x100&_nc_cat=106&ccb=1-7&_nc_sid=4de414&_nc_ohc=HYzVa1-sS50AX9dFs6q&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRIkhrulla401PoLt2wtQd0AmsnOc4Su59qLTxs8Blqew&oe=643D804C"
+                alt="User Image">
             <h2 class="user-name">Cơ Điện Tử Đức K14</h2>
-            <button class="random-button" >Hôm nay ai trực nhật</button>
-        </div>
+            <button class="random-button">Hôm nay ai trực nhật</button>
+           
+            <div class="Setting">
+                <button onclick="Settime(0)">
+                    0s
+                </button>
+                <button  onclick="Settime(3)">
+                    3s
+                </button >
+                <button  onclick="Settime(10)">
+                    10s
+                </button>
+                <button id="Sound" onclick="ChangeSound()" >
+                    <i class="fa-solid fa-compact-disc"></i>
+                </button>
+                <button onclick="SoundMUTE()" >
+                    <i id="iconMUTE" class="fa-solid fa-volume-xmark"></i>
+                </button>
+
+                <audio id="MySound" muted>
+                    <source src="./Music/nhacxoso.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+            </div>
+        </div>    
     </div>
-    
+
 
 
 
     <div class="Info">
+        <div class="Download">
+            <button class="App" onclick="download('Android')">Tải cho Android</button>
+            <button class="App" onclick="download('iOS')">Tải cho iOS</button>
+        </div>
         <h1>Thông tin</h1>
-        <p>Trang này được tạo ra với mục đích cá nhân phục vụ cho lớp, không quảng cáo và không chứa dữ liệu độc hại hay thu thập dữ liệu của bạn.</p>
+        <p>Trang này được tạo ra với mục đích cá nhân phục vụ cho lớp, không quảng cáo và không chứa dữ liệu độc hại hay
+            thu thập dữ liệu của bạn.</p>
         <p>Được chọn ngẫu nhiên và không có sự can thiệp tỉ lệ mỗi thành viên.</p>
         <p>Các thành viên khi được chọn trước đó sẽ không bị lặp lại cho tới khi chọn hết thành viên của lớp.</p>
         <p>Tên và ảnh của mỗi thành viên được đặt theo Facebook và tự động cập nhật bằng API tích hợp.</p>
+     
+        
         <h1>Tính minh bạch</h1>
         <p>
-            Nhằm tránh tình trạng anh em trong lớp bảo thằng lập trình <b>Hùng</b> 
+            Nhằm tránh tình trạng anh em trong lớp bảo thằng lập trình <b>Hùng</b>
             chơi ăn gian thì đây sẽ là bằng chứng.
         </p>
         <code>
@@ -55,24 +92,24 @@ randomIndex = Math.floor(Math.random() * userData.length);
 </pre>
         </code>
         <p>Một đoạn Javascript chính đóng vai trò chọn ngẫu nhiên một thành viên trong lớp.</p>
-<h1>Cập nhật sắp tới ? </h1>
-<p>Sắp có ứng dụng cho Android & iOS.</p>
-<p>Thêm chế độ vòng quay.</p>
+        <h1>Cập nhật sắp tới ? </h1>
+        <p>Sắp có ứng dụng cho Android & iOS.</p>
 
-<h1>Quá trình phát triển</h1>
-<p>20/03/2023 - Sửa lỗi & bổ sung thêm tính năng.</p>
-<p>18/03/2023 - Ra mắt phiên bản đầu tiên.</p>
+        <h1>Quá trình phát triển</h1>
+        <p>20/03/2023 - Sửa lỗi & bổ sung thêm tính năng.</p>
+        <p>18/03/2023 - Ra mắt phiên bản đầu tiên.</p>
         <div class="theme-switcher">
             <button class="theme-switcher-button"><i class="fa-solid fa-moon"></i></button>
-          </div>
+        </div>
 
-          
+
     </div>
-    
-   
-      
+
+
+
     <footer>
-        Lập trình & thiết kế bởi <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a> ❤
+        Lập trình & thiết kế bởi <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh
+            Hùng</a> ❤
     </footer>
 </body>
 

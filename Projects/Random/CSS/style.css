@@ -20,16 +20,15 @@ body.dark-mode {
 
 
 .user-box {
-  margin-top: 50px;
   text-align: center;
   padding: 10px;
 }
 
 .BG-user {
   margin: 5px 0px;
-  padding: 50px 20px 30px 20px;
+  padding: 20px 0px 20px 0px;
   background-color: #bdb9b9;
-  border-radius: 10px;
+  border-radius: 25px;
 }
 body.dark-mode .BG-user {
   background-color: #111;
@@ -39,11 +38,27 @@ body.dark-mode .BG-user {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin: 20px auto;
+  margin: 0px auto;
   display: block;
   border: 5px solid #4CAF50;
 }
+.Setting {
+  text-align: center;
+  margin: 20px 0 10px 0;
+}
+.Setting button {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  margin: 0 2px;
+  border: 2px solid #4CAF50;
+}
+.Setting button i {
+  font-size: 16px;
 
+}
 .user-name {
   font-size: 25px;
   margin: 0;
@@ -65,11 +80,11 @@ body.dark-mode .BG-user {
   color: #4CAF50;
   font-size: 20px;
   text-transform: uppercase;
-  margin: 20px 0 0 0;
+  margin: 30px 0 10px 0;
 }
 
 .Info p {
-  font-size: 14px;
+  font-size: 16px;
   margin: 5px 0 10px 0;
 }
 .Info p b {
@@ -108,15 +123,16 @@ footer a {
 
 .theme-switcher {
   position: fixed;
-  top: 10px;
+  bottom: 50px;
   right: 10px;
   text-align: center;
 }
 
 .theme-switcher button {
+  font-size:16px;
   color: #000;
-  height: 40px !important;
-  width: 40px !important;
+  height: 45px !important;
+  width: 45px !important;
 }
 body.dark-mode .theme-switcher button {
   color: #eee;
@@ -136,6 +152,20 @@ button {
   color: #3c4043;
   cursor: pointer;
 }
+.Download {
+  margin: 10px 0;
+  text-align: center;
+}
+.App {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4CAF50 ;
+  height: 40px;
+  padding: 0 20px;
+  margin: 0 10px;
+}
+
 
 ::-webkit-scrollbar {
   width: 8px;
