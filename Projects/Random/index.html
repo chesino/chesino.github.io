@@ -47,17 +47,6 @@
                 <button  onclick="Settime(10)">
                     10s
                 </button>
-                <button id="Sound" onclick="ChangeSound()" >
-                    <i class="fa-solid fa-compact-disc"></i>
-                </button>
-                <button onclick="SoundMUTE()" >
-                    <i id="iconMUTE" class="fa-solid fa-volume-xmark"></i>
-                </button>
-
-                <audio id="MySound" muted>
-                    <source src="./Music/nhacxoso.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                  </audio>
             </div>
         </div>    
     </div>
@@ -66,10 +55,7 @@
 
 
     <div class="Info">
-        <div class="Download">
-            <button class="App" onclick="download('Android')">Tải cho Android</button>
-            <button class="App" onclick="download('iOS')">Tải cho iOS</button>
-        </div>
+
         <h1>Thông tin</h1>
         <p>Trang này được tạo ra với mục đích cá nhân phục vụ cho lớp, không quảng cáo và không chứa dữ liệu độc hại hay
             thu thập dữ liệu của bạn.</p>
@@ -92,17 +78,12 @@ randomIndex = Math.floor(Math.random() * userData.length);
 </pre>
         </code>
         <p>Một đoạn Javascript chính đóng vai trò chọn ngẫu nhiên một thành viên trong lớp.</p>
-        <h1>Cập nhật sắp tới ? </h1>
-        <p>Sắp có ứng dụng cho Android & iOS.</p>
-
         <h1>Quá trình phát triển</h1>
         <p>20/03/2023 - Sửa lỗi & bổ sung thêm tính năng.</p>
         <p>18/03/2023 - Ra mắt phiên bản đầu tiên.</p>
         <div class="theme-switcher">
             <button class="theme-switcher-button"><i class="fa-solid fa-moon"></i></button>
         </div>
-
-
     </div>
 
 

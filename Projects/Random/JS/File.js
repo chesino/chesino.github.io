@@ -45,7 +45,6 @@ var timeSET = 3000;
 function Settime(x) {
   timeSET = x*1000
   console.log(timeSET);
-  return
 }
 
 // Lưu trữ các các người đã được chọn trước đó
@@ -54,7 +53,6 @@ var usedIndexes = [];
 // Nhấn để ngẫu nhiên người trực nhật
 randomButton.addEventListener("click", function () {
   // Hàng chờ
-  x.play();
   userImage.src = './random.gif'
   userName.textContent = 'Chờ đợi có đáng sợ ?'
   pyro.style.display = "none";
@@ -81,33 +79,15 @@ randomButton.addEventListener("click", function () {
     setTimeout(() => {
       pyro.style.display = "block";
       userName.textContent = randomUser.name;
-    }, 400);
+    }, 300);
     // Đặt lại
     if (usedIndexes.length === userData.length) {
       alert('Đã ngẫu nhiên toàn bộ thành viên lớp')
       usedIndexes = [];
-    }
-    SoundMUTEef();
-    
+    }  
   }, timeSET); // Chờ 3s để ngẫu nhiên 
 });
 
-
-function SoundMUTEef() {
-  setTimeout(() => {
-    x.volume = 0.5;
-  }, 100);
-  setTimeout(() => {
-    x.volume = 0.3;
-  }, 200);
-  setTimeout(() => {
-    x.volume = 0;
-  }, 500);
-  setTimeout(() => {
-    x.volume = 1;
-    x.pause(); 
-  }, 1000);
-}
 
 const themeSwitcherButton = document.querySelector('.theme-switcher-button');
 const body = document.querySelector('body');
@@ -140,27 +120,3 @@ function toggleTheme() {
 
 themeSwitcherButton.addEventListener('click', toggleTheme);
 
-
-function download(x) {
-  alert('Hiện tại chưa có phiên bản dành cho ' + x + '\nSẽ có trong phiên bản sắp tới.' )
-}
-
-MySound
-
-var x = document.getElementById("MySound");
-var iconMUTE = document.getElementById("iconMUTE");
-
-function SoundMUTE() {
-  
-  if (iconMUTE.className == "fa-solid fa-volume-high") {
-    x.muted = true;
-    iconMUTE.className = "fa-solid fa-volume-xmark";
-  } else {
-    x.muted = false;
-    iconMUTE.className = "fa-solid fa-volume-high"
-  }
-}
-
-function ChangeSound() {
-  alert('Vui lòng chờ phiên bản mới')
-}
