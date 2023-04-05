@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+<html>
+
+<head>
+    <!-- Tiêu đề trang -->
+    <title>Chesino</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Style.css" />
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <img src="./TaiLieuOnTap.png" alt="TaiLieuOnTap" srcset="">
+        <h1>Lời mở đầu</h1>
+        <p><b>Hùng</b> xin chào và cảm ơn bạn đã ghé trang này, Trang này được tạo ra với mục đích ôn tập Grafcet & PLC
+            của <b>Thầy Phương</b>.</p>
+        <p><b>Hùng</b> sẽ cố gắng tạo ra nội dung bổ ích và hữu ích nhất có thể để giúp bạn hiểu rõ hơn về hai chủ đề
+            này. Ngoài ra, tui sẽ luôn sẵn sàng hỗ trợ bạn nếu có bất kỳ câu hỏi hoặc thắc mắc nào liên quan đến đề tài
+            này.</p>
+        <p><b>Hùng</b> hy vọng rằng trang này sẽ giúp bạn ôn tập và nâng cao kiến thức của mình về Grafcet & PLC, và
+            cũng giúp bạn chuẩn bị tốt hơn cho các bài kiểm tra tuần sau.</p>
+        <h1>Lưu ý trước khi ôn tập</h1>
+        <div class="note">
+            <div class="note-header">
+                <h5 class="note-title">Grafcet luôn có bước khởi tạo.</h5>
+                <button class="expand-btn">Tại sao ?</button>
+            </div>
+            <div class="note-content">
+                <p> Bước khởi tạo này đảm bảo rằng hệ thống sẽ bắt đầu từ một trạng thái ban đầu cụ thể và không phải là
+                    một trạng thái ngẫu nhiên nào đó. Bước khởi tạo thường được biểu diễn bằng một trạng thái đặc biệt,
+                    thường là trạng thái đầu tiên của Grafcet.</p>
+            </div>
+        </div>
+        <div class="note">
+            <div class="note-header">
+                <h5 class="note-title">Grafcet luôn có tối thiểu 3 bước.</h5>
+                <button class="expand-btn">Tại sao ?</button>
+            </div>
+            <div class="note-content">
+                <p>Cái này <b>Thanh Anh</b> bổ sung thêm,<b>Hùng</b> chưa rõ lý do. thà thừa hơn thiếu và nó cũng không
+                    ảnh hướng tới Grafcet. 😉</p>
+            </div>
+        </div>
+        <div class="note green">
+            <div class="note-header">
+                <h5 class="note-title">Nếu có thắc mắc hãy đặt câu hỏi cho tôi</h5>
+                <button class="expand-btn">Tại sao ?</button>
+            </div>
+            <div class="note-content">
+                <p>Không hỏi sao mà biết, mà không biết thì sao mà kiểm tra 😁.</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="Box TimHieuVeGrafcet">
+        <h1>Tìm hiểu cơ bản về Grafcet</h1>
+        <p>Ở thư viện các thành phần (Component Library) ta chỉ cần các thành phần sau là có thể làm Grafcet cơ bản:</p>
+        <img src="./img/Picture1.png" alt="Picture1" srcset="">
+        <h2>Các thành phần cần chú ý</h2>
+        <div class="danhsachthanhphan"></div>
+    </div>
+
+    <div class="Box De1">
+        <h1>Đề 1</h1>
+        <img src="./img/De1/De1.jpg" alt="" srcset="">
+        <div class="note">
+            <div class="note-header">
+                <h5 class="note-title">E1, E2, E3 đều là H1 và E4 là H2</h5>
+                <button class="expand-btn">Xem thêm</button>
+            </div>
+            <div class="note-content">
+                <p>Tại vì đèn E1, E2, E3 sử dụng chung Q0.0 và E4 là Q0.1 </p>
+            </div>
+        </div>
+
+        <div class="success">
+            <h5>Yêu cầu đề bài</h5>
+            <p> Khi tác động S1 hoặc S2 hoặc S3 thì đèn H1 sáng và tắt sau 10s nếu S1,S2,S3 không bị tác động nữa.</p>
+            <p> Khi tác động B1 thì đèn H2 sáng và tắt sau 15s nếu B1 không bị tác động nữa.</p>
+        </div>
+        
+        <h1>Hướng dẫn vẽ Grafcet</h1>
+        <p>Trước tiên ta thêm các nút nhấn, đèn và Grafcet I/O</p>
+        <div class="success">
+            <p>bài này đây ta có input như sau: S1,S2,S3,B1 <br> và output là H1, H2.</p>
+        </div>
+        <img src="./img/De1/Picture1.png" alt="" srcset="">
+        <p>Tạo bước khởi tạo.</p>
+        <img class="icon" src="./img/De1/Picture2.png" alt="" srcset="">
+        <p>Sau đó khi tác động S1,S2,S3 thì đèn H1 sẽ sáng ở đây S1,S2,S3 là điều kiện chuyển tiếp</p>
+        <img src="./img/De1/Picture18.png" alt="" srcset="">
+
+        
+        <div class="success">
+            <p>! S1,S2,S3 phải trong ngoặc giống như việc nhân chia cộng trừ nếu không có thì bài làm có thể bị sai.
+                <br>! X1 có nghĩa là [Step1] mà muốn qua [Step 2] tiếp theo thì [Step 1] trước đó phải hoạt động.
+                </p>
+        </div>
+        <p>H1 sẽ là hành động của bước tiếp theo [Step 2] </p>
+        <img src="./img/De1/Picture17.png" alt="" srcset="">
+
+        <p>Sau đó ta nối các thành phần với nhau như hình dưới đây</p>
+
+        <img src="./img/De1/Picture19.png" alt="" srcset="">
+
+        <p>Tiếp theo nếu ngưng tác động S1,S2,S3 thì sau 10s đèn H1 sẽ tắt</p>
+        <div class="success">
+            <p>Ở bước này sẽ phải có bộ đếm thời gian 10s [Timer] 
+                Vậy điều kiện để qua [Step 3] sẽ là 10s và Step trước đó [Step 2]
+                </p>
+        </div>
+        <img src="./img/De1/Picture20.png" alt="" srcset="">
+        <p>Sau đó [Step 3] có nhiệm vụ là quay trở lại Bước khởi tạo [Step 1]</p>
+        <img src="./img/De1/Picture21.png" alt="" srcset="">
+        <p>Hoàn chỉnh Grafcet Đèn H1 </p>
+        <p>Tiếp theo Grafcet Đèn H2, cũng như mạch Đèn H1 đèn H2 cũng tương tự chỉ khác là sau 15s mới tắt.</p>
+        <div class="success">
+            <p>!Như cách vẽ này sẽ là tách làm 2 mạch Grafcet của H1 và H2 nên sẽ phải sử dụng Bước khởi tạo ở [Step 4]</p>
+        </div>
+        <img src="./img/De1/Picture22.png" alt="" srcset="">
+        <p>Và cuối cùng hoàn thiện sẽ được như sau</p>
+        <img src="./img/De1/Picture23.png" alt="" srcset="">
+    
+        <h1>Hướng dẫn TIA PORTAL</h1>
+        <p>Sắp có</p>
+    </div>
+
+
+</body>
+
+<script src="./Script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</html>
