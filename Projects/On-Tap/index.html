@@ -20,6 +20,13 @@
 </head>
 
 <body>
+    <div class="ChatBox">
+        <!-- Messenger Plugin chat Code -->
+        <div id="fb-root"></div>
+        <!-- Your Plugin chat code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
+    </div>
     <header>
         <img src="./TaiLieuOnTap.png" alt="TaiLieuOnTap" srcset="">
         <h1>Lời mở đầu</h1>
@@ -52,15 +59,30 @@
                     ảnh hướng tới Grafcet. 😉</p>
             </div>
         </div>
-        <div class="note green">
+        <div class="note">
             <div class="note-header">
-                <h5 class="note-title">Nếu có thắc mắc hãy đặt câu hỏi cho tôi</h5>
+                <h5 class="note-title">Nếu phát hiện sai xót hãy chủ động giúp tôi.</h5>
                 <button class="expand-btn">Tại sao ?</button>
             </div>
             <div class="note-content">
-                <p>Không hỏi sao mà biết, mà không biết thì sao mà kiểm tra 😁.</p>
+                <p>Nếu phát hiện sai, lỗi về bài làm hay giao diện hãy nhắn tin cho Hùng, Hùng sẽ xử lý và khắc phục sớm
+                    nhất.</p>
             </div>
         </div>
+        <div class="note green">
+            <div class="note-header">
+                <h5 class="note-title">Một số điều cơ bản</h5>
+                <button class="expand-btn">Thu gọn</button>
+            </div>
+            <div class="note-content block">
+                <p>Đây là bài làm cá nhân Hùng nên sẽ có thể khó hiểu hoặc sai xót, Nếu có bất kì thắc mắc gì chủ động
+                    hỏi Hùng, Hùng sẽ cố gắng giải thích cho bạn.</p>
+                <p>Trang chỉ ở giao diện tối giản để giảm dung lượng cũng như khi tải trang sẽ nhẹ và nhanh hơn.</p>
+                <p>Trang đạt chuẩn bảo mật <b>HTTPS</b>.</p>
+                <p>Nếu bạn có góp ý gì về trang hãy nhắn tin cho Hùng tại Messenger dưới góc phải.</p>
+            </div>
+        </div>
+
     </header>
 
     <div class="Box TimHieuVeGrafcet">
@@ -89,11 +111,11 @@
             <p> Khi tác động S1 hoặc S2 hoặc S3 thì đèn H1 sáng và tắt sau 10s nếu S1,S2,S3 không bị tác động nữa.</p>
             <p> Khi tác động B1 thì đèn H2 sáng và tắt sau 15s nếu B1 không bị tác động nữa.</p>
         </div>
-        
+
         <h1>Hướng dẫn vẽ Grafcet</h1>
         <p>Trước tiên ta thêm các nút nhấn, đèn và Grafcet I/O</p>
         <div class="success">
-            <p>bài này đây ta có input như sau: S1,S2,S3,B1 <br> và output là H1, H2.</p>
+            <p>Bài này ta có input như sau: S1,S2,S3,B1 <br> và output là H1, H2.</p>
         </div>
         <img src="./img/De1/Picture1.png" alt="" srcset="">
         <p>Tạo bước khởi tạo.</p>
@@ -101,11 +123,10 @@
         <p>Sau đó khi tác động S1,S2,S3 thì đèn H1 sẽ sáng ở đây S1,S2,S3 là điều kiện chuyển tiếp</p>
         <img src="./img/De1/Picture18.png" alt="" srcset="">
 
-        
+
         <div class="success">
-            <p>! S1,S2,S3 phải trong ngoặc giống như việc nhân chia cộng trừ nếu không có thì bài làm có thể bị sai.
-                <br>! X1 có nghĩa là [Step1] mà muốn qua [Step 2] tiếp theo thì [Step 1] trước đó phải hoạt động.
-                </p>
+            <p>S1,S2,S3 có thể hiểu là 1 khối vì vậy sẽ ở trong ngoặc, và [OR] hay [AND] thì tuỳ vào [+] hay [*].</p>
+            <p>X1 có nghĩa là [Step1] mà muốn qua [Step 2] tiếp theo thì [Step 1] trước đó phải hoạt động.</p>
         </div>
         <p>H1 sẽ là hành động của bước tiếp theo [Step 2] </p>
         <img src="./img/De1/Picture17.png" alt="" srcset="">
@@ -116,24 +137,31 @@
 
         <p>Tiếp theo nếu ngưng tác động S1,S2,S3 thì sau 10s đèn H1 sẽ tắt</p>
         <div class="success">
-            <p>Ở bước này sẽ phải có bộ đếm thời gian 10s [Timer] 
+            <p>Ở bước này sẽ phải có bộ đếm thời gian 10s [Timer]
                 Vậy điều kiện để qua [Step 3] sẽ là 10s và Step trước đó [Step 2]
-                </p>
+            </p>
         </div>
         <img src="./img/De1/Picture20.png" alt="" srcset="">
         <p>Sau đó [Step 3] có nhiệm vụ là quay trở lại Bước khởi tạo [Step 1]</p>
         <img src="./img/De1/Picture21.png" alt="" srcset="">
-        <p>Hoàn chỉnh Grafcet Đèn H1 </p>
+        <h5>Hoàn chỉnh Grafcet Đèn H1 </h5>
+        <br>
         <p>Tiếp theo Grafcet Đèn H2, cũng như mạch Đèn H1 đèn H2 cũng tương tự chỉ khác là sau 15s mới tắt.</p>
         <div class="success">
-            <p>!Như cách vẽ này sẽ là tách làm 2 mạch Grafcet của H1 và H2 nên sẽ phải sử dụng Bước khởi tạo ở [Step 4]</p>
+            <p>!Như cách vẽ này sẽ là tách làm 2 mạch Grafcet của H1 và H2 nên sẽ tiếp tục sử dụng Bước khởi tạo ở [Step 4].
+            </p>
         </div>
         <img src="./img/De1/Picture22.png" alt="" srcset="">
-        <p>Và cuối cùng hoàn thiện sẽ được như sau</p>
+        <h1>Hoàn thiện</h1>
+        <p>Và cuối cùng hoàn thiện sẽ được như sau.</p>
         <img src="./img/De1/Picture23.png" alt="" srcset="">
-    
+
         <h1>Hướng dẫn TIA PORTAL</h1>
-        <p>Sắp có</p>
+        <p>Sắp có, Nhưng trước tiên hãy cho Hùng hỏi ý kiến bạn một chút.</p>
+    </div>
+    <br>
+    <div class="Form">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdhOQ4sLMUSGz9vTO2qSVmEVjq8PuFzQnB8yInmgegThB6G0g/viewform?embedded=true" width="100%" height="1191" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     </div>
 
 
@@ -141,5 +169,27 @@
 
 <script src="./Script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "906471282789816");
+    chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v16.0'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 
 </html>
