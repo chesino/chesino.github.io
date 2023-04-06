@@ -1,3 +1,6 @@
+
+
+
 const devices = [
     { TenThietBi: "Còi, Chuông", Mota: "Không có chú thích ở đây" },
     { TenThietBi: "Đèn", Mota: "Không có chú thích ở đây" },
@@ -12,10 +15,6 @@ const devices = [
     { TenThietBi: "Đồng bộ", Mota: "Có thể hiểu là song song điều kiện nào thoả mãn thì sẽ chạy điều kiện đó." },
     { TenThietBi: "Chuyển tiếp", Mota: "Chuyển tiếp sẽ đi kèm với điều kiện và thường mắc nối tiếp với bước" },
 ];
-  
-
-
-
 
   for (let i = 0; i < devices.length; i++) {
     const device = devices[i];
@@ -54,7 +53,6 @@ const devices = [
 
   }
   
-
 
 const expandBtns = document.querySelectorAll('.expand-btn');
 const noteContents = document.querySelectorAll('.note-content');

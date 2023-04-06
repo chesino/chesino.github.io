@@ -7,7 +7,14 @@ body {
     padding: 10px;
 }
 
-
+@media only screen and (min-width: 1500px) {
+    body {
+        padding: 10px 300px;
+    }
+    .Box img {
+        width:40% !important;
+    }
+}
 
 header img {
     width: 100%;
