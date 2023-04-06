@@ -24,7 +24,18 @@ header p {
     font-size: 16px;
     margin: 10px 0;
 }
-
+.MucLuc {
+    color: #fff;
+    margin: 20px 0;
+    background-color: #111;
+    padding: 10px;
+    border-radius: 10px;
+}
+.MucLuc a {
+    margin-left: 20px;
+    color: #04AA6D;
+    font-weight: bold;
+}
 .note {
     background-color: #ffdddd;
     border-left: 6px solid #f44336;

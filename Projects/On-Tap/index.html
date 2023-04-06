@@ -23,10 +23,14 @@
     <div class="ChatBox">
         <!-- Messenger Plugin chat Code -->
         <div id="fb-root"></div>
+
         <!-- Your Plugin chat code -->
         <div id="fb-customer-chat" class="fb-customerchat">
         </div>
+
+
     </div>
+
     <header>
         <img src="./TaiLieuOnTap.png" alt="TaiLieuOnTap" srcset="">
         <h1>Lời mở đầu</h1>
@@ -64,7 +68,7 @@
                 <h5 class="note-title">Nếu phát hiện sai xót hãy chủ động giúp tôi.</h5>
                 <button class="expand-btn">Tại sao ?</button>
             </div>
-            <div class="note-content">
+            <div class="note-content block">
                 <p>Nếu phát hiện sai, lỗi về bài làm hay giao diện hãy nhắn tin cho Hùng, Hùng sẽ xử lý và khắc phục sớm
                     nhất.</p>
             </div>
@@ -79,13 +83,19 @@
                     hỏi Hùng, Hùng sẽ cố gắng giải thích cho bạn.</p>
                 <p>Trang chỉ ở giao diện tối giản để giảm dung lượng cũng như khi tải trang sẽ nhẹ và nhanh hơn.</p>
                 <p>Trang đạt chuẩn bảo mật <b>HTTPS</b>.</p>
-                <p>Nếu bạn có góp ý gì về trang hãy nhắn tin cho Hùng tại Messenger dưới góc phải.</p>
+                <p>Nếu bạn có góp ý gì về trang hãy nhắn tin cho Hùng tại Messenger dưới góc phải hoặc tại đây <a
+                        href="m.me/906471282789816">Messenger</a>.</p>
             </div>
         </div>
 
     </header>
-
-    <div class="Box TimHieuVeGrafcet">
+    <div class="MucLuc">
+        <h1>Mục lục</h1>
+        <a href="#TimHieuVeGrafcets">1. Tìm hiểu cơ bản về Grafcet</a>
+        <br>
+        <a href="#De1">2. Hướng dẫn Grafcet & PLC Đề 1</a>
+    </div>
+    <div class="Box" id="TimHieuVeGrafcets">
         <h1>Tìm hiểu cơ bản về Grafcet</h1>
         <p>Ở thư viện các thành phần (Component Library) ta chỉ cần các thành phần sau là có thể làm Grafcet cơ bản:</p>
         <img src="./img/Picture1.png" alt="Picture1" srcset="">
@@ -93,16 +103,16 @@
         <div class="danhsachthanhphan"></div>
     </div>
 
-    <div class="Box De1">
+    <div class="Box" id="De1">
         <h1>Đề 1</h1>
         <img src="./img/De1/De1.jpg" alt="" srcset="">
         <div class="note">
             <div class="note-header">
-                <h5 class="note-title">E1, E2, E3 đều là H1 và E4 là H2</h5>
+                <h5 class="note-title">E1, E2, E3 sẽ đặt tên là H1 và E4 là H2</h5>
                 <button class="expand-btn">Xem thêm</button>
             </div>
             <div class="note-content">
-                <p>Tại vì đèn E1, E2, E3 sử dụng chung Q0.0 và E4 là Q0.1 </p>
+                <p>Tại vì đèn E1, E2, E3 sử dụng chung Q0.0 và E4 là Q0.1</p>
             </div>
         </div>
 
@@ -148,7 +158,8 @@
         <br>
         <p>Tiếp theo Grafcet Đèn H2, cũng như mạch Đèn H1 đèn H2 cũng tương tự chỉ khác là sau 15s mới tắt.</p>
         <div class="success">
-            <p>!Như cách vẽ này sẽ là tách làm 2 mạch Grafcet của H1 và H2 nên sẽ tiếp tục sử dụng Bước khởi tạo ở [Step 4].
+            <p>!Như cách vẽ này sẽ là tách làm 2 mạch Grafcet của H1 và H2 nên sẽ tiếp tục sử dụng Bước khởi tạo ở [Step
+                4].
             </p>
         </div>
         <img src="./img/De1/Picture22.png" alt="" srcset="">
@@ -161,7 +172,9 @@
     </div>
     <br>
     <div class="Form">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdhOQ4sLMUSGz9vTO2qSVmEVjq8PuFzQnB8yInmgegThB6G0g/viewform?embedded=true" width="100%" height="1191" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdhOQ4sLMUSGz9vTO2qSVmEVjq8PuFzQnB8yInmgegThB6G0g/viewform?embedded=true"
+            width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
     </div>
 
 
@@ -174,22 +187,24 @@
     var chatbox = document.getElementById('fb-customer-chat');
     chatbox.setAttribute("page_id", "906471282789816");
     chatbox.setAttribute("attribution", "biz_inbox");
-</script>
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            xfbml: true,
-            version: 'v16.0'
-        });
+  </script>
+
+  <!-- Your SDK code -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        xfbml            : true,
+        version          : 'v16.0'
+      });
     };
 
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-</script>
+  </script>
 
 </html>
