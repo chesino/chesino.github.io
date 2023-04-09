@@ -68,3 +68,41 @@ for (let i = 0; i < expandBtns.length; i++) {
     }
   });
 }
+
+let count = 0;
+
+function lockPage() {
+
+  localStorage.setItem("lockTime", new Date().getTime());
+  setTimeout(function() {
+    localStorage.removeItem("lockTime");
+  }, 30000);
+}
+
+function checkPassword() {
+  const password = document.getElementById("password").value;
+  if (password === "01231") {
+    document.getElementById("OpenAll").style.display = "block";
+  } else {
+    alert('Mật khẩu sai, Nếu không biết xin đừng thử lại.')
+    count++;
+    if (count >= 2) {
+      lockPage();
+      document.body.innerText = 'Do bạn đã nhập sai mật khẩu nên trang đang hạn chế bạn, vui lòng thử lại sau 30s.'
+    }
+  }
+}
+
+window.onload = function() {
+  const lockTime = localStorage.getItem("lockTime");
+  if (lockTime) {
+    const currentTime = new Date().getTime();
+    const elapsedTime = Math.floor((currentTime - lockTime) / 1000);
+    if (elapsedTime < 30) {
+      document.body.innerText = 'Do bạn đã nhập sai mật khẩu nên trang đang hạn chế bạn, vui lòng thử lại sau 30s.'
+    } else {
+      localStorage.removeItem("lockTime");
+    }
+  }
+}
+
