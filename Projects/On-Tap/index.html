@@ -94,6 +94,7 @@
         <a href="#TimHieuVeGrafcets">1. Tìm hiểu cơ bản về Grafcet</a>
         <br>
         <a href="#De1">2. Hướng dẫn Grafcet & PLC Đề 1</a>
+        <a href="#De2">3. Hướng dẫn Grafcet & PLC Đề 2</a>
     </div>
     <div class="Box" id="TimHieuVeGrafcets">
         <h1>Tìm hiểu cơ bản về Grafcet</h1>
@@ -176,13 +177,61 @@
             <p>Qua phần TIA PORTAL</p>
             </div>
             <h1>Hướng dẫn TIA PORTAL</h1>
+            <div class="success">
+                <p>Mình chỉ làm mạch H1 vì mạch H2 cũng tương tự H1 chỉ khác chỗ S1,S2,S3 thay thành B1.</p>
+            </div>
             <a href="./img/De1/TIA/HunqD_De1.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
-        </div> 
+    </div> 
+    <div class="Box" id="De2">
+        <h1>Đề 2</h1>
+        <img src="./img/De1/De1.jpg" alt="" srcset="">
+        <div class="note">
+            <div class="note-header">
+                <h5 class="note-title">E1, E2, E3 sẽ đặt tên là H1 và E4 là H2</h5>
+                <button class="expand-btn">Xem thêm</button>
+            </div>
+            <div class="note-content">
+                <p>Tại vì đèn E1, E2, E3 sử dụng chung Q0.0 và E4 là Q0.1</p>
+            </div>
+        </div>
+        <div class="success">
+            <h5>Yêu cầu đề bài</h5>
+            <p> Khi tác động S1 hoặc S2 hoặc S3 thì đèn H1 sáng và tắt sau 10s nếu S1,S2,S3 không bị tác động nữa.</p>
+            <p> Khi tác động B1 đủ 5s thì đèn H2 sáng và tắt sau 15s nếu B1 không bị tác động nữa.</p>
+        </div>
+        <h1>Hướng dẫn vẽ Grafcet</h1>
+        <div class="success">
+            <h5>Chỉ mạch H2 thay đổi</h5>
+            <p>Do <a href="#De2">Đề 2</a> giống với đề <a href="#De1">Đề 1</a> nên mình chỉ tóm ngắn gọn lại.</p>
+            <p>Khi tắc động B1 đủ 5s thì mới sáng đèn H2.</p>
+        </div>
+        <img src="./img/De2/HunqD_Grafcet_De2A-1.png" alt="" srcset="">
+        <h2>Mạch hoàn chỉnh.</h2>
+        <img src="./img/De2/HunqD_Grafcet_De2-1.png" alt="" srcset="">
+        <h1>Hướng dẫn TIA PORTAL</h1>
+        <a href="./img/De2/HunqD_TiaPortal_De2.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
+    </div>
 
+    <div class="Box" id="De3">
+        <h1>Đề 3</h1>
+        <img src="./img/De3/Picture1.jpg" alt="" srcset="">
+       
+        <div class="success">
+            <h1>Yêu cầu đề bài</h1>
+            <p>S1 có nhiệm vụ bật hệ thống chống trộm và S2 có nhiệm vụ tắt hệ thống</p>
+            <p>Khi bật hệ thống sẽ chưa hoạt động mà phải chờ 10s, sau khi đủ 10s hệ thống chống trộm đã được kích hoạt.</p>
+            
+        <p>Sau đó nếu có trộm mở cửa ( B1 hoặc B2 hoặc B3 ) thì hệ thống sẽ báo động ( P1 và Chuông ) liên tục cho tới khi cửa được đóng lại, hệ thống sẽ báo động ( P1 sáng và Chuông sẽ kêu tít tít ) và tự tắt sau 30s.</p>
+            <h1>Input & Output của bài</h1>
+            <p>Input: B1, B2, B3, S1, S2</p>
+            <p>Output: P1, Chuông</p>
+        </div>
+        <h1>Hướng dẫn Grafcet</h1>
+        <img src="./img/De3/HunqD_Grafcet_De3.png" alt="" srcset="">
+        <h1>Hướng dẫn TIA PORTAL</h1>
+        <a href="./img/De3/HunqD_TiaPortal_De3.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
+    </div>
     
-
-
-
 </body>
 
 <script src="./Script.js"></script>
