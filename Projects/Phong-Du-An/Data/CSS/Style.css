@@ -1,22 +1,25 @@
-*{
-    margin: 0;
+* {
+	margin: 0;
 }
+
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #eee;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	background-color: var(--BG);
 	--color: #000;
-	--BG:#eee;
+	--BG: #0ba6ff;
+	;
 }
+
 .dark-mode {
-	background-color: #333333;
 	--color: #ffffff;
-	--BG:#111;
+	--BG: #111;
 }
+
 header {
 	/* position: fixed; */
-    top: 0;
-    right: 0;
-    left: 0;
+	top: 0;
+	right: 0;
+	left: 0;
 	width: 100%;
 	background-color: #0066ff83;
 }
@@ -34,65 +37,138 @@ header {
 	z-index: 9999;
 	opacity: 1;
 	transition: opacity 0.5s ease;
-  }
-  .loading.hidden {
-	display: none;
-  }
-  .loading_icon {
+}
+
+.loading.hidden {
+	opacity: 0;
+}
+
+.loading_icon {
 	width: 120px;
 	height: 120px;
 	border: 10px solid rgba(126, 126, 126, 0.534);
 	border-top-color: var(--color);
 	border-radius: 50%;
 	animation: spin 1s linear infinite;
-  }
+}
+
 .loading_logo {
 	position: absolute;
 	height: 118px;
 	width: 118px;
 
 }
+
 .loading_logo img {
 	width: 100%;
 	border-radius: 50%;
 
 }
-  @keyframes spin {
+
+@keyframes spin {
 	0% {
-	  transform: rotate(0deg);
+		transform: rotate(0deg);
 	}
+
 	100% {
-	  transform: rotate(360deg);
+		transform: rotate(360deg);
 	}
-  }
-  
+}
+
 
 #toggle-button {
+	text-align: center;
 	position: fixed;
-	height: 30px;
-	width: 30px;
-	top: 0;
+	height: 40px;
+	width: 40px;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
 }
+
 .ChaoMung {
 	color: #fff;
-	background-color: #0ba6ff;
+	/* background-color: #0ba6ff; */
 	height: calc(100vh - 40px);
 	padding: 30px 10px 10px 10px;
 }
+
 .ChaoMung .IMG {
 	margin: 20px auto;
 	width: 80%;
 }
+
 .ChaoMung .IMG img {
 	width: 100%;
 
 }
+
 .ChaoMung h1 {
 	font-size: 30px;
 	text-transform: capitalize;
 }
+
 .ChaoMung h2 {
 	font-size: 18px;
-    line-height: 24px;
-    margin-bottom: 30px;
+	line-height: 24px;
+	margin-bottom: 30px;
+}
+.DuAn {
+	text-align: center;
+}
+.DuAn .progress {
+	width: calc(100% - 4px);
+	height: 15px;
+	background-color: #ddd;
+	border-radius: 10px;
+	padding: 2px;
+}
+
+.DuAn #ValueProgress {
+	text-align: right;
+}
+
+.DuAn .progress-bar {
+	height: 100%;
+	background-color: darkblue;
+	border-radius: 10px;
+	transition: width 0.5s ease-in-out;
+}
+
+.DuAn .progress-bar.blue {
+	background-color: blue;
+}
+
+.DuAn .progress-bar.orange {
+	background-color: orange;
+}
+
+.DuAn .progress-bar.red {
+	background-color: red;
+}
+.DuAn .progress-bar.green {
+	background-color: green;
+}
+
+.DuAn button {
+	height: 50px;
+	width: 80px;
+	border-radius: 10px;
+	border: 2px solid black;
+	margin: 10px auto;
+}
+.btnDuAn button:nth-child(1){
+	background-color: blue;
+}
+.btnDuAn button:nth-child(2){
+	background-color: orange;
+}
+.btnDuAn button:nth-child(3){
+	background-color: red;
+}
+.btnDuAn button:nth-child(4){
+	background-color: green;
 }

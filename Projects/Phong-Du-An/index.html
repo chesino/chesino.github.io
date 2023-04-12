@@ -25,19 +25,35 @@
 
 <body>
 
-    <div class="loading">
+    <div class="loading" id="loading">
         <div class="loading_icon"></div>
         <div class="loading_logo">
             <img src="/Data/logo.png" alt="" srcset="">
         </div>
     </div>
-      
+
     <div class="ChaoMung">
         <div class="IMG">
             <img src="./Data/img/IMG1.png" alt="ChaoMung">
         </div>
         <h1>Phòng dự án</h1>
-        <h2>Chúng tôi</h2>
+        <h2>Các dự án của chúng tôi.</h2>
+        <div class="DuAn">
+            <div id="ValueProgress"></div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar"></div>
+            </div>
+            <div class="btnDuAn">
+                <button onclick="updateProgress(20, 'blue')">Dự án 1</button>
+                <button onclick="updateProgress(50, 'orange')">Dự án 2</button>
+                <button onclick="updateProgress(80, 'red')">Dự án 3</button>
+                <button onclick="updateProgress(100, 'green')">Dự án 3</button>
+            </div>
+          
+        </div>
+
+
+
     </div>
     <div id="toggle-button"></div>
 </body>
