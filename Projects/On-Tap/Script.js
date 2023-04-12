@@ -106,3 +106,17 @@ window.onload = function() {
   }
 }
 
+window.addEventListener('scroll', function() {
+  var toc = document.getElementById('table-of-contents');
+  var y = window.scrollY;
+  if (y >= 1400) {
+    toc.classList.add('square');
+  } else {
+    toc.classList.remove('square');
+  }
+});
+var toc = document.getElementById('table-of-contents');
+toc.addEventListener('click', function() {
+  toc.classList.toggle('expanded');
+});
+

@@ -25,3 +25,6 @@ th {
   background-color: #04AA6D;
   color: #111;
 }
+tr.today {
+  background-color: #1d6cff !important;
+}

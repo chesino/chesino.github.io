@@ -10,7 +10,11 @@
     <!-- Bộ giải mã và phân loại thiết bị -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/Data/logo.png">
 
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Style.css" />
 
@@ -23,12 +27,9 @@
     <div class="ChatBox">
         <!-- Messenger Plugin chat Code -->
         <div id="fb-root"></div>
-
         <!-- Your Plugin chat code -->
         <div id="fb-customer-chat" class="fb-customerchat">
         </div>
-
-
     </div>
 
     <header>
@@ -36,11 +37,6 @@
         <h1>Lời mở đầu</h1>
         <p><b>Hùng</b> xin chào và cảm ơn bạn đã ghé trang này, Trang này được tạo ra với mục đích ôn tập Grafcet & PLC
             của <b>Thầy Phương</b>.</p>
-        <p><b>Hùng</b> sẽ cố gắng tạo ra nội dung bổ ích và hữu ích nhất có thể để giúp bạn hiểu rõ hơn về hai chủ đề
-            này. Ngoài ra, tui sẽ luôn sẵn sàng hỗ trợ bạn nếu có bất kỳ câu hỏi hoặc thắc mắc nào liên quan đến đề tài
-            này.</p>
-        <p><b>Hùng</b> hy vọng rằng trang này sẽ giúp bạn ôn tập và nâng cao kiến thức của mình về Grafcet & PLC, và
-            cũng giúp bạn chuẩn bị tốt hơn cho các bài kiểm tra tuần sau.</p>
         <h1>Lưu ý trước khi ôn tập</h1>
         <div class="note">
             <div class="note-header">
@@ -59,8 +55,7 @@
                 <button class="expand-btn">Tại sao ?</button>
             </div>
             <div class="note-content">
-                <p><b>Hùng</b> chưa rõ lý do. thà thừa hơn thiếu và nó cũng không
-                    ảnh hướng tới Grafcet. 😉</p>
+                <p>Tại vì bước 1 không thể reset lại bước 2, nên bước 3 sẽ là trung gian.</p>
             </div>
         </div>
         <div class="note">
@@ -89,20 +84,22 @@
         </div>
 
     </header>
-    <div class="MucLuc">
+    <div id="table-of-contents" class="MucLuc">
         <h1>Mục lục</h1>
         <a href="#TimHieuVeGrafcets">1. Tìm hiểu cơ bản về Grafcet</a>
+
         <br>
-        <a href="#De1">2. Hướng dẫn Grafcet & PLC Đề 1</a>
+        <a href="#De1">2. Hướng dẫn Grafcet &amp; PLC Đề 1</a>
         <br>
-        <a href="#De2">3. Hướng dẫn Grafcet & PLC Đề 2</a>
+        <a href="#De2">3. Hướng dẫn Grafcet &amp; PLC Đề 2</a>
         <br>
-        <a href="#De3">4. Hướng dẫn Grafcet & PLC Đề 3</a>
+        <a href="#De3">4. Hướng dẫn Grafcet &amp; PLC Đề 3</a>
         <br>
-        <a href="#De4">5. Hướng dẫn Grafcet & PLC Đề 4</a>
+        <a href="#De4">5. Hướng dẫn Grafcet &amp; PLC Đề 4</a>
         <br>
         <a href="#All">6. Dành cho thành viên nhóm</a>
     </div>
+
     <hr>
     <div class="Box" id="TimHieuVeGrafcets">
         <h1>Tìm hiểu cơ bản về Grafcet</h1>
@@ -111,7 +108,7 @@
         <h2>Các thành phần cần chú ý</h2>
         <div class="danhsachthanhphan"></div>
     </div>
-<hr>
+    <hr>
     <div class="Box" id="De1">
         <h1>Đề 1</h1>
         <img src="./img/De1/De1.jpg" alt="" srcset="">
@@ -157,7 +154,7 @@
         <p>Tiếp theo nếu ngưng tác động S1,S2,S3 thì sau 10s đèn H1 sẽ tắt</p>
         <div class="success">
             <p>Ở bước này sẽ phải có bộ đếm thời gian 10s [Timer]
-                Vậy điều kiện để qua [Step 3] sẽ là 10s và Step trước đó [Step 2]
+                Vậy điều kiện để qua [Step 3] sẽ là 10s và Step trước đó [Step 2] và các nút S1,S2,S3 không bị tác động.
             </p>
         </div>
         <img src="./img/De1/Picture20.png" alt="" srcset="">
@@ -183,13 +180,13 @@
                 src="https://docs.google.com/forms/d/e/1FAIpQLSdhOQ4sLMUSGz9vTO2qSVmEVjq8PuFzQnB8yInmgegThB6G0g/viewform?embedded=true"
                 width="100%" height="1500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
             <p>Qua phần TIA PORTAL</p>
-            </div>
-            <h1>Hướng dẫn TIA PORTAL</h1>
-            <div class="success">
-                <p>Mình chỉ làm mạch H1 vì mạch H2 cũng tương tự H1 chỉ khác chỗ S1,S2,S3 thay thành B1.</p>
-            </div>
-            <a href="./img/De1/TIA/HunqD_De1.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
-    </div> 
+        </div>
+        <h1>Hướng dẫn TIA PORTAL</h1>
+        <div class="success">
+            <p>Mình chỉ làm mạch H1 vì mạch H2 cũng tương tự H1 chỉ khác chỗ S1,S2,S3 thay thành B1.</p>
+        </div>
+        <a href="./img/De1/TIA/HunqD_De1.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
+    </div>
     <hr>
     <div class="Box" id="De2">
         <h1>Đề 2</h1>
@@ -211,7 +208,8 @@
         <h1>Hướng dẫn vẽ Grafcet</h1>
         <div class="success">
             <h5>Chỉ mạch H2 thay đổi</h5>
-            <p>Do <a href="#De2">Đề 2</a> giống với đề <a href="#De1">Đề 1</a> nên mình chỉ tóm ngắn gọn lại.</p>
+            <p>Do <a href="#De2">Đề 2</a> giống với đề <a href="#De1">Đề 1</a> nên mình chỉ tóm ngắn gọn lại.
+            </p>
             <p>Khi tắc động B1 đủ 5s thì mới sáng đèn H2.</p>
         </div>
         <img src="./img/De2/HunqD_Grafcet_De2A-1.png" alt="" srcset="">
@@ -220,17 +218,20 @@
         <h1>Hướng dẫn TIA PORTAL</h1>
         <a href="./img/De2/HunqD_TiaPortal_De2.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
     </div>
-<hr>
+    <hr>
     <div class="Box" id="De3">
         <h1>Đề 3</h1>
         <img src="./img/De3/Picture1.jpg" alt="" srcset="">
-       
+
         <div class="success">
             <h1>Yêu cầu đề bài</h1>
             <p>S1 có nhiệm vụ bật hệ thống chống trộm và S2 có nhiệm vụ tắt hệ thống</p>
-            <p>Khi bật hệ thống sẽ chưa hoạt động mà phải chờ 10s, sau khi đủ 10s hệ thống chống trộm đã được kích hoạt.</p>
-            
-        <p>Sau đó nếu có trộm mở cửa ( B1 hoặc B2 hoặc B3 ) thì hệ thống sẽ báo động ( P1 và Chuông ) liên tục cho tới khi cửa được đóng lại, hệ thống sẽ báo động ( P1 sáng và Chuông sẽ kêu tít tít ) và tự tắt sau 30s.</p>
+            <p>Khi bật hệ thống sẽ chưa hoạt động mà phải chờ 10s, sau khi đủ 10s hệ thống chống trộm đã được kích hoạt.
+            </p>
+
+            <p>Sau đó nếu có trộm mở cửa ( B1 hoặc B2 hoặc B3 ) thì hệ thống sẽ báo động ( P1 và Chuông ) liên tục cho
+                tới khi cửa được đóng lại, hệ thống sẽ báo động ( P1 sáng và Chuông sẽ kêu tít tít ) và tự tắt sau 30s.
+            </p>
             <h1>Input & Output của bài</h1>
             <p>Input: B1, B2, B3, S1, S2</p>
             <p>Output: P1, Chuông</p>
@@ -250,7 +251,8 @@
         <div class="success">
             <h1>Lưu ý</h1>
             <p>Ở đây anh Quang làm trực tiếp phần nút nhấn nên sẽ không có GrafcetI/O.</p>
-            <p>Do tuần này sẽ kiểm tra nên nếu bạn có thắc mắc gì về các đề trên hãy nhắn tin với Hùng qua Messenger.</p>
+            <p>Do tuần này sẽ kiểm tra nên nếu bạn có thắc mắc gì về các đề trên hãy nhắn tin với Hùng qua Messenger.
+            </p>
         </div>
         <img src="./img/De4/BAI_1.1_GRAFCET12.png" alt="" srcset="">
         <p>Mạch Grafcet</p>
@@ -267,13 +269,13 @@
             <a href="./HunqD.ct" target="_blank" rel="noopener noreferrer">Tải file .CT bài 3</a>
             <br>
             <a href="./THAY PHUONG.rar" target="_blank" rel="noopener noreferrer">Tải file lập trình PLC</a>
-        </div>        
+        </div>
     </div>
-    
+
     <footer>
         <p>Lập trình bởi <a href="https://www.facebook.com/HunqD" target="_blank">HunqD</a></p>
-     </footer>
-     
+    </footer>
+
 
 </body>
 
@@ -281,13 +283,12 @@
 <script src="./Script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
+<!-- <script>
     var chatbox = document.getElementById('fb-customer-chat');
     chatbox.setAttribute("page_id", "906471282789816");
     chatbox.setAttribute("attribution", "biz_inbox");
   </script>
 
-  <!-- Your SDK code -->
   <script>
     window.fbAsyncInit = function() {
       FB.init({
@@ -303,6 +304,6 @@
       js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-  </script>
+  </script> -->
 
 </html>
