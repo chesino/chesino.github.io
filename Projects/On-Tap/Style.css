@@ -240,3 +240,55 @@ footer a:hover {
 .block {
     display: block;
 }
+
+
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+	opacity: 1;
+	transition: opacity 0.5s ease;
+}
+
+.loading.hidden {
+	opacity: 0;
+}
+
+.loading_icon {
+	width: 120px;
+	height: 120px;
+	border: 10px solid rgba(0, 0, 0);
+	border-top-color: #eee;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+.loading_logo {
+	position: absolute;
+	height: 118px;
+	width: 118px;
+
+}
+
+.loading_logo img {
+	width: 100%;
+	border-radius: 50%;
+
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

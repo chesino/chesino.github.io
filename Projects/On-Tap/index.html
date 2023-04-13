@@ -24,6 +24,13 @@
 </head>
 
 <body>
+    <div class="loading" id="loading">
+        <div class="loading_icon"></div>
+        <div class="loading_logo">
+            <img src="/Data/logo.png" alt="" srcset="">
+        </div>
+    </div>
+
     <div class="ChatBox">
         <!-- Messenger Plugin chat Code -->
         <div id="fb-root"></div>
@@ -175,12 +182,7 @@
 
         <h2>Hùng xin ít phút từ bạn, hãy cho Hùng xin ý kiến bạn một chút.</h2>
         <br>
-        <div class="Form">
-            <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLSdhOQ4sLMUSGz9vTO2qSVmEVjq8PuFzQnB8yInmgegThB6G0g/viewform?embedded=true"
-                width="100%" height="1500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-            <p>Qua phần TIA PORTAL</p>
-        </div>
+       
         <h1>Hướng dẫn TIA PORTAL</h1>
         <div class="success">
             <p>Mình chỉ làm mạch H1 vì mạch H2 cũng tương tự H1 chỉ khác chỗ S1,S2,S3 thay thành B1.</p>
@@ -213,7 +215,10 @@
             <p>Khi tắc động B1 đủ 5s thì mới sáng đèn H2.</p>
         </div>
         <img src="./img/De2/HunqD_Grafcet_De2A-1.png" alt="" srcset="">
+       
         <h2>Mạch hoàn chỉnh.</h2>
+        <p>Ở chuyển tiếp 10s/X2 hãy sửa lại thành 10s/X2*NOT(S1+S2+S3)</p>
+        <p>Ở chuyển tiếp 15s/X5 hãy sửa lại thành 15s/X5*NOT(B1)</p>
         <img src="./img/De2/HunqD_Grafcet_De2-1.png" alt="" srcset="">
         <h1>Hướng dẫn TIA PORTAL</h1>
         <a href="./img/De2/HunqD_TiaPortal_De2.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
@@ -261,6 +266,12 @@
         <a href="./img/De4/BAI_1.pdf" target="_blank" rel="noopener noreferrer">Tải hướng dẫn TIA</a>
     </div>
     <hr>
+    <div class="Form">
+        <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdhOQ4sLMUSGz9vTO2qSVmEVjq8PuFzQnB8yInmgegThB6G0g/viewform?embedded=true"
+            width="100%" height="1500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+    <hr>
     <div class="Box" id="All">
         <h1>Mã khoá dữ liệu</h1>
         <input type="password" id="password">
@@ -283,7 +294,7 @@
 <script src="./Script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- <script>
+<script>
     var chatbox = document.getElementById('fb-customer-chat');
     chatbox.setAttribute("page_id", "906471282789816");
     chatbox.setAttribute("attribution", "biz_inbox");
@@ -304,6 +315,6 @@
       js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-  </script> -->
+  </script>
 
 </html>

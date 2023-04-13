@@ -6,22 +6,26 @@ body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	background-color: var(--BG);
 	--color: #000;
-	--BG: #0ba6ff;
-	;
+	--BG: #0b89ff;
+	
 }
 
 .dark-mode {
 	--color: #ffffff;
 	--BG: #111;
 }
-
-header {
-	/* position: fixed; */
-	top: 0;
-	right: 0;
-	left: 0;
-	width: 100%;
-	background-color: #0066ff83;
+#toggle-button {
+	cursor: pointer;
+	text-align: center;
+	position: fixed;
+	height: 40px;
+	width: 40px;
+	bottom: 10px;
+	right: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
 }
 
 .loading {
@@ -76,36 +80,40 @@ header {
 }
 
 
-#toggle-button {
-	text-align: center;
-	position: fixed;
-	height: 40px;
-	width: 40px;
-	top: 10px;
-	right: 10px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-}
+
 
 .ChaoMung {
 	color: #fff;
 	/* background-color: #0ba6ff; */
-	height: calc(100vh - 40px);
+	/* height: calc(100vh - 40px); */
 	padding: 30px 10px 10px 10px;
+	opacity: 0; 
+	transform: scale(0.9);
+	transition: all 0.5s ease-in-out; 
+}
+.ChaoMung.Loaded {
+	opacity: 1;
+	transform: scale(1);
 }
 
 .ChaoMung .IMG {
+	transform: scale(0.8);
 	margin: 20px auto;
 	width: 80%;
-}
+	opacity: 0; 
+	transition: all 1.5s ease-in-out; 
+  }
+  
+.ChaoMung.Loaded .IMG {
+	opacity: 1;
+	transform: scale(1);
+  }
+  
 
 .ChaoMung .IMG img {
 	width: 100%;
 
 }
-
 .ChaoMung h1 {
 	font-size: 30px;
 	text-transform: capitalize;
@@ -116,59 +124,92 @@ header {
 	line-height: 24px;
 	margin-bottom: 30px;
 }
-.DuAn {
+.TienDoDuAn {
 	text-align: center;
 }
-.DuAn .progress {
+.TienDoDuAn .progress {
 	width: calc(100% - 4px);
 	height: 15px;
 	background-color: #ddd;
 	border-radius: 10px;
 	padding: 2px;
 }
-
-.DuAn #ValueProgress {
-	text-align: right;
+body.dark-mode .TienDoDuAn .progress {
+	background-color: #eee;
 }
 
-.DuAn .progress-bar {
+.TienDoDuAn #ValueProgress {
+	text-align: right;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.TienDoDuAn .progress-bar {
 	height: 100%;
 	background-color: darkblue;
 	border-radius: 10px;
 	transition: width 0.5s ease-in-out;
 }
 
-.DuAn .progress-bar.blue {
+.TienDoDuAn .progress-bar.blue {
 	background-color: blue;
 }
 
-.DuAn .progress-bar.orange {
+.TienDoDuAn .progress-bar.orange {
 	background-color: orange;
 }
 
-.DuAn .progress-bar.red {
+.TienDoDuAn .progress-bar.red {
 	background-color: red;
 }
-.DuAn .progress-bar.green {
+.TienDoDuAn .progress-bar.green {
 	background-color: green;
 }
 
-.DuAn button {
+.TienDoDuAn button {
+	font-size: 16px;
+	font-weight: bold;
 	height: 50px;
+	border-radius: 10px;
+	border: 2px solid #fff;
+	color: #fff;
+	margin: 10px auto;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+body.dark-mode .TienDoDuAn button {
+	border: 2px solid #eee;
+	color: #eee;
+}
+.btnTienDoDuAn {
+	margin: 10px 0;
+}
+.btnTienDoDuAn button:nth-child(1){
+	background-color: blue;
+}
+.btnTienDoDuAn button:nth-child(2){
+	background-color: orange;
+}
+.btnTienDoDuAn button:nth-child(3){
+	background-color: red;
+}
+.btnTienDoDuAn button:nth-child(4){
+	background-color: green;
+}
+
+.DuAn {
+	padding: 10px 15px;
+	background-color: antiquewhite;
+}
+.DuAn .ThongTin {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+.DuAn .ThongTin .Logo img{
 	width: 80px;
 	border-radius: 10px;
-	border: 2px solid black;
-	margin: 10px auto;
 }
-.btnDuAn button:nth-child(1){
-	background-color: blue;
-}
-.btnDuAn button:nth-child(2){
-	background-color: orange;
-}
-.btnDuAn button:nth-child(3){
-	background-color: red;
-}
-.btnDuAn button:nth-child(4){
-	background-color: green;
+
+.Hide {
+	display: none;
 }

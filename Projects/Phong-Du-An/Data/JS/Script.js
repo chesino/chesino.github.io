@@ -3,7 +3,18 @@ setTimeout(function() {
     setTimeout(() => {
       document.getElementById('loading').style.display = 'none';
     }, 1200);
+    var Welcome = document.querySelector('.ChaoMung div');
+    Welcome.parentNode.classList.add('Loaded');
   }, 1000);
+
+  // window.addEventListener('load', function() { 
+  //   document.getElementById('loading').classList.add('hidden');
+  //     setTimeout(() => {
+  //       document.getElementById('loading').style.display = 'none';
+  //     }, 100);
+  //     var Welcome = document.querySelector('.ChaoMung div');
+  //     Welcome.parentNode.classList.add('Loaded');
+  // });
 
   const progressBar = document.querySelector('.progress-bar');
   var ValueProgress = document.getElementById('ValueProgress');
@@ -15,3 +26,4 @@ setTimeout(function() {
     progressBar.classList.add(color); // Thêm lớp màu sắc mới
   }
   updateProgress(0)
+

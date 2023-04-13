@@ -1,5 +1,10 @@
 
-
+setTimeout(function() {
+  document.getElementById('loading').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('loading').style.display = 'none';
+  }, 1200);
+}, 1000);
 
 const devices = [
     { TenThietBi: "Còi, Chuông", Mota: "Không có chú thích ở đây" },
