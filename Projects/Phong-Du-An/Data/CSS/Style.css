@@ -7,12 +7,9 @@ body {
 	background-color: var(--BG);
 	--color: #000;
 	--BG: #0b89ff;
-	cursor: url('/Projects/Phong-Du-An/frog2.cur'), auto;
+	cursor: url('/Projects/Phong-Du-An/Data/Cursor/Cursor1.png'), auto;
 }
 
-body:active {
-	cursor: url('/Projects/Phong-Du-An/frog.cur'), auto;
-  }
 .dark-mode {
 	--color: #ffffff;
 	--BG: #111;
@@ -21,7 +18,7 @@ body:active {
 	display: none;
 }
 #toggle-button {
-	cursor: pointer;
+	cursor: url('/Projects/Phong-Du-An/Data/Cursor/Cursor1.png'), auto;
 	text-align: center;
 	position: fixed;
 	height: 40px;
@@ -178,7 +175,7 @@ body.dark-mode .TienDoDuAn .progress {
 	color: #fff;
 	margin: 10px auto;
 	padding: 5px 10px;
-	cursor: url('/Projects/Phong-Du-An/frog.cur'), auto;
+	cursor: url('/Projects/Phong-Du-An/Data/Cursor/Cursor1.png'), auto;
 }
 body.dark-mode .TienDoDuAn button {
 	border: 2px solid #eee;
@@ -257,7 +254,6 @@ body.dark-mode .TienDoDuAn button {
 	color: #008cff;
 	margin: 15px 0 5px 0 ;
 	font-size: 30px;
-	cursor: pointer;
 }
 .DoiNgu .ThanhVien .XaHoi i:hover {
 	color: rgb(255, 0, 64);
@@ -274,7 +270,6 @@ body.dark-mode .TienDoDuAn button {
 		background-color: #111;
 		margin: 10px;
 		padding: 50px 0 ;
-		cursor: url('/Projects/Phong-Du-An/frog.cur'), auto;
 	}
 	.DoiNgu .ThanhVien:hover {
 		background-color: #444444;
