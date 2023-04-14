@@ -14,6 +14,9 @@ body {
 	--color: #ffffff;
 	--BG: #111;
 }
+.Hide {
+	display: none;
+}
 #toggle-button {
 	cursor: pointer;
 	text-align: center;
@@ -210,6 +213,16 @@ body.dark-mode .TienDoDuAn button {
 	border-radius: 10px;
 }
 
-.Hide {
-	display: none;
+.DoiNgu {
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+}
+.DoiNgu .ThanhVien {
+	background-color: #0b89ff;
+	
+}
+
+.DoiNgu .ThanhVien .Anh img {
+	height: 50px;
+	width: 50px;
 }
