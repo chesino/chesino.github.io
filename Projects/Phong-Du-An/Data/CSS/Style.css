@@ -7,9 +7,12 @@ body {
 	background-color: var(--BG);
 	--color: #000;
 	--BG: #0b89ff;
-	
+	cursor: url('/Projects/Phong-Du-An/frog2.cur'), auto;
 }
 
+body:active {
+	cursor: url('/Projects/Phong-Du-An/frog.cur'), auto;
+  }
 .dark-mode {
 	--color: #ffffff;
 	--BG: #111;
@@ -82,14 +85,11 @@ body {
 	}
 }
 
-
-
-
 .ChaoMung {
 	color: #fff;
 	/* background-color: #0ba6ff; */
 	/* height: calc(100vh - 40px); */
-	padding: 30px 10px 10px 10px;
+	padding: 30px 20px 10px 20px;
 	opacity: 0; 
 	transform: scale(0.9);
 	transition: all 0.5s ease-in-out; 
@@ -214,15 +214,69 @@ body.dark-mode .TienDoDuAn button {
 }
 
 .DoiNgu {
-	display: grid;
-	grid-template-columns: auto auto auto auto;
-}
-.DoiNgu .ThanhVien {
-	background-color: #0b89ff;
-	
+	color: #fff;
+	text-align: center;
+	margin: auto;
+	border-radius: 20px;
 }
 
+.DoiNgu .ThanhVien {
+	background-color: #000;
+	margin: 20px 50px;
+	padding: 20px 10px;
+	border-radius: 20px;
+}
+
+.DoiNgu .ThanhVien .Anh {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 110px;
+	width: 110px;
+	border-radius: 50%;
+	border: 5px solid wheat;
+	margin: auto;
+}
 .DoiNgu .ThanhVien .Anh img {
-	height: 50px;
-	width: 50px;
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	border: 2px solid wheat;
+}
+.DoiNgu .ThanhVien .Ten {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 5px 0 0 0;
+}
+
+.DoiNgu .ThanhVien .ChucVu {
+	font-size: 16px;
+	color: #a3a3a3;
+}
+.DoiNgu .ThanhVien .XaHoi i {
+	color: #008cff;
+	margin: 15px 0 5px 0 ;
+	font-size: 30px;
+	cursor: pointer;
+}
+.DoiNgu .ThanhVien .XaHoi i:hover {
+	color: rgb(255, 0, 64);
+}
+@media only screen and (min-width: 1000px) {
+	.DoiNgu {
+		background-color: #000;
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+		margin:  20px;
+		padding: 20px;
+	}
+	.DoiNgu .ThanhVien {
+		background-color: #111;
+		margin: 10px;
+		padding: 50px 0 ;
+		cursor: pointer;
+	}
+	.DoiNgu .ThanhVien:hover {
+		background-color: #444444;
+	}
 }
