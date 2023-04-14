@@ -31,102 +31,125 @@
             <img src="/Data/logo.png" alt="" srcset="">
         </div>
     </div>
-
-    <div class="ChaoMung">
-        <div class="IMG">
-            <img src="./Data/img/IMG1.png" alt="ChaoMung">
-        </div>
-        <h1>Phòng dự án</h1>
-        <h2>Các dự án của chúng tôi.</h2>
-        <div class="TienDoDuAn">
-            <div id="ValueProgress"></div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar"></div>
+    <div class="Block">
+        <div class="BlockA">
+            <div class="ChaoMung">
+                <div class="IMG">
+                    <img src="./Data/img/IMG1.png" alt="ChaoMung">
+                </div>
+                <h1>Phòng dự án</h1>
+                <h2>Các dự án của chúng tôi.</h2>
+                <div class="TienDoDuAn">
+                    <div id="ValueProgress"></div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar"></div>
+                    </div>
+                    <div class="btnTienDoDuAn">
+                        <button onclick="updateProgress(20, 'blue')">Dự án 1</button>
+                        <button onclick="updateProgress(50, 'orange')">Dự án 2</button>
+                        <button onclick="updateProgress(80, 'red')">Dự án 3</button>
+                        <button onclick="updateProgress(100, 'green')">Dự án 3</button>
+                    </div>
+                </div>
             </div>
-            <div class="btnTienDoDuAn">
-                <button onclick="updateProgress(20, 'blue')">Dự án 1</button>
-                <button onclick="updateProgress(50, 'orange')">Dự án 2</button>
-                <button onclick="updateProgress(80, 'red')">Dự án 3</button>
-                <button onclick="updateProgress(100, 'green')">Dự án 3</button>
+            <div class="DoiNgu">
+                <div class="ThanhVien">
+                    <div class="Anh">
+                        <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
+                    </div>
+                    <div class="ThongTin">
+                        <div class="Ten">
+                            Đinh Mạnh Hùng
+                        </div>
+                        <div class="ChucVu">
+                            Trưởng nhóm
+                        </div>
+                        <div class="XaHoi">
+                            <i class="fa-brands fa-facebook"></i>
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="ThanhVien">
+                    <div class="Anh">
+                        <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
+                    </div>
+                    <div class="ThongTin">
+                        <div class="Ten">
+                            Đinh Mạnh Hùng
+                        </div>
+                        <div class="ChucVu">
+                            Trưởng nhóm
+                        </div>
+                        <div class="XaHoi">
+                            <i class="fa-brands fa-facebook"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="ThanhVien">
+                    <div class="Anh">
+                        <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
+                    </div>
+                    <div class="ThongTin">
+                        <div class="Ten">
+                            Đinh Mạnh Hùng
+                        </div>
+                        <div class="ChucVu">
+                            Trưởng nhóm
+                        </div>
+                        <div class="XaHoi">
+                            <i class="fa-brands fa-facebook"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="ThanhVien">
+                    <div class="Anh">
+                        <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
+                    </div>
+                    <div class="ThongTin">
+                        <div class="Ten">
+                            Đinh Mạnh Hùng
+                        </div>
+                        <div class="ChucVu">
+                            Trưởng nhóm
+                        </div>
+                        <div class="XaHoi">
+                            <i class="fa-brands fa-facebook"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="BlockB">
+            <div class="div100vh">
+                <div class="KhoaNoiDung">
+                    <div class="Passwords">
+                        <input id="password-input" type="password" placeholder="Vui lòng nhập mật khẩu"></input>
+                        <br>
+                        <button id="submit-button" type="submit">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </button>
+                        <br>
+                    </div>
+                    
+                </div>
+
+                <div class="MoNoiDung" style="display: none;">
+                    <div class="NoiDungA" style="display: none;">Đây là nội dung A</div>
+                    <div class="NoiDungB" style="display: none;">Đây là nội dung B</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="DuAn Hide" id="DuAn1">
-        <div class="ThongTin">
-            <div class="Logo">
-                <img src="/Data/logo.png" alt="" srcset="">
-            </div>
-            <div class="TenDuAn">
-                <h1>Dự án đèn giao thông</h1>
-                <p>Nhóm 1</p>
-            </div>
-        </div>    
-    </div>
 
-    <div class="DoiNgu">
-        <div class="ThanhVien">
-            <div class="Anh">
-                <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
-            </div>
-            <div class="Ten">
-                Đinh Mạnh Hùng
-            </div>
-            <div class="ChucVu">
-                Trưởng nhóm
-            </div>
-            <div class="XaHoi">
-                <i class="fa-brands fa-facebook"></i>
-            </div>
-        </div>
-        <div class="ThanhVien">
-            <div class="Anh">
-                <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
-            </div>
-            <div class="Ten">
-                Đinh Mạnh Hùng
-            </div>
-            <div class="ChucVu">
-                Trưởng nhóm
-            </div>
-            <div class="XaHoi">
-                <i class="fa-brands fa-facebook"></i>
-            </div>
-        </div>
-        <div class="ThanhVien">
-            <div class="Anh">
-                <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
-            </div>
-            <div class="Ten">
-                Đinh Mạnh Hùng
-            </div>
-            <div class="ChucVu">
-                Trưởng nhóm
-            </div>
-            <div class="XaHoi">
-                <i class="fa-brands fa-facebook"></i>
-            </div>
-        </div>
-        <div class="ThanhVien">
-            <div class="Anh">
-                <img src="./Data/Member/HunqD.jpg" alt="" srcset="">
-            </div>
-            <div class="Ten">
-                Đinh Mạnh Hùng
-            </div>
-            <div class="ChucVu">
-                Trưởng nhóm
-            </div>
-            <div class="XaHoi">
-                <i class="fa-brands fa-facebook"></i>
-            </div>
-        </div>
-    </div>
 
 
     <div id="toggle-button"></div>
 </body>
 <script src="/Data/JS/Darkmode.js"></script>
 <script src="./Data/JS/Script.js"></script>
+<script src="./Data/JS/MaGioiThieu.js"></script>
 
 </html>
