@@ -8,6 +8,9 @@ const noiDungA = document.querySelector(".NoiDungA");
 const noiDungB = document.querySelector(".NoiDungB");
 const moNoiDung = document.querySelector(".MoNoiDung");
 
+const submitform = document.getElementById("submit-form");
+const Form = document.querySelector(".Form");
+
 function kiemTraMatKhau() {
   const enteredPassword = passwordInput.value;
   
@@ -28,6 +31,10 @@ function kiemTraMatKhau() {
     noiDungB.style.display = "none";
   }
 }
+function BlockForm() {
+  Form.style.display = "block"
+}
+submitform.addEventListener("click", BlockForm);
 
 submitButton.addEventListener("click", kiemTraMatKhau);
 

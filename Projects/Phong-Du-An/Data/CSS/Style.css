@@ -280,7 +280,6 @@ body.dark-mode .TienDoDuAn button {
 	text-align: center;
 }
 
-
 #result-message {
 	color: #000;
 }
@@ -299,20 +298,32 @@ body.dark-mode .TienDoDuAn button {
 	width: 80%;
 }
 
-
+.Passwords a {
+	color: #008cff;
+	font-weight: bold;
+}
 .Passwords #password-input {
+	color: #fff;
+	font-size: 20px;
 	height: 35px;
 	width: 100%;
 	background-color: #0000002d;
 	border: none;
 	border-bottom: 2px solid #000;
 	margin: 10px 0;
+	padding: 5px 10px;
 }
 .Passwords #submit-button {
 	height: 50px;
 	width: 50px;
 	border: 2px solid #000;
 	background-color: #0000002d;
+}
+.Form {
+	display: none;
+	height: 100vh;
+	width: 100%;
+	top: 0;
 }
 
 
