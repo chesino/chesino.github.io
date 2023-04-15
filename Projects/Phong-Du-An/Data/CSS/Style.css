@@ -340,7 +340,7 @@ body.dark-mode .TienDoDuAn button {
 
 	.Block {
 		display: grid;
-		grid-template-columns: 45% 55%;
+		grid-template-columns: 40% 60%;
 	}
 
 	.DoiNgu {
@@ -359,7 +359,7 @@ body.dark-mode .TienDoDuAn button {
 	}
 
 	.DoiNgu .ThanhVien .ThongTin .Ten {
-		font-size: 20px;
+		font-size: 16px;
 	}
 
 	.DoiNgu .ThanhVien:hover {
@@ -377,7 +377,7 @@ body.dark-mode .TienDoDuAn button {
 	}
 
 	.DoiNgu .ThanhVien .XaHoi i {
-		font-size: 30px;
+		font-size: 25px;
 		margin: 15px 5px 5px 5px;
 	}
 
