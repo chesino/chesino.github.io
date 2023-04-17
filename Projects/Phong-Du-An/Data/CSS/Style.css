@@ -260,7 +260,9 @@ body.dark-mode .TienDoDuAn button {
 	font-size: 16px;
 	color: #a3a3a3;
 }
-
+.DoiNgu .ThanhVien .XaHoi a {
+	text-decoration: none;
+}
 .DoiNgu .ThanhVien .XaHoi i {
 	color: #008cff;
 	margin: 10px 5px 0 5px;
@@ -320,12 +322,22 @@ body.dark-mode .TienDoDuAn button {
 	background-color: #0000002d;
 }
 .Form {
+	background-color: var(--BG);
 	display: none;
 	height: 100vh;
 	width: 100%;
 	top: 0;
+	text-align: center;
 }
-
+.reload {
+	color: var(--BG);
+	background-color: var(--color);
+	height: 50px;
+	width: 150px;
+	border: none;
+	border-radius: 10px;
+	margin: 20px 0 50px 0;
+}
 
 @media only screen and (min-width: 1400px) {
 	.BlockA {
@@ -357,7 +369,7 @@ body.dark-mode .TienDoDuAn button {
 	.DoiNgu {
 		background-color: #000;
 		display: grid;
-		grid-template-columns: auto auto auto auto;
+		grid-template-columns: 25% 25%  25%  25% ;
 		margin: 10px;
 		padding: 5px;
 	}

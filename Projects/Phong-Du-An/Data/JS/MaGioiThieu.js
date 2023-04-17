@@ -1,5 +1,5 @@
-const matKhauA = "ABC";
-const matKhauB = "ZXC";
+const matKhauA = "K14";
+const matKhauB = "CDT999";
 
 const passwordInput = document.getElementById("password-input");
 const submitButton = document.getElementById("submit-button");
@@ -32,6 +32,7 @@ function kiemTraMatKhau() {
   }
 }
 function BlockForm() {
+  KhoaNoiDung.style.display = "none";
   Form.style.display = "block"
 }
 submitform.addEventListener("click", BlockForm);
