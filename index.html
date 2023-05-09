@@ -11,11 +11,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-<!-- Biểu tượng cho web -->
-<link rel="icon" href="/Data/logo.png">
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/Data/logo.png">
 
-<!-- Biểu tượng iPhone -->
-<link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Data/CSS/Style.css" />
 
@@ -25,117 +25,10 @@
 </head>
 
 <body>
-
-    <div class="MenuBar">
-        <div class="Function" id="toggle-button" >
-        </div>
-        <div class="Function Active"  onclick="openTab(event, 'Home')">
-            <i class="fa-solid fa-house"></i>
-        </div>
-
-        <div class="Function " onclick="openTab(event, 'MyProjects')">
-            <i class="fa-solid fa-diagram-project"></i>
-        </div>
-
-        <div class="Function" onclick="openTab(event, 'Info')">
-            <i class="fa-solid fa-circle-question"></i>
-        </div>
-
-        <div class="Function" onclick="openTab(event, 'Setting')">
-            <i class="fa-solid fa-gear"></i>
-        </div>
-
-        <div class="Function" id="Capture" onclick="capture()">
-            <i class="fa-solid fa-camera"></i>
-        </div>
+    <div class="hide" id="toggle-button">
     </div>
-
-
-    <div class="Page One" id="Home" >
-        <div class="VideoBG">
-            <video class="video"autoplay loop muted playsinline >
-                <source src="./Data/Video/video_2.mp4" type="video/mp4">
-                Your browser does not support HTML5 video.
-            </video>
-              
-        </div>
-        <div class="Welcome">
-            <h1>Trang đang cập nhật</h1>
-            <p id="text"></p>
-
-        </div>
-         
-          
-    </div>
-   
-    <div class="Page Two" id="MyProjects" >
-        <h1>Các dự án</h1>
-        <div class="CardBox">
-            
-            <div class="Card">
-                <a href="./Projects/Random/index.html" target="_blank" >
-                    <img src="./Data/Images/Projects/Cleaning.png" alt="" srcset="">
-                </a>
-                Ai trực nhật lớp ?
-            </div>
-            <div class="Card">
-                <a href="./Projects/TKB/index.html" target="_blank" >
-                    <img src="./Data/Images/Projects/TKB.png" >
-                </a>
-                Thời khoá biểu
-            </div>
-            <div class="Card">
-                <a href="./HunqD/index.html" target="_blank" >
-                    <img src="./HunqD/Data/IMG/Banner/0.png" alt="" srcset="">
-                </a>
-                Thống kê trang cá nhân
-            </div>
-            <div class="Card" onclick="alert('Sắp ra mắt trong thời gian sắp tới')">
-                <img src="./Data/Images/Projects/TTĐ.png" alt="" srcset="">
-                Tính toán điện
-            </div>
-            <div class="Card" onclick="alert('Sắp ra mắt trong thời gian sắp tới')">
-                <img src="./Data/Images/Projects/TKTM.png" alt="" srcset="">
-                Tiết kiệm thông minh
-            </div>
-            <!-- <div class="Card"></div>
-            <div class="Card"></div>
-            <div class="Card"></div>
-            <div class="Card"></div> -->
-        </div>
-
-        <h1>Tài liệu cơ điện tử</h1>
-        <div class="CardBox">
-            <div class="Card">
-                <img src="./Data/Images/TaiLieu/TL.png" alt="" srcset="">
-                Tài liệu cơ điện tử cơ bản
-            </div>
-            <div class="Card">
-                <img src="./Data/Images/Projects/Banner.png" alt="" srcset="">
-                Chesino
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="Page Three" id="Info">
-        <h1>Trang thông tin</h1>
-        <p>Website này được lập ra với mục đích phi cá nhân và tập trung vào việc hỗ trợ trong việc học tập và cá nhân. Trang web có thể cung cấp các tài liệu, bài viết, hướng dẫn và công cụ hữu ích để giúp người dùng cải thiện kỹ năng và kiến thức của mình.</p>
-        <p>Các nội dung trên trang bao gồm những chủ đề về cơ điện tử và nhiều lĩnh vực đời sống khác.</p>
-        <p>Với sự đóng góp của cộng đồng và sự hỗ trợ của các công cụ học tập và nghiên cứu trực tuyến, trang web này có thể là một nguồn tài nguyên hữu ích cho những ai đang tìm kiếm kiến ​​thức và muốn phát triển bản thân trong lĩnh vực cơ điện tử.</p>
-        <hr>
-        <h1>Ủng hộ tôi</h1>
-        <p>Theo dõi tôi trên Facebook <a href="http://fb.com/HunqD" target="_blank">HunqD</a></p>
-    </div>
-    
-    <div class="Page" id="Setting">
-        <h1>Cài đặt</h1>
-        <!-- <button onclick="shareFacebook()">Chia sẻ Facebook</button> -->
-    </div>
-
+    <h1>Trang đang bảo trì.</h1>
 </body>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./Data/JS/File.js"></script>
