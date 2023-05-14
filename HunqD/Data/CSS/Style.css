@@ -18,6 +18,10 @@ body {
     font-weight: bold;
     margin: 2px 0;
 }
+.Name span {
+    font-size: 14px;
+    color: #217aff;
+}
 .UserName {
     font-size: 14px;
     color: #c0c0c0;
@@ -49,29 +53,29 @@ body {
 }
 .Contact {
     display: grid;
-    grid-template-columns: auto 45px 45px ;
+    grid-template-columns: auto 50px 50px ;
     gap:  10px;
     padding: 10px;
-    width: 80%;
+    width: calc(80% - 20px);
 }
 
 .BTN {
+    font-size: 16px;
     cursor: pointer;
     color: #fff;
     text-align: center;
     background-color: #0d1f30;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border: none;
 }
 .BTN i {
-    font-size: 15px;
+    font-size: 16px;
 }
 .BTN a {
     color: #fff;
 }
 .BTN.Chat {
-    height: 45px;
     width: 100%;
     font-weight: 600;
     background-color: rgb(0, 73, 156);
@@ -87,7 +91,7 @@ body {
 .Tab .tablinks {
     cursor: pointer;
     margin: 0 5px 0 0;
-    font-size: 16px;
+    font-size: 18px;
     color: #fff;
     background-color: transparent;
     border: none;
@@ -104,6 +108,25 @@ body {
     border-bottom: 2px solid #fff ;
 }
 
+.rss-item, .iOS {
+    background-color: #0d1f30;
+    padding: 20px 10px;
+}
+.rss-item h1  {
+    font-size: 24px;
+}
+.rss-item .time  {
+    color: #217aff;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.rss-item .time b {
+    font-size: 14px;
+}
+.iOS a {
+    color: #217aff;
+    margin: auto;
+}
 .gallery {
     column-count: 2;
     --webkit-column-count: 2;
