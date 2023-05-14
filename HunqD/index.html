@@ -16,7 +16,7 @@
 
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
-    
+
 </head>
 
 
@@ -34,7 +34,7 @@
                     <div class="Address">
                         <i class="fa-solid fa-location-dot"></i>
                         VietNam
-                    </div> 
+                    </div>
                     <div class="Website">
                         <a href="http://chesino.github.io" target="_blank" rel="noopener noreferrer">
                             <i class="fa-solid fa-square-arrow-up-right"></i>
@@ -42,21 +42,21 @@
                         </a>
                     </div>
                 </div>
-               
+
             </div>
             <div class="Avatar">
                 <img src="https://graph.facebook.com/100045640179308/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662"
-                alt="" srcset="">
+                    alt="" srcset="">
             </div>
-                
+
         </div>
 
         <div class="Contact">
-            <button class="BTN Chat">
-                <a href="http://m.me/HunqD" target="_blank">
-                    <i class="fa-brands fa-facebook-messenger"></i>
-                </a>
-            </button>
+            <a href="http://m.me/HunqD" target="_blank">
+                <button class="BTN Chat">
+                    Nhắn tin
+                </button>
+            </a>
             <button class="BTN AddFriend" onclick="alert('Chưa khả dụng')">
                 <i class="fa-solid fa-user-plus"></i>
             </button>
@@ -67,25 +67,78 @@
     </div>
 
 
-    <section class="gallery">
-        <div class="image">
-            <img src="./Data/IMG/A1.jpg" alt="" srcset="">
-          </div>
-          <div class="image">
-            <img src="./Data/IMG/A3.jpg" alt="" srcset="">
-          </div>
-          <div class="image">
-            <img src="./Data/IMG/A5.jpg" alt="" srcset="">
-          </div>
-          <div class="image">
-            <img src="./Data/IMG/A4.jpg" alt="" srcset="">
-          </div>
-      </section>
+    <div class="Tab">
+        <button class="tablinks active" onclick="openTAB(event, 'Photo')">Ảnh</button>
+        <button class="tablinks" onclick="openTAB(event, 'Poster')">Bài viết</button>
+        <button class="tablinks" onclick="openTAB(event, 'Share')">Chia sẻ</button>
+    </div>
+
+    <div id="Photo" class="tabcontent show" >
+        <section class="gallery">
+            <div class="image">
+                <img src="./Data/IMG/A1.jpg" alt="" srcset="">
+            </div>
+            <div class="image">
+                <img src="./Data/IMG/A3.jpg" alt="" srcset="">
+            </div>
+            <div class="image">
+                <img src="./Data/IMG/A5.jpg" alt="" srcset="">
+            </div>
+            <div class="image">
+                <img src="./Data/IMG/A4.jpg" alt="" srcset="">
+            </div>
+        </section>
+    </div>
+
+    <div id="Poster" class="tabcontent">
+        <div id="rss-feed">
+            bài viết
+        </div>
+    </div>
+
+    <div class="tabcontent" id="Share">
+        <div class="iOS">
+            <p>Chặn quảng cáo bằng cấu hình trên iOS</p>
+            <a href="https://cdn.adguard.com/public/Dns/adguard-dns.mobileconfig">Tải cấu hình</a>
+        </div>
+    </div>
+
+
+
+
 </body>
 
-  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/JS/File.js"></script>
 
+<script>
+const rssUrl = 'https://hunqd.wordpress.com/feed';
+const proxyUrl = 'https://api.allorigins.win/raw?url=';
 
+fetch(proxyUrl + encodeURIComponent(rssUrl))
+  .then(response => response.text())
+  .then(str => new DOMParser().parseFromString(str, "text/xml"))
+  .then(data => {
+    const items = data.querySelectorAll("item");
+
+    let html = '';
+    items.forEach(item => {
+      const title = item.querySelector("title").textContent;
+      const link = item.querySelector("link").textContent;
+      const description = item.querySelector("description").textContent;
+
+      html += `
+        <div class="rss-item">
+          <h2><a href="${link}">${title}</a></h2>
+          <p>${description}</p>
+        </div>
+      `;
+    });
+
+    document.querySelector('#rss-feed').innerHTML = html;
+  })
+  .catch(error => console.log(error));
+
+  </script>
+  
 </html>
