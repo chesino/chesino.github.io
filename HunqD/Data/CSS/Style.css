@@ -1,6 +1,7 @@
-*{
+* {
     margin: 0;
 }
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: aliceblue;
@@ -8,53 +9,63 @@ body {
 }
 
 .Info {
-    margin: 20px 0 0 0 ;
-    padding: 20px 20px 0 10px ;
+    margin: 20px 0 0 0;
+    padding: 20px 20px 0 10px;
     display: grid;
     grid-template-columns: auto auto;
 }
+
 .Name {
     font-size: 25px;
     font-weight: bold;
     margin: 2px 0;
 }
+
 .Name span {
     font-size: 14px;
     color: #217aff;
 }
+
 .UserName {
     font-size: 14px;
     color: #c0c0c0;
     margin-bottom: 25px;
 }
-.More{
+
+.More {
     display: grid;
     grid-template-columns: auto auto;
 }
-.Address, .Website {
+
+.Address,
+.Website {
     margin: 5px 0;
     color: #c0c0c0;
     text-transform: uppercase;
-    font-size: 12px;
-    padding: 0 2px ;  
+    font-size: 14px;
+    padding: 0 2px;
 }
+
 .Website a {
-    color:#217aff ;
+    color: #217aff;
     text-decoration: none;
 }
+
 .Avatar {
     text-align: right;
 }
+
 .Avatar img {
     margin-top: 10px;
     height: 70px;
     width: 70px;
     border-radius: 50%;
 }
+
 .Contact {
     display: grid;
-    grid-template-columns: auto 50px 50px ;
-    gap:  10px;
+    grid-template-columns: auto 50px 50px;
+    gap: 10px;
     padding: 10px;
     width: calc(80% - 20px);
 }
@@ -69,25 +80,109 @@ body {
     height: 50px;
     border: none;
 }
+
 .BTN i {
     font-size: 16px;
 }
+
 .BTN a {
     color: #fff;
 }
+
 .BTN.Chat {
     width: 100%;
     font-weight: 600;
     background-color: rgb(0, 73, 156);
 }
+
 .BTN.Chat:hover {
     background-color: #0d1f30;
 }
 
+.Donate {
+    display: none;
+    text-align: center;
+    width: calc(100% - 64px);
+    position:absolute;
+    opacity: 0;
+    background-color: #0d1f30;
+    border: 2px solid #fff;
+    margin: 0 10px ;
+    padding: 20px;
+    transition: opacity 0.5s ease-in-out;
+}
+.Donate.active {
+    opacity: 1;
+    display: block;
+  }
+.Donate h2 {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.Donate img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.Donate button {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    margin-top: 10px;
+    background-color: #217aff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+}
+.Donate button:hover {
+    background-color: #021222;
+}
+.Donate button.Momo {
+    background-color: #ad006c;
+}
+
+
+.listdonate {
+    padding: 10px 0 0 0 ;
+}
+.listdonate h1 {
+    font-size: 18px;
+    color: #217aff;
+}
+.listdonate span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+.listdonate h2 {
+    margin: 0;
+    font-size: 18px;
+}
+.listdonate p {
+    color: #c0c0c0;
+    font-size: 12px;
+}
+.listdonate-item {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.listdonate-item.active {
+    opacity: 1;
+    
+}
+.listdonate-item.hide {
+    opacity: 0;
+}
+
 .Tab {
     text-align: left;
-    margin: 10px 0 0px 10px;
+    margin: 10px 0 0px 12px;
 }
+
 .Tab .tablinks {
     cursor: pointer;
     margin: 0 5px 0 0;
@@ -95,47 +190,60 @@ body {
     color: #fff;
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid transparent ;
+    border-bottom: 2px solid transparent;
 }
+
 .tabcontent {
     display: none;
     padding: 10px;
 }
+
 .tabcontent.show {
     display: block;
-} 
-.Tab .tablinks.active {
-    border-bottom: 2px solid #fff ;
 }
 
-.rss-item, .iOS {
-    background-color: #0d1f30;
-    padding: 20px 10px;
+.Tab .tablinks.active {
+    border-bottom: 2px solid #fff;
 }
-.rss-item h1  {
+
+.rss-item,
+.iOS {
+    background-color: #0d1f30;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.rss-item h1 {
     font-size: 24px;
 }
-.rss-item .time  {
+
+.rss-item .time {
     color: #217aff;
     font-size: 12px;
     margin-bottom: 10px;
 }
+
 .rss-item .time b {
     font-size: 14px;
 }
+
 .iOS a {
     color: #217aff;
     margin: auto;
 }
+
 .gallery {
     column-count: 2;
     --webkit-column-count: 2;
     --moz-column-count: 2;
     gap: 10px;
-  }
-  
+}
+
 .image img {
     margin-top: 5px;
     height: auto;
     width: 100%;
+}
+.hide {
+    display: none;
 }
