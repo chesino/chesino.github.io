@@ -216,6 +216,9 @@ body {
 .rss-item h1 {
     font-size: 24px;
 }
+.rss-item img {
+    max-width: 100%;
+}
 
 .rss-item .time {
     color: #217aff;
