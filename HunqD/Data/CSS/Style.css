@@ -9,7 +9,7 @@ body {
 }
 
 .Info {
-    margin: 20px 0 0 0;
+    margin: 10px 0 0 0;
     padding: 20px 20px 0 10px;
     display: grid;
     grid-template-columns: auto auto;
@@ -145,6 +145,8 @@ body {
 
 
 .listdonate {
+    text-align: center;
+    width: 100%;
     padding: 10px 0 0 0 ;
 }
 .listdonate h1 {
@@ -170,13 +172,6 @@ body {
     margin-bottom: 10px;
 }
 
-.listdonate-item.active {
-    opacity: 1;
-    
-}
-.listdonate-item.hide {
-    opacity: 0;
-}
 
 .Tab {
     text-align: left;
@@ -210,14 +205,27 @@ body {
 .iOS {
     background-color: #0d1f30;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .rss-item h1 {
     font-size: 24px;
 }
-.rss-item img {
+.rss-item p {
+    margin-bottom: 10px;
+}
+.rss-item hr {
+    background-color: #fff;
+    height: 3px;
+    border: none;
+    border-radius: 2px;
+    margin: 10px 0;
+}
+.rss-item img, video,iframe{
     max-width: 100%;
+}
+.rss-item audio {
+    width: 100%;
 }
 
 .rss-item .time {

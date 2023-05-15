@@ -7,7 +7,6 @@ let clickCount = 0;
 
 donateBtn.addEventListener('click', function () {
     if (!isFirstTimeClick) {
-        ListDonate();
         isFirstTimeClick = true;
     }
     donateDiv.classList.toggle('active');
@@ -25,57 +24,75 @@ donateDiv.addEventListener('click', function (event) {
         ibtndonate.className = "fa-regular fa-star";
     }
 });
-
-
-function ListDonate() {
-    const donateList = [
-        { name: "Nguyễn Văn A", amount: "20.000", time: "20:40-14/05/2023" },
-        { name: "Nguyễn Văn B", amount: "50.000", time: "21:00-14/05/2023" },
-        { name: "Nguyễn Văn C", amount: "100.000", time: "22:00-14/05/2023" },
-    ];
-
-    const listdonate = document.querySelector(".listdonate");
-
-    function showNextDonor(index) {
-        const donor = donateList[index];
-
-        const item = document.createElement("div");
-        item.classList.add("listdonate-item");
-        item.innerHTML = `
-    <h1><span>Cảm ơn </span>${donor.name}<span> đã ủng hộ.</span></h1>
-    <h2>${donor.amount}đ</h2>
-    <p>${donor.time}</p>`;
-
-        listdonate.appendChild(item);
-
-        // Wait for the fade in animation to finish
+const donateList = [
+    { name: "Nguyễn Văn A", amount: "20.000", time: "20:40-14/05/2023" },
+    { name: "Nguyễn Văn B", amount: "50.000", time: "21:00-14/05/2023" },
+    { name: "Nguyễn Văn C", amount: "100.000", time: "22:00-14/05/2023" },
+  ];
+  
+  const ddDonate = document.querySelector(".DDonate");
+  const listdonate = document.querySelector(".listdonate");
+  
+  // Function to fade in an element
+  function fadeIn(element) {
+    element.style.opacity = "0";
+    let opacity = 0;
+    const interval = setInterval(() => {
+      if (opacity < 1) {
+        opacity += 0.1;
+        element.style.opacity = opacity;
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+  }
+  
+  // Function to fade out an element
+  function fadeOut(element) {
+    let opacity = 1;
+    const interval = setInterval(() => {
+      if (opacity > 0) {
+        opacity -= 0.1;
+        element.style.opacity = opacity;
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+  }
+  
+  function showNextDonor(index) {
+    const donor = donateList[index];
+  
+    const item = document.createElement("div");
+    item.classList.add("listdonate-item");
+    item.innerHTML = `
+      <h1><span>Cảm ơn </span>${donor.name}<span> đã ủng hộ.</span></h1>
+      <h2>${donor.amount}đ</h2>
+      <p>${donor.time}</p>`;
+  
+    listdonate.appendChild(item);
+  
+    setTimeout(() => {
+      fadeIn(item);
+  
+      setTimeout(() => {
+        fadeOut(item);
+  
         setTimeout(() => {
-            // Mark the item as active to show it
-            item.classList.add("active");
-
-            // Wait for a certain time
-            setTimeout(() => {
-                // Mark the item as hidden to fade it out
-                item.classList.add("hide");
-
-                // Wait for the fade out animation to finish
-                setTimeout(() => {
-                    // Remove the item from the DOM
-                    item.remove();
-
-                    // Show the next donor (if any)
-                    if (index < donateList.length - 1) {
-                        showNextDonor(index + 1);
-                    } else {
-                        isFirstTimeClick = false;
-                    }
-                }, 500); // wait for the fade out animation
-            }, 3000); // wait for a certain time
-        }, 500); // wait for the fade in animation
-    }
-
-    // Start showing the donors
+          item.remove();
+  
+          if (index < donateList.length - 1) {
+            showNextDonor(index + 1);
+          } else {
+            fadeOut(ddDonate);
+          }
+        }, 3000); // Wait for 3 seconds before fading out
+      }, 3000); // Show each donor for 3 seconds
+    }, index * 100); // Delay the appearance based on index (6 seconds between each donor)
+  }
+  
+  setTimeout(() => {
+    fadeIn(ddDonate);
     showNextDonor(0);
-
-}
-
+  }, 2000); // Wait 2 seconds before starting the animation
+  
