@@ -25,9 +25,7 @@ donateDiv.addEventListener('click', function (event) {
     }
 });
 const donateList = [
-    { name: "Nguyễn Văn A", amount: "20.000", time: "20:40-14/05/2023" },
-    { name: "Nguyễn Văn B", amount: "50.000", time: "21:00-14/05/2023" },
-    { name: "Nguyễn Văn C", amount: "100.000", time: "22:00-14/05/2023" },
+    { name: "Mezzi", amount: "10.000", time: "20:40-14/05/2023" },
   ];
   
   const ddDonate = document.querySelector(".DDonate");
