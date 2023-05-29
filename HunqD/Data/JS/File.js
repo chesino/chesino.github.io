@@ -12,21 +12,15 @@
 //   alert('Bạn đang sử dụng trình duyệt máy tính, giao diện có thể bị sai lệch và lỗi.')
 // }
 
-function checkReferral() {
-  var urlParams = new URLSearchParams(window.location.search);
-  var mibextid = urlParams.get('mibextid');
-  var fbclid = urlParams.get('fbclid');
 
-  if (mibextid) {
-    console.log("Người dùng truy cập từ Facebook qua Mibbit");
-  } else if (fbclid) {
-    console.log("Người dùng truy cập từ Facebook");
-  } else {
-    console.log("Người dùng truy cập bằng link thường");
-  }
+var isFacebookBrowser = /FBAN|FBAV/i.test(navigator.userAgent);
+
+if (isFacebookBrowser) {
+  alert("hello Facebook");
+} else {
+  console.log("ok");
 }
 
-checkReferral();
 
 
 function openTAB(evt, TabName) {
