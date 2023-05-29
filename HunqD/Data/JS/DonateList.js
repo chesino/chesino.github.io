@@ -1,5 +1,6 @@
 const donateList = [
-  { name: "iVi", amount: "5.000", time: "Momo 20:40-14/05/2023" },
+  { name: "iVi", amount: "5.000", time: "MOMO 20:40-14/05/2023" },
+  { name: "***09", amount: "10.000", time: "MOMO 15:20-28/05/2023" },
 ];
 
 const donateBtn = document.querySelector('#btnDonate');

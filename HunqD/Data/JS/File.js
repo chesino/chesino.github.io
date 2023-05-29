@@ -14,11 +14,14 @@
 
 
 var isFacebookBrowser = /FBAN|FBAV/i.test(navigator.userAgent);
+var AlertFacebook = document.getElementById('AlertFacebook');
 
 if (isFacebookBrowser) {
-  alert("hello Facebook");
+  console.log("Truy cập bằng Facebook");
+  document.body.style.paddingBottom = '45px';
+  AlertFacebook.style.display = 'block';
 } else {
-  console.log("ok");
+  console.log("Link Thường");
 }
 
 
