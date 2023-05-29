@@ -1,3 +1,6 @@
+:root {
+    --border: 10px;
+}
 * {
     margin: 0;
 }
@@ -79,6 +82,7 @@ body {
     width: 50px;
     height: 50px;
     border: none;
+    border-radius: var(--border);
 }
 
 .BTN i {
@@ -110,6 +114,7 @@ body {
     margin: 0 10px ;
     padding: 20px;
     transition: opacity 0.5s ease-in-out;
+    border-radius: var(--border);
 }
 .Donate.active {
     opacity: 1;
@@ -121,8 +126,10 @@ body {
 }
 
 .Donate img {
-    max-width: 100%;
+    max-width: calc(200px - 4px);
+    height: 200px;
     border-radius: 10px;
+    border: 2px solid #ad006c;
 }
 
 .Donate button {
@@ -132,12 +139,14 @@ body {
     height: 40px;
     margin-top: 10px;
     background-color: #217aff;
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
     padding: 10px 20px;
+    width: 200px;
 }
-.Donate button:hover {
-    background-color: #021222;
+.Donate button.Momo:hover {
+    background-color: #003366;
+    cursor: pointer;
 }
 .Donate button.Momo {
     background-color: #ad006c;
@@ -204,8 +213,9 @@ body {
 .rss-item,
 .iOS {
     background-color: #0d1f30;
-    padding: 10px;
+    padding: 5px 10px;
     margin-top: 10px;
+    border-radius: var(--border);
 }
 
 .rss-item h1 {
@@ -250,10 +260,11 @@ body {
     gap: 10px;
 }
 
-.image img {
+.gallery .image img {
     margin-top: 5px;
     height: auto;
     width: 100%;
+    border-radius: var(--border);
 }
 .hide {
     display: none;

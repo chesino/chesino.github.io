@@ -1,3 +1,7 @@
+const donateList = [
+  { name: "iVi", amount: "5.000", time: "Momo 20:40-14/05/2023" },
+];
+
 const donateBtn = document.querySelector('#btnDonate');
 const ibtndonate = document.querySelector('#ibtndonate');
 const donateDiv = document.querySelector('.Donate');
@@ -24,9 +28,7 @@ donateDiv.addEventListener('click', function (event) {
         ibtndonate.className = "fa-regular fa-star";
     }
 });
-const donateList = [
-    { name: "Mezzi", amount: "10.000", time: "20:40-14/05/2023" },
-  ];
+
   
   const ddDonate = document.querySelector(".DDonate");
   const listdonate = document.querySelector(".listdonate");
