@@ -24,13 +24,264 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 </head>
 
-<body>
-    <div class="hide" id="toggle-button">
-    </div>
-    <h1>Trang đang bảo trì.</h1>
-</body>
+<body class="OnTop">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="./Data/JS/File.js"></script>
+    <div class="BlockMenu">
+        <div class="Head" id="Head">
+            <div class="LogoHead" id="LogoHead">
+                <h1>HunqD</h1>
+            </div>
+
+            <div class="IconMenu" id="iDarkMode">
+                <i id="dark-mode-toggle" class="fas fa-sun"></i>
+            </div>
+
+            <div class="IconMenu" onclick="NavMenu()">
+                <i id="NavCheck" class="fa-solid fa-bars-staggered"></i>
+            </div>
+        </div>
+        <div class="progress-container" id="idProgress">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+        <div id="myNav" class="overlay">
+            <div class="overlay-content">
+                <a href="#">Trang Chủ</a>
+                <a href="#">Dịch Vụ</a>
+                <a href="#">Tải Ngay</a>
+                <a href="#">Liên Hệ</a>
+            </div>
+        </div>
+        <div id="SpaceMenu"></div>
+    </div>
+
+
+    <div class="Block">
+        <div class="BlockMusic">
+            <div id="music_list">
+                <audio id="musicBG" title="HunqD - Audio"></audio>
+            </div>
+
+            <div class="Music" id="aWrap">
+                <div class="MusicLocal">
+                    <div class="Control" id="Control">
+                        <div class="Btn" id="btnBack" onclick="PreFn()">
+                            <i class="fa-solid fa-backward"></i>
+                        </div>
+                        <div class="Btn">
+                            <i onclick="PlayMusicBG()" id="btnPlay" class="fa-solid fa-play"></i>
+                        </div>
+                        <div class="Btn" onclick="NextFn()">
+                            <i class="fa-solid fa-forward"></i>
+                        </div>
+                        <div class="Btn" onclick="MuteMusic()">
+                            <i id="Volume" class="fa-solid fa-volume-high"></i>
+                        </div>
+                        <div class="SongName" onclick="WhatNext()">
+                            <marquee id="NameSong" behavior=scroll direction="left" scrollamount="2">Tên Bài Hát
+                            </marquee>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Youtube">
+                    <div class="inLink">
+                        <input id="inYoutube" type="text" onfocus="this.value=''"
+                            placeholder="Dán URL Youtube vào đây">
+                        <button onclick="SetYoutube()">
+                            <i id="iSearch" class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+
+                    <div class="MusicForYou">
+                        <div class="tab">
+                            <button class="tablinks" onclick="openCategory(event, 'ForYou')">Dành cho bạn</button>
+                            <button class="tablinks" onclick="openCategory(event, 'LoFi')">Lo-fi</button>
+                            <button class="tablinks" onclick="openCategory(event, 'WhiteNoise')">White Noise</button>
+                            <button class="tablinks" onclick="openCategory(event, 'Delta')">Delta</button>
+                            <button class="tablinks" onclick="openCategory(event, 'Mashup')">Mashup</button>
+                            <button class="tablinks" onclick="openCategory(event, 'Instrumental')">Instrumental</button>
+                            <button class="tablinks" onclick="openCategory(event, 'Review')">Review Phim</button>
+                            <button class="tablinks btnHide" onclick="openCategory(event, 'Hide')">Ẩn</button>
+
+                        </div>
+                        <div id="Hide" class="tabcontent" style="border: none !important; margin: 0 !important;padding: 0 !important;"></div>
+                        <div id="ForYou" class="tabcontent">
+                            <h3>Nhạc dành cho bạn</h3>
+                            <p>Những bài hát có thể bạn sẽ thích</p>
+                            <button onclick="Lofi1()">
+                                Nhạc Lofi Nhẹ Nhàng 1
+                            </button>
+
+                            <button onclick="Lofi2()">
+                                Nhạc Lofi Nhẹ Nhàng 2
+                            </button>
+
+
+                            <button onclick="Lofi3()">
+                                Nhạc Lofi Nhẹ Nhàng 3
+                            </button>
+                        </div>
+                        <div id="LoFi" class="tabcontent">
+                            <h3>Lo-fi</h3>
+                            <p>Lo-fi là một thể loại nhạc trong đó có chứa các yếu tố không hoàn hảo trong quá trình ghi
+                                âm
+                                và trình diễn. Tiêu chuẩn chất lượng âm thanh sự sản xuất âm nhạc được cải thiện qua
+                                nhiều
+                                thập kỉ, trong khi nhiều nhạc lo-fi cũ đã không được công nhận.</p>
+                            <button onclick="Lofi1()">
+                                Nhạc Lofi Nhẹ Nhàng 1
+                            </button>
+
+                            <button onclick="Lofi2()">
+                                Nhạc Lofi Nhẹ Nhàng 2
+                            </button>
+
+
+                            <button onclick="Lofi3()">
+                                Nhạc Lofi Nhẹ Nhàng 3
+                            </button>
+                        </div>
+
+                        <div id="WhiteNoise" class="tabcontent">
+                            <h3>White Noise</h3>
+                            <p>Theo một nghiên cứu được đăng trên trang Archives of Disease in Childhood, tiếng ồn trắng
+                                được chứng minh là có thể giúp giải tỏa căng thẳng, giúp trẻ bình tĩnh và ngủ ngon hơn.
+                                Tuy
+                                nhiên, tiếng ồn trắng chắc chắn không phải là liều thuốc ngủ ngon có thể dùng được trong
+                                mọi
+                                trường hợp.</p>
+                            <button onclick="WNoise1()">
+                                Studying White Noise | Focus on Homework, Test Prep, School | 10 Hours Study Sound
+                            </button>
+                            <button onclick="WNoise2()">
+                                Rainstorm Sounds for Relaxing, Focus or Deep Sleep | Nature White Noise | 8 Hour Video
+                            </button>
+                        </div>
+
+                        <div id="Delta" class="tabcontent">
+                            <h3>Delta</h3>
+                            <p>Sóng nhạc Delta được biết đến là một dạng sóng não có biên độ cao với tần số dao động từ
+                                0.5
+                                tới 4 Hz. Sóng Delta được phát hiện lần đầu tiên vào năm 1930 bởi W. Gray Walter. Ông đã
+                                nâng
+                                cấp và cải tiến máy điện não đồ (EEG), giúp phát hiện ra sóng Alpha và Delta.</p>
+
+                            <button onclick="Delta1()">
+                                432 Hz Cleanse Negative Energy
+                            </button>
+
+                            <button onclick="Delta2()">
+                                Sleep Music Delta Waves: Relaxing Music to Help you Sleep, Deep Sleep, Inner Peace
+                            </button>
+
+                            <button onclick="Delta3()">
+                                8 Hour Deep Sleep Music: Delta Waves, Relaxing Music Sleep, Sleeping Music, Sleep
+                                Meditation, ☯159
+                            </button>
+
+                        </div>
+                        <div id="Mashup" class="tabcontent">
+                            <h3>Mashup</h3>
+                            <p>Một mashup là một tác phẩm sáng tạo, thường là một hình thức của một bài hát, được tạo ra
+                                bằng cách kết hợp hai hoặc nhiều bài hát được thu âm trước, thường bằng cách phủ lên bản
+                                nhạc của một bài hát liền mạch trên bản nhạc cụ của bài hát khác.</p>
+
+                            <button onclick="Mashup1()">
+                                Pop Songs World 2017 - Mashup (Dj Pyromania)
+                            </button>
+
+                            <button onclick="Mashup2()">
+                                SUMMER HITS 2017 | Mashup +60 Songs | T10MO
+
+                            </button>
+
+                            <button onclick="Mashup3()">
+                                Pop Songs World 2022 - Mashup of 30+ Pop Songs
+
+                            </button>
+                        </div>
+                        <div id="Instrumental" class="tabcontent">
+                            <h3>Instrumental - Nhạc Không Lời</h3>
+                            <p>Nhạc cụ là một bản ghi âm bình thường không có bất kỳ giọng hát nào, mặc dù nó có thể bao
+                                gồm
+                                một số giọng hát không chính xác, chẳng hạn như giọng hát dự phòng được hét lên trong
+                                cài
+                                đặt ban nhạc lớn. Thông qua việc mở rộng ngữ nghĩa, một nghĩa rộng hơn của từ bài hát có
+                                thể
+                                ám chỉ nhạc cụ.</p>
+                        </div>
+                        <div id="Review" class="tabcontent">
+                            <h3>Review Phim</h3>
+                            <p>Nhạc của Review Phim 😂.</p>
+                            <button onclick="Review1()">
+                                For Your Future
+                            </button>
+                            <button onclick="Review2()">
+                                Limitless (Despair)
+                            </button>
+                            <button onclick="Review3()">
+                                Mất Tích Xuyên Thời Gian
+                            </button>
+                            <button onclick="Review4()">
+                                Late Night
+                            </button>
+                            <button onclick="Review5()">
+                                Star Sky
+                            </button>
+                            <button onclick="Review6()">
+                                羽肿 - Windy Hill
+                            </button>
+                            <button onclick="Review7()">
+                                NỤ CƯỜI CỦA CÔ ẤY
+                            </button>
+                            <button onclick="Review8()">
+                                逆時針向 - Asphyxia
+                            </button>
+                            <button onclick="Review9()">
+                                Melody Of The Night
+                            </button>
+                            <button onclick="Review10()">
+                                Shirfine - Illusionary Daytime
+                            </button>
+                            <button onclick="Review11()">
+                                Nghe tất cả
+                            </button>
+                        </div>
+                    </div>
+                    <div class="OpenYoutube" id="OpenYoutube">
+                        <iframe id="Youtube" src="" title="HunqD - Nhạc Trên Youtube" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <div class="IDVideo">
+                            <p><span id="IDVideo"></span> </p>
+                            <i id="iCopyVideo" onclick="CopyIDVideo()" class="fa-solid fa-copy"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="Content">
+           
+            <div class="VhTest" style="height: 150vh;"></div>
+        </div>
+    </div>
+
+
+    <div class="Info">
+        <p>Bản Quyền © 2022 HunqD</p>
+    </div>
+
+
+
+
+</body>
+<!-- JS của web -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="./Data/JS/file.js"></script>
+<script src="./Data/JS/Player.js"></script>
+<script src="./Data/JS/MusicForYou.js"></script>
 
 </html>
