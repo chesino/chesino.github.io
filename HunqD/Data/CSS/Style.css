@@ -14,7 +14,7 @@ body {
     display: none;
     text-align: center;
     position: fixed;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     color: #eee;
     background-color: #111;
@@ -24,8 +24,7 @@ body {
     border-right: 2px solid white;
     border-left: 2px solid white;
     width: calc(100% - 4px);
-    height: 30px;
-    padding: 10px 0 0 0;
+    padding: 10px 0 10px 0;
     bottom: 0;
 }
 
