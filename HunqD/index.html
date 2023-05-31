@@ -11,6 +11,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/Data/logo.png">
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
+
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Data/CSS/Style.css" />
 
@@ -32,7 +38,7 @@
         <div class="Info">
             <div class="Social">
                 <div class="Name">
-                    Đinh Mạnh Hùng <span><i  onclick="alert('Trang đã xác minh')" class="fa-solid fa-circle-check"></i></span>
+                    Đinh Mạnh Hùng <span><i  onclick="alert('Trang này đã xác minh chính chủ')" class="fa-solid fa-circle-check"></i></span>
                 </div>
                 <div class="UserName">
                     @HunqD
@@ -64,7 +70,7 @@
                     Nhắn tin
                 </button>
             </a>
-            <button class="BTN AddFriend" onclick="alert('Hiện tại Đinh Mạnh Hùng không nhận lời mời kết bạn.')">
+            <button class="BTN AddFriend" onclick="alert('Hiện tại Đinh Mạnh Hùng không nhận lời mời kết bạn mới.')">
                 <i class="fa-solid fa-user-plus"></i>
             </button>
             <button class="BTN" id="btnDonate" >
@@ -85,7 +91,7 @@
 
     <div class="Tab">
         <button class="tablinks active" onclick="openTAB(event, 'Poster')">Bài viết</button>
-        <button class="tablinks " onclick="openTAB(event, 'RepNGL')">NGL</button>
+        <button class="tablinks hide" onclick="openTAB(event, 'RepNGL')">NGL</button>
         <button class="tablinks " onclick="openTAB(event, 'Photo')">Ảnh</button>
         <button class="tablinks" onclick="openTAB(event, 'Share')">Chia sẻ</button>
     </div>
