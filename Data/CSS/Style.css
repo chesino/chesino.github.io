@@ -3,7 +3,7 @@
   }
   
   :root {
-	--background: #eee;
+	--background: #c9c9c9;
 	--backgroundBody: #fff;
 	--backgroundMenu: #f8f8f8f5;
 	--backgroundMusic: #8b8b8b;
@@ -25,7 +25,7 @@
 	--backgroundMenu: #111111f1;
 	--backgroundMusic: #696969;
 	--color: #eee;
-	--colorSel: #000;
+	--colorSel: #111;
   }
   
   .Head {
@@ -65,7 +65,7 @@
 	display: none;
 	position: fixed;
 	z-index: 2;
-	top: 50px;
+	top: 60px;
 	width: 100%;
   }
   
@@ -393,7 +393,6 @@
 	.Block {
 	  color: var(--color);
 	  background-color: var(--background);
-	  border-radius: 30px;
 	  padding: 10px 15px;
 	  margin: 10px 0 0 0 ;
 	}
