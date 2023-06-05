@@ -165,7 +165,7 @@ var files = [
       RunYoutube();
       IDVideo.innerText = ToYoutube;
     } else {
-      inYoutube.value = 'Sai đường dẫn! Vui lòng thử lại';
+      inYoutube.value = 'Sai URL! Vui lòng thử lại';
       StopYoutube();
     }
   
