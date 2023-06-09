@@ -1,6 +1,6 @@
 const rssUrl1 = 'https://hunqd.wordpress.com/feed';
 const rssUrl2 = 'https://nglhunqd.wordpress.com/feed';
-const proxyUrl = 'https://api.allorigins.win/raw?url=';
+const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
 
 fetch(proxyUrl + encodeURIComponent(rssUrl1))
     .then(response => response.text())
