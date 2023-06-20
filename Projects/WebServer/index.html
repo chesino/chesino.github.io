@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <!-- Tiêu đề trang -->
+  <title>Đinh Mạnh Hùng</title>
+
+  <!-- Bộ giải mã và phân loại thiết bị -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Biểu tượng cho web -->
+  <link rel="icon" href="/Data/logo.png">
+
+  <!-- Biểu tượng iPhone -->
+  <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
+
+  <!-- CSS của web -->
+  <link rel="stylesheet" href="./Data/Style.css">
+  <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <p id="KichThuocManHinh"></p>
+    <header>
+        <div class="Logo" onclick="DarkMode()">
+            <img src="./Data/LOGO/Logo.png" alt="" srcset="">
+        </div>
+        <div class="Title">
+            <h1>Trường CĐCNQT LILAMA2</h1>
+        </div>
+    </header>
+    <div class="Tab">
+        <button class="tablinks " onclick="openMode(event, 'Automatic')"><i class="fa-solid fa-bolt"></i></button>
+        <button class="tablinks " onclick="openMode(event, 'Manual')"><i class="fa-solid fa-hand"></i></button>
+        <button class="tablinks " onclick="openMode(event, 'Status')"><i class="fa-solid fa-link"></i></button>
+        <button class="tablinks " onclick="openMode(event, 'Info')"><i class="fa-solid fa-circle-info"></i></button>
+    </div>
+
+    <div class="tabcontent" id="Automatic">
+        Chế độ tự động
+    </div>
+    <div class="tabcontent" id="Manual">
+        Chế độ tay
+    </div>
+    <div class="tabcontent" id="Status">
+        Trạng Thái
+    </div>
+    <div class="tabcontent" id="Info" >
+        Hướng dẫn
+    </div>
+  
+</body>
+<script src="./Data/JS/Script.js"></script>
+</html>
