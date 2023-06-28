@@ -74,6 +74,7 @@ fetch(proxyUrl + encodeURIComponent(rssUrl2))
             const hourDiff = Math.floor(timeDiff / (1000 * 60 * 60));
             const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
             let TimeDiff = '';
+            
             if (dayDiff > 0) {
                 TimeDiff = dayDiff + " ngày trước";
             } else if (hourDiff > 0) {

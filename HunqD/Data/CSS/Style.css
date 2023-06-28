@@ -303,6 +303,9 @@ body {
     width: 100%;
     border-radius: var(--border);
 }
+.wp-block-button {
+    background-color: #003366;
+}
 .hide {
     display: none;
 }
