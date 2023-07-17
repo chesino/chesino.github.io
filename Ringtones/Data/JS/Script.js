@@ -13,10 +13,10 @@ let analyser = audioCtx.createAnalyser();
 
 audioSource.connect(analyser);
 analyser.connect(audioCtx.destination);
-analyser.fftSize = 128 ;
+analyser.fftSize = 128 * 8;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
-const barWidth = canvas.width / bufferLength ;
+const barWidth = canvas.width / bufferLength * 2;
 let x = 0;
 
 function playAudio() {
