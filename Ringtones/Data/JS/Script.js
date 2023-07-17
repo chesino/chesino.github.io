@@ -7,16 +7,16 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext("2d");
-let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 let audioSource = audioCtx.createMediaElementSource(audio1);
 let analyser = audioCtx.createAnalyser();
 
 audioSource.connect(analyser);
 analyser.connect(audioCtx.destination);
-analyser.fftSize = 128 * 8;
+analyser.fftSize = 128 ;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
-const barWidth = canvas.width / bufferLength * 2;
+const barWidth = canvas.width / bufferLength ;
 let x = 0;
 
 function playAudio() {
