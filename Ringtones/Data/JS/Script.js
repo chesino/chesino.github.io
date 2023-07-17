@@ -7,13 +7,13 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext("2d");
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 let audioSource = audioCtx.createMediaElementSource(audio1);
 let analyser = audioCtx.createAnalyser();
 
 audioSource.connect(analyser);
 analyser.connect(audioCtx.destination);
-analyser.fftSize = 128 * 16;
+analyser.fftSize = 128 * 8;
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 const barWidth = canvas.width / bufferLength * 2;
@@ -34,19 +34,25 @@ function animate() {
     });
     requestAnimationFrame(animate);
 }
+let hue = 0;
+const hueIncrement = 0; // Giá trị tăng hue chậm hơn
 
 function drawVisualizer({ bufferLength, dataArray, barWidth }) {
     let barHeight;
     for (let i = 0; i < bufferLength; i++) {
         barHeight = dataArray[i];
-        const red = (i * barHeight);
-        const green = i;
-        const blue = barHeight;
-        ctx.fillStyle = `rgb(${green}, ${blue}, ${red})`;
+        
+        const color = `hsl(${hue}, 100%, 50%)`;
+        ctx.fillStyle = color;
+
         ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth;
+
+        hue += hueIncrement; // Tăng giá trị hue chậm hơn
     }
 }
+
+
 
 animate();
 
