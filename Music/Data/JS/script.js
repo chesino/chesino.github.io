@@ -48,7 +48,7 @@ const app = {
             <p class="author">${song.singer}</p>
           </div>
           <div class="option" >
-            <a href="${song.path}" download>
+            <a onclick="alert('Bạn không thể tải [${song.name}] vì đây là phiên bản trải nghiệm.')" >
             <i class="fa-regular fa-circle-down"></i>
             </a>
           </div>
@@ -269,7 +269,7 @@ const app = {
       }
     });
 
-    fetch(`https://hunqdxswbun.github.io/Music/${this.config.currentAlbum || "USUK"}.json`)
+    fetch(`https://hunqdxswbun.github.io/Music/${this.config.currentAlbum || "HOT"}.json`)
       .then((response) => response.json())
       .then((data) => {
         _this.loadSongs(data);
