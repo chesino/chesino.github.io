@@ -49,6 +49,7 @@ header .Title h1{
     border-radius: 20px;
 }
 .Tab button {
+    cursor: pointer;
     width: 100%;
     padding: 10px 0;
     margin: auto;

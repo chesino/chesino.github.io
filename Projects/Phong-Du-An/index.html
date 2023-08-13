@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
     <div class="loading" id="loading">
         <div class="loading_icon"></div>
         <div class="loading_logo">
@@ -39,18 +38,6 @@
                 </div>
                 <h1>Phòng dự án</h1>
                 <h2>Các dự án của chúng tôi.</h2>
-                <div class="TienDoDuAn">
-                    <div id="ValueProgress"></div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar"></div>
-                    </div>
-                    <div class="btnTienDoDuAn">
-                        <button onclick="updateProgress(20, 'blue')">Dự án 1</button>
-                        <button onclick="updateProgress(50, 'orange')">Dự án 2</button>
-                        <button onclick="updateProgress(80, 'red')">Dự án 3</button>
-                        <button onclick="updateProgress(100, 'green')">Dự án 3</button>
-                    </div>
-                </div>
             </div>
             <div class="DoiNgu">
                 <div class="ThanhVien">
@@ -72,7 +59,7 @@
                             <a href="mailto:manhhung.cvo@gmail.com">
                                 <i class="fa-solid fa-envelope"></i>
                             </a>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -121,7 +108,7 @@
                     </div>
                     <div class="ThongTin">
                         <div class="Ten">
-                            Trần Thị T.Nguyên
+                            Trần Thị Thảo Nguyên
                         </div>
                         <div class="ChucVu">
                             Thành viên
@@ -154,15 +141,17 @@
                 </div>
 
                 <div class="MoNoiDung" style="display: none;">
-                    <div class="NoiDungA" style="display: none;">Đây là nội dung A</div>
-                    <div class="NoiDungB" style="display: none;">Đây là nội dung B</div>
+                    <div class="NoiDung A" style="display: none;">
+                        <div id="rss-feed"></div>
+                    </div>
+                    <div class="NoiDung B" style="display: none;">Đây là nội dung B</div>
                 </div>
                 <div class="Form" id="Form">
                     <iframe
                         src="https://docs.google.com/forms/d/e/1FAIpQLSc5X06p2MuHeUXEv9rWWzNXsYS_qMECBkLqhrExA1im687tYQ/viewform?embedded=true"
                         width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
                     <button class="reload" onclick="location.reload();">Tải lại trang</button>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -174,6 +163,7 @@
 </body>
 <script src="/Data/JS/Darkmode.js"></script>
 <script src="./Data/JS/Script.js"></script>
+<script src="./Data/JS/Blog.js"></script>
 <script src="./Data/JS/MaGioiThieu.js"></script>
 
 </html>

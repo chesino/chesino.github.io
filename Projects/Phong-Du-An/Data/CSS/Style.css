@@ -83,7 +83,9 @@ body {
 		transform: rotate(360deg);
 	}
 }
-
+.BlockA {
+	height: 100vh;
+}
 .ChaoMung {
 	color: #fff;
 	/* background-color: #0ba6ff; */
@@ -126,91 +128,19 @@ body {
 .ChaoMung h2 {
 	font-size: 18px;
 	line-height: 24px;
-	margin-bottom: 30px;
 }
 
-.TienDoDuAn {
-	text-align: center;
+
+.DoiNgu {
+	opacity: 0;
+	transform: scale(0.9);
+	transition: all 0.3s ease-in-out;
 }
 
-.TienDoDuAn .progress {
-	width: calc(100% - 4px);
-	height: 15px;
-	background-color: #ddd;
-	border-radius: 10px;
-	padding: 2px;
+.DoiNgu.Loaded {
+	opacity: 1;
+	transform: scale(1);
 }
-
-body.dark-mode .TienDoDuAn .progress {
-	background-color: #eee;
-}
-
-.TienDoDuAn #ValueProgress {
-	text-align: right;
-	font-size: 18px;
-	font-weight: 700;
-}
-
-.TienDoDuAn .progress-bar {
-	height: 100%;
-	background-color: darkblue;
-	border-radius: 10px;
-	transition: width 0.5s ease-in-out;
-}
-
-.TienDoDuAn .progress-bar.blue {
-	background-color: blue;
-}
-
-.TienDoDuAn .progress-bar.orange {
-	background-color: orange;
-}
-
-.TienDoDuAn .progress-bar.red {
-	background-color: red;
-}
-
-.TienDoDuAn .progress-bar.green {
-	background-color: green;
-}
-
-.TienDoDuAn button {
-	font-size: 16px;
-	font-weight: bold;
-	height: 50px;
-	border-radius: 10px;
-	border: 2px solid #fff;
-	color: #fff;
-	margin: 10px auto;
-	padding: 5px 10px;
-	cursor: url('/Projects/Phong-Du-An/Data/Cursor/Cursor1.png'), auto;
-}
-
-body.dark-mode .TienDoDuAn button {
-	border: 2px solid #eee;
-	color: #eee;
-}
-
-.btnTienDoDuAn {
-	margin: 10px 0;
-}
-
-.btnTienDoDuAn button:nth-child(1) {
-	background-color: blue;
-}
-
-.btnTienDoDuAn button:nth-child(2) {
-	background-color: orange;
-}
-
-.btnTienDoDuAn button:nth-child(3) {
-	background-color: red;
-}
-
-.btnTienDoDuAn button:nth-child(4) {
-	background-color: green;
-}
-
 .DoiNgu {
 	color: #fff;
 	text-align: center;
@@ -221,26 +151,29 @@ body.dark-mode .TienDoDuAn button {
 .DoiNgu .ThanhVien {
 	background-color: #000;
 	margin: 20px;
-	padding: 20px 10px;
+	padding: 10px 10px;
 	border-radius: 20px;
 	display: grid;
-	grid-template-columns: 100px auto;
+	grid-template-columns: 80px auto;
+}
+.DoiNgu .ThanhVien:hover {
+	background-color: #202020;
 }
 
 .DoiNgu .ThanhVien .Anh {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 70px;
-	width: 70px;
+	height: 60px;
+	width: 60px;
 	border-radius: 50%;
 	border: 3px solid wheat;
 	margin: auto;
 }
 
 .DoiNgu .ThanhVien .Anh img {
-	height: 60px;
-	width: 60px;
+	height: 50px;
+	width: 50px;
 	border-radius: 50%;
 	border: 2px solid wheat;
 }
@@ -251,13 +184,12 @@ body.dark-mode .TienDoDuAn button {
 }
 
 .DoiNgu .ThanhVien .Ten {
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: bold;
-	margin: 5px 0 0 0;
 }
 
 .DoiNgu .ThanhVien .ChucVu {
-	font-size: 16px;
+	font-size: 14px;
 	color: #a3a3a3;
 }
 .DoiNgu .ThanhVien .XaHoi a {
@@ -281,6 +213,15 @@ body.dark-mode .TienDoDuAn button {
 .KhoaNoiDung {
 	text-align: center;
 }
+.NoiDung{
+ padding: 10px ;
+}
+
+.wp-block-image img{
+	max-width: 100%;
+	border-radius: 10px;
+}
+
 
 #result-message {
 	color: #000;
@@ -339,7 +280,7 @@ body.dark-mode .TienDoDuAn button {
 	margin: 20px 0 50px 0;
 }
 
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 1200px) {
 	.BlockA {
 		height: 100vh;
 	}

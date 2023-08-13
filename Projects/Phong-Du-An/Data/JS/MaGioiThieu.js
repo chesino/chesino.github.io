@@ -4,8 +4,8 @@ const matKhauB = "CDT999";
 const passwordInput = document.getElementById("password-input");
 const submitButton = document.getElementById("submit-button");
 const KhoaNoiDung = document.querySelector(".KhoaNoiDung");
-const noiDungA = document.querySelector(".NoiDungA");
-const noiDungB = document.querySelector(".NoiDungB");
+const noiDungA = document.querySelector(".NoiDung.A");
+const noiDungB = document.querySelector(".NoiDung.B");
 const moNoiDung = document.querySelector(".MoNoiDung");
 
 const submitform = document.getElementById("submit-form");
