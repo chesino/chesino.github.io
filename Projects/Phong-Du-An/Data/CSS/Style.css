@@ -1,5 +1,6 @@
 * {
 	margin: 0;
+	box-sizing: border-box;
 }
 
 body {
@@ -90,7 +91,7 @@ body {
 	color: #fff;
 	/* background-color: #0ba6ff; */
 	/* height: calc(100vh - 40px); */
-	padding: 30px 20px 10px 20px;
+	padding: 10px 20px 10px 20px;
 	opacity: 0;
 	transform: scale(0.9);
 	transition: all 0.5s ease-in-out;
@@ -104,7 +105,7 @@ body {
 .ChaoMung .IMG {
 	transform: scale(0.8);
 	margin: 20px auto;
-	width: 60%;
+	width: 180px;
 	opacity: 0;
 	transition: all 1.5s ease-in-out;
 }
@@ -156,7 +157,7 @@ body {
 	display: grid;
 	grid-template-columns: 80px auto;
 }
-.DoiNgu .ThanhVien:hover {
+.DoiNgu .ThanhVien:active {
 	background-color: #202020;
 }
 
@@ -238,27 +239,24 @@ body {
 }
 
 .KhoaNoiDung .Passwords {
-	width: 80%;
+	width: 100%;
 }
 
-.Passwords a {
-	color: #008cff;
-	font-weight: bold;
-}
 .Passwords #password-input {
 	color: #fff;
 	font-size: 20px;
 	height: 35px;
-	width: 100%;
 	background-color: #0000002d;
 	border: none;
+	height: 50px;
 	border-bottom: 2px solid #000;
-	margin: 10px 0;
-	padding: 5px 10px;
+	border-right: 2px solid #000;
+	padding: 5px 20px;
 }
 .Passwords #submit-button {
 	height: 50px;
 	width: 50px;
+	margin: auto;
 	border: 2px solid #000;
 	background-color: #0000002d;
 }
