@@ -35,7 +35,7 @@ function BlockForm() {
   KhoaNoiDung.style.display = "none";
   Form.style.display = "block"
 }
-submitform.addEventListener("click", BlockForm);
+
 
 submitButton.addEventListener("click", kiemTraMatKhau);
 

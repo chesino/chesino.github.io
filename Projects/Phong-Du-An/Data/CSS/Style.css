@@ -207,7 +207,6 @@ body {
 }
 
 .div100vh {
-	height: 100vh;
 	background-color: #008cff;
 }
 
@@ -342,5 +341,8 @@ body {
 		font-size: 25px;
 		margin: 15px 5px 5px 5px;
 	}
+	.NoiDung{
+		padding: 10px 50px;
+	   } 
 
 }
