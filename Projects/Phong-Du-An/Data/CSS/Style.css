@@ -8,26 +8,30 @@ body {
 	background-color: var(--BG);
 	--color: #000;
 	--BG: #0b89ff;
+	--BG2: #ffffff;
 	cursor: url('/Projects/Phong-Du-An/Data/Cursor/Cursor1.png'), auto;
 }
 
 .dark-mode {
 	--color: #ffffff;
 	--BG: #111;
+	--BG2: #000;
 }
 
 .Hide {
 	display: none;
 }
-
+button {
+	cursor:url('/Projects/Phong-Du-An/Data/Cursor/Cursor2.png'), auto;
+}
 #toggle-button {
-	cursor: url('/Projects/Phong-Du-An/Data/Cursor/Cursor1.png'), auto;
+	cursor: pointer;
 	text-align: center;
 	position: fixed;
 	height: 40px;
 	width: 40px;
 	bottom: 10px;
-	right: 10px;
+	right: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -207,7 +211,8 @@ body {
 }
 
 .div100vh {
-	background-color: #008cff;
+	color: var(--color);
+	background-color: var(--BG2);
 }
 
 .KhoaNoiDung {
