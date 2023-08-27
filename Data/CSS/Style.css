@@ -1,13 +1,12 @@
 * {
 	margin: 0;
+	box-sizing: border-box;
 }
 
 :root {
 	--color:#fff;
 	--background: #000;
-
 	--colorborder:pink;
-
 }
 
 body {
@@ -25,71 +24,10 @@ body {
 	background-color: #111111;
 	margin: 20px;
 	padding: 10px 20px;
-	border-radius: 20px;
-	box-sizing: border-box;
-}
-.HunqDDownloader {
-	background-color: var(--colorborder);
 	border-radius: 10px;
-	margin: 10px 0 ;
-	display: grid;
-	grid-template-columns: 45px auto 100px auto;
+	box-sizing: border-box;
 }
 
-.HunqDDownloader button, .HunqDDownloader select  {
-	cursor: pointer;
-}
-.HunqDDownloader button {
-	font-size: 20px;
-}
-.HunqDDownloader button:nth-child(1) {
-	background-color: #fff;
-	height: 45px;
-	width: 45px;
-	border: 4px solid var(--colorborder);
-	border-right: none;
-	border-bottom-left-radius: 10px;
-	border-top-left-radius: 10px;
-}
-.HunqDDownloader input{
-	background-color: #fff;
-	height: 45px;
-	width: 100%;
-	border: 4px solid  var(--colorborder);
-	border-right: none;
-	border-left: none;
-	border-bottom-right-radius: 10px;
-	border-top-right-radius: 10px;
-	box-sizing: border-box;
-}
-.HunqDDownloader select:nth-child(3) {
-	font-size: 18px;
-	height: 45px;
-	width: 100px;
-	border-radius: 10px;
-	border: 4px solid  var(--colorborder);
-}
-.HunqDDownloader select option {
-	font-size: 18px;
-}
-.HunqDDownloader button:nth-child(4) {
-	background-color: var(--colorborder);
-	height: 45px;
-	width: 100%;
-	border: 4px solid  var(--colorborder);
-	border-left: none;
-	border-bottom-right-radius: 10px;
-	border-top-right-radius: 10px;
-}
-#outLink {
-	padding: 10px;
-}
-#outLink iframe {
-	width: 100%;
-	height: 300px;
-	border-radius: 10px;
-	border: 4px solid var(--colorborder);
-}
 .Card a {
 	color: aqua;
 	text-decoration: none;
