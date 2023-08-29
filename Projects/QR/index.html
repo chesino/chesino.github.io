@@ -135,6 +135,7 @@
                 qrCodeContainer.innerHTML = '';
                 new QRCode(qrCodeContainer, text);
             }
+            downloadBtn.style.display = 'block';
         }
 
         function toggleWifiOptions() {
@@ -147,23 +148,8 @@
             }
         }
 
-        generateBtn.addEventListener('click', generateQRCode);
         qrType.addEventListener('change', toggleWifiOptions);
 
-        function generateQRCode() {
-            const type = qrType.value;
-
-            if (type === 'wifi') {
-                // ... (Code to generate WiFi QR)
-            } else {
-                const text = qrText.value;
-                qrCodeContainer.innerHTML = '';
-                new QRCode(qrCodeContainer, text);
-            }
-
-            // Hiển thị nút "Tải về mã QR"
-            downloadBtn.style.display = 'block';
-        }
         const downloadBtn = document.getElementById('downloadBtn');
         downloadBtn.addEventListener('click', downloadQRCode);
 
