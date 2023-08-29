@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .container {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .optionGroup {
+        display: none;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin: 10px 0;
+    }
+
+    #qrCode img {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        border: 5px solid black;
+        padding: 10px;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Tạo Mã QR</h1>
+        <br>
+        <label for="qrType">Loại QR:</label>
+        <select id="qrType">
+            <option value="text">Văn bản, URL, Số điện thoại,...</option>
+            <option value="wifi">WiFi</option>
+        </select>
+
+        <div id="textOptions">
+            <label for="qrText">Văn bản hoặc URL:</label>
+            <input type="text" id="qrText">
+        </div>
+
+        <!-- WiFi options -->
+        <div id="wifiOptions" class="optionGroup">
+            <label for="wifiSecurity">Mã hoá:</label>
+            <select id="wifiSecurity">
+                <option value="nopass">Không có</option>
+                <option value="WPA">WPA/WPA2</option>
+                <option value="WEP">WEP</option>
+            </select>
+
+            <label for="ssid">Tên WiFi:</label>
+            <input type="text" id="ssid">
+
+            <label for="password">Mật Khẩu:</label>
+            <input type="text" id="password">
+        </div>
+
+        <button id="generateBtn">Tạo mã QR</button>
+        <div id="qrCode"></div>
+        <button id="downloadBtn" style="display: none;">Tải về mã QR</button>
+
+    </div>
+
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script>
+        const generateBtn = document.getElementById('generateBtn');
+        const qrText = document.getElementById('qrText');
+        const qrType = document.getElementById('qrType');
+        const textOptions = document.getElementById('textOptions');
+        const wifiOptions = document.getElementById('wifiOptions');
+        const wifiSecurity = document.getElementById('wifiSecurity');
+        const ssidInput = document.getElementById('ssid');
+        const passwordInput = document.getElementById('password');
+        const qrCodeContainer = document.getElementById('qrCode');
+
+        generateBtn.addEventListener('click', generateQRCode);
+        qrType.addEventListener('change', toggleWifiOptions);
+
+        function generateQRCode() {
+            const type = qrType.value;
+
+            if (type === 'wifi') {
+                const securityType = wifiSecurity.value;
+                const ssid = ssidInput.value;
+                const password = passwordInput.value;
+
+                let qrData = `WIFI:T:${securityType};S:${ssid};`;
+
+                if (securityType !== 'none') {
+                    qrData += `P:${password};`;
+                }
+
+                qrCodeContainer.innerHTML = '';
+                new QRCode(qrCodeContainer, qrData);
+            } else {
+                const text = qrText.value;
+                qrCodeContainer.innerHTML = '';
+                new QRCode(qrCodeContainer, text);
+            }
+        }
+
+        function toggleWifiOptions() {
+            if (qrType.value === 'wifi') {
+                wifiOptions.style.display = 'block';
+                textOptions.style.display = 'none';
+            } else {
+                wifiOptions.style.display = 'none';
+                textOptions.style.display = 'block';
+            }
+        }
+
+        generateBtn.addEventListener('click', generateQRCode);
+        qrType.addEventListener('change', toggleWifiOptions);
+
+        function generateQRCode() {
+            const type = qrType.value;
+
+            if (type === 'wifi') {
+                // ... (Code to generate WiFi QR)
+            } else {
+                const text = qrText.value;
+                qrCodeContainer.innerHTML = '';
+                new QRCode(qrCodeContainer, text);
+            }
+
+            // Hiển thị nút "Tải về mã QR"
+            downloadBtn.style.display = 'block';
+        }
+        const downloadBtn = document.getElementById('downloadBtn');
+        downloadBtn.addEventListener('click', downloadQRCode);
+
+        function downloadQRCode() {
+            const qrCodeImage = qrCodeContainer.querySelector('img');
+            const qrDataURL = qrCodeImage.src;
+
+            const link = document.createElement('a');
+            link.href = qrDataURL;
+            link.download = 'qr_code.png';
+            link.click();
+        }
+
+
+
+    </script>
+</body>
+
+</html>
