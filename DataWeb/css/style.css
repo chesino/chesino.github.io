@@ -1,0 +1,491 @@
+:root {
+  --background: #fff;
+  --color: black;
+  --color2: #818181;
+  --border: rgba(0, 0, 0, 0.418);
+  --card: #e9e9e9;
+  --Link: #007bff;
+  --backgroundPB:#000;
+  --ProgressBar: #a5a5a5;
+  --Menu: #fff;
+  --colorCard:var(--color);
+  
+  --Fsmenu: 25px;
+  --Hmenu: 80px;
+  --hApp: 80px;
+  --FsApp: 22px;
+}
+
+.darkmode {
+  --background: #111;
+  --color: #eee;
+  --color2: #818181;
+  --border: #000;
+  --card: #111;
+  --backgroundPB:rgb(255, 255, 255);
+  --ProgressBar: #a5a5a5 ;
+  --Menu: #000;
+  --colorCard:white;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--color);
+  font-family: hco gotham, -apple-system, BlinkMacSystemFont, Segoe UI,
+    helvetica neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+}
+
+code {
+  font-family: monospace;
+  background-color: #111;
+  color: greenyellow;
+  border-radius: 2px;
+  padding: 4px 6px;
+}
+.note {
+  font-size: 14px !important;
+  color: var(--color2);
+}
+.Blog a {
+  font-family: monospace;
+  background-color: #111;
+  color: greenyellow;
+  border-radius: 2px;
+  padding: 4px 6px;
+  font-weight: 600;
+  color: var(--Link);
+  text-decoration: none;
+}
+
+.Blog 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.50rem 0 1.05rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+.Blog h1 {
+  font-weight: 500;
+}
+.Blog h2 {
+  font-weight: bold;
+  background-color: var(--color);
+  color: var(--background);
+  padding: 5px ;
+  border-radius: 2px;
+}
+.Blog h3 {
+  font-weight: 500;
+  text-decoration:underline ;
+}
+.Blog p {
+  margin-bottom: 1.15rem;
+  font-size: 1.2em;
+}
+.Blog .red{
+  font-size: 1em;
+  color: red;
+}
+.Blog .green{
+  font-size: 1em;
+  color: greenyellow;
+}
+
+
+.Blog img{
+  max-width: 100%;
+  margin: 10px auto;
+}
+.Blog hr {
+  margin: 10px 0;
+}
+.About 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.50rem 0 1.05rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+.About 
+h1 {
+  font-weight: 500;
+}
+.About p {
+  margin-bottom: 1.15rem;
+  font-size: 1em;
+}
+
+.BTNfull {
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  border: 2px solid var(--colorCard);
+}
+
+.CardTeam {
+  color: var(--colorCard);
+ 
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	-webkit-animation: gradient 15s ease infinite;
+	        animation: gradient 15s ease infinite;
+  padding: 10px 0;
+  margin: 10px auto;
+  text-align: center;
+  border-radius: 12px;
+  border: 2px solid var(--colorCard);
+  background-color: var(--card);
+  box-shadow: var(--border) 0px 6px 12px -2px,
+    var(--border) 0px 3px 7px -3px;
+}
+
+@-webkit-keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+.CardTeam h1 {
+  font-size: 20px;
+  margin: 5px 0 20px 0 ;
+}
+
+
+.Team {
+  display: grid;
+  grid-template-columns: 50% 50%;
+ 
+}
+.Team .Avatar img {
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--Link);
+}
+
+.Team .Name h1{
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px auto;
+  text-align: center;
+}
+.Team .Name p{
+  font-size: 14px;
+  text-transform: uppercase;
+  margin: 0px;
+}
+.About hr {
+  margin: 20px   ;
+  background-color: var(--color);
+  height: 2px;
+  border: none;
+}
+a {
+  font-weight: 600;
+  color: var(--Link);
+  text-decoration: none;
+}
+
+
+hr {
+  background-color: var(--color);
+  height: 2px;
+  border: none;
+  margin: 10px 0;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+::selection {
+  color: var(--background);
+  background: var(--color);
+}
+
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+
+::-webkit-scrollbar-track {
+  background-color: var(--background);
+  border-left: 3px solid var(--color);
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: var(--color);
+}
+
+/* Google Dịch */
+#idGoogle {
+  display: none;
+}
+.Google_Translate {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+.goog-te-combo {
+  width: 150px;
+  color: var(--color) !important;
+  background-color: var(--background) !important;
+  border: 2px solid var(--color) !important;
+}
+#google_translate_element {
+  margin: 5px auto;
+}
+.goog-te-gadget,.goog-logo-link {
+  color: var(--color) !important;
+}
+
+
+
+
+.OnTop {
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  height: 35px;
+  width: 35px;
+  border-radius: 10px;
+  background-color: var(--card);
+  border: 2px solid var(--colorCard);
+}
+.OnTop i {
+  color: var(--colorCard);
+  font-size: 21px;
+  margin:  7px auto;
+}
+
+
+/* Thanh Menu  */
+.Menu {
+  margin: 0;
+  width: 100%;
+  height: var(--Hmenu);
+  display: grid;
+  grid-template-columns: var(--Hmenu) auto var(--Hmenu) var(--Hmenu);
+  background-color: var(--background);
+}
+
+.Menu div {
+  height: var(--Hmenu);
+  text-align: center;
+}
+
+.IconMenu {
+  height: var(--Hmenu);
+  width: var(--Hmenu);
+}
+
+.IconMenu i {
+  cursor: pointer;
+  font-size: var(--Fsmenu);
+  margin: calc( ( var(--Hmenu) - var(--Fsmenu)) / 2 );
+}
+
+.IconMenu i:hover {
+  color: var(--color2);
+}
+
+.IconMenu img {
+  height: 30px;
+  border: 2px solid var(--color);
+  margin: 13px auto;
+  border-radius: 50%;
+}
+
+.IconMenu img:hover {
+  border: 2px solid blue;
+}
+
+.IconMenu img.active {
+  border: 2px solid var(--color2);
+}
+
+.MenuLogo img {
+  height: 60px;
+  margin-top: 3px;
+}
+
+#imgLogo {
+  margin: 0 auto;
+  height: var(--Hmenu);
+  width: calc(var(--Hmenu) * 2 );
+  background-image: url(/DataWeb/img/LogoBanner2.png);
+  background-size: cover;
+}
+
+
+
+
+
+#Language {
+  display: none;
+}
+
+.Languages {
+  text-align: center;
+  display: grid;
+  grid-template-columns: var(--Hmenu) auto var(--Hmenu);
+  position: fixed;
+  top: 0;
+  background-color: var(--background);
+  height: var(--Hmenu);
+  width: 100%;
+}
+
+.LangSelect {
+  height: var(--Hmenu);
+  display: grid;
+  grid-template-columns: var(--Hmenu) var(--Hmenu) var(--Hmenu) var(--Hmenu) auto;
+}
+
+
+.ShowLanguage {
+  margin: 12px auto;
+  color: var(--color);
+}
+
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--Menu);
+  overflow-x: hidden;
+  transition: 0.3s;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.NavCenter {
+  margin: auto 0;
+  width: 100%;
+}
+.sidenav a {
+  padding: 8px 0px;
+  text-decoration: none;
+  font-size: 25px;
+  color: var(--color);
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  background-color: var(--color);
+  color: var(--background);
+}
+
+.sidenav .closebtn {
+  width: 60px;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px 100px 100px 100px;
+}
+
+
+.Social {
+  display: grid;
+  grid-template-columns: auto 60px  60px 60px auto;
+  text-align: center;
+}
+.Social a {
+  padding: 8px 0px;
+  text-decoration: none;
+  font-size: 25px;
+  color: var(--color);
+  display: block;
+  transition: 0.3s;
+}
+.Social img {
+  height: 30px;
+  margin: auto;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+
+
+@media only screen and (max-width: 800px) {
+  :root { 
+    --Fsmenu: 18px;
+    --Hmenu: 50px;
+    --hApp: 50px;
+    --FsApp: 18px;
+  }
+  #main {
+    transition: margin-left 0.5s;
+    padding: 20px 20px 60px 20px;
+  }
+  .Blog p {
+    margin-bottom: 1.15rem;
+    font-size: 1.1em;
+  }
+  .Blog .red{
+    font-size: 13px;
+    color: red;
+  }
+}

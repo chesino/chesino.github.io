@@ -4,8 +4,8 @@
 }
 
 :root {
-	--color:#fff;
-	--background: #000;
+	--color:#000;
+	--background: #fff;
 	--colorborder:pink;
 }
 
@@ -18,18 +18,4 @@ body {
 .darkmode {
 	--background: #111;
 	--backgroundBody: #000;
-}
-
-.Card {
-	background-color: #111111;
-	margin: 20px;
-	padding: 10px 20px;
-	border-radius: 10px;
-	box-sizing: border-box;
-}
-
-.Card a {
-	color: aqua;
-	text-decoration: none;
-	font-weight: bold;
 }
