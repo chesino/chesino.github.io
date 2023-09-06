@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thử Bàn Phím</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #key-info {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thử Bàn Phím trên Windows</h1>
+    <div id="key-info">Nhấn một phím để xem thông tin về phím đó.</div>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            const keyInfo = document.getElementById('key-info');
+            keyInfo.innerText = `Phím: ${event.key} (Mã phím: ${event.keyCode})`;
+        });
+    </script>
+</body>
+</html>
