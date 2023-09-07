@@ -85,13 +85,19 @@ h1 {
     color: #555;
     line-height: 1.5;
 }
+.tabcontent {
+    display: none;
+}
+.tabcontent.show {
+    display: block;
+}
 
 #Home iframe{
     width: 100%;
-    min-height: 110vh;
+    height: 120vh;
     border: none;
-    margin-bottom: -10px;
 }
+
 
 #Member .container {
     display: flex;
