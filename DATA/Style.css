@@ -2,7 +2,9 @@
     margin: 0;
     box-sizing: border-box;
 }
-
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 .header {
     background-color: #f1f1f1;
     padding: 30px;
@@ -30,7 +32,7 @@
 }
 
 #navbar a.active {
-    background-color: #04AA6D;
+    background-color: #ff2655;
     color: white;
 }
 
@@ -46,4 +48,99 @@
 
 .sticky+.content {
     padding-top: 60px;
+}
+
+header {
+    background-color: #ff2655 ;
+    color: #fff;
+    text-align: center;
+    padding: 10px 5px;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.terms {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.terms h2 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.terms p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+#Home iframe{
+    width: 100%;
+    min-height: 110vh;
+    border: none;
+    margin-bottom: -10px;
+}
+
+#Member .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+.package {
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    padding:  20px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+.package:hover {
+    transform: scale(1.05);
+}
+.package h2 {
+    font-size: 24px;
+    color: #333;
+}
+.package p {
+    font-size: 14px;
+    color: #777;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff2655;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    margin: 10px 0;
+}
+.button:hover {
+    background-color: red;
+}
+@media (max-width: 768px) {
+    #Member .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .package {
+        width: 80%;
+        margin: 10px 0;
+        padding: 30px 10px;
+    }
 }
