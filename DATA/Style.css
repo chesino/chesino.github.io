@@ -23,8 +23,7 @@ button,
     overflow: auto;
     background-color: #333;
     width: 100%;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25% 25% 25% 25% 25%;
+
 }
 
 #navbar a {
@@ -57,9 +56,10 @@ button,
     width: 100%;
 }
 
-.sticky+.tabcontent {
-    padding-top: 60px;
+body.padding .tabcontent {
+    padding-top: 50px;
 }
+
 
 
 header {
@@ -76,7 +76,7 @@ h1 {
 .container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 20px ;
+    padding: 20px;
 }
 
 .terms {
@@ -163,19 +163,7 @@ h1 {
     background-color: red;
 }
 
-@media (max-width: 768px) {
-    #Member .pack {
-        flex-direction: column;
-        align-items: center;
-        padding: 0 20px;
-    }
 
-    .package {
-        width: 100%;
-        margin: 10px 0;
-        padding: 30px 10px;
-    }
-}
 
 
 #Media.Dark {
@@ -315,4 +303,26 @@ h1 {
 
 .container.ListMovie p {
     font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    #Member .pack {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .package {
+        width: 100%;
+        margin: 10px 0;
+        padding: 30px 10px;
+    }
+
+    #navbar {
+        overflow: auto;
+        background-color: #333;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25% 25% 25% 25% 25%;
+    }
 }
