@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #000;
+    color: aliceblue;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+.Profile {
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+}
+.Profile .Avatar {
+    position: relative;
+    height: 150px;
+}
+.Profile .Frame {
+    position: relative;
+    z-index: 2;
+    margin: auto;
+    top: 25px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.Profile .Frame img {
+    width: 100%;
+}
+.Profile .Icon {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.Profile .Icon img {
+    width: 100px;
+    border-radius: 50%;
+}
+.search {
+    margin-top: 10px;
+    padding: 0 50px;
+}
+.search input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+}
+.search button {
+    color: #fff;
+    background-color: black;
+    font-size: 18px;
+    width: 100%;
+    border: none;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 10px;
+}
