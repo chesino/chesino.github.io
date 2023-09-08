@@ -30,19 +30,26 @@
 <body>
 
     <div class="header">
-        <h2>Chesino Upload</h2>
-        <p>Chia sẻ, lưu trữ không giới hạn.</p>
+        <h2>Chesino ToolBox</h2>
+        <p>Tiện ích, Chia sẻ và Lưu trữ không giới hạn.</p>
     </div>
 
     <div class="tab" id="navbar">
-        <a class="tablinks active" onclick="openCity(event, 'Home')"><i class="fa-solid fa-cloud-arrow-up"></i></a>
-        <a class="tablinks" onclick="openCity(event, 'Info')"><i class="fa-solid fa-circle-info"></i></a>
-        <a class="tablinks" onclick="openCity(event, 'Terms')"><i class="fa-solid fa-scale-balanced"></i></a>
-        <a class="tablinks" onclick="openCity(event, 'Member')"><i class="fa-solid fa-star"></i></a>
+        <a class="tablinks active" onclick="openTab(event, 'Home')"><i class="fa-solid fa-cloud-arrow-up"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Info')"><i class="fa-solid fa-circle-info"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Terms')"><i class="fa-solid fa-scale-balanced"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Member')"><i class="fa-solid fa-star"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Media')"><i class="fa-solid fa-circle-play"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Youtube')"><i class="fa-brands fa-youtube"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Note')"><i class="fa-solid fa-notes-medical"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Movie')"><i class="fa-solid fa-film"></i></a>
 
     </div>
 
     <div id="Home" class="tabcontent show">
+        <header>
+            <h1>Chesino Upload</h1>
+        </header>
         <iframe
             src='https://script.google.com/macros/s/AKfycbzdrKSm1nRFBL-3J_mYxtljJJc0SdPF4dwjGUHhh09qXw--E-wsVa8ETHsmE748282y/exec'></iframe>
     </div>
@@ -130,7 +137,16 @@
         </div>
     </div>
     <div id="Member" class="tabcontent">
+        <header>
+            <h1>Các gói lưu trữ</h1>
+        </header>
         <div class="container">
+            <div class="terms">
+                <h2>Gói lưu trữ</h2>
+                <p>Giúp bạn lưu trữ dữ liệu của bạn lâu hơn và có thể tiết kiệm hơn.</p>
+            </div>
+        </div>
+        <div class="pack">
             <div class="package">
                 <h2>Gói 5GB</h2>
                 <p>Thời hạn lưu trữ: 15 Ngày</p>
@@ -154,7 +170,91 @@
         </div>
     </div>
 
-   
+    <div id="Media" class="tabcontent">
+        <header>
+            <h1>Trình phát đa phương tiện</h1>
+        </header>
+        <div class="container">
+            <div class="terms">
+                <h2>Giới thiệu</h2>
+                <p>Hỗ trợ bạn xem các tệp đa phương tiện (mp3, mp4, ogg, vv.) bằng cách sử dụng ID hoặc Link.</p>
+                <h2>Tính năng</h2>
+                <p>Hỗ trợ chỉ phát âm thanh cho nhiều định dạng video.</p>
+                <h2>Sắp tới</h2>
+                <p>Hỗ trợ chuyển đổi Video sang Audio.</p>
+                <p>Xem chung bằng ID Phòng.</p>
+            </div>
+        </div>
+
+        <div class="MediaPlayer">
+            <div class="SearchBox">
+                <select id="mediaType">
+                    <option value="video">Video</option>
+                    <option value="audio">Audio</option>
+                </select>
+                <input type="text" id="IDMedia" placeholder="Vui lòng nhập ID">
+                <input type="text" maxlength="3" placeholder="ID Phòng" disabled>
+                <button class="Search" onclick="playMedia()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <div class="MediaBox" id="Player"></div>
+        </div>
+    </div>
+
+    <div id="Youtube" class="tabcontent">
+        <header>
+            <h1>Youtube Downloader</h1>
+        </header>
+        <div class="container">
+            <div class="terms">
+                <h2>Sắp phát hành</h2>
+                <p>Hỗ trợ tải nhạc, video từ Youtube hoàn toàn miễn phí.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="Note" class="tabcontent">
+        <header>
+            <h1>Ghi chú</h1>
+        </header>
+        <div class="container">
+            <div class="terms">
+                <h2>Sắp phát hành</h2>
+                <p>Hỗ trợ ghi chú nhanh.</p>
+                <h2>Sắp tới</h2>
+                <p>Chia sẻ ghi chú bằng link.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="Movie" class="tabcontent ">
+        <header>
+            <h1>Chesino Movie</h1>
+        </header>
+        <div class="container">
+            <div class="terms">
+                <h2>Doraemon Movie 12 Nobita Ở Xứ Sở Nghìn Lẻ Một Đêm Lồng Tiếng Việt</h2>
+                <p>Thời gian: 1h40m</p>
+                <p>Nguồn: Dailymotion</p>
+                <div class="dailymotion"> 
+                    <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x8l7d7b" width="100%" height="100%" allowfullscreen title="Dailymotion Video Player" > </iframe>
+                </div>
+            </div>
+            <div class="terms">
+                <h2>Doraemon Tập Dài - Nobita Và Vùng Đất Lý Tưởng Trên Bầu Trời (Doraemon Movie 42 - Nobita to Sora no Utopia)</h2>
+                <p>Thời gian: 1h43m</p>
+                <p>Nguồn: Dailymotion</p>
+                <div class="dailymotion"> 
+                    <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x8n1kci" width="100%" height="100%" allowfullscreen title="Dailymotion Video Player" > </iframe>
+                </div>
+            </div>
+          
+        </div>
+
+    </div>
+
 </body>
 <script src="./DATA/Script.js"></script>
 
