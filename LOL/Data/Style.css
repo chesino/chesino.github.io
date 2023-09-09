@@ -150,8 +150,8 @@ hr {
 
 .Rank {
     margin: auto;
-    height: 120px;
-    width: 120px;
+    height: 150px;
+    width: 150px;
     overflow: hidden;
 }
 
@@ -307,8 +307,11 @@ hr {
         0px 0px 0px 4px #937341;
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 700px) {
     .Profile {
       padding: 0 300px;
+    }
+    .Rank {
+        height: 150px;
     }
   }
