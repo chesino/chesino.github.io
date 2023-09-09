@@ -31,7 +31,7 @@ async function fetchSummonerInfo() {
         const apiUrl = `https://vn2.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
         const data = await fetchJson(apiUrl);
 
-        document.getElementById('profileIconId').src = `http://ddragon.leagueoflegends.com/cdn/13.17.1/img/profileicon/${data.profileIconId}.png`;
+        document.getElementById('profileIconId').src = `https://ddragon.leagueoflegends.com/cdn/13.17.1/img/profileicon/${data.profileIconId}.png`;
         document.getElementById('summonerName').innerText = data.name;
         document.getElementById('summonerLevel').innerText = data.summonerLevel;
         document.getElementById('summonerID').innerText = data.id;
