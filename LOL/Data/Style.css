@@ -249,6 +249,13 @@ hr {
     display: grid;
     grid-template-rows: auto auto;
 }
+.Match .Win .Head {
+    background-color: #da9b37;
+}
+.Match .Lose .Head {
+    background-color: #da3737;
+}
+
 .Match .Head{
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -258,7 +265,7 @@ hr {
     border-top-left-radius: 10px;
 }
 .Match .Head p {
-    font-size: 16px;
+    font-size: 12px;
 }
 .Match .Body {
     display: grid;
