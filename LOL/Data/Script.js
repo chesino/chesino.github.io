@@ -140,35 +140,74 @@ async function fetchMasteryInfo(summonerId) {
         document.getElementById('champion-mastery-info').innerHTML = '<p>Có lỗi xảy ra khi tìm kiếm thông thạo tướng.</p>';
     }
 }
-// Hàm lấy lịch sử thi đấu và hiển thị 10 trận gần nhất
+// Hàm lấy lịch sử thi đấu và hiển thị 10 trận gần nhất 
+
+// Tạo bảng ánh xạ từ queueId sang tên tiếng Việt
+const queueMapping = {
+    420: 'Rank Đơn / Đôi',
+    430: 'Đấu Thường',
+    440: 'Rank Linh Hoạt',
+    // Thêm các loại trận đấu khác tại đây
+    // Ví dụ:
+    // 450: 'ARAM',
+};
+
 async function fetchMatchHistory(puuid) {
     try {
         const matchHistoryApiUrl = `https://sea.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${API_KEY}`;
         const matchHistoryData = await fetchJson(matchHistoryApiUrl);
         const matchHistoryInfo = document.getElementById('match-history-info');
         matchHistoryInfo.innerHTML = '';
-        console.log(matchHistoryApiUrl);
+
         if (matchHistoryData.length > 0) {
             for (const gameId of matchHistoryData) {
                 const matchInfoApiUrl = `https://sea.api.riotgames.com/lol/match/v5/matches/${gameId}?api_key=${API_KEY}`;
                 const matchInfo = await fetchJson(matchInfoApiUrl);
-                console.log(matchInfoApiUrl);
 
-                const matchDateString = new Date(matchInfo.info.gameCreation).toLocaleDateString();
+                // Lọc ra thông tin của puuid đã nhập vào
+                const participant = matchInfo.info.participants.find(participant => participant.puuid === puuid);
 
-                const matchInfoElem = document.createElement('div');
-                matchInfoElem.classList.add('Match');
-                
+                if (participant) {
+                    const matchDate = new Date(matchInfo.info.gameCreation);
 
-                matchInfoElem.innerHTML = `
-                    <p>Trận ngày ${matchDateString}</p>
-                    <p>Champion ID: ${matchInfo.info.participants[1].championName}</p>
-                    <p>Trận đấu ID: ${matchInfo.metadata.matchId}</p>
-                    <p>Queue Type: ${matchInfo.info.queueId}</p>
-                    <br>
-                    <br>
-                `;
-                matchHistoryInfo.appendChild(matchInfoElem);
+                    // Định dạng ngày giờ
+                    const matchDateTimeString = matchDate.toLocaleTimeString() + ' ' + matchDate.toLocaleDateString();
+                    const win = participant.win ? 'Thắng' : 'Thất bại';
+                    if (participant.win === true) {
+                        classWin = 'Win';
+                    } else {
+                        classWin = 'Lose';
+                    }
+                    const queueType = queueMapping[matchInfo.info.queueId] || 'Không xác định';
+
+                    const matchInfoElem = document.createElement('div');
+                    matchInfoElem.classList.add('Match');
+
+                    matchInfoElem.innerHTML = `
+                        <div class="Match ${classWin}">
+                        <div class="Head">
+                            <p>${win}</p>
+                            <p>${queueType}</p>
+                            <p>${matchDateTimeString}</p>
+                            <p>${matchInfo.metadata.matchId}</p>
+                        </div>
+                        <div class="Body">
+                            <div class="Champion">
+                                <img src="/DATA/logo.png" alt="" srcset="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${participant.championName}.png">
+                            </div>
+                            <div class="Info">
+                                <p>${participant.championName}</p>
+                                <p>${participant.kills}/${participant.deaths}/${participant.assists}</p>
+                            </div>
+                        </div>
+                        </div>
+
+
+
+
+                    `;
+                    matchHistoryInfo.appendChild(matchInfoElem);
+                }
             }
         } else {
             matchHistoryInfo.innerHTML = '<p>Không có trận đấu gần đây.</p>';
@@ -178,6 +217,8 @@ async function fetchMatchHistory(puuid) {
         document.getElementById('match-history-info').innerHTML = '<p>Có lỗi xảy ra khi tìm kiếm lịch sử thi đấu.</p>';
     }
 }
+
+
 
 
 
