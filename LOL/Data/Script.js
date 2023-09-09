@@ -1,11 +1,13 @@
-const API_KEY = 'RGAPI-96388fae-c753-4eff-842c-2b056813ad87';
+const API_KEY = 'RGAPI-139c43b3-ab0b-413d-ac60-2dea5c068ec0';
 const championCosts = {
     'Yasuo': '9',
     'Leesin': '7',
     'Riven': '16',
     'Lucian': '19',
     "Vel'Koz": '2',
-    "Kha'Zix": '4'
+    "Kha'Zix": '4',
+    "Teemo": '27',
+    "Master Yi": '89'
     // Thêm các tướng khác và cost tương ứng ở đây
 };
 
@@ -57,7 +59,7 @@ async function fetchRankInfo(summonerId) {
                 'BRONZE': 'Đồng',
                 'SILVER': 'Bạc',
                 'GOLD': 'Vàng',
-                'PLATINUM': 'Bạch kim',
+                'EMERALD': 'Lục bảo',
                 'DIAMOND': 'Kim cương',
                 'MASTER': 'Cao thủ',
                 'GRANDMASTER': 'Đại cao thủ',
@@ -96,21 +98,49 @@ async function fetchMasteryInfo(summonerId) {
                 const championData = await fetchJson(championJsonUrl);
                 const championList = championData.data;
                 const champion = championList[Object.keys(championList).find(key => championList[key].key === championId.toString())];
-                
-                
+
+
                 if (champion) {
                     const championName = champion.name;
                     const championCost = championCosts[championName] || '0';
                     const normalizedChampionName = championName.replace(/[^a-zA-Z0-9]/g, '');
                     const capitalizedChampionName = normalizedChampionName.charAt(0).toUpperCase() + normalizedChampionName.slice(1).toLowerCase();
 
+
+                    const championNameCosts = {
+                        'Leesin': 'LeeSin',
+                        'Masteryi': 'MasterYi',
+                        "Kha'Zix": 'Khazix',
+                        "Vel'Koz": 'Velkoz',
+                        // Thêm các tướng khác và cost tương ứng ở đây
+                    };
+
+                    function fixChampionName(capitalizedChampionName) {
+                        const fixedName = championNameCosts[capitalizedChampionName];
+                        return fixedName ? fixedName.replace(/\s/g, '') : capitalizedChampionName.replace(/\s/g, '');
+                    }
+
+                    // Sử dụng hàm fixChampionName để kiểm tra và chuyển đổi tên tướng
+                    const correctedChampionName = fixChampionName(championName);
+
+
                     if (!firstChampionLogged) {
-                        const championImageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${capitalizedChampionName}_${championCost}.jpg`;
+                        const championImageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${correctedChampionName}_${championCost}.jpg`;
                         document.getElementById('MainChampion').style.backgroundImage = `url(${championImageURL})`;
                         firstChampionLogged = true;
                     }
 
-                    const championImageUrl = `https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${capitalizedChampionName}.png`;
+
+
+
+
+
+
+
+
+
+
+                    const championImageUrl = `https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${correctedChampionName}.png`;
                     const championPointsFormatted = championMastery.championPoints.toLocaleString();
                     const championInfo = document.createElement('div');
 
@@ -183,7 +213,7 @@ async function fetchMatchHistory(puuid) {
 
                     const matchInfoElem = document.createElement('div');
                     matchInfoElem.classList.add('Match');
-                    
+
                     matchInfoElem.innerHTML = `
 
 
@@ -218,8 +248,10 @@ async function fetchMatchHistory(puuid) {
 
 
 
+function runSearch() {
+    document.getElementById('search-button').click(); // Gọi hàm xử lý sự kiện khi nhấn nút
+}
 
-// Thêm lịch sử thi đấu vào sự kiện click nút tìm kiếm
 document.getElementById('search-button').addEventListener('click', async function () {
     try {
         const summonerData = await fetchSummonerInfo();
@@ -233,4 +265,9 @@ document.getElementById('search-button').addEventListener('click', async functio
     }
 });
 
-
+// Xử lý sự kiện khi nhấn phím Enter trong trường nhập liệu
+document.getElementById('summoner-name').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        runSearch(); // Gọi hàm xử lý sự kiện khi nhấn Enter
+    }
+});

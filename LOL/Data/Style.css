@@ -20,7 +20,7 @@ body {
 }
 
 .Search input {
-    color: #fff;
+    color: #da9b37;
     background-color: #000000b2;
     border: 2px solid #da9b37;
     width: 100%;
@@ -30,7 +30,7 @@ body {
 }
 
 .Search input::placeholder {
-    color: #937341;
+    color: #5f533f;
 }
 
 .Search input:focus {
@@ -38,6 +38,7 @@ body {
 }
 
 .Search button {
+    text-align: center;
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -80,12 +81,16 @@ body {
 
 .Head .Icon img {
     width: 100%;
+    height: 80px;
     border-radius: 10px;
-    border: 5px solid black;
+    border: 5px solid #fcb748;
+}
+#summonerName {
+    font-size: 25px;
 }
 
 .Head .Icon .Level {
-    background-color: #000000c2;
+    background-color: #da9c3765;
     font-size: 16px;
     font-weight: bold;
     padding: 0px 10px 5px 5px;
