@@ -10,20 +10,19 @@
     <!-- Bộ giải mã và phân loại thiết bị -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    
     <!-- Đảm bảo đặt meta tag sau -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- Biểu tượng cho web -->
-    <link rel="icon" href="./DataWeb/img/chesino.png" />
+    <link rel="icon" href="/DATA/logo.png" />
 
     <!-- Biểu tượng iPhone -->
-    <link rel="apple-touch-icon" href="./DataWeb/img/chesino.png" sizes="150x150" />
+    <link rel="apple-touch-icon" href="/DATA/logo.png" sizes="150x150" />
 
     <!-- Ảnh -->
-    <meta property="og:image" content="./DataWeb/img/bannerlogo.png" />
+    <meta property="og:image" content="/DATA/logo.png" />
 
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Data/Style.css" />
@@ -31,36 +30,57 @@
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+
+
     <div class="Profile">
-        <div class="Avatar">
-            <!-- <div class="Frame">
-                <img  src="./Data/ranked-emblem/emblem-challenger.png" alt="" srcset="">
-            </div> -->
-            <div class="Icon">
-                <img id="icon" alt="" >
+        <div class="MainChampion" id="MainChampion">
+            <div class="Search">
+                <input onfocus="this.value=''" value="HunqD" id="summoner-name" type="text"
+                    placeholder="Nhập tên người chơi">
+                <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="Head">
+                <div class="Icon">
+                    <img id="profileIconId" src="/DATA/logo.png" alt="" srcset="">
+                    <div id="summonerLevel" class="Level">1</div>
+                </div>
+                <div class="Info">
+                    <h1 id="summonerName">HunqD</h1>
+                    <p id="summonerID"></p>
+                </div>
             </div>
         </div>
-        <div class="Info">
-            <h1 id="name">HunqD</h1>
-            <h5 id="level">Lv.100</h5>
-            <br>
-            <div id="rank-info">
-                <h2>Thông tin Rank</h2>
-                <p>Rank: <span id="rank-tier"></span></p>
-                <p>Điểm: <span id="rank-points"></span></p>
+
+        <div class="Content">
+            <div class="Ranked">
+                <div class="Solo">
+                    <h1>Xếp hạng Đơn Đội</h1>
+                    <hr>
+                    <div class="Rank">
+                        <img id="RankIcon" src="./Data/Rank/iron.png" alt="" srcset="">
+                    </div>
+                    <h2 id="RankInfo">Sắt </h2>
+                    <h3 id="leaguePoints">0 Điểm</h3>
+                    <p id="PointsWL">W:0 | L:0</p>
+                </div>
+            </div>
+            <div class="ChampionMaster">
+                <h1>Thông thạo</h1>
+                <hr>
+                <div class="champion-mastery-info" id="champion-mastery-info">
+                </div>
             </div>
         </div>
-        
-    <div class="search" id="search-form">
-        <input type="text" id="summoner-name" placeholder="Nhập tên người chơi">
-        <button type="button" id="search-button">Tìm</button>
-    </div>
     </div>
 
+    <div class="HunqD">
+        <p>Lập trình bởi <a href="http://facebook.com/HunqD" target="_blank" rel="noopener noreferrer">HunqD</a></p>
+    </div>
 
 
-    
 </body>
 <script src="./Data/Script.js"></script>
+
 </html>
