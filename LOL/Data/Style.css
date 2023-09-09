@@ -59,6 +59,7 @@ body {
     background-size: cover;
     background-position: center;
     padding: 10px 10px 20px 10px;
+    border-radius: 10px;
 }
 
 .Head {
@@ -113,7 +114,9 @@ body {
     margin: auto;
     text-align: center;
 }
-
+.Content {
+    margin-bottom: 20px;
+}
 .Content h1 {
     letter-spacing: 1px;
     color: #937341;
@@ -224,7 +227,7 @@ hr {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding: 10px ;
+    padding: 12px 0 ;
 }
 .HunqD p {
     color: #937341;
@@ -243,39 +246,49 @@ hr {
     padding: 10px;
 }
 .Match {
-    margin-top: 20px;
-    padding: 10px 5px;
-    margin: 10px 0;
+    padding: 5px 5px;
+    margin:  0;
     display: grid;
     grid-template-rows: auto auto;
 }
 .Match .Win .Head {
-    background-color: #da9b37;
+    background-color: #937341;
 }
 .Match .Lose .Head {
-    background-color: #da3737;
+    background-color: #505050;
 }
 
 .Match .Head{
+    text-align: left;
+    padding: 10px 20px;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto  auto ;
     background-color: #1f1f1f;
     border-radius: 0;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
 .Match .Head p {
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.Match .Head p:last-child {
+    text-align: right;
+    font-size: 14px;
+    font-weight: 500;
 }
 .Match .Body {
     display: grid;
     grid-template-columns: 80px auto;
     background-color: #1f1f1f;
-    margin-top: 5px;
+    margin-top: 3px;
     padding: 5px 20px;
     border-radius: none;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+.Match .Body .Info {
+    margin-top: 5px;
 }
 .Match .Champion {
     height: 80px;
@@ -293,3 +306,9 @@ hr {
     box-shadow: 0px 0px 0px 2px #111,
         0px 0px 0px 4px #937341;
 }
+
+@media only screen and (min-width: 800px) {
+    .Profile {
+      padding: 0 300px;
+    }
+  }

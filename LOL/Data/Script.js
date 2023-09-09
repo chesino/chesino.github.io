@@ -50,7 +50,7 @@ async function fetchRankInfo(summonerId) {
 
         if (rankData.length > 0) {
             const rankInfo = rankData[0];
-            document.getElementById('RankIcon').src = `./Data/Rank/${rankInfo.tier}.png`;
+            document.getElementById('RankIcon').src = `./Data/Ranks/${rankInfo.tier}.png`;
 
             const rankNames = {
                 'IRON': 'Sắt',
@@ -92,11 +92,12 @@ async function fetchMasteryInfo(summonerId) {
 
             for (const championMastery of masteryData) {
                 const championId = championMastery.championId;
-                const championJsonUrl = 'https://ddragon.leagueoflegends.com/cdn/13.17.1/data/en_US/champion.json';
+                const championJsonUrl = 'https://ddragon.leagueoflegends.com/cdn/13.17.1/data/vi_VN/champion.json';
                 const championData = await fetchJson(championJsonUrl);
                 const championList = championData.data;
                 const champion = championList[Object.keys(championList).find(key => championList[key].key === championId.toString())];
-
+                
+                
                 if (champion) {
                     const championName = champion.name;
                     const championCost = championCosts[championName] || '0';
@@ -182,29 +183,25 @@ async function fetchMatchHistory(puuid) {
 
                     const matchInfoElem = document.createElement('div');
                     matchInfoElem.classList.add('Match');
-
+                    
                     matchInfoElem.innerHTML = `
-                        <div class="Match ${classWin}">
-                        <div class="Head">
-                            <p>${win}</p>
-                            <p>${queueType}</p>
-                            <p>${matchDateTimeString}</p>
-                            <p>${matchInfo.metadata.matchId}</p>
-                        </div>
-                        <div class="Body">
-                            <div class="Champion">
-                                <img src="/DATA/logo.png" alt="" srcset="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${participant.championName}.png">
+
+
+                        <div class="${classWin}">
+                            <div class="Head">
+                                <p>${queueType}</p>
+                                <p>${matchDateTimeString}</p>
                             </div>
-                            <div class="Info">
-                                <p>${participant.championName}</p>
-                                <p>${participant.kills}/${participant.deaths}/${participant.assists}</p>
+                            <div class="Body">
+                                <div class="Champion">
+                                    <img src="/DATA/logo.png" alt="" srcset="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${participant.championName}.png">
+                                </div>
+                                <div class="Info">
+                                    <h2>${participant.championName}</h2>
+                                    <h3>${participant.kills}/${participant.deaths}/${participant.assists}</h3>
+                                </div>
                             </div>
                         </div>
-                        </div>
-
-
-
-
                     `;
                     matchHistoryInfo.appendChild(matchInfoElem);
                 }
