@@ -132,14 +132,6 @@ async function fetchMasteryInfo(summonerId) {
 
 
 
-
-
-
-
-
-
-
-
                     const championImageUrl = `https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${correctedChampionName}.png`;
                     const championPointsFormatted = championMastery.championPoints.toLocaleString();
                     const championInfo = document.createElement('div');
