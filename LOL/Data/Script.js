@@ -7,7 +7,31 @@ const championCosts = {
     "Vel'Koz": '2',
     "Kha'Zix": '4',
     "Teemo": '27',
-    "Master Yi": '89'
+    "Master Yi": '89',
+    "Ngộ Không": '7',
+    "Alistar": '10',
+    "Vayne": '11',
+    "Akali": '5',
+    "Katarina": '8',
+    "Fizz": '8',
+    "Twisted Fate": '11',
+    "Ezreal": '5',
+    "Ahri": '65',
+    "Lux": '7',
+    "Lulu": '27',
+    "Hecarim": '22',
+    "Miss Fortune": '16',
+    "Lee Sin": '4',
+    "Kassadin": '5',
+    "Zeri": '10',
+    "Leona": '10',
+    "Jinx": '37',
+    "Fiora": '4',
+    "Tryndamere": '6',
+    "Zed": '30',
+    "Heimerdinger": '6',
+    
+    
     // Thêm các tướng khác và cost tương ứng ở đây
 };
 
@@ -102,7 +126,7 @@ async function fetchMasteryInfo(summonerId) {
 
                 if (champion) {
                     const championName = champion.name;
-                    const championCost = championCosts[championName] || '0';
+                    const championCost = championCosts[championName] || '1';
                     const normalizedChampionName = championName.replace(/[^a-zA-Z0-9]/g, '');
                     const capitalizedChampionName = normalizedChampionName.charAt(0).toUpperCase() + normalizedChampionName.slice(1).toLowerCase();
 
@@ -112,6 +136,11 @@ async function fetchMasteryInfo(summonerId) {
                         'Masteryi': 'MasterYi',
                         "Kha'Zix": 'Khazix',
                         "Vel'Koz": 'Velkoz',
+                        "Ngộ Không": 'MonkeyKing',
+                        "Dr.Mundo": 'DrMundo',
+                        "Kai'Sa": 'Kaisa',
+                        
+                        
                         // Thêm các tướng khác và cost tương ứng ở đây
                     };
 
