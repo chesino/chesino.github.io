@@ -314,7 +314,7 @@ hr {
 
 @media only screen and (min-width: 700px) {
     .Profile {
-      padding: 0 300px;
+      padding: 20px 15%;
     }
     .Rank {
         height: 150px;
