@@ -35,12 +35,17 @@
 
 
     <div class="Profile">
-        <div class="MainChampion" id="MainChampion">
+        <div class="SearchBox">
             <div class="Search">
-                <input onfocus="this.value=''"  id="summoner-name" type="text"
-                    placeholder="Nhập tên người chơi" spellcheck="false">
+                <input onfocus="this.value=''" id="summoner-name" type="text" placeholder="Nhập tên người chơi" spellcheck="false">
                 <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
+            <div class="SearchHistory" id="search-history">
+                <ul id="search-history-list"></ul>
+            </div>
+        </div>
+       
+        <div class="MainChampion" id="MainChampion">
             <div class="Head">
                 <div class="Icon">
                     <img id="profileIconId" src="/DATA/logo.png" alt="" srcset="">

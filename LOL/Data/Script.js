@@ -1,4 +1,4 @@
-const API_KEY = 'RGAPI-139c43b3-ab0b-413d-ac60-2dea5c068ec0';
+const API_KEY = 'RGAPI-42e3f404-401b-4f86-8806-9323a3495b6e';
 const championCosts = {
     'Yasuo': '9',
     'Leesin': '7',
@@ -30,8 +30,8 @@ const championCosts = {
     "Tryndamere": '6',
     "Zed": '30',
     "Heimerdinger": '6',
-    
-    
+
+
     // Thêm các tướng khác và cost tương ứng ở đây
 };
 
@@ -139,8 +139,8 @@ async function fetchMasteryInfo(summonerId) {
                         "Ngộ Không": 'MonkeyKing',
                         "Dr.Mundo": 'DrMundo',
                         "Kai'Sa": 'Kaisa',
-                        
-                        
+
+
                         // Thêm các tướng khác và cost tương ứng ở đây
                     };
 
@@ -267,28 +267,72 @@ async function fetchMatchHistory(puuid) {
 }
 
 
+const searchButton = document.getElementById('search-button');
+const summonerNameInput = document.getElementById('summoner-name');
 
-
-function runSearch() {
-    document.getElementById('search-button').click(); // Gọi hàm xử lý sự kiện khi nhấn nút
-}
-
-document.getElementById('search-button').addEventListener('click', async function () {
+searchButton.addEventListener('click', async () => {
     try {
         const summonerData = await fetchSummonerInfo();
         if (summonerData) {
-            await fetchRankInfo(summonerData.id);
-            await fetchMasteryInfo(summonerData.id);
-            await fetchMatchHistory(summonerData.puuid);
+            await Promise.all([
+                fetchRankInfo(summonerData.id),
+                fetchMasteryInfo(summonerData.id),
+                fetchMatchHistory(summonerData.puuid)
+            ]);
+            displaySearchHistory();
         }
     } catch (error) {
-        console.error('An error occurred:', error);
+        summonerNameInput.value = "Không tồn tại";
+        setTimeout(() => {
+            summonerNameInput.value = "";
+        }, 500);
     }
 });
 
-// Xử lý sự kiện khi nhấn phím Enter trong trường nhập liệu
-document.getElementById('summoner-name').addEventListener('keydown', function (event) {
+summonerNameInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        runSearch(); // Gọi hàm xử lý sự kiện khi nhấn Enter
+        runSearch();
+        displaySearchHistory();
     }
 });
+
+function runSearch() {
+    const summonerName = summonerNameInput.value.trim();
+    if (summonerName) {
+        const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+        searchHistory.push(summonerName);
+        localStorage.setItem('searchHistory', JSON.stringify([...new Set(searchHistory)]));
+        searchButton.click();
+    }
+}
+
+summonerNameInput.addEventListener('focus', displaySearchHistory);
+
+function displaySearchHistory() {
+    const searchHistoryList = document.getElementById('search-history-list');
+    searchHistoryList.innerHTML = '';
+
+    const uniqueNames = [...new Set(JSON.parse(localStorage.getItem('searchHistory')) || [])];
+
+    if (uniqueNames.length > 0) {
+        uniqueNames.forEach((name) => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('search-history-item');
+            listItem.textContent = name;
+
+            const deleteIcon = document.createElement('span');
+            deleteIcon.classList.add('delete-icon');
+            deleteIcon.textContent = 'x';
+            deleteIcon.addEventListener('click', () => {
+                const updatedNames = uniqueNames.filter((n) => n !== name);
+                localStorage.setItem('searchHistory', JSON.stringify(updatedNames));
+                displaySearchHistory();
+            });
+
+            listItem.appendChild(deleteIcon);
+            searchHistoryList.appendChild(listItem);
+        });
+    }
+}
+
+window.onload = displaySearchHistory;
