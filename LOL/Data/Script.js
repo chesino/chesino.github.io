@@ -34,7 +34,7 @@ async function fetchSummonerInfo() {
         document.getElementById('profileIconId').src = `https://ddragon.leagueoflegends.com/cdn/13.17.1/img/profileicon/${data.profileIconId}.png`;
         document.getElementById('summonerName').innerText = data.name;
         document.getElementById('summonerLevel').innerText = data.summonerLevel;
-        document.getElementById('summonerID').innerText = data.id;
+        // document.getElementById('summonerID').innerText = data.id;
 
         return data;
     } catch (error) {
@@ -72,7 +72,7 @@ async function fetchRankInfo(summonerId) {
             document.getElementById('leaguePoints').innerText = `${rankInfo.leaguePoints} Điểm`;
             document.getElementById('PointsWL').innerText = `W:${rankInfo.wins}  |  L:${rankInfo.losses}`;
         } else {
-            document.getElementById('RankIcon').src = './Data/Rank/iron.png';
+            document.getElementById('RankIcon').src = './Data/Ranks/IRON.png';
             document.getElementById('RankInfo').innerText = 'Không có RANK.';
         }
     } catch (error) {

@@ -38,7 +38,11 @@ body {
 }
 
 .Search button {
+    display: flex;
+    justify-content: center;
     text-align: center;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -64,29 +68,32 @@ body {
 }
 
 .Head {
-    background-color: #000000b2;
     width: 100%;
     padding: 20px;
-    display: flex;
+    display: grid;
     gap: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .Head .Icon {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     position: relative;
-    margin: auto 0;
+    margin: auto;
 }
 
 .Head .Icon img {
     width: 100%;
-    height: 80px;
+    height: 100px;
     border-radius: 10px;
     border: 5px solid #fcb748;
 }
+
 #summonerName {
     font-size: 25px;
+    color: #da9b37;
+    text-shadow: 0 0 10px black;
 }
 
 .Head .Icon .Level {
@@ -106,7 +113,7 @@ body {
 }
 
 #summonerID {
-    display: none;
+    color: #da9b37;
 }
 
 .Ranked {
@@ -119,9 +126,11 @@ body {
     margin: auto;
     text-align: center;
 }
+
 .Content {
     margin-bottom: 20px;
 }
+
 .Content h1 {
     letter-spacing: 1px;
     color: #937341;
@@ -171,6 +180,7 @@ hr {
     text-align: center;
     padding: 10px 20px;
 }
+
 .champion-mastery-info .Champion {
     display: grid;
     grid-template-columns: 100px auto 100px;
@@ -185,25 +195,29 @@ hr {
 }
 
 .Champion .Icon {
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     margin: auto;
     padding: 5px;
     text-align: center;
     margin: auto;
+    border: 2px solid #937341;
+    box-shadow: 0px 0px 0px 2px #111,
+        0px 0px 0px 5px #937341;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .Champion .Icon .ChampionIcon {
     width: 100%;
-    border-radius: 50%;
-    border: 2px solid #937341;
-    box-shadow: 0px 0px 0px 2px #111,
-        0px 0px 0px 5px #937341;
+    object-fit: cover;
+    scale: 1.4;
 }
 
 .Champion .Info {
     margin-top: 5px;
 }
+
 .Champion .Info p {
     font-size: 14px;
     font-family: monospace;
@@ -232,13 +246,16 @@ hr {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding: 12px 0 ;
+    padding: 12px 0;
+    text-shadow: 0 0 10px black;
 }
+
 .HunqD p {
     color: #937341;
     font-size: 14px;
     font-weight: 500;
 }
+
 .HunqD p a {
     color: #da9b37;
     text-decoration: none;
@@ -250,73 +267,90 @@ hr {
     text-align: center;
     padding: 10px;
 }
+
 .Match {
     padding: 5px 5px;
-    margin:  0;
+    margin: 0;
     display: grid;
     grid-template-rows: auto auto;
 }
+
 .Match .Win .Head {
     background-color: #937341;
 }
+
 .Match .Lose .Head {
-    background-color: #505050;
+    background-color: #8a1313;
 }
 
-.Match .Head{
+.Match .Head {
     text-align: left;
-    padding: 10px 20px;
+    padding: 5px 20px;
     display: grid;
-    grid-template-columns: auto  auto ;
+    grid-template-columns: auto auto;
     background-color: #1f1f1f;
     border-radius: 0;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
+
 .Match .Head p {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: bold;
 }
+
 .Match .Head p:last-child {
     text-align: right;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
 }
+
 .Match .Body {
     display: grid;
-    grid-template-columns: 80px auto;
+    grid-template-columns: 50px auto;
     background-color: #1f1f1f;
     margin-top: 3px;
-    padding: 5px 20px;
-    border-radius: none;
+    padding: 5px 20px 10px 20px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-.Match .Body .Info {
-    margin-top: 5px;
-}
+
+
+
 .Match .Champion {
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
     margin: auto;
     padding: 5px;
     text-align: center;
     margin: auto;
-
-}
-.Match .Champion img {
-    width: 100%;
     border-radius: 50%;
     border: 2px solid #937341;
     box-shadow: 0px 0px 0px 2px #111,
         0px 0px 0px 4px #937341;
+    overflow: hidden;
+}
+
+.Match .Champion img {
+    width: 100%;
+    scale: 1.4;
+    object-fit: cover;
 }
 
 @media only screen and (min-width: 700px) {
     .Profile {
-      padding: 20px 15%;
+        padding: 20px 18%;
     }
+
+    .Profile .MainChampion {
+        box-shadow: 0 0 10px 1px black;
+    }
+
+    .Profile .Content {
+        margin-top: 20px;
+    }
+
     .Rank {
         height: 150px;
     }
-  }
+}
