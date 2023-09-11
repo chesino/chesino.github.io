@@ -86,17 +86,21 @@ body {
 #search-history-list li:last-child {
     border-bottom: none;
     padding-bottom: 10px;
+
 }
 
 #search-history-list li:hover {
-    background-color: #f5f5f5;
+    border-radius: 10px;
+    background-color: #da9b37;
+    color: #000;
 }
 
 .delete-icon {
     margin-left: auto;
     padding-right: 10px;
     cursor: pointer;
-    color: #da9b37;
+    color: red;
+    cursor: pointer;
 }
 
 .delete-icon:hover {
@@ -287,6 +291,9 @@ hr {
     font-weight: bold;
     margin: auto;
 }
+.champion-mastery-info .Mastery:hover {
+    scale: 1.2;
+}
 
 .champion-mastery-info .Mastery img {
     width: 100%;
@@ -424,7 +431,5 @@ hr {
         height: 150px;
     }
 
-    .Search {
-        padding: 10px 20px;
-    }
+
 }

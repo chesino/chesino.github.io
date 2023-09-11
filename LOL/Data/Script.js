@@ -266,9 +266,17 @@ async function fetchMatchHistory(puuid) {
     }
 }
 
-
 const searchButton = document.getElementById('search-button');
 const summonerNameInput = document.getElementById('summoner-name');
+const searchHistoryList = document.getElementById('search-history-list');
+
+// Lưu trạng thái ban đầu vào lịch sử trình duyệt
+const initialState = {
+    summonerName: '',
+};
+
+// Thêm trạng thái ban đầu vào lịch sử trình duyệt
+history.replaceState(initialState, '', window.location.pathname);
 
 searchButton.addEventListener('click', async () => {
     try {
@@ -280,17 +288,37 @@ searchButton.addEventListener('click', async () => {
                 fetchMatchHistory(summonerData.puuid)
             ]);
             displaySearchHistory();
+
+            const summonerName = summonerNameInput.value.trim();
+            if (summonerName) {
+                // Tạo một trạng thái mới với thông tin tìm kiếm và cập nhật URL
+                const newState = {
+                    summonerName: summonerName,
+                };
+                const newURL = `#${summonerName}`;
+                history.pushState(newState, '', newURL);
+            }
         }
     } catch (error) {
-        summonerNameInput.value = "Không tồn tại";
-        setTimeout(() => {
-            summonerNameInput.value = "";
-        }, 500);
+        alert("Không tồn tại") ;
     }
 });
 
 summonerNameInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
+        runSearch();
+        displaySearchHistory();
+    }
+});
+
+searchHistoryList.addEventListener('click', (event) => {
+    if (event.target && event.target.matches('li.search-history-item')) {
+        const selectedName = event.target.textContent;
+        if (selectedName.endsWith('x')) {
+            summonerNameInput.value = selectedName.slice(0, -1);
+        } else {
+            summonerNameInput.value = selectedName;
+        }
         runSearch();
         displaySearchHistory();
     }
@@ -306,10 +334,7 @@ function runSearch() {
     }
 }
 
-summonerNameInput.addEventListener('focus', displaySearchHistory);
-
 function displaySearchHistory() {
-    const searchHistoryList = document.getElementById('search-history-list');
     searchHistoryList.innerHTML = '';
 
     const uniqueNames = [...new Set(JSON.parse(localStorage.getItem('searchHistory')) || [])];
@@ -335,4 +360,28 @@ function displaySearchHistory() {
     }
 }
 
-window.onload = displaySearchHistory;
+window.onload = () => {
+    displaySearchHistory();
+
+    // Trích xuất thông tin tìm kiếm từ URL và hiển thị trong trường nhập liệu
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        summonerNameInput.value = hash;
+        runSearch();
+    }
+};
+
+// Xử lý sự kiện popstate để cập nhật trạng thái từ lịch sử trình duyệt
+window.addEventListener('popstate', (event) => {
+    if (event.state) {
+        summonerNameInput.value = event.state.summonerName;
+        runSearch();
+    }
+});
+
+// Xử lý sự kiện hashchange để theo dõi thay đổi trong hashtag và tìm kiếm lại
+window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.substring(1);
+    summonerNameInput.value = hash;
+    runSearch();
+});
