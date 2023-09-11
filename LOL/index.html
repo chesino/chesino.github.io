@@ -32,100 +32,101 @@
 </head>
 
 <body>
-
-
     <div class="Profile">
-        <div class="SearchBox">
-            <div class="Search">
-                <input onfocus="this.value=''" id="summoner-name" type="text" placeholder="Nhập tên người chơi" spellcheck="false">
-                <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-            <div class="SearchHistory" id="search-history">
-                <ul id="search-history-list"></ul>
-            </div>
-        </div>
-       
-        <div class="MainChampion" id="MainChampion">
-            <div class="Head">
-                <div class="Icon">
-                    <img id="profileIconId" src="/DATA/logo.png" alt="" srcset="">
-                    <div id="summonerLevel" class="Level">1</div>
+        <div class="BlockOne">
+            <div class="SearchBox">
+                <div class="Search">
+                    <input onfocus="this.value=''" id="summoner-name" type="text" placeholder="Nhập tên người chơi"
+                        spellcheck="false">
+                    <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <div class="Info">
-                    <h1 id="summonerName">Chesino</h1>
-                    <!-- <p id="summonerID"></p> -->
+                <div class="SearchHistory" id="search-history">
+                    <ul id="search-history-list"></ul>
                 </div>
             </div>
-        </div>
-
-        <div class="Content">
-            <div class="Ranked">
-                <div class="Solo">
-                    <h1>Xếp hạng Đơn đôi</h1>
+            <div class="MainChampion" id="MainChampion">
+                <div class="Head">
+                    <div class="Icon">
+                        <img id="profileIconId" src="/DATA/logo.png" alt="" srcset="">
+                        <div id="summonerLevel" class="Level">1</div>
+                    </div>
+                    <div class="Info">
+                        <h1 id="summonerName">Chesino</h1>
+                        <!-- <p id="summonerID"></p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="Content">
+                <div class="Ranked">
+                    <div class="Solo">
+                        <h1>Xếp hạng Đơn đôi</h1>
+                        <hr>
+                        <div class="Rank">
+                            <img id="RankIcon" src="./Data/Ranks/IRON.png" alt="" srcset="">
+                        </div>
+                        <h2 id="RankInfo">Sắt </h2>
+                        <h3 id="leaguePoints">0 Điểm</h3>
+                        <p id="PointsWL">W:0 | L:0</p>
+                    </div>
+                </div>
+                <div class="ChampionMaster">
+                    <h1>Thông thạo</h1>
                     <hr>
-                    <div class="Rank">
-                        <img id="RankIcon" src="./Data/Ranks/IRON.png" alt="" srcset="">
-                    </div>
-                    <h2 id="RankInfo">Sắt </h2>
-                    <h3 id="leaguePoints">0 Điểm</h3>
-                    <p id="PointsWL">W:0 | L:0</p>
-                </div>
-            </div>
-            <div class="ChampionMaster">
-                <h1>Thông thạo</h1>
-                <hr>
-                <div class="champion-mastery-info" id="champion-mastery-info">
-                    <div>
-                        <div class="Champion">
-                            <div class="Icon">
-                                <img class="ChampionIcon"
-                                    src="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/Yasuo.png"
-                                    alt="Yasuo icon">
-                            </div>
-                            <div class="Info">
-                                <h2>Yasuo</h2>
-                                <p>1.000.000</p>
-                            </div>
-                            <div class="Mastery">
-                                <img src="./Data/Mastery/Level_7.webp" alt="" srcset="">
+                    <div class="champion-mastery-info" id="champion-mastery-info">
+                        <div>
+                            <div class="Champion">
+                                <div class="Icon">
+                                    <img class="ChampionIcon"
+                                        src="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/Yasuo.png"
+                                        alt="Yasuo icon">
+                                </div>
+                                <div class="Info">
+                                    <h2>Yasuo</h2>
+                                    <p>1.000.000</p>
+                                </div>
+                                <div class="Mastery">
+                                    <img src="./Data/Mastery/Level_7.webp" alt="" srcset="">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="Champion">
-                            <div class="Icon">
-                                <img class="ChampionIcon"
-                                    src="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/LeeSin.png"
-                                    alt="LeeSin icon">
-                            </div>
-                            <div class="Info">
-                                <h2>Lee Sin</h2>
-                                <p>999.999</p>
-                            </div>
-                            <div class="Mastery">
-                                <img src="./Data/Mastery/Level_6.webp" alt="" srcset="">
+                        <div>
+                            <div class="Champion">
+                                <div class="Icon">
+                                    <img class="ChampionIcon"
+                                        src="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/LeeSin.png"
+                                        alt="LeeSin icon">
+                                </div>
+                                <div class="Info">
+                                    <h2>Lee Sin</h2>
+                                    <p>999.999</p>
+                                </div>
+                                <div class="Mastery">
+                                    <img src="./Data/Mastery/Level_6.webp" alt="" srcset="">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="Champion">
-                            <div class="Icon">
-                                <img class="ChampionIcon"
-                                    src="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/Zed.png"
-                                    alt="Zed icon">
-                            </div>
-                            <div class="Info">
-                                <h2>Zed</h2>
-                                <p>999.999</p>
-                            </div>
-                            <div class="Mastery">
-                                <img src="./Data/Mastery/Level_5.webp" alt="" srcset="">
+                        <div>
+                            <div class="Champion">
+                                <div class="Icon">
+                                    <img class="ChampionIcon"
+                                        src="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/Zed.png"
+                                        alt="Zed icon">
+                                </div>
+                                <div class="Info">
+                                    <h2>Zed</h2>
+                                    <p>999.999</p>
+                                </div>
+                                <div class="Mastery">
+                                    <img src="./Data/Mastery/Level_5.webp" alt="" srcset="">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="BlockTwo Content">
             <div class="MatchHistory">
                 <h1>Lịch sử thi đấu gần đây</h1>
                 <hr>
@@ -170,10 +171,8 @@
 
                 </div>
             </div>
-
-
-
         </div>
+
     </div>
 
     <div class="HunqD">
