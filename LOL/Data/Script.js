@@ -1,4 +1,4 @@
-const API_KEY = 'RGAPI-42e3f404-401b-4f86-8806-9323a3495b6e';
+const API_KEY = 'RGAPI-362bdda6-79dd-415b-8790-7bcd43a1c513';
 const championCosts = {
     'Yasuo': '9',
     'Leesin': '7',
