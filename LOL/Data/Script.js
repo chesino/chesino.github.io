@@ -1,4 +1,5 @@
 const API_KEY = 'RGAPI-41bf1c0d-6e51-40d8-8206-bc65307d4243';
+const VER = '13.18.1';
 const championCosts = {
     'Yasuo': '9',
     'Leesin': '7',
@@ -55,7 +56,7 @@ async function fetchSummonerInfo() {
         const apiUrl = `https://vn2.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
         const data = await fetchJson(apiUrl);
 
-        document.getElementById('profileIconId').src = `https://ddragon.leagueoflegends.com/cdn/13.17.1/img/profileicon/${data.profileIconId}.png`;
+        document.getElementById('profileIconId').src = `https://ddragon.leagueoflegends.com/cdn/${VER}/img/profileicon/${data.profileIconId}.png`;
         document.getElementById('summonerName').innerText = data.name;
         document.getElementById('summonerLevel').innerText = data.summonerLevel;
         // document.getElementById('summonerID').innerText = data.id;
@@ -118,7 +119,7 @@ async function fetchMasteryInfo(summonerId) {
 
             for (const championMastery of masteryData) {
                 const championId = championMastery.championId;
-                const championJsonUrl = 'https://ddragon.leagueoflegends.com/cdn/13.17.1/data/vi_VN/champion.json';
+                const championJsonUrl = `https://ddragon.leagueoflegends.com/cdn/${VER}/data/vi_VN/champion.json`;
                 const championData = await fetchJson(championJsonUrl);
                 const championList = championData.data;
                 const champion = championList[Object.keys(championList).find(key => championList[key].key === championId.toString())];
@@ -161,7 +162,7 @@ async function fetchMasteryInfo(summonerId) {
 
 
 
-                    const championImageUrl = `https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${correctedChampionName}.png`;
+                    const championImageUrl = `https://ddragon.leagueoflegends.com/cdn/${VER}/img/champion/${correctedChampionName}.png`;
                     const championPointsFormatted = championMastery.championPoints.toLocaleString();
                     const championInfo = document.createElement('div');
 
@@ -245,7 +246,7 @@ async function fetchMatchHistory(puuid) {
                             </div>
                             <div class="Body">
                                 <div class="Champion">
-                                    <img src="/DATA/logo.png" alt="" srcset="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/${participant.championName}.png">
+                                    <img src="/DATA/logo.png" alt="" srcset="https://ddragon.leagueoflegends.com/cdn/${VER}/img/champion/${participant.championName}.png">
                                 </div>
                                 <div class="Info">
                                     <h2>${participant.championName}</h2>
