@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+<html>
+
+<head>
+    <!-- Tiêu đề trang -->
+    <title>Dữ liệu AP2</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- Đảm bảo đặt meta tag sau -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/DATA/logo.png" />
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/DATA/logo.png" sizes="150x150" />
+
+    <!-- Ảnh -->
+    <meta property="og:image" content="/DATA/logo.png" />
+
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Database/Style.css" />
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header">
+        <h2>AP2</h2>
+        <p>Mục cá nhân</p>
+    </div>
+
+    <div class="tab" id="navbar">
+        <a class="tablinks active" onclick="openTab(event, 'Home')"><i class="fa-solid fa-house"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Terms')"><i class="fa-solid fa-scale-balanced"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Data')"><i class="fa-solid fa-database"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Server')"><i class="fa-solid fa-server"></i></a>
+        <a class="tablinks" onclick="openTab(event, 'Download')"><i class="fa-solid fa-download"></i></a>
+    </div>
+
+
+    <div id="Home" class="tabcontent show">
+        <header>
+            <h1>Thông tin về Chesino Upload</h1>
+        </header>
+        <div class="table-container">
+            <h1>AP2</h1>
+            <img src="./Paint.png" alt="" srcset="">
+        </div>
+    </div>
+    <div id="Terms" class="tabcontent">
+        <header>
+            <h1>Thông tin về dự án</h1>
+        </header>
+        <div class="table-container">
+            <h1>Quyền truy cập</h1>
+            <p>Tôi chỉ chia sẻ với các thành viên và những người mà tôi đã cho phép truy cập và tải về, bởi vì đây là một bài thi và cũng nhằm mục đích tránh việc cạnh tranh không lành mạnh trong tương lai.</p>
+        </div>
+    </div>
+
+    <div id="Data" class="tabcontent ">
+        <header>
+            <h1>Cơ sở dữ liệu</h1>
+        </header>
+        <div class="table-container">
+            <h2>Phần A</h2>
+            <table id="A-table">
+                <!-- Table header -->
+                <thead>
+                    <tr>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-container">
+            <h2>Phần B</h2>
+            <table id="B-table">
+                <!-- Table header -->
+                <thead>
+                    <tr>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-container">
+            <h2>Phần C</h2>
+            <table id="C-table">
+                <!-- Table header -->
+                <thead>
+                    <tr>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                        <th>Điện áp</th>
+                        <th>Tần số</th>
+                        <th>Tải</th>
+                        <th>RPM</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-container">
+            <h2>Phần D</h2>
+            <table id="D-table">
+                <!-- Table header -->
+                <thead>
+                    <tr>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-container">
+            <h2>Phần E</h2>
+            <table id="E-table">
+                <!-- Table header -->
+                <thead>
+                    <tr>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="Server" class="tabcontent">
+        <header>
+            <h1>Web Server</h1>
+        </header>
+        <div class="container">
+            <div class="content">
+                <h2>Không có dữ liệu</h2>
+                <p>Không tìm thấy WebServer.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="Download" class="tabcontent">
+        <header>
+            <h1>Tải dự án về</h1>
+        </header>
+        <div class="container">
+            <div class="content">
+                <h2>Dữ liệu mở rộng</h2>
+                <h5>Phiên bản 1.0.0 </h5>
+                <p>Ảnh,MSSV của các thành viên.</p>
+                <p>Icon, Logo, Vector,...</p>
+                <p>Công thức tính toán.</p>
+                <a  class="Download" href="">Đang cập nhật</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="content">
+                <h2>TIA Portal</h2>
+                <h5>Phiên bản 1.0.0 - V16</h5>
+                <p>Ở bản này chưa có gì cả 😁.</p>
+                <a  class="Download" href="./Dowloads/PLC.v001.zip">Tải về</a>
+            </div>
+        </div>
+
+      
+
+    </div>
+
+   
+
+
+
+
+
+</body>
+<script src="./Database/Script.js"></script>
+
+</html>

@@ -1,0 +1,116 @@
+{
+    "A": {
+        "CylinderM10": {
+            "Description": "Xi Lanh M10",
+            "Status": 100
+        },
+        "SensorB11": {
+            "Description": "Cảm biến B11",
+            "Status": 0
+        },
+        "SensorB12": {
+            "Description": "Cảm biến B12",
+            "Status": 1
+        }
+    },
+    "B": {
+        "CylinderM20": {
+            "Description": "Xi Lanh M20",
+            "Status": 100
+        },
+        "SensorB21": {
+            "Description": "Cảm biến B21",
+            "Status": 0
+        },
+        "SensorB22": {
+            "Description": "Cảm biến B22",
+            "Status": 1
+        },
+        "SensorA": {
+            "Description": "Cảm biến có phôi",
+            "Status": 1
+        },
+        "SensorB": {
+            "Description": "Cảm biến phôi sắt",
+            "Status": 0
+        }
+    },
+    "C": {
+        "Conveyor": {
+            "Description": "Băng tải",
+            "Status": 1
+        },
+         "Motor": {
+            "Description": "Động cơ ",
+            "Status": 1,
+            "Voltage": 230,
+            "Frequency": 60,
+            "Current": 10,
+            "RPM": 500
+        },
+        "Inverter": {
+            "Description": "Biến tần",
+            "Status": 1,
+            "Voltage": 230,
+            "Frequency": 60,
+            "Current": 10,
+            "RPM": 500
+        }
+    },
+    "D": {
+        "CylinderM30": {
+            "Description": "Xi Lanh M30",
+            "Status": 0
+        },
+        "CylinderM40": {
+            "Description": "Xi Lanh M40",
+            "Status": 0
+        },
+        "CylinderM50": {
+            "Description": "Xi Lanh M50",
+            "Status": 0
+        },
+        "SensorB31": {
+            "Description": "Cảm biến B31",
+            "Status": 1
+        },
+        "SensorB32": {
+            "Description": "Cảm biến B32",
+            "Status": 0
+        },
+        "SensorB41": {
+            "Description": "Cảm biến B41",
+            "Status": 1
+        },
+        "SensorB42": {
+            "Description": "Cảm biến B42",
+            "Status": 0
+        },
+        "SensorB51": {
+            "Description": "Cảm biến B51",
+            "Status": 1
+        },
+        "SensorB52": {
+            "Description": "Cảm biến B52",
+            "Status": 0
+        }
+    },
+    "E": {
+        "TroughA": {
+            "Description": "Máng A ( phôi nhựa trắng )",
+            "Status": 0
+        },
+        "TroughB": {
+            "Description": "Máng B ( phôi nhựa đen )",
+            "Status": 0
+        },
+        "TroughC": {
+            "Description": "Máng C ( phôi sắt )",
+            "Status": 0
+        },
+        "SensorA": {
+            "Description": "Cảm biến Gương",
+            "Status": 0
+        }
+    }
+}
