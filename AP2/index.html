@@ -1,240 +1,510 @@
 <!DOCTYPE html>
-<html lang="vi">
-<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
-<html>
+<html lang="en">
 
 <head>
-    <!-- Tiêu đề trang -->
-    <title>Dữ liệu AP2</title>
 
-    <!-- Bộ giải mã và phân loại thiết bị -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
-    <!-- Đảm bảo đặt meta tag sau -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>DigiMedia - Creative SEO HTML5 Template</title>
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Biểu tượng cho web -->
-    <link rel="icon" href="/DATA/logo.png" />
 
-    <!-- Biểu tượng iPhone -->
-    <link rel="apple-touch-icon" href="/DATA/logo.png" sizes="150x150" />
-
-    <!-- Ảnh -->
-    <meta property="og:image" content="/DATA/logo.png" />
-
-    <!-- CSS của web -->
-    <link rel="stylesheet" href="./Database/Style.css" />
-
-    <!-- FontAweSome fas fa icon -->
-    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-digimedia-v3.css">
+  <link rel="stylesheet" href="assets/css/animated.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
 
 </head>
 
 <body>
-    <div class="header">
-        <h2>AP2</h2>
-        <p>Mục cá nhân</p>
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
 
-    <div class="tab" id="navbar">
-        <a class="tablinks active" onclick="openTab(event, 'Home')"><i class="fa-solid fa-house"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Terms')"><i class="fa-solid fa-scale-balanced"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Data')"><i class="fa-solid fa-database"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Server')"><i class="fa-solid fa-server"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Download')"><i class="fa-solid fa-download"></i></a>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              <img height="60px" src="assets/images/logo-v3.png" alt="">
+            </a>
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="#top" class="active">Trang chủ</a></li>
+              <li class="scroll-to-section"><a href="#about">Giới thiệu</a></li>
+              <li class="scroll-to-section"><a href="#services">Chi tiết</a></li>
+              <li class="scroll-to-section"><a href="#team">Thành viên</a></li>
+              <li class="scroll-to-section"><a href="#blog">Tải về</a></li>
+              <li class="scroll-to-section"><a href="#blog"></a></li>
+            </ul>
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
     </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
 
-
-    <div id="Home" class="tabcontent show">
-        <header>
-            <h1>Thông tin về Chesino Upload</h1>
-        </header>
-        <div class="table-container">
-            <h1>AP2</h1>
-            <img src="./Paint.png" alt="" srcset="">
-        </div>
-    </div>
-    <div id="Terms" class="tabcontent">
-        <header>
-            <h1>Thông tin về dự án</h1>
-        </header>
-        <div class="table-container">
-            <h1>Quyền truy cập</h1>
-            <p>Tôi chỉ chia sẻ với các thành viên và những người mà tôi đã cho phép truy cập và tải về, bởi vì đây là một bài thi và cũng nhằm mục đích tránh việc cạnh tranh không lành mạnh trong tương lai.</p>
-        </div>
-    </div>
-
-    <div id="Data" class="tabcontent ">
-        <header>
-            <h1>Cơ sở dữ liệu</h1>
-        </header>
-        <div class="table-container">
-            <h2>Phần A</h2>
-            <table id="A-table">
-                <!-- Table header -->
-                <thead>
-                    <tr>
-                        <th>Thiết bị</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div class="table-container">
-            <h2>Phần B</h2>
-            <table id="B-table">
-                <!-- Table header -->
-                <thead>
-                    <tr>
-                        <th>Thiết bị</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div class="table-container">
-            <h2>Phần C</h2>
-            <table id="C-table">
-                <!-- Table header -->
-                <thead>
-                    <tr>
-                        <th>Thiết bị</th>
-                        <th>Trạng thái</th>
-                        <th>Điện áp</th>
-                        <th>Tần số</th>
-                        <th>Tải</th>
-                        <th>RPM</th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div class="table-container">
-            <h2>Phần D</h2>
-            <table id="D-table">
-                <!-- Table header -->
-                <thead>
-                    <tr>
-                        <th>Thiết bị</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div class="table-container">
-            <h2>Phần E</h2>
-            <table id="E-table">
-                <!-- Table header -->
-                <thead>
-                    <tr>
-                        <th>Thiết bị</th>
-                        <th>Trạng thái</th>
-                    </tr>
-                </thead>
-                <!-- Table body -->
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="Server" class="tabcontent">
-        <header>
-            <h1>Web Server</h1>
-        </header>
-        <div class="container">
-            <div class="content">
-                <h2>Không có dữ liệu</h2>
-                <p>Không tìm thấy WebServer.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="Download" class="tabcontent">
-        <header>
-            <h1>Tải dự án về</h1>
-        </header>
-        
-        <div class="container">
-            <div class="content">
-                <h2>Toàn bộ dự án</h2>
-                <h5>Cập nhật ngày: 21/09/2023.</h5>
-                <p class="red">Chỉ những thành viên trong nhóm mới có quyền truy cập.</p>
-
-                <div class="progress">
-                    <div class="progress-bar progress-bar-warning " role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%">
-                    PLC (50%)
+  <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 align-self-center">
+              <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h6>Dự án</h6>
+                    <h2>AP2</h2>
+                    <p>Trạm phân loại phôi với PLC & HMI. <br> Chia sẻ bởi HunqD.</p>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="border-first-button scroll-to-section">
+                      <a href="#about">Xem thêm</a>
                     </div>
+                  </div>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-info " role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-                    HMI (80%)
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger " role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:30%">
-                    WebServer (30%)
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success " role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:90%">
-                    Graphic (90%)
-                    </div>
-                </div>
-                
-
-
-                <a target="_blank" class="Download" href="https://drive.google.com/file/d/1t6l8zLjKP_0RFjtAbw50NyiPGKKc_URw/view">Tải về</a>
+              </div>
             </div>
-        </div>
-
-
-        <div class="container">
-            <div class="content">
-                <h2>Dữ liệu mở rộng</h2>
-                <p>Ảnh,MSSV của các thành viên.</p>
-                <p>Icon, Logo, Vector,...</p>
-                <p>Công thức tính toán.</p>
-                <a  class="Download" href="">Đang cập nhật</a>
+            <div class="col-lg-6">
+              <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                <img src="assets/images/slider-dec-v3.svg" alt="">
+              </div>
             </div>
+          </div>
         </div>
-
-        <div class="container">
-            <div class="content">
-                <h2>Dữ liệu mở rộng chia sẻ</h2>
-                <p>Icon, Logo, Vector,...</p>
-                <p style="color: red;">Mật khẩu: <b>CDTK14</b> <i onclick="CopyPass()" id="copy" class="fa-regular fa-copy"></i></p>
-                <a target="_blank" class="Download" href="https://drive.google.com/open?id=1-bfe0DLpOBQRzzfy08k7X8pNDW_whs2O">Tải về ngay</a>
-            </div>
-        </div>
-
-
-
-      
-
+      </div>
     </div>
+  </div>
 
-   
+  <div id="about" class="about section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="about-left-image  wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
+                <img src="assets/images/about-dec-v3.svg" alt="">
+              </div>
+            </div>
+            <div class="col-lg-6 align-self-center  wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+              <div class="about-right-content">
+                <div class="section-heading">
+                  <h6>Giới thiệu</h6>
+                  <h4>Kì thi <em>AP2</em></h4>
+                  <div class="line-dec"></div>
+                </div>
+                <p>Lập trình trạm phân loại phôi với PLC & HMI.
+                  <br>
+                  Cảm ơn anh <b style="color: #4da6e7 ;">Duy Quang</b> đã hỗ trợ.
+                </p>
+                <div class="row">
+                  <div class="col-lg-4 col-sm-4">
+                    <div class="skill-item first-skill-item wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
+                      <div class="progress" data-percentage="50">
+                        <span class="progress-left">
+                          <span class="progress-bar"></span>
+                        </span>
+                        <span class="progress-right">
+                          <span class="progress-bar"></span>
+                        </span>
+                        <div class="progress-value">
+                          <div>
+                            50%<br>
+                            <span>PLC</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-4">
+                    <div class="skill-item second-skill-item wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
+                      <div class="progress" data-percentage="80">
+                        <span class="progress-left">
+                          <span class="progress-bar"></span>
+                        </span>
+                        <span class="progress-right">
+                          <span class="progress-bar"></span>
+                        </span>
+                        <div class="progress-value">
+                          <div>
+                            80%<br>
+                            <span>HMI</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-4">
+                    <div class="skill-item third-skill-item wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
+                      <div class="progress" data-percentage="10">
+                        <span class="progress-left">
+                          <span class="progress-bar"></span>
+                        </span>
+                        <span class="progress-right">
+                          <span class="progress-bar"></span>
+                        </span>
+                        <div class="progress-value">
+                          <div>
+                            10%<br>
+                            <span>WebServer</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="services" class="services section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h6>Chi tiết</h6>
+            <h4>Dữ liệu và tài liệu <em>AP2</em></h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="naccs">
+            <div class="grid">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="menu">
+                    <div class="first-thumb active">
+                      <div class="thumb">
+                        <span class="icon"><img src="assets/images/service-icon-01.png" alt=""></span>
+                        Dữ liệu
+                      </div>
+                    </div>
+                    <div>
+                      <div class="thumb">
+                        <span class="icon"><img src="assets/images/service-icon-03.png" alt=""></span>
+                        PLC
+                      </div>
+                    </div>
+                    <div>
+                      <div class="thumb">
+                        <span class="icon"><img src="assets/images/service-icon-02.png" alt=""></span>
+                        HMI
+                      </div>
+                    </div>
+                    <div>
+                      <div class="thumb">
+                        <span class="icon"><img src="assets/images/service-icon-04.png" alt=""></span>
+                        WebServer
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <ul class="nacc">
+                    <li class="active">
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>Dữ liệu</h4>
+                                <p>Sử dụng dữ liệu với các chức năng con.</p>
+                                <div class="ticks-list">
+                                  <span><i class="fa fa-check"></i> Dễ quản lý các dự liệu</span>
+                                  <span><i class="fa fa-check"></i>Tối ưu lưu trữ</span>
+                                  <span><i class="fa fa-check"></i> Dễ dàng thay đổi với Mapping</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="assets/images/services-image.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>PLC</h4>
+                                <p>Hiện tại vẫn đang lập trình PLC.</p>
+                                <div class="ticks-list">
+                                  <span><i class="fa fa-check"></i> Tối giản nhất có thể</span>
+                                  <span><i class="fa fa-check"></i> Sử dụng dữ liệu đối với các chức năng con</span> 
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="assets/images/services-image-02.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>HMI</h4>
+                                <p>Sắp hoàn thành.</p>
+                                <div class="ticks-list">
+                                  <span><i class="fa fa-check"></i> Sử dụng dữ liệu</span>
+                                  <span><i class="fa fa-check"></i> Giao diện trực quan</span> 
+                                  <span><i class="fa fa-check"></i> Hỗ trợ xem dữ liệu nhanh</span> 
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="assets/images/services-image-03.svg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="thumb">
+                          <div class="row">
+                            <div class="col-lg-6 align-self-center">
+                              <div class="left-text">
+                                <h4>WebServer</h4>
+                                <p>Có thể sẽ thêm.</p>
+                                <div class="ticks-list">
+                                  <span><i class="fa fa-check"></i> Sử dụng dữ liệu</span>
+                                  <span><i class="fa fa-check"></i> Giao diện trực quan</span> 
+                                  <span><i class="fa fa-check"></i> Hỗ trợ xem dữ liệu nhanh</span> 
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 align-self-center">
+                              <div class="right-image">
+                                <img src="assets/images/services-image-04.jpg" alt="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
+  <div id="free-quote" class="free-quote">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+          <div class="section-heading  wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h6>HunqD sẽ gửi cho bạn dự án qua Email.</h6>
+            <h4>Nhận thông tin mới</h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+        <div class="col-lg-8 offset-lg-2  wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+          <form id="search" action="#" method="GET">
+            <div class="row">
+              <div class="col-lg-4 col-sm-4">
+                <fieldset>
+                  <input type="web" name="web" class="website" placeholder="Tên của bạn" autocomplete="on"
+                    required>
+                </fieldset>
+              </div>
+              <div class="col-lg-4 col-sm-4">
+                <fieldset>
+                  <input type="address" name="address" class="email" placeholder="Email..." autocomplete="on"
+                    required>
+                </fieldset>
+              </div>
+              <div class="col-lg-4 col-sm-4">
+                <fieldset>
+                  <button onclick="alert('Hiện tại HunqD đang bảo trì tính năng này.')"  style="font-weight: bold;" type="submit" class="main-button">Nhận Tin</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
+  <div id="team" class="our-portfolio section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+            <h6>Thành viên</h6>
+            <h4>Nhóm <em>6</em></h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="loop owl-carousel">
+            <div class="item">
+              <a target="_blank"  href="https://www.facebook.com/HunqD/">
+                <div class="portfolio-item">
+                  <div class="thumb">
+                    <img src="./IMG/HunqD.jpg" alt="">
+                  </div>
+                  <div class="down-content">
+                    <h4>Đinh Mạnh Hùng</h4>
+                    <span>Trưởng nhóm</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="item">
+              <a target="_blank"  href="https://www.facebook.com/ngo.h.khanh.716">
+                <div class="portfolio-item">
+                  <div class="thumb">
+                    <img src="https://graph.facebook.com/100034337931817/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="">
+                  </div>
+                  <div class="down-content">
+                    <h4>Ngô Hông Khanh</h4>
+                    <span>Thành viên</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="item">
+              <a target="_blank"   href="https://www.facebook.com/profile.php?id=100088260422422">
+                <div class="portfolio-item">
+                  <div class="thumb">
+                    <img src="https://graph.facebook.com/100088260422422/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="">
+                  </div>
+                  <div class="down-content">
+                    <h4>Trần Ngọc Ánh</h4>
+                    <span>Thành viên</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="item">
+              <a target="_blank"  href="https://www.facebook.com/naucuabame">
+                <div class="portfolio-item">
+                  <div class="thumb">
+                    <img src="https://graph.facebook.com/100004709207159/picture?type=large&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="">
+                  </div>
+                  <div class="down-content">
+                    <h4>Trần Thị Thảo Nguyên</h4>
+                    <span>Thành viên</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="blog" class="blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 offset-lg-4  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.3s">
+          <div class="section-heading">
+            <h6>Tải về</h6>
+            <h4>Dự án <em>AP2</em></h4>
+            <div class="line-dec"></div>
+          </div>
+        </div>
+        <div class="col-lg-6 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+          <div class="blog-post">
+            <div class="thumb">
+              <a href="#"><img src="./IMG/Fast loading-amico.svg" alt=""></a>
+            </div>
+            <div class="down-content">
+              <span class="category">Project AP2</span>
+              <span class="date">22/09/2023</span>
+              <a href="#">
+                <h4>Toàn bộ dự án</h4>
+              </a>
+              <p>Chỉ thành viên nhóm mới có thể truy cập mục này.</p>
+              <span class="author"><img src="./IMG/HunqD.jpg" alt=""><b>HunqD</b></span>
+              <div class="border-first-button"><a href="#">Truy cập ngay</a></div>
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Lập trình bởi: <b><a href="https://facebook.com/HunqD" target="_parent" title="HunqD">HunqD</a></b> 
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/animation.js"></script>
+  <script src="assets/js/imagesloaded.js"></script>
+  <script src="assets/js/custom.js"></script>
 
 </body>
-<script src="./Database/Script.js"></script>
 
 </html>
