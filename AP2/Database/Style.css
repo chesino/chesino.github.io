@@ -157,6 +157,11 @@ h1 {
     line-height: 1.5;
     margin-bottom: 5px;
 }
+.content p.red {
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
+}
 .Download {
     font-size: 20px;
     padding: 10px;
@@ -169,4 +174,10 @@ h1 {
     width: 100%;
     margin-top: 10px;
     text-align: center;
+}
+#copy {
+    cursor: pointer;
+}
+#copy:hover {
+    font-weight: bold;
 }

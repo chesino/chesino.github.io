@@ -5,14 +5,14 @@ var navbar = document.getElementById("navbar");
 var sticky = navbar.offsetTop;
 
 function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-    document.body.classList.add("padding")
-  } else {
-    navbar.classList.remove("sticky");
-    document.body.classList.remove("padding")
+    if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+        document.body.classList.add("padding")
+    } else {
+        navbar.classList.remove("sticky");
+        document.body.classList.remove("padding")
 
-  }
+    }
 }
 
 function openTab(evt, tabName) {
@@ -40,7 +40,7 @@ function populateTable(tableId, data) {
         const status = rowData.Status;
         const statusClass = status === 0 ? 'Stop' : (status !== 0 ? 'Run' : '');
 
-        if (key === "Motor" || key === "Inverter" ) {
+        if (key === "Motor" || key === "Inverter") {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${rowData.Description}</td>
@@ -79,3 +79,11 @@ fetchJsonData('./Database/Data.json', jsonData => {
     populateTable('E-table', jsonData.E);
     // Call populateTable for other tables as needed
 });
+
+
+
+
+function CopyPass() {
+    navigator.clipboard.writeText('CDTK14');
+    alert('Sao chép thành công.')
+}
