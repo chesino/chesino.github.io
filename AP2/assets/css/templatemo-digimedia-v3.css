@@ -140,6 +140,13 @@ img {
 global styles
 --------------------------------------------- 
 */
+.right-image hr {
+  height: 3px;
+  background-color: #4da6e7;
+  border: none;
+  margin: 50px 0;
+}
+
 html,
 body {
   background: #fff;
@@ -886,7 +893,7 @@ Banner Style
   position: relative;
   overflow: hidden;
 }
-
+/* 
 .main-banner:after {
   content: '';
   background-image: url(../images/slider-left-dec.jpg);
@@ -909,7 +916,7 @@ Banner Style
   width: 1159px;
   height: 797px;
   z-index: -1;
-}
+} */
 
 .main-banner .left-content {
   margin-right: 15px;
