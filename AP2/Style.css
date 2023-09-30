@@ -171,13 +171,12 @@ body {
 }
 .Home {
     text-align: center;
-    padding: 100px 0;
+    padding: 30px 0;
     background-color: #00000085;
 }
 
 .Home h1 {
     font-size: 50px;
-    margin-bottom: 20px;
 }
 
 .Home h1 b {
@@ -253,7 +252,7 @@ progress::-webkit-progress-value {
 
 .Blog {
     width: 100%;
-    background-color: #000000;
+    background-color: #000;
 }
 
 #rss-feed {
@@ -373,3 +372,10 @@ progress::-webkit-progress-value {
     color: greenyellow;
     text-decoration: none;
 }
+
+#Welcome {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    margin-bottom: 10px;
+}
+  
