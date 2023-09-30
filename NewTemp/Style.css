@@ -7,13 +7,12 @@ body {
     background-color: #111;
     color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-image: url(./wallpaperflare.com_wallpaper.jpg);
-    background-size: cover;
 }
 
 ::selection {
     background-color: #111;
 }
+
 .topnav {
     overflow: hidden;
     background-color: #000;
@@ -35,7 +34,8 @@ body {
 }
 
 .topnav a.active:first-child {
-    padding: 10px 16px;
+    max-width: 110px;
+    padding: 8px 16px;
     font-size: 20px;
     text-decoration-line: none;
     text-transform: none;
@@ -43,7 +43,7 @@ body {
     background-color: white;
     color: #000;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
     border-radius: 2px;
 }
 
@@ -74,8 +74,19 @@ body {
     .topnav a.icon {
         float: right;
         display: block;
+        right: 22px;
+        top: 12px;
+        border-radius: 2px;
+        background-color: #fff;
+        color: #000;
+        position: absolute;
+        right: 22px;
+        top: 12px;
+        font-size: 20px;
     }
-
+    .topnav a.icon:hover {
+        background-color: #ffffff85;
+    }
     .topnav a {
         margin: 10px 0;
 
@@ -88,14 +99,18 @@ body {
     }
 
     .topnav.responsive .icon {
+        border-radius: 2px;
+        background-color: #fff;
         color: #000;
         position: absolute;
         right: 22px;
         top: 12px;
+        font-size: 20px;
     }
 
     .topnav.responsive .icon:hover {
-        color: #fff;
+        background-color: #ffffff85;
+        color: #000;
     }
 
     .topnav.responsive a {
@@ -110,6 +125,7 @@ body {
     }
 
     .topnav a:first-child {
+        max-width: 110px;
         background-color: transparent;
         margin-right: 0px;
         margin-left: 10px;
@@ -119,7 +135,7 @@ body {
 }
 
 .Content {
-    min-height: 100vh;
+    width: 100%;
 }
 
 .Content img {
@@ -146,11 +162,16 @@ body {
     color: #000;
     box-shadow: 0 0 0px 2px black,
         0 0 0px 4px white;
-  
-
-   
 }
-
+.BG {
+    background-image: url(./wallpaperflare.com_wallpaper.jpg);
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+}
 .Home {
     text-align: center;
     padding: 100px 0;
@@ -161,23 +182,41 @@ body {
     font-size: 50px;
     margin-bottom: 20px;
 }
+
 .Home h1 b {
-    padding: 0 10px;
+    cursor: cell;
+    padding: 0 10px ;
     border-radius: 2px;
     color: #000;
     background-color: #fff;
 }
+.Home h1 b:hover{
+    color: #fff;
+    background-color: #0b4d58;
+}
 
-.About {
+.Block {
     background-color: #000;
-    height: 100vh;
+    padding: 20px;
     text-align: center;
-    padding: 10px 40px;
+    height: 100vh;
+}
+.Block h1 {
+    text-transform: capitalize;
+    margin: 10px 0;
+}
+.Block h2 {
+    text-align: left;
+}
+.Block .Progress {
+    padding: 20px;
 }
 
 .progress-container {
-    width: 100%; /* Độ rộng của thanh tiến độ */
-    height: 25px; /* Chiều cao của thanh tiến độ */
+    width: 100%;
+    /* Độ rộng của thanh tiến độ */
+    height: 25px;
+    /* Chiều cao của thanh tiến độ */
     margin: 10px auto;
     position: relative;
 
@@ -185,24 +224,28 @@ body {
 
 
 progress {
-    width: 100%; /* Độ rộng của thanh tiến độ */
-    height: 25px; /* Chiều cao của thanh tiến độ */
-    background-color: #ddd; 
+    width: 100%;
+    /* Độ rộng của thanh tiến độ */
+    height: 25px;
+    /* Chiều cao của thanh tiến độ */
+    background-color: #eee;
 
 }
+
 .progress-label {
     position: absolute;
     font-weight: bold;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff; /* Màu chữ */
+    color: #fff;
+    /* Màu chữ */
 }
 
 progress::-webkit-progress-bar {
-    background-color: #fff; 
+    background-color: #000000e3;
 }
 
 progress::-webkit-progress-value {
-    background-image: linear-gradient(to right, #0b4d58 , #0b4d58);
+    background-image: linear-gradient(to right, #0b4d58, #0b4d58);
 }
