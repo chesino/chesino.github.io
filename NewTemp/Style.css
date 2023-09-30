@@ -138,9 +138,6 @@ body {
     width: 100%;
 }
 
-.Content img {
-    width: 100%;
-}
 
 .btn3D {
     cursor: pointer;
@@ -197,9 +194,8 @@ body {
 
 .Block {
     background-color: #000;
-    padding: 20px;
+    padding: 20px ;
     text-align: center;
-    height: 100vh;
 }
 .Block h1 {
     text-transform: capitalize;
@@ -248,4 +244,131 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
     background-image: linear-gradient(to right, #0b4d58, #0b4d58);
+}
+.ticks-list {
+    text-align: left;
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.Blog {
+    width: 100%;
+    background-color: #00000073;
+}
+
+#rss-feed {
+    padding-bottom: 10px;
+    padding: 4px;
+
+}
+
+.Feed {
+    color: #fff;
+    background-color: #000;
+    margin-bottom: 10px;
+    padding: 15px 10px 10px 10px;
+    border-radius: 10px;
+}
+
+.Feed:first-child {
+    margin-top: 0;
+}
+
+.Feed:last-child {
+    margin-bottom: 0;
+}
+
+.Feed.Active {
+    background-color: #252525;
+}
+
+.Head .Author {
+    display: grid;
+    grid-template-columns: 60px auto 30px;
+    gap: 2px;
+}
+
+.Head .Author .Avatar {
+    text-align: center;
+}
+
+.Head .Author .Avatar img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.Head .Author .Info .Name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Head .Author .Info .Time {
+    font-size: 14px;
+}
+
+.Head .Author .Func.Share {
+    text-align: center;
+    padding-top: 5px;
+}
+
+.Head .Author .Func.Share i {
+    font-size: 20px;
+}
+
+.wp-block-video video {
+    max-width: 100%;
+    margin: 5px 0 0 0;
+}
+
+.Body .Status {
+    padding: 5px;
+}
+
+.Body .Status h1 {
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.figure {
+    margin: 5px 0;
+}
+
+.Body .Status img,
+.Body .Status video {
+    border-radius: 10px;
+    border: 2px solid var(--BodyBG);
+    box-sizing: border-box;
+}
+
+.Body .Status video {
+    background-color: var(--BodyBG);
+}
+
+
+.Body .Status .Content .wp-smiley {
+    border: none;
+}
+
+.Status .wp-block-gallery {
+    column-count: 3 !important;
+    --webkit-column-count: 2;
+    --moz-column-count: 2;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.Status .wp-block-image {
+    overflow: auto;
+    margin: 5px 0;
+}
+
+.Status .wp-block-gallery .wp-block-image {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.Block a {
+    color: greenyellow;
+    text-decoration: none;
 }
