@@ -253,7 +253,7 @@ progress::-webkit-progress-value {
 
 .Blog {
     width: 100%;
-    background-color: #00000073;
+    background-color: #000000;
 }
 
 #rss-feed {
@@ -336,6 +336,8 @@ progress::-webkit-progress-value {
 
 .Body .Status img,
 .Body .Status video {
+    height: auto;
+    width: 100%;
     border-radius: 10px;
     border: 2px solid var(--BodyBG);
     box-sizing: border-box;
@@ -359,7 +361,6 @@ progress::-webkit-progress-value {
 }
 
 .Status .wp-block-image {
-    overflow: auto;
     margin: 5px 0;
 }
 
