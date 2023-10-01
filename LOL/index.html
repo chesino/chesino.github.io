@@ -32,7 +32,8 @@
 </head>
 
 <body>
-    <div class="Profile">
+    <div class="Profile" id="Profile" >
+        <div class="BG"></div>
         <div class="BlockOne">
             <div class="SearchBox">
                 <div class="Search">
@@ -46,20 +47,21 @@
             </div>
             <div class="MainChampion" id="MainChampion">
                 <div class="Head">
-                    <div class="Icon">
+                    <div class="Icon" onclick="toggleBG()">
                         <img id="profileIconId" src="/DATA/logo.png" alt="" srcset="">
                         <div id="summonerLevel" class="Level">1</div>
                     </div>
                     <div class="Info">
                         <h1 id="summonerName">Chesino</h1>
-                        <!-- <p id="summonerID"></p> -->
+                        <input class="InfoSummoner" id="summonerID" placeholder="summonerID"></input>
+                        <input class="InfoSummoner" id="PUUID" placeholder="PUUID "></input>
                     </div>
                 </div>
             </div>
             <div class="Content">
                 <div class="Ranked">
-                    <div class="Solo">
-                        <h1>Xếp hạng Đơn đôi</h1>
+                    <div class="InfoRank" id="soloRank">
+                        <h1 id="RankType">Xếp hạng Đơn đôi</h1>
                         <hr>
                         <div class="Rank">
                             <img id="RankIcon" src="./Data/Ranks/IRON.png" alt="" srcset="">
@@ -67,6 +69,16 @@
                         <h2 id="RankInfo">Sắt </h2>
                         <h3 id="leaguePoints">0 Điểm</h3>
                         <p id="PointsWL">W:0 | L:0</p>
+                    </div>
+                    <div class="InfoRank" id="flexRank">
+                        <h1 id="RankTypeFlex">Xếp hạng Đơn đôi</h1>
+                        <hr>
+                        <div class="Rank">
+                            <img id="RankIconFlex" src="./Data/Ranks/IRON.png" alt="" srcset="">
+                        </div>
+                        <h2 id="RankInfoFlex">Sắt </h2>
+                        <h3 id="leaguePointsFlex">0 Điểm</h3>
+                        <p id="PointsWLFlex">W:0 | L:0</p>
                     </div>
                 </div>
                 <div class="ChampionMaster">
@@ -147,6 +159,26 @@
                                     <h2>Nasus</h2>
                                     <h3>0/17/5</h3>
                                 </div>
+                                <div class="Items">
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/2003.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/2003.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/2003.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/2003.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/2003.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/2003.png" alt="Item1">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,11 +191,31 @@
                             <div class="Body">
                                 <div class="Champion">
                                     <img src="/DATA/logo.png" alt=""
-                                        srcset="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/Nasus.png">
+                                        srcset="https://ddragon.leagueoflegends.com/cdn/13.17.1/img/champion/Yasuo.png">
                                 </div>
                                 <div class="Info">
-                                    <h2>Nasus</h2>
-                                    <h3>0/17/5</h3>
+                                    <h2>Yasuo</h2>
+                                    <h3>0/10/5</h3>
+                                </div>
+                                <div class="Items">
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/6673.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/3006.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/6672.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/3105.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/3123.png" alt="Item1">
+                                    </div>
+                                    <div class="Item">
+                                        <img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/3067.png" alt="Item1">
+                                    </div>
                                 </div>
                             </div>
                         </div>

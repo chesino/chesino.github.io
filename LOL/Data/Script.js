@@ -59,8 +59,8 @@ async function fetchSummonerInfo() {
         document.getElementById('profileIconId').src = `https://ddragon.leagueoflegends.com/cdn/${VER}/img/profileicon/${data.profileIconId}.png`;
         document.getElementById('summonerName').innerText = data.name;
         document.getElementById('summonerLevel').innerText = data.summonerLevel;
-        // document.getElementById('summonerID').innerText = data.id;
-
+        document.getElementById('summonerID').value = data.id;
+        document.getElementById('PUUID').value = data.puuid;
         return data;
     } catch (error) {
         console.error('Error fetching summoner info:', error);
@@ -70,33 +70,67 @@ async function fetchSummonerInfo() {
 }
 
 // Hàm lấy thông tin Rank và xử lý
+// Hàm lấy thông tin Rank và xử lý
 async function fetchRankInfo(summonerId) {
     try {
         const rankApiUrl = `https://vn2.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${API_KEY}`;
         const rankData = await fetchJson(rankApiUrl);
+        console.log(rankApiUrl);
 
         if (rankData.length > 0) {
-            const rankInfo = rankData[0];
-            document.getElementById('RankIcon').src = `./Data/Ranks/${rankInfo.tier}.png`;
+            const soloRankInfo = rankData.find(rank => rank.queueType === 'RANKED_SOLO_5x5');
+            const flexRankInfo = rankData.find(rank => rank.queueType === 'RANKED_FLEX_SR');
 
-            const rankNames = {
-                'IRON': 'Sắt',
-                'BRONZE': 'Đồng',
-                'SILVER': 'Bạc',
-                'GOLD': 'Vàng',
-                'EMERALD': 'Lục bảo',
-                'DIAMOND': 'Kim cương',
-                'MASTER': 'Cao thủ',
-                'GRANDMASTER': 'Đại cao thủ',
-                'CHALLENGER': 'Thách đấu'
-            };
+            if (soloRankInfo) {
+                // Xử lý thông tin rank đơn đôi
+                document.getElementById('RankIcon').src = `./Data/Ranks/${soloRankInfo.tier}.png`;
+                const rankNames = {
+                    'IRON': 'Sắt',
+                    'BRONZE': 'Đồng',
+                    'SILVER': 'Bạc',
+                    'GOLD': 'Vàng',
+                    'EMERALD': 'Lục bảo',
+                    'DIAMOND': 'Kim cương',
+                    'MASTER': 'Cao thủ',
+                    'GRANDMASTER': 'Đại cao thủ',
+                    'CHALLENGER': 'Thách đấu'
+                };
+                soloRankInfo.tier = rankNames[soloRankInfo.tier] || soloRankInfo.tier;
+                document.getElementById('RankType').innerText = 'Xếp hạng Đơn đôi';
+                document.getElementById('RankInfo').innerText = `${soloRankInfo.tier} ${soloRankInfo.rank}`;
+                document.getElementById('leaguePoints').innerText = `${soloRankInfo.leaguePoints} Điểm`;
+                document.getElementById('PointsWL').innerText = `W:${soloRankInfo.wins}  |  L:${soloRankInfo.losses}`;
+            } else {
+                // Không có rank đơn đôi
+                document.getElementById('RankIcon').src = './Data/Ranks/IRON.png';
+                document.getElementById('RankInfo').innerText = 'Không có RANK.';
+            }
 
-            rankInfo.tier = rankNames[rankInfo.tier] || rankInfo.tier;
-
-            document.getElementById('RankInfo').innerText = `${rankInfo.tier} ${rankInfo.rank}`;
-            document.getElementById('leaguePoints').innerText = `${rankInfo.leaguePoints} Điểm`;
-            document.getElementById('PointsWL').innerText = `W:${rankInfo.wins}  |  L:${rankInfo.losses}`;
+            if (flexRankInfo) {
+                // Xử lý thông tin rank Linh Hoạt
+                document.getElementById('RankIconFlex').src = `./Data/Ranks/${flexRankInfo.tier}.png`;
+                const rankNamesFlex = {
+                    'IRON': 'Sắt',
+                    'BRONZE': 'Đồng',
+                    'SILVER': 'Bạc',
+                    'GOLD': 'Vàng',
+                    'EMERALD': 'Lục bảo',
+                    'DIAMOND': 'Kim cương',
+                    'MASTER': 'Cao thủ',
+                    'GRANDMASTER': 'Đại cao thủ',
+                    'CHALLENGER': 'Thách đấu'
+                };
+                flexRankInfo.tier = rankNamesFlex[flexRankInfo.tier] || flexRankInfo.tier;
+                document.getElementById('RankTypeFlex').innerText = 'Xếp hạng Linh Hoạt';
+                document.getElementById('RankInfoFlex').innerText = `${flexRankInfo.tier} ${flexRankInfo.rank}`;
+                document.getElementById('leaguePointsFlex').innerText = `${flexRankInfo.leaguePoints} Điểm`;
+                document.getElementById('PointsWLFlex').innerText = `W:${flexRankInfo.wins}  |  L:${flexRankInfo.losses}`;
+            } else {
+                // Không có rank Linh Hoạt
+                // Có thể cập nhật thông tin mặc định hoặc ẩn phần này nếu muốn
+            }
         } else {
+            // Không có rank
             document.getElementById('RankIcon').src = './Data/Ranks/IRON.png';
             document.getElementById('RankInfo').innerText = 'Không có RANK.';
         }
@@ -105,6 +139,7 @@ async function fetchRankInfo(summonerId) {
         document.getElementById('rank-info').innerHTML = '<p>Có lỗi xảy ra khi tìm kiếm thông tin rank.</p>';
     }
 }
+
 
 // Hàm lấy thông tin Mastery và xử lý
 async function fetchMasteryInfo(summonerId) {
@@ -216,7 +251,6 @@ async function fetchMatchHistory(puuid) {
             for (const gameId of matchHistoryData) {
                 const matchInfoApiUrl = `https://sea.api.riotgames.com/lol/match/v5/matches/${gameId}?api_key=${API_KEY}`;
                 const matchInfo = await fetchJson(matchInfoApiUrl);
-
                 // Lọc ra thông tin của puuid đã nhập vào
                 const participant = matchInfo.info.participants.find(participant => participant.puuid === puuid);
 
@@ -236,24 +270,55 @@ async function fetchMatchHistory(puuid) {
                     const matchInfoElem = document.createElement('div');
                     matchInfoElem.classList.add('Match');
 
+                    const defaultItemValue = 100; // Giá trị mặc định cho item khi là 0
+
+                    const item0Src = participant.item0 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item0}.png` : `/DATA/logo.png`;
+                    const item1Src = participant.item1 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item1}.png` : `/DATA/logo.png`;
+                    const item2Src = participant.item2 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item2}.png` : `/DATA/logo.png`;
+                    const item3Src = participant.item3 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item3}.png` : `/DATA/logo.png`;
+                    const item4Src = participant.item4 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item4}.png` : `/DATA/logo.png`;
+                    const item5Src = participant.item5 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item5}.png` : `/DATA/logo.png`;
+
+
                     matchInfoElem.innerHTML = `
 
 
                         <div class="${classWin}">
                             <div class="Head">
-                                <p>${queueType}</p>
-                                <p>${matchDateTimeString}</p>
+                            <p>${queueType}</p>
+                            <p>${matchDateTimeString}</p>
                             </div>
                             <div class="Body">
-                                <div class="Champion">
-                                    <img src="/DATA/logo.png" alt="" srcset="https://ddragon.leagueoflegends.com/cdn/${VER}/img/champion/${participant.championName}.png">
-                                </div>
-                                <div class="Info">
-                                    <h2>${participant.championName}</h2>
-                                    <h3>${participant.kills}/${participant.deaths}/${participant.assists}</h3>
-                                </div>
+                            <div class="Champion">
+                                <img src="/DATA/logo.png" alt="" srcset="https://ddragon.leagueoflegends.com/cdn/${VER}/img/champion/${participant.championName}.png">
+                            </div>
+                            <div class="Info">
+                                <h2>${participant.championName}</h2>
+                                <h3>${participant.kills}/${participant.deaths}/${participant.assists}</h3>
+                            </div>
+                         
+                            <div class="Items">
+                            <div class="Item">
+                                <img src="${item0Src}" alt="Item1">
+                            </div>
+                            <div class="Item">
+                                <img src="${item1Src}" alt="Item1">
+                            </div>
+                            <div class="Item">
+                                <img src="${item2Src}" alt="Item1">
+                            </div>
+                            <div class="Item">
+                                <img src="${item3Src}" alt="Item1">
+                            </div>
+                            <div class="Item">
+                                <img src="${item4Src}" alt="Item1">
+                            </div>
+                            <div class="Item">
+                                <img src="${item5Src}" alt="Item1">
+                            </div>
                             </div>
                         </div>
+
                     `;
                     matchHistoryInfo.appendChild(matchInfoElem);
                 }
@@ -301,7 +366,7 @@ searchButton.addEventListener('click', async () => {
             }
         }
     } catch (error) {
-        alert("Không tồn tại") ;
+        alert("Không tồn tại");
     }
 });
 
@@ -386,3 +451,32 @@ window.addEventListener('hashchange', () => {
     summonerNameInput.value = hash;
     runSearch();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const bg = document.querySelector('.BG');
+
+    window.addEventListener('scroll', function () {
+        const scrolled = window.scrollY;
+        bg.style.backgroundPosition = `-${scrolled}px -${scrolled}px`;
+    });
+});
+
+var toggle = 0 ;
+function toggleBG() {
+    toggle++;
+    if (toggle === 1) {
+        document.getElementById('Profile').style.backgroundColor = '#111111ab';
+    } 
+    if (toggle === 2) {
+        document.getElementById('Profile').style.backgroundColor = '#111111ea';
+    }
+    if (toggle === 3) {
+        document.getElementById('Profile').style.backgroundColor = 'transparent';
+    }
+    if (toggle === 4) {
+        document.getElementById('Profile').style.backgroundColor = '#111111';
+        toggle = 0
+    } 
+  
+
+}
