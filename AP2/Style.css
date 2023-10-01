@@ -168,6 +168,8 @@ body {
     position: fixed;
     z-index: -1;
     top: 0;
+    transition: transform 0.5s ease-out;
+    background-position: left;
 }
 .Home {
     text-align: center;

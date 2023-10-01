@@ -52,3 +52,20 @@ setInterval(() => {
     vWelcome.style.opacity = 1;
   }, 1000);
 }, 10000);
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const bg = document.querySelector('.BG');
+
+  window.addEventListener('scroll', function () {
+      const scrolled = window.scrollY;
+      if (scrolled <= 1100) {
+        bg.style.backgroundPosition = ` -${scrolled}px`;
+      }else{
+        console.log(scrolled - 1100);
+        bg.style.backgroundPosition = `${-1100 + scrolled - 1100}px`;
+      }
+  
+  });
+});
+
