@@ -47,28 +47,90 @@
     <div class="Content">
         <div class="BG"></div>
 
-        <!-- <div class="Home">
-            <h1>PROJECT <b>AP2.</b></h1>
-            <a href="https://drive.google.com/drive/folders/1-7JDCy73Hdle9CDwA4Wa8dsUwHtPzE08?usp=sharing" target="_blank" rel="noopener noreferrer">
-                <button class="btn3D">Tải Dự Án Ngay</button>
-            </a>
-        </div> -->
-
         <div class="Home">
             <div id="Welcome">
                 <h1>PROJECT <b>AP2.</b></h1>
             </div>
-            <a href="https://drive.google.com/drive/folders/1-7JDCy73Hdle9CDwA4Wa8dsUwHtPzE08?usp=sharing" target="_blank" rel="noopener noreferrer">
+            <a href="https://drive.google.com/drive/folders/1-7JDCy73Hdle9CDwA4Wa8dsUwHtPzE08?usp=sharing"
+                target="_blank" rel="noopener noreferrer">
                 <button class="btn3D">Tải Dự Án Ngay</button>
             </a>
         </div>
 
-        <div class="Blog">
-            <div id="rss-feed"></div>
+        <div class="Block">
+            <div class="Recipe">
+                <div class="A">
+                    <h1>Tính toán tín hiệu sang đơn vị.</h1>
+                    <hr>
+                    <h5>
+                        Ta có một cảm biến với tín hiệu: 4mA-20mA. Tương đương với 0-150Bar.
+                        <br>
+                        Vậy 75Bar bằng bao nhiêu mA ?
+                    </h5>
+                    <br>
+                    <div class="Box">
+                        <div class="Input">
+                            <label for="A-Min">A tối thiểu</label>
+                            <input value="0" type="number" names="A-Min" id="A-Min">
+                        </div>
+
+                        <div class="Input">
+                            <label for="A-Need">A cần tìm</label>
+                            <input value="75"  type="number" name="A-Need" id="A-Need">
+                        </div>
+
+                        <div class="Input">
+                            <label for="A-Max">A tối đa</label>
+                            <input value="150" type="number" name="A-Max" id="A-Max">
+                        </div>
+                        <div class="Input">
+                            <label for="A-Unit">Đơn vị</label>
+                            <input value="Bar" type="text" name="A-Unit" id="A-Unit">
+                        </div> 
+                    </div>
+
+                    <div class="Box">
+                        <div class="Input">
+                            <label for="B-Min">B tối thiểu</label>
+                            <input value="4" type="number" names="B-Min" id="B-Min">
+                        </div>
+
+                        <div class="Input">
+                            <label for="B-Need">B cần tìm</label>
+                            <input  type="number" name="B-Need" id="B-Need">
+                        </div>
+
+                        <div class="Input">
+                            <label for="B-Max">B tối đa</label>
+                            <input value="20" type="number" name="B-Max" id="B-Max">
+                        </div>
+                        <div class="Input">
+                            <label for="A-Unit">Đơn vị</label>
+                            <input value="mA" type="text" name="B-Unit" id="B-Unit">
+                        </div> 
+                    </div>
+
+                    <div id="Result">
+
+                    </div>
+
+                    <button onclick="ClearA()">Xóa</button>
+                    <button onclick="CalculatorA()">Tính</button>
+                   
+                </div>
+
+                <div class="B">
+                    <h1>Tính U I R</h1>
+                    <hr>
+                </div>
+
+            </div>
         </div>
 
-        <div class="Block" style="background-color: transparent;">
-            <div style="height: 200vh;"></div>
+        <div class="Blog">
+            <div id="rss-feed">
+                <h3 style="text-align: center; padding: 50px 0;">Đang tải bài viết, hoặc có thể đang lỗi</h3>
+            </div>
         </div>
 
 
