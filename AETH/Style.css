@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-image: url(/AP2/wallpaperflare.com_wallpaper.jpg);
+    background-size: cover;
+    background-color: #000;
+}
+
+.Card {
+    padding: 10px;
+    color: #fff;
+    height: 100vh;
+    background-color: #0000009d;
+}
+
+.AddTally {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto 100px;
+    gap: 5px;
+}
+
+.AddTally input {
+    font-size: 20px;
+    padding-left: 10px;
+    font-weight: bold;
+    height: 50px;
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    border: none;
+}
+
+.AddTally button {
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+}
+
+.Tally {
+    color: #fff;
+    background-color: #111;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.Head {
+    display: flex;
+    margin: 5px 0;
+}
+
+.Item {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Del-Item {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    border-radius: 4px;
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.Body {
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+    gap: 5px;
+}
+
+.Body button {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+    border: none;
+    font-size: 30px;
+    font-weight: bold;
+    display: block;
+}
+
+.Body button:first-child {
+    color: red;
+    background-color: rgb(46, 0, 0);
+}
+
+.Body button:last-child {
+    color: rgb(0, 255, 0);
+    background-color: rgb(0, 41, 0);
+}
+
+.Body input {
+    text-align: center;
+    font-size: 30px;
+    height: 50px;
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    border: none;
+}

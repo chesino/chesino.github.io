@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+<html>
+
+<head>
+    <!-- Tiêu đề trang -->
+    <title>Chesino</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    
+    <!-- Đảm bảo đặt meta tag sau -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="./DataWeb/img/chesino.png" />
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="./DataWeb/img/chesino.png" sizes="150x150" />
+
+    <!-- Ảnh -->
+    <meta property="og:image" content="./DataWeb/img/bannerlogo.png" />
+
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Style.css" />
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="Card">
+        <h1>Bộ đếm</h1>
+        <hr>
+        <div class="AddTally">
+            <input type="text" id="itemName">
+            <button onclick="addTally()">Thêm</button>
+        </div>
+        <div id="Tally"></div>
+    </div>
+
+</body>
+
+<script src="./Script.js"></script>
+</html>
