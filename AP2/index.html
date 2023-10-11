@@ -17,13 +17,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- Biểu tượng cho web -->
-    <link rel="icon" href="./DataWeb/img/chesino.png" />
+    <link rel="icon" href="/DATA/logo.png" />
 
     <!-- Biểu tượng iPhone -->
-    <link rel="apple-touch-icon" href="./DataWeb/img/chesino.png" sizes="150x150" />
+    <link rel="apple-touch-icon" href="/DATA/logo.png" sizes="150x150" />
 
     <!-- Ảnh -->
-    <meta property="og:image" content="./DataWeb/img/bannerlogo.png" />
+    <meta property="og:image" content="/DATA/logo.png" />
 
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Style.css" />
@@ -57,7 +57,7 @@
             </a>
         </div>
 
-        <div class="Block">
+        <div class="Block" style="display: none;">
             <div class="Recipe">
                 <div class="A">
                     <h1>Tính toán tín hiệu sang đơn vị.</h1>
@@ -76,7 +76,7 @@
 
                         <div class="Input">
                             <label for="A-Need">A cần tìm</label>
-                            <input value="75"  type="number" name="A-Need" id="A-Need">
+                            <input value="75" type="number" name="A-Need" id="A-Need">
                         </div>
 
                         <div class="Input">
@@ -86,7 +86,7 @@
                         <div class="Input">
                             <label for="A-Unit">Đơn vị</label>
                             <input value="Bar" type="text" name="A-Unit" id="A-Unit">
-                        </div> 
+                        </div>
                     </div>
 
                     <div class="Box">
@@ -97,7 +97,7 @@
 
                         <div class="Input">
                             <label for="B-Need">B cần tìm</label>
-                            <input  type="number" name="B-Need" id="B-Need">
+                            <input type="number" name="B-Need" id="B-Need">
                         </div>
 
                         <div class="Input">
@@ -107,7 +107,7 @@
                         <div class="Input">
                             <label for="A-Unit">Đơn vị</label>
                             <input value="mA" type="text" name="B-Unit" id="B-Unit">
-                        </div> 
+                        </div>
                     </div>
 
                     <div id="Result">
@@ -116,7 +116,7 @@
 
                     <button onclick="ClearA()">Xóa</button>
                     <button onclick="CalculatorA()">Tính</button>
-                   
+
                 </div>
 
                 <div class="B">
@@ -128,6 +128,10 @@
         </div>
 
         <div class="Blog">
+            <div class="Search">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm chưa khả dụng">
+                <button onclick="searchFeeds()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
             <div id="rss-feed">
                 <h3 style="text-align: center; padding: 50px 0;">Đang tải bài viết, hoặc có thể đang lỗi</h3>
             </div>
