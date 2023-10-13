@@ -10,7 +10,7 @@
     <!-- Bộ giải mã và phân loại thiết bị -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    
+
     <!-- Đảm bảo đặt meta tag sau -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -37,18 +37,27 @@
         <h1>Bộ Đếm</h1>
         <p>UNO ?</p>
         <div class="AddTally">
-            <input type="text" id="itemName">
+            <input type="text" id="itemName" placeholder="Ai ?">
             <button onclick="addTally()"><i class="fa-solid fa-circle-plus"></i></button>
             <button id="DeleteAll"><i class="fa-solid fa-trash"></i></button>
         </div>
         <div id="Tally"></div>
+        <div class="HistoryTally">
+            <h1>Lịch sử</h1>
+            <div id="HistoryTally"></div>
+        </div>
     </div>
-    <div class="Card">
+    <div class="Card" style="padding-bottom: 50px;">
         <h1>Vòng quay</h1>
         <p>Đang phát triển</p>
+    </div>
+
+    <div class="HunqD">
+        <p>Thiết kế & lập trình bởi <a href="facebook.com/HunqD">HunqD</a></p>
     </div>
 
 </body>
 
 <script src="./Script.js"></script>
+
 </html>

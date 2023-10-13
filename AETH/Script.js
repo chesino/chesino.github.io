@@ -1,9 +1,5 @@
-// Load existing tally data from local storage
 document.addEventListener('DOMContentLoaded', () => {
-    const savedTallies = JSON.parse(localStorage.getItem('tallies')) || [];
-    savedTallies.forEach(tally => {
-        addTally(tally.itemName);
-    });
+    loadFromLocalStorage();
 });
 
 const itemNameEnter = document.getElementById('itemName');
@@ -13,8 +9,13 @@ itemNameEnter.addEventListener('keydown', (event) => {
     }
 });
 
-function addTally(itemName) {
+const HistoryTally = document.getElementById("HistoryTally");
+let currentLog = null;
+let timeoutId = null;
+
+function addTally(itemName, quantity) {
     itemName = itemName || document.getElementById("itemName").value;
+    quantity = quantity || 0;
 
     if (itemName.trim() !== "") {
         var newTally = document.createElement("div");
@@ -52,17 +53,19 @@ function addTally(itemName) {
         minusButton.addEventListener("click", function () {
             var inputNumber = body.querySelector("input");
             inputNumber.value = Math.max(0, parseInt(inputNumber.value) - 1);
+            logValueDelayed(itemName, -1);
         });
 
         var numberInput = document.createElement("input");
         numberInput.type = "number";
-        numberInput.value = "0";
+        numberInput.value = quantity;
 
         var plusButton = document.createElement("button");
         plusButton.innerHTML = '<i class="fa-solid fa-plus"></i>';
         plusButton.addEventListener("click", function () {
             var inputNumber = body.querySelector("input");
             inputNumber.value = parseInt(inputNumber.value) + 1;
+            logValueDelayed(itemName, 1);
         });
 
         body.appendChild(minusButton);
@@ -81,20 +84,123 @@ function addTally(itemName) {
     }
 }
 
+function logValueDelayed(itemName, quantity) {
+    const currentTime = new Date();
+    const timeString = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+    const dateString = `${currentTime.getDate()}/${currentTime.getMonth() + 1}/${currentTime.getFullYear()}`;
+
+    const logText = `${itemName} ${quantity > 0 ? '+' : ''}${quantity} lúc ${timeString} - ${dateString}`;
+
+    if (currentLog === null || currentLog.itemName !== itemName) {
+        // Nếu không có thông báo hiện tại hoặc thông báo hiện tại không phải là cùng một mục
+        if (currentLog !== null) {
+            // Nếu có thông báo hiện tại, thêm vào HistoryTally
+            addToHistory(currentLog);
+        }
+        // Tạo một thông báo mới
+        currentLog = { itemName, quantity, time: currentTime };
+    } else {
+        // Nếu đang trong khoảng thời gian ngắn, cập nhật thông báo hiện tại
+        currentLog.quantity += quantity;
+        currentLog.time = currentTime;
+    }
+
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+        // Sau 1 giây, thêm thông báo hiện tại (nếu có) vào HistoryTally
+        if (currentLog !== null) {
+            addToHistory(currentLog);
+            currentLog = null;
+        }
+    }, 1500);
+}
+
+function addToHistory(log) {
+    const timeString = `${log.time.getHours()}:${log.time.getMinutes()}:${log.time.getSeconds()}`;
+    const dateString = `${log.time.getDate()}/${log.time.getMonth() + 1}/${log.time.getFullYear()}`;
+    const logText = `${log.itemName} ${log.quantity > 0 ? '+' : ''}${log.quantity} lúc ${timeString} - ${dateString}`;
+
+    const newParagraph = document.createElement("p");
+    newParagraph.innerText = logText;
+    HistoryTally.appendChild(newParagraph);
+    saveToLocalStorage();
+    saveHistoryToLocalStorage();
+}
+
 function saveToLocalStorage() {
     const tallies = [];
     const tallyElements = document.getElementsByClassName("Item");
-    for (const element of tallyElements) {
-        tallies.push({ itemName: element.innerText });
+    const tallyInputs = document.querySelectorAll(".Tally input");
+
+    for (let i = 0; i < tallyElements.length; i++) {
+        tallies.push({
+            itemName: tallyElements[i].innerText,
+            quantity: parseInt(tallyInputs[i].value)
+        });
     }
+
     localStorage.setItem('tallies', JSON.stringify(tallies));
 }
+
+function saveHistoryToLocalStorage() {
+    const historyLogs = [];
+    const historyItems = HistoryTally.querySelectorAll("p");
+
+    historyItems.forEach(item => {
+        historyLogs.push(item.innerText);
+    });
+
+    localStorage.setItem('historyLogs', JSON.stringify(historyLogs));
+}
+
+function loadFromLocalStorage() {
+    const savedTallies = JSON.parse(localStorage.getItem('tallies')) || [];
+    const savedHistoryLogs = JSON.parse(localStorage.getItem('historyLogs')) || [];
+
+    savedTallies.forEach(tally => {
+        addTally(tally.itemName, tally.quantity);
+    });
+
+    // Set input values based on loaded data
+    const tallyInputs = document.querySelectorAll(".Tally input");
+
+    savedTallies.forEach((tally, index) => {
+        tallyInputs[index].value = tally.quantity;
+    });
+
+    savedHistoryLogs.forEach(log => {
+        addToHistoryLog(log);
+    });
+}
+
+function addToHistoryLog(logText) {
+    const newParagraph = document.createElement("p");
+    newParagraph.innerText = logText;
+    HistoryTally.appendChild(newParagraph);
+}
+
+
 
 const deleteAllButton = document.getElementById("DeleteAll");
 deleteAllButton.addEventListener("click", function () {
     localStorage.removeItem('tallies');
+    localStorage.removeItem('historyLogs');
     document.getElementById("Tally").innerHTML = '';
+    document.getElementById("HistoryTally").innerHTML = '';
 });
 
 
 
+let lastClickTime = 0;
+
+document.addEventListener('click', function (event) {
+    let currentTime = new Date().getTime();
+    let clickTimeDifference = currentTime - lastClickTime;
+
+    if (clickTimeDifference < 300) { // Giả sử giới hạn thời gian giữa các lần click là 300ms
+        event.preventDefault(); // Ngăn chặn sự kiện mặc định của trình duyệt
+        // Các đoạn mã xử lý khác tùy thuộc vào yêu cầu của bạn
+    }
+
+    lastClickTime = currentTime;
+});
