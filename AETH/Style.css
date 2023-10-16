@@ -22,11 +22,13 @@ body {
 .dark-mode {
     --BG: #000;
     --TX: #fff;
-    --CR: #00000070;
+    --CR: #111;
     --BGI: url(./UNO2.jpg);
     --TALLY: #000;
 }
-
+button{
+    cursor: pointer;
+}
 .Card {
     padding: 10px;
     color: var(--TX);

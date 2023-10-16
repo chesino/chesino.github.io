@@ -119,7 +119,7 @@ function logValueDelayed(itemName, quantity) {
 function addToHistory(log) {
     const timeString = `${log.time.getHours()}:${log.time.getMinutes()}:${log.time.getSeconds()}`;
     const dateString = `${log.time.getDate()}/${log.time.getMonth() + 1}/${log.time.getFullYear()}`;
-    const logText = `${log.itemName} ${log.quantity > 0 ? '+' : ''}${log.quantity} lúc ${timeString} - ${dateString}`;
+    const logText = `${timeString} - ${log.itemName} ${log.quantity > 0 ? '+' : ''}${log.quantity}`;
 
     const newParagraph = document.createElement("p");
     newParagraph.innerText = logText;
@@ -192,16 +192,15 @@ deleteAllButton.addEventListener("click", function () {
 
 
 
-let lastClickTime = 0;
-
-document.addEventListener('click', function (event) {
-    let currentTime = new Date().getTime();
-    let clickTimeDifference = currentTime - lastClickTime;
-
-    if (clickTimeDifference < 300) { // Giả sử giới hạn thời gian giữa các lần click là 300ms
-        event.preventDefault(); // Ngăn chặn sự kiện mặc định của trình duyệt
-        // Các đoạn mã xử lý khác tùy thuộc vào yêu cầu của bạn
-    }
-
-    lastClickTime = currentTime;
+document.addEventListener('gesturestart', function (event) {
+    event.preventDefault(); // Chặn sự kiện zoom
 });
+
+var lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    var now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
