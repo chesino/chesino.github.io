@@ -3,10 +3,35 @@
     box-sizing: border-box;
 }
 
+:root {
+    --BG: #fff;
+    --CL: #000;
+    --HOME: #47d4ff;
+    --BLOG: #eee;
+    --CLFEED: #000;
+    --FEED: #fff;
+    --BBLQ: #ff2d2d;
+    --CBLQ: #ff2d2d;
+    --BLQ: #cfcfcf;
+}
+
 body {
-    background-color: #111;
-    color: #fff;
+    background-color: var(--BG);
+    color: var(--CL);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.dark-mode {
+    --BG: #111;
+    --CL: #fff;
+    --HOME: #000000e8;
+    --BLOG: #000;
+    --CLFEED: #eee;
+    --FEED: #111;
+    --BBLQ: #34ff2d;
+    --CBLQ: #34ff2d;
+    --BLQ: #000;
+    
 }
 
 ::selection {
@@ -84,9 +109,11 @@ body {
         top: 12px;
         font-size: 20px;
     }
+
     .topnav a.icon:hover {
         background-color: #ffffff85;
     }
+
     .topnav a {
         margin: 10px 0;
 
@@ -160,20 +187,12 @@ body {
     box-shadow: 0 0 0px 2px black,
         0 0 0px 4px white;
 }
-.BG {
-    background-image: url(./wallpaperflare.com_wallpaper.jpg);
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    transition: transform 0.5s ease-out;
-    background-position: left;
-}
+
+
 .Home {
     text-align: center;
     padding: 30px 0;
-    background-color: #00000085;
+    background-color: var(--HOME);
 }
 
 .Home h1 {
@@ -182,28 +201,32 @@ body {
 
 .Home h1 b {
     cursor: cell;
-    padding: 0 10px ;
+    padding: 0 10px;
     border-radius: 2px;
-    color: #000;
-    background-color: #fff;
+    color: var(--HOME);
+    background-color: var(--CL);
 }
-.Home h1 b:hover{
+
+.Home h1 b:hover {
     color: #fff;
     background-color: #0b4d58;
 }
 
 .Block {
     background-color: #000000ec;
-    padding: 20px ;
+    padding: 20px;
     text-align: center;
 }
+
 .Block h1 {
     text-transform: capitalize;
     margin: 10px 0;
 }
+
 .Block h2 {
     text-align: left;
 }
+
 .Block .Progress {
     padding: 20px;
 }
@@ -245,6 +268,7 @@ progress::-webkit-progress-bar {
 progress::-webkit-progress-value {
     background-image: linear-gradient(to right, #0b4d58, #0b4d58);
 }
+
 .ticks-list {
     text-align: left;
     padding-left: 20px;
@@ -253,14 +277,16 @@ progress::-webkit-progress-value {
 
 .Blog {
     width: 100%;
-    background-color: #000;
+    background-color: var(--BLOG);
 }
+
 .Search {
     display: flex;
     gap: 5px;
     padding: 10px;
 }
-.Search input{
+
+.Search input {
     font-size: 16px;
     padding: 10px 5px;
     width: 100%;
@@ -268,11 +294,12 @@ progress::-webkit-progress-value {
     border-radius: 8px;
     border: none;
 }
-input:focus{
+
+input:focus {
     outline: none;
 }
 
-.Search button{
+.Search button {
     font-size: 18px;
     padding: 12px 14px;
     display: block;
@@ -286,9 +313,9 @@ input:focus{
 }
 
 .Feed {
-    color: #fff;
-    background-color: #111;
-    margin-bottom: 10px;
+    color: var(--CLFEED);
+    background-color: var(--FEED);
+    margin-bottom: 20px;
     padding: 15px 10px 10px 10px;
     border-radius: 10px;
 }
@@ -344,13 +371,36 @@ input:focus{
     margin: 5px 0 0 0;
 }
 
+.Feed .Body ol {
+    list-style-type: upper-latin;
+}
+
+.Feed .Body p {
+    margin: 10px 0;
+}
+
+.Feed .Body strong,
+.Feed .Body mark {
+    color: var(--CBLQ) !important;
+    font-weight: bold;
+}
+
+.Feed .Body blockquote {
+    background-color: var(--BLQ);
+    border-left: 3px solid var(--BBLQ);
+    padding: 1px 0;
+    padding-left: 10px;
+}
+
+
+
 .Body .Status {
     padding: 5px;
 }
 
 .Body .Status h1 {
     font-size: 20px;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
 }
 
 .figure {
@@ -408,6 +458,7 @@ input:focus{
     font-size: 24px;
     margin-bottom: 20px;
 }
+
 .Recipe hr {
     border: none;
     height: 5px;
@@ -415,26 +466,29 @@ input:focus{
     margin: 10px 0;
     border-radius: 10px;
 }
+
 .Recipe .A input {
     display: block;
     width: 100%;
     padding: 10px;
     margin: 10px 0 20px 0;
     border-radius: 4px;
-    border: none ;
+    border: none;
     font-size: 18px;
 }
+
 .Recipe .A button {
     margin: 10px 0;
     width: 100%;
     font-size: 22px;
     font-weight: bold;
-    padding: 10px; 
-    border-radius: 4px ;
+    padding: 10px;
+    border-radius: 4px;
     border: none;
-    background-color: #0b4d58 ;
+    background-color: #0b4d58;
     color: #fff;
 }
+
 .Box {
     display: grid;
     grid-template-columns: auto auto auto auto;

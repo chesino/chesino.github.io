@@ -33,16 +33,6 @@ setInterval(() => {
 }, 5000);
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  const bg = document.querySelector('.BG');
-
-  window.addEventListener('scroll', function () {
-    const scrolled = window.scrollY;
-    bg.style.backgroundPosition = ` -${scrolled}px `;
-  });
-});
-
-
 
 // Phần máy tính
 function CalculatorA() {
