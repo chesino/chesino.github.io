@@ -75,3 +75,5 @@ function ClearA() {
   Bneed2.style.backgroundColor = 'white';
   Bneed2.value =  '';
 }
+
+

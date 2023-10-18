@@ -13,6 +13,8 @@
     --BBLQ: #ff2d2d;
     --CBLQ: #ff2d2d;
     --BLQ: #cfcfcf;
+    --HL: #47d4ff;
+    --SEARCH: #eee;
 }
 
 body {
@@ -24,18 +26,20 @@ body {
 .dark-mode {
     --BG: #111;
     --CL: #fff;
-    --HOME: #000000e8;
+    --HOME: #000000;
     --BLOG: #000;
     --CLFEED: #eee;
     --FEED: #111;
     --BBLQ: #34ff2d;
     --CBLQ: #34ff2d;
     --BLQ: #000;
+    --HL: #474747;
+    --SEARCH: #111;
     
 }
 
 ::selection {
-    background-color: #111;
+    background-color: #0b4d58;
 }
 
 .topnav {
@@ -190,6 +194,7 @@ body {
 
 
 .Home {
+    margin-top: 50px;
     text-align: center;
     padding: 30px 0;
     background-color: var(--HOME);
@@ -281,13 +286,19 @@ progress::-webkit-progress-value {
 }
 
 .Search {
+    position: fixed;
+    top: 0px;
+    width: 100%;
     display: flex;
     gap: 5px;
     padding: 10px;
+    background-color: var(--SEARCH);
 }
 
 .Search input {
-    font-size: 16px;
+    font-size: 18px;
+    color: var(--BG);
+    background-color: var(--BLQ);
     padding: 10px 5px;
     width: 100%;
     display: block;
@@ -300,6 +311,9 @@ input:focus {
 }
 
 .Search button {
+    cursor: pointer;
+    color: var(--BG);
+    background-color: var(--CL);
     font-size: 18px;
     padding: 12px 14px;
     display: block;
@@ -308,8 +322,9 @@ input:focus {
 }
 
 #rss-feed {
-    padding-bottom: 10px;
     padding: 8px;
+    padding-bottom: 80px;
+ 
 }
 
 .Feed {
@@ -318,6 +333,9 @@ input:focus {
     margin-bottom: 20px;
     padding: 15px 10px 10px 10px;
     border-radius: 10px;
+}
+.Feed.highlighted {
+    background-color: var(--HL);
 }
 
 .Feed:first-child {
@@ -377,6 +395,7 @@ input:focus {
 
 .Feed .Body p {
     margin: 10px 0;
+    word-wrap: break-word;
 }
 
 .Feed .Body strong,
@@ -410,7 +429,7 @@ input:focus {
 .Body .Status img,
 .Body .Status video {
     height: auto;
-    width: 100%;
+    width: 100% !important;
     border-radius: 10px;
     border: 2px solid var(--BodyBG);
     box-sizing: border-box;
@@ -493,4 +512,36 @@ input:focus {
     display: grid;
     grid-template-columns: auto auto auto auto;
     gap: 10px;
+}
+#toggle-button {
+    cursor: pointer;
+    position: fixed;
+    bottom: 35px;
+    right: 10px;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+
+.HunqD {
+    font-size: 14px;
+    color: #fff;
+    background-color: #000;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding: 5px ;
+}
+
+.HunqD a {
+    color: greenyellow;
+    font-weight: bold;
+    text-decoration: none;
 }

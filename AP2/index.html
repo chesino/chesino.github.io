@@ -45,9 +45,14 @@
             <i class="fa fa-bars"></i>
         </a>
     </div> -->
-
+    <div class="Search">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm nội dung">
+        <button onclick="searchFeeds()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button onclick="scrollUp()"><i class="fa-solid fa-chevron-up"></i></button>
+        <button onclick="scrollDown()"><i class="fa-solid fa-chevron-down"></i></button>
+        <button class="onTOP" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+    </div>
     <div class="Content">
-
         <div class="Home">
             <div id="Welcome">
                 <h1>PROJECT <b>AP2.</b></h1>
@@ -129,20 +134,18 @@
         </div>
 
         <div class="Blog">
-            <div class="Search">
-                <input type="text" id="searchInput" placeholder="Tìm kiếm chưa khả dụng">
-                <button onclick="searchFeeds()"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
+          
             <div id="rss-feed">
                 <h3 style="text-align: center; padding: 50px 0;">Đang tải bài viết, hoặc có thể đang lỗi</h3>
             </div>
         </div>
 
 
-        <div class="Block">
-            <p>Lập trình bởi: <b><a href="https://facebook.com/HunqD" target="_parent" title="HunqD">HunqD</a></b></p>
-        </div>
+   
 
+    </div>
+    <div class="HunqD">
+        <p>Thiết kế & lập trình bởi <a href="facebook.com/HunqD">HunqD</a></p>
     </div>
 
 

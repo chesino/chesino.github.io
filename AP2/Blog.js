@@ -190,20 +190,95 @@ function ReloadBlog() {
     .catch(error => console.log(error));
 }
 
+
+
+var highlightedIndex = 0; // Index của phần tử .Feed đang được tô sáng
+var foundFeedElements = []; // Mảng chứa các phần tử .Feed đã tìm thấy
+
 function searchFeeds() {
-  // Get the search query
-  var searchQuery = document.getElementById('searchInput').value.toLowerCase();
+    // Lấy giá trị từ ô input
+    var searchText = document.getElementById("searchInput").value.toLowerCase();
 
-  // Loop through all content elements and find the matching text
-  var allContents = document.querySelectorAll('.Content');
-  for (var i = 0; i < allContents.length; i++) {
-      var content = allContents[i].innerText.toLowerCase();
+    // Lấy tất cả các phần tử .Feed
+    var feedElements = document.querySelectorAll("#rss-feed .Feed");
 
-      // If the content contains the search query
-      if (content.includes(searchQuery)) {
-          // Scroll to the element
-          allContents[i].scrollIntoView({ behavior: 'smooth' });
-          break; // Stop searching after the first match
-      }
-  }
+    // Xóa mảng phần tử .Feed đã tìm thấy từ trước
+    foundFeedElements = [];
+
+    // Thiết lập lại trạng thái khi tìm kiếm mới
+    highlightedIndex = 0;
+    updateHighlight();
+
+    // Biến để kiểm tra xem có phần tử nào tìm thấy không
+    var found = false;
+
+    // Duyệt qua từng phần tử .Feed
+    feedElements.forEach(function(feedElement, index) {
+        // Lấy văn bản trong phần tử .Feed
+        var feedText = feedElement.innerText.toLowerCase();
+
+        // Kiểm tra xem văn bản tìm kiếm có xuất hiện trong phần tử .Feed không
+        if (feedText.includes(searchText)) {
+            // Nếu tìm thấy, đặt biến found là true và tô sáng phần tử .Feed
+            found = true;
+            feedElement.classList.add("highlighted");
+
+            // Thêm phần tử .Feed vào mảng các phần tử đã tìm thấy
+            foundFeedElements.push(feedElement);
+
+            // Cập nhật index của phần tử .Feed đang được tô sáng
+            highlightedIndex = foundFeedElements.length - 1;
+        } else {
+            // Nếu không tìm thấy, đảm bảo rằng phần tử không được tô sáng
+            feedElement.classList.remove("highlighted");
+        }
+    });
+
+    // Nếu không tìm thấy, thông báo
+    if (!found) {
+        alert("Không tìm thấy kết quả");
+    }
+
+    // Cuộn đến phần tử .Feed đầu tiên trong danh sách đã tìm thấy
+    if (foundFeedElements.length > 0) {
+        foundFeedElements[highlightedIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
+
+function scrollToHighlighted() {
+    // Kiểm tra xem có phần tử .Feed đã tìm thấy không
+    if (foundFeedElements.length > 0) {
+        // Cuộn đến phần tử .Feed đang được tô sáng
+        foundFeedElements[highlightedIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
+
+function updateHighlight() {
+    // Loại bỏ tất cả các lớp "highlighted" để đảm bảo không có phần tử nào được tô sáng
+    foundFeedElements.forEach(function(feedElement) {
+        feedElement.classList.remove("highlighted");
+    });
+
+    // Tô sáng phần tử .Feed ở vị trí hiện tại của biến highlightedIndex
+    if (foundFeedElements[highlightedIndex]) {
+        foundFeedElements[highlightedIndex].classList.add("highlighted");
+    }
+}
+
+function scrollUp() {
+    // Giảm index và cập nhật tô sáng
+    highlightedIndex = Math.max(0, highlightedIndex - 1);
+    updateHighlight();
+    scrollToHighlighted();
+}
+
+function scrollDown() {
+    // Tăng index và cập nhật tô sáng
+    highlightedIndex = Math.min(foundFeedElements.length - 1, highlightedIndex + 1);
+    updateHighlight();
+    scrollToHighlighted();
+}
+function scrollToTop() {
+  // Cuộn đến đầu trang
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
