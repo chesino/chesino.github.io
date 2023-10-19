@@ -297,7 +297,7 @@ progress::-webkit-progress-value {
 
 .Search input {
     font-size: 18px;
-    color: var(--BG);
+    color: var(--CLFEED);
     background-color: var(--BLQ);
     padding: 10px 5px;
     width: 100%;
@@ -405,6 +405,8 @@ input:focus {
 }
 
 .Feed .Body blockquote {
+    font-size: 20px;
+    margin-top: 10px;
     background-color: var(--BLQ);
     border-left: 3px solid var(--BBLQ);
     padding: 1px 0;
