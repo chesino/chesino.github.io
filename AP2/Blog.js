@@ -289,7 +289,7 @@ $(document).ready(function () {
   // Xác định nút nhấn và thực hiện chức năng khi được nhấn
   $('#hideImagesButton').on('click', function () {
     // Ẩn toàn bộ ảnh trong các .Feed
-    $('.Feed figure img').toggle();
+    $('.Feed .Content').children().not('blockquote').toggle();
 
     var iconClass = $(this).find('i').hasClass('fa-eye-slash') ? 'fa-eye' : 'fa-eye-slash';
     $(this).find('i').removeClass().addClass('fa-solid ' + iconClass);

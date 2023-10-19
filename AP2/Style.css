@@ -96,6 +96,7 @@ body {
 }
 
 @media screen and (max-width: 600px) {
+
     .topnav a:not(:first-child) {
         display: none;
     }
@@ -420,7 +421,7 @@ input:focus {
 }
 
 .Body .Status h1 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
@@ -546,4 +547,11 @@ input:focus {
     color: greenyellow;
     font-weight: bold;
     text-decoration: none;
+}
+
+@media only screen and (min-width: 800px) {
+    .Status .wp-block-image img {
+        max-width: 25%;
+
+    }
 }
