@@ -85,7 +85,7 @@ function ReloadBlog() {
                     <div class="Time">${timeDiffText}</div>
                 </div>
                 <div class="Func Share">
-                <i class="fa-solid fa-up-right-from-square"></i>
+                <i class="fa-solid fa-share-from-square"></i>
               </div>
             </div>
         </div>
