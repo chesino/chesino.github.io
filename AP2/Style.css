@@ -448,7 +448,7 @@ input:focus {
 
 @media only screen and (min-width: 800px) {
     .Status .wp-block-image img {
-        max-width: 25%;
+        max-width: 50%;
 
     }
 }
