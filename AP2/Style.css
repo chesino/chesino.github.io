@@ -344,7 +344,12 @@ input:focus {
     margin: 0 auto;
     text-align: center;
 }
-
+.Feed hr {
+    height: 2px;
+    border: none;
+    background-color: var(--CL);
+    margin: 12px 0;
+}
 .Block a {
     color: greenyellow;
     text-decoration: none;
