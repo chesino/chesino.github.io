@@ -329,11 +329,14 @@ input:focus {
 }
 
 .Status .wp-block-gallery {
-    column-count: 3 !important;
+    column-count: 2 !important;
     --webkit-column-count: 2;
     --moz-column-count: 2;
     gap: 10px;
     margin: 5px 0;
+}
+.Status .wp-block-gallery img {
+    border: 2px solid var(--CLFEED);
 }
 
 .Status .wp-block-image {
