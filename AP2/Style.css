@@ -276,6 +276,7 @@ input:focus {
 }
 
 .Feed .Body p {
+    font-size: 18px;
     margin: 10px 0;
     word-wrap: break-word;
 }
@@ -332,12 +333,51 @@ input:focus {
     column-count: 2 !important;
     --webkit-column-count: 2;
     --moz-column-count: 2;
-    gap: 10px;
+    gap: 5px;
     margin: 5px 0;
 }
 .Status .wp-block-gallery img {
-    border: 2px solid var(--CLFEED);
+    border: 2px solid black;
 }
+/* Ẩn modal mặc định */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Hiển thị ảnh trong modal */
+.modal-content {
+    border-radius: 10px;
+    margin: 80px auto auto auto;
+    display: block;
+    max-width: 95%;
+    max-height: 100%;
+}
+
+/* Đóng modal */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+}
+/* Thêm kiểu dáng cho chữ caption */
+.caption {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px; /* Điều chỉnh khoảng cách giữa ảnh và chữ caption */
+}
+
 
 .Status .wp-block-image {
     margin: 5px 0;
