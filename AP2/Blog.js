@@ -61,8 +61,8 @@ function ReloadBlog() {
         let author = '';
         let srcIMG = '';
         if (creator === 'HunqD') {
-          author = 'Trần Thị Thảo Nguyên';
-          srcIMG = 'https://graph.facebook.com/100004709207159/picture?type=large&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662';
+          author = 'Ngô Hồng Khanh';
+          srcIMG = 'https://graph.facebook.com/100034337931817/picture?type=large&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662';
         } else {
           author = 'Không rõ';
           srcIMG = '/DATA/logo.png';
