@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+<html>
+
+<head>
+    <!-- Tiêu đề trang -->
+    <title>UNO - Chesino</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- Đảm bảo đặt meta tag sau -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/DATA/logo.png" />
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="./DataWeb/img/chesino.png" sizes="150x150" />
+
+    <!-- Ảnh -->
+    <meta property="og:image" content="./DataWeb/img/bannerlogo.png" />
+
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Style.css" />
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="Block A" id="A">
+        <div class="Top">
+            <h1>UNO</h1>
+        </div>
+        <div class="Center">
+            <div class="Box A">
+                <h2>Có bao nhiêu người chơi ?</h2>
+                <input type="text" value="2" id="playerCount" disabled>
+                <div class="BTN">
+                    <button onclick="decreaseValue()"><i class="fa-solid fa-user-minus"></i></button>
+                    <button onclick="increaseValue()"><i class="fa-solid fa-user-plus"></i></button>
+                </div>
+            </div>
+            <div class="Box B">
+                <h2>Bao nhiêu điểm là chiến thắng ?</h2>
+                <input type="text" id="winValue">
+                <div class="BTN">
+                    <button onclick="winValue(10)">10</button>
+                    <button onclick="winValue(20)">20</button>
+                    <button onclick="winValue(30)">30</button>
+                    <button onclick="winValue(40)">40</button>
+                    <button onclick="winValue(50)">50</button>
+                </div>
+            </div>
+        </div>
+        <div class="Bottom">
+            <button onclick="PlayUNO()" >Xác nhận</button>
+        </div>
+    </div>
+
+    <div class="Block B hidden" id="B">
+        <div class="Center">
+            <h2>Vui lòng điền tên các người chơi.</h2>
+            <div id="playerUNO"></div>
+        </div>
+        <div class="Bottom">
+            <button onclick="startGame()">Bắt đầu chơi</button>
+        </div>
+        
+    </div>
+    <div class="Block C" >
+        <div class="playerWin" id="playerButtons">
+           
+        </div>
+        <div id="historyPoint"></div>
+    </div>
+
+
+</body>
+<script src="./Script.js"></script>
+
+</html>
