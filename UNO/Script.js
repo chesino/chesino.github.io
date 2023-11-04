@@ -47,6 +47,9 @@ function winValue(x) {
 }
 
 function startGame() {
+    document.getElementById("B").classList.add("hidden");
+    document.getElementById("C").classList.remove("hidden");
+
     var playerCount = document.getElementById("playerCount").value;
     var playerButtonsContainer = document.getElementById("playerButtons");
     playerButtonsContainer.innerHTML = "";
@@ -80,6 +83,7 @@ function startGame() {
         button.setAttribute("onclick", `WinRate(${i})`);
         playerButtonsContainer.appendChild(button);
     }
+  
 }
 var Rank = 0;
 
@@ -105,7 +109,7 @@ function WinRate(x) {
 
         // Tạo một li mới cho entry
         var historyEntry = document.createElement("li");
-        historyEntry.textContent = `${playerName}: +${MaxPoint - Rank} points`;
+        historyEntry.textContent = `${playerName}: +${MaxPoint - Rank} điểm`;
 
         // Chèn vào đầu danh sách lịch sử
         historyPointElement.insertBefore(historyEntry, historyPointElement.firstChild);
