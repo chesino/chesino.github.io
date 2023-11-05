@@ -62,7 +62,7 @@ function startGame() {
 
         if (playerName === 'Hùng') {
             button.innerHTML = `
-            <input type="text" class="Point" id="Point${i}">
+            <input type="text" value="0" class="Point" id="Point${i}" disabled>
             <div class="Avatar">
                 <img src="https://graph.facebook.com/100045640179308/picture?type=large&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
             </div>
@@ -71,19 +71,56 @@ function startGame() {
             </div>
             `;
         } else {
-            button.innerHTML = `
-            <input type="text" class="Point" id="Point${i}">
-             <div class="Name">
-                <h1>${playerName}</h1>
+
+            if (playerName === 'Hiền') {
+                button.innerHTML = `
+            <input type="text" value="0" class="Point" id="Point${i}" disabled>
+            <div class="Avatar">
+                <img src="https://graph.facebook.com/100022625414871/picture?type=large&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
             </div>
-            
-            `
-                ;
+            <div class="Name">
+                <h1>Hiền</h1>
+            </div>
+            `;
+            } else {
+                if (playerName === 'Hoàng') {
+                    button.innerHTML = `
+                <input type="text" value="0" class="Point" id="Point${i}" disabled>
+                <div class="Avatar">
+                    <img src="https://graph.facebook.com/100015905130912/picture?type=large&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
+                </div>
+                <div class="Name">
+                    <h1>Hoàng</h1>
+                </div>
+                `;
+                } else {
+                    if (playerName === 'Thiện') {
+                        button.innerHTML = `
+                    <input type="text" value="0" class="Point" id="Point${i}" disabled>
+                    <div class="Avatar">
+                        <img src="https://graph.facebook.com/100028302531768/picture?type=large&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="" srcset="">
+                    </div>
+                    <div class="Name">
+                        <h1>Thiện</h1>
+                    </div>
+                    `;
+                    } else {
+                        button.innerHTML = `
+                        <input type="text"  value="0" class="Point" id="Point${i}" disabled>
+                         <div class="Name">
+                            <h1>${playerName}</h1>
+                        </div>
+                        `;
+                    }
+                }
+            }
+
+
         }
         button.setAttribute("onclick", `WinRate(${i})`);
         playerButtonsContainer.appendChild(button);
     }
-  
+
 }
 var Rank = 0;
 
@@ -124,7 +161,7 @@ function WinRate(x) {
             Alert('Xong');
         }
     }
-   
+
 }
 
 
