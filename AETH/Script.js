@@ -245,7 +245,7 @@ resetButton.addEventListener("click", function () {
 
 // Sự kiện khi nút reset được giữ
 resetButton.addEventListener("touchstart", function () {
-    pressTimer = window.setTimeout(handleLongPress, 3000);
+    pressTimer = window.setTimeout(handleLongPress, 2000);
 });
 
 resetButton.addEventListener("touchend", function () {
@@ -265,7 +265,7 @@ deleteAllButton.addEventListener("touchstart", function () {
         document.querySelector('.HistoryTally').classList.add('Hidden');
 
         alert('Xóa tất cả thành công.');
-    }, 3000);
+    }, 2000);
 });
 
 deleteAllButton.addEventListener("click", function () {
