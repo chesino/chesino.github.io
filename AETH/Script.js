@@ -10,15 +10,54 @@ itemNameEnter.addEventListener('keydown', (event) => {
     }
 });
 
+var Point = 1;
+var smartPointActive = false;
+
+function toggleSmartPoint() {
+    var smartPoint = document.getElementById("smartpoint");
+
+    if (smartPointActive) {
+        smartPoint.classList.remove("active");
+        Point = 1;
+    } else {
+        smartPoint.classList.add("active");
+
+        // Lấy tất cả các phần tử có class là "Tally"
+        var tallyElements = document.getElementsByClassName('Tally');
+
+        // Lấy số lượng phần tử có class là "Tally"
+        var tallyCount = tallyElements.length;
+        Point = tallyCount;
+    }
+
+    smartPointActive = !smartPointActive;
+}
+
+function UpdatePoint() {
+    if (smartPointActive == true) {
+        Point--; 
+        if (Point == 0) {
+            var tallyElements = document.getElementsByClassName('Tally');
+            // Lấy số lượng phần tử có class là "Tally"
+            var tallyCount = tallyElements.length;
+            Point = tallyCount - 1;     
+        } 
+    }
+
+}
+
+
 const HistoryTally = document.getElementById("HistoryTally");
 let currentLog = null;
 let timeoutId = null;
-
 function addTally(itemName, quantity) {
+
     itemName = itemName || document.getElementById("itemName").value;
     quantity = quantity || 0;
 
     if (itemName.trim() !== "") {
+        document.querySelector('.HistoryTally').classList.remove('Hidden');
+
         var newTally = document.createElement("div");
         newTally.className = "Tally";
 
@@ -64,9 +103,10 @@ function addTally(itemName, quantity) {
         var plusButton = document.createElement("button");
         plusButton.innerHTML = '<i class="fa-solid fa-plus"></i>';
         plusButton.addEventListener("click", function () {
+            UpdatePoint();
             var inputNumber = body.querySelector("input");
-            inputNumber.value = parseInt(inputNumber.value) + 1;
-            logValueDelayed(itemName, 1);
+            inputNumber.value = parseInt(inputNumber.value) + Point;
+            logValueDelayed(itemName, Point);
         });
 
         body.appendChild(minusButton);
@@ -181,26 +221,66 @@ function addToHistoryLog(logText) {
 }
 
 
-
+const resetButton = document.getElementById("resetButton");
 const deleteAllButton = document.getElementById("DeleteAll");
+let pressTimer;
+
+// Hàm xử lý khi nút được giữ trong 3 giây
+function handleLongPress() {
+    const tallyInputs = document.querySelectorAll(".Tally input");
+
+    tallyInputs.forEach(input => {
+        input.value = 0;
+        localStorage.removeItem('historyLogs');
+        document.getElementById("HistoryTally").innerHTML = '';
+    });
+
+    alert('Đặt lại thành công.');
+    saveToLocalStorage(); // Lưu trạng thái mới vào localStorage nếu cần
+}
+
+resetButton.addEventListener("click", function () {
+    alert('Nhấn và giữ 3 giây để đặt lại số điểm & lịch sử.');
+});
+
+// Sự kiện khi nút reset được giữ
+resetButton.addEventListener("mousedown", function () {
+    pressTimer = window.setTimeout(handleLongPress, 3000);
+});
+
+// Sự kiện khi nút reset được nhả
+resetButton.addEventListener("mouseup", function () {
+    window.clearTimeout(pressTimer);
+});
+
+// Sự kiện khi con trỏ di chuyển ra khỏi nút reset
+resetButton.addEventListener("mouseout", function () {
+    window.clearTimeout(pressTimer);
+});
+
+// Sự kiện khi nút delete được giữ
+deleteAllButton.addEventListener("mousedown", function () {
+    pressTimer = window.setTimeout(function () {
+        localStorage.removeItem('tallies');
+        localStorage.removeItem('historyLogs');
+        document.getElementById("Tally").innerHTML = '';
+        document.getElementById("HistoryTally").innerHTML = '';
+        document.querySelector('.HistoryTally').classList.add('Hidden');
+
+        alert('Xóa tất cả thành công.');
+    }, 3000);
+});
+
 deleteAllButton.addEventListener("click", function () {
-    localStorage.removeItem('tallies');
-    localStorage.removeItem('historyLogs');
-    document.getElementById("Tally").innerHTML = '';
-    document.getElementById("HistoryTally").innerHTML = '';
+    alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
+});
+// Sự kiện khi nút delete được nhả
+deleteAllButton.addEventListener("mouseup", function () {
+    window.clearTimeout(pressTimer);
 });
 
-
-
-document.addEventListener('gesturestart', function (event) {
-    event.preventDefault(); // Chặn sự kiện zoom
+// Sự kiện khi con trỏ di chuyển ra khỏi nút delete
+deleteAllButton.addEventListener("mouseout", function () {
+    window.clearTimeout(pressTimer);
 });
 
-var lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
-    var now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-    }
-    lastTouchEnd = now;
-}, false);
