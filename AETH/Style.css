@@ -70,6 +70,7 @@ button{
     width: 100%;
     border-radius: 10px;
     display: flex;
+    padding: 0 5px;
 } 
 .Top1 marquee {
     margin: auto;
@@ -93,6 +94,7 @@ button{
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        touch-action: manipulation;
     color: #fff;
     background-color: #111;
     height: 50px;
