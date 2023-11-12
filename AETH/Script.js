@@ -244,22 +244,19 @@ resetButton.addEventListener("click", function () {
 });
 
 // Sự kiện khi nút reset được giữ
-resetButton.addEventListener("mousedown", function () {
+resetButton.addEventListener("touchstart", function () {
     pressTimer = window.setTimeout(handleLongPress, 3000);
 });
 
-// Sự kiện khi nút reset được nhả
-resetButton.addEventListener("mouseup", function () {
+resetButton.addEventListener("touchend", function () {
     window.clearTimeout(pressTimer);
 });
 
-// Sự kiện khi con trỏ di chuyển ra khỏi nút reset
-resetButton.addEventListener("mouseout", function () {
+resetButton.addEventListener("touchleave", function () {
     window.clearTimeout(pressTimer);
 });
 
-// Sự kiện khi nút delete được giữ
-deleteAllButton.addEventListener("mousedown", function () {
+deleteAllButton.addEventListener("touchstart", function () {
     pressTimer = window.setTimeout(function () {
         localStorage.removeItem('tallies');
         localStorage.removeItem('historyLogs');
@@ -274,13 +271,11 @@ deleteAllButton.addEventListener("mousedown", function () {
 deleteAllButton.addEventListener("click", function () {
     alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
 });
-// Sự kiện khi nút delete được nhả
-deleteAllButton.addEventListener("mouseup", function () {
+
+deleteAllButton.addEventListener("touchend", function () {
     window.clearTimeout(pressTimer);
 });
 
-// Sự kiện khi con trỏ di chuyển ra khỏi nút delete
-deleteAllButton.addEventListener("mouseout", function () {
+deleteAllButton.addEventListener("touchleave", function () {
     window.clearTimeout(pressTimer);
 });
-
