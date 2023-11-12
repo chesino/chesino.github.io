@@ -33,15 +33,47 @@ function toggleSmartPoint() {
     smartPointActive = !smartPointActive;
 }
 
+var ENAvatar = true;
+
+function toggleENAvatar() {
+    var btnENAvatar = document.getElementById("ENAvatar");
+
+    if (ENAvatar) {
+        btnENAvatar.classList.remove("active");
+        // Lấy tất cả các phần tử có class chứa ".Tally"
+        var elements = document.querySelectorAll('.Tally');
+
+        // Lặp qua từng phần tử
+        elements.forEach(function (element) {
+            // Tách các class thành một mảng
+            var classes = element.className.split(' ');
+
+            // Lọc ra class chỉ có tên là "Tally"
+            var filteredClasses = classes.filter(function (className) {
+                return className === 'Tally';
+            });
+
+            // Gán lại class cho phần tử
+            element.className = filteredClasses.join(' ');
+        });
+    } else {
+        btnENAvatar.classList.add("active");
+    }
+
+    ENAvatar = !ENAvatar;
+}
+
+
+
 function UpdatePoint() {
     if (smartPointActive == true) {
-        Point--; 
+        Point--;
         if (Point == 0) {
             var tallyElements = document.getElementsByClassName('Tally');
             // Lấy số lượng phần tử có class là "Tally"
             var tallyCount = tallyElements.length;
-            Point = tallyCount - 1;     
-        } 
+            Point = tallyCount - 1;
+        }
     }
 
 }
@@ -50,16 +82,41 @@ function UpdatePoint() {
 const HistoryTally = document.getElementById("HistoryTally");
 let currentLog = null;
 let timeoutId = null;
+
 function addTally(itemName, quantity) {
 
     itemName = itemName || document.getElementById("itemName").value;
     quantity = quantity || 0;
 
+    // Chuyển chữ cái đầu của itemName thành chữ hoa
+    itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
+
+    // Bây giờ itemName chứa chuỗi với chữ cái đầu viết hoa
     if (itemName.trim() !== "") {
         document.querySelector('.HistoryTally').classList.remove('Hidden');
 
         var newTally = document.createElement("div");
         newTally.className = "Tally";
+
+        if (itemName == 'HunqD' || itemName == 'Hùng') {
+            newTally.classList.add('HunqD');
+        }
+
+
+        if (itemName == 'Hoàng') {
+            newTally.classList.add('Hoang');
+        }
+
+        if (itemName == 'Hiền') {
+            newTally.classList.add('Hien');
+        }
+
+        if (itemName == 'Thiện') {
+            newTally.classList.add('Thien');
+        }
+
+        var box = document.createElement("div");
+        box.className = "Box";
 
         var head = document.createElement("div");
         head.className = "Head";
@@ -81,6 +138,7 @@ function addTally(itemName, quantity) {
                 saveToLocalStorage();
             }
         });
+
 
         head.appendChild(item);
         head.appendChild(delButton);
@@ -113,8 +171,11 @@ function addTally(itemName, quantity) {
         body.appendChild(numberInput);
         body.appendChild(plusButton);
 
-        newTally.appendChild(head);
-        newTally.appendChild(body);
+        box.appendChild(head);
+        box.appendChild(body);
+        newTally.appendChild(box);
+
+
 
         document.getElementById("Tally").appendChild(newTally);
 
@@ -243,7 +304,7 @@ resetButton.addEventListener("click", function () {
     alert('Nhấn và giữ 3 giây để đặt lại số điểm & lịch sử.');
 });
 
-// Sự kiện khi nút reset được giữ
+// Dành cho di động
 resetButton.addEventListener("touchstart", function () {
     pressTimer = window.setTimeout(handleLongPress, 2000);
 });
@@ -253,6 +314,20 @@ resetButton.addEventListener("touchend", function () {
 });
 
 resetButton.addEventListener("touchleave", function () {
+    window.clearTimeout(pressTimer);
+});
+
+
+// Dành cho máy tính
+resetButton.addEventListener("mousedown", function () {
+    pressTimer = window.setTimeout(handleLongPress, 2000);
+});
+
+resetButton.addEventListener("mousend", function () {
+    window.clearTimeout(pressTimer);
+});
+
+resetButton.addEventListener("mouseout", function () {
     window.clearTimeout(pressTimer);
 });
 
@@ -268,6 +343,21 @@ deleteAllButton.addEventListener("touchstart", function () {
     }, 2000);
 });
 
+// Dành cho di động
+deleteAllButton.addEventListener("click", function () {
+    alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
+});
+
+deleteAllButton.addEventListener("touchend", function () {
+    window.clearTimeout(pressTimer);
+});
+
+deleteAllButton.addEventListener("touchleave", function () {
+    window.clearTimeout(pressTimer);
+});
+
+
+// Dành cho máy tính
 deleteAllButton.addEventListener("click", function () {
     alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
 });

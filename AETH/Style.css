@@ -33,6 +33,7 @@ button{
 }
 .Card:first-child {
     min-height: 100vh;
+    padding-bottom: 50px;
 }
 
 
@@ -76,6 +77,7 @@ button{
     margin: auto;
 }
 .AddTally input {
+    text-transform: capitalize;
     color: #fff;
     background-color: #535353;
     font-size: 20px;
@@ -117,7 +119,7 @@ button{
 .AddTally .Two button:nth-child(3){
     background-color: rgb(54, 54, 54);
 }
-.AddTally .Two button:nth-child(4){
+.AddTally .Two button:nth-child(4).active{
     background-color: rgb(184, 211, 32);
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 500% 500%;
@@ -139,9 +141,12 @@ button{
 .Tally {
     color: var(--TALLYCL);
     background-color: var(--TALLY);
-    padding: 10px;
     margin: 10px 0;
     border-radius: 10px;
+}
+.Tally .Box {
+    background-color: #1111116e;
+    padding: 10px;
 }
 
 .Head {
@@ -152,6 +157,7 @@ button{
 .Item {
     font-size: 20px;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .Del-Item {
@@ -194,7 +200,7 @@ button{
 .Body input {
     font-weight: bold;
     color: #fff;
-    background-color: #111;
+    background-color: #111111c5;
     text-align: center;
     font-size: 30px;
     height: 50px;
@@ -224,7 +230,7 @@ button{
     color: green;
 }
 
-.HunqD {
+footer.HunqD {
     font-size: 14px;
     color: #fff;
     background-color: #000;
@@ -235,7 +241,7 @@ button{
     padding: 5px ;
 }
 
-.HunqD a {
+footer.HunqD a {
     color: greenyellow;
     font-weight: bold;
     text-decoration: none;
@@ -258,4 +264,39 @@ button{
 }
 #smartpoint.active {
     background-color: rgb(0, 102, 255);
+}
+
+.Tally.HunqD {
+    background-image: url(https://graph.facebook.com/100045640179308/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
+    background-size: cover;
+    background-position: 0 -45px;
+}
+.Tally.HunqD .Head {
+    margin-bottom: 20px;
+}
+
+.Tally.Hoang {
+    background-image: url(https://graph.facebook.com/100015905130912/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
+    background-size: cover;
+    background-position: 0 -150px;
+}
+.Tally.Hoang .Head {
+    margin-bottom: 20px;
+}
+.Tally.Hien {
+    background-image: url(https://graph.facebook.com/100022625414871/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
+    background-size: cover;
+    background-position: 0 -115px;
+}
+.Tally.Hien .Head {
+    margin-bottom: 20px;
+}
+.Tally.Thien {
+    background-image: url(https://graph.facebook.com/100028302531768/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
+    background-size: cover;
+    background-position: 0 -115px;
+}
+.Tally.Thien .Head {
+    margin-bottom: 20px;
+
 }
