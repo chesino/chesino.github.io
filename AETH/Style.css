@@ -5,8 +5,8 @@
 }
 :root {
     --BG: #eeeeee;
-    --TX: #fff;
-    --CR: #000000c0;
+    --TX: #000000;
+    --CR: rgb(255, 209, 217);
     --TALLYCL: #fff;
     --TALLY: #000000;
 }
@@ -20,8 +20,8 @@ body {
 .dark-mode {
     --BG: #000;
     --TX: #fff;
-    --CR: #111;
-    --TALLY: #000;
+    --CR: #000;
+    --TALLY: #111;
 }
 button{
     cursor: pointer;
@@ -67,7 +67,8 @@ button{
 
 }
 .AddTally .Two .Top1 {
-    background-color: #111111;
+    color: var(--TX);
+    background-color: var(--CR);
     width: 100%;
     border-radius: 10px;
     display: flex;
@@ -146,6 +147,7 @@ button{
 }
 .Tally .Box {
     background-color: #1111116e;
+    border-radius: 10px;
     padding: 10px;
 }
 
@@ -200,7 +202,7 @@ button{
 .Body input {
     font-weight: bold;
     color: #fff;
-    background-color: #111111c5;
+    background-color: #000000c5;
     text-align: center;
     font-size: 30px;
     height: 50px;
@@ -238,7 +240,7 @@ footer.HunqD {
     bottom: 0;
     text-align: center;
     width: 100%;
-    padding: 5px 5px 20px 5px ;
+    padding: 5px 5px 15px 5px ;
 }
 
 footer.HunqD a {

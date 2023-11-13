@@ -1,4 +1,4 @@
-const API_KEY = 'RGAPI-94426946-21fa-4817-914c-fdc88ab875b0';
+const API_KEY = 'RGAPI-685827f7-0ec5-45d2-b140-0452035dfab8';
 const VER = '13.18.1';
 const championCosts = {
     'Yasuo': '9',
@@ -70,12 +70,10 @@ async function fetchSummonerInfo() {
 }
 
 // Hàm lấy thông tin Rank và xử lý
-// Hàm lấy thông tin Rank và xử lý
 async function fetchRankInfo(summonerId) {
     try {
         const rankApiUrl = `https://vn2.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${API_KEY}`;
         const rankData = await fetchJson(rankApiUrl);
-        console.log(rankApiUrl);
 
         if (rankData.length > 0) {
             const soloRankInfo = rankData.find(rank => rank.queueType === 'RANKED_SOLO_5x5');
@@ -140,11 +138,11 @@ async function fetchRankInfo(summonerId) {
     }
 }
 
-
 // Hàm lấy thông tin Mastery và xử lý
-async function fetchMasteryInfo(summonerId) {
+async function fetchMasteryInfo(puuid) {
+    console.log(puuid);
     try {
-        const masteryApiUrl = `https://vn2.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}/top?count=3&api_key=${API_KEY}`;
+        const masteryApiUrl = `https://vn2.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}/top?count=3&api_key=${API_KEY}`;
         const masteryData = await fetchJson(masteryApiUrl);
         const championMasteryInfo = document.getElementById('champion-mastery-info');
         championMasteryInfo.innerHTML = '';
@@ -350,7 +348,7 @@ searchButton.addEventListener('click', async () => {
         if (summonerData) {
             await Promise.all([
                 fetchRankInfo(summonerData.id),
-                fetchMasteryInfo(summonerData.id),
+                fetchMasteryInfo(summonerData.puuid),
                 fetchMatchHistory(summonerData.puuid)
             ]);
             displaySearchHistory();
@@ -452,31 +450,14 @@ window.addEventListener('hashchange', () => {
     runSearch();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const bg = document.querySelector('.BG');
-
-    window.addEventListener('scroll', function () {
-        const scrolled = window.scrollY;
-        bg.style.backgroundPosition = `-${scrolled}px -${scrolled}px`;
-    });
-});
-
 var toggle = 0 ;
 function toggleBG() {
     toggle++;
     if (toggle === 1) {
-        document.getElementById('Profile').style.backgroundColor = '#111111ab';
+        document.getElementById('Profile').style.backgroundColor = '#111111';
     } 
     if (toggle === 2) {
-        document.getElementById('Profile').style.backgroundColor = '#111111ea';
-    }
-    if (toggle === 3) {
-        document.getElementById('Profile').style.backgroundColor = 'transparent';
-    }
-    if (toggle === 4) {
-        document.getElementById('Profile').style.backgroundColor = '#111111';
+        document.getElementById('Profile').style.backgroundColor = '#000000';
         toggle = 0
-    } 
-  
-
+    }
 }

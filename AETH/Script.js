@@ -182,7 +182,7 @@ function addTally(itemName, quantity) {
         saveToLocalStorage();
         document.getElementById("itemName").value = '';
     } else {
-        alert('???');
+        alert('Vui lòng nhập tên người chơi');
     }
 }
 
@@ -304,32 +304,9 @@ resetButton.addEventListener("click", function () {
     alert('Nhấn và giữ 3 giây để đặt lại số điểm & lịch sử.');
 });
 
-// Dành cho di động
-resetButton.addEventListener("touchstart", function () {
-    pressTimer = window.setTimeout(handleLongPress, 2000);
-});
-
-resetButton.addEventListener("touchend", function () {
-    window.clearTimeout(pressTimer);
-});
-
-resetButton.addEventListener("touchleave", function () {
-    window.clearTimeout(pressTimer);
-});
 
 
-// Dành cho máy tính
-resetButton.addEventListener("mousedown", function () {
-    pressTimer = window.setTimeout(handleLongPress, 2000);
-});
 
-resetButton.addEventListener("mousend", function () {
-    window.clearTimeout(pressTimer);
-});
-
-resetButton.addEventListener("mouseout", function () {
-    window.clearTimeout(pressTimer);
-});
 
 deleteAllButton.addEventListener("touchstart", function () {
     pressTimer = window.setTimeout(function () {
@@ -343,29 +320,63 @@ deleteAllButton.addEventListener("touchstart", function () {
     }, 2000);
 });
 
-// Dành cho di động
-deleteAllButton.addEventListener("click", function () {
-    alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
-});
-
-deleteAllButton.addEventListener("touchend", function () {
-    window.clearTimeout(pressTimer);
-});
-
-deleteAllButton.addEventListener("touchleave", function () {
-    window.clearTimeout(pressTimer);
-});
 
 
-// Dành cho máy tính
-deleteAllButton.addEventListener("click", function () {
-    alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
-});
 
-deleteAllButton.addEventListener("touchend", function () {
-    window.clearTimeout(pressTimer);
-});
 
-deleteAllButton.addEventListener("touchleave", function () {
-    window.clearTimeout(pressTimer);
-});
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (isMobile) {
+    // Dành cho di động
+    deleteAllButton.addEventListener("click", function () {
+        alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
+    });
+
+    deleteAllButton.addEventListener("touchend", function () {
+        window.clearTimeout(pressTimer);
+    });
+
+    deleteAllButton.addEventListener("touchleave", function () {
+        window.clearTimeout(pressTimer);
+    });
+
+    // Dành cho di động
+    resetButton.addEventListener("touchstart", function () {
+        pressTimer = window.setTimeout(handleLongPress, 2000);
+    });
+
+    resetButton.addEventListener("touchend", function () {
+        window.clearTimeout(pressTimer);
+    });
+
+    resetButton.addEventListener("touchleave", function () {
+        window.clearTimeout(pressTimer);
+    });
+
+} else {
+    // Dành cho máy tính
+    deleteAllButton.addEventListener("click", function () {
+        alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
+    });
+
+    deleteAllButton.addEventListener("touchend", function () {
+        window.clearTimeout(pressTimer);
+    });
+
+    deleteAllButton.addEventListener("touchleave", function () {
+        window.clearTimeout(pressTimer);
+    });
+
+    // Dành cho máy tính
+    resetButton.addEventListener("mousedown", function () {
+        pressTimer = window.setTimeout(handleLongPress, 2000);
+    });
+
+    resetButton.addEventListener("mousend", function () {
+        window.clearTimeout(pressTimer);
+    });
+
+    resetButton.addEventListener("mouseout", function () {
+        window.clearTimeout(pressTimer);
+    });
+}
