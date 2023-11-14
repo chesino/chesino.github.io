@@ -103,18 +103,6 @@ function addTally(itemName, quantity) {
         }
 
 
-        if (itemName == 'Hoàng') {
-            newTally.classList.add('Hoang');
-        }
-
-        if (itemName == 'Hiền') {
-            newTally.classList.add('Hien');
-        }
-
-        if (itemName == 'Thiện') {
-            newTally.classList.add('Thien');
-        }
-
         var box = document.createElement("div");
         box.className = "Box";
 
