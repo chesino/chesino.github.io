@@ -277,28 +277,3 @@ footer.HunqD a {
     margin-bottom: 20px;
 }
 
-.Tally.Hoang {
-    background-image: url(https://graph.facebook.com/100015905130912/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -150px;
-}
-.Tally.Hoang .Head {
-    margin-bottom: 20px;
-}
-.Tally.Hien {
-    background-image: url(https://graph.facebook.com/100022625414871/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -115px;
-}
-.Tally.Hien .Head {
-    margin-bottom: 20px;
-}
-.Tally.Thien {
-    background-image: url(https://graph.facebook.com/100028302531768/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -115px;
-}
-.Tally.Thien .Head {
-    margin-bottom: 20px;
-
-}
