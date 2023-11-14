@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+<html>
+
+<head>
+    <!-- Tiêu đề trang -->
+    <title>Quản lý chi tiêu thông minh</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Đảm bảo đặt meta tag sau -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="./IMG/icon.png" />
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="./IMG/icon-square.png" sizes="150x150" />
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Style.css" />
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigiln="anonymous"></script>
+</head>
+
+<body>
+    <div class="Container">
+        <div class="Card Main">
+            <div class="TotalMoney">
+                Tài khoản
+                <h1>
+                    <span id="displayTotal"></span><strong>đ</strong>
+                </h1>
+            </div>
+            <hr>
+            <div class="FuncBlock">
+                <div class="Func" onclick="openTab(event, 'A')">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <strong>Thu nhập</strong>
+                </div>
+                <div class="Func" onclick="openTab(event, 'B')">
+                    <i class="fa-solid fa-circle-minus"></i>
+                    <strong>Chi tiêu</strong>
+                </div>
+                <div class="Func" onclick="openTab(event, 'D')">
+                    <i class="fa-solid fa-receipt"></i>
+                    <strong>Sổ Nợ</strong>
+                </div>
+                <div class="Func" onclick="openTab(event, 'E')">
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                    <strong>Tiết kiệm</strong>
+                </div>
+                <div class="Func" onclick="openTab(event, 'C')">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <strong>Mua đồ</strong>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="Wallet">
+            <div class="Card Money" onclick="alert('Đây là khoản tiền mặt của bạn hiện có.')">
+                <p>Tiền mặt</p>
+                <h1><span id="displayCash">0</span>đ</h1>
+            </div>
+            <div class="Card Money" onclick="alert('Đây là khoản tiền trong thẻ của bạn hiện có.')">
+                <p>Tiền thẻ</p>
+                <h1><span id="displayCard">0</span>đ</h1>
+            </div>
+            <div class="Card Money" onclick="alert('Đây là gợi ý khoản tiền có thể chi tiêu cho nhu cầu thiết yếu.')">
+                <p>Thiết yếu <span id="ptsave50">50%</span></p>
+                <h1><span id="ThietYeu">0</span>đ</h1>
+            </div>
+            <div class="Card Money" onclick="alert('Đây là gợi ý khoản tiền có thể chi tiêu cho nhu cầu cá nhân.')">
+                <p>Tiêu sài <span id="ptsave30">30%</span></p>
+                <h1><span id="TieuSai">0</span>đ</h1>
+            </div>
+            <div class="Card Money"
+                onclick="alert('Đây là gợi ý khoản tiền có thể đầu từ hoặc tiết kiệm.\nChữ màu nhỏ màu xanh đó là khoảng tiền bạn nên thêm vào tiết kiệm của mình.')">
+                <p>Tiết kiệm <span id="ptsave20">20%</span></p>
+                <h1><span id="savingsTotal">0</span>đ <span id="save20"></span></h1>
+            </div>
+            <div class="Card Money" onclick="alert('Đây là tổng tiền của bạn.')">
+                <p>Tổng tài sản <span>100%</span></p>
+                <h1><span id="ToltalMoney">0</span>đ</h1>
+            </div>
+            <div class="Card Money" onclick="alert('Đây là khoản tiền bạn đang nợ.')">
+                <p>Nợ</p>
+                <h1><span id="tienno">0</span>đ</h1>
+            </div>
+            <div class="Card Money Alert" onclick="Note()">
+                <p>⚠ Cảnh báo</p>
+                <div class="marquee-parent">
+                    <div class="marquee-child">
+                        <p id="marquee">Đừng mua đồ Shopee nữa, bớt trà sữa lại tiết kiệm đi nào 🎉✨</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="Tab">
+            <div class="Card Tabcontent" id="A">
+                <h1>Thu nhập</h1>
+                <label for="cash">Tiền mặt:</label>
+                <input type="text" class="inputFM" id="cash" name="cash" pattern="[0-9]*" >
+                <br>
+                <br>
+                <label for="card">Tiền thẻ:</label>
+                <input type="text" class="inputFM" id="card" name="card" pattern="[0-9]*" >
+                <br>
+                <br>
+                <label for="cashNote">Ghi chú:</label>
+                <input type="text" id="cashNote" name="cashNote" placeholder="Ghi chú (nếu có)">
+                <button onclick="addMoney()">Nhập</button>
+            </div>
+            <div class="Card Tabcontent" id="B">
+                <h1>Chi tiêu</h1>
+                <label for="cashWithdraw">Tiền mặt rút:</label>
+                <input type="text" class="inputFM" id="cashWithdraw" name="cashWithdraw" pattern="[0-9]*"   >
+                <br>
+                <br>
+                <label for="cardWithdraw">Tiền thẻ rút:</label>
+                <input type="text" class="inputFM" id="cardWithdraw" name="cardWithdraw" pattern="[0-9]*"   >
+                <br>
+                <br>
+                <label for="cashWithdrawNote">Ghi chú:</label>
+                <input type="text" id="cashWithdrawNote" name="cashWithdrawNote" placeholder="Ghi chú (nếu có)">
+                <button onclick="addMoney()">Nhập</button>
+            </div>
+            <div class="Card Tabcontent" id="D">
+                <h1>Ghi nợ</h1>
+                <label for="debtAmount">Số tiền nợ:</label>
+                <input type="text" class="inputFM" id="debtAmount" name="debtAmount" pattern="[0-9]*"   >
+                <br><br>
+                <label for="payAmount">Số tiền trả:</label>
+                <input type="text" class="inputFM" id="payAmount" name="payAmount" pattern="[0-9]*"   >
+                <br><br>
+                <label for="payWho">Của ai:</label>
+                <input type="text" id="payWho" value="...">
+                <button onclick="recordDebt()">Ghi nợ</button>
+            </div>
+            <div class="Card Tabcontent" id="E">
+                <h1>Tiết kiệm</h1>
+                <label for="savingsAmount">Số tiền tiết kiệm:</label>
+                <input type="text" class="inputFM" id="savingsAmount" name="savingsAmount" pattern="[0-9]*"   >
+                <button onclick="saveSavings()">Tiết kiệm</button>
+                <br>
+                <label for="withdrawalAmount">Rút tiền tiết kiệm:</label>
+                <input type="text" class="inputFM" id="withdrawalAmount" name="withdrawalAmount" pattern="[0-9]*"
+                      >
+                <button onclick="withdrawSavings()">Rút tiền</button>
+            </div>
+
+            <div class="Card Tabcontent" id="C">
+                <h1>Mua đồ</h1>
+                <div id="CoNenMuaKhong"></div>
+                <label for="">Giá gốc sản phẩm bạn tính mua ?</label>
+                <input id="GiaGocSanPham" type="text" class="inputFM" pattern="[0-9]*"   >
+                <br>
+                <br>
+                <label for="">Giá sản phẩm hiện tại ?</label>
+                <input id="GiaSanPham" type="text" class="inputFM" pattern="[0-9]*"   >
+
+                <br>
+                <button onclick="TinhTienMuaHang()">Tính ngay</button>
+
+
+            </div>
+            <div class="Card Tabcontent" id="F">
+                <h1>Tính toán</h1>
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="Card Transactions">
+            <h1>Lịch sử giao dịch</h1>
+            <hr>
+            <div id="Transactions">
+            </div>
+
+            <div class="Button">
+                <button onclick="exportTransactions()"><i class="fa-solid fa-circle-down"></i></button>
+                <button onclick="clearTransactions()"><i class="fa-solid fa-trash"></i></button>
+                <button onclick="Clear()"><i class="fa-solid fa-database"></i></button>
+                <button onclick="handlePasteClick()">Nhập từ VCB</button>
+            </div>
+        </div>
+
+        <div id="toggle-button">HIHI</div>
+    </div>
+    <footer>
+        <!-- Nội dung chân trang -->
+        <p>Lập trình và thiết kế bởi Đinh Mạnh Hùng.</p>
+    </footer>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="./Script.js"></script>
+<script src="./DarkMode.js"></script>
+
+</html>
