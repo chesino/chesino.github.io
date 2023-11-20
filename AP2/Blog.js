@@ -1,7 +1,7 @@
 ReloadBlog();
 function ReloadBlog() {
 
-  const rssUrl1 = 'https://hunqd.wordpress.com/feed/';
+  const rssUrl1 = 'https://projectap2.wordpress.com/feed/';
   const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
 
 
