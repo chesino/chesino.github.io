@@ -1,119 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #0f0f10;
+    background-color: #393837;
     color: #acacac;
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 10px;
-}
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
 .BoxSearch {
-    background-color: #222223 ;
-    padding: 10px 20px;
-    margin: 10px 0 20px 0;
-    border-radius: 10px;
-}
-.BoxSearch h1 {
-    font-size: 18px;
-    text-transform: uppercase;
-    margin: 5px 0 20px 0;
-}
-.search,
-.filter {
-    margin-bottom: 20px;
-}
-
-.search label,
-.filter label {
-    margin-right: 10px;
-}
-
-.search input[type="text"] {
-    font-size: 20px;
-    width: 300px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.search button {
-    padding: 5px 10px;
-    background-color: #ff2020;
-    color: #fff;
-    font-size: 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.filter select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.app {
-    background-color: #222223;
-    display: grid;
-    grid-template-columns: 65px auto 60px;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 20px;
-    border-radius: 20px;
+    background-color: #000000;
     padding: 10px;
 }
-
-.app img {
-    width: 60px;
-    height: 60px;
-    margin-right: 20px;
-    border-radius: 18px;
-}
-
-.app h2 {
-    font-size: 20px;
-    margin: 0;
-}
-
-.app p {
-    margin: 5px 0;
-}
-
-.download button {
-    cursor: pointer;
-    height: 30px;
-    padding: 0 10px;
-    background-color: #ff2020;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-}
-.infoApp {
+.BoxSearch .search  {
     display: flex;
-    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-  }
-  
-  .infoApp h2 {
-    font-size: 16px;
-    margin-right: 10px; /* Khoảng cách giữa tiêu đề và phần tử tiếp theo */
-  }
-
-  .infoApp p {
-    cursor: pointer;
+    gap: 4px;
+    height: 45px;
+    margin: 10px 0;
+}
+.BoxSearch .search input{
+    width: 100%;
+    font-size: 18px;
+    padding: 5px ;
+    border: none;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.BoxSearch .search button {
+    background-color:#fff;
+    border: none;
+    width: 100px;
     font-size: 20px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.BoxSearch .filter label{
+    font-size: 20px;
+}
+.BoxSearch .filter select {
+    font-size: 20px;
+    padding: 5px;
+}
+
+.App {
+    background-color: #202020;
+    padding: 8px;
+    border-radius: 24px;
+    margin: 10px ;
+}
+
+.App .InfoApp .Icon img {
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+    display: block;
+}
+
+.InfoApp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    border-radius: 16px;
+    padding: 6px;
+}
+
+.InfoApp .Info {
+    display: flex;
+    gap: 8px;
+}
+
+.InfoApp .Info h1 {
+
     color: #fff;
+    font-size: 22px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.InfoApp .Info p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+.InfoApp .Download {
+    margin: 0 20px;
+}
+
+.InfoApp .Download button {
     text-align: center;
-    /* padding: 0px 6px 2px 5px;
-    border-radius: 10px; */
-  }
-.no-data {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+}
+
+.App .More {
     text-align: center;
-    font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 6px;
 }
