@@ -229,6 +229,4 @@ const apps = [
     "description": "Chuyển dữ liệu các game, ứng dụng đã chỉnh sửa.",
     "downloadLink": "https://imazing.com/"
   },
-  
-  
 ];
