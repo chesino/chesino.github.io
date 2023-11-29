@@ -35,7 +35,15 @@
     </video>
   </div>
 
+  <audio id="myAudio">
+    <source  src="https://drive.google.com/uc?export=download&id=1AWojPJ7Z26_D3HycNztUg4PpajBBUHtK" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <div class="Menu">
+    <div class="Icon" id="toggleMusic" onclick="toggleMusic()">
+      <i class="fa-solid fa-music"></i>
+    </div>
     <div class="Icon" onclick="toggleContent()">
       <i class="fa-solid fa-eye"></i>
     </div>
@@ -45,11 +53,7 @@
   </div>
 
   <div class="Container">
-    <div class="Head">
-      <p id="TimeNow">Thứ tư....</p>
-    </div>
     <div class="BoxSearch">
-      <h1>Lưu trữ</h1>
       <div class="search">
         <input type="text" id="search-input" placeholder="Tìm kiếm">
         <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -61,10 +65,10 @@
           <label for="all">Tất cả</label>
 
           <input type="radio" id="tweak" name="category" value="Tweak">
-          <label for="tweak">Tweak</label>
+          <label for="tweak"><i class="fa-solid fa-cube"></i> Tweak</label>
 
           <input type="radio" id="ipa" name="category" value="iPA">
-          <label for="ipa">iPA</label>
+          <label for="ipa"><i class="fa-brands fa-app-store-ios"></i> iPA</label>
         </div>
       </div>
 
@@ -72,6 +76,7 @@
     </div>
 
     <div class="app-list">
+
     </div>
 
   </div>

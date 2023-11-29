@@ -68,7 +68,7 @@ function renderAppList() {
             </div>
           </div>
           <div class="Download">
-            <a href="apple-magnifier://install?url=${app.downloadLink}">
+            <a href="${app.downloadLink}">
               <button>
                 <i class="fa-solid fa-download"></i>
               </button>
@@ -122,21 +122,41 @@ function toggleVideo() {
   }
 }
 
+function toggleMusic() {
+  var x = document.getElementById("myAudio");
+  var toggleMusic = document.getElementById("toggleMusic");
+  
+  var currentTime = new Date();
+  var startMinute = currentTime.getMinutes();
+  var startSecond = currentTime.getSeconds();
 
+  x.currentTime = startMinute * 60 + startSecond;
 
-
-
-function updateDateTime() {
-  var TimeNow = new Date();
-  var daysOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
-  var dayIndex = TimeNow.getDay();
-  var dayOfMonth = TimeNow.getDate();
-  var monthIndex = TimeNow.getMonth() + 1;
-
-  var result = daysOfWeek[dayIndex] + ', ' + dayOfMonth + ' Tháng ' + monthIndex;
-  var divTimeNow = document.getElementById("TimeNow");
-  divTimeNow.innerText = result;
+  if (x.paused == false) {
+    toggleMusic.innerHTML = '<i class="fa-solid fa-play"></i>'
+    x.pause();
+  } else {
+    toggleMusic.innerHTML = '<i class="fa-solid fa-pause"></i>'
+    x.play();
+  }
 }
 
-updateDateTime();
-setInterval(updateDateTime, 1000);
+
+
+
+
+
+// function updateDateTime() {
+//   var TimeNow = new Date();
+//   var daysOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+//   var dayIndex = TimeNow.getDay();
+//   var dayOfMonth = TimeNow.getDate();
+//   var monthIndex = TimeNow.getMonth() + 1;
+
+//   var result = daysOfWeek[dayIndex] + ', ' + dayOfMonth + ' Tháng ' + monthIndex;
+//   var divTimeNow = document.getElementById("TimeNow");
+//   divTimeNow.innerText = result;
+// }
+
+// updateDateTime();
+// setInterval(updateDateTime, 1000);
