@@ -20,3 +20,4 @@ const apps = [
     "downloadLink": "https://drive.google.com/uc?export=download&id=1rGPLedFtV5VvPrpAgWFmRlCh3mlJ9qLI"
   },
 ];
+

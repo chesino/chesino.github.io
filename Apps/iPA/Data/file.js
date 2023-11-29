@@ -68,7 +68,7 @@ function renderAppList() {
             </div>
           </div>
           <div class="Download">
-            <a href="${app.downloadLink}">
+            <a href="apple-magnifier://install?url=${app.downloadLink}">
               <button>
                 <i class="fa-solid fa-download"></i>
               </button>
