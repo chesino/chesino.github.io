@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #393837;
+    color: #acacac;
+    background-image: url(./IMG/wallpaperflare.com_wallpaper.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.Menu {
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.Menu .Icon {
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(0, 140, 255);
+    border-radius: 10px;
+}
+
+.VideoBG {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
+
+.VideoBG video {
+    min-height: 100vh;
+    min-width: 100%;
+}
+
+.Hidden {
+    display: none;
+}
+
+
+
+.Head {
+    padding: 10px;
+    background-color: #000000;
+}
+
+.Head #TimeNow {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.BoxSearch {
+    background-color: #000000;
+    padding: 10px;
+}
+
+.BoxSearch .search {
+    display: flex;
+    gap: 4px;
+    height: 45px;
+    margin: 10px 0;
+}
+
+.BoxSearch .search input {
+    width: 100%;
+    font-size: 18px;
+    padding: 5px;
+    border: none;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.BoxSearch .search button {
+    background-color: #fff;
+    border: none;
+    width: 100px;
+    font-size: 20px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+
+
+.radio-group {
+    display: flex;
+    flex-direction: row;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    margin-right: 10px;
+    padding: 5px;
+    background-color: #111;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked+label {
+    background-color: #2196F3;
+    color: #fff;
+}
+
+
+.App {
+    background-color: #202020;
+    padding: 8px;
+    border-radius: 24px;
+    margin: 10px;
+}
+
+.App .InfoApp .Icon img {
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+    display: block;
+}
+
+.InfoApp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    border-radius: 16px;
+    padding: 6px;
+}
+
+.InfoApp .Info {
+    display: flex;
+    gap: 8px;
+}
+
+.InfoApp .Info h1 {
+
+    color: #fff;
+    font-size: 22px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.InfoApp .Info p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.InfoApp .Download {
+    margin: 0 20px;
+}
+
+.InfoApp .Download button {
+    color: #000000;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+}
+
+.App .More {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 6px;
+}
+
+@media only screen and (min-width: 800px) {
+    .VideoBG {
+        display: none;
+    }
+
+    .Container {
+        margin: 0 100px;
+    }
+}

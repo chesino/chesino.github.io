@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <!-- Tiêu đề trang -->
+  <title>Chesino</title>
+
+  <!-- Bộ giải mã và phân loại thiết bị -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Biểu tượng cho web -->
+  <link rel="icon" href="/Data/logo.png">
+
+  <!-- Biểu tượng iPhone -->
+  <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
+
+  <!-- CSS của web -->
+  <link rel="stylesheet" href="./Data/style.css">
+  <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div class="VideoBG" id="VideoBG">
+    <video autoplay loop muted playsinline class="video-background ">
+      <source src="./Data/VideoBG/Jinx.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="Menu">
+    <div class="Icon" onclick="toggleContent()">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+    <div class="Icon" onclick="toggleVideo()">
+      <i class="fa-solid fa-video-slash"></i>
+    </div>
+  </div>
+
+  <div class="Container">
+    <div class="Head">
+      <p id="TimeNow">Thứ tư....</p>
+    </div>
+    <div class="BoxSearch">
+      <h1>Lưu trữ</h1>
+      <div class="search">
+        <input type="text" id="search-input" placeholder="Tìm kiếm">
+        <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+
+      <div class="filter">
+        <div class="radio-group">
+          <input type="radio" id="all" name="category" value="" checked>
+          <label for="all">Tất cả</label>
+      
+          <input type="radio" id="tweak" name="category" value="Tweak">
+          <label for="tweak">Tweak</label>
+      
+          <input type="radio" id="ipa" name="category" value="iPA">
+          <label for="ipa">iPA</label>
+        </div>
+      </div>
+      
+      
+    </div>
+
+    <div class="app-list">
+    </div>
+
+  </div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="./Data/app.js"></script>
+<script src="./Data/file.js"></script>
+
+
+</html>

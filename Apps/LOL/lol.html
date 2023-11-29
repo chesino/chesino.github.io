@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Riot Games API</title>
+</head>
+
+<body>
+
+    
+    <h1>Riot Games API</h1>
+    <form id="search-form">
+        <input type="text" id="summoner-name" placeholder="Nhập tên người chơi">
+        <input type="text" id="region" placeholder="Nhập máy chủ (Ví dụ: na1)">
+        <button type="button" id="search-button">Tìm</button>
+
+    </form>
+
+    <!-- Thêm div cho thông tin về lịch sử rank và điểm rank -->
+    <div id="rank-info">
+        <h2>Thông tin Rank</h2>
+        <p>Mức rank: <span id="rank-tier"></span></p>
+        <p>Điểm rank: <span id="rank-points"></span></p>
+    </div>
+
+    <!-- Thêm div cho thông tin về lịch sử trận đấu -->
+    <div id="match-history">
+        <h2>Lịch sử trận đấu</h2>
+        <ul id="matches-list"></ul>
+    </div>
+
+
+    <div id="result"></div>
+    <script>
+        document.getElementById('search-button').addEventListener('click', function () {
+            const summonerName = document.getElementById('summoner-name').value;
+            const region = document.getElementById('region').value;
+
+            // Thay đổi API_KEY bằng API Key của bạn từ Riot Games
+            const API_KEY = 'RGAPI-96388fae-c753-4eff-842c-2b056813ad87';
+
+            // Tạo URL yêu cầu API
+            const apiUrl = `https://vn2.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
+
+            // Gửi yêu cầu đến API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Xử lý phản hồi từ API ở đây
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = `
+                        <h2>Thông tin người chơi</h2>
+                        <p>Tên người chơi: ${data.name}</p>
+                        <p>ID người chơi: ${data.id}</p>
+                        <p>puuid: ${data.puuid}</p>
+                        <p>Máy chủ: ${data.region}</p>
+                        <p>Cấp: ${data.summonerLevel}</p>
+                        <p>revisionDate: ${data.revisionDate}</p>
+                        <img alt="${data.profileIconId}" srcset="http://ddragon.leagueoflegends.com/cdn/13.17.1/img/profileicon/${data.profileIconId}.png">
+                    `;
+                    const rankApiUrl = `https://vn2.api.riotgames.com/lol/league/v4/entries/by-summoner/${data.id}?api_key=${API_KEY}`;
+
+                    fetch(rankApiUrl)
+                        .then(response => response.json())
+                        .then(rankData => {
+                            // Xử lý phản hồi từ API về rank ở đây
+                            if (rankData.length > 0) {
+                                const rankInfo = rankData[0]; // Giả sử lấy thông tin rank đầu tiên
+                                document.getElementById('rank-tier').textContent = rankInfo.tier + ' ' + rankInfo.rank;
+                                document.getElementById('rank-points').textContent = rankInfo.leaguePoints + ' điểm';
+                            } else {
+                                document.getElementById('rank-info').innerHTML = '<p>Người chơi này không có rank hiện tại.</p>';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Lỗi khi gửi yêu cầu đến API Rank: ', error);
+                            document.getElementById('rank-info').innerHTML = '<p>Có lỗi xảy ra khi tìm kiếm thông tin rank.</p>';
+                        });
+
+
+                    // Lấy thông tin về lịch sử trận đấu
+                    const matchHistoryApiUrl = `https://vn2.api.riotgames.com/lol/match/v4/matchlists/by-account/${data.accountId}?api_key=${API_KEY}`;
+
+                    fetch(matchHistoryApiUrl)
+                        .then(response => response.json())
+                        .then(matchHistoryData => {
+                            // Xử lý phản hồi từ API về lịch sử trận đấu ở đây
+                            const matchesList = document.getElementById('matches-list');
+                            matchesList.innerHTML = '';
+
+                            if (matchHistoryData.matches && matchHistoryData.matches.length > 0) {
+                                matchHistoryData.matches.slice(0, 10).forEach(match => { // Giới hạn số lượng trận đấu hiển thị
+                                    const listItem = document.createElement('li');
+                                    listItem.textContent = `Trận đấu ID: ${match.gameId}, Máy chủ: ${match.platformId}`;
+                                    matchesList.appendChild(listItem);
+                                });
+                            } else {
+                                matchesList.innerHTML = '<p>Không có lịch sử trận đấu cho người chơi này.</p>';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Lỗi khi gửi yêu cầu đến API Lịch sử trận đấu: ', error);
+                            const matchesList = document.getElementById('matches-list');
+                            matchesList.innerHTML = '<p>Có lỗi xảy ra khi tìm kiếm lịch sử trận đấu.</p>';
+                        });
+
+                })
+                .catch(error => {
+                    console.error('Lỗi khi gửi yêu cầu đến API: ', error);
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = '<p>Có lỗi xảy ra khi tìm kiếm thông tin người chơi.</p>';
+                });
+
+
+
+        });
+        // Lấy thông tin về lịch sử rank và điểm rank
+
+    </script>
+</body>
+
+</html>
