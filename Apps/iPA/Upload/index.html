@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Form</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
     <h1>Form</h1>
     <form id="myForm">
         <label for="type">Phân loại:</label>
         <select id="type" name="type">
-            <option value="Game">Game</option>
-            <option value="App">App</option>
+            <option value="Tweak">Tweak</option>
+            <option value="iPA">iPA</option>
         </select><br><br>
 
         <label for="logo">Logo:</label>
@@ -27,6 +29,12 @@
             <option value="Khác">Khác</option>
         </select><br><br>
 
+        <label for="version">Version:</label>
+        <input type="text" id="version" name="version"><br><br>
+
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size"><br><br>
+
         <label for="description">Mô tả:</label>
         <textarea id="description" name="description">Premium vĩnh viễn</textarea><br><br>
 
@@ -42,4 +50,5 @@
 
     <script src="./script.js"></script>
 </body>
+
 </html>
