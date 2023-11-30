@@ -1,4 +1,8 @@
 window.onload = function () {
+  // Initially hide the loading message
+  const loadingMessage = document.getElementById("loading-message");
+  loadingMessage.style.display = "none";
+
   renderAppList();
 };
 
@@ -6,6 +10,7 @@ const searchInputElement = document.getElementById("search-input");
 const searchButtonElement = document.getElementById("search-button");
 const radioButtons = document.querySelectorAll('input[name="category"]');
 const appListElement = document.querySelector(".app-list");
+const loadingMessage = document.getElementById("loading-message");
 
 searchButtonElement.addEventListener("click", renderAppList);
 searchInputElement.addEventListener("input", renderAppList);
@@ -15,17 +20,25 @@ radioButtons.forEach(function (radio) {
 });
 
 function renderAppList() {
+  // Show the loading message while apps are being loaded
+  loadingMessage.style.display = "block";
+  
   appListElement.innerHTML = "";
 
   const searchTerm = searchInputElement.value.toLowerCase();
   const typeFilter = getSelectedRadioValue("category");
 
-  const filteredApps = apps.filter((app) => {
+  let filteredApps = apps.filter((app) => {
     return (
       app.name.toLowerCase().includes(searchTerm) &&
       (typeFilter === "" || app.type === typeFilter)
     );
   });
+
+  filteredApps = filteredApps.reverse();
+
+  // Hide the loading message once apps are loaded
+  loadingMessage.style.display = "none";
 
   if (filteredApps.length === 0) {
     const noDataElement = document.createElement("div");
@@ -43,6 +56,8 @@ function renderAppList() {
         type = '<i class="fa-solid fa-cube"></i> Tweak';
       } else if (app.type === "iPA") {
         type = '<i class="fa-brands fa-app-store-ios"></i> iPA';
+      } else if (app.type === "Link") {
+        type = '<i class="fa-solid fa-link"></i> Link';
       } else {
         type = '<i class="fa-solid fa-question"></i>';
       }
@@ -93,7 +108,6 @@ function getSelectedRadioValue(name) {
   return selectedRadio ? selectedRadio.value : "";
 }
 
-
 var isContentHidden = false;
 
 function toggleContent() {
@@ -106,8 +120,6 @@ function toggleContent() {
     Container.classList.remove('Hidden');
   }
 }
-
-
 
 var isVideoHidden = false;
 
@@ -140,23 +152,3 @@ function toggleMusic() {
     x.play();
   }
 }
-
-
-
-
-
-
-// function updateDateTime() {
-//   var TimeNow = new Date();
-//   var daysOfWeek = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
-//   var dayIndex = TimeNow.getDay();
-//   var dayOfMonth = TimeNow.getDate();
-//   var monthIndex = TimeNow.getMonth() + 1;
-
-//   var result = daysOfWeek[dayIndex] + ', ' + dayOfMonth + ' Tháng ' + monthIndex;
-//   var divTimeNow = document.getElementById("TimeNow");
-//   divTimeNow.innerText = result;
-// }
-
-// updateDateTime();
-// setInterval(updateDateTime, 1000);
