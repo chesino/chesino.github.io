@@ -71,26 +71,6 @@ const apps = [
   },
   {
     "type": "iPA",
-    "logo": "/Data/logo.png",
-    "name": "Tracker ",
-    "os": "iOS",
-    "version": "4.11.3",
-    "size": "4,54MB",
-    "description": "Premium.",
-    "downloadLink": "https://download948.mediafire.com/6fciv9q1xkmguknwJ1ycobbk9hy9_0xU6x5XVO_eeJOvoyx0b1X7kDP5B8kgnaHNzJNvBs4WydRX3zEkLPi7s3XbcO3dfMFIGK_vVMwR21dusCar8Wa7EMgL3nXqbg9RZph3gPcUq84fztK5q9m-l2Q8s_S1FYnIwJr-je7C4Nzr9w/gmgd8gq56ci5g7k/Sex+Tracker%2B%2B_4.11.3_LeTi.ipa"
-  },
-  {
-    "type": "iPA",
-    "logo": "./Data/LogoApps/Meitu.png",
-    "name": "Meitu",
-    "os": "iOS",
-    "version": "9.9.30",
-    "size": "231MB",
-    "description": "VIP",
-    "downloadLink": "https://download1590.mediafire.com/orddjns401cgs0Dq8BUKCWK296hIY2r4_nxwI7gqUysyEssghcFO7I7mo8O81aMJ6ZlClL4xwnHzL4QXfzvhBM-iYqiTLU7L96txACow5FXw9BjUYA8hbZDdOT8nA038Sya4ykoRxXK9UUIjZL2FGni5zEOfc3Po9b8b0jkNDDFSYoc/njlp53e32wbpjpy/Meitu%2B%2B_9.9.30_LeTi.ipa"
-  },
-  {
-    "type": "iPA",
     "logo": "./Data/LogoApps/ppsspp.png",
     "name": "PPSSPP",
     "os": "iOS",
@@ -131,7 +111,7 @@ const apps = [
   },
   {
     "type": "iPA",
-    "logo": "/Data/logo.png",
+    "logo": "https://chesino.github.io/DATA/logo.png",
     "name": "SGv3 - Việt Hóa",
     "os": "iOS",
     "version": "0.20.15v3",
@@ -176,7 +156,7 @@ const apps = [
     "os": "iOS",
     "version": "1.102.1",
     "size": "589.20MB",
-    "description": "Nhấn Ba Ngón Tay Vào Màn Hình Ba Lần Để Hiện Ra Menu Hack. Độn Thổ.",
+    "description": "Nhấn Ba Ngón Tay Vào Màn Hình Ba Lần Để Hiện Ra Menu Hack.",
     "downloadLink": "https://download1526.mediafire.com/fe0e7bbq7mkgAr8EXIin5ThdzmIHREOd6Ti16EGqtISVTAhhkaqxtVhuPRQT2SoB0LSfYk-pHeCIdyzlIlzr87iP1K-3ERoM0igPNOm0V3zr16VwEwc9YsGS6QkP8lZbO7BqmT2RZ9rst8L0TsBGpgBy8eZK25GbLYqviRE7D9hdMqo/z17d02yiqnagi7p/Free+Fire+DVC+iOS_1.102.1.ipa"
   },
   {
@@ -209,6 +189,25 @@ const apps = [
     "description": "Kênh Telegram",
     "downloadLink": "https://t.me/IPA_FREE_RAK"
   },
-
+  {
+    "type": "Tweak",
+    "logo": "./Data/LogoApps/Filza.png",
+    "name": "Filza",
+    "os": "iOS",
+    "version": "4.0.0",
+    "size": "N/A",
+    "description": "Quản lý file, Hãy xoá Filza nếu các app phát hiện Jailbreak.",
+    "downloadLink": "https://tigisoftware.com/download/Filza_4.0.0.ipa"
+  },
+  {
+    "type": "iPA",
+    "logo": "https://ios.codevn.net/wp-content/uploads/2020/10/DiuTube.png",
+    "name": "DiuTube",
+    "os": "iOS",
+    "version": "18.41.2",
+    "size": "105MB",
+    "description": "Chặn quảng cáo, Nghe nhạc màn hình, PiP,...",
+    "downloadLink": "https://download1076.mediafire.com/9r6dtdblj3hgaDYV0wjCOpkSWufjmwsaZuP8-FTa4flR-YkgXu0Cau2GkR0OXFOR56JlHua1BWyQt4eg_qs8w_oZNDA_JbDTfF1YphX_wo6fjMjZgwQOOty-lhy5aYRwbQ_El57I4j8Zh33IY1vvqMuSxHUjAYMWUyHJ08qNDRR_Gmc/zjjs25xodrmokjb/DiuTube_18.41.2_LeTi.ipa"
+  },
 ];
 
