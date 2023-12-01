@@ -150,16 +150,6 @@ const apps = [
     "downloadLink": "https://download1503.mediafire.com/cvz08uqf5etgS8VNCi16LM2ZUHKYPgjd5YAZqEgQk10DU0zgKcVsE2NYKlxeJt9Qy0H_Ln1o2u8tUDAi-pURpbN4UvZwhs7qN4iMUT0iiufx8zesmaNvkiyqhQKIni1k9Mu-sb7SHqh3Gt3mdsbo6xW-E1AicGi5O7FxT_mEjocr_8k/6tux94tctittcx0/IMemScan_TS.ipa"
   },
   {
-    "type": "iPA",
-    "logo": "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/d3/f7/ac/d3f7ac6e-2216-64ca-de8d-d78947b56fad/AppIcon-1697727839-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/217x0w.webp",
-    "name": "Free Fire HACK - DVC iOS",
-    "os": "iOS",
-    "version": "1.102.1",
-    "size": "589.20MB",
-    "description": "Nhấn Ba Ngón Tay Vào Màn Hình Ba Lần Để Hiện Ra Menu Hack.",
-    "downloadLink": "https://download1526.mediafire.com/fe0e7bbq7mkgAr8EXIin5ThdzmIHREOd6Ti16EGqtISVTAhhkaqxtVhuPRQT2SoB0LSfYk-pHeCIdyzlIlzr87iP1K-3ERoM0igPNOm0V3zr16VwEwc9YsGS6QkP8lZbO7BqmT2RZ9rst8L0TsBGpgBy8eZK25GbLYqviRE7D9hdMqo/z17d02yiqnagi7p/Free+Fire+DVC+iOS_1.102.1.ipa"
-  },
-  {
     "type": "Link",
     "logo": "./Data/LogoApps/DVCiPA.jpg",
     "name": "DVC iOS - Telegram",
