@@ -114,10 +114,10 @@ const apps = [
     "logo": "https://chesino.github.io/DATA/logo.png",
     "name": "SGv3 - Việt Hóa",
     "os": "iOS",
-    "version": "0.20.15v3",
-    "size": "454,91MB",
+    "version": "0.20.16",
+    "size": "2GB",
     "description": "Đã việt hoá.",
-    "downloadLink": "https://download1592.mediafire.com/sbkh0g8w91ngjwU9UvRfd42KyqGeKB2lkUn8GGfgK8z61qJkgoBEkUzO2XZYqOUDKb-VLn0fOSSb2gPb8WH9pEZToug2siY-oRNbHuLm1wvtKLwGSAlUgmpHVq_Vh9_9ev7ldtyZwkOrdcxS9JFq469ug9k5rP-RXeias6_GpKUoo4U/jvw37gabimatqs8/SummertimeSaga_v.0.20.15v3.ipa"
+    "downloadLink": "https://download1526.mediafire.com/32909i7l1togx-4Ve4JQSFvXoRR4T6VvivGxg0293oqTCAM4twfbs07gmZdIud-HKzWQx93rpA2B-gMWS9vF3OFwgC35_r4yVBsnLF8_xIbun8gFANiCqmslSjD8WU4mKNvsmAKxwh8cj1XHdv77erpHaUdZtf0OJoQzC2D1sP5hKgY/eg9h0wm1qcrukb5/SummertimeSaga_v.0.20.16.ipa"
   },
   {
     "type": "iPA",
