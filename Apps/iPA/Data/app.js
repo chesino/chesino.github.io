@@ -24,7 +24,7 @@ const apps = [
     "logo": "./Data/LogoApps/ESign.png",
     "name": "ESign",
     "os": "iOS",
-    "version": "4.8.1",
+    "version": "4.8.2",
     "size": "6,8 MB",
     "description": "Cài iPA bằng chứng chỉ có tuỳ chỉnh.",
     "downloadLink": "https://drive.google.com/uc?export=download&id=12jfR5vZFz2o1DmbnB-Ti8byW1HwnP39V"
@@ -240,14 +240,14 @@ const apps = [
     "downloadLink": "https://download1326.mediafire.com/yqbr57ue9vcgaqnXaiCrDN2nyyOJMRMg-N1FavYF6gjAPBJAv0m9PSVbOT9WrEHQSpbxaJAyksIcXNtRudjfJmni1VJWOYsLVs-GRoe73_fMgo1cbyjH5ZQt101yhbpbCXa__zFIbkvOPGGyyg76x9sxp7n_Kx2MzF9hjuan6-79ikg/42eb9ocs8ppp75g/Auto-Clicker.ipa"
   },
   {
-    "type": "iPA",
-    "logo": "https://cdn.decrypt.day/image/thumb/Purple116/v4/dc/e2/0c/dce20c08-b938-ce16-e16d-ef80e888567f/AppIcon-0-0-1x_U007emarketing-0-0-0-10-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/492x0w.webp",
-    "name": "Beat Fire",
+    "type": "Tweak",
+    "logo": "./Data/LogoApps/Picasso.jpg",
+    "name": "Picasso",
     "os": "iOS",
-    "version": "1.30",
-    "size": "88.3MB",
-    "description": "Beat Fire creates a music feast suitable for YOU.",
-    "downloadLink": "https://download937.mediafire.com/ngrgl8s3btxghRmTnTAiHY0eInQcYSwv9SG2er5yQCZNaibG1eUGFzqj6YOv2MFtA8doaC3hlIh7I5zT9SYV27fRY478RvMsTMDLIGQy4HrG_51GSIy1bY3OWwNZZWtyeBlfCZ3ReLDBrWOGXZnSOPrm_sqFcdg8i7qvbpHgNT8M25s/dephtq3f8rew1nv/com.Adaric.EDM.beatfire_1.30_und3fined.ipa"
+    "version": "3.0.1",
+    "size": "36,1MB",
+    "description": "Picasso một trình quản lý tinh chỉnh (Tweak), Theme,...",
+    "downloadLink": "https://download1979.mediafire.com/rmk31xpm7segQKeUzhriNjCu2VCRO6JhDxkCwitgif7Mw1v7K6bD836XIkKn_WUbRf1uHeMrzH9ZLA5vqzr1GhQklLb1FqIpAh6mELM4G-0qEWANUfwcVjeDuSU_zHiuKRqSg45s3YbASaJBa73SNAyqlRM_CJJWdvob1WH5woOhwME/5tehjryhobdv5i3/Picasso_v3.0.1.ipa"
   },
 ];
 
