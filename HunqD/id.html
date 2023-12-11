@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chỉnh sửa JSON</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Chỉnh sửa JSON và Thêm ID từ URL</h2>
+  <p>1. Paste JSON data vào ô dưới đây:</p>
+  <textarea id="jsonInput"></textarea>
+
+  <p>2. Nhấn nút để thêm ID từ URL:</p>
+  <button onclick="addIdFromUrl()">Thêm ID từ URL</button>
+
+  <p>3. Sau khi chỉnh sửa, nhấn nút để tải xuống:</p>
+  <button onclick="downloadJson()">Tải xuống JSON đã chỉnh sửa</button>
+
+  <script>
+    function addIdFromUrl() {
+      try {
+        const jsonData = JSON.parse(document.getElementById('jsonInput').value);
+        const updatedJsonData = jsonData.map(item => {
+          const idMatch = item.profileURL.match(/id=(\d+)/);
+          if (idMatch && idMatch[1]) {
+            return {
+              ...item,
+              id: idMatch[1]
+            };
+          }
+          return item;
+        });
+        document.getElementById('jsonInput').value = JSON.stringify(updatedJsonData, null, 2);
+      } catch (error) {
+        alert('Có lỗi xảy ra khi thêm ID từ URL. Hãy chắc chắn rằng đầu vào JSON là đúng.');
+      }
+    }
+
+    function downloadJson() {
+      const jsonData = document.getElementById('jsonInput').value;
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'edited_data.json';
+      a.click();
+    }
+  </script>
+
+</body>
+</html>

@@ -249,5 +249,15 @@ const apps = [
     "description": "Picasso một trình quản lý tinh chỉnh (Tweak), Theme,...",
     "downloadLink": "https://download1979.mediafire.com/rmk31xpm7segQKeUzhriNjCu2VCRO6JhDxkCwitgif7Mw1v7K6bD836XIkKn_WUbRf1uHeMrzH9ZLA5vqzr1GhQklLb1FqIpAh6mELM4G-0qEWANUfwcVjeDuSU_zHiuKRqSg45s3YbASaJBa73SNAyqlRM_CJJWdvob1WH5woOhwME/5tehjryhobdv5i3/Picasso_v3.0.1.ipa"
   },
+  {
+    "type": "Link",
+    "logo": "./Data/LogoApps/iPAFire.jpg",
+    "name": "IPA Free",
+    "os": "iOS",
+    "version": "1.0",
+    "size": "0KB",
+    "description": "Kênh Telegram",
+    "downloadLink": "https://t.me/ipafire"
+  },
 ];
 

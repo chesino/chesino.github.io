@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #friendList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .friend {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Danh sách bạn bè</h1>
+    <input type="file" id="jsonFile" accept=".json">
+    <button id="downloadButton" disabled>Tải về JSON đã chỉnh sửa</button>
+    <ul id="friendList"></ul>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var jsonData;
+
+            // Input file element
+            var inputElement = document.getElementById("jsonFile");
+            inputElement.addEventListener("change", handleFile);
+
+            // Download button
+            var downloadButton = document.getElementById("downloadButton");
+            downloadButton.addEventListener("click", downloadEditedJSON);
+
+            function decodeUnicode(str) {
+                return decodeURIComponent(escape(str));
+            }
+
+
+            function handleFile(e) {
+                var file = e.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        try {
+                            jsonData = JSON.parse(e.target.result);
+                            renderFriendList();
+                            downloadButton.disabled = false;
+                        } catch (error) {
+                            alert("Lỗi đọc tệp JSON: " + error.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            }
+
+            function downloadEditedJSON() {
+                var editedJSON = JSON.stringify(jsonData, null, 2);
+                var blob = new Blob([decodeURIComponent(escape(editedJSON))], { type: "application/json;charset=utf-8" });
+                var url = URL.createObjectURL(blob);
+
+                var a = document.createElement("a");
+                a.href = url;
+                a.download = "edited_data.json";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+
+            function renderFriendList() {
+                var friendList = document.getElementById("friendList");
+                friendList.innerHTML = "";
+
+                jsonData.friends_v2.forEach(function (friend) {
+                    var listItem = document.createElement("li");
+                    listItem.className = "friend";
+
+                    var name = decodeUnicode(friend.name);
+                    var timestamp = friend.timestamp;
+
+                    listItem.innerHTML = "<strong>Name:</strong> " + name + "<br><strong>Timestamp:</strong> " + timestamp;
+
+                    friendList.appendChild(listItem);
+                });
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>
