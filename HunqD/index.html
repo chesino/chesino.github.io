@@ -26,7 +26,7 @@
     <meta property="og:image" content="/DATA/logo.png" />
 
     <!-- CSS của web -->
-    <link rel="stylesheet" href="./Style.css" />
+    <link rel="stylesheet" href="./DATA/CSS-JS/Style.css" />
 
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
@@ -34,35 +34,49 @@
 
 <body>
 
-
-    <div class="CheckFriend">
+    <div class="CheckFriend ">
         <div class="Box">
-            <div class="Profile">
-                <div class="Avatar">
-                    <img src="/DATA/logo.png" alt="" srcset="">
-                </div>
-                <div class="Name">
-                   Kiểm tra 
-                </div>
+            <div class="Logo">
+                <img src="./DATA/IMG/airplane.png" alt="" srcset="">
             </div>
+            <h1>HunqD ToolKit</h1>
+            <p id="resultText"></p>
             <div class="Input">
-                <label for="searchInput">Nhập tên, Link,  ID Facebook của bạn:</label>
-                <input type="text" id="searchInput">
-                <button onclick="searchUser()">Kiểm tra </button>
-    
-                
+                <label for="searchInput">Tài khoản:</label>
+                <input type="text" id="searchInput" placeholder="Tên Facebook hoặc Link Facebook.">
+                <label for="passwordInput">Mật khẩu:</label>
+                <input type="password" id="passwordInput" placeholder="Mặc định là: 123">
+                <button onclick="SignIn()">Đăng Nhập</button>
+                <button onclick="SignUp()">Đăng Ký
+                 <span>Chỉ áp dụng cho danh sách bạn bè</span></button>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <div class="Home  Hidden">
+        <div class="MenuBar">
+            <div class="icon" id="toggle-button"></div>
+            <h1>Cá Nhân</h1>
+            <div class="icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+        </div>
+        <div class="Head">
+            <div class="Avatar">
+                <img src="./DATA/IMG/presentation.png" alt="" srcset="">
             </div>
         </div>
     </div>
 
     <div class="Result" id="result">
+       
     </div>
 
 
 </body>
-<script src="./Script.js"></script>
-<script>
-    
-</script>
+<script src="./DATA/CSS-JS/Script.js"></script>
+<script src="/DATA/DarkMode.js"></script>
 
 </html>

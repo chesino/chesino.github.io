@@ -11,7 +11,7 @@ body {
 .CheckFriend {
     display: flex;
     align-items: center;
-    height: 40vh;
+    height: 100vh;
     background-color: #0098ff;
 }
 .Box {
@@ -26,14 +26,13 @@ body {
     margin-bottom: 20px;
 }
 .Profile .Avatar {
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
 }
 .Profile  .Avatar img {
     display: block;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
 }
 .Profile .Name {
     font-size: 20px;
@@ -67,8 +66,9 @@ body {
     font-size: 20px;
 }
 .Result {
+    display: none;
     text-align: center;
-    height: 50vh;
+    height: 100vh;
     color: aliceblue;
     padding: 10px;
     padding-top: 20px;
