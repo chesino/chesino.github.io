@@ -14,7 +14,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center; /* Center horizontally */
-    height: 100vh;
+    height: 80vh;
     background-color: #0098ff;
 }
 
@@ -50,6 +50,12 @@ body {
     margin-bottom: 8px; /* Add spacing between label and input */
     text-align: left;
 }
+.Input label span {
+    color: #ff0000;
+    display: block;
+    font-size: 12px;
+}
+
 
 .Input input {
     display: block;
@@ -60,6 +66,19 @@ body {
     border: 1px solid #ddd; /* Add a subtle border */
     border-radius: 8px;
     box-sizing: border-box; /* Include padding and border in the total width */
+}
+.Input input:nth-child(4){
+    margin-bottom: 0;
+}
+.Input a {
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: auto;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    text-align: right;
+    display: block;
 }
 
 .Input button {
