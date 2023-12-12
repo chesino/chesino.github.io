@@ -217,6 +217,9 @@ function SignIn() {
   const searchInput = document.getElementById('searchInput').value;
   const passwordInput = document.getElementById('passwordInput').value; // Thêm dòng này để lấy mật khẩu
   const resultDiv = document.getElementById('result');
+  const CheckFriend = document.getElementById('CheckFriend');
+  const resultText = document.getElementById('resultText');
+  const BoxInput = document.getElementById('BoxInput');
 
   const result = searchByNameOrID(searchInput);
 
@@ -231,7 +234,10 @@ function SignIn() {
       result.id
       img = `https://graph.facebook.com/${result.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     }
-    resultDiv.innerHTML = `
+    BoxInput.classList.add('Hidden');
+    resultText.innerHTML = 'Đang đăng nhập  <i class="fa-solid fa-circle-notch"></i>';
+    setTimeout(() => {
+      resultDiv.innerHTML = `
 
         <div class="Head">
             <div class="Avatar">
@@ -267,6 +273,10 @@ function SignIn() {
             </div>
         </div>
       `;
+      CheckFriend.classList.add('Hidden');
+      resultDiv.classList.remove('Hidden');
+    }, 2000);
+
   } else {
     resultDiv.innerHTML = '<p>Bạn không có trong danh sách bạn bè hoặc nhập sai dữ liệu.</p>';
   }

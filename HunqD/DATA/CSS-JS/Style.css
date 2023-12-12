@@ -3,17 +3,21 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     background-color: #0098ff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .Hidden {
     display: none !important;
 }
+
 .CheckFriend {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center horizontally */
+    justify-content: center;
+    /* Center horizontally */
     height: 80vh;
     background-color: #0098ff;
 }
@@ -21,20 +25,23 @@ body {
 .Box {
     text-align: center;
     width: 80%;
-    background-color: #fff; /* White background for the box */
+    padding: 20px 0;
+    background-color: #fff;
     border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-    overflow: hidden; /* Ensure rounded corners apply properly */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .Logo {
     width: 100%;
-    padding: 20px 0; /* Add some padding for spacing */
+    padding: 20px 0;
+    /* Add some padding for spacing */
     text-align: center;
 }
 
 .Logo img {
-    width: 180px; /* Adjusted logo size */
+    width: 180px;
+    /* Adjusted logo size */
     display: block;
     margin: auto;
 }
@@ -47,9 +54,11 @@ body {
 .Input label {
     font-size: 16px;
     display: block;
-    margin-bottom: 8px; /* Add spacing between label and input */
+    margin-bottom: 8px;
+    /* Add spacing between label and input */
     text-align: left;
 }
+
 .Input label span {
     color: #ff0000;
     display: block;
@@ -62,14 +71,19 @@ body {
     font-size: 16px;
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px; /* Add spacing between inputs */
-    border: 1px solid #ddd; /* Add a subtle border */
+    margin-bottom: 15px;
+    /* Add spacing between inputs */
+    border: 1px solid #ddd;
+    /* Add a subtle border */
     border-radius: 8px;
-    box-sizing: border-box; /* Include padding and border in the total width */
+    box-sizing: border-box;
+    /* Include padding and border in the total width */
 }
-.Input input:nth-child(4){
+
+.Input input:nth-child(4) {
     margin-bottom: 0;
 }
+
 .Input a {
     font-size: 14px;
     text-decoration: none;
@@ -92,26 +106,33 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    transition: background-color 0.3s ease;
+    /* Smooth transition on hover */
 }
 
 
 .Input button:hover {
-    background-color: #333; /* Darken the button on hover */
+    background-color: #333;
+    /* Darken the button on hover */
 }
+
 .Input button:last-child {
     background-color: #ffffff;
     color: black;
     margin-top: 10px;
     box-shadow: inset 0 0 0 2px black;
 }
+
 .Input button:last-child:hover {
-    background-color: #0098ff; /* Darken the button on hover */
+    background-color: #0098ff;
+    /* Darken the button on hover */
 }
+
 .Input button:last-child span {
     font-size: 12px;
     display: block;
 }
+
 .Result {
     text-align: center;
     height: 100vh;
@@ -119,11 +140,31 @@ body {
     padding: 10px;
     padding-top: 20px;
 }
+#resultText {
+    margin-top: 10px;
+    font-size: 18px;
+}
+#resultText i {
+    animation-name: spin;
+    animation-duration: 2000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    0% {
+        transform:rotate(0deg);
+    }
+    100% {
+        transform:rotate(360deg);
+    }
+}
 .Head {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .Head .Icon {
     font-size: 30px;
     text-align: center;
@@ -135,6 +176,7 @@ body {
     height: 120px;
     width: 120px;
 }
+
 .Head .Avatar img {
     display: block;
     width: 100%;
@@ -146,17 +188,19 @@ body {
     padding: 0 10px;
     margin: 20px 0;
 }
+
 .Card {
     background-color: black;
     width: 100%;
     border-radius: 10px;
-    padding:  10px;
+    padding: 10px;
     margin: 20px 0;
 }
 
 .Label {
     text-align: left;
 }
+
 .Output {
     font-size: 40px;
 }
@@ -165,8 +209,10 @@ body {
 .MenuBar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: #29292956;
 }
+
 .MenuBar .icon {
     display: flex;
     align-items: center;
@@ -176,9 +222,11 @@ body {
     height: 50px;
     width: 50px;
 }
+
 .MenuBar .icon {
     background-color: transparent !important;
 }
+
 .Head img {
     width: 100%;
 }
