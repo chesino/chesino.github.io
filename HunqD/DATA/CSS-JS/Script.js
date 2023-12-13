@@ -6,6 +6,7 @@ const jsonData = [
       "timestamp": 1697068800,
       "id": 61551995024526,
       "rank": "BOSS",
+      "point": 22,
       "pass": "111"
 
     },
@@ -14,7 +15,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100092307943151",
       "timestamp": 1701959002,
       "id": 100092307943151,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -22,7 +23,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100088260422422",
       "timestamp": 1697116606,
       "id": 100088260422422,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -30,7 +31,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100073434319397",
       "timestamp": 1701998563,
       "id": 100073434319397,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -38,7 +39,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100063894533991",
       "timestamp": 1702186683,
       "id": 100063894533991,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -46,7 +47,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100060666301063",
       "timestamp": 1697275904,
       "id": 100060666301063,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -54,7 +55,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100057501075921",
       "timestamp": 1702021105,
       "id": 100057501075921,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -62,21 +63,22 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100052261622413",
       "timestamp": 1702295638,
       "id": 100052261622413,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     // {
     //   "name": "Nhi Rex",
     //   "profileURL": "Nhi Rex",
     //   "rank": "Bạn FB",
-      // "pass": "123"
+    // "point": 0,
+    // "pass": "123"
     // },
     {
       "name": "Nhỏ Nguyễn",
       "profileURL": "https://www.facebook.com/profile.php?id=100044510499977",
       "timestamp": 1697286855,
       "id": 100044510499977,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -84,7 +86,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100042744378107",
       "timestamp": 1701868351,
       "id": 100042744378107,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -92,7 +94,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100042140778354",
       "timestamp": 1697278179,
       "id": 100042140778354,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -100,7 +102,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/ins.pnkunn",
       "timestamp": 1702269050,
       "id": 100035657791086,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -108,7 +110,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/ngo.h.khanh.716",
       "timestamp": 1697112574,
       "id": 100034337931817,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -116,7 +118,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/q.thien.vu.9",
       "timestamp": 1697114063,
       "id": 100028302531768,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -124,7 +126,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/hien40555",
       "timestamp": 1697111769,
       "id": 100022625414871,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -132,7 +134,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100022277839522",
       "timestamp": 1702221540,
       "id": 100022277839522,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -140,7 +142,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/tram.lengoctram.948",
       "timestamp": 1701954695,
       "id": 100015979231019,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -148,7 +150,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/nhatha941",
       "timestamp": 1697276525,
       "id": 100014817736634,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -156,7 +158,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=100014569175965",
       "timestamp": 1697276841,
       "id": 100014569175965,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -164,7 +166,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/quan31702",
       "timestamp": 1697275928,
       "id": 100014270777334,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -172,7 +174,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/thanhanh66",
       "timestamp": 1697282191,
       "id": 100012949321472,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -180,7 +182,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/tandeptrai29122002",
       "timestamp": 1697283245,
       "id": 100010685404349,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -188,8 +190,8 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/nguyenahdyy",
       "timestamp": 1697276964,
       "id": 100008161964802,
-      "rank": "Bạn FB",
-      "rank": "Bạn FB",
+      "point": 0,
+      "point": 0,
       "pass": "123"
     },
     {
@@ -197,7 +199,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/trung22121998",
       "timestamp": 1697385319,
       "id": 100008045827167,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -205,7 +207,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/naucuabame",
       "timestamp": 1697111612,
       "id": 100004709207159,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -213,7 +215,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=61552165441962",
       "timestamp": 1701964236,
       "id": 61552165441962,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -221,7 +223,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=61551121340761",
       "timestamp": 1697280584,
       "id": 61551121340761,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -229,7 +231,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/profile.php?id=61551075231497",
       "timestamp": 1702271524,
       "id": 61551075231497,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
     {
@@ -237,7 +239,7 @@ const jsonData = [
       "profileURL": "https://www.facebook.com/ngandz100",
       "timestamp": 1702350499,
       "id": 100017818543172,
-      "rank": "Bạn FB",
+      "point": 0,
       "pass": "123"
     },
 
@@ -265,34 +267,87 @@ function SignIn() {
       result.id
       img = `https://graph.facebook.com/${result.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     }
+
+    var rank = 0;
+    var point = result.point;
+    let titleRank = 'N/A'
+    let nextRank = 'N/A'
+    if (point <= 20) {
+      rank = 20
+      titleRank = 'Bạn FB'
+      nextRank = 'Fan Cứng'
+    }
+    if (point <= 30) {
+      rank = 30
+      titleRank = 'Fan Cứng'
+      nextRank = 'Fan Cứng 2'
+    }
+    console.log(rank);
+
+
+
     BoxInput.classList.add('Hidden');
     resultText.innerHTML = 'Đang đăng nhập  <i class="fa-solid fa-circle-notch"></i>';
     setTimeout(() => {
       resultDiv.innerHTML = `
-
-        <div class="Head">
+      <div class="Head">
             <div class="Avatar">
               <img src="${img}" alt="Avatar" >
-              <div class="Rank">${result.rank}</div>
+              <div class="Rank">${titleRank}</div>
             </div>
             <div class="Name">
                 <h1>${result.name}</h1>
                 <h5>ID: ${result.id} <i class="fa-solid fa-copy"></i></h5>
             </div>
         </div>
-
-        <div class="Time">
-          <h2>bạn đã kết nối với Hùng</h2>
-          <h1>${formattedTime2}</h1>
-          <h5>${formattedTime}</h5>
-        </div>
+        <div class="Body">
+            <div class="Card">
+                <h1>Điểm tương tác</h1>
+                <p>Bạn cần 9 điểm nữa để trở thành ${nextRank} [${point}/${rank}].</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="myProgressBar"></div>
+                </div>
+                <p class="right">Cập nhật: 10 giờ trước</p>
+            </div>
+            <div class="Card Flex">
+                <div class="One">
+                    <div class="Avatar">
+                        <img src="/DATA/logo.png" alt="Avatar" >
+                    </div>
+                    <div class="Avatar">
+                        <img src="${img}" alt="Avatar" >
+                    </div>
+                </div>
+                <div class="Two">
+                    <p>Bạn đã kết nối với Hùng</p>
+                    <h1>${formattedTime2}</h1>
+                    <p>${formattedTime}</p>
+                </div>
+            </div>
+            <div class="Card">
+                <h1>Gửi câu hỏi</h1>
+                <p>Cho phép bạn gửi tin nhắn ẩn danh hoặc công khai cho Hùng.</p>
+            </div>
+            <div class="Card">
+                <h1>Tin nhắn</h1>
+                <p>Hiện tại chưa cập nhật tính năng này.</p>
+            </div>
+            <div class="Card">
+                <h1>Thư mục chia sẻ</h1>
+                <p>Cho phép bạn chia sẻ tệp, tài liệu, ảnh, video với Hùng.</p>
+            </div>
+      </div>
       `;
       CheckFriend.classList.add('Hidden');
-      resultDiv.classList.remove('Hidden');
-    }, 2000);
+
+      setTimeout(() => {
+        move(point, rank);
+      }, 500);
+
+    }, 1000);
 
   } else {
-    resultDiv.innerHTML = '<p>Bạn không có trong danh sách bạn bè hoặc nhập sai dữ liệu.</p>';
+    resultText.innerText = 'Sai mật khẩu hoặc bạn chưa có trong danh sách bạn bè của tôi.'
   }
 }
 
@@ -385,7 +440,25 @@ function SignUp() {
     const redirectUrl = `http://m.me/ChesinoPage?text=${searchInput}:${passwordInput}`;
     window.open(redirectUrl, '_blank');
   } else {
-    resultText.innerText = 'Vui lòng điền thông tin để đăng ký'
+    resultText.innerText = 'Vui lòng điền thông tin để đăng ký.'
   }
 
+}
+
+
+function move(a, b) {
+  var x = (a * 100) / b;
+  var elem = document.getElementById("myProgressBar");
+  var width = 0;
+  var id = setInterval(frame, 10);
+
+  function frame() {
+    if (width >= x) {
+      clearInterval(id);
+    } else {
+      width += 0.5; // Tăng giá trị này để đạt được hiệu ứng mượt mà hơn
+      elem.style.width = width + '%';
+      elem.innerHTML = Math.round(width * (b / 100)); // Cập nhật giá trị hiển thị
+    }
+  }
 }
