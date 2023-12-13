@@ -282,10 +282,7 @@ function SignIn() {
       titleRank = 'Fan Cứng'
       nextRank = 'Fan Cứng 2'
     }
-    console.log(rank);
-
-
-
+    
     BoxInput.classList.add('Hidden');
     resultText.innerHTML = 'Đang đăng nhập  <i class="fa-solid fa-circle-notch"></i>';
     setTimeout(() => {
@@ -303,16 +300,16 @@ function SignIn() {
         <div class="Body">
             <div class="Card">
                 <h1>Điểm tương tác</h1>
-                <p>Bạn cần 9 điểm nữa để trở thành ${nextRank} [${point}/${rank}].</p>
+                <p>Bạn cần ${rank-point} điểm nữa để trở thành ${nextRank} [${point}/${rank}].</p>
                 <div class="progress-container">
                     <div class="progress-bar" id="myProgressBar"></div>
                 </div>
-                <p class="right">Cập nhật: 10 giờ trước</p>
+                <p class="right">Cập nhật: 1 tuần trước.</p>
             </div>
             <div class="Card Flex">
                 <div class="One">
                     <div class="Avatar">
-                        <img src="/DATA/logo.png" alt="Avatar" >
+                        <img src="https://graph.facebook.com/61551995024526/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="Avatar" >
                     </div>
                     <div class="Avatar">
                         <img src="${img}" alt="Avatar" >
@@ -338,13 +335,14 @@ function SignIn() {
             </div>
       </div>
       `;
-      CheckFriend.classList.add('Hidden');
 
+      CheckFriend.classList.add('Hidden');
       setTimeout(() => {
         move(point, rank);
       }, 500);
 
-    }, 1000);
+    }, 1500);
+    
 
   } else {
     resultText.innerText = 'Sai mật khẩu hoặc bạn chưa có trong danh sách bạn bè của tôi.'

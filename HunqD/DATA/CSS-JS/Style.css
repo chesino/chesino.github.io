@@ -87,15 +87,15 @@ body {
 }
 
 .Input a {
+    width: 120px;
     color: #0066ff;
     font-size: 14px;
     text-decoration: none;
     font-weight: 500;
     margin-top: 5px;
     margin-left: auto;
-    margin-right: 5px;
-    margin-bottom: 15px;
-    text-align: right;
+    margin-bottom: 10px;
+    text-align: center;
     display: block;
 }
 
@@ -256,10 +256,10 @@ body {
     height: 80px;
     display: block;
     border-radius: 50%;
-    border: 3px solid #ff0000;
+    border: 3px solid #00a005;
 }
 .One .Avatar:last-child img {
-    border: 3px solid #00a005;
+    border: 3px solid #ff0000;
 }
 .Two h1  {
     margin: 0;
