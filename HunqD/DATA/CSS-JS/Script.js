@@ -41,7 +41,7 @@ function SignIn() {
       titleRank = 'Bạn FB'
       nextRank = 'Fan Cứng'
     }
-    if (point <= 30) {
+    if (point >= 20 && point <= 30) {
       rank = 30
       titleRank = 'Fan Cứng'
       nextRank = 'Fan Cứng 2'
@@ -101,7 +101,7 @@ function SignIn() {
       `;
 
       CheckFriend.classList.add('Hidden');
-      fireSweetAlert(`Tài khoản: ${result.name}`)
+      fireSweetAlert(`Facebook: ${result.name}`)
       setTimeout(() => {
         move(point, rank);
       }, 500);
