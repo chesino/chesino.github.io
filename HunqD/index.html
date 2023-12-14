@@ -42,12 +42,18 @@
             <h1>HunqD ToolKit <span>v2.0</span></h1>
             <p id="resultText"></p>
             <div class="Input" id="BoxInput">
-                <label for="searchInput">Tài khoản: <span>Có thế sử dụng Link hoặc ID.</span></label>
-                <input type="text" id="searchInput" placeholder="Tên Facebook.">
+                <label for="searchInput">Tài khoản: <span>Có thể sử dụng Link hoặc ID.</span></label>
+                <input type="text" id="searchInput" placeholder="Tên Facebook."
+                    onkeydown="handleEnter(event, 'passwordInput')">
+
                 <label for="passwordInput">Mật khẩu: <span>Không phải là mật khẩu Facebook của bạn.</span></label>
-                <input type="password" id="passwordInput" placeholder="Mặc định là: 123">
+                <input type="password" id="passwordInput" placeholder="Mặc định là: 123"
+                    onkeydown="handleEnter(event, 'signInButton')">
+
                 <a href="http://m.me/ChesinoPAGE?text=Quên%20mật%20khẩu" target="_blank">Quên mật khẩu ?</a>
-                <button onclick="SignIn()">Đăng Nhập</button>
+
+                <button id="signInButton" onclick="SignIn()">Đăng Nhập</button>
+
                 <button onclick="SignUp()">Đăng Ký
                     <span>Chỉ áp dụng cho danh sách bạn bè</span>
                 </button>
@@ -59,7 +65,7 @@
 
     <div class="Result" id="result">
 
-        <!--         
+<!--                 
         <div class="Head">
             <div class="Avatar">
               <img src="/DATA//logo.png" alt="Avatar" >
@@ -67,7 +73,7 @@
             </div>
             <div class="Name">
                 <h1>ABC</h1>
-                <h5>ID: 123123123123123 <i class="fa-solid fa-copy"></i></h5>
+                <h5>ID: 123123123123123 <i onclick="navigator.clipboard.writeText('Hello');alert('Copy')" class="fa-solid fa-copy"></i></h5>
             </div>
         </div>
         <div class="Body">
@@ -106,15 +112,18 @@
                 <h1>Thư mục chia sẻ</h1>
                 <p>Cho phép bạn chia sẻ tệp, tài liệu, ảnh, video với Hùng.</p>
             </div>
-        </div>
- -->
+        </div> -->
+
 
 
     </div>
 
 
 </body>
+
+<script src="./DATA/Friends.js"></script>
 <script src="./DATA/CSS-JS/Script.js"></script>
-<!-- <script src="/DATA/DarkMode.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+ <!-- <script src="/DATA/DarkMode.js"></script>  -->
 
 </html>

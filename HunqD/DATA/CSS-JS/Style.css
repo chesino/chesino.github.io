@@ -15,6 +15,7 @@ body {
 
 
 .CheckFriend {
+    z-index: 99;
     position: fixed;
     width: 100%;
     display: flex;
@@ -212,7 +213,13 @@ body {
 .Head .Name {
     text-align: left;
 }
-
+.Head .Name h5 {
+    font-size: 14px;
+}
+.Head .Name h5 i {
+    cursor: pointer;
+    font-size: 20px;
+}
 .Body {
     margin: 20px 0;
 }
