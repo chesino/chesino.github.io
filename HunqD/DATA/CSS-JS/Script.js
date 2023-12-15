@@ -88,6 +88,51 @@ function SignIn() {
                     <p>${formattedTime}</p>
                 </div>
             </div>
+            <div class="Card">
+                    <h1>Tin nhắn</h1>
+                    <p>Bạn và Hùng chưa có tin nhắn nào 😯.</p>
+                </div>
+                <div class="Card">
+                    <h1>SocialToolKit</h1>
+                    <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
+                    <div class="SocialToolKit">
+                        <label for="">Chọn dịch vụ</label>
+                        <select name="" id="">
+                            <option value="0">Người theo dõi</option>
+                            <option value="1">Lượt thích bài viết</option>
+                            <option value="2">Lượt xem Story</option>
+                        </select>
+                        <div class="S1">
+                            <label for="">Tài khoản
+                                <span>Sử dụng link Facebook hoặc ID Facebook.</span>
+                            </label>
+                            <input type="text" placeholder="Link bài viết">
+                        </div>
+    
+                        <div class="S2">
+                            <label for="">Link bài viết
+                                <span>Sử dụng Link bài viết hoặc Link Story.</span>
+                            </label>
+                            <input type="text" placeholder="Link bài viết">
+                        </div>
+                        <label for="">Số lượng <span>Thấp nhất 100 và cao nhất 10,000 mỗi lần.</span></label>
+                        <input type="number" name="" id="">
+    
+                        <h5>Tổng số tiền bạn cần thanh toàn là</h5>
+                        <h1>0đ</h1>
+    
+                        <label for="">Mã giảm giá</label>
+                        <input type="text">
+    
+                        <label for="">Chọn thương thức thanh toán</label>
+                        <select name="" id="">
+                            <option value="0">HunqD Point</option>
+                            <option value="1">Ví MOMO</option>
+                            <option value="2">Chuyển khoản ngân hàng</option>
+                        </select>
+                        <button>Thanh toán ngay</button>
+                    </div>
+                </div>
             <div class="Card Question">
                 <h1>Gửi câu hỏi</h1>
                 <p>Cho phép bạn gửi tin nhắn ẩn danh hoặc công khai cho Hùng.</p>
@@ -96,14 +141,7 @@ function SignIn() {
                 <h2>OR</h2>
                 <iframe src="https://ngl.link/ngl_kakashi" frameborder="0"></iframe>
             </div>
-            <div class="Card">
-                <h1>Tin nhắn</h1>
-                <p>Hiện tại chưa cập nhật tính năng này.</p>
-            </div>
-            <div class="Card">
-                <h1>Thư mục chia sẻ</h1>
-                <p>Cho phép bạn chia sẻ tệp, tài liệu, ảnh, video với Hùng.</p>
-            </div>
+           
       </div>
       `;
 
@@ -261,7 +299,7 @@ function Fail(T1, T2) {
 function SendMess() {
   const SendMess = document.getElementById('SendMess').value;
 
-  if (SendMess !== '' ) {
+  if (SendMess !== '') {
     const redirectUrl = `https://www.messenger.com/t/61551995024526?text=${SendMess}`;
     window.open(redirectUrl, '_blank');
   } else {
