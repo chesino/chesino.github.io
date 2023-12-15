@@ -140,7 +140,7 @@ body {
 
 .Result {
     text-align: center;
-    height: 80vh;
+    min-height: 100vh;
     color: aliceblue;
     padding: 10px;
     padding-top: 20px;
@@ -296,4 +296,36 @@ body {
     text-align: right;
     line-height: 20px;
     color: white;
+}
+
+.Question iframe{
+    width: 100%;
+    height: 60vh;
+    border-radius: 10px;
+}
+.Question textarea {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px 0;
+}
+.Question button {
+    color: #fff;
+    background-color: #f13465;
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid black;
+    margin-top: 5px;
+}
+.Question h2  {
+    text-align: center;
+    margin: 10px 0;
 }

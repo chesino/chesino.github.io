@@ -39,7 +39,7 @@
             <div class="Logo">
                 <img src="./DATA/IMG/airplane.png" alt="" srcset="">
             </div>
-            <h1>HunqD ToolKit <span>v2.0</span></h1>
+            <h1>HunqD ToolKit <span id="Version">v2.0</span></h1>
             <p id="resultText"></p>
             <div class="Input" id="BoxInput">
                 <label for="searchInput">Tài khoản: <span>Có thể sử dụng Link hoặc ID.</span></label>
@@ -63,10 +63,10 @@
     </div>
 
 
-    <div class="Result" id="result">
+    <div class="Result " id="result">
 
-<!--                 
-        <div class="Head">
+                
+        <!-- <div class="Head">
             <div class="Avatar">
               <img src="/DATA//logo.png" alt="Avatar" >
               <div class="Rank">BBF</div>
@@ -100,9 +100,13 @@
                     <p>00:00:00 00/00/0000</p>
                 </div>
             </div>
-            <div class="Card">
+            <div class="Card Question">
                 <h1>Gửi câu hỏi</h1>
                 <p>Cho phép bạn gửi tin nhắn ẩn danh hoặc công khai cho Hùng.</p>
+                <textarea name="SendMess" id="SendMess" rows="5" placeholder="Hãy đặt câu hỏi"></textarea>
+                <button onclick="SendMess()">Gửi</button>
+                <h2>OR</h2>
+                <iframe src="https://ngl.link/ngl_kakashi" frameborder="0"></iframe>
             </div>
             <div class="Card">
                 <h1>Tin nhắn</h1>
@@ -123,7 +127,7 @@
 
 <script src="./DATA/Friends.js"></script>
 <script src="./DATA/CSS-JS/Script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="/DATA/SweetAlert2.js"></script>
  <!-- <script src="/DATA/DarkMode.js"></script>  -->
 
 </html>

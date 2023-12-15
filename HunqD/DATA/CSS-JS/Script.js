@@ -1,18 +1,21 @@
+const Version = '2.1'
+document.getElementById('Version').innerText = 'v' + Version;
+
 function handleEnter(event, nextInputId) {
   if (event.key === "Enter") {
-      event.preventDefault();
-      document.getElementById(nextInputId).focus();
+    event.preventDefault();
+    document.getElementById(nextInputId).focus();
 
-      // Nếu là input cuối cùng, thực hiện SignIn()
-      if (nextInputId === 'signInButton') {
-          SignIn();
-      }
+    // Nếu là input cuối cùng, thực hiện SignIn()
+    if (nextInputId === 'signInButton') {
+      SignIn();
+    }
   }
 }
 
 function SignIn() {
   const searchInput = document.getElementById('searchInput').value;
-  const passwordInput = document.getElementById('passwordInput').value; // Thêm dòng này để lấy mật khẩu
+  const passwordInput = document.getElementById('passwordInput').value;
   const resultDiv = document.getElementById('result');
   const CheckFriend = document.getElementById('CheckFriend');
   const resultText = document.getElementById('resultText');
@@ -46,7 +49,7 @@ function SignIn() {
       titleRank = 'Fan Cứng'
       nextRank = 'Fan Cứng 2'
     }
-    
+
     BoxInput.classList.add('Hidden');
     resultText.innerHTML = 'Đang đăng nhập  <i class="fa-solid fa-circle-notch"></i>';
     setTimeout(() => {
@@ -58,13 +61,13 @@ function SignIn() {
             </div>
             <div class="Name">
                 <h1>${result.name}</h1>
-                <h5>ID: ${result.id} <i onclick="navigator.clipboard.writeText(${result.id});fireSweetAlert('Đã sao chép ID: ${result.id}')" class="fa-solid fa-copy"></i></h5>
+                <h5>ID: ${result.id} <i onclick="navigator.clipboard.writeText(${result.id});Done('Sao chép thành công','Đã sao chép ID: ${result.id}')" class="fa-solid fa-copy"></i></h5>
             </div>
         </div>
         <div class="Body">
             <div class="Card">
                 <h1>Điểm tương tác</h1>
-                <p>Bạn cần ${rank-point} điểm nữa để trở thành ${nextRank} [${point}/${rank}].</p>
+                <p>Bạn cần ${rank - point} điểm nữa để trở thành ${nextRank} [${point}/${rank}].</p>
                 <div class="progress-container">
                     <div class="progress-bar" id="myProgressBar"></div>
                 </div>
@@ -85,9 +88,13 @@ function SignIn() {
                     <p>${formattedTime}</p>
                 </div>
             </div>
-            <div class="Card">
+            <div class="Card Question">
                 <h1>Gửi câu hỏi</h1>
                 <p>Cho phép bạn gửi tin nhắn ẩn danh hoặc công khai cho Hùng.</p>
+                <textarea name="SendMess" id="SendMess" rows="5" placeholder="Hãy đặt câu hỏi"></textarea>
+                <button onclick="SendMess()">Gửi</button>
+                <h2>OR</h2>
+                <iframe src="https://ngl.link/ngl_kakashi" frameborder="0"></iframe>
             </div>
             <div class="Card">
                 <h1>Tin nhắn</h1>
@@ -101,16 +108,22 @@ function SignIn() {
       `;
 
       CheckFriend.classList.add('Hidden');
-      fireSweetAlert(`Facebook: ${result.name}`)
+      CheckFriend.scrollTop = 0;
+      Done('Đăng nhập thành công', `Tài khoản: ${result.name}`)
       setTimeout(() => {
         move(point, rank);
       }, 500);
 
     }, 1500);
-    
+
 
   } else {
-    resultText.innerText = 'Sai mật khẩu hoặc bạn chưa được cập nhật.'
+    if (searchInput !== '' && passwordInput !== '') {
+      Fail('Tài khoản không tồn tại', 'Có thể bạn nhập sai tài khoản mật khẩu hoặc chưa đăng ký.');
+    } else {
+      Fail('Không thể đăng nhập', 'Vui lòng nhập tài khoản & mật khẩu');
+    }
+
   }
 }
 
@@ -154,11 +167,16 @@ function formatTimestamp2(timestamp) {
 
 
 function extractFacebookProfileURL(input) {
-  // Sử dụng regular expression để trích xuất URL
-  const match = input.match(/(https:\/\/www\.facebook\.com\/profile\.php\?id=\d+)/);
+  // Kiểm tra xem input có chứa chuỗi cần tìm kiếm hay không
+  if (input.includes("https://www.facebook.com/profile.php?id=")) {
+    // Sử dụng regular expression để trích xuất URL
+    const match = input.match(/(https:\/\/www\.facebook\.com\/profile\.php\?id=\d+)/);
 
-  // Nếu có kết quả, trả về URL, ngược lại trả về null
-  return match ? match[1] : null;
+    // Nếu có kết quả, trả về URL, ngược lại trả về null
+    return match ? match[1] : null;
+  } else {
+    return input
+  }
 }
 
 function searchByNameOrID(query) {
@@ -172,9 +190,8 @@ function searchByNameOrID(query) {
       }
     }
   } else {
-    // If not numeric, check for URL or name
-    const facebookURL = extractFacebookProfileURL(query);
-    if (facebookURL) {
+    if (query.includes("https://")) {
+      facebookURL = extractFacebookProfileURL(query);
       for (const data of jsonData[0]) {
         if (data.profileURL === facebookURL) {
           return data;
@@ -189,7 +206,6 @@ function searchByNameOrID(query) {
     }
   }
 
-  // If no match is found, return null
   return null;
 }
 
@@ -197,13 +213,12 @@ function searchByNameOrID(query) {
 function SignUp() {
   const searchInput = document.getElementById('searchInput').value;
   const passwordInput = document.getElementById('passwordInput').value; // Thêm dòng này để lấy mật khẩu
-  const resultText = document.getElementById('resultText');
 
   if (searchInput !== '' && passwordInput !== '') {
     const redirectUrl = `http://m.me/ChesinoPage?text=${searchInput}:${passwordInput}`;
     window.open(redirectUrl, '_blank');
   } else {
-    resultText.innerText = 'Vui lòng điền thông tin để đăng ký.'
+    Fail('Không thể đăng ký', 'Vui lòng điền thông tin để đăng ký.');
   }
 
 }
@@ -226,10 +241,31 @@ function move(a, b) {
   }
 }
 
-function fireSweetAlert(text) {
+function Done(T1, T2) {
   Swal.fire(
-      'Thành Công',
-      text,
-      'success'
+    T1,
+    T2,
+    'success'
   )
+}
+
+function Fail(T1, T2) {
+  Swal.fire(
+    T1,
+    T2,
+    'error'
+  )
+}
+
+
+function SendMess() {
+  const SendMess = document.getElementById('SendMess').value;
+
+  if (SendMess !== '' ) {
+    const redirectUrl = `https://www.messenger.com/t/61551995024526?text=${SendMess}`;
+    window.open(redirectUrl, '_blank');
+  } else {
+    Fail('Ủa alo ?', 'Vui lòng nhập câu hỏi.');
+  }
+
 }
