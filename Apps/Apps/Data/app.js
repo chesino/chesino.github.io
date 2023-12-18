@@ -229,4 +229,14 @@ const apps = [
     "description": "Chuyển dữ liệu các game, ứng dụng đã chỉnh sửa.",
     "downloadLink": "https://imazing.com/"
   },
+  {
+    "type": "Game",
+    "logo": "./Data/IMG/LOGO/mcpe.png",
+    "name": "Minecraft PE",
+    "os": "Android",
+    "time": "18/12/2023",
+    "size": "209Mb",
+    "description": "Minecraft là một trò chơi được làm từ các khối mà bạn có thể biến đổi thành bất cứ thứ gì bạn có thể tưởng tượng.",
+    "downloadLink": "https://download2445.mediafire.com/s9w1s1pkvutgFK26JZfyl49FNyWDJzYV6yyG-pd39_Uk9piAubytFKol3Vz1QiQyHZf4iXlyG3bpsySBbREemIusKTxtbH5UHw2ocGNVVDfK_3UmMfrZSLaIPUCvbAB0rrJ3PPfc6gnJcVUeP1buXeCF78Az-esCCxU2HKmSws0baQc/0nkmov268t6qb4l/Minecraft_BETA_1.20.50.20.apk"
+  },
 ];
