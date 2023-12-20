@@ -49,6 +49,12 @@ function SignIn() {
       titleRank = 'Fan Cứng'
       nextRank = 'Fan Cứng 2'
     }
+    let Mess = '';
+    if (result.mess === 0) {
+      Mess = 'Bạn và Hùng chưa có tin nhắn nào 😐.'
+    } else {
+      Mess = 'Bạn và Hùng đã nhắn tin được ' + `<strong> ${result.mess}</strong>` +' tin nhắn'
+    }
 
     BoxInput.classList.add('Hidden');
     resultText.innerHTML = 'Đang đăng nhập  <i class="fa-solid fa-circle-notch"></i>';
@@ -90,9 +96,9 @@ function SignIn() {
             </div>
             <div class="Card">
                     <h1>Tin nhắn</h1>
-                    <p>Bạn và Hùng chưa có tin nhắn nào 😯.</p>
+                    <p>${Mess}</p>
                 </div>
-                <div class="Card">
+                <div class="Card Hidden">
                     <h1>SocialToolKit</h1>
                     <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
                     <div class="SocialToolKit">

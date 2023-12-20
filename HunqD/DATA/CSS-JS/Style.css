@@ -290,12 +290,13 @@ body {
     width: 0;
     max-width: 100% !important;
     height: 20px;
-    background-color: #00a005;
+    background-color: #0098ff;
     border-radius: 5px;
     padding-right: 10px;
     text-align: right;
     line-height: 20px;
     color: white;
+    font-weight: bold;
 }
 
 .Question iframe{
