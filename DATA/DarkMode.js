@@ -14,6 +14,7 @@ if (isMobile) {
 const button = document.getElementById('toggle-button');
 button.addEventListener('click', toggleMode);
 
+
 // Khởi tạo chế độ mặc định và lưu vào local storage (nếu chưa có)
 let mode = parseInt(localStorage.getItem('mode')) || 1;
 
@@ -26,6 +27,7 @@ function toggleMode() {
   setMode(mode);
   // Lưu chế độ vào local storage
   localStorage.setItem('mode', mode);
+  
 }
 
 

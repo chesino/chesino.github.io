@@ -27,6 +27,7 @@
 
     <!-- CSS của web -->
     <link rel="stylesheet" href="./DATA/CSS-JS/Style.css" />
+    <link rel="stylesheet" href="./DATA/SweetAlert2dark.css">
 
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
@@ -35,7 +36,9 @@
 <body>
 
     <div class="CheckFriend" id="CheckFriend">
+       
         <div class="Box">
+            <button class="DarkModeBtn" onclick="toggleMode()"><i class="fa-solid fa-moon"></i></button>
             <div class="Logo">
                 <img src="./DATA/IMG/airplane.png" alt="" srcset="">
             </div>
@@ -50,22 +53,23 @@
                 <input type="password" id="passwordInput" placeholder="Mặc định là: 123"
                     onkeydown="handleEnter(event, 'signInButton')">
 
-                <a href="http://m.me/ChesinoPAGE?text=Quên%20mật%20khẩu" target="_blank">Quên mật khẩu ?</a>
+                <a href="https://www.messenger.com/t/61551995024526?text=Quên%20mật%20khẩu" target="_blank">Quên mật khẩu ?</a>
 
                 <button id="signInButton" onclick="SignIn()">Đăng Nhập</button>
 
                 <button onclick="SignUp()">Đăng Ký
-                    <span>Chỉ áp dụng cho danh sách bạn bè</span>
+                    <span>Nếu mới kết bạn hãy đợi sau 24 giờ</span>
                 </button>
-
             </div>
         </div>
+
     </div>
+
+    <div id="toggle-button" ></div>
 
 
     <div class="Result " id="result">
-
-        <!-- <div>
+     <!-- <div>
             <div class="Head">
                 <div class="Avatar">
                     <img src="/DATA//logo.png" alt="Avatar">
@@ -154,20 +158,22 @@
                     <textarea name="SendMess" id="SendMess" rows="5" placeholder="Hãy đặt câu hỏi"></textarea>
                     <button onclick="SendMess()">Gửi</button>
                     <h2>OR</h2>
+                    <p onclick="navigator.clipboard.writeText()" class="Tips">Để Hùng chủ động nhắn tin tới bạn hãy sao chép ID và gửi bằng NGL 🧐.</p>
                     <iframe src="https://ngl.link/ngl_kakashi" frameborder="0"></iframe>
                 </div>
     
             </div>
-        </div> -->
+        </div> 
         
-    </div>
+    </div> -->
 
 
 </body>
 
+<script src="/DATA/DarkMode.js"></script> 
 <script src="./DATA/Friends.js"></script>
 <script src="./DATA/CSS-JS/Script.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
-<!-- <script src="/DATA/DarkMode.js"></script>  -->
+
 
 </html>

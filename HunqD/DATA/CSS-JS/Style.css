@@ -3,16 +3,56 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+:root {
+    --BG: #0098ff;
+    --CheckFriend: #0098ff;
+    --Box: #fff;
+    --TBox:#000;
+    --T2Box:#111;
+    --T3Box: #ff0000;
+    --IBox: #ddd;
+    --ITBox: #000;
+    --BBox: #fff;
+    --Card: #fff;
+    --TCard: #000;
+    --Progress: #f1f1f1;
+}
 body {
-    background-color: #0098ff;
+    background-color: var(--BG);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.dark-mode {
+    --BG: #1f1f1f;
+    --CheckFriend: #000000;
+    --Box: #1f1f1f;
+    --TBox:#fff;
+    --T2Box:rgba(177, 177, 177, 0.3);
+    --T3Box: #9e0000;
+    --IBox: #111;
+    --ITBox: #fff;
+    --BBox: #646464;
+    --Card: #000000;
+    --TCard: #fff;
+    --Progress: #525252;
 }
 
 .Hidden {
     display: none !important;
 }
 
+#toggle-button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
 
 .CheckFriend {
     z-index: 99;
@@ -22,20 +62,36 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #0098ff;
+    background-color: var(--CheckFriend);
     overflow-x: hidden;
 }
 
 .Box {
+    color: var(--TBox);
     text-align: center;
     width: 80%;
     padding: 20px 0;
-    background-color: #fff;
+    background-color: var(--Box);
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
+.DarkModeBtn {
+    background-color: var(--Card);
+    color: var(--TCard);
+    font-size: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: -10px;
+    margin-bottom: -50px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    border: none;
+    
 
+}
 .Box h1 span {
     font-size: 12px;
 }
@@ -58,6 +114,7 @@ body {
 }
 
 .Input label {
+    color: var(--T2Box);
     font-size: 16px;
     display: block;
     margin-bottom: 8px;
@@ -66,19 +123,21 @@ body {
 }
 
 .Input label span {
-    color: #ff0000;
+    color: var(--T3Box);
     display: block;
     font-size: 12px;
 }
 
 
 .Input input {
+    color: var(--ITBox);
+    background-color: transparent;
     display: block;
     font-size: 16px;
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    border: 2px solid var(--IBox);
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -122,7 +181,7 @@ body {
 }
 
 .Input button:last-child {
-    background-color: #ffffff;
+    background-color: var(--BBox);
     color: black;
     margin-top: 10px;
     box-shadow: inset 0 0 0 2px black;
@@ -225,8 +284,8 @@ body {
 }
 .Card {
     text-align: left;
-    color: #000;
-    background-color: #ffffff;
+    color: var(--TCard);
+    background-color: var(--Card);
     border-radius: 10px;
     padding: 10px;
     margin: 10px 0;
@@ -252,6 +311,9 @@ body {
     font-weight: bold;
     text-align: right;
     margin-right: 10px;
+}
+.Card p.right.red {
+    color: var(--T3Box);
 }
 .One {
     display: flex;
@@ -282,7 +344,7 @@ body {
 .progress-container {
     margin: 2px 0;
     width: 100%;
-    background-color: #f1f1f1;
+    background-color: var(--Progress);
     border-radius: 5px;
 }
 
@@ -298,7 +360,11 @@ body {
     color: white;
     font-weight: bold;
 }
-
+.Question .Tips {
+    color: #797979;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
 .Question iframe{
     width: 100%;
     height: 60vh;
@@ -310,6 +376,8 @@ body {
     display: block;
     width: 100%;
     border-radius: 10px;
+    color: var(--ITBox);
+    background-color: var(--IBox);
     border: 2px solid black;
     padding: 10px;
     margin: 10px 0;

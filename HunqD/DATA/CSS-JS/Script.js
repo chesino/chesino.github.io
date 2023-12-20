@@ -53,7 +53,7 @@ function SignIn() {
     if (result.mess === 0) {
       Mess = 'Bạn và Hùng chưa có tin nhắn nào 😐.'
     } else {
-      Mess = 'Bạn và Hùng đã nhắn tin được ' + `<strong> ${result.mess}</strong>` +' tin nhắn'
+      Mess = 'Bạn và Hùng đã nhắn tin được ' + `<strong> ${result.mess}</strong>` + ' tin nhắn'
     }
 
     BoxInput.classList.add('Hidden');
@@ -67,7 +67,7 @@ function SignIn() {
             </div>
             <div class="Name">
                 <h1>${result.name}</h1>
-                <h5>ID: ${result.id} <i onclick="navigator.clipboard.writeText(${result.id});Done('Sao chép thành công','Đã sao chép ID: ${result.id}')" class="fa-solid fa-copy"></i></h5>
+                <h5>ID: ${result.id} <i onclick="navigator.clipboard.writeText(${result.id});Done('Sao chép thành công','ID của bạn là: ${result.id}')" class="fa-solid fa-copy"></i></h5>
             </div>
         </div>
         <div class="Body">
@@ -77,7 +77,7 @@ function SignIn() {
                 <div class="progress-container">
                     <div class="progress-bar" id="myProgressBar"></div>
                 </div>
-                <p class="right">Cập nhật: 1 tuần trước.</p>
+                <p class="right red">Tính năng này đang bị lỗi.</p>
             </div>
             <div class="Card Flex">
                 <div class="One">
@@ -97,6 +97,7 @@ function SignIn() {
             <div class="Card">
                     <h1>Tin nhắn</h1>
                     <p>${Mess}</p>
+                    <p class="right">Cập nhật: 1 ngày trước.</p>
                 </div>
                 <div class="Card Hidden">
                     <h1>SocialToolKit</h1>
@@ -145,6 +146,7 @@ function SignIn() {
                 <textarea name="SendMess" id="SendMess" rows="5" placeholder="Hãy đặt câu hỏi"></textarea>
                 <button onclick="SendMess()">Gửi</button>
                 <h2>OR</h2>
+                <p class="Tips">Để Hùng chủ động nhắn tin tới bạn hãy sao chép ID và gửi bằng NGL 🧐.</p>
                 <iframe src="https://ngl.link/ngl_kakashi" frameborder="0"></iframe>
             </div>
            
@@ -153,7 +155,8 @@ function SignIn() {
 
       CheckFriend.classList.add('Hidden');
       CheckFriend.scrollTop = 0;
-      Done('Đăng nhập thành công', `Tài khoản: ${result.name}`)
+
+      DoneSignIn(`Tài khoản: ${result.name}`)
       setTimeout(() => {
         move(point, rank);
       }, 500);
@@ -254,18 +257,6 @@ function searchByNameOrID(query) {
 }
 
 
-function SignUp() {
-  const searchInput = document.getElementById('searchInput').value;
-  const passwordInput = document.getElementById('passwordInput').value; // Thêm dòng này để lấy mật khẩu
-
-  if (searchInput !== '' && passwordInput !== '') {
-    const redirectUrl = `http://m.me/ChesinoPage?text=${searchInput}:${passwordInput}`;
-    window.open(redirectUrl, '_blank');
-  } else {
-    Fail('Không thể đăng ký', 'Vui lòng điền thông tin để đăng ký.');
-  }
-
-}
 
 
 function move(a, b) {
@@ -284,6 +275,25 @@ function move(a, b) {
     }
   }
 }
+
+function DoneSignIn(T1) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "success",
+    title: T1
+  });
+}
+
 
 function Done(T1, T2) {
   Swal.fire(
@@ -313,3 +323,32 @@ function SendMess() {
   }
 
 }
+
+
+
+
+function SignUp() {
+  Swal.fire({
+    title: 'Bạn cần kết bạn với Hùng',
+    text: 'Để có tài khoản bạn cần kết bạn với Hùng và đợi 24 giờ sau khi kết bạn. Nếu bạn xoá bạn bè tài khoản sẽ bị xoá khỏi danh sách sau 1 - 7 ngày.',
+    icon: 'warning',
+    
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Kết bạn ngay',
+    cancelButtonText: 'Huỷ'
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire(
+        'Đang mở Facebook',
+        'Bạn sẽ được chuyển tới Facebook của Hùng sau 3 giây.',
+        'success',
+        setTimeout(() => {
+          window.open('https://www.facebook.com/profile.php?id=61551995024526', '_blank');
+        }, 3000)
+      )
+    }
+  })
+}
+
