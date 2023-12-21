@@ -317,12 +317,14 @@ button {
 
 .Card h1 {
     text-transform: capitalize;
-    font-size: 22px;
-    margin-bottom: 5px;
+    font-size: 24px;
+    margin-bottom: 2px;
+    color: var(--BG);
 }
 
 .Card p {
     font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .Card p.right {
@@ -334,6 +336,7 @@ button {
 
 .red {
     color: var(--T3Box);
+    margin-bottom: 10px;
 }
 
 .One {
@@ -431,6 +434,7 @@ button {
 }
 
 .SocialToolKit label {
+    font-weight: bold;
     font-size: 16px;
     display: block;
     margin-bottom: 8px;

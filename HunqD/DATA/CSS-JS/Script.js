@@ -43,7 +43,7 @@ function SignIn() {
   if (result && result.pass === passwordInput) { // Kiểm tra mật khẩu
     const formattedTime = formatTimestamp(result.timestamp);
     const formattedTime2 = formatTimestamp2(result.timestamp);
-    if (result.id === undefined || result.name === 'Khách' ) {
+    if (result.id === undefined || result.name === 'Khách') {
       result.id = 'Tài khoản khách'
       img = '/DATA/logo.png';
     } else {
@@ -51,7 +51,7 @@ function SignIn() {
       img = `https://graph.facebook.com/${result.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     }
 
-    
+
     if (result.name === 'Hùng Đinh') {
       HunqD();
     }
@@ -83,7 +83,7 @@ function SignIn() {
     if (result.mess === 0) {
       Mess = 'Bạn và Hùng chưa có tin nhắn nào 😐.'
     } else {
-      Mess = 'Bạn và Hùng đã nhắn tin được ' + `<strong> ${result.mess}</strong>` + ' tin nhắn'
+      Mess = 'Bạn và Hùng đã nhắn tin được ' + `<strong> ${result.mess}</strong>` + 'tin nhắn'
     }
 
     BoxInput.classList.add('Hidden');
@@ -128,8 +128,19 @@ function SignIn() {
                     <h1>Tin nhắn</h1>
                     <p>${Mess}</p>
                     <p class="right">Cập nhật: ${UpdateTime}.</p>
-                </div>
-                <div class="Card">
+            </div>
+            <div class="Card">
+              <h1>Tải video trên Facebook</h1>
+              <p>Cho phép bạn tải Reel, Video trên Facebook</p>
+              <div class="SocialToolKit">
+                  <label for="">Link video, Reel
+                      <span>Sử dụng link Facebook hoặc ID Facebook.</span>
+                  </label>
+                  <input type="text" placeholder="Link bài viết">
+                  <button onclick="Warning('Sắp ra mắt','Tính năng này sắp ra mắt.')">Tải xuống ngay</button>
+              </div>
+            </div>
+            <div class="Card">
                 <h1>Facebook ToolKit</h1>
                 <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
                 <h5 class="red">Hiện tại tính năng này chưa hoạt động.</h5>
@@ -171,7 +182,7 @@ function SignIn() {
                         <option value="2">Chuyển khoản ngân hàng</option>
                     </select>
                     <button onclick="Warning('Sắp ra mắt','Tính năng này sắp ra mắt !')">Thanh toán ngay</button>
-                </div>
+              </div>
             </div>
             <div class="Card Question">
                 <h1>Gửi câu hỏi</h1>
@@ -484,38 +495,38 @@ function ToolKit() {
 function HunqD() {
   const userListElement = document.getElementById("userList");
 
-      // Lặp qua mỗi đối tượng người dùng trong dữ liệu JSON và thêm vào danh sách
-      jsonData[0].forEach(user => {
-        // Tạo phần tử .card
-        const card = document.createElement("div");
-        card.classList.add("CardMember");
-        card.style.backgroundImage = `url(https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662)`
-        // Tạo phần tử ảnh
-        const userImage = document.createElement("img");
-        userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-        userImage.alt = user.name + "'s Image";
-        userImage.classList.add("user-image");
-    
-        // Tạo phần tử .Info để chứa thông tin người dùng
-        const userInfoDiv = document.createElement("div");
-        userInfoDiv.classList.add("Info");
-        userInfoDiv.appendChild(userImage);
-        // Thêm thông tin người dùng vào phần tử .Info
-        Object.keys(user).forEach(key => {
-            if (key !== 'point'&& key !== 'timestamp' && key !== 'profileURL' && key !== 'mess' && key !== 'pass') {
-                const infoItem = document.createElement("div");
-    
-                // Chuyển đổi timestamp thành định dạng ngày giờ
-                const value = key === 'timestamp' ? new Date(user[key] * 1000).toLocaleString() : user[key];
-    
-                infoItem.innerHTML = `${value}`;
-                userInfoDiv.appendChild(infoItem);
-            }
-        });
-            
-        card.appendChild(userInfoDiv);
-    
-        // Thêm phần tử .card vào phần tử div
-        userListElement.appendChild(card);
-      });
+  // Lặp qua mỗi đối tượng người dùng trong dữ liệu JSON và thêm vào danh sách
+  jsonData[0].forEach(user => {
+    // Tạo phần tử .card
+    const card = document.createElement("div");
+    card.classList.add("CardMember");
+    card.style.backgroundImage = `url(https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662)`
+    // Tạo phần tử ảnh
+    const userImage = document.createElement("img");
+    userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+    userImage.alt = user.name + "'s Image";
+    userImage.classList.add("user-image");
+
+    // Tạo phần tử .Info để chứa thông tin người dùng
+    const userInfoDiv = document.createElement("div");
+    userInfoDiv.classList.add("Info");
+    userInfoDiv.appendChild(userImage);
+    // Thêm thông tin người dùng vào phần tử .Info
+    Object.keys(user).forEach(key => {
+      if (key !== 'point' && key !== 'timestamp' && key !== 'profileURL' && key !== 'mess' && key !== 'pass') {
+        const infoItem = document.createElement("div");
+
+        // Chuyển đổi timestamp thành định dạng ngày giờ
+        const value = key === 'timestamp' ? new Date(user[key] * 1000).toLocaleString() : user[key];
+
+        infoItem.innerHTML = `${value}`;
+        userInfoDiv.appendChild(infoItem);
+      }
+    });
+
+    card.appendChild(userInfoDiv);
+
+    // Thêm phần tử .card vào phần tử div
+    userListElement.appendChild(card);
+  });
 }
