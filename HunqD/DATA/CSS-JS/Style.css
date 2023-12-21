@@ -38,11 +38,16 @@ body {
     --Progress: #525252;
 }
 
+button {
+    cursor: pointer;
+}
+
 .Hidden {
     display: none !important;
 }
 
 #toggle-button {
+    display: none !important;
     position: fixed;
     top: 0;
     right: 0;
@@ -289,6 +294,7 @@ body {
     border-radius: 10px;
     padding: 10px;
     margin: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .Card.Flex {
     display: flex;

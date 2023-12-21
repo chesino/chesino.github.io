@@ -1,4 +1,21 @@
-const Version = '2.1'
+const Version = '2.2'
+
+var timeUpdate = new Date('2023-12-19T00:00:00');
+var timeDifference = new Date() - timeUpdate;
+let UpdateTime = ''
+// Chuyển đổi chênh lệch thời gian từ milliseconds sang phút và ngày
+var minutesDifference = Math.floor(timeDifference / (1000 * 60));
+var hoursDifference = Math.floor(timeDifference / (1000 * 60 * 60));
+var daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+if (minutesDifference < 60 && hoursDifference == 0) {
+  UpdateTime = minutesDifference + ' phút trước'
+} else if (daysDifference === 0) {
+  UpdateTime = hoursDifference + ' giờ trước'
+} else{
+  UpdateTime = daysDifference + ' ngày trước'
+}
+
+
 document.getElementById('Version').innerText = 'v' + Version;
 
 function handleEnter(event, nextInputId) {
@@ -35,20 +52,28 @@ function SignIn() {
       img = `https://graph.facebook.com/${result.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     }
 
-    var rank = 0;
+    var ranks = [
+      { minPoint: 0, maxPoint: 19, title: 'Bạn FB', nextRank: 'Fan Cứng' },
+      { minPoint: 20, maxPoint: 29, title: 'Fan Cứng', nextRank: 'Fan Pro' },
+      { minPoint: 30, maxPoint: 39, title: 'Fan Pro', nextRank: 'Fan Pro Max' },
+      // Thêm các mức rank khác tương tự ở đây
+    ];
+    
     var point = result.point;
-    let titleRank = 'N/A'
-    let nextRank = 'N/A'
-    if (point <= 20) {
-      rank = 20
-      titleRank = 'Bạn FB'
-      nextRank = 'Fan Cứng'
+    var rank = 0;
+    let titleRank = 'N/A';
+    let nextRank = 'N/A';
+    
+    for (var i = 0; i < ranks.length; i++) {
+      if (point >= ranks[i].minPoint && point <= ranks[i].maxPoint) {
+        rank = ranks[i].maxPoint;
+        titleRank = ranks[i].title;
+        nextRank = ranks[i].nextRank;
+        break; // Kết thúc vòng lặp khi tìm được mức rank phù hợp
+      }
     }
-    if (point >= 20 && point <= 30) {
-      rank = 30
-      titleRank = 'Fan Cứng'
-      nextRank = 'Fan Cứng 2'
-    }
+    
+
     let Mess = '';
     if (result.mess === 0) {
       Mess = 'Bạn và Hùng chưa có tin nhắn nào 😐.'
@@ -73,11 +98,11 @@ function SignIn() {
         <div class="Body">
             <div class="Card">
                 <h1>Điểm tương tác</h1>
-                <p>Bạn cần ${rank - point} điểm nữa để trở thành ${nextRank} [${point}/${rank}].</p>
+                <p>Bạn cần ${rank - point+1} điểm nữa để trở thành ${nextRank} [${point}/${rank+1}].</p>
                 <div class="progress-container">
                     <div class="progress-bar" id="myProgressBar"></div>
                 </div>
-                <p class="right red">Tính năng này đang bị lỗi.</p>
+                <p class="right red">Tính năng này đang bảo trì.</p>
             </div>
             <div class="Card Flex">
                 <div class="One">
@@ -97,7 +122,7 @@ function SignIn() {
             <div class="Card">
                     <h1>Tin nhắn</h1>
                     <p>${Mess}</p>
-                    <p class="right">Cập nhật: 1 ngày trước.</p>
+                    <p class="right">Cập nhật: ${UpdateTime}.</p>
                 </div>
                 <div class="Card Hidden">
                     <h1>SocialToolKit</h1>
@@ -153,8 +178,11 @@ function SignIn() {
       </div>
       `;
 
+
       CheckFriend.classList.add('Hidden');
-      CheckFriend.scrollTop = 0;
+      resultDiv.classList.remove('Hidden');
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
 
       DoneSignIn(`Tài khoản: ${result.name}`)
       setTimeout(() => {
@@ -184,12 +212,6 @@ function formatTimestamp2(timestamp) {
   const date = new Date(timestamp * 1000);
 
   const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-
-  const nowFormatted = now.toLocaleDateString('en-US', options);
-  const dateFormatted = date.toLocaleDateString('en-US', options);
-
-  console.log(`Ngày hiện tại: ${nowFormatted}`);
-  console.log(`Ngày từ timestamp: ${dateFormatted}`);
 
   // Tính số ngày chênh lệch
   const timeDiff = now.getTime() - date.getTime();
@@ -222,7 +244,16 @@ function extractFacebookProfileURL(input) {
     // Nếu có kết quả, trả về URL, ngược lại trả về null
     return match ? match[1] : null;
   } else {
+    
+    if (input.includes("https://www.facebook.com/")) {
+    // Sử dụng regular expression để trích xuất URL
+    const match = input.match(/(https:\/\/www\.facebook\.com\/[^\?]+)/);
+
+    // Nếu có kết quả, trả về URL, ngược lại trả về null
+    return match ? match[1] : null;
+  } else {
     return input
+  }
   }
 }
 
@@ -330,7 +361,7 @@ function SendMess() {
 function SignUp() {
   Swal.fire({
     title: 'Bạn cần kết bạn với Hùng',
-    text: 'Để có tài khoản bạn cần kết bạn với Hùng và đợi 24 giờ sau khi kết bạn. Nếu bạn xoá bạn bè tài khoản sẽ bị xoá khỏi danh sách sau 1 - 7 ngày.',
+    text: 'Để có tài khoản bạn cần kết bạn với Hùng và đợi 24 giờ sau khi kết bạn. Nếu xoá bạn bè tài khoản sẽ bị xoá khỏi danh sách sau 30 ngày.',
     icon: 'warning',
     
     showCancelButton: true,
@@ -341,12 +372,10 @@ function SignUp() {
   }).then((result) => {
     if (result.value) {
       Swal.fire(
-        'Đang mở Facebook',
-        'Bạn sẽ được chuyển tới Facebook của Hùng sau 3 giây.',
+        'Đã mở Facebook',
+        'Bạn sẽ được chuyển tới Facebook của Hùng.',
         'success',
-        setTimeout(() => {
-          window.open('https://www.facebook.com/profile.php?id=61551995024526', '_blank');
-        }, 3000)
+        window.open('https://www.facebook.com/profile.php?id=61551995024526', '_blank')
       )
     }
   })

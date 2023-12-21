@@ -11,14 +11,13 @@ const jsonData = [
   
       },
       {
-        "name": "Demo",
+        "name": "Khách",
         "profileURL": "https://www.facebook.com/profile.php?id=61551995024526",
         "timestamp": 1697068800,
         "id": 61551995024526,
-        "point": 22,
+        "point": 40,
         "mess": 1000,
-        "pass": "123"
-  
+        "pass": ""
       },
       {
         "name": "Ánh Hằng",
