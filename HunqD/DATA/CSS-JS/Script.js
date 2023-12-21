@@ -52,6 +52,47 @@ function SignIn() {
       img = `https://graph.facebook.com/${result.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     }
 
+    if (result.name === 'Hùng Đinh') {
+      const userListElement = document.getElementById("userList");
+
+      // Lặp qua mỗi đối tượng người dùng trong dữ liệu JSON và thêm vào danh sách
+      jsonData[0].forEach(user => {
+        // Tạo phần tử .card
+        const card = document.createElement("div");
+        card.classList.add("CardMember");
+
+        // Tạo phần tử ảnh
+        const userImage = document.createElement("img");
+        userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+        userImage.alt = user.name + "'s Image";
+        userImage.classList.add("user-image");
+
+
+        // Tạo phần tử ul để chứa thông tin người dùng
+        const userInfoList = document.createElement("ul");
+
+        // Thêm thông tin người dùng vào phần tử ul
+        Object.keys(user).forEach(key => {
+          if (key !== 'point' && key !== 'mess' && key !== 'pass') {
+            const listItem = document.createElement("li");
+
+            // Chuyển đổi timestamp thành định dạng ngày giờ
+            const value = key === 'timestamp' ? new Date(user[key] * 1000).toLocaleString() : user[key];
+
+            listItem.innerHTML = `<strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${value}`;
+            userInfoList.appendChild(listItem);
+          }
+        });
+
+        // Thêm phần tử ảnh và phần tử ul vào phần tử .card
+        card.appendChild(userImage);
+        card.appendChild(userInfoList);
+
+        // Thêm phần tử .card vào phần tử div
+        userListElement.appendChild(card);
+      });
+    }
+
     var ranks = [
       { minPoint: 0, maxPoint: 19, title: 'Bạn FB', nextRank: 'Fan Cứng' },
       { minPoint: 20, maxPoint: 29, title: 'Fan Cứng', nextRank: 'Fan Pro' },
@@ -165,7 +206,7 @@ function SignIn() {
                         <option value="1">Ví MOMO</option>
                         <option value="2">Chuyển khoản ngân hàng</option>
                     </select>
-                    <button onclick="Fail('Lỗi','Tính năng này sắp ra mắt !')">Thanh toán ngay</button>
+                    <button onclick="Warning('Sắp ra mắt','Tính năng này sắp ra mắt !')">Thanh toán ngay</button>
                 </div>
             </div>
             <div class="Card Question">
@@ -189,8 +230,12 @@ function SignIn() {
 
       ToolKit();
       DoneSignIn(`Tài khoản: ${result.name}`)
+
       setTimeout(() => {
         move(point, rank);
+        if (result.pass === '123') {
+          Warning('Cảnh báo', 'Bạn đang sử dụng mật khẩu mặc định hãy thay đổi mật khẩu mới để bảo mật tài khoản. Hiện tại chưa thể thay đổi bằng cách tự động hãy nhắn tin cho Hùng để đổi mất khẩu mới!')
+        }
       }, 500);
 
     }, 1500);
@@ -345,6 +390,13 @@ function Fail(T1, T2) {
     'error'
   )
 }
+function Warning(T1, T2) {
+  Swal.fire(
+    T1,
+    T2,
+    'warning'
+  )
+}
 
 
 function SendMess() {
@@ -393,14 +445,14 @@ function calculateTotal() {
 
   // Define the cost per unit for each service
   var costPerUnit = {
-    '0': 10, // Cost for Người theo dõi
-    '1': 5,  // Cost for Lượt thích bài viết
-    '2': 2   // Cost for Lượt xem Story
+    '0': 55, // Cost for Người theo dõi
+    '1': 50,  // Cost for Lượt thích bài viết
+    '2': 40   // Cost for Lượt xem Story
   };
 
   // Define discount codes and their required amounts
   var discountCodes = {
-    'NOEL': 9000,
+    'NOEL': 5000,
     'HUNQD': 10000
     // Add more discount codes and amounts here as needed
   };
@@ -437,25 +489,26 @@ function formatNumber(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// Add event listeners for real-time updates
-document.getElementById('selectService').addEventListener('change', function () {
-  // Hide both S1 and S2 by default
-  document.querySelector('.S1').style.display = 'none';
-  document.querySelector('.S2').style.display = 'none';
 
-  // Show the selected element based on the value of selectService
-  var selectedService = document.getElementById('selectService').value;
-  if (selectedService === '0') {
-    document.querySelector('.S1').style.display = 'block';
-  } else {
-    document.querySelector('.S2').style.display = 'block';
-  }
-
-  // Recalculate the total when the service selection changes
-  calculateTotal();
-});
 
 function ToolKit() {
   document.getElementById('quantityInput').addEventListener('input', calculateTotal);
-document.getElementById('discountCode').addEventListener('input', calculateTotal);
+  document.getElementById('discountCode').addEventListener('input', calculateTotal);
+  // Add event listeners for real-time updates
+  document.getElementById('selectService').addEventListener('change', function () {
+    // Hide both S1 and S2 by default
+    document.querySelector('.S1').style.display = 'none';
+    document.querySelector('.S2').style.display = 'none';
+
+    // Show the selected element based on the value of selectService
+    var selectedService = document.getElementById('selectService').value;
+    if (selectedService === '0') {
+      document.querySelector('.S1').style.display = 'block';
+    } else {
+      document.querySelector('.S2').style.display = 'block';
+    }
+
+    // Recalculate the total when the service selection changes
+    calculateTotal();
+  });
 }

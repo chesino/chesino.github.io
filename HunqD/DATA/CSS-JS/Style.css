@@ -3,12 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 :root {
     --BG: #0098ff;
     --CheckFriend: #0098ff;
     --Box: #fff;
-    --TBox:#000;
-    --T2Box:#111;
+    --TBox: #000;
+    --T2Box: #111;
     --T3Box: #ff0000;
     --IBox: #ddd;
     --ITBox: #000;
@@ -17,6 +18,7 @@
     --TCard: #000;
     --Progress: #f1f1f1;
 }
+
 body {
     background-color: var(--BG);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -27,8 +29,8 @@ body {
     --BG: #1f1f1f;
     --CheckFriend: #000000;
     --Box: #1f1f1f;
-    --TBox:#fff;
-    --T2Box:rgba(177, 177, 177, 0.3);
+    --TBox: #fff;
+    --T2Box: rgba(177, 177, 177, 0.3);
     --T3Box: #9e0000;
     --IBox: #111;
     --ITBox: #fff;
@@ -81,6 +83,7 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
+
 .DarkModeBtn {
     background-color: var(--Card);
     color: var(--TCard);
@@ -94,9 +97,10 @@ button {
     width: 40px;
     border-radius: 20px;
     border: none;
-    
+
 
 }
+
 .Box h1 span {
     font-size: 12px;
 }
@@ -212,7 +216,7 @@ button {
 
 #resultText {
     color: #ff0000;
-    margin: 5px ;
+    margin: 5px;
     font-size: 14px;
 }
 
@@ -277,16 +281,20 @@ button {
 .Head .Name {
     text-align: left;
 }
+
 .Head .Name h5 {
     font-size: 14px;
 }
+
 .Head .Name h5 i {
     cursor: pointer;
     font-size: 20px;
 }
+
 .Body {
     margin: 20px 0;
 }
+
 .Card {
     text-align: left;
     color: var(--TCard);
@@ -296,49 +304,61 @@ button {
     margin: 10px 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .Card.Flex {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
+
 .Card img {
     max-width: 100%;
 }
-.Card h1  {
+
+.Card h1 {
     text-transform: capitalize;
     font-size: 22px;
     margin-bottom: 5px;
 }
+
 .Card p {
     font-size: 14px;
 }
+
 .Card p.right {
     font-size: 12px;
     font-weight: bold;
     text-align: right;
     margin-right: 10px;
 }
+
 .Card p.right.red {
     color: var(--T3Box);
 }
+
 .One {
     display: flex;
 }
-.One .Avatar:last-child{
+
+.One .Avatar:last-child {
     margin-left: -20px;
 }
+
 .One .Avatar img {
     height: 80px;
     display: block;
     border-radius: 50%;
     border: 3px solid #00a005;
 }
+
 .One .Avatar:last-child img {
     border: 3px solid #ff0000;
 }
-.Two h1  {
+
+.Two h1 {
     margin: 0;
 }
+
 .Two p {
     font-size: 18px;
 }
@@ -366,16 +386,19 @@ button {
     color: white;
     font-weight: bold;
 }
+
 .Question .Tips {
     color: #797979;
     font-size: 12px;
     margin-bottom: 5px;
 }
-.Question iframe{
+
+.Question iframe {
     width: 100%;
     height: 60vh;
     border-radius: 10px;
 }
+
 .Question textarea {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 18px;
@@ -388,6 +411,7 @@ button {
     padding: 10px;
     margin: 10px 0;
 }
+
 .Question button {
     color: #fff;
     background-color: #f13465;
@@ -400,7 +424,8 @@ button {
     border: 2px solid black;
     margin-top: 5px;
 }
-.Question h2  {
+
+.Question h2 {
     text-align: center;
     margin: 10px 0;
 }
@@ -410,14 +435,16 @@ button {
     display: block;
     margin-bottom: 8px;
     text-align: left;
-    color: #333; /* Adjust label text color */
+    color: #333;
+    /* Adjust label text color */
 }
 
 .SocialToolKit label span {
     color: #ff0000;
     display: block;
     font-size: 12px;
-    margin-top: 5px; /* Add some spacing between label and span */
+    margin-top: 5px;
+    /* Add some spacing between label and span */
 }
 
 .SocialToolKit input,
@@ -426,27 +453,34 @@ button {
     display: block;
     font-size: 16px;
     width: 100%;
-    padding: 12px; /* Increase padding for better input appearance */
+    padding: 12px;
+    /* Increase padding for better input appearance */
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease; /* Add transition for input border color */
+    transition: border-color 0.3s ease;
+    /* Add transition for input border color */
 }
+
+
 
 .SocialToolKit input:focus,
 .SocialToolKit select:focus,
 .SocialToolKit option:focus {
-    border-color: #007bff; /* Change border color on focus */
+    border-color: #007bff;
+    /* Change border color on focus */
 }
 
 .SocialToolKit button {
     display: block;
     width: 100%;
-    padding: 14px; /* Increase padding for better button appearance */
+    padding: 14px;
+    /* Increase padding for better button appearance */
     background-color: #007bff;
     border: none;
-    color: #fff; /* Adjust button text color */
+    color: #fff;
+    /* Adjust button text color */
     border-radius: 8px;
     font-size: 18px;
     font-weight: bold;
@@ -455,27 +489,98 @@ button {
 }
 
 .SocialToolKit button:hover {
-    background-color: #0056b3; /* Darker color on hover */
+    background-color: #0056b3;
+    /* Darker color on hover */
 }
 
-.S1, .S2 {
+.S1,
+.S2 {
     display: none;
 }
 
 /* Additional styling for the discount message */
 #discountMessage {
-    color: #28a745; /* Green color for success message */
+    color: #28a745;
+    /* Green color for success message */
     font-size: 14px;
     margin-top: 8px;
 }
 
 #discountMessage.error {
-    color: #dc3545; /* Red color for error message */
+    color: #dc3545;
+    /* Red color for error message */
 }
 
 /* Additional styling for the total cost */
 #totalCost {
     font-size: 24px;
-    color: #333; /* Total cost text color */
+    color: #333;
+    /* Total cost text color */
     margin-top: 15px;
+}
+
+
+
+.SocialToolKit select {
+    position: relative;
+    display: inline-block;
+}
+
+.SocialToolKit select:after {
+    content: '\0025BC';
+    font: normal normal normal 12px/1 FontAwesome;
+    color: white;
+    right: 14px;
+    top: 4px;
+    height: 26px;
+    padding: 15px 0px 0px 8px;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Thêm CSS để tùy chỉnh giao diện danh sách người dùng */
+#userList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.CardMember {
+    display: block;
+    width: 100%;
+    border: 1px solid #ddd;
+    background-color: var(--Card);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    overflow: auto;
+}
+
+.CardMember:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.user-image {
+    width: 80px;
+    /* Điều chỉnh kích thước ảnh người dùng */
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 50%;
+    /* Bo góc ảnh để tạo hình tròn */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+strong {
+    margin-right: 5px;
+    font-weight: bold;
 }
