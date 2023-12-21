@@ -43,54 +43,17 @@ function SignIn() {
   if (result && result.pass === passwordInput) { // Kiểm tra mật khẩu
     const formattedTime = formatTimestamp(result.timestamp);
     const formattedTime2 = formatTimestamp2(result.timestamp);
-    if (result.id === undefined) {
-      result.id = 'Chưa cập nhật ID'
+    if (result.id === undefined || result.name === 'Khách' ) {
+      result.id = 'Tài khoản khách'
       img = '/DATA/logo.png';
-
     } else {
       result.id
       img = `https://graph.facebook.com/${result.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     }
 
+    
     if (result.name === 'Hùng Đinh') {
-      const userListElement = document.getElementById("userList");
-
-      // Lặp qua mỗi đối tượng người dùng trong dữ liệu JSON và thêm vào danh sách
-      jsonData[0].forEach(user => {
-        // Tạo phần tử .card
-        const card = document.createElement("div");
-        card.classList.add("CardMember");
-
-        // Tạo phần tử ảnh
-        const userImage = document.createElement("img");
-        userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-        userImage.alt = user.name + "'s Image";
-        userImage.classList.add("user-image");
-
-
-        // Tạo phần tử ul để chứa thông tin người dùng
-        const userInfoList = document.createElement("ul");
-
-        // Thêm thông tin người dùng vào phần tử ul
-        Object.keys(user).forEach(key => {
-          if (key !== 'point' && key !== 'mess' && key !== 'pass') {
-            const listItem = document.createElement("li");
-
-            // Chuyển đổi timestamp thành định dạng ngày giờ
-            const value = key === 'timestamp' ? new Date(user[key] * 1000).toLocaleString() : user[key];
-
-            listItem.innerHTML = `<strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${value}`;
-            userInfoList.appendChild(listItem);
-          }
-        });
-
-        // Thêm phần tử ảnh và phần tử ul vào phần tử .card
-        card.appendChild(userImage);
-        card.appendChild(userInfoList);
-
-        // Thêm phần tử .card vào phần tử div
-        userListElement.appendChild(card);
-      });
+      HunqD();
     }
 
     var ranks = [
@@ -169,6 +132,7 @@ function SignIn() {
                 <div class="Card">
                 <h1>Facebook ToolKit</h1>
                 <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
+                <h5 class="red">Hiện tại tính năng này chưa hoạt động.</h5>
                 <div class="SocialToolKit">
                     <label for="">Chọn dịch vụ</label>
                     <select id="selectService">
@@ -233,10 +197,16 @@ function SignIn() {
 
       setTimeout(() => {
         move(point, rank);
+      }, 500);
+
+      setTimeout(() => {
         if (result.pass === '123') {
           Warning('Cảnh báo', 'Bạn đang sử dụng mật khẩu mặc định hãy thay đổi mật khẩu mới để bảo mật tài khoản. Hiện tại chưa thể thay đổi bằng cách tự động hãy nhắn tin cho Hùng để đổi mất khẩu mới!')
         }
-      }, 500);
+        if (result.name === 'Khách') {
+          Warning('Cảnh báo', 'Bạn đang sử dụng tài khoản khách nên các tính năng sẽ bị giới hạn!');
+        }
+      }, 1000);
 
     }, 1500);
 
@@ -400,8 +370,6 @@ function Warning(T1, T2) {
 
 
 function SendMess() {
-  const SendMess = document.getElementById('SendMess').value;
-
   if (SendMess !== '') {
     const redirectUrl = `https://www.messenger.com/t/61551995024526?text=${SendMess}`;
     window.open(redirectUrl, '_blank');
@@ -511,4 +479,43 @@ function ToolKit() {
     // Recalculate the total when the service selection changes
     calculateTotal();
   });
+}
+
+function HunqD() {
+  const userListElement = document.getElementById("userList");
+
+      // Lặp qua mỗi đối tượng người dùng trong dữ liệu JSON và thêm vào danh sách
+      jsonData[0].forEach(user => {
+        // Tạo phần tử .card
+        const card = document.createElement("div");
+        card.classList.add("CardMember");
+        card.style.backgroundImage = `url(https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662)`
+        // Tạo phần tử ảnh
+        const userImage = document.createElement("img");
+        userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+        userImage.alt = user.name + "'s Image";
+        userImage.classList.add("user-image");
+    
+        // Tạo phần tử .Info để chứa thông tin người dùng
+        const userInfoDiv = document.createElement("div");
+        userInfoDiv.classList.add("Info");
+        userInfoDiv.appendChild(userImage);
+        // Thêm thông tin người dùng vào phần tử .Info
+        Object.keys(user).forEach(key => {
+            if (key !== 'point'&& key !== 'timestamp' && key !== 'profileURL' && key !== 'mess' && key !== 'pass') {
+                const infoItem = document.createElement("div");
+    
+                // Chuyển đổi timestamp thành định dạng ngày giờ
+                const value = key === 'timestamp' ? new Date(user[key] * 1000).toLocaleString() : user[key];
+    
+                infoItem.innerHTML = `${value}`;
+                userInfoDiv.appendChild(infoItem);
+            }
+        });
+            
+        card.appendChild(userInfoDiv);
+    
+        // Thêm phần tử .card vào phần tử div
+        userListElement.appendChild(card);
+      });
 }

@@ -332,7 +332,7 @@ button {
     margin-right: 10px;
 }
 
-.Card p.right.red {
+.red {
     color: var(--T3Box);
 }
 
@@ -542,16 +542,19 @@ button {
 #userList {
     display: flex;
     flex-wrap: wrap;
+    max-width: 100%;
+    padding: 10px;
+    gap: 10px;
 }
 
 .CardMember {
-    display: block;
-    width: 100%;
+    background-size: cover;
+    background-position: center;
+    width: calc(50% - 5px);
+    box-sizing: border-box;
     border: 1px solid #ddd;
     background-color: var(--Card);
     border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
     overflow: auto;
@@ -561,12 +564,31 @@ button {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.CardMember .Info {
+    height: 100%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.CardMember .Info div {
+
+    word-wrap: break-word;
+}
+
+.CardMember .Info div:nth-child(2) {
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .user-image {
     width: 80px;
     /* Điều chỉnh kích thước ảnh người dùng */
     height: 80px;
     margin-right: 10px;
-    border-radius: 50%;
+    border-radius: 10px;
+    border: 2px solid #fff;
     /* Bo góc ảnh để tạo hình tròn */
 }
 
