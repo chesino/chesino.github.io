@@ -1,6 +1,6 @@
 const Version = '2.2'
 
-var timeUpdate = new Date('2023-12-19T00:00:00');
+var timeUpdate = new Date('2023-12-20T00:00:00');
 var timeDifference = new Date() - timeUpdate;
 let UpdateTime = ''
 // Chuyển đổi chênh lệch thời gian từ milliseconds sang phút và ngày
@@ -11,7 +11,7 @@ if (minutesDifference < 60 && hoursDifference == 0) {
   UpdateTime = minutesDifference + ' phút trước'
 } else if (daysDifference === 0) {
   UpdateTime = hoursDifference + ' giờ trước'
-} else{
+} else {
   UpdateTime = daysDifference + ' ngày trước'
 }
 
@@ -56,14 +56,15 @@ function SignIn() {
       { minPoint: 0, maxPoint: 19, title: 'Bạn FB', nextRank: 'Fan Cứng' },
       { minPoint: 20, maxPoint: 29, title: 'Fan Cứng', nextRank: 'Fan Pro' },
       { minPoint: 30, maxPoint: 39, title: 'Fan Pro', nextRank: 'Fan Pro Max' },
+      { minPoint: 40, maxPoint: 99, title: 'Fan Pro Max', nextRank: 'Fan Ultra' },
       // Thêm các mức rank khác tương tự ở đây
     ];
-    
+
     var point = result.point;
     var rank = 0;
     let titleRank = 'N/A';
     let nextRank = 'N/A';
-    
+
     for (var i = 0; i < ranks.length; i++) {
       if (point >= ranks[i].minPoint && point <= ranks[i].maxPoint) {
         rank = ranks[i].maxPoint;
@@ -72,7 +73,7 @@ function SignIn() {
         break; // Kết thúc vòng lặp khi tìm được mức rank phù hợp
       }
     }
-    
+
 
     let Mess = '';
     if (result.mess === 0) {
@@ -98,7 +99,7 @@ function SignIn() {
         <div class="Body">
             <div class="Card">
                 <h1>Điểm tương tác</h1>
-                <p>Bạn cần ${rank - point+1} điểm nữa để trở thành ${nextRank} [${point}/${rank+1}].</p>
+                <p>Bạn cần ${rank - point + 1} điểm nữa để trở thành ${nextRank} [${point}/${rank + 1}].</p>
                 <div class="progress-container">
                     <div class="progress-bar" id="myProgressBar"></div>
                 </div>
@@ -124,47 +125,49 @@ function SignIn() {
                     <p>${Mess}</p>
                     <p class="right">Cập nhật: ${UpdateTime}.</p>
                 </div>
-                <div class="Card Hidden">
-                    <h1>SocialToolKit</h1>
-                    <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
-                    <div class="SocialToolKit">
-                        <label for="">Chọn dịch vụ</label>
-                        <select name="" id="">
-                            <option value="0">Người theo dõi</option>
-                            <option value="1">Lượt thích bài viết</option>
-                            <option value="2">Lượt xem Story</option>
-                        </select>
-                        <div class="S1">
-                            <label for="">Tài khoản
-                                <span>Sử dụng link Facebook hoặc ID Facebook.</span>
-                            </label>
-                            <input type="text" placeholder="Link bài viết">
-                        </div>
-    
-                        <div class="S2">
-                            <label for="">Link bài viết
-                                <span>Sử dụng Link bài viết hoặc Link Story.</span>
-                            </label>
-                            <input type="text" placeholder="Link bài viết">
-                        </div>
-                        <label for="">Số lượng <span>Thấp nhất 100 và cao nhất 10,000 mỗi lần.</span></label>
-                        <input type="number" name="" id="">
-    
-                        <h5>Tổng số tiền bạn cần thanh toàn là</h5>
-                        <h1>0đ</h1>
-    
-                        <label for="">Mã giảm giá</label>
-                        <input type="text">
-    
-                        <label for="">Chọn thương thức thanh toán</label>
-                        <select name="" id="">
-                            <option value="0">HunqD Point</option>
-                            <option value="1">Ví MOMO</option>
-                            <option value="2">Chuyển khoản ngân hàng</option>
-                        </select>
-                        <button>Thanh toán ngay</button>
+                <div class="Card">
+                <h1>Facebook ToolKit</h1>
+                <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
+                <div class="SocialToolKit">
+                    <label for="">Chọn dịch vụ</label>
+                    <select id="selectService">
+                        <option value="0">Người theo dõi</option>
+                        <option value="1">Lượt thích bài viết</option>
+                        <option value="2">Lượt xem Story</option>
+                    </select>
+                    <div class="S1">
+                        <label for="">Tài khoản
+                            <span>Sử dụng link Facebook hoặc ID Facebook.</span>
+                        </label>
+                        <input type="text" placeholder="Link bài viết">
                     </div>
+            
+                    <div class="S2">
+                        <label for="">Link bài viết
+                            <span>Sử dụng Link bài viết hoặc Link Story.</span>
+                        </label>
+                        <input type="text" placeholder="Link bài viết">
+                    </div>
+                    <label for="">Số lượng <span>Thấp nhất 100 và cao nhất 10,000 mỗi lần.</span></label>
+                    <input type="number" id="quantityInput">
+            
+                    <h5>Tổng số tiền bạn cần thanh toàn là</h5>
+                    <h1 id="totalCost">0đ</h1>
+            
+                    <p id="discountMessage"></p>
+            
+                    <label for="">Mã giảm giá</label>
+                    <input type="text" id="discountCode">
+            
+                    <label for="">Chọn thương thức thanh toán</label>
+                    <select id="selectPaymentMethod">
+                        <option value="0">HunqD Point</option>
+                        <option value="1">Ví MOMO</option>
+                        <option value="2">Chuyển khoản ngân hàng</option>
+                    </select>
+                    <button onclick="Fail('Lỗi','Tính năng này sắp ra mắt !')">Thanh toán ngay</button>
                 </div>
+            </div>
             <div class="Card Question">
                 <h1>Gửi câu hỏi</h1>
                 <p>Cho phép bạn gửi tin nhắn ẩn danh hoặc công khai cho Hùng.</p>
@@ -184,6 +187,7 @@ function SignIn() {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
 
+      ToolKit();
       DoneSignIn(`Tài khoản: ${result.name}`)
       setTimeout(() => {
         move(point, rank);
@@ -244,16 +248,16 @@ function extractFacebookProfileURL(input) {
     // Nếu có kết quả, trả về URL, ngược lại trả về null
     return match ? match[1] : null;
   } else {
-    
-    if (input.includes("https://www.facebook.com/")) {
-    // Sử dụng regular expression để trích xuất URL
-    const match = input.match(/(https:\/\/www\.facebook\.com\/[^\?]+)/);
 
-    // Nếu có kết quả, trả về URL, ngược lại trả về null
-    return match ? match[1] : null;
-  } else {
-    return input
-  }
+    if (input.includes("https://www.facebook.com/")) {
+      // Sử dụng regular expression để trích xuất URL
+      const match = input.match(/(https:\/\/www\.facebook\.com\/[^\?]+)/);
+
+      // Nếu có kết quả, trả về URL, ngược lại trả về null
+      return match ? match[1] : null;
+    } else {
+      return input
+    }
   }
 }
 
@@ -363,7 +367,7 @@ function SignUp() {
     title: 'Bạn cần kết bạn với Hùng',
     text: 'Để có tài khoản bạn cần kết bạn với Hùng và đợi 24 giờ sau khi kết bạn. Nếu xoá bạn bè tài khoản sẽ bị xoá khỏi danh sách sau 30 ngày.',
     icon: 'warning',
-    
+
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
@@ -381,3 +385,77 @@ function SignUp() {
   })
 }
 
+function calculateTotal() {
+  var service = document.getElementById('selectService').value;
+  var quantity = parseInt(document.getElementById('quantityInput').value);
+  var discountCode = document.getElementById('discountCode').value;
+  var paymentMethod = document.getElementById('selectPaymentMethod').value;
+
+  // Define the cost per unit for each service
+  var costPerUnit = {
+    '0': 10, // Cost for Người theo dõi
+    '1': 5,  // Cost for Lượt thích bài viết
+    '2': 2   // Cost for Lượt xem Story
+  };
+
+  // Define discount codes and their required amounts
+  var discountCodes = {
+    'NOEL': 9000,
+    'HUNQD': 10000
+    // Add more discount codes and amounts here as needed
+  };
+
+  // Calculate total cost
+  var totalCost = quantity * costPerUnit[service];
+
+  // Check if a valid discount code is entered and total cost meets the requirement
+  if (discountCodes.hasOwnProperty(discountCode)) {
+    var requiredAmount = discountCodes[discountCode];
+
+    if (totalCost >= requiredAmount) {
+      var discountAmount = discountCodes[discountCode];
+      totalCost -= discountAmount;
+
+      // Display discount message
+      document.getElementById('discountMessage').textContent = 'Bạn đã giảm được ' +
+        formatNumber(discountAmount) + 'đ khi sử dụng mã ' + discountCode;
+    } else {
+      // Display message when total cost does not meet the requirement
+      document.getElementById('discountMessage').textContent = 'Mã ' + discountCode +
+        ' chỉ áp dụng cho đơn hàng từ ' + formatNumber(requiredAmount) + 'đ trở lên.';
+    }
+  } else {
+    // Display message when the entered discount code is not valid
+    document.getElementById('discountMessage').textContent = 'Mã giảm giá không hợp lệ.';
+  }
+
+  // Update the total cost on the page with formatted number or display 0 if NaN
+  document.getElementById('totalCost').textContent = isNaN(totalCost) ? '0đ' : formatNumber(totalCost) + 'đ';
+}
+
+function formatNumber(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// Add event listeners for real-time updates
+document.getElementById('selectService').addEventListener('change', function () {
+  // Hide both S1 and S2 by default
+  document.querySelector('.S1').style.display = 'none';
+  document.querySelector('.S2').style.display = 'none';
+
+  // Show the selected element based on the value of selectService
+  var selectedService = document.getElementById('selectService').value;
+  if (selectedService === '0') {
+    document.querySelector('.S1').style.display = 'block';
+  } else {
+    document.querySelector('.S2').style.display = 'block';
+  }
+
+  // Recalculate the total when the service selection changes
+  calculateTotal();
+});
+
+function ToolKit() {
+  document.getElementById('quantityInput').addEventListener('input', calculateTotal);
+document.getElementById('discountCode').addEventListener('input', calculateTotal);
+}
