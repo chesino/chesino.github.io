@@ -30,6 +30,22 @@ function handleEnter(event, nextInputId) {
   }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  const storedLoginInfo = localStorage.getItem('loginInfo');
+
+  if (!storedLoginInfo) {
+    // Nếu không có thông tin đăng nhập, chuyển hướng người dùng đến trang đăng nhập hoặc hiển thị thông báo
+    // Ví dụ: window.location.href = '/login.html'; hoặc hiển thị thông báo đăng nhập
+  } else {
+    const { username, password } = JSON.parse(storedLoginInfo);
+    document.getElementById('searchInput').value = username;
+    document.getElementById('passwordInput').value = password;
+    SignIn(); // Gọi hàm đăng nhập
+  }
+});
+
+
+
 function SignIn() {
   const searchInput = document.getElementById('searchInput').value;
   const passwordInput = document.getElementById('passwordInput').value;
@@ -40,6 +56,7 @@ function SignIn() {
   const result = searchByNameOrID(searchInput);
 
   if (result && result.pass === passwordInput) { // Kiểm tra mật khẩu
+    saveLoginInfo(searchInput, passwordInput);
     const formattedTime = formatTimestamp(result.timestamp);
     const formattedTime2 = formatTimestamp2(result.timestamp);
     if (result.id === undefined || result.name === 'Khách') {
@@ -103,7 +120,7 @@ function SignIn() {
             <div class="progress-container">
               <div class="progress-bar" id="myProgressBar" >0</div>
             </div>
-          <p class="right red">Tính năng này đang bảo trì.</p>
+          <p class="right red">Tính năng này đang bảo trì</p>
       `
       
       document.getElementById('Friend').innerHTML = `
@@ -161,6 +178,11 @@ function SignIn() {
     }
 
   }
+}
+
+function saveLoginInfo(username, password) {
+  const loginInfo = { username, password };
+  localStorage.setItem('loginInfo', JSON.stringify(loginInfo));
 }
 
 function formatTimestamp(timestamp) {
@@ -364,6 +386,7 @@ function SignOut() {
     cancelButtonText: 'Huỷ'
   }).then((result) => {
     if (result.value) {
+      clearLoginInfo();
       Swal.fire(
         'Đăng xuất thành công',
         'Đã đăng xuất.',
@@ -374,6 +397,9 @@ function SignOut() {
       }, 1000);
     }
   })
+}
+function clearLoginInfo() {
+  localStorage.removeItem('loginInfo');
 }
 
 function calculateTotal() {
@@ -461,11 +487,25 @@ function HunqD() {
     const card = document.createElement("div");
     card.classList.add("CardMember");
     card.style.backgroundImage = `url(https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662)`
+    card.addEventListener("click", () => {
+      // Trích xuất và sao chép id vào clipboard
+      const userId = user.id;
+      navigator.clipboard.writeText(userId)
+        .then(() => {
+          Done('Sao chép thành công',`ID ${userId} đã được sao chép vào clipboard.`);
+          // Có thể thêm thông báo hoặc thực hiện các hành động khác ở đây nếu cần
+        })
+        .catch(err => {
+          Fail('Lỗi khi sao chép ID:', err);
+        });
+    });
     // Tạo phần tử ảnh
     const userImage = document.createElement("img");
     userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     userImage.alt = user.name + "-Avatar";
     userImage.classList.add("user-image");
+
+    
 
     // Tạo phần tử .Info để chứa thông tin người dùng
     const userInfoDiv = document.createElement("div");
@@ -507,7 +547,7 @@ function Password() {
       }
     });
     if (password) {
-      window.open(`https://www.messenger.com/t/61551995024526?text=${password}`, '_blank')
+      window.open(`https://www.messenger.com/t/61551995024526?text=ĐMK:${password}`, '_blank')
     }
   })()
 }

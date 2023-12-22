@@ -7,7 +7,7 @@ const jsonData = [
       "id": 61551995024526,
       "point": 22,
       "mess": 10,
-      "pass": "111"
+      "pass": "9999"
 
     },
     {

@@ -126,7 +126,7 @@
                     <div class="progress-container">
                         <div class="progress-bar" id="myProgressBar" style="width: 76%;">22</div>
                     </div>
-                    <p class="right red">Tính năng này đang bảo trì.</p>
+                    <p class="right red">Tính năng này đang bảo trì</p>
                 </div>
             </div>
             <div class="Block Friend" id="Friend">
@@ -156,7 +156,23 @@
                     <p class="right">Cập nhật: 2 ngày trước.</p>
                 </div>
             </div>
-            <div class="Block Downloader">
+            <div class="Block">
+                <h1><i class="fa-regular fa-star"></i> Cài đặt</h1>
+                <div class="Card">
+                    <div class="Setting" onclick="toggleMode()">
+                        <div class="Icon" id="toggle-button">
+                        </div>
+                        <div id="toggle_text"></div>
+                    </div>
+                    <div class="Setting" onclick="IPme()">
+                        <div class="Icon">
+                            IP
+                        </div>
+                        <div id="ipAddress">Nhấn vào đây để xem IP của bạn</div>
+                    </div>
+                </div>
+            </div>
+            <div class="Block Downloader Hidden">
                 <h1><i class="fa-regular fa-circle-down"></i> Tải video trên Facebook</h1>
                 <div class="Card">
                     <p>Cho phép bạn tải Reel, Video trên Facebook</p>
@@ -169,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            <div class="Block ToolKit">
+            <div class="Block ToolKit Hidden">
                 <h1><i class="fa-brands fa-facebook"></i> Facebook ToolKit</h1>
                 <div class="Card">
                     <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
@@ -227,22 +243,7 @@
                 </div>
 
             </div>
-            <div class="Block">
-                <h1><i class="fa-regular fa-star"></i> Cài đặt</h1>
-                <div class="Card">
-                    <div class="Setting" onclick="toggleMode()">
-                        <div class="Icon" id="toggle-button">
-                        </div>
-                        <div id="toggle_text"></div>
-                    </div>
-                    <div class="Setting" onclick="IPme()">
-                        <div class="Icon">
-                            IP
-                        </div>
-                        <div id="ipAddress">Nhấn vào đây để xem IP của bạn</div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 
