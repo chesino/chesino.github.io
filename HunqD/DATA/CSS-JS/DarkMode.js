@@ -14,6 +14,10 @@ if (isMobile) {
 const button = document.getElementById('toggle-button');
 button.addEventListener('click', toggleMode);
 
+const text = document.getElementById('toggle_text');
+
+
+
 
 // Khởi tạo chế độ mặc định và lưu vào local storage (nếu chưa có)
 let mode = parseInt(localStorage.getItem('mode')) || 1;
@@ -35,6 +39,7 @@ function toggleMode() {
 function setMode(mode) {
   switch (mode) {
     case 1:
+      text.innerText = 'Tự động'
       button.style.backgroundColor = '#40c3da';
       button.style.color = '#000';
 
@@ -47,15 +52,16 @@ function setMode(mode) {
       mode1();
       break;
     case 2:
+      text.innerText = 'Chế độ tối'
       button.innerHTML = '<i class="fa-solid fa-moon"></i>';
-      button.style.backgroundColor = '#211e2c';
+      button.style.backgroundColor = '#000';
       button.style.color = '#eee';
 
       // Chạy hàm cho chế độ 2
       mode2();
       break;
     case 3:
-
+      text.innerText = 'Chế độ sáng'
       button.innerHTML = '<i class="fa-solid fa-sun"></i>';
       button.style.backgroundColor = '#f5c85d';
       button.style.color = '#000';

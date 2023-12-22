@@ -41,14 +41,14 @@
             <div class="Logo">
                 <img src="./DATA/IMG/airplane.png" alt="" srcset="">
             </div>
-            <h1>HunqD ToolKit <span id="Version">v1.0</span></h1>
+            <h1 class="Name">HunqD ToolKit <span id="Version">v1.0</span></h1>
             <p id="resultText"></p>
             <div class="Input" id="BoxInput">
-                <label for="searchInput">Tài khoản: <span>Có thể sử dụng Tên hoặc ID.</span></label>
+                <label for="searchInput">Tài khoản <span>Có thể sử dụng Tên hoặc ID.</span></label>
                 <input type="text" id="searchInput" placeholder="Link Facebook của bạn"
                     onkeydown="handleEnter(event, 'passwordInput')">
 
-                <label for="passwordInput">Mật khẩu: <span>Không phải là mật khẩu Facebook của bạn.</span></label>
+                <label for="passwordInput">Mật khẩu <span>Không phải là mật khẩu Facebook của bạn.</span></label>
                 <input type="password" id="passwordInput" placeholder="Mặc định là: 123"
                     onkeydown="handleEnter(event, 'signInButton')">
 
@@ -65,20 +65,196 @@
 
     </div>
 
-    <div id="toggle-button"></div>
+
 
 
     <div class="Result Hidden" id="result">
-        
+        <div class="Head" id="Head">
+            <div class="Avatar">
+                <img src="https://graph.facebook.com/61551995024526/picture?width=9999&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662"
+                    alt="Avatar">
+                <div class="Rank">Fan Cứng</div>
+            </div>
+            <div class="Name">
+                <h1>Hùng Đinh</h1>
+                <h5>ID: 61551995024526 <i
+                        onclick="navigator.clipboard.writeText(61551995024526);Done('Sao chép thành công','ID của bạn là: 61551995024526')"
+                        class="fa-solid fa-copy" aria-hidden="true"></i></h5>
+            </div>
+        </div>
+        <div class="Body">
+            <div class="Block">
+                <h1><i class="fa-regular fa-circle-user"></i> Tài khoản</h1>
+                <div class="Card">
+                    <div class="Setting Recommend" onclick="Password()">
+                        <div class="Icon">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        Đổi mật khẩu
+                    </div>
+                    <div class="Setting" onclick="Warning('Hộp thư','Không có thư mới nào 😶.')">
+                        <div class="Icon">
+                            <i class="fa-solid fa-inbox"></i>
+                        </div>
+                        Hộp thư
+                    </div>
+                    <div class="Setting"
+                        onclick="Warning('Thông tin cá nhân','Hiện tại chưa cho phép chỉnh sửa thông tin cá nhân.')">
+                        <div class="Icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        Thông tin cá nhân
+                    </div>
+                    <div class="Setting" onclick="Warning('Ví','Sắp ra mắt.')">
+                        <div class="Icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        Ví
+                    </div>
+                    <div class="Setting" onclick="SignOut()">
+                        <div class="Icon">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </div>
+                        Đăng xuất
+                    </div>
+                </div>
+            </div>
+            <div class="Block Rank" >
+                <h1><i class="fa-regular fa-heart"></i> Điểm tương tác</h1>
+                <div class="Card" id="Rank">
+                    <p>Bạn cần 8 điểm nữa để trở thành Fan Pro <strong>[22/30]</strong></p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="myProgressBar" style="width: 76%;">22</div>
+                    </div>
+                    <p class="right red">Tính năng này đang bảo trì.</p>
+                </div>
+            </div>
+            <div class="Block Friend" id="Friend">
+                <h1><i class="fa-regular fa-user"></i> Kết nối</h1>
+                <div class="Card Flex">
+                    <div class="One">
+                        <div class="Avatar">
+                            <img src="https://graph.facebook.com/61551995024526/picture?width=9999&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662"
+                                alt="Avatar">
+                        </div>
+                        <div class="Avatar">
+                            <img src="https://graph.facebook.com/61551995024526/picture?width=9999&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662"
+                                alt="Avatar">
+                        </div>
+                    </div>
+                    <div class="Two">
+                        <p>Bạn đã kết nối với Hùng</p>
+                        <h1>11 ngày 2 tháng</h1>
+                        <p>07:00:00 12/10/2023</p>
+                    </div>
+                </div>
+            </div>
+            <div class="Block Mess">
+                <h1><i class="fa-regular fa-message"></i> Tin nhắn</h1>
+                <div class="Card" id="Mess">
+                    <p>Bạn và Hùng đã nhắn tin được <strong> 10</strong>tin nhắn</p>
+                    <p class="right">Cập nhật: 2 ngày trước.</p>
+                </div>
+            </div>
+            <div class="Block Downloader">
+                <h1><i class="fa-regular fa-circle-down"></i> Tải video trên Facebook</h1>
+                <div class="Card">
+                    <p>Cho phép bạn tải Reel, Video trên Facebook</p>
+                    <div class="SocialToolKit">
+                        <label for="">Link video, Reel
+                            <span>Sử dụng link Facebook hoặc ID Facebook.</span>
+                        </label>
+                        <input type="text" placeholder="Link bài viết">
+                        <button onclick="Warning('Sắp ra mắt','Tính năng này sắp ra mắt.')">Tải xuống ngay</button>
+                    </div>
+                </div>
+            </div>
+            <div class="Block ToolKit">
+                <h1><i class="fa-brands fa-facebook"></i> Facebook ToolKit</h1>
+                <div class="Card">
+                    <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
+                    <h5 class="red">Hiện tại tính năng này chưa hoạt động.</h5>
+                    <div class="SocialToolKit">
+                        <label for="">Chọn dịch vụ</label>
+                        <select id="selectService">
+                            <option value="0">Người theo dõi</option>
+                            <option value="1">Lượt thích bài viết</option>
+                            <option value="2">Lượt xem Story</option>
+                        </select>
+                        <div class="S1">
+                            <label for="">Tài khoản
+                                <span>Sử dụng link Facebook hoặc ID Facebook.</span>
+                            </label>
+                            <input type="text" placeholder="Link bài viết">
+                        </div>
+
+                        <div class="S2">
+                            <label for="">Link bài viết
+                                <span>Sử dụng Link bài viết hoặc Link Story.</span>
+                            </label>
+                            <input type="text" placeholder="Link bài viết">
+                        </div>
+                        <label for="">Số lượng <span>Thấp nhất 100 và cao nhất 10,000 mỗi lần.</span></label>
+                        <input type="number" id="quantityInput">
+
+                        <h5>Tổng số tiền bạn cần thanh toàn là</h5>
+                        <h1 id="totalCost">0đ</h1>
+
+                        <p id="discountMessage"></p>
+
+                        <label for="">Mã giảm giá</label>
+                        <input type="text" id="discountCode">
+
+                        <label for="">Chọn thương thức thanh toán</label>
+                        <select id="selectPaymentMethod">
+                            <option value="0">HunqD Point</option>
+                            <option value="1">Ví MOMO</option>
+                            <option value="2">Chuyển khoản ngân hàng</option>
+                        </select>
+                        <button onclick="Warning('Sắp ra mắt','Tính năng này sắp ra mắt !')">Thanh toán ngay</button>
+                    </div>
+                </div>
+            </div>
+            <div class="Block Question">
+                <h1><i class="fa-regular fa-circle-question"></i> Gửi câu hỏi</h1>
+                <div class="Card">
+                    <p>Cho phép bạn gửi tin nhắn ẩn danh hoặc công khai cho Hùng.</p>
+                    <textarea name="SendMess" id="SendMess" rows="5" placeholder="Hãy đặt câu hỏi"></textarea>
+                    <button onclick="SendMess()">Gửi</button>
+                    <h2>OR</h2>
+                    <p class="Tips">Để Hùng chủ động nhắn tin tới bạn hãy sao chép ID và gửi bằng NGL 🧐.</p>
+                    <iframe src="https://ngl.link/ngl_kakashi" frameborder="0"></iframe>
+                </div>
+
+            </div>
+            <div class="Block">
+                <h1><i class="fa-regular fa-star"></i> Cài đặt</h1>
+                <div class="Card">
+                    <div class="Setting" onclick="toggleMode()">
+                        <div class="Icon" id="toggle-button">
+                        </div>
+                        <div id="toggle_text"></div>
+                    </div>
+                    <div class="Setting" onclick="IPme()">
+                        <div class="Icon">
+                            IP
+                        </div>
+                        <div id="ipAddress">Nhấn vào đây để xem IP của bạn</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <ul class="user-list" id="userList"></ul>
 
 
 </body>
 
-<script src="/DATA/DarkMode.js"></script>
+
 <script src="./DATA/Friends.js"></script>
 <script src="./DATA/CSS-JS/Script.js"></script>
+<script src="./DATA/CSS-JS/DarkMode.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
 
 

@@ -35,7 +35,6 @@ function SignIn() {
   const passwordInput = document.getElementById('passwordInput').value;
   const resultDiv = document.getElementById('result');
   const CheckFriend = document.getElementById('CheckFriend');
-  const resultText = document.getElementById('resultText');
   const BoxInput = document.getElementById('BoxInput');
 
   const result = searchByNameOrID(searchInput);
@@ -89,114 +88,47 @@ function SignIn() {
     BoxInput.classList.add('Hidden');
     resultText.innerHTML = 'Đang đăng nhập  <i class="fa-solid fa-circle-notch"></i>';
     setTimeout(() => {
-      resultDiv.innerHTML = `
-      <div class="Head">
-            <div class="Avatar">
-              <img src="${img}" alt="Avatar" >
-              <div class="Rank">${titleRank}</div>
+      document.getElementById('Head').innerHTML = `
+          <div class="Avatar">
+            <img src="${img}" alt="Avatar" >
+            <div class="Rank">${titleRank}</div>
+          </div>
+          <div class="Name">
+              <h1>${result.name}</h1>
+              <h5>ID: ${result.id} <i onclick="navigator.clipboard.writeText(${result.id});Done('Sao chép thành công','ID của bạn là: ${result.id}')" class="fa-solid fa-copy"></i></h5>
+          </div>
+      `
+      document.getElementById('Rank').innerHTML = `
+          <p>Bạn cần ${rank - point + 1} điểm nữa để trở thành ${nextRank} [${point}/${rank + 1}].</p>
+            <div class="progress-container">
+              <div class="progress-bar" id="myProgressBar" >0</div>
             </div>
-            <div class="Name">
-                <h1>${result.name}</h1>
-                <h5>ID: ${result.id} <i onclick="navigator.clipboard.writeText(${result.id});Done('Sao chép thành công','ID của bạn là: ${result.id}')" class="fa-solid fa-copy"></i></h5>
+          <p class="right red">Tính năng này đang bảo trì.</p>
+      `
+      
+      document.getElementById('Friend').innerHTML = `
+        <h1><i class="fa-regular fa-user"></i> Kết nối</h1>
+        <div class="Card Flex" id>
+            <div class="One">
+                <div class="Avatar">
+                    <img src="https://graph.facebook.com/61551995024526/picture?width=9999&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662"
+                        alt="Avatar">
+                </div>
+                <div class="Avatar">
+                    <img src="${img}" alt="Avatar" >
+                </div>
+            </div>
+            <div class="Two">
+                <p>Bạn đã kết nối với Hùng</p>
+                <h1>${formattedTime2}</h1>
+                <p>${formattedTime}</p>
             </div>
         </div>
-        <div class="Body">
-            <div class="Card">
-                <h1>Điểm tương tác</h1>
-                <p>Bạn cần ${rank - point + 1} điểm nữa để trở thành ${nextRank} [${point}/${rank + 1}].</p>
-                <div class="progress-container">
-                    <div class="progress-bar" id="myProgressBar"></div>
-                </div>
-                <p class="right red">Tính năng này đang bảo trì.</p>
-            </div>
-            <div class="Card Flex">
-                <div class="One">
-                    <div class="Avatar">
-                        <img src="https://graph.facebook.com/61551995024526/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662" alt="Avatar" >
-                    </div>
-                    <div class="Avatar">
-                        <img src="${img}" alt="Avatar" >
-                    </div>
-                </div>
-                <div class="Two">
-                    <p>Bạn đã kết nối với Hùng</p>
-                    <h1>${formattedTime2}</h1>
-                    <p>${formattedTime}</p>
-                </div>
-            </div>
-            <div class="Card">
-                    <h1>Tin nhắn</h1>
-                    <p>${Mess}</p>
-                    <p class="right">Cập nhật: ${UpdateTime}.</p>
-            </div>
-            <div class="Card">
-              <h1>Tải video trên Facebook</h1>
-              <p>Cho phép bạn tải Reel, Video trên Facebook</p>
-              <div class="SocialToolKit">
-                  <label for="">Link video, Reel
-                      <span>Sử dụng link Facebook hoặc ID Facebook.</span>
-                  </label>
-                  <input type="text" placeholder="Link bài viết">
-                  <button onclick="Warning('Sắp ra mắt','Tính năng này sắp ra mắt.')">Tải xuống ngay</button>
-              </div>
-            </div>
-            <div class="Card">
-                <h1>Facebook ToolKit</h1>
-                <p>Tăng lượt theo dõi, thích, lượt xem,...</p>
-                <h5 class="red">Hiện tại tính năng này chưa hoạt động.</h5>
-                <div class="SocialToolKit">
-                    <label for="">Chọn dịch vụ</label>
-                    <select id="selectService">
-                        <option value="0">Người theo dõi</option>
-                        <option value="1">Lượt thích bài viết</option>
-                        <option value="2">Lượt xem Story</option>
-                    </select>
-                    <div class="S1">
-                        <label for="">Tài khoản
-                            <span>Sử dụng link Facebook hoặc ID Facebook.</span>
-                        </label>
-                        <input type="text" placeholder="Link bài viết">
-                    </div>
-            
-                    <div class="S2">
-                        <label for="">Link bài viết
-                            <span>Sử dụng Link bài viết hoặc Link Story.</span>
-                        </label>
-                        <input type="text" placeholder="Link bài viết">
-                    </div>
-                    <label for="">Số lượng <span>Thấp nhất 100 và cao nhất 10,000 mỗi lần.</span></label>
-                    <input type="number" id="quantityInput">
-            
-                    <h5>Tổng số tiền bạn cần thanh toàn là</h5>
-                    <h1 id="totalCost">0đ</h1>
-            
-                    <p id="discountMessage"></p>
-            
-                    <label for="">Mã giảm giá</label>
-                    <input type="text" id="discountCode">
-            
-                    <label for="">Chọn thương thức thanh toán</label>
-                    <select id="selectPaymentMethod">
-                        <option value="0">HunqD Point</option>
-                        <option value="1">Ví MOMO</option>
-                        <option value="2">Chuyển khoản ngân hàng</option>
-                    </select>
-                    <button onclick="Warning('Sắp ra mắt','Tính năng này sắp ra mắt !')">Thanh toán ngay</button>
-              </div>
-            </div>
-            <div class="Card Question">
-                <h1>Gửi câu hỏi</h1>
-                <p>Cho phép bạn gửi tin nhắn ẩn danh hoặc công khai cho Hùng.</p>
-                <textarea name="SendMess" id="SendMess" rows="5" placeholder="Hãy đặt câu hỏi"></textarea>
-                <button onclick="SendMess()">Gửi</button>
-                <h2>OR</h2>
-                <p class="Tips">Để Hùng chủ động nhắn tin tới bạn hãy sao chép ID và gửi bằng NGL 🧐.</p>
-                <iframe src="https://ngl.link/ngl_kakashi" frameborder="0"></iframe>
-            </div>
-           
-      </div>
-      `;
-
+      `
+      document.getElementById('Mess').innerHTML = `
+        <p>${Mess}</p>
+        <p class="right">Cập nhật: ${UpdateTime}.</p>
+      `
 
       CheckFriend.classList.add('Hidden');
       resultDiv.classList.remove('Hidden');
@@ -205,7 +137,6 @@ function SignIn() {
 
       ToolKit();
       DoneSignIn(`Tài khoản: ${result.name}`)
-
       setTimeout(() => {
         move(point, rank);
       }, 500);
@@ -378,6 +309,13 @@ function Warning(T1, T2) {
     'warning'
   )
 }
+function Info(T1, T2) {
+  Swal.fire(
+    T1,
+    T2,
+    'info'
+  )
+}
 
 
 function SendMess() {
@@ -389,9 +327,6 @@ function SendMess() {
   }
 
 }
-
-
-
 
 function SignUp() {
   Swal.fire({
@@ -412,6 +347,31 @@ function SignUp() {
         'success',
         window.open('https://www.facebook.com/profile.php?id=61551995024526', '_blank')
       )
+    }
+  })
+}
+
+function SignOut() {
+  Swal.fire({
+    title: 'Đăng xuất',
+    text: 'Bạn có muốn đăng xuất ngay bây giờ không ?',
+    icon: 'warning',
+
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Đăng Xuất',
+    cancelButtonText: 'Huỷ'
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire(
+        'Đăng xuất thành công',
+        'Đã đăng xuất.',
+        'success',
+      )
+      setTimeout(() => {
+        location.reload()
+      }, 1000);
     }
   })
 }
@@ -504,7 +464,7 @@ function HunqD() {
     // Tạo phần tử ảnh
     const userImage = document.createElement("img");
     userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-    userImage.alt = user.name + "'s Image";
+    userImage.alt = user.name + "-Avatar";
     userImage.classList.add("user-image");
 
     // Tạo phần tử .Info để chứa thông tin người dùng
@@ -529,4 +489,45 @@ function HunqD() {
     // Thêm phần tử .card vào phần tử div
     userListElement.appendChild(card);
   });
+}
+
+function Password() {
+  (async () => {
+    const { value: password } = await Swal.fire({
+      title: "Đổi mật khẩu",
+      text: "Vì lý do xác minh danh tính, bạn sẽ gửi mật khẩu mới qua Messenger cho tôi bằng cách thủ công.",
+      input: "password",
+      inputLabel: "Password",
+      inputPlaceholder: "Nhập mật khẩu mới",
+      confirmButtonText: 'Xác nhận',
+      inputAttributes: {
+        maxlength: "10",
+        autocapitalize: "off",
+        autocorrect: "off"
+      }
+    });
+    if (password) {
+      window.open(`https://www.messenger.com/t/61551995024526?text=${password}`, '_blank')
+    }
+  })()
+}
+
+var IP = 0;
+
+function IPme() {
+  if (IP === 0) {
+    IP++;
+    (async () => {
+      const ipAPI = "//api.ipify.org?format=json";
+      const response = await fetch(ipAPI);
+      const data = await response.json();
+      document.getElementById('ipAddress').innerText = data.ip;
+    })()
+    Warning('Địa chỉ IPv4', 'Đây là địa chỉ IP của bạn. Nó giống như địa chỉ nhà của bạn vậy nên là hãy bảo mật bằng cách không chia sẻ cho bất cứ ai và sử dụng phần mềm VPN (1.1.1.1, NordVPN, ExpressVPN ) khi truy cập các trang web.')
+
+  } else {
+    document.getElementById('ipAddress').innerText = 'Đã ẩn IP - Nhấn để xem';
+    IP = 0;
+  }
+
 }

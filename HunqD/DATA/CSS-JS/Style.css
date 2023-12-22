@@ -14,8 +14,15 @@
     --IBox: #ddd;
     --ITBox: #000;
     --BBox: #fff;
-    --Card: #fff;
-    --TCard: #000;
+    --Block: #fff;
+    --TBlock: #000;
+    --Card: #ffffff;
+    --TCard: #000000;
+    --Setting: #ececec;
+    --Setting2: #afafaf;
+    --TSetting: #000;
+    --Icon: #fffcfc;
+    --TIcon: #000;
     --Progress: #f1f1f1;
 }
 
@@ -26,17 +33,24 @@ body {
 
 
 .dark-mode {
-    --BG: #1f1f1f;
+    --BG: #000000;
     --CheckFriend: #000000;
-    --Box: #1f1f1f;
+    --Box: #232323;
     --TBox: #fff;
-    --T2Box: rgba(177, 177, 177, 0.3);
-    --T3Box: #9e0000;
-    --IBox: #111;
+    --T2Box: #ffffff;
+    --T3Box: #696969;
+    --IBox: #383838;
     --ITBox: #fff;
     --BBox: #646464;
-    --Card: #000000;
+    --Block: #232323;
+    --TBlock: #fff;
+    --Card: #232323;
     --TCard: #fff;
+    --Setting: #1b1b1b;
+    --Setting2: #0f0f0f;
+    --TSetting: #fff;
+    --Icon: #000;
+    --TIcon: #fff;
     --Progress: #525252;
 }
 
@@ -48,18 +62,7 @@ button {
     display: none !important;
 }
 
-#toggle-button {
-    display: none !important;
-    position: fixed;
-    top: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
-}
+
 
 .CheckFriend {
     z-index: 99;
@@ -84,9 +87,13 @@ button {
     overflow: hidden;
 }
 
+.Box h1.Name span {
+    color: var(--T3Box);
+}
+
 .DarkModeBtn {
-    background-color: var(--Card);
-    color: var(--TCard);
+    background-color: var(--Block);
+    color: var(--TBlock);
     font-size: 20px;
     display: block;
     margin-left: auto;
@@ -120,11 +127,13 @@ button {
 .Input {
     text-align: center;
     padding: 0 20px;
+    margin-top: 20px;
 }
 
 .Input label {
     color: var(--T2Box);
     font-size: 16px;
+    font-weight: bold;
     display: block;
     margin-bottom: 8px;
     /* Add spacing between label and input */
@@ -140,13 +149,14 @@ button {
 
 .Input input {
     color: var(--ITBox);
-    background-color: transparent;
+    background-color: var(--IBox);
     display: block;
     font-size: 16px;
+    font-weight: bold;
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 2px solid var(--IBox);
+    border: none;
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -215,7 +225,7 @@ button {
 }
 
 #resultText {
-    color: #ff0000;
+    color: var(--T3Box);
     margin: 5px;
     font-size: 14px;
 }
@@ -295,7 +305,43 @@ button {
     margin: 20px 0;
 }
 
-.Card {
+.Block {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.Card.Flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Block img {
+    max-width: 100%;
+}
+
+.Block h1 {
+    text-transform: capitalize;
+    font-size: 20px;
+    margin-bottom: 2px;
+    color: var(--TBlock);
+}
+
+.Block p {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.Block p.right {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.Block .Card {
     text-align: left;
     color: var(--TCard);
     background-color: var(--Card);
@@ -305,33 +351,39 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.Card.Flex {
+.Block .Card .Setting {
+    cursor: pointer;
+    color: var(--TSetting);
+    background-color: var(--Setting);
+    margin: 5px 0;
+    padding: 5px;
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.Card img {
-    max-width: 100%;
-}
-
-.Card h1 {
-    text-transform: capitalize;
-    font-size: 24px;
-    margin-bottom: 2px;
-    color: var(--BG);
-}
-
-.Card p {
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.Card p.right {
-    font-size: 12px;
+    gap: 8px;
+    font-size: 18px;
     font-weight: bold;
-    text-align: right;
-    margin-right: 10px;
+    border-radius: 10px;
+
+}
+
+.Block .Card .Setting.Recommend:not(:hover) {
+    color: #ff0000;
+}
+
+
+.Block .Card .Setting:hover {
+    background-color: var(--Setting2);
+}
+
+.Block .Card .Setting .Icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    color: var(--TIcon);
+    background-color: var(--Icon);
+    border-radius: 50%;
 }
 
 .red {
@@ -557,7 +609,7 @@ button {
     width: calc(50% - 5px);
     box-sizing: border-box;
     border: 1px solid #ddd;
-    background-color: var(--Card);
+    background-color: var(--Block);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
