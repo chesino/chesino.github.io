@@ -501,7 +501,7 @@ function Password() {
       inputPlaceholder: "Nhập mật khẩu mới",
       confirmButtonText: 'Xác nhận',
       inputAttributes: {
-        maxlength: "10",
+        maxlength: "20",
         autocapitalize: "off",
         autocorrect: "off"
       }
