@@ -603,6 +603,7 @@ button {
 }
 
 .CardMember {
+    cursor: pointer;
     background-size: cover;
     background-position: center;
     width: calc(50% - 5px);
