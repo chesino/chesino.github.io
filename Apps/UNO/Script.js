@@ -45,19 +45,14 @@ function toggleENAvatar() {
 
         // Lặp qua từng phần tử
         elements.forEach(function (element) {
-            // Tách các class thành một mảng
-            var classes = element.className.split(' ');
-
-            // Lọc ra class chỉ có tên là "Tally"
-            var filteredClasses = classes.filter(function (className) {
-                return className === 'Tally';
-            });
-
-            // Gán lại class cho phần tử
-            element.className = filteredClasses.join(' ');
+            element.classList.add("Black");
         });
     } else {
         btnENAvatar.classList.add("active");
+        var elements = document.querySelectorAll('.Tally');
+        elements.forEach(function (element) {
+            element.classList.remove("Black");
+        });
     }
 
     ENAvatar = !ENAvatar;
@@ -100,6 +95,18 @@ function addTally(itemName, quantity) {
 
         if (itemName == 'HunqD' || itemName == 'Hùng') {
             newTally.classList.add('HunqD');
+        }
+        if (itemName == 'Hiền') {
+            newTally.classList.add('Hien');
+        }
+        if (itemName == 'Thiện') {
+            newTally.classList.add('Thien');
+        }
+        if (itemName == 'Hoa') {
+            newTally.classList.add('Hoa');
+        }
+        if (itemName == 'Hoàng') {
+            newTally.classList.add('Hoang');
         }
 
 
