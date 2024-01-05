@@ -76,7 +76,7 @@ const apps = [
     "os": "iOS",
     "version": "1.16.6",
     "size": "28,15MB",
-    "description": "Giả lập.",
+    "description": "Giả lập PSP.",
     "downloadLink": "https://download1979.mediafire.com/awqz7smn709gXuiWLYh69vClpivW07xcw-Z_Bp-xxORodetlUqoxqXZtXArA9LGsDThN4BQQQ7IJFb7LykmzWZrtI8scwQHIrE_RJ86z8vp9-Or50pYrefK-E1YvLyKn6qUFFU3TkBGJ1Bfj4OlEWhApAtTm4NepXUwSeDd2z01HhQ/dz3762jj89dwe8l/PPSSPP_v1.16.6.ipa"
   },
   {
