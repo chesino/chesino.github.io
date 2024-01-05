@@ -122,7 +122,7 @@ function SignIn() {
             </div>
           <p class="right red">Tính năng này đang bảo trì</p>
       `
-      
+
       document.getElementById('Friend').innerHTML = `
         <h1><i class="fa-regular fa-user"></i> Kết nối</h1>
         <div class="Card Flex" id>
@@ -477,56 +477,125 @@ function ToolKit() {
     calculateTotal();
   });
 }
-
 function HunqD() {
   const userListElement = document.getElementById("userList");
 
-  // Lặp qua mỗi đối tượng người dùng trong dữ liệu JSON và thêm vào danh sách
   jsonData[0].forEach(user => {
-    // Tạo phần tử .card
     const card = document.createElement("div");
     card.classList.add("CardMember");
-    card.style.backgroundImage = `url(https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662)`
+    card.style.backgroundImage = `url(https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662)`;
     card.addEventListener("click", () => {
-      // Trích xuất và sao chép id vào clipboard
       const userId = user.id;
       navigator.clipboard.writeText(userId)
         .then(() => {
-          Done('Sao chép thành công',`ID ${userId} đã được sao chép vào clipboard.`);
-          // Có thể thêm thông báo hoặc thực hiện các hành động khác ở đây nếu cần
+          alert('Sao chép thành công', `ID ${userId} đã được sao chép vào clipboard.`);
         })
         .catch(err => {
-          Fail('Lỗi khi sao chép ID:', err);
+          alert('Lỗi khi sao chép ID:', err);
         });
     });
-    // Tạo phần tử ảnh
+
     const userImage = document.createElement("img");
     userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
     userImage.alt = user.name + "-Avatar";
     userImage.classList.add("user-image");
 
-    
-
-    // Tạo phần tử .Info để chứa thông tin người dùng
     const userInfoDiv = document.createElement("div");
     userInfoDiv.classList.add("Info");
     userInfoDiv.appendChild(userImage);
-    // Thêm thông tin người dùng vào phần tử .Info
+
     Object.keys(user).forEach(key => {
-      if (key !== 'point' && key !== 'timestamp' && key !== 'profileURL' && key !== 'mess' && key !== 'pass') {
+      if (key !== 'point' && key !== 'profileURL' && key !== 'mess' && key !== 'pass' && key !== 'id') {
         const infoItem = document.createElement("div");
-
-        // Chuyển đổi timestamp thành định dạng ngày giờ
-        const value = key === 'timestamp' ? new Date(user[key] * 1000).toLocaleString() : user[key];
-
+        const value = key === 'timestamp' ? new Intl.DateTimeFormat('vi-VN', {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          timeZone: 'asia/ho_chi_minh' // Đặt múi giờ theo mong muốn
+        }).format(new Date(user[key] * 1000)) : user[key];
         infoItem.innerHTML = `${value}`;
         userInfoDiv.appendChild(infoItem);
       }
     });
 
     card.appendChild(userInfoDiv);
+    userListElement.appendChild(card);
+  });
+}
 
-    // Thêm phần tử .card vào phần tử div
+function sortUsers(sortType) {
+  const sortedData = [...jsonData[0]];
+
+  switch (sortType) {
+    case 'nameAZ':
+      sortedData.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case 'nameZA':
+      sortedData.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case 'timestampNew':
+      sortedData.sort((a, b) => b.timestamp - a.timestamp);
+      break;
+    case 'timestampOld':
+      sortedData.sort((a, b) => a.timestamp - b.timestamp);
+      break;
+    case 'messHigh':
+      sortedData.sort((a, b) => b.mess - a.mess);
+      break;
+    case 'messLow':
+      sortedData.sort((a, b) => a.mess - b.mess);
+      break;
+    case 'pointHigh':
+      sortedData.sort((a, b) => b.point - a.point);
+      break;
+    case 'pointLow':
+      sortedData.sort((a, b) => a.point - b.point);
+      break;
+    default:
+      break;
+  }
+
+  const userListElement = document.getElementById("userList");
+  userListElement.innerHTML = "";
+
+  sortedData.forEach(user => {
+    const card = document.createElement("div");
+    card.classList.add("CardMember");
+    card.style.backgroundImage = `url(https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662)`;
+    card.addEventListener("click", () => {
+      const userId = user.id;
+      navigator.clipboard.writeText(userId)
+        .then(() => {
+          alert('Sao chép thành công', `ID ${userId} đã được sao chép vào clipboard.`);
+        })
+        .catch(err => {
+          alert('Lỗi khi sao chép ID:', err);
+        });
+    });
+
+    const userImage = document.createElement("img");
+    userImage.src = `https://graph.facebook.com/${user.id}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+    userImage.alt = user.name + "-Avatar";
+    userImage.classList.add("user-image");
+
+    const userInfoDiv = document.createElement("div");
+    userInfoDiv.classList.add("Info");
+    userInfoDiv.appendChild(userImage);
+
+    Object.keys(user).forEach(key => {
+      if (key !== 'point' && key !== 'profileURL' && key !== 'mess' && key !== 'pass') {
+        const value = key === 'timestamp' ? new Date(user[key] * 1000).toLocaleString() : user[key];
+        const infoItem = document.createElement("div");
+        infoItem.innerHTML = value;
+        userInfoDiv.appendChild(infoItem);
+      }
+    });
+
+    card.appendChild(userInfoDiv);
     userListElement.appendChild(card);
   });
 }

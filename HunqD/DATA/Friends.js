@@ -16,7 +16,7 @@ const jsonData = [
       "timestamp": 1697068800,
       "id": 61551995024526,
       "point": 40,
-      "mess": 1000,
+      "mess": 0,
       "pass": ""
     },
     {
