@@ -16,9 +16,12 @@
 ! 
 ! -----------------------General advert blocking filters-----------------------!
 ! *** easylist:easylist/easylist_general_block.txt ***
+
+! 2024-01-09 https://www2.vuaphimmoi1.net
 ||www2.vuaphimmoi1.net/wp-content/themes/halimmovies/media/img/item_bgg.gif$image
 www2.vuaphimmoi1.net##.popUpBannerBox
 
+! 2024-01-09 https://motchill.uk
 ||motchill.uk/i9.gif$image
 motchill.uk##.closecf
 ||motchill.uk/i9.gif$image
@@ -27,8 +30,64 @@ motchill.uk###star
 motchill.uk###div_average
 ||motchill.uk/motchill.png$image
 motchill.uk##.mt-3.video-p-first
-motchill.uk##.myui_custom_header
-motchill.uk##div.clearfix.myui-panel-bg.myui-panel:nth-of-type(3)
-motchill.uk##div.clearfix.myui-panel-bg.myui-panel:nth-of-type(2)
 motchill.uk##.clearfix.myui-foot
 ||motchill.uk/i9.gif$image
+
+! 2024-01-09 https://tvhayh.org
+||dataqq.net/ads/385x60-i9bet.gif$image
+
+! 2024-01-09 https://tvhay.xyz
+||tvhay.xyz/ads/dt/i9bet/728-x-60.gif$image
+||tvhay.xyz/ads/yylive/728x60px.gif$image
+||tvhay.xyz/ads/yylive/980x90px.gif$image
+
+/www.i9bet166.com
+||bf.333xbet.com/18881999/video888.mp4$media
+/bf.333xbet.com/18881999/video888.mp4$media
+
+! 2024-01-09 https://www2.phimmoivl.net
+www2.phimmoivl.net##.popUpBannerBox
+||www.facebook.com/v2.6/plugins/comments.php?app_id=3605038506481723&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df200a45ca355c34%26domain%3Dwww2.phimmoivl.net%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fwww2.phimmoivl.net%252Ff1d3f1fb7e4fe38%26relation%3Dparent.parent&color_scheme=dark&container_width=524&height=100&href=https%3A%2F%2Fwww2.phimmoivl.net%2Fxem-phim%2Fthieu-nien-minh-long-tap-1&locale=vi_VN&numposts=10&order_by=reverse_time&sdk=joey&version=v2.6&width=$subdocument
+www2.phimmoivl.net##div.sbox:nth-of-type(6)
+
+www2.phimmoivl.net###comments
+www2.phimmoivl.net##[href="javascript:hide_float()"]
+www2.phimmoivl.net###container-ads > button
+www2.phimmoivl.net##[href="javascript:hide_floatx()"]
+
+! 2024-01-09 https://animevietsub.io
+||lh3.googleusercontent.com/KruwK_s_smf0WlmToOydGRLCOXgg7_GCs_ASqxRoW3p5-nk8CKQPLpYS8_NdZvQvVBjuD8n89OJPz6SwODbTsLPyRz1wisJ53ZYLGjKfnUZzxCa6p14zqPgBooE=s0$image
+||lh3.googleusercontent.com/mjaT-RPkoK18ZpsioZUzrpjZCkgEFAtScHe1fzVxynO9gAHx41KovZsLzgXxqwfcGU52p0oiPPcGLP3VKQpl9lBeu5JrIfM89Us6a5CjcbYFi-42bOwYxTd2dLY3=s0$image
+||lh3.googleusercontent.com/rxpqnLMZDn7XxzgdT8LZI7VULvveC4uz_nzvyOWyGDff1FgG-vcWZ3LqGBsx_JgZnz9qxdkaFigZnBpQ9PLT4pizsyenPP7ZcAJsF35UDvoGXdUuel_oxsMqHS4r=s0$image
+||media.adop.asia/uploads/2024/01/06/fly-moi-1699343940-1704502347.png$image
+animevietsub.io##.aanetwork-flyicon-btnclose-16
+||media.adop.asia/uploads/2024/01/05/giam40-1704424553.png$image
+##div.aanetwork-flyicon-16
+||lh3.googleusercontent.com/vxCjL0BkaghsXXxFYYGNq3txvjwElcxPOr49BdbwGUdw0aJoHFMHsVI7aKCx_jaGaRQjN_qXTFZUnN6UI0TxxBPcwkW8B5Nx4Nc3DXPvwlIhR_ctEbZ8VpfsjiM=s0$image
+||cdn.animevietsub.io/data/poster/2023/09/29/animevsub-Qf9u3L0E8T.jpeg$image
+animevietsub.io##.announcement
+animevietsub.io###watch-block .schedule-title-main
+animevietsub.io##.title.fbcmt
+animevietsub.io##main > .fbcmt
+animevietsub.io###mv-keywords
+animevietsub.io##.notif-300 > div > center
+animevietsub.io##section.Wdgt:nth-of-type(3)
+animevietsub.io##.Footer
+animevietsub.io##[href="javascript:hide_catfix()"]
+animevietsub.io##.alert-info.alert
+
+! 2024-01-09 https://motchill.vn
+motchill.vn###mp-preload-popup-overlay
+||motchill.vn/storage/files/banner-muaview.gif$image
+motchill.vn##.film-note
+motchill.vn###catfish > div
+##div#catfish
+||www.facebook.com/v16.0/plugins/comments.php?app_id=1074433552938164&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df24c7eb9f7d68c8%26domain%3Dmotchill.vn%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fmotchill.vn%252Ffe56802bb7f2e%26relation%3Dparent.parent&color_scheme=light&container_width=899&height=100&href=https%3A%2F%2Fmotchill.vn%2Fphim%2Fcau-chuyen-luc-nua-dem-169920365704246-full-vietsub&locale=en_US&numposts=10&order_by=reverse_time&sdk=joey&version=v16.0&width=899$subdocument
+motchill.vn##.tags
+motchill.vn##.keywords > h4
+##div#mp-comments
+
+! 2024-01-09 https://motchill.uk
+motchill.uk##.popUpBannerBox
+
+

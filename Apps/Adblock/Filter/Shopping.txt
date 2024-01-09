@@ -1,0 +1,30 @@
+[Adblock Plus 2.0]
+! Version: 202401091627
+! Title: EasyList
+! Last modified: 09 Jan 2024 16:27 UTC
+! Expires: 4 days (update frequency)
+! *** easylist:template_header.txt ***
+! 
+! Please report any unblocked adverts or problems
+! in the forums (https://forums.lanik.us/)
+! or via e-mail (easylist@protonmail.com).
+! 
+! Homepage: https://easylist.to/
+! Licence: https://easylist.to/pages/licence.html
+! GitHub issues: https://github.com/easylist/easylist/issues
+! GitHub pull requests: https://github.com/easylist/easylist/pulls
+! 
+! -----------------------General advert blocking filters-----------------------!
+! *** easylist:easylist/easylist_general_block.txt ***
+
+/https://shopee.vn/
+/https://shope.ee/
+##a[href^="https://shope.ee/"]
+
+/https://www.lazada.vn/
+/https://lzd.zone/
+##a[href^="https://lzd.zone/"]
+
+/https://goink.me/
+/https://goink.me/stats/
+##a[href^="https://goink.me/"]
