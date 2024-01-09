@@ -15,7 +15,9 @@ header {
     text-align: center;
     padding: 5px;
 }
-
+main {
+    padding-bottom: 20px;
+}
 .Step {
     max-width: 100%;
     padding: 20px;
@@ -30,6 +32,10 @@ header {
 .Step p {
     margin: 10px 0;
 }
+.Step .red {
+    color: red;
+    font-weight: bold;
+}
 .Step ul {
     padding: 0 20px;
 }
@@ -40,7 +46,7 @@ header {
     display: block;
     width: 100%;
     border-radius: 6px;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 .Step img.min {
     width: 40%;
@@ -56,8 +62,9 @@ header {
     gap: 10px;
 }
 .Btn button {
+    color: #000;
     cursor: pointer;
-    background-color: #c4c4c4;
+    background-color: #39a6ff;
     font-size: 18px;
     padding: 10px ;
     border-radius: 5px;
