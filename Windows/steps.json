@@ -1,0 +1,48 @@
+[
+    {
+        "head": "Chào mừng bạn đến với Chesino Auto Windows",
+        "text": "Bạn muốn cài lại Windows hay cài đặt phần mềm tự động ?\nNếu bạn cài lại Windows hãy sử dụng thêm điện thoại và quét mã QR dưới để dễ dàng hơn nhé.",
+        "img": "./IMG/QRWeb.png",
+        "btns": [
+            {
+                "label": "Bắt đầu",
+                "action": 3
+            }
+        ],
+        "actionbtn": 3
+    },
+    {
+        "head": "Bạn đã có bộ cài của Chesino Auto Windows chưa ?",
+        "text": "Bộ cài Chesino Auto Windows giúp bạn cài Windows cũng như phần mềm nhanh chóng. Hiện tại có 2 bộ cài:",
+        "ul": [
+            "Chesino AW 1: Phần mềm boot Anhdv, Windows 10-11 và các phần mềm cơ bản [2.7Gb].",
+            "Chesino AW 2: Chỉ các phần mềm cơ bản [380Mb]."
+        ],
+        "btns": [
+            {
+                "label": "Chesino AW 1",
+                "action": 3
+            },
+            {
+                "label": "Chesino AW 2",
+                "action": 4
+            },
+            {
+                "label": "Tôi đã tải rồi",
+                "action": 5
+            }
+        ],
+        "actionbtn": 3
+    },
+    {
+        "head": "Bây giờ hãy giải nén bộ cài như hình dưới đây",
+        "img": "./IMG/File1.png",
+        "btns": [
+            {
+                "label": "Đã xong",
+                "action": null
+            }
+        ],
+        "actionbtn": null
+    }
+]
