@@ -23,6 +23,7 @@
 
 /https://www.lazada.vn/
 /https://lzd.zone/
+/pages.lazada.vn/
 ##a[href^="https://lzd.zone/"]
 
 /https://goink.me/

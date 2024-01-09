@@ -42,6 +42,7 @@ motchill.uk##.clearfix.myui-foot
 ||tvhay.xyz/ads/yylive/980x90px.gif$image
 
 /www.i9bet166.com
+/www.fb88id.com/
 ||bf.333xbet.com/18881999/video888.mp4$media
 /bf.333xbet.com/18881999/video888.mp4$media
 
@@ -86,8 +87,85 @@ motchill.vn###catfish > div
 motchill.vn##.tags
 motchill.vn##.keywords > h4
 ##div#mp-comments
-
+##div#mobileCatfishz
+subnhanhvnn.com##div#comments
+##div#catfish_banner
+###catfish
+###ads_location
 ! 2024-01-09 https://motchill.uk
 motchill.uk##.popUpBannerBox
 
+! 2024-01-09 https://shopee.vn
+shopee.vn##shopee-banner-popup-stateful
+/https://shope.ee/
+##a[href^="https://shope.ee/"]
+
+/https://lzd.zone/
+
+! 2024-01-09 https://motchill.uk
+motchill.uk##.commen-folow-fb
+motchill.uk##div.clearfix.myui-panel-bg.myui-panel:nth-of-type(3)
+
+! 2024-01-09 https://www.tiktok.com
+www.tiktok.com##.e1gjoq3k0.css-py8jux-DivModalContainer > .e1gjoq3k2.css-v2a75e-DivModalMask
+www.tiktok.com##.e1gjoq3k7.css-1dw2wty-DivCenterWrapper
+www.tiktok.com##.e1gjoq3k0.css-py8jux-DivModalContainer
+
+! 2024-01-09 https://subnhanhvnn.com
+||p.thoctv.com/css/x.png$image
+
+! 2024-01-09 https://motphimtvi.com
+motphimtvi.com##.container > .film-note
+
+! 2024-01-09 https://www3.phimhay.in
+||www3.phimhay.in/wp-content/uploads/2023/phimhay/f8topbanner.gif$image
+www3.phimhay.in##div.clearfix.htmlwrap:nth-of-type(16)
+www3.phimhay.in##.the_tag_list
+
+! 2024-01-09 https://hotphim.cc
+hotphim.cc###preload > div
+hotphim.cc##.aanetwork-flyicon-btnclose-16
+hotphim.cc##div.Wdgt:nth-of-type(2)
+||hotphim.net/storage/images/banner/ZCn7RNy.gif$image
+hotphim.cc##[href="javascript:an_trochuyen();"]
+
+! 2024-01-09 https://motchilltvi.com
+motchilltvi.com###mp-preload-popup-overlay
+motchilltvi.com##.watch-banner-2.ad-container
+motchilltvi.com###footer
+motchilltvi.com##h4
+motchilltvi.com##.caption
+motchilltvi.com##.film-note.left-content-player
+
+! 2024-01-09 https://motphim.fan
+motphim.fan##center:nth-of-type(1)
+motphim.fan##.sda-catfish.sda-wrapper
+motphim.fan###footer
+motphim.fan##center:nth-of-type(2)
+motphim.fan##.tabs-content
+
+! 2024-01-09 https://taiphim4k.com
+taiphim4k.com##.content-area
+taiphim4k.com##.small-text-center.medium-text-center.dark.absolute-footer
+
+! 2024-01-09 https://motchill.vn
+motchill.vn###footer
+
+! 2024-01-09 https://motchilli.net
+motchilli.net###preload > div
+motchilli.net###content > .mp-adz
+motchilli.net##.film-note
+motchilli.net###footer
+motchilli.net##.play-tags
+motchilli.net###tabs-facebook > div
+||www.facebook.com/v7.0/plugins/like.php?action=like&app_id=711081303025670&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df985b47b6bcfcc%26domain%3Dmotchilli.net%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fmotchilli.net%252Ff1df2c9e98d815%26relation%3Dparent.parent&color_scheme=dark&container_width=0&href=https%3A%2F%2Fwww.facebook.com%2Fmotsub%2F&layout=standard&locale=vi_VN&sdk=joey&share=false&show_faces=true&size=small&width=100$subdocument
+||www.facebook.com/v7.0/plugins/like.php?action=like&app_id=711081303025670&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df165b7e330b8204%26domain%3Dmotchilli.net%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fmotchilli.net%252Ff1df2c9e98d815%26relation%3Dparent.parent&container_width=0&href=https%3A%2F%2Fmotchilli.net%2Fphim%2Fsinh-vat-gyeongseong-12065.html&layout=button_count&locale=vi_VN&sdk=joey&share=true&show_faces=false$subdocument
+
+! 2024-01-09 https://motchill.pw
+motchill.pw###mp-preload-popup-overlay
+motchill.pw##.tabs-content
+motchill.pw##.tags
+motchill.pw##.keywords
+motchill.pw##.container > .film-note
+motchill.pw###footer > .container
 
