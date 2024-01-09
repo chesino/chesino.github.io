@@ -17,10 +17,13 @@
 ! -----------------------General advert blocking filters-----------------------!
 ! *** easylist:easylist/easylist_general_block.txt ***
 
+/shopee.vn
+/www.shopee.vn/
 /https://shopee.vn/
 /https://shope.ee/
 ##a[href^="https://shope.ee/"]
 
+/www.lazada.vn/
 /https://www.lazada.vn/
 /https://lzd.zone/
 /pages.lazada.vn/
