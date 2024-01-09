@@ -1,3 +1,8 @@
+@font-face {
+    font-family: RobotoMono;
+    src: url(/DATA/Font/RobotoMono-Regular.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +10,7 @@
 }
 
 body {
-    font-family: monospace;
+    font-family: RobotoMono;
     background-color: #f4f4f4;
 }
 
@@ -15,9 +20,11 @@ header {
     text-align: center;
     padding: 5px;
 }
+
 main {
     padding-bottom: 20px;
 }
+
 .Step {
     max-width: 100%;
     padding: 20px;
@@ -26,54 +33,66 @@ main {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .Step h2 {
     font-size: 18px;
 }
+
 .Step p {
     margin: 10px 0;
 }
+
 .Step .red {
     color: red;
     font-weight: bold;
 }
+
 .Step ul {
     padding: 0 20px;
 }
+
 .Step li {
     margin: 5px 0;
 }
+
 .Step img {
     display: block;
     width: 100%;
     border-radius: 6px;
     margin: 10px auto;
 }
+
 .Step img.min {
     width: 40%;
 }
+
 .Step iframe {
     width: 100%;
     border-radius: 10px;
 }
+
 .Btn {
     display: flex;
     justify-content: center;
     margin: 10px 0;
     gap: 10px;
 }
+
 .Btn button {
     color: #000;
     cursor: pointer;
     background-color: #39a6ff;
     font-size: 18px;
-    padding: 10px ;
+    padding: 10px;
     border-radius: 5px;
     border: none;
 
 }
+
 .Btn button:hover {
     background-color: #777777;
 }
+
 footer {
     font-size: 12px;
     text-align: center;
