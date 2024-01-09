@@ -1,3 +1,4 @@
+! *** easylist:easylist/easylist_general_block.txt ***
 ! 2024-01-09 https://www2.vuaphimmoi1.net
 ||www2.vuaphimmoi1.net/wp-content/themes/halimmovies/media/img/item_bgg.gif$image
 www2.vuaphimmoi1.net##.popUpBannerBox
@@ -16,4 +17,3 @@ motchill.uk##div.clearfix.myui-panel-bg.myui-panel:nth-of-type(3)
 motchill.uk##div.clearfix.myui-panel-bg.myui-panel:nth-of-type(2)
 motchill.uk##.clearfix.myui-foot
 ||motchill.uk/i9.gif$image
-
