@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000;
+}
+
+header {
+    display: none;
+    background-color: #3498db;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+}
+.Block {
+    width: 100%;
+}
+.code-container {
+    margin-bottom: 10px;
+
+}
+
+textarea {
+    width: 100%; /* Chú ý giảm đi 20px để đảm bảo chiều rộng không vượt quá .code-container */
+    height: 150px;
+    resize: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box; /* Bảo đảm rằng padding không tăng kích thước chiều rộng và chiều cao */
+}
+
+.code-header {
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+iframe {
+    width: 100%;
+    height: auto;
+    border: none;
+    background-color: red;
+}
+
+
+/* Media queries cho thiết bị di động */
+@media screen and (max-width: 600px) {
+    .container {
+        display: flex;
+        flex-direction: column
+    }
+    .code-container {
+        margin-bottom: 10px;
+    }
+    iframe {
+        min-height: 100vh;
+    }
+
+    textarea {
+        height: 100px;
+    }
+}
+
+

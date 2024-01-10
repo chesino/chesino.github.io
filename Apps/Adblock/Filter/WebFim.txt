@@ -99,7 +99,6 @@ motchill.uk##.popUpBannerBox
 shopee.vn##shopee-banner-popup-stateful
 /https://shope.ee/
 ##a[href^="https://shope.ee/"]
-
 ##a[href^="https://tinyurl.com/"]
 
 /https://lzd.zone/
