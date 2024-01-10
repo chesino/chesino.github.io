@@ -16,6 +16,7 @@
 ! 
 ! -----------------------General advert blocking filters-----------------------!
 ! *** easylist:easylist/easylist_general_block.txt ***
+
 ! 2024-01-09 https://www2.vuaphimmoi1.net
 ||www2.vuaphimmoi1.net/wp-content/themes/halimmovies/media/img/item_bgg.gif$image
 www2.vuaphimmoi1.net##.popUpBannerBox
@@ -99,6 +100,8 @@ shopee.vn##shopee-banner-popup-stateful
 /https://shope.ee/
 ##a[href^="https://shope.ee/"]
 
+##a[href^="https://tinyurl.com/"]
+
 /https://lzd.zone/
 /https://pages.lazada.vn/
 
@@ -171,4 +174,43 @@ motchill.pw###footer > .container
 
 ! 2024-01-09 https://ios.codevn.net
 ios.codevn.net##.swal2-backdrop-show.swal2-center.swal2-container
+ios.codevn.net##body:remove-class(swal2-shown)
+
+! 2024-01-09 https://animehay.city
+animehay.city##div:nth-of-type(7)
+animehay.city##.ah_footer
+animehay.city##div.ah-frame-bg:nth-of-type(5)
+
+! 2024-01-09 https://hhchina.tv
+hhchina.tv##.catfish.banner-balloon.ff-banner
+hhchina.tv##.ah_footer
+hhchina.tv##.ah-frame-bg.desc
+
+! 2024-01-09 https://ipatool.codevn.net
+ipatool.codevn.net##.swal2-backdrop-show.swal2-center.swal2-container
+ipatool.codevn.net##body:remove-class(swal2-shown)
+
+! 2024-01-09 https://sign.codevn.net
+sign.codevn.net##.swal2-backdrop-show.swal2-center.swal2-container
+sign.codevn.net##body:remove-class(swal2-shown)
+
+! 2024-01-09 https://bundleid.codevn.net
+bundleid.codevn.net##.swal2-backdrop-show.swal2-center.swal2-container
+bundleid.codevn.net##body:remove-class(swal2-shown)
+
+! 2024-01-09 https://i.codevn.net
+i.codevn.net##.swal2-backdrop-show.swal2-center.swal2-container
+i.codevn.net##body:remove-class(swal2-shown)
+
+! 2024-01-09 https://codevn.net
+codevn.net##.swal2-backdrop-show.swal2-center.swal2-container
+codevn.net##body:remove-class(swal2-shown)
+
+! 2024-01-10 https://lmssplus.com
+||lmssplus.com/static_image/ads-provider/anh2.gif$image
+||www.youtube.com/embed/5BBttz3F_ps?si=DGljAVK9SG_ltflA&autoplay=1&mute=1$subdocument
+##.style_wrapper__AY4ph
+##.popupchat_wrapper__lu9sH
+##.footer_footer__GaW5f
+
 
