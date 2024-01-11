@@ -20,35 +20,56 @@
         <div class="Block">
             <div id="editor">
                 <div class="code-container">
-                    <div class="code-header">HTML</div>
+                    <div class="code-header">
+                        <button id="upload-html"><i class="fa-solid fa-file-arrow-up"></i></button>
+                        HTML
+                        <button id="download-html"><i class="fa-solid fa-file-arrow-down"></i></button>
+                    </div>
                     <textarea id="html-code" placeholder="Enter HTML code"></textarea>
                 </div>
                 <div class="code-container">
-                    <div class="code-header">CSS</div>
+                    <div class="code-header">
+                        <button id="upload-css"><i class="fa-solid fa-file-arrow-up"></i></button>
+                        CSS
+                        <button id="download-css"><i class="fa-solid fa-file-arrow-down"></i></button>
+                    </div>
                     <textarea id="css-code" placeholder="Enter CSS code"></textarea>
                 </div>
                 <div class="code-container">
-                    <div class="code-header">JavaScript</div>
+                    <div class="code-header">
+
+                        <button id="upload-js"><i class="fa-solid fa-file-arrow-up"></i></button>
+                        JavaScript
+                        <button id="download-js"><i class="fa-solid fa-file-arrow-down"></i></button>
+                    </div>
                     <textarea id="js-code" placeholder="Enter JavaScript code"></textarea>
                 </div>
             </div>
             <button onclick="runCode()">Run Code</button>
         </div>
         
-        <iframe id="result-frame"></iframe>
+        <div class="Result">
+            <img src="./iPhone15PM.png" alt="" srcset="">
+            <iframe id="result-frame"></iframe>
+        </div>
+        
+        <!-- Thêm vào HTML -->
+
+
     </div>
     <!-- Include jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Your script.js -->
-   
+
 </body>
-    <!-- Include CodeMirror scripts -->
-    <script src="/DATA/Codemirror/lib/codemirror.js"></script>
-    <script src="/DATA/Codemirror/mode/xml/xml.js"></script>
-    <script src="/DATA/Codemirror/mode/css/css.js"></script>
-    <script src="/DATA/Codemirror/mode/htmlmixed/htmlmixed.js"></script>
-    <script src="/DATA/Codemirror/mode/javascript/javascript.js"></script>
-    
-    <script src="./script.js"></script>
+<!-- Include CodeMirror scripts -->
+<script src="/DATA/Codemirror/lib/codemirror.js"></script>
+<script src="/DATA/Codemirror/mode/xml/xml.js"></script>
+<script src="/DATA/Codemirror/mode/css/css.js"></script>
+<script src="/DATA/Codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="/DATA/Codemirror/mode/javascript/javascript.js"></script>
+
+<script src="./script.js"></script>
+
 </html>

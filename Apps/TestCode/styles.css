@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #000;
+    background-color: #fff;
 }
 
 header {
@@ -31,9 +31,17 @@ header {
 
 }
 
+#editor {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.Block {
+    max-width: 50%;
+}
 textarea {
     width: 100%; /* Chú ý giảm đi 20px để đảm bảo chiều rộng không vượt quá .code-container */
-    height: 150px;
+    height: 100px;
     resize: none;
     padding: 10px;
     margin-bottom: 10px;
@@ -43,12 +51,23 @@ textarea {
     box-sizing: border-box; /* Bảo đảm rằng padding không tăng kích thước chiều rộng và chiều cao */
 }
 
+
 .code-header {
     background-color: #333;
     color: #fff;
     padding: 5px;
     text-align: center;
-    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+.code-header button {
+    width: 40px;
+    height: 40px;
+}
+.CodeMirror {
+    font-size: 18px;
 }
 
 button {
@@ -63,11 +82,25 @@ button {
 }
 
 iframe {
+    position: absolute;
     width: 100%;
-    height: auto;
+    height: calc(100vh - 20px);
     border: none;
-    background-color: red;
+    z-index: 2;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 10px 0;
 }
+.Result {
+    position: relative;
+    width: 100%;
+}
+.Result img {
+    position: absolute;
+    display: none;
+    max-width: 100%;
+}
+
 
 
 /* Media queries cho thiết bị di động */
@@ -79,8 +112,21 @@ iframe {
     .code-container {
         margin-bottom: 10px;
     }
+    .Block {
+        max-width: 100%;
+    }
+    .Result img {
+        position: absolute;
+        display: block;
+        max-width: 100%;
+    }
     iframe {
-        min-height: 100vh;
+        min-height: calc(100vh - 122px);
+        margin: 20px 23px;
+        height: auto;
+        width: calc(100% - 46px);
+        border-radius: 48px;
+        background-color: #fff;
     }
 
     textarea {
