@@ -133,10 +133,10 @@ document.getElementById('upload-js').onclick = () => uploadCode('js');
 
 function Dynamic() {
     var dynamic = document.getElementById('dynamic');
-    dynamic.style.width = '346px';
+    dynamic.style.width = '85%';
     dynamic.style.height = '100px';
     setTimeout(() => {
-        dynamic.style.width = '100px';
-        dynamic.style.height = '30px';
+        dynamic.style.width = '80px';
+        dynamic.style.height = '24px';
     }, 2000);
 }
