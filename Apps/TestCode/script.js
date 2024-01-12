@@ -72,7 +72,15 @@ function downloadCode(type) {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `code.${type}`;
+
+    if (type === 'html') {
+        a.download = `index.${type}`;
+    } else if (type === 'css') {
+        a.download = `style.${type}`;
+    } else {
+        a.download = `script.${type}`;
+    }
+
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -121,3 +129,14 @@ document.getElementById('download-js').onclick = () => downloadCode('js');
 document.getElementById('upload-html').onclick = () => uploadCode('html');
 document.getElementById('upload-css').onclick = () => uploadCode('css');
 document.getElementById('upload-js').onclick = () => uploadCode('js');
+
+
+function Dynamic() {
+    var dynamic = document.getElementById('dynamic');
+    dynamic.style.width = '346px';
+    dynamic.style.height = '100px';
+    setTimeout(() => {
+        dynamic.style.width = '100px';
+        dynamic.style.height = '30px';
+    }, 2000);
+}

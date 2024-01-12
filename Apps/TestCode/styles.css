@@ -3,11 +3,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fff;
+    background-color: #000;
 }
 
 header {
@@ -23,9 +24,11 @@ header {
     gap: 10px;
     padding: 5px;
 }
+
 .Block {
     width: 100%;
 }
+
 .code-container {
     margin-bottom: 10px;
 
@@ -36,11 +39,14 @@ header {
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
 .Block {
     max-width: 50%;
 }
+
 textarea {
-    width: 100%; /* Chú ý giảm đi 20px để đảm bảo chiều rộng không vượt quá .code-container */
+    width: 100%;
+    /* Chú ý giảm đi 20px để đảm bảo chiều rộng không vượt quá .code-container */
     height: 100px;
     resize: none;
     padding: 10px;
@@ -48,7 +54,8 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-    box-sizing: border-box; /* Bảo đảm rằng padding không tăng kích thước chiều rộng và chiều cao */
+    box-sizing: border-box;
+    /* Bảo đảm rằng padding không tăng kích thước chiều rộng và chiều cao */
 }
 
 
@@ -62,10 +69,12 @@ textarea {
     align-items: center;
     font-size: 18px;
 }
+
 .code-header button {
     width: 40px;
     height: 40px;
 }
+
 .CodeMirror {
     font-size: 18px;
 }
@@ -82,26 +91,42 @@ button {
 }
 
 iframe {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: calc(100vh - 20px);
     border: none;
     z-index: 2;
-    border: 2px solid black;
-    border-radius: 10px;
-    margin: 10px 0;
+    border: 4px solid #111;
+    margin: 0;
 }
+
 .Result {
     position: relative;
     width: 100%;
+    text-align: center;
 }
+
 .Result img {
     position: absolute;
     display: none;
-    max-width: 100%;
+    width: 100%;
+    height: calc(100vh - 122px);
 }
 
-
+.dynamic {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 30px;
+    border-radius: 40px;
+    z-index: 3;
+    background-color: #000;
+    height: 30px;
+    width: 100px;
+    transition: all 0.5s;
+}
 
 /* Media queries cho thiết bị di động */
 @media screen and (max-width: 600px) {
@@ -109,23 +134,28 @@ iframe {
         display: flex;
         flex-direction: column
     }
+
     .code-container {
         margin-bottom: 10px;
     }
+
     .Block {
         max-width: 100%;
     }
+
     .Result img {
         position: absolute;
         display: block;
         max-width: 100%;
     }
+
     iframe {
-        min-height: calc(100vh - 122px);
-        margin: 20px 23px;
-        height: auto;
+        min-height: calc(100vh - 158px);
+        margin: 18px 23px;
+        height: 100%;
         width: calc(100% - 46px);
-        border-radius: 48px;
+        border: 4px solid #000;
+        border-radius: 54px;
         background-color: #fff;
     }
 
@@ -133,5 +163,3 @@ iframe {
         height: 100px;
     }
 }
-
-
