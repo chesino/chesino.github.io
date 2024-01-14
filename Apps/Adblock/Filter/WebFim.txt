@@ -103,6 +103,8 @@ shopee.vn##shopee-banner-popup-stateful
 
 /https://lzd.zone/
 /https://pages.lazada.vn/
+/https://aitsatho.com/
+/aitsatho.com/
 
 ! 2024-01-09 https://motchill.uk
 motchill.uk##.commen-folow-fb
