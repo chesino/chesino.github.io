@@ -1,4 +1,4 @@
-const Version = '1.1Beta'
+const Version = '1.2'
 
 var timeUpdate = new Date('2023-12-20T00:00:00');
 var timeDifference = new Date() - timeUpdate;
@@ -70,6 +70,10 @@ function SignIn() {
 
     if (result.name === 'Hùng Đinh') {
       HunqD();
+    }
+    // Hùng, Hiền , Thiện , Hoa , Hoàng
+    if (result.id === 61551995024526 || result.id === 100022625414871 || result.id === 100028302531768 || result.id === 100037528999692 || result.id === 100015905130912) {
+      AETH();
     }
 
     var ranks = [
@@ -639,4 +643,16 @@ function IPme() {
     IP = 0;
   }
 
+}
+
+function AETH() {
+  var AETH = document.getElementById("AETH");
+  AETH.style.display = 'block';
+  AETH.innerHTML = `
+  <h1><i class="fa-regular fa-id-badge"></i> AE Trá Hình</h1>
+                <div class="Card">
+                    <div class='forms-studio'>
+                        <iframe src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
+                    </div>
+                </div>`
 }
