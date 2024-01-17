@@ -2,7 +2,7 @@ const jsonData = [
   [
     {
       "name": "Hùng Đinh",
-      "profileURL": "https://www.facebook.com/profile.php?id=61551995024526",
+      "profileURL": "https://www.facebook.com/mhung001",
       "timestamp": 1697068800,
       "id": 61551995024526,
       "point": 22,

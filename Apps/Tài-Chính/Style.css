@@ -23,8 +23,10 @@ button {
     --CARD: #111111;
 }
 .MenuON {
+    overflow: hidden;
     padding-bottom: 250px;
 }
+
 #toggle-button {
     cursor: pointer;
     margin:  auto;
@@ -43,7 +45,14 @@ button {
 .Container {
     padding: 0 10px ;
 }
-
+.Blur {
+    top: 0;
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: #000000ee;
+}
 .Card {
     background-color: var(--CARD);
     border-radius: 10px;
@@ -191,14 +200,14 @@ button {
 }
 
 .Transactions .Button {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
+    display: flex;
     gap: 10px;
+    height: 50px;
     margin: 10px 0;
 }
 .Transactions .Button button {
     color: black;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
     padding: 8px;
     width: 100%;
@@ -207,7 +216,9 @@ button {
     background-color: var(--MAIN);
     border: none;
 }
-
+.Transactions .Button button img {
+    height: 100%;
+}
 #Transactions p {
     font-size: 14px;
     margin: 10px 0;

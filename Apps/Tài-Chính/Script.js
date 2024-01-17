@@ -1,5 +1,7 @@
 function openTab(evt, Tabname) {
     var body = document.querySelector('body');
+    var blur = document.querySelector('.Blur');
+
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -11,6 +13,7 @@ function openTab(evt, Tabname) {
         body.classList.remove('MenuON');
         return;
     }
+
 
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("Tabcontent");
@@ -26,10 +29,36 @@ function openTab(evt, Tabname) {
     }
 
     // Show the current tab and add an "active" class to the button that opened the tab
+    blur.style.display = "block";
     body.classList.add('MenuON');
     currentTab.style.display = "block";
     evt.currentTarget.className += " active";
+
 }
+
+function closeTab() {
+    var body = document.querySelector('body');
+    var blur = document.querySelector('.Blur');
+    var tabcontent = document.getElementsByClassName("Tabcontent");
+    var tablinks = document.getElementsByClassName("Func");
+
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    body.classList.remove('MenuON');
+    blur.style.display = "none";
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    var blur = document.querySelector('.Blur');
+    blur.addEventListener('click', closeTab);
+});
+
 
 
 let cashAmount = 0;
@@ -46,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
     totalAmount = parseInt(localStorage.getItem('totalAmount')) || 0;
     debtAmount = parseInt(localStorage.getItem('debtAmount')) || 0;
     savingsAmount = parseInt(localStorage.getItem('savingsAmount')) || 0;
+    totalAmount = parseFloat(localStorage.getItem('totalAmount')) || 0;
+
 
     // Hiển thị giá trị số tiền mặt và tiền thẻ trong các phần tử displayCash và displayCard
     const displayCash = document.getElementById('displayCash');
@@ -60,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     displayTotal.innerText = totalAmount.toLocaleString();
     tiennoDiv.innerText = debtAmount.toLocaleString();
     savingsTotalDiv.innerText = savingsAmount.toLocaleString();
+    displayTotal.innerText = totalAmount.toLocaleString();
 
     const savedTransactions = localStorage.getItem('transactionsHistory');
     if (savedTransactions) {
@@ -145,7 +177,7 @@ function addMoney(cash, card) {
             transactionMessage += 'Số dư Tiền Mặt +' + cashValue.toLocaleString() + 'đ.';
             if (cashNote !== '') {
                 transactionMessage += cashNote + '.';
-
+                
             }
         }
 
@@ -174,6 +206,7 @@ function addMoney(cash, card) {
         transactionsHistory.unshift(transactionMessage);
         SaveHistory();
         displayTransactionHistory();
+        Trans('Thành công');
     }
     Rule503020();
     changeColor();
@@ -231,15 +264,16 @@ function recordDebt() {
                     displayTransaction(transactionMessage);
                     transactionsHistory.unshift(transactionMessage);
                 } else {
-                    alert('Tài khoản của bạn không đủ để trả nợ.');
+                    Warning('Tài khoản của bạn không đủ để trả nợ.');
                 };
             };
-
+            
             SaveHistory();
             changeColor();
         }
+        Trans('Thành công');
     } else {
-        alert('Có nợ ai đâu mà trả 🤔')
+        Warning('Có nợ ai đâu mà trả 🤔')
     }
 
     document.getElementById('payWho').value = '';
@@ -247,6 +281,7 @@ function recordDebt() {
     document.getElementById('payAmount').value = 0;
     document.getElementById('debtAmount').dataset.rawValue = 0;
     document.getElementById('payAmount').dataset.rawValue = 0;
+
     changeColor();
 }
 
@@ -261,6 +296,7 @@ function saveSavings() {
             transactionMessage += 'Số dư Tiết Kiệm +' + savingsValue.toLocaleString() + 'đ.';
             displayTransaction(transactionMessage);
             transactionsHistory.unshift(transactionMessage);
+            Trans('Thành công');
         } else {
             if (cardAmount >= savingsValue) {
                 addMoney(0, -savingsValue);
@@ -269,10 +305,12 @@ function saveSavings() {
                 displayTransaction(transactionMessage);
                 transactionsHistory.unshift(transactionMessage);
             } else {
-                alert('Không có tiền bà đặt tiết kiệm 🤣.')
+                Warning('Không có đủ tiền bà đặt tiết kiệm 🤣.');
             }
 
         }
+        
+        
         SaveHistory();
         const savingsTotalDiv = document.getElementById('savingsTotal');
         savingsTotalDiv.innerText = savingsAmount.toLocaleString();
@@ -302,8 +340,9 @@ function withdrawSavings() {
         displayTransaction(transactionMessage);
         transactionsHistory.unshift(transactionMessage);
         SaveHistory();
+        Trans('Thành công')
     } else {
-        alert('vượt quá số dư');
+        Warning('vượt quá số dư');
     }
     document.getElementById('savingsAmount').value = '';
     document.getElementById('withdrawalAmount').value = '';
@@ -480,7 +519,7 @@ function Note() {
 function Rule503020() {
     totalAmount = parseInt(localStorage.getItem('totalAmount')) || 0;
     document.getElementById('ToltalMoney').innerText = formatWithDots(totalAmount + savingsAmount);
-    
+
     var v50 = totalAmount * 50 / 100;
     var v30 = totalAmount * 30 / 100;
     var v20 = totalAmount * 20 / 100;
@@ -578,11 +617,164 @@ function handlePasteClick() {
                     return;
                 }
             } else {
-                alert('Không đúng định dạng hoặc không có dữ liệu.')
+                Fail('Không đúng định dạng hoặc không có dữ liệu.')
             }
         })
         .catch(function () {
-            alert('🤔 Có sao chép gì đâu mà dán.')
+            Warning('🤔 Có sao chép gì đâu mà dán.')
         });
     Rule503020();
 }
+
+function Done(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'success'
+    )
+}
+
+function Fail(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'error'
+    )
+}
+function Warning(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'warning'
+    )
+}
+function Info(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'info'
+    )
+}
+function Trans(T1) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: T1
+    });
+}
+
+
+function exportData() {
+    const dataToExport = {
+        cashAmount,
+        cardAmount,
+        totalAmount,
+        debtAmount,
+        savingsAmount,
+        transactionsHistory
+    };
+
+    const dataString = JSON.stringify(dataToExport);
+    const blob = new Blob([dataString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'DuLieu.json';
+    a.click();
+}
+
+function importData() {
+    const inputElement = document.createElement('input');
+    inputElement.type = 'file';
+    inputElement.accept = '.json';
+    inputElement.addEventListener('change', handleFileSelect);
+    inputElement.click();
+}
+
+function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const importedData = JSON.parse(e.target.result);
+
+            // Gán giá trị từ dữ liệu nhập vào biến
+            cashAmount = importedData.cashAmount;
+            cardAmount = importedData.cardAmount;
+            totalAmount = importedData.totalAmount;
+            debtAmount = importedData.debtAmount;
+            savingsAmount = importedData.savingsAmount;
+            transactionsHistory = importedData.transactionsHistory;
+
+            // Hiển thị lại dữ liệu sau khi nhập
+            displayData();
+
+            // Lưu lại dữ liệu vào localStorage
+            localStorage.setItem('cashAmount', cashAmount);
+            localStorage.setItem('cardAmount', cardAmount);
+            localStorage.setItem('totalAmount', totalAmount);
+            localStorage.setItem('debtAmount', debtAmount);
+            localStorage.setItem('savingsAmount', savingsAmount);
+            localStorage.setItem('transactionsHistory', JSON.stringify(transactionsHistory));
+
+            // Thông báo nhập dữ liệu thành công
+            Info('Nhập Dữ Liệu', 'Dữ liệu đã được nhập thành công.');
+        };
+
+        reader.readAsText(file);
+    }
+}
+
+function displayData() {
+    // Hiển thị dữ liệu vào các phần tử HTML
+    const displayCash = document.getElementById('displayCash');
+    const displayCard = document.getElementById('displayCard');
+    const displayTotal = document.getElementById('displayTotal');
+    const tiennoDiv = document.getElementById('tienno');
+    const savingsTotalDiv = document.getElementById('savingsTotal');
+
+
+    displayCash.innerText = cashAmount.toLocaleString();
+    displayCard.innerText = cardAmount.toLocaleString();
+    displayTotal.innerText = totalAmount.toLocaleString();
+    tiennoDiv.innerText = debtAmount.toLocaleString();
+    savingsTotalDiv.innerText = savingsAmount.toLocaleString();
+
+    // Hiển thị lịch sử giao dịch
+    SaveHistory();
+    displayTransactionHistory();
+    Rule503020();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all input elements with the class 'inputFM'
+    var inputFields = document.querySelectorAll('.inputFM');
+
+    // Attach a keyup event listener to each input field
+    inputFields.forEach(function (inputField) {
+        inputField.addEventListener('keyup', function (event) {
+            // Check if the pressed key is Enter (key code 13)
+            if (event.keyCode === 13) {
+                // Get the parent Card element to determine which button to click
+                var parentCard = inputField.closest('.Card');
+
+                // Find the button inside the parent Card and trigger its click event
+                var button = parentCard.querySelector('button');
+                if (button) {
+                    button.click();
+                }
+            }
+        });
+    });
+});
