@@ -9,125 +9,79 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #111;
         }
 
-        #fileA,
-        #fileB {
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+
+
+        label {
+            display: block;
             margin-bottom: 10px;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        input[type=file] {
+            display: none;
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         #result {
             margin-top: 20px;
+            color: #fff;
+            background-color: #000;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
         }
     </style>
 </head>
 
 <body>
+    <h1>Bạn bè Facebook</h1>
+    <label for="fileA">Dữ liệu bạn bè mới </label>
     <input type="file" id="fileA" />
+    <label for="fileB">Dữ liệu bạn bè cũ</label>
     <input type="file" id="fileB" />
-    <button onclick="compareFiles()">So sánh</button>
+    <button onclick="compareFiles()">So sánh ngay</button>
+    <button onclick="compareWithOriginal()">So sánh với File JSON gốc</button>
+
 
     <div id="result"></div>
 
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        function compareFiles() {
-            var fileA = document.getElementById('fileA').files[0];
-            var fileB = document.getElementById('fileB').files[0];
-
-            if (!fileA || !fileB) {
-                alert('Vui lòng chọn cả hai file để so sánh.');
-                return;
-            }
-
-            var readerA = new FileReader();
-            var readerB = new FileReader();
-
-            readerA.onload = function (e) {
-                var dataA;
-                try {
-                    dataA = JSON.parse(e.target.result);
-                    if (!Array.isArray(dataA)) {
-                        throw new Error('Dữ liệu không phải là mảng.');
-                    }
-                } catch (error) {
-                    alert('Lỗi khi đọc dữ liệu từ File A: ' + error.message);
-                    return;
-                }
-
-                readerB.onload = function (e) {
-                    var dataB;
-                    try {
-                        dataB = JSON.parse(e.target.result);
-                        if (!Array.isArray(dataB)) {
-                            throw new Error('Dữ liệu không phải là mảng.');
-                        }
-                    } catch (error) {
-                        alert('Lỗi khi đọc dữ liệu từ File B: ' + error.message);
-                        return;
-                    }
-
-                    // So sánh dữ liệu
-                    var addedData = [];
-                    var missingData = [];
-
-                    dataA.forEach(function (itemA) {
-                        var existsInB = dataB.some(function (itemB) {
-                            return itemA.name === itemB.name;
-                        });
-
-                        if (!existsInB) {
-                            missingData.push(itemA);
-                        }
-                    });
-
-                    dataB.forEach(function (itemB) {
-                        var existsInA = dataA.some(function (itemA) {
-                            return itemB.name === itemA.name;
-                        });
-
-                        if (!existsInA) {
-                            addedData.push(itemB);
-                        }
-                    });
-
-                    displayResult(addedData, missingData, dataA.length, dataB.length);
-                };
-
-                readerB.readAsText(fileB);
-            };
-
-            readerA.readAsText(fileA);
-        }
-
-        function displayResult(addedData, missingData, totalDataA, totalDataB) {
-            var resultContainer = document.getElementById('result');
-            resultContainer.innerHTML = '';
-
-            var totalAddedData = addedData.length;
-            var totalMissingData = missingData.length;
-
-            resultContainer.innerHTML += '<p>Tổng số dữ liệu trong File A: ' + totalDataA + '</p>';
-            resultContainer.innerHTML += '<p>Tổng số dữ liệu trong  File B: ' + totalDataB + '</p>';
-            resultContainer.innerHTML += '<p>Số dữ liệu mới trong File A: ' + totalAddedData + '</p>';
-            resultContainer.innerHTML += '<p>Số dữ liệu mà có trong File A nhưng không có trong File B: ' + totalMissingData + '</p>';
-
-            if (addedData.length > 0) {
-                resultContainer.innerHTML += '<p>Dữ liệu mới trong File A:</p>';
-                addedData.forEach(function (item) {
-                    resultContainer.innerHTML += '<p>' + item.name + '</p>';
-                });
-            }
-
-            if (missingData.length > 0) {
-                resultContainer.innerHTML += '<p>Dữ liệu mà có trong File A nhưng không có trong File B:</p>';
-                missingData.forEach(function (item) {
-                    resultContainer.innerHTML += '<p>' + item.name + '</p>';
-                });
-            }
-        }
-
-    </script>
+    <script src="./FriendsList/script.js"></script>
 </body>
 
 </html>
