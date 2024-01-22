@@ -15,8 +15,7 @@ body {
 .Search {
     width: 100%;
     background-color: transparent;
-    display: grid;
-    grid-template-columns: auto 100px 50px;
+    display: flex;
     gap: 5px;
 }
 

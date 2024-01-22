@@ -1,5 +1,5 @@
 const API_KEY = 'RGAPI-685827f7-0ec5-45d2-b140-0452035dfab8';
-const VER = '13.18.1';
+const VER = '14.1.1';
 const championCosts = {
     'Yasuo': '9',
     'Leesin': '7',
@@ -55,7 +55,6 @@ async function fetchSummonerInfo() {
         const summonerName = document.getElementById('summoner-name').value;
         const apiUrl = `https://vn2.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
         const data = await fetchJson(apiUrl);
-
         document.getElementById('profileIconId').src = `https://ddragon.leagueoflegends.com/cdn/${VER}/img/profileicon/${data.profileIconId}.png`;
         document.getElementById('summonerName').innerText = data.name;
         document.getElementById('summonerLevel').innerText = data.summonerLevel;
@@ -68,6 +67,7 @@ async function fetchSummonerInfo() {
         throw error;
     }
 }
+
 
 // Hàm lấy thông tin Rank và xử lý
 async function fetchRankInfo(summonerId) {
@@ -140,7 +140,6 @@ async function fetchRankInfo(summonerId) {
 
 // Hàm lấy thông tin Mastery và xử lý
 async function fetchMasteryInfo(puuid) {
-    console.log(puuid);
     try {
         const masteryApiUrl = `https://vn2.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}/top?count=3&api_key=${API_KEY}`;
         const masteryData = await fetchJson(masteryApiUrl);
@@ -270,12 +269,12 @@ async function fetchMatchHistory(puuid) {
 
                     const defaultItemValue = 100; // Giá trị mặc định cho item khi là 0
 
-                    const item0Src = participant.item0 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item0}.png` : `/DATA/logo.png`;
-                    const item1Src = participant.item1 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item1}.png` : `/DATA/logo.png`;
-                    const item2Src = participant.item2 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item2}.png` : `/DATA/logo.png`;
-                    const item3Src = participant.item3 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item3}.png` : `/DATA/logo.png`;
-                    const item4Src = participant.item4 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item4}.png` : `/DATA/logo.png`;
-                    const item5Src = participant.item5 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${participant.item5}.png` : `/DATA/logo.png`;
+                    const item0Src = participant.item0 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item0}.png` : `/DATA/logo.png`;
+                    const item1Src = participant.item1 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item1}.png` : `/DATA/logo.png`;
+                    const item2Src = participant.item2 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item2}.png` : `/DATA/logo.png`;
+                    const item3Src = participant.item3 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item3}.png` : `/DATA/logo.png`;
+                    const item4Src = participant.item4 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item4}.png` : `/DATA/logo.png`;
+                    const item5Src = participant.item5 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item5}.png` : `/DATA/logo.png`;
 
 
                     matchInfoElem.innerHTML = `
@@ -450,12 +449,12 @@ window.addEventListener('hashchange', () => {
     runSearch();
 });
 
-var toggle = 0 ;
+var toggle = 0;
 function toggleBG() {
     toggle++;
     if (toggle === 1) {
         document.getElementById('Profile').style.backgroundColor = '#111111';
-    } 
+    }
     if (toggle === 2) {
         document.getElementById('Profile').style.backgroundColor = '#000000';
         toggle = 0
