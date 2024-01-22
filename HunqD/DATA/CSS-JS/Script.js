@@ -438,13 +438,13 @@ function HunqD() {
       if (key !== 'point' && key !== 'profileURL' && key !== 'mess' && key !== 'pass' && key !== 'id') {
         const infoItem = document.createElement("div");
         const value = key === 'timestamp' ? new Intl.DateTimeFormat('vi-VN', {
-          weekday: 'short',
+          // weekday: 'short',
           year: 'numeric',
           month: 'short',
           day: 'numeric',
           hour: 'numeric',
           minute: 'numeric',
-          second: 'numeric',
+          // second: 'numeric',
           timeZone: 'asia/ho_chi_minh' // Đặt múi giờ theo mong muốn
         }).format(new Date(user[key] * 1000)) : user[key];
         infoItem.innerHTML = `${value}`;
