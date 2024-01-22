@@ -7,7 +7,7 @@
 :root {
     --BG: #eeeeee;
     --TX: #000000;
-    --CR: rgb(255, 209, 217);
+    --CR: rgb(255, 255, 255);
     --TALLYCL: #fff;
     --TALLY: #000000;
 }
@@ -258,9 +258,9 @@ button {
 }
 
 footer.HunqD {
-    font-size: 14px;
-    color: #fff;
-    background-color: #000;
+    font-size: 12px;
+    color: var(--TX);
+    text-shadow: 1px 1px 5px var(--BG);
     position: fixed;
     bottom: 0;
     text-align: center;
@@ -269,6 +269,7 @@ footer.HunqD {
 }
 
 footer.HunqD a {
+    font-size: 14px;
     color: greenyellow;
     font-weight: bold;
     text-decoration: none;
@@ -315,19 +316,19 @@ footer.HunqD a {
 .Tally.Thien {
     background-image: url(https://graph.facebook.com/100028302531768/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
     background-size: cover;
-    background-position: 0 -180px;
+    background-position: 0 -120px;
 }
 
 .Tally.Hoa {
     background-image: url(https://graph.facebook.com/100037528999692/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
     background-size: cover;
-    background-position: 0 -60px;
+    background-position: 0 -120px;
 }
 
 .Tally.Hoang {
     background-image: url(https://graph.facebook.com/100015905130912/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
     background-size: cover;
-    background-position: 0 -160px;
+    background-position: 0 -90px;
 }
 .Tally.Black {
     background-image: none;

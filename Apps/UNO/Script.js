@@ -19,6 +19,8 @@ function toggleSmartPoint() {
     if (smartPointActive) {
         smartPoint.classList.remove("active");
         Point = 1;
+        Done('SmartPoint đã tắt')
+
     } else {
         smartPoint.classList.add("active");
 
@@ -28,6 +30,7 @@ function toggleSmartPoint() {
         // Lấy số lượng phần tử có class là "Tally"
         var tallyCount = tallyElements.length;
         Point = tallyCount;
+        Done('SmartPoint đã bật','Tính năng điểm thông minh, sẽ tự động tính toán số người chơi và cộng điểm một cách thông minh.')
     }
 
     smartPointActive = !smartPointActive;
@@ -126,12 +129,22 @@ function addTally(itemName, quantity) {
         delButton.className = "Del-Item";
         delButton.innerHTML = '<i class="fa-solid fa-ban"></i>';
         delButton.addEventListener("click", function () {
-            clickCount++;
-            if (clickCount === 3) {
-                newTally.remove();
-                clickCount = 0;
-                saveToLocalStorage();
-            }
+            Swal.fire({
+                title: `Bạn muốn xoá ${itemName} ?`,
+                text: "Chỉ bao gồm người chơi, điểm số.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Xoá",
+                cancelButtonText: "Huỷ"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    newTally.remove();
+                    saveToLocalStorage();
+                    Done('Xóa tất cả thành công.');
+                }
+            });
         });
 
 
@@ -177,13 +190,13 @@ function addTally(itemName, quantity) {
         saveToLocalStorage();
         document.getElementById("itemName").value = '';
     } else {
-        alert('Vui lòng nhập tên người chơi');
+        Warning('Vui lòng nhập tên người chơi');
     }
 }
 
 function logValueDelayed(itemName, quantity) {
     const currentTime = new Date();
-    const timeString = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+    const timeString = `${currentTime.getHours()}:${currentTime.getMinutes()}}`;
     const dateString = `${currentTime.getDate()}/${currentTime.getMonth() + 1}/${currentTime.getFullYear()}`;
 
     const logText = `${itemName} ${quantity > 0 ? '+' : ''}${quantity} lúc ${timeString} - ${dateString}`;
@@ -213,7 +226,7 @@ function logValueDelayed(itemName, quantity) {
 }
 
 function addToHistory(log) {
-    const timeString = `${log.time.getHours()}:${log.time.getMinutes()}:${log.time.getSeconds()}`;
+    const timeString = `${log.time.getHours()}:${log.time.getMinutes()}`;
     const dateString = `${log.time.getDate()}/${log.time.getMonth() + 1}/${log.time.getFullYear()}`;
     const logText = `${timeString} - ${log.itemName} ${log.quantity > 0 ? '+' : ''}${log.quantity}`;
 
@@ -277,101 +290,116 @@ function addToHistoryLog(logText) {
 }
 
 
+
 const resetButton = document.getElementById("resetButton");
-const deleteAllButton = document.getElementById("DeleteAll");
-let pressTimer;
+resetButton.addEventListener("click", function () {
+    Swal.fire({
+        title: "Bạn có muốn đặt lại điểm số không ?",
+        text: "Tất cả các người chơi sẽ trở về số 0.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yah sure chắc chắn là như vậy rồi",
+        cancelButtonText: "Huỷ"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+            const tallyInputs = document.querySelectorAll(".Tally input");
 
-// Hàm xử lý khi nút được giữ trong 3 giây
-function handleLongPress() {
-    const tallyInputs = document.querySelectorAll(".Tally input");
+            tallyInputs.forEach(input => {
+                input.value = 0;
+                localStorage.removeItem('historyLogs');
+                document.getElementById("HistoryTally").innerHTML = '';
+            });
 
-    tallyInputs.forEach(input => {
-        input.value = 0;
-        localStorage.removeItem('historyLogs');
-        document.getElementById("HistoryTally").innerHTML = '';
+            Done('Đặt lại thành công.');
+            saveToLocalStorage();
+        }
     });
+});
 
-    alert('Đặt lại thành công.');
-    saveToLocalStorage(); // Lưu trạng thái mới vào localStorage nếu cần
+
+
+const deleteAllButton = document.getElementById("DeleteAll");
+
+deleteAllButton.addEventListener("click", function () {
+    Swal.fire({
+        title: "Bạn muốn xoá toàn bộ dữ liệu ?",
+        text: "Bao gồm người chơi, điểm số và lịch sử.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yah sure chắc chắn là như vậy rồi",
+        cancelButtonText: "Huỷ"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.removeItem('tallies');
+            localStorage.removeItem('historyLogs');
+            document.getElementById("Tally").innerHTML = '';
+            document.getElementById("HistoryTally").innerHTML = '';
+            document.querySelector('.HistoryTally').classList.add('Hidden');
+
+            Done('Xóa tất cả thành công.');
+        }
+    });
+});
+
+
+
+
+
+function Done(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'success'
+    )
 }
 
-resetButton.addEventListener("click", function () {
-    alert('Nhấn và giữ 3 giây để đặt lại số điểm & lịch sử.');
-});
+function Fail(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'error'
+    )
+}
+function Warning(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'warning'
+    )
+}
+function Info(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'info'
+    )
+}
 
-
-
-
-
-deleteAllButton.addEventListener("touchstart", function () {
-    pressTimer = window.setTimeout(function () {
-        localStorage.removeItem('tallies');
-        localStorage.removeItem('historyLogs');
-        document.getElementById("Tally").innerHTML = '';
-        document.getElementById("HistoryTally").innerHTML = '';
-        document.querySelector('.HistoryTally').classList.add('Hidden');
-
-        alert('Xóa tất cả thành công.');
-    }, 2000);
-});
-
-
-
-
-
-var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-if (isMobile) {
-    // Dành cho di động
-    deleteAllButton.addEventListener("click", function () {
-        alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
-    });
-
-    deleteAllButton.addEventListener("touchend", function () {
-        window.clearTimeout(pressTimer);
-    });
-
-    deleteAllButton.addEventListener("touchleave", function () {
-        window.clearTimeout(pressTimer);
-    });
-
-    // Dành cho di động
-    resetButton.addEventListener("touchstart", function () {
-        pressTimer = window.setTimeout(handleLongPress, 2000);
-    });
-
-    resetButton.addEventListener("touchend", function () {
-        window.clearTimeout(pressTimer);
-    });
-
-    resetButton.addEventListener("touchleave", function () {
-        window.clearTimeout(pressTimer);
-    });
-
-} else {
-    // Dành cho máy tính
-    deleteAllButton.addEventListener("click", function () {
-        alert('Nhấn và giữ 3 giây để xoá toàn bộ.');
-    });
-
-    deleteAllButton.addEventListener("touchend", function () {
-        window.clearTimeout(pressTimer);
-    });
-
-    deleteAllButton.addEventListener("touchleave", function () {
-        window.clearTimeout(pressTimer);
-    });
-
-    // Dành cho máy tính
-    resetButton.addEventListener("mousedown", function () {
-        pressTimer = window.setTimeout(handleLongPress, 2000);
-    });
-
-    resetButton.addEventListener("mousend", function () {
-        window.clearTimeout(pressTimer);
-    });
-
-    resetButton.addEventListener("mouseout", function () {
-        window.clearTimeout(pressTimer);
+function Confirm(T1) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
     });
 }

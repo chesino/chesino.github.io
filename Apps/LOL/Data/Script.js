@@ -269,12 +269,12 @@ async function fetchMatchHistory(puuid) {
 
                     const defaultItemValue = 100; // Giá trị mặc định cho item khi là 0
 
-                    const item0Src = participant.item0 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item0}.png` : `/DATA/logo.png`;
-                    const item1Src = participant.item1 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item1}.png` : `/DATA/logo.png`;
-                    const item2Src = participant.item2 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item2}.png` : `/DATA/logo.png`;
-                    const item3Src = participant.item3 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item3}.png` : `/DATA/logo.png`;
-                    const item4Src = participant.item4 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item4}.png` : `/DATA/logo.png`;
-                    const item5Src = participant.item5 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/14.1.1/img/item/${participant.item5}.png` : `/DATA/logo.png`;
+                    const item0Src = participant.item0 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/${VER}/img/item/${participant.item0}.png` : `/DATA/logo.png`;
+                    const item1Src = participant.item1 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/${VER}/img/item/${participant.item1}.png` : `/DATA/logo.png`;
+                    const item2Src = participant.item2 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/${VER}/img/item/${participant.item2}.png` : `/DATA/logo.png`;
+                    const item3Src = participant.item3 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/${VER}/img/item/${participant.item3}.png` : `/DATA/logo.png`;
+                    const item4Src = participant.item4 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/${VER}/img/item/${participant.item4}.png` : `/DATA/logo.png`;
+                    const item5Src = participant.item5 !== 0 ? `https://ddragon.leagueoflegends.com/cdn/${VER}/img/item/${participant.item5}.png` : `/DATA/logo.png`;
 
 
                     matchInfoElem.innerHTML = `
@@ -460,3 +460,4 @@ function toggleBG() {
         toggle = 0
     }
 }
+
