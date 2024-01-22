@@ -59,8 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
     blur.addEventListener('click', closeTab);
 });
 
-
-
 let cashAmount = 0;
 let cardAmount = 0;
 let totalAmount = 0;
@@ -222,7 +220,6 @@ function SaveHistory() {
     localStorage.setItem('transactionsHistory', JSON.stringify(transactionsHistory));
 }
 
-
 function recordDebt() {
     const debtValue = parseInt(document.getElementById('debtAmount').dataset.rawValue) || 0;
     const payWho = document.getElementById('payWho').value;
@@ -325,7 +322,6 @@ function saveSavings() {
     changeColor();
 }
 
-
 function withdrawSavings() {
     let transactionMessage = new Date().toLocaleTimeString() + ' ' + new Date().toLocaleDateString() + ' - ';
     const withdrawalValue = parseInt(document.getElementById('withdrawalAmount').dataset.rawValue) || 0;
@@ -351,11 +347,6 @@ function withdrawSavings() {
     Rule503020();
     changeColor();
 }
-
-
-
-
-
 
 function TinhTienMuaHang() {
     var GiaGocSanPham = document.getElementById('GiaGocSanPham').dataset.rawValue;
@@ -396,11 +387,6 @@ function TinhTienMuaHang() {
 
 }
 
-
-
-
-
-
 function displayTransaction(message) {
     const transactionDiv = document.getElementById('Transactions');
     const p = document.createElement('p');
@@ -410,7 +396,6 @@ function displayTransaction(message) {
 }
 
 
-// Hàm thực hiện chức năng xuất giao dịch ra file text
 function exportTransactions() {
     const textToSave = transactionsHistory.join('\n');
     const blob = new Blob([textToSave], { type: 'text/plain' });
@@ -467,11 +452,6 @@ function changeColor() {
 
 // Call the function when the page loads and whenever the values change
 window.addEventListener('load', changeColor);
-
-
-function Clear() {
-    localStorage.clear();
-}
 
 const inputElements = document.querySelectorAll('.inputFM');
 inputElements.forEach((input) => {
@@ -560,119 +540,6 @@ function Rule503020() {
     }
 
 }
-
-
-
-function handlePasteClick() {
-    navigator.clipboard.readText()
-        .then(function (clipboardData) {
-            const inputText = clipboardData;
-
-            const regexA = /[+-]?\d{1,3}(?:,\d{3})*(?:,\d{1,3})?(?= VND(?!\.))/;
-            const regexB = /\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}/;
-            const regexC = /\d{1,3}(?:,\d{3})*(?= VND\.)/;
-            const regexE = /toi\d{10} [A-Z\s]+|toi \d+ [A-Z\s]+/g;
-            const regexF = /(?<=\()[^)]+(?=\))/;
-            const regexD = /tu \d+ [A-Z\s]+/g;
-            const regexArr = [regexA, regexB, regexC, regexE, regexF, regexD];
-
-            const matches = regexArr.map(regex => inputText.match(regex));
-
-            let transactionMessage = '';
-
-            if (matches[0] !== null) {
-                var SoTienGD = matches[0].toLocaleString().replace(/,/g, '');
-                var SoTienGDr = matches[0].toLocaleString();
-                var ThoiGianGD = '[' + matches[1].toLocaleString().replace(/-/g, '/') + ']';
-
-                if (matches[3] !== null) {
-                    var NguoiNhan = matches[3].toLocaleString().replace('toi', 'Chuyển tiền tới ').replace(/^toi | N$/g, '');
-                    var NguoiGui = matches[5].toLocaleString().replace('tu', 'Từ ');
-                    if (SoTienGD < 0) {
-                        transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiNhan + '.';
-                    } else {
-                        transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiGui + NguoiNhan + '.';
-                    }
-
-                } else {
-                    if (SoTienGD < 0) {
-                        transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ.';
-                    } else {
-                        transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ.';
-                    }
-                }
-
-                displayTransaction(transactionMessage);
-                transactionsHistory.unshift(transactionMessage);
-                SaveHistory();
-                displayTransactionHistory();
-
-
-                if (SoTienGD < 0) {
-                    addMoney(0, Number(SoTienGD));
-                    return;
-                }
-                if (SoTienGD > 0) {
-                    addMoney(0, Number(SoTienGD));
-                    return;
-                }
-            } else {
-                Fail('Không đúng định dạng hoặc không có dữ liệu.')
-            }
-        })
-        .catch(function () {
-            Warning('🤔 Có sao chép gì đâu mà dán.')
-        });
-    Rule503020();
-}
-
-function Done(T1, T2) {
-    Swal.fire(
-        T1,
-        T2,
-        'success'
-    )
-}
-
-function Fail(T1, T2) {
-    Swal.fire(
-        T1,
-        T2,
-        'error'
-    )
-}
-function Warning(T1, T2) {
-    Swal.fire(
-        T1,
-        T2,
-        'warning'
-    )
-}
-function Info(T1, T2) {
-    Swal.fire(
-        T1,
-        T2,
-        'info'
-    )
-}
-function Trans(T1) {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
-    Toast.fire({
-        icon: "success",
-        title: T1
-    });
-}
-
 
 function exportData() {
     const dataToExport = {
@@ -778,3 +645,55 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+function Done(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'success'
+    )
+}
+
+function Fail(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'error'
+    )
+}
+function Warning(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'warning'
+    )
+}
+function Info(T1, T2) {
+    Swal.fire(
+        T1,
+        T2,
+        'info'
+    )
+}
+function Trans(T1) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: T1
+    });
+}
+
+function Clear() {
+    localStorage.clear();
+}
