@@ -451,6 +451,7 @@ button {
 }
 
 .CardMember {
+    text-align: left;
     cursor: pointer;
     background-size: cover;
     background-position: center;
