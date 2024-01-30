@@ -573,12 +573,5 @@ function IPme() {
 
 function AETH() {
   var AETH = document.getElementById("AETH");
-  AETH.style.display = 'block';
-  AETH.innerHTML = `
-  <h1><i class="fa-regular fa-id-badge"></i> AE Trá Hình</h1>
-                <div class="Card">
-                    <div class='forms-studio'>
-                        <iframe src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
-                    </div>
-                </div>`
+  AETH.classList.remove('Hidden');
 }

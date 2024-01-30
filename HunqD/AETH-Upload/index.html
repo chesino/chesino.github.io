@@ -16,28 +16,50 @@
     <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
 
     <!-- CSS của web -->
-    <link rel="stylesheet" href="./Data/style.css">
-    <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
-
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 
 </head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background-color: #111;
+        overflow: hidden;
+    }
+    iframe {
+        width: 100%;
+        border: none;
+        height: 100vh;
+    }
+
+    a {
+        position: fixed;
+        color: #fff;
+        background-color: #000;
+        padding: 12px;
+        font-size: 22px;
+        border-radius: 12px;
+        left: 10px;
+        bottom: 20px;
+        z-index: 9999;
+    }
+</style>
 
 <body>
-    <div id="toggle-button"></div>
-    <div class="Container">
-        <div class="Block">
-            <h1>Mua sắm</h1>
-            <input type="file" name="" id="">
-            <input type="text" placeholder="Tên mục tiêu">
-        </div>
-
+    <a href="/HunqD/index.html">
+        <i class="fa-solid fa-house"></i>
+    </a>
+    <div class='forms-studio'>
+        <iframe
+            src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
     </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="./Data/script.js"></script>
-<script src="/DATA/DarkMode.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
 
 </html>

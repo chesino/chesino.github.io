@@ -76,7 +76,7 @@ button {
     overflow-x: hidden;
 }
 
-.Box {
+.CheckFriend .Box {
     color: var(--TBox);
     text-align: center;
     width: 80%;
@@ -87,7 +87,7 @@ button {
     overflow: hidden;
 }
 
-.Box h1.Name span {
+.CheckFriend .Box h1.Name span {
     color: var(--T3Box);
 }
 
@@ -384,7 +384,21 @@ button {
     background-color: var(--Icon);
     border-radius: 50%;
 }
-
+.Block .Card .Box {
+    background-color: #111;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.Block .Card .Box:last-child{
+    margin: 0;
+}
+.Block .Card .Box a {
+    color: #0066ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
 .red {
     color: var(--T3Box);
     margin-bottom: 10px;
@@ -557,9 +571,7 @@ strong {
     display: block;
 }
 
-.AETH {
-    display: none;
-}
+
 .forms-studio {
     position: relative;
     overflow: hidden;
