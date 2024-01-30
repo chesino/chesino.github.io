@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Tiêu đề trang -->
+    <title>Giảm dung lượng ảnh</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/Data/logo.png">
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
+
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+
+</head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 100vh;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="file"] {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #imageInfo {
+        margin-top: 20px;
+    }
+
+    p {
+        font-weight: bold;
+        margin:  0;
+    }
+
+    .image-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 10px;
+        margin-top: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Giảm dung lượng ảnh</h1>
+
+        <input type="file" id="imageInput" accept="image/*">
+
+        <select id="compressionLevel">
+            <option value="0.9">Chất lượng cao</option>
+            <option value="0.7">Trung bình</option>
+            <option value="0.5">Thấp</option>
+            <option value="0.1">Siêu nhẹ</option>
+        </select>
+
+        <button onclick="compressImage()">Giảm dung lượng</button>
+        
+        <div class="image-container">
+            <div class="A">
+                <img id="originalImage" alt="Ảnh gốc" src="/DATA/logo.png">
+                <p id="originalSize"></p>
+            </div>
+            <div class="B">
+                <img id="compressedImage" alt="Ảnh giảm dung lượng" src="/DATA/logo.png">
+                <p id="compressedSize"></p>
+            </div>
+        </div>
+        <button id="downloadImage" onclick="downloadImage()" style="display: none;">Tải về</button>
+        <button id="resetButton" onclick="resetPage()" style="display: none;">Làm mới trang</button>
+
+    </div>
+
+</body>
+<script>
+    document.getElementById('imageInput').addEventListener('change', function (e) {
+        var originalImage = document.getElementById('originalImage');
+        var compressedImage = document.getElementById('compressedImage');
+
+        var file = e.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            originalImage.src = e.target.result;
+            updateOriginalSize(file.size);
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    function compressImage() {
+        var originalImage = document.getElementById('originalImage');
+        var compressedImage = document.getElementById('compressedImage');
+        var compressionLevel = document.getElementById('compressionLevel').value;
+        document.getElementById('imageInput').style.display = 'none';
+        document.getElementById('compressionLevel').style.display = 'none';
+
+
+        var img = new Image();
+        img.src = originalImage.src;
+
+        img.onload = function () {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+
+            canvas.toBlob(function (blob) {
+                var url = URL.createObjectURL(blob);
+                compressedImage.src = url;
+                updateCompressedSize(blob.size);
+            }, 'image/jpeg', compressionLevel);
+        };
+        document.getElementById('resetButton').style.display = 'inline-block';
+        document.getElementById('downloadImage').style.display = 'inline-block';
+    }
+
+    function updateOriginalSize(size) {
+        var originalSize = document.getElementById('originalSize');
+        originalSize.textContent = formatSize(size);
+    }
+
+    function updateCompressedSize(size) {
+        var compressedSize = document.getElementById('compressedSize');
+        compressedSize.textContent =  formatSize(size);
+    }
+
+    function formatSize(bytes) {
+        var kilobytes = bytes / 1024;
+
+        if (kilobytes < 1024) {
+            return kilobytes.toFixed(2) + ' KB';
+        } else {
+            var megabytes = kilobytes / 1024;
+            return megabytes.toFixed(2) + ' MB';
+        }
+    }
+
+    function downloadImage() {
+        var compressedImage = document.getElementById('compressedImage');
+        var link = document.createElement('a');
+        link.href = compressedImage.src;
+        link.download = 'compressed_image.jpg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function resetPage() {
+        location.reload();
+    }
+
+</script>
+
+</html>
