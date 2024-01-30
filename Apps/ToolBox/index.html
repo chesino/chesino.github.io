@@ -1,134 +1,147 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <!-- Tiêu đề trang -->
-  <title>Chesino</title>
+    <!-- Tiêu đề trang -->
+    <title>Chesino</title>
 
-  <!-- Bộ giải mã và phân loại thiết bị -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <!-- Biểu tượng cho web -->
-  <link rel="icon" href="/Data/logo.png">
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/Data/logo.png">
 
-  <!-- Biểu tượng iPhone -->
-  <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
 
-  <!-- CSS của web -->
-  <link rel="stylesheet" href="./Data/style.css">
-  <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
-  
-  <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Data/style.css">
+    <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
+
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-  <div id="toggle-button" ></div>
-  <div class="Container">
-    <div class="Block">
-      <div id="main">
-  
-        <div class="section">
-            <div class="tooltip">?
-                <div>
-                    <h3>Tính phần trăm của một giá trị.</h3>
-                    <p>Đối với tính toán 20% của 80 viết hộp 20 đầu tiên, hộp thứ hai 80.</p>
+    <div id="toggle-button"></div>
+    <div class="Container">
+        <div class="Block">
+            <div id="main">
+
+                <div class="section">
+                    <div class="tooltip">?
+                        <div>
+                            <h3>Tính phần trăm của một giá trị.</h3>
+                            <p>Đối với tính toán 20% của 80 viết hộp 20 đầu tiên, hộp thứ hai 80.</p>
+                        </div>
+                    </div>
+                    <div class="tooltip" id="A_sol">?
+                        <div>
+                            <p><strong>Dung dịch:</strong></p>
+                            <p><code></code></p>
+                        </div>
+                    </div>
+                    <div class="tool">
+                        <p class="head">Tính x% của a:</p>
+                        <ul class="list">
+                            <li class="nobr"><input placeholder="x" type="tel" class="input inEl A_F" data-id="A_F"
+                                    id="A_2"> <strong>% </strong>của</li>
+                            <li class="nobr"> <input placeholder="a" type="tel" class="input inEl" id="A_1"></li>
+                            <li class="nobr toRight"><strong>=</strong> <input type="text" class="input" id="A_S"></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="tooltip" id="A_sol">?
-                <div>
-                    <p><strong>Dung dịch:</strong></p>
-                    <p><code></code></p>
-                </div>
-            </div>
-            <div class="tool">
-                <p class="head">Tính x% của a:</p>
-          <ul class="list">
-                <li class="nobr"><input placeholder="x" type="tel" class="input inEl A_F" data-id="A_F" id="A_2"> <strong>% </strong>của</li>  
-          <li class="nobr"> <input placeholder="a" type="tel" class="input inEl" id="A_1"></li>  
-          <li class="nobr toRight"><strong>=</strong> <input type="text" class="input" id="A_S"></li>
-          </ul>
-            </div>
-        </div>
-        <div class="section">
-            <div class="tooltip">?
-                <div>
-                    <h3>Làm thế nào để tính toán tỷ lệ phần trăm một số là của một số khác.</h3>
-                    <p>Viết thư cho hộp 20 đầu tiên, hộp thứ hai 80 để tính toán tỷ lệ phần trăm 20 của 80.</p>
-                </div>
-            </div>
-            <div class="tooltip" id="B_sol">?
-                <div>
-                    <p><strong>Dung dịch:</strong></p>
-                    <p><code></code></p>
-                </div>
-            </div>
-            <div class="tool">
-                <p class="head">Tính xem x là bao nhiêu % của a:</p>
-              
-                   
-                        <input placeholder="x" type="tel" class="input inEl B_F" data-id="B_F" id="B_1"> là bao nhiêu % của
-                    
-                   
+                <div class="section">
+                    <div class="tooltip">?
+                        <div>
+                            <h3>Làm thế nào để tính toán tỷ lệ phần trăm một số là của một số khác.</h3>
+                            <p>Viết thư cho hộp 20 đầu tiên, hộp thứ hai 80 để tính toán tỷ lệ phần trăm 20 của 80.</p>
+                        </div>
+                    </div>
+                    <div class="tooltip" id="B_sol">?
+                        <div>
+                            <p><strong>Dung dịch:</strong></p>
+                            <p><code></code></p>
+                        </div>
+                    </div>
+                    <div class="tool">
+                        <p class="head">Tính xem x là bao nhiêu % của a:</p>
+
+
+                        <input placeholder="x" type="tel" class="input inEl B_F" data-id="B_F" id="B_1"> là bao nhiêu %
+                        của
+
+
                         <input placeholder="a" type="tel" class="input inEl" id="B_2">
-                   
-                   
+
+
                         <span class="nobr toRight">
                             <strong>=</strong>
                             <input type="text" class="input" id="B_S"> <strong>%</strong>
                         </span>
-                    
-                
-               
-               
-              
-            </div>
-        </div>
-        <div class="section">
-            <div class="tooltip">?
-                <div>
-                    <h3>Tính phần trăm của giá trị thay đổi</h3>
-                    <p>Viết thư cho hộp đầu tiên, 20 hộp thứ hai 40 để tính toán tỷ lệ phần trăm của giá trị thay đổi.</p>
-                </div>
-            </div>
-            <div class="tooltip" id="C_sol">?
-                <div>
-                    <p><strong>Dung dịch:</strong></p>
-                    <p><code></code></p>
-                </div>
-            </div>
-            <div class="tool">
-                <p class="head">Tính phần trăm của giá trị thay đổi:</p>
-                Tỷ lệ tăng / giảm <input placeholder="x" type="tel" class="input inEl C_F" data-id="C_F" id="C_1"> &nbsp; - &nbsp; <span class="nobr"><input placeholder="a" type="tel" class="input inEl" id="C_2"></span> <span class="nobr toRight"><strong>=</strong> <input type="text" class="input" id="C_S"> <strong>%</strong></span>
-            </div>
-        </div>
-        <div class="section">
-            <div class="tooltip">?
-                <div>
-                    <h3>Để tăng hoặc giảm một tỷ lệ cụ thể.</h3>
-                    <p>Viết thư cho hộp đầu tiên 10, hộp thứ ba 80 so với hộp chọn thứ hai (tăng / giảm) để tính tăng hoặc giảm 10 phần trăm của 80.</p>
-                </div>
-            </div>
-            <div class="tooltip" id="D_sol">?
-                <div>
-                    <p><strong>Dung dịch:</strong></p>
-                    <p><code></code></p>
-                </div>
-            </div>
-            <div class="tool">
-                <p class="head">Để tăng hoặc giảm một tỷ lệ cụ thể:</p>
-                <span class="nobr"><input placeholder="x" type="tel" class="input inEl D_F" data-id="D_F" id="D_2"> <strong>%</strong></span> <select class="input inEl" id="D_3"><option value="+">tăng</option><option value="-">giảm</option></select>
-                của <input placeholder="a" type="tel" class="input inEl" id="D_1"><span class="nobr toRight"><strong>=</strong> <input type="text" class="input" id="D_S"></span>
-            </div>
-        </div>
-    
-        
-     
-        
-    </div>
-    </div>
 
-  </div>
+
+
+
+
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="tooltip">?
+                        <div>
+                            <h3>Tính phần trăm của giá trị thay đổi</h3>
+                            <p>Viết thư cho hộp đầu tiên, 20 hộp thứ hai 40 để tính toán tỷ lệ phần trăm của giá trị
+                                thay đổi.</p>
+                        </div>
+                    </div>
+                    <div class="tooltip" id="C_sol">?
+                        <div>
+                            <p><strong>Dung dịch:</strong></p>
+                            <p><code></code></p>
+                        </div>
+                    </div>
+                    <div class="tool">
+                        <p class="head">Tính phần trăm của giá trị thay đổi:</p>
+                        Tỷ lệ tăng / giảm <input placeholder="x" type="tel" class="input inEl C_F" data-id="C_F"
+                            id="C_1"> &nbsp; - &nbsp; <span class="nobr"><input placeholder="a" type="tel"
+                                class="input inEl" id="C_2"></span> <span class="nobr toRight"><strong>=</strong> <input
+                                type="text" class="input" id="C_S"> <strong>%</strong></span>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="tooltip">?
+                        <div>
+                            <h3>Để tăng hoặc giảm một tỷ lệ cụ thể.</h3>
+                            <p>Viết thư cho hộp đầu tiên 10, hộp thứ ba 80 so với hộp chọn thứ hai (tăng / giảm) để tính
+                                tăng hoặc giảm 10 phần trăm của 80.</p>
+                        </div>
+                    </div>
+                    <div class="tooltip" id="D_sol">?
+                        <div>
+                            <p><strong>Dung dịch:</strong></p>
+                            <p><code></code></p>
+                        </div>
+                    </div>
+                    <div class="tool">
+                        <p class="head">Để tăng hoặc giảm một tỷ lệ cụ thể:</p>
+                        <span class="nobr"><input placeholder="x" type="tel" class="input inEl D_F" data-id="D_F"
+                                id="D_2"> <strong>%</strong></span> <select class="input inEl" id="D_3">
+                            <option value="+">tăng</option>
+                            <option value="-">giảm</option>
+                        </select>
+                        của <input placeholder="a" type="tel" class="input inEl" id="D_1"><span
+                            class="nobr toRight"><strong>=</strong> <input type="text" class="input" id="D_S"></span>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

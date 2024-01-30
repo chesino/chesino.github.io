@@ -322,8 +322,8 @@ kbd.selected {
     float: right;
     margin-left: 10px;
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    width: 28px;
+    height: 28px;
     background: #fff;
     color: #000;
     padding: 0 5px 10px 5px;
@@ -370,8 +370,7 @@ kbd.selected {
     color:#4285f4
 }
 
-.tip-social {
-}
+
 
 .social {
     margin-top:5px;
