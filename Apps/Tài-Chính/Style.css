@@ -46,12 +46,14 @@ button {
     padding: 0 10px ;
 }
 .Blur {
+    right: 0;
     top: 0;
     display: none;
     position: fixed;
     height: 100vh;
     width: 100%;
     background-color: #000000ee;
+    z-index: 2;
 }
 .Card {
     background-color: var(--CARD);
@@ -68,13 +70,13 @@ button {
 }
 
 .Container .Wallet {
-    display: grid;
-    grid-template-columns: calc(50% - 5px) calc(50% - 5px);
-    grid-template-rows: auto auto;
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .Wallet .Card.Money {
+    width: calc(50% - 2.5px);
     margin: 0;
     overflow: auto;
 }
@@ -111,7 +113,15 @@ button {
 .Wallet .Card.Money h1.red {
     color: #ff4545;
 }
-
+.Wallet532{
+    display: none;
+}
+.Wallet532.Show{
+    width: 100% !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;    
+}
 
 .Card hr {
     height: 2px;
@@ -191,6 +201,7 @@ button {
     min-height: 320px;
     background-color: #000000;
     border: 3px solid var(--MAIN);
+    z-index: 3;
 }
 
 .Card.Tabcontent h1,
@@ -211,7 +222,7 @@ button {
     color: black;
     font-size: 22px;
     font-weight: bold;
-    padding: 8px;
+    padding: 10px;
     width: 50px;
     margin: 2px 0;
     border-radius: 10px;

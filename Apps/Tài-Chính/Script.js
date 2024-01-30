@@ -161,6 +161,9 @@ function addMoney(cash, card) {
     document.getElementById('card').dataset.rawValue = 0;
     document.getElementById('cashWithdraw').dataset.rawValue = 0;
     document.getElementById('cardWithdraw').dataset.rawValue = 0;
+    
+    document.getElementById('cashNote').value = '';
+    document.getElementById('cashWithdrawNote').value = '';
 
     localStorage.setItem('cashAmount', cashAmount);
     localStorage.setItem('cardAmount', cardAmount);
@@ -697,3 +700,36 @@ function Trans(T1) {
 function Clear() {
     localStorage.clear();
 }
+
+function Wallet532() {
+    var W532 = document.getElementById('Wallet532');
+    
+    // Toggle the "Show" class
+    W532.classList.toggle("Show");
+
+    // Check if the "Show" class is present after toggling
+    var isWalletVisible = W532.classList.contains("Show");
+
+    // Save the state to local storage
+    localStorage.setItem('Wallet532State', isWalletVisible);
+}
+
+// Load the initial state from local storage when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    var W532 = document.getElementById('Wallet532');
+    
+    // Get the stored state from local storage
+    var storedState = localStorage.getItem('Wallet532State');
+
+    // If there's a stored state, apply it to the element
+    if (storedState !== null) {
+        var isWalletVisible = JSON.parse(storedState);
+        
+        // Toggle the "Show" class based on the stored state
+        if (isWalletVisible) {
+            W532.classList.add("Show");
+        } else {
+            W532.classList.remove("Show");
+        }
+    }
+});

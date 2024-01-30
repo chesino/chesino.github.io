@@ -62,6 +62,10 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <strong>Mua đồ</strong>
                 </div>
+                <div class="Func" onclick="Wallet532()">
+                    <i class="fa-regular fa-lightbulb"></i>
+                    <strong>Gợi ý</strong>
+                </div>
             </div>
         </div>
 
@@ -75,7 +79,20 @@
                 <p>Tiền thẻ</p>
                 <h1><span id="displayCard">0</span>đ</h1>
             </div>
-            <div class="Card Money"
+            <div class="Card Money" onclick="Info('Nợ','Đây là khoản tiền bạn đang nợ.')">
+                <p>Nợ</p>
+                <h1><span id="tienno">0</span>đ</h1>
+            </div>
+            <div class="Card Money Alert" onclick="Note()">
+                <p>⚠ Cảnh báo</p>
+                <div class="marquee-parent">
+                    <div class="marquee-child">
+                        <p id="marquee">Đừng mua đồ Shopee nữa, bớt trà sữa lại tiết kiệm đi nào 🎉✨</p>
+                    </div>
+                </div>
+            </div>
+            <div class="Wallet532" id="Wallet532">
+                <div class="Card Money"
                 onclick="Info('Thiết yếu','Đây là gợi ý khoản tiền có thể chi tiêu cho nhu cầu thiết yếu.')">
                 <p>Thiết yếu <span id="ptsave50">50%</span></p>
                 <h1><span id="ThietYeu">0</span>đ</h1>
@@ -94,17 +111,6 @@
                 <p>Tổng tài sản <span>100%</span></p>
                 <h1><span id="ToltalMoney">0</span>đ</h1>
             </div>
-            <div class="Card Money" onclick="Info('Nợ','Đây là khoản tiền bạn đang nợ.')">
-                <p>Nợ</p>
-                <h1><span id="tienno">0</span>đ</h1>
-            </div>
-            <div class="Card Money Alert" onclick="Note()">
-                <p>⚠ Cảnh báo</p>
-                <div class="marquee-parent">
-                    <div class="marquee-child">
-                        <p id="marquee">Đừng mua đồ Shopee nữa, bớt trà sữa lại tiết kiệm đi nào 🎉✨</p>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -174,11 +180,17 @@
 
                 <br>
                 <button onclick="TinhTienMuaHang()">Tính ngay</button>
-
-
             </div>
+
             <div class="Card Tabcontent" id="F">
-                <h1>Tính toán</h1>
+                <h1>Rút tiền</h1>
+                <label for="savingsAmount">Số tiền tiết kiệm:</label>
+                <input type="text" class="inputFM" id="savingsAmount" name="savingsAmount" pattern="[0-9]*">
+                <button onclick="saveSavings()">Tiết kiệm</button>
+                <br>
+                <label for="withdrawalAmount">Rút tiền tiết kiệm:</label>
+                <input type="text" class="inputFM" id="withdrawalAmount" name="withdrawalAmount" pattern="[0-9]*">
+                <button onclick="withdrawSavings()">Rút tiền</button>
             </div>
         </div>
 
