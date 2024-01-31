@@ -5,8 +5,8 @@
 }
 
 :root {
-    --BG: #0098ff;
-    --CheckFriend: #0098ff;
+    --BG: #64bfff;
+    --CheckFriend: #64bfff;
     --Box: #fff;
     --TBox: #000;
     --T2Box: #111;
@@ -385,7 +385,7 @@ button {
     border-radius: 50%;
 }
 .Block .Card .Box {
-    background-color: #111;
+    background-color: var(--Setting);;
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 10px;

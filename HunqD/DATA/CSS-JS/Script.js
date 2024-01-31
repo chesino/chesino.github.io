@@ -1,6 +1,6 @@
 const Version = '1.2'
 
-var timeUpdate = new Date('2023-12-20T00:00:00');
+var timeUpdate = new Date('2024-01-31T23:00:00');
 var timeDifference = new Date() - timeUpdate;
 let UpdateTime = ''
 // Chuyển đổi chênh lệch thời gian từ milliseconds sang phút và ngày
