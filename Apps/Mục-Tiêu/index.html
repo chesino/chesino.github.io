@@ -2,115 +2,123 @@
 <html>
 
 <head>
-    <!-- Tiêu đề trang -->
-    <title>Chesino</title>
+  <!-- Tiêu đề trang -->
+  <title>Chesino</title>
 
-    <!-- Bộ giải mã và phân loại thiết bị -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Bộ giải mã và phân loại thiết bị -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-    <!-- Biểu tượng cho web -->
-    <link rel="icon" href="/Data/logo.png">
+  <!-- Biểu tượng cho web -->
+  <link rel="icon" href="/Data/logo.png">
 
-    <!-- Biểu tượng iPhone -->
-    <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
+  <!-- Biểu tượng iPhone -->
+  <link rel="apple-touch-icon" href="/Data/logo.png" sizes="150x150">
 
-    <!-- CSS của web -->
-    <link rel="stylesheet" href="./Data/style.css">
-    <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
+  <!-- CSS của web -->
+  <link rel="stylesheet" href="./Data/style.css">
+  <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
 
-    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-    <div class="Container">
-        <div class="Home">
-            <div class="BlockA">
-                <div class="Grid">
-                    <div class="input">
-                        <label for="">Tổng thu nhập hàng tháng</label>
-                        <input type="text">
-                    </div>
-                    <div class="input">
-                        <label for="">Quốc gia</label>
-                        <button id="Nation">
-                            VN
-                        </button>
-                    </div>
-                </div>
-                <div class="Grid">
-                    <div class="input">
-                        <label for="">Số ngày mỗi tuần</label>
-                        <input type="text">
-                    </div>
-                    <div class="input">
-                        <label for="">Số giờ mỗi ngày</label>
-                        <input type="text">
-                    </div>
-                </div>
-                <div class="input">
-                    <label for="">Mức tiêu dùng cố định tháng</label>
-                    <input type="text">
-                </div>
-    
-                <div class="input">
-                    <label for="">Mục tiêu tài sản dài hạn</label>
-                    <input type="text">
-                </div>
-            </div>
-            <div class="BlockB">
-                <table>
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Gốc</th>
-                        <th>Đã chi tiêu</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Mỗi giờ</td>
-                        <td>96.153.85đ</td>
-                        <td>76.923,08đ</td>
-                      </tr>
-                      <tr>
-                        <td>Mỗi ngày</td>
-                        <td>230.769,23đ</td>
-                        <td>184.615,38đ</td>
-                      </tr>
-                      <tr>
-                        <td>Mỗi năm</td>
-                        <td>60.000.000đ</td>
-                        <td>48.000.000đ</td>
-                      </tr>
-                      <tr>
-                        <td>Đánh giá</td>
-                        <td><strong>Thấp</strong></td>
-                        <td>Trung Bình so với mức chi tiêu bình quân của Việt Nam 2023</td>
-                      </tr>
-                      <tr>
-                        <td>Mục tiêu</td>
-                        <td></td>
-                        <td>~2 năm</td>
-                      </tr>
-                      <tr>
-                    </tbody>
-                    <tfoot>
-                        <th>Gợi ý</th>
-                        <th colspan="2">
-                          Bạn nên thu nhập tối thiểu 8.500.000đ/tháng để tốt hơn trong tương lai
-                          <br>
-                          150-200 triệu đồng/năm để có một cuộc sống đầy đủ ở Việt Nam
-                        </th>
-                      </tr>
-                    </tfoot>
-                  </table>
-            </div>
-           
+  <div class="Container">
+    <div class="Home">
+      <div class="BlockA">
+        <div class="Grid">
+          <div class="input">
+            <label for="Total">Tổng thu nhập hàng tháng</label>
+            <input type="text" class="inputFM" id="Total" name="" pattern="[0-9]*">
+          </div>
+          <div class="input">
+            <label for="Nation">Quốc gia</label>
+            <button id="Nation">
+              VN
+            </button>
+          </div>
+        </div>
+        <div class="Grid">
+          <div class="input">
+            <label for="DWeek">Số ngày mỗi tuần</label>
+            <input type="text" id="DWeek" pattern="[0-9]*">
+          </div>
+          <div class="input">
+            <label for="HWeek">Số giờ mỗi tuần</label>
+            <input type="text" id="HWeek" pattern="[0-9]*">
+          </div>
+        </div>
+        <div class="input">
+          <label for="Spend">Mức tiêu dùng cố định tháng</label>
+          <input type="text" class="inputFM" id="Spend" name="Spend" pattern="[0-9]*">
         </div>
 
+        <div class="input">
+          <label for="Target">Mục tiêu tài sản dài hạn</label>
+          <input type="text" class="inputFM" id="Target" name="Target" pattern="[0-9]*">
+        </div>
+        <button onclick="CalcA()">Tính toán</button>
+      </div>
+      <div class="BlockB">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Thu nhập</th>
+              <th>Chi tiêu</th>
+              <th>Tiết kiệm</th>
+              <th>Mục tiêu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Mỗi giờ</th>
+              <td id="resultHour"></td>
+              <td id="resultHour2"></td>
+              <td rowspan="3"  id="resultHour3"></td>
+              <td rowspan="4" id="resultHour4"></td>
+            </tr>
+            <tr>
+              <th>Mỗi ngày</th>
+              <td id="resultDay"></td>
+              <td id="resultDay2"></td>
+            </tr>
+            <tr>
+              <th>Mỗi tuần</th>
+              <td id="resultWekk"></td>
+              <td id="resultWekk2"></td>
+            </tr>
+            <tr>
+              <th>Mỗi năm</th>
+              <td id="resultYear"></td>
+              <td id="resultYear2"></td>
+              <td id="resultYear3"></td>
+            </tr>
+            <tr>
+              <th>Xếp hạng</th>
+              <td id="resultRate"></td>
+              <td id="resultRate2"></td>
+              <td id="resultRate3"></td>
+              <td id="resultRate4"></td>
+            </tr>
+            <tr>
+          </tbody>
+          <tfoot>
+            <th>Gợi ý</th>
+            <th colspan="4">
+              Bạn nên thu nhập tối thiểu 8.500.000đ/tháng để tốt hơn trong tương lai
+              <br>
+              150-200 triệu đồng/năm để có một cuộc sống đầy đủ ở Việt Nam
+            </th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
     </div>
+
+  </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

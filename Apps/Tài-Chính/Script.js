@@ -453,7 +453,6 @@ function changeColor() {
     });
 }
 
-// Call the function when the page loads and whenever the values change
 window.addEventListener('load', changeColor);
 
 const inputElements = document.querySelectorAll('.inputFM');

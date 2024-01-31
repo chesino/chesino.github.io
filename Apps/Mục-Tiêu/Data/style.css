@@ -8,13 +8,11 @@ body {
 }
 
 .Home {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
     padding: 50px 20px;
 }
 .Home .input{
     width: 100% ;
+    margin: 5px 0;
 }
 label {
     font-weight: bold;
@@ -33,6 +31,7 @@ input{
     border-radius: 8px;
 }
 button {
+    cursor: pointer;
     display: block;
     width: 100%;
     background-color: #eee;
@@ -49,13 +48,16 @@ button {
     gap: 10px;
 }
 
-
 table {
-    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+    margin: 10px 0;
     width: 100%;
+    border-collapse: collapse;
   }
 
   th, td {
+    text-align: center;
     border: 1px solid #000;
     padding: 5px;
   }
