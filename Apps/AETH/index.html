@@ -28,6 +28,43 @@
 
 <body>
     <div class="Container">
+        <div class="DynamicIsland" onclick="Dynamic()" id="dynamic">
+            <div class="Action" id="dAction">
+                <div class="Active One" id="dOne">
+                    <div class="Icon">
+                        <img src="./Data/frog.png" alt="" srcset="">
+                    </div>
+                    <div class="Icon" style="width: 30px;">
+                        <img width="100px" src="./Data/wave.gif" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="Active Two" id="dTwo">
+                    <div class="Icon">
+                        <img src="./Data/frog.png" alt="" srcset="">
+                    </div>
+                    <div class="Content">
+                        <p>iPhone</p>
+                        <h1>AE Trá Hình 2.0</h1>
+                    </div>
+                    <div class="Icon">
+                        <i style="rotate: 135deg;" class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="Icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                </div>
+            </div>
+
+            <audio id="myAudio">
+                <source src="./Data/CaoOc20.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <audio id="myAudio2">
+                <source src="./Data/Ringtone.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+        </div>
         <div class="AETH">
             <div class="Head">
                 <h1>AE<span>Trá Hình</span><span>by <strong>M.Hùng</strong></span></h1>
@@ -37,7 +74,7 @@
                 <h1>Danh mục</h1>
                 <p>Chọn 1 mục bất kì</p>
                 <div class="DIVFuncs">
-                    <div class="Func">
+                    <div class="Func" onclick="Info('Đang phát triển')">
                         <div class="Icon">
                             <i class="fa-solid fa-people-group"></i>
                         </div>
@@ -45,7 +82,7 @@
                             Share & GO
                         </div>
                     </div>
-                    <div class="Func">
+                    <div class="Func" onclick="Info('Đang chờ','Đã phát triển nhưng chưa cập nhật.')">
                         <div class="Icon">
                             <i class="fa-solid fa-cloud"></i>
                         </div>
@@ -53,7 +90,7 @@
                             AE Cloud
                         </div>
                     </div>
-                    <div class="Func">
+                    <div class="Func" onclick="Info('Đang chờ','Đã phát triển nhưng chưa cập nhật.')">
                         <div class="Icon">
                             <i class="fa-solid fa-face-laugh-beam"></i>
                         </div>
@@ -61,7 +98,25 @@
                             UNO
                         </div>
                     </div>
-                    <div class="Func">
+                    <div class="Func Active" onclick="Done('Chúc mừng','Bạn là thành viên Premium')">
+                        <div class="Icon">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div class="Label">
+                            Premium
+                        </div>
+                    </div>
+
+                    <div class="Func Active" onclick="Done('Tính năng','Đã bật Dynamic Island')">
+                        <div class="Icon">
+                            <i class="fa-solid fa-mobile-button"></i>
+                        </div>
+                        <div class="Label">
+                            iPhone 15
+                        </div>
+                    </div>
+
+                    <div class="Func" onclick="Info('Sắp ra mắt','Hãy liên hệ Hùng nếu muốn có thêm tính năng mới.')">
                         <div class="Icon">
                             <i class="fa-solid fa-star"></i>
                         </div>
@@ -73,14 +128,14 @@
             </div>
         </div>
 
-        <div class="Block">
+        <div class="Block Hidden">
             <div class="Head">
                 <h1>Share<span>&</span>Go<span>by <strong>AE Trá Hình</strong></span></h1>
                 <p>Chia hoá đơn hoặc ở nhà</p>
             </div>
 
         </div>
-     
+
     </div>
 
 </body>
