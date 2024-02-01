@@ -9,8 +9,8 @@ function Dynamic() {
 
     vDynamic++;
     if (vDynamic == 1) {
-        dAction.style.width = '150px';
-        dAction.style.height = '28px';
+        dAction.style.width = '180px';
+        dAction.style.height = '36px';
         dTwo.style.display = 'none';
         dOne.style.display = 'flex';
         dAudio.currentTime = 0
@@ -29,13 +29,31 @@ function Dynamic() {
     }
     if (vDynamic == 3) {
         vDynamic = 0;
-        dAction.style.width = '90px';
-        dAction.style.height = '28px';
+        dAction.style.width = '120px';
+        dAction.style.height = '36px';
         dOne.style.display = 'none';
         dTwo.style.display = 'none';
         dAudio.pause(); 
         dRingtone.pause();
     }
+}
+
+var vOff = 0;
+function offDynamic() {
+  var dynamic = document.getElementById('dynamic');
+  var voffDynamic = document.getElementById('offDynamic');
+
+  vOff++
+  if (vOff == 1) {
+    dynamic.style.display = 'none';
+    voffDynamic.classList.remove('Active')
+  } else {
+    vOff = 0;
+    dynamic.style.display = 'flex';
+    voffDynamic.classList.add('Active')
+  }
+ 
+
 }
 
 function Done(T1, T2) {
