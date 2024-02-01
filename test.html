@@ -39,15 +39,18 @@
         <button id="stopButton" disabled>Dừng lại</button>
         <button id="captureButton" disabled>Chụp ảnh</button>
         <button id="switchCameraButton" disabled>Chuyển đổi Camera</button>
-
+        <button id="recordVideoButton">Quay Video</button>
+        <button id="wideAngleCameraButton">Camera góc rộng</button>
     </div>
     <script>
-       document.addEventListener('DOMContentLoaded', () => {
+   document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('video');
     const startButton = document.getElementById('startButton');
     const stopButton = document.getElementById('stopButton');
     const captureButton = document.getElementById('captureButton');
     const switchCameraButton = document.getElementById('switchCameraButton');
+    const recordVideoButton = document.getElementById('recordVideoButton');
+    const wideAngleCameraButton = document.getElementById('wideAngleCameraButton');
 
     let mediaRecorder;
     let recordedChunks;
@@ -113,6 +116,8 @@
         stopButton.disabled = false;
         captureButton.disabled = false;
         switchCameraButton.disabled = false;
+        recordVideoButton.disabled = true; // Disable when recording
+        wideAngleCameraButton.disabled = true;
 
         // Dừng quay sau 30 giây
         setTimeout(() => {
@@ -121,6 +126,8 @@
             stopButton.disabled = true;
             captureButton.disabled = true;
             switchCameraButton.disabled = true;
+            recordVideoButton.disabled = false;
+            wideAngleCameraButton.disabled = false;
         }, 30000);
     });
 
@@ -131,6 +138,8 @@
         stopButton.disabled = true;
         captureButton.disabled = true;
         switchCameraButton.disabled = true;
+        recordVideoButton.disabled = false;
+        wideAngleCameraButton.disabled = false;
     });
 
     // Chức năng chụp ảnh
@@ -163,6 +172,69 @@
         const nextDeviceId = devices[nextDeviceIndex].deviceId;
         currentStream = await getMediaStream(nextDeviceId);
         video.srcObject = currentStream;
+    });
+
+    // Chức năng quay video
+    recordVideoButton.addEventListener('click', async () => {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        video.srcObject = stream;
+        currentStream = stream;
+        mediaRecorder = new MediaRecorder(stream);
+        recordedChunks = [];
+
+        mediaRecorder.ondataavailable = (e) => {
+            if (e.data.size > 0) {
+                recordedChunks.push(e.data);
+            }
+        };
+
+        mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            recordedChunks = [];
+
+            // Hiển thị video đã quay
+            const playbackVideo = document.createElement('video');
+            playbackVideo.controls = true;
+            playbackVideo.src = url;
+            document.body.appendChild(playbackVideo);
+        };
+
+        mediaRecorder.start();
+        startButton.disabled = true;
+        stopButton.disabled = false;
+        captureButton.disabled = true;
+        switchCameraButton.disabled = true;
+        recordVideoButton.disabled = true;
+        wideAngleCameraButton.disabled = true;
+
+        // Dừng quay sau 30 giây
+        setTimeout(() => {
+            mediaRecorder.stop();
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            captureButton.disabled = true;
+            switchCameraButton.disabled = true;
+            recordVideoButton.disabled = false;
+            wideAngleCameraButton.disabled = false;
+        }, 30000);
+    });
+
+    // Chức năng chuyển đổi giữa camera góc rộng và các camera khác
+    wideAngleCameraButton.addEventListener('click', async () => {
+        const devices = await getMediaDevices();
+        const wideAngleCamera = devices.find(device => device.label.toLowerCase().includes('wide'));
+
+        if (wideAngleCamera) {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+
+            currentStream = await getMediaStream(wideAngleCamera.deviceId);
+            video.srcObject = currentStream;
+        } else {
+            alert('Không có camera góc rộng nào được tìm thấy.');
+        }
     });
 });
 
