@@ -38,22 +38,90 @@ function Dynamic() {
   }
 }
 
-var vOff = 0;
+var vON = 0;
 function offDynamic() {
   var dynamic = document.getElementById('dynamic');
   var voffDynamic = document.getElementById('offDynamic');
 
-  vOff++
-  if (vOff == 1) {
-    dynamic.style.display = 'none';
-    voffDynamic.classList.remove('Active')
-  } else {
-    vOff = 0;
+  vON++
+  if (vON == 1) {
     dynamic.style.display = 'flex';
     voffDynamic.classList.add('Active')
+  } else {
+    vON = 0;
+    dynamic.style.display = 'none';
+    voffDynamic.classList.remove('Active')
   }
+}
+
+function UNO() {
+  Swal.fire({
+    title: 'Xác nhận mở UNO',
+    text: 'Nếu xác nhận bạn sẽ được chuyển sang UNO.',
+    icon: 'warning',
+
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Xác nhận',
+    cancelButtonText: 'Huỷ'
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire(
+        'Thành công',
+        'Đã mở UNO.',
+        'success',
+        window.open('/Apps/UNO', '_blank')
+      )
+    }
+  })
+}
 
 
+function AEUpload() {
+  Swal.fire({
+    title: 'Xác nhận mở AE Upload',
+    text: 'Nếu xác nhận bạn sẽ được chuyển sang AE Upload.',
+    icon: 'warning',
+
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Xác nhận',
+    cancelButtonText: 'Huỷ'
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire(
+        'Thành công',
+        'Đã mở AE Upload.',
+        'success',
+        window.open('/HunqD/AETH-Upload', '_blank')
+      )
+    }
+  })
+}
+
+function AECloud() {
+  Swal.fire({
+    title: 'Xác nhận mở AE Cloud',
+    text: 'Nếu xác nhận bạn sẽ được chuyển sang AE Cloud.',
+    icon: 'warning',
+
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Xác nhận',
+    cancelButtonText: 'Huỷ'
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire(
+        'Thành công',
+        'Đã mở AE Cloud.',
+        'success',
+        window.open('https://drive.google.com/drive/folders/14yrdFluR8wuzHqUVUThQgCLttLFQmFDe?usp=drive_link', '_blank')
+      )
+    }
+  })
 }
 
 function Done(T1, T2) {
@@ -94,23 +162,10 @@ $("#btnAECloud").click(function () {
     scrollTop: $("#AECloud").offset().top
   }, 2000);
   setTimeout(function () {
-    $("#AETH").css("display", "none");
     $("#Home").css("display", "flex");
   }, 2000);
 });
 
-$("#btnUNO").click(function () {
-  $("#UNO").css("display", "block");
- 
-  $([document.documentElement, document.body]).animate({
-    scrollTop: $("#UNO").offset().top
-  }, 2000);
-
-  setTimeout(function () {
-    $("#AETH").css("display", "none");
-    $("#Home").css("display", "flex");
-  }, 2000);
-});
 
 $("#Home").click(function () {
   $("#AETH").css("display", "block");
@@ -123,3 +178,4 @@ $("#Home").click(function () {
     $("#UNO").css("display", "none");
   }, 2000);
 });
+

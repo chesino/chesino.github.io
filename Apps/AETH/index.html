@@ -80,8 +80,6 @@
                 <p>Anh em có phúc cùng hưởng, có họa tự chịu.</p>
             </div>
             <div class="Body">
-                <h1>Danh mục</h1>
-                <p>Chọn 1 mục bất kì</p>
                 <div class="DIVFuncs">
                     <div class="Func" onclick="Info('Đang phát triển')">
                         <div class="Icon">
@@ -99,7 +97,7 @@
                             AE Cloud
                         </div>
                     </div>
-                    <div class="Func" id="btnUNO">
+                    <div class="Func" onclick="UNO()">
                         <div class="Icon">
                             <i class="fa-solid fa-face-laugh-beam"></i>
                         </div>
@@ -116,7 +114,7 @@
                         </div>
                     </div>
 
-                    <div class="Func Active" id="offDynamic" onclick="offDynamic()">
+                    <div class="Func" id="offDynamic" onclick="offDynamic()">
                         <div class="Icon">
                             <i class="fa-solid fa-mobile-button"></i>
                         </div>
@@ -142,16 +140,29 @@
             <img src="./Data/frog.png" alt="" srcset="">
         </div>
 
-        <div class="Block UNO" id="UNO">
-            <div class="Body">
-                <iframe src="/Apps/UNO/index.html" frameborder="0"></iframe>
-            </div>
-        </div>
         <div class="Block AECloud" id="AECloud">
+            <div class="Head">
+                <h1>AE<span>Cloud</span> </h1>
+            </div>
             <div class="Body">
-                <div class='forms-studio'>
-                    <iframe
-                        src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
+                <div class="DIVFuncs">
+                    <div class="Func" onclick="AEUpload()">
+                        <div class="Icon">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <div class="Label">
+                            Tải lên
+                        </div>
+                    </div>
+                    <div class="Func" onclick="AECloud()">
+                        <div class="Icon">
+                            <i class="fa-solid fa-cloud"></i>
+                        </div>
+                        <div class="Label">
+                            Truy cập thư mục
+                        </div>
+                    </div>
+                   
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@ body {
     display: none !important;
 }
 .DynamicIsland {
+    cursor: pointer;
     position: fixed;
     left: 0;
     right: 0;
@@ -20,7 +21,7 @@ body {
     top: 10px;
     z-index: 3;
     max-width: calc(100% - 20px);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
@@ -162,15 +163,14 @@ body {
     font-weight: 400;
 }
 
-.AETH .Body .DIVFuncs {
+.DIVFuncs {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: center;
     gap: 20px;
-    margin-top: 20px;
 }
 
-.AETH .Body .Func {
+.Func {
     cursor: pointer;
     background-color: #fff;
     height: 150px;
@@ -184,14 +184,14 @@ body {
     margin: auto;
 }
 
-.AETH .Body .Func:active .Icon,
-.AETH .Body .Func:hover .Icon,
-.AETH .Body .Func.Active .Icon{
+.Func:active .Icon,
+.Func:hover .Icon,
+.Func.Active .Icon{
     color: #fff;
     background-color: #1f51d8;
 }
 
-.AETH .Body .Func .Icon {
+.Func .Icon {
     font-size: 40px;
     color: #7d7d7d;
     background-color: #ececee;
@@ -204,7 +204,7 @@ body {
     justify-content: center;
 }
 
-.AETH .Body .Func .Label {
+.Func .Label {
     color: #000000;
     font-size: 16px;
     font-weight: 600;
@@ -226,8 +226,9 @@ body {
 }
 
 .Block .Head h1 span {
-    font-size: 14px;
+    font-size: 20px;
     color: #111;
+    margin-left: 5px;
 }
 
 .Block .Head h1 span:nth-child(2) {
@@ -247,17 +248,22 @@ body {
     font-size: 14px;
     margin-top: -5px;
 }
-
+.Block .Body {
+    height: 80vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
 .Block {
     display: none;
     padding: 0px;
     overflow: hidden;
 }
-.Block.UNO .Body iframe{
-    width: 100%;
-    height: 100vh;
-}
 
+.Block.AECloud {
+    padding: 10px;
+}
 .Block.AECloud .Body iframe{
     width: 100%;
     height: 100vh;
