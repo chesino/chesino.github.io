@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #app {
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            max-width: 640px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+    <div id="app">
+        <video id="video" playsinline autoplay muted></video>
+        <button id="startButton">Bắt đầu</button>
+        <button id="stopButton" disabled>Dừng lại</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('video');
+            const startButton = document.getElementById('startButton');
+            const stopButton = document.getElementById('stopButton');
+
+            let mediaRecorder;
+            let recordedChunks = [];
+
+            // Chức năng bắt đầu quay video
+            startButton.addEventListener('click', async () => {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+
+                video.srcObject = stream;
+
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    recordedChunks = [];
+
+                    // Hiển thị video đã quay
+                    const playbackVideo = document.createElement('video');
+                    playbackVideo.controls = true;
+                    playbackVideo.src = url;
+                    document.body.appendChild(playbackVideo);
+                };
+
+                mediaRecorder.start();
+                startButton.disabled = true;
+                stopButton.disabled = false;
+
+                // Dừng quay sau 30 giây
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                    startButton.disabled = false;
+                    stopButton.disabled = true;
+                }, 30000);
+            });
+
+            // Chức năng dừng quay
+            stopButton.addEventListener('click', () => {
+                mediaRecorder.stop();
+                startButton.disabled = false;
+                stopButton.disabled = true;
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
