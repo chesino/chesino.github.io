@@ -247,3 +247,46 @@ body {
     font-size: 14px;
     margin-top: -5px;
 }
+
+.Block {
+    display: none;
+    padding: 0px;
+    overflow: hidden;
+}
+.Block.UNO .Body iframe{
+    width: 100%;
+    height: 100vh;
+}
+
+.Block.AECloud .Body iframe{
+    width: 100%;
+    height: 100vh;
+    border: none;
+}
+.Home {
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60px;
+    width: 60px;
+    z-index: 999;
+}
+.Home .chat {
+    position: absolute;
+    width: 200px;
+    top: -20px;
+    margin-left: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #bdbdbd;
+}
+.Home img {
+    width: 100%;
+}

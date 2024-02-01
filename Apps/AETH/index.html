@@ -71,9 +71,10 @@
                 <source src="./Data/Ringtone.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-
         </div>
-        <div class="AETH">
+
+
+        <div class="AETH" id="AETH">
             <div class="Head">
                 <h1>AE<span>Trá Hình</span><span>by <strong>M.Hùng</strong></span></h1>
                 <p>Anh em có phúc cùng hưởng, có họa tự chịu.</p>
@@ -90,7 +91,7 @@
                             Share & GO
                         </div>
                     </div>
-                    <div class="Func" onclick="Info('Đang chờ','Đã phát triển nhưng chưa cập nhật.')">
+                    <div class="Func" id="btnAECloud">
                         <div class="Icon">
                             <i class="fa-solid fa-cloud"></i>
                         </div>
@@ -98,7 +99,7 @@
                             AE Cloud
                         </div>
                     </div>
-                    <div class="Func" onclick="Info('Đang chờ','Đã phát triển nhưng chưa cập nhật.')">
+                    <div class="Func" id="btnUNO">
                         <div class="Icon">
                             <i class="fa-solid fa-face-laugh-beam"></i>
                         </div>
@@ -136,19 +137,31 @@
             </div>
         </div>
 
-        <div class="Block">
-            <div class="Head">
-                <h1>Share<span>&</span>Go<span>by <strong>AE Trá Hình</strong></span></h1>
-                <p>Chia hoá đơn hoặc ở nhà</p>
-            </div>
-
+        <div class="Home" id="Home">
+            <div class="chat">Bấm vào tôi để về Menu</div>
+            <img src="./Data/frog.png" alt="" srcset="">
         </div>
+
+        <div class="Block UNO" id="UNO">
+            <div class="Body">
+                <iframe src="/Apps/UNO/index.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="Block AECloud" id="AECloud">
+            <div class="Body">
+                <div class='forms-studio'>
+                    <iframe
+                        src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 
 </body>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/script.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
 
