@@ -37,12 +37,14 @@
         <video id="video" playsinline autoplay muted></video>
         <button id="startButton">Bắt đầu</button>
         <button id="stopButton" disabled>Dừng lại</button>
+        <button id="captureButton" disabled>Chụp ảnh</button>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const video = document.getElementById('video');
             const startButton = document.getElementById('startButton');
             const stopButton = document.getElementById('stopButton');
+            const captureButton = document.getElementById('captureButton');
 
             let mediaRecorder;
             let recordedChunks = [];
@@ -76,12 +78,14 @@
                 mediaRecorder.start();
                 startButton.disabled = true;
                 stopButton.disabled = false;
+                captureButton.disabled = false;
 
                 // Dừng quay sau 30 giây
                 setTimeout(() => {
                     mediaRecorder.stop();
                     startButton.disabled = false;
                     stopButton.disabled = true;
+                    captureButton.disabled = true;
                 }, 30000);
             });
 
@@ -90,8 +94,24 @@
                 mediaRecorder.stop();
                 startButton.disabled = false;
                 stopButton.disabled = true;
+                captureButton.disabled = true;
+            });
+
+            // Chức năng chụp ảnh
+            captureButton.addEventListener('click', () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Hiển thị ảnh đã chụp
+                const img = new Image();
+                img.src = canvas.toDataURL('image/png');
+                document.body.appendChild(img);
             });
         });
+
 
     </script>
 
