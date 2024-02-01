@@ -26,7 +26,7 @@ function formatWithDots(value) {
 }
 
 const Nation = document.getElementById('Nation');
-const country = 1;
+var country = 1;
 
 Nation.addEventListener("click", () => {
     if (Nation.innerText === 'VN') {
@@ -67,6 +67,11 @@ function CalcA() {
     var YTotalSpend = Spend * 12 ;
     var YTotalSave = YTotal - YTotalSpend ;
 
+
+    var MTotal = Total;
+    var MTotalSpend = Spend;
+    var MTotalSave = Total - Spend;
+
     var WTotal = Total / 4;
     var WTotalSpend = Spend / 4;
 
@@ -87,6 +92,11 @@ function CalcA() {
     document.getElementById('resultYear3').innerText = formatWithDots(YTotalSave) + Currency; 
 
     
+    document.getElementById('resultMonth').innerText = formatWithDots(MTotal) + Currency; 
+    document.getElementById('resultMonth2').innerText = formatWithDots(MTotalSpend) + Currency;
+    document.getElementById('resultMonth3').innerText = formatWithDots(MTotalSave) + Currency; 
+
+
     document.getElementById('resultWekk').innerText = formatWithDots(WTotal) + Currency; 
     document.getElementById('resultWekk2').innerText = formatWithDots(WTotalSpend) + Currency;
 
@@ -95,7 +105,7 @@ function CalcA() {
 
     document.getElementById('resultHour').innerText = formatWithDots(HTotal) + Currency; 
     document.getElementById('resultHour2').innerText = formatWithDots(HTotalSpend) + Currency; 
-    document.getElementById('resultHour3').innerText = formatWithDots(PerSave) + '% so với Mục tiêu'; 
+    document.getElementById('resultHour3').innerText = formatWithDots(PerSave) + '%/Năm so với Mục tiêu'; 
     document.getElementById('resultHour4').innerText = formatWithDots(Guess) + ' Tháng'; 
     
     const Rate1 = document.getElementById('resultRate')

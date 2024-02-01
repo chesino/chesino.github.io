@@ -1,4 +1,4 @@
-const Version = '1.2'
+const Version = '1.2.2'
 
 var timeUpdate = new Date('2024-01-31T23:00:00');
 var timeDifference = new Date() - timeUpdate;
