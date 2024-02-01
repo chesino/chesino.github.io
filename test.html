@@ -38,80 +38,133 @@
         <button id="startButton">Bắt đầu</button>
         <button id="stopButton" disabled>Dừng lại</button>
         <button id="captureButton" disabled>Chụp ảnh</button>
+        <button id="switchCameraButton" disabled>Chuyển đổi Camera</button>
+
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('video');
-            const startButton = document.getElementById('startButton');
-            const stopButton = document.getElementById('stopButton');
-            const captureButton = document.getElementById('captureButton');
+       document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('video');
+    const startButton = document.getElementById('startButton');
+    const stopButton = document.getElementById('stopButton');
+    const captureButton = document.getElementById('captureButton');
+    const switchCameraButton = document.getElementById('switchCameraButton');
 
-            let mediaRecorder;
-            let recordedChunks = [];
+    let mediaRecorder;
+    let recordedChunks;
+    let currentStream;
 
-            // Chức năng bắt đầu quay video
-            startButton.addEventListener('click', async () => {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    // Hàm lấy danh sách các thiết bị media
+    async function getMediaDevices() {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        return devices.filter(device => device.kind === 'videoinput');
+    }
 
-                video.srcObject = stream;
+    // Hàm chọn thiết bị media theo ID
+    async function getMediaStream(deviceId) {
+        const constraints = {
+            video: { deviceId: { exact: deviceId } },
+            audio: true,
+        };
+        return await navigator.mediaDevices.getUserMedia(constraints);
+    }
 
-                mediaRecorder = new MediaRecorder(stream);
+    // Chức năng bắt đầu quay video
+    startButton.addEventListener('click', async () => {
+        const devices = await getMediaDevices();
+        const frontCamera = devices.find(device => device.label.includes('front'));
+        const rearCamera = devices.find(device => device.label.includes('back'));
 
-                mediaRecorder.ondataavailable = (e) => {
-                    if (e.data.size > 0) {
-                        recordedChunks.push(e.data);
-                    }
-                };
+        if (frontCamera) {
+            currentStream = await getMediaStream(frontCamera.deviceId);
+        } else if (rearCamera) {
+            currentStream = await getMediaStream(rearCamera.deviceId);
+        } else if (devices.length > 0) {
+            currentStream = await getMediaStream(devices[0].deviceId);
+        } else {
+            alert('Không có thiết bị camera nào được tìm thấy.');
+            return;
+        }
 
-                mediaRecorder.onstop = () => {
-                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                    const url = URL.createObjectURL(blob);
-                    recordedChunks = [];
+        video.srcObject = currentStream;
 
-                    // Hiển thị video đã quay
-                    const playbackVideo = document.createElement('video');
-                    playbackVideo.controls = true;
-                    playbackVideo.src = url;
-                    document.body.appendChild(playbackVideo);
-                };
+        mediaRecorder = new MediaRecorder(currentStream);
+        recordedChunks = [];
 
-                mediaRecorder.start();
-                startButton.disabled = true;
-                stopButton.disabled = false;
-                captureButton.disabled = false;
+        mediaRecorder.ondataavailable = (e) => {
+            if (e.data.size > 0) {
+                recordedChunks.push(e.data);
+            }
+        };
 
-                // Dừng quay sau 30 giây
-                setTimeout(() => {
-                    mediaRecorder.stop();
-                    startButton.disabled = false;
-                    stopButton.disabled = true;
-                    captureButton.disabled = true;
-                }, 30000);
-            });
+        mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            recordedChunks = [];
 
-            // Chức năng dừng quay
-            stopButton.addEventListener('click', () => {
-                mediaRecorder.stop();
-                startButton.disabled = false;
-                stopButton.disabled = true;
-                captureButton.disabled = true;
-            });
+            // Hiển thị video đã quay
+            const playbackVideo = document.createElement('video');
+            playbackVideo.controls = true;
+            playbackVideo.src = url;
+            document.body.appendChild(playbackVideo);
+        };
 
-            // Chức năng chụp ảnh
-            captureButton.addEventListener('click', () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        mediaRecorder.start();
+        startButton.disabled = true;
+        stopButton.disabled = false;
+        captureButton.disabled = false;
+        switchCameraButton.disabled = false;
 
-                // Hiển thị ảnh đã chụp
-                const img = new Image();
-                img.src = canvas.toDataURL('image/png');
-                document.body.appendChild(img);
-            });
-        });
+        // Dừng quay sau 30 giây
+        setTimeout(() => {
+            mediaRecorder.stop();
+            startButton.disabled = false;
+            stopButton.disabled = true;
+            captureButton.disabled = true;
+            switchCameraButton.disabled = true;
+        }, 30000);
+    });
 
+    // Chức năng dừng quay
+    stopButton.addEventListener('click', () => {
+        mediaRecorder.stop();
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        captureButton.disabled = true;
+        switchCameraButton.disabled = true;
+    });
+
+    // Chức năng chụp ảnh
+    captureButton.addEventListener('click', () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Hiển thị ảnh đã chụp
+        const img = new Image();
+        img.src = canvas.toDataURL('image/png');
+        document.body.appendChild(img);
+    });
+
+    // Chức năng chuyển đổi giữa camera trước và sau
+    switchCameraButton.addEventListener('click', async () => {
+        const devices = await getMediaDevices();
+
+        if (currentStream) {
+            currentStream.getTracks().forEach(track => track.stop());
+        }
+
+        let nextDeviceIndex = devices.findIndex(device => device.deviceId === currentStream.getVideoTracks()[0].getSettings().deviceId) + 1;
+        if (nextDeviceIndex >= devices.length) {
+            nextDeviceIndex = 0;
+        }
+
+        const nextDeviceId = devices[nextDeviceIndex].deviceId;
+        currentStream = await getMediaStream(nextDeviceId);
+        video.srcObject = currentStream;
+    });
+});
 
     </script>
 
