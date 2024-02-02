@@ -213,12 +213,13 @@ body {
 
 .Block {
     background-color: #245fff;
-    height: 100vh;
+    min-height: 100vh;
     padding: 10px;
 }
 
 .Block .Head {
     color: #fff;
+    padding: 0 10px;
 }
 
 .Block .Head h1 {
@@ -228,7 +229,6 @@ body {
 .Block .Head h1 span {
     font-size: 20px;
     color: #111;
-    margin-left: 5px;
 }
 
 .Block .Head h1 span:nth-child(2) {
@@ -295,4 +295,16 @@ body {
 }
 .Home img {
     width: 100%;
+}
+.ShareGo {
+    display: block;
+}
+#map {
+    height: 400px;
+    width: 100%;
+}
+.map-container {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 20px;
 }

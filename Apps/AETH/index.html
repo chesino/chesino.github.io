@@ -26,10 +26,9 @@
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Data/style.css">
     <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
-    <!-- Bổ sung sau thẻ <link rel="stylesheet" href="styles.css"> -->
-    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=YOUR_BING_MAPS_API_KEY' async
-        defer></script>
 
+
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 
 </head>
@@ -74,7 +73,7 @@
         </div>
 
 
-        <div class="AETH" id="AETH">
+        <div class="AETH Hidden" id="AETH">
             <div class="Head">
                 <h1>AE<span>Trá Hình</span><span>by <strong>M.Hùng</strong></span></h1>
                 <p>Anh em có phúc cùng hưởng, có họa tự chịu.</p>
@@ -162,16 +161,57 @@
                             Truy cập thư mục
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
+        </div>
+
+        <div class="Block ShareGo" id="ShareGo">
+            <h1>Định vị và Hiển thị Bản đồ</h1>
+            <button onclick="getLocation()">Lấy vị trí của bạn</button>
+
+            <div class="map-container" id="mapboxMap"></div>
+
+            <script>
+                function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                        alert("Trình duyệt không hỗ trợ định vị.");
+                    }
+                }
+
+                function showPosition(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    showMapboxMap(lat, lng);
+                }
+
+                function showMapboxMap(lat, lng) {
+                    mapboxgl.accessToken = 'pk.eyJ1IjoiZGVudHVyZTA4IiwiYSI6ImNsczRhaGY3bTExdHIybHF4eHRycHhhdzYifQ.5tZl5IYrRubtihFlnmK4mg';
+
+                    const mapboxMap = new mapboxgl.Map({
+                        container: 'mapboxMap',
+                        style: 'mapbox://styles/mapbox/streets-v11',
+                        center: [lng, lat],
+                        zoom: 15
+                    });
+
+                    new mapboxgl.Marker()
+                        .setLngLat([lng, lat])
+                        .addTo(mapboxMap)
+                        .setPopup(new mapboxgl.Popup().setHTML('Vị trí của bạn'));
+                }
+            </script>
+
         </div>
 
 
     </div>
 
 </body>
-
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/script.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
