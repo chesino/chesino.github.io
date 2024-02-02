@@ -157,7 +157,7 @@ function Info(T1, T2) {
 
 $("#btnAECloud").click(function () {
   $("#AECloud").css("display", "block");
-  
+
   $([document.documentElement, document.body]).animate({
     scrollTop: $("#AECloud").offset().top
   }, 2000);
@@ -175,7 +175,172 @@ $("#Home").click(function () {
   setTimeout(function () {
     $("#AECloud").css("display", "none");
     $("#Home").css("display", "none");
-    $("#UNO").css("display", "none");
+    $("#ShareGo").css("display", "none");
   }, 2000);
 });
 
+$("#btnShareGo").click(function () {
+  $("#ShareGo").css("display", "block");
+  $([document.documentElement, document.body]).animate({
+    scrollTop: $("#ShareGo").offset().top
+  }, 2000);
+  setTimeout(function () {
+    $("#Home").css("display", "flex");
+  }, 2000);
+});
+
+
+
+
+// mapboxgl.accessToken = 'pk.eyJ1IjoiZGVudHVyZTA4IiwiYSI6ImNsczRhaGY3bTExdHIybHF4eHRycHhhdzYifQ.5tZl5IYrRubtihFlnmK4mg';
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGVudHVyZTA4IiwiYSI6ImNsczQ5cjhyNTEzbWUybW5xOTdtaDZ6enYifQ.0rvi1bjq-EeSFaCkNRiJhQ';
+
+
+const mapboxMap = new mapboxgl.Map({
+  container: 'mapboxMap',
+  style: 'mapbox://styles/mapbox/streets-v11',
+  center: [106.722, 10.795], // Tọa độ mặc định
+  zoom: 10
+});
+
+let currentMarker = null; // Biến để lưu trữ tham chiếu đến đánh dấu hiện tại
+
+function searchAddress() {
+  const address = document.getElementById('address').value;
+
+  if (address) {
+    // Sử dụng Mapbox Geocoding API để tìm kiếm địa chỉ
+    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${mapboxgl.accessToken}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.features && data.features.length > 0) {
+          const coordinates = data.features[0].center;
+
+          // Xoá đánh dấu cũ nếu tồn tại
+          if (currentMarker) {
+            currentMarker.remove();
+          }
+
+          // Thêm đánh dấu mới và hiển thị popup
+          currentMarker = new mapboxgl.Marker()
+            .setLngLat(coordinates)
+            .addTo(mapboxMap)
+            .setPopup(new mapboxgl.Popup().setHTML('Vị trí của bạn'))
+            .togglePopup();
+
+          mapboxMap.flyTo({ center: coordinates, zoom: 15 });
+        } else {
+          alert('Không tìm thấy địa chỉ.');
+        }
+      })
+      .catch(error => {
+        console.error('Lỗi khi tìm kiếm địa chỉ:', error);
+      });
+  }
+}
+
+function changeMapType() {
+  const mapType = document.getElementById('mapType').value;
+  mapboxMap.setStyle(`mapbox://styles/mapbox/${mapType}`);
+}
+
+function getCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+            
+      // Sử dụng Mapbox Geocoding API để lấy địa chỉ từ tọa độ
+      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`)
+  
+        .then(response => response.json())
+        .then(data => {
+          if (data.features && data.features.length > 0) {
+            const address = data.features[2].place_name;
+            
+            // Gán địa chỉ vào ô input có id là 'address'
+            document.getElementById('address').value = address;
+       
+            // Xoá đánh dấu cũ nếu tồn tại
+            if (currentMarker) {
+              currentMarker.remove();
+            }
+
+            // Thêm đánh dấu mới và hiển thị popup
+            currentMarker = new mapboxgl.Marker()
+              .setLngLat([lng, lat])
+              .addTo(mapboxMap)
+              .setPopup(new mapboxgl.Popup().setHTML('Vị trí của bạn'))
+              .togglePopup();
+
+            mapboxMap.flyTo({ center: [lng, lat], zoom: 15 });
+          } else {
+            alert('Không thể lấy địa chỉ từ tọa độ.');
+          }
+        })
+        .catch(error => {
+          console.error('Lỗi khi lấy địa chỉ từ tọa độ:', error);
+          alert('Không thể lấy địa chỉ từ tọa độ.');
+        });
+    }, error => {
+      console.error('Lỗi khi lấy vị trí:', error);
+      alert('Không thể lấy vị trí hiện tại.');
+    });
+  } else {
+    alert("Trình duyệt không hỗ trợ định vị.");
+  }
+}
+
+function Google() {
+  if (currentMarker) {
+    const latLng = currentMarker.getLngLat();
+    const lat = latLng.lat;
+    const lng = latLng.lng;
+
+    // Tạo liên kết Google Maps và mở trong một cửa sổ mới
+    const googleMapsLink = `https://maps.google.com/?q=${lat},${lng}`;
+    window.open(googleMapsLink, '_blank');
+  } else {
+    Fail('Vị trí không xác định.','Vui lòng bấm vào định vị để lấy vị trí.');
+  }
+}
+
+
+const inputElements = document.querySelectorAll('.inputFM');
+inputElements.forEach((input) => {
+    input.addEventListener('input', formatNumber);
+});
+
+function formatNumber(event) {
+    let input = event.target;
+    let rawValue = input.value.replace(/\./g, ''); // Lưu trữ giá trị gốc (loại bỏ dấu chấm)
+    let formattedValue = formatWithDots(rawValue);
+    input.value = formattedValue;
+    input.dataset.rawValue = rawValue; // Lưu trữ giá trị gốc trong thuộc tính 'data-raw-value'
+}
+
+function formatWithDots(value) {
+    if (isNaN(value)) {
+        return ''; // Nếu không phải là số thì trả về chuỗi rỗng
+    }
+
+    // Chuyển đổi giá trị thành số nguyên từ chuỗi đã loại bỏ dấu chấm
+    let intValue = parseInt(value, 10);
+
+    let parts = intValue.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return parts.join('.');
+}
+
+$(function (){
+  var star = '.star',
+      selected = '.selected';
+  
+  $(star).on('click', function(){
+    $(selected).each(function(){
+      $(this).removeClass('selected');
+    });
+    $(this).addClass('selected');
+  });
+ 
+});

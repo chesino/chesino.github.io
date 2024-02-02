@@ -27,8 +27,8 @@
     <link rel="stylesheet" href="./Data/style.css">
     <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
 
-
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 
 </head>
@@ -73,14 +73,14 @@
         </div>
 
 
-        <div class="AETH Hidden" id="AETH">
+        <div class="AETH" id="AETH">
             <div class="Head">
                 <h1>AE<span>Trá Hình</span><span>by <strong>M.Hùng</strong></span></h1>
                 <p>Anh em có phúc cùng hưởng, có họa tự chịu.</p>
             </div>
             <div class="Body">
                 <div class="DIVFuncs">
-                    <div class="Func" onclick="Info('Đang phát triển')">
+                    <div class="Func" id="btnShareGo">
                         <div class="Icon">
                             <i class="fa-solid fa-people-group"></i>
                         </div>
@@ -167,43 +167,68 @@
         </div>
 
         <div class="Block ShareGo" id="ShareGo">
-            <h1>Định vị và Hiển thị Bản đồ</h1>
-            <button onclick="getLocation()">Lấy vị trí của bạn</button>
 
-            <div class="map-container" id="mapboxMap"></div>
+            <div class="Map">
+                <div class="map-container" id="mapboxMap"></div>
+                <div class="custom-select">
+                    <select id="mapType" onchange="changeMapType()">
+                        <option value="streets-v11">Mặc định</option>
+                        <option value="satellite-v9">Vệ tinh</option>
+                        <option value="dark-v11">Tối</option>
+                    </select>
+                </div>
+                <div class="Head">
+                    <h1>Share<span>n</span>GO</h1>
+                </div>
+            </div>
 
-            <script>
-                function getLocation() {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(showPosition);
-                    } else {
-                        alert("Trình duyệt không hỗ trợ định vị.");
-                    }
-                }
+            <div class="Form">
+                <h1>Thông tin</h1>
+                <div class="Input">
+                    <label for="">Tên địa điểm</label>
+                    <input type="text" id="">
+                </div>
 
-                function showPosition(position) {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
+                <div class="Flex">
+                    <div class="Input">
+                        <label for="address">Địa chỉ <span>không cần thiết</span></label>
+                        <input type="text" id="address">
+                    </div>
 
-                    showMapboxMap(lat, lng);
-                }
+                    <button onclick="searchAddress()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button onclick="Google()"><i class="fa-brands fa-google"></i></button>
+                    <button onclick="getCurrentLocation()"><i class="fa-solid fa-location-crosshairs"></i></button>
+                </div>
+                <div class="Input">
+                    <label for="">Ảnh</label>
+                    <input type="file" id="">
+                </div>
+                <div class="Input">
+                    <label for="">Giá</label>
+                    <input type="text" class="inputFM" id="Target" name="Target" pattern="[0-9]*">
+                </div>
+                <div class="Input">
+                    <label for="">Số người</label>
+                    <input type="text" id="" pattern="[0-9]*" >
+                </div>
+                <div class="Input">
+                    <label for="">Đánh Giá</label>
+                    <ul class="ratings">
+                        <li class="star"></li>
+                        <li class="star"></li>
+                        <li class="star"></li>
+                        <li class="star"></li>
+                        <li class="star"></li>
+                      </ul>
+                </div>
+                <div class="Input">
+                    <label for="">Ghi chú</label>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <button class="Confirm">Xác nhận</button>
 
-                function showMapboxMap(lat, lng) {
-                    mapboxgl.accessToken = 'pk.eyJ1IjoiZGVudHVyZTA4IiwiYSI6ImNsczRhaGY3bTExdHIybHF4eHRycHhhdzYifQ.5tZl5IYrRubtihFlnmK4mg';
 
-                    const mapboxMap = new mapboxgl.Map({
-                        container: 'mapboxMap',
-                        style: 'mapbox://styles/mapbox/streets-v11',
-                        center: [lng, lat],
-                        zoom: 15
-                    });
-
-                    new mapboxgl.Marker()
-                        .setLngLat([lng, lat])
-                        .addTo(mapboxMap)
-                        .setPopup(new mapboxgl.Popup().setHTML('Vị trí của bạn'));
-                }
-            </script>
+            </div>
 
         </div>
 
