@@ -557,7 +557,7 @@ function s2ab(s) {
 }
 
 
-function deleteHistoryItem(index) {
+function deleteHistoryItemAll() {
   Swal.fire({
     title: 'Xác nhận xoá ?',
     text: 'Nếu xác nhận mục này sẽ được xoá.',
