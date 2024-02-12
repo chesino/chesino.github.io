@@ -426,6 +426,7 @@ select:focus {
 }
 
 .Form input {
+    color: #000;
     width: 100%;
     display: block;
     border: none;
