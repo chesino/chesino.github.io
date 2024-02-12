@@ -63,7 +63,7 @@
             </div>
 
             <audio id="myAudio">
-                <source src="./Data/CaoOc20.mp3" type="audio/mpeg">
+                <source src="./Data/Music.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
             <audio id="myAudio2">
@@ -135,7 +135,6 @@
         </div>
 
         <div class="Home" id="Home">
-            <div class="chat">Bấm vào tôi để về Menu</div>
             <img src="./Data/frog.png" alt="" srcset="">
         </div>
 
@@ -167,7 +166,6 @@
         </div>
 
         <div class="Block ShareGo" id="ShareGo">
-
             <div class="Map">
                 <div class="map-container" id="mapboxMap"></div>
                 <div class="custom-select">
@@ -185,13 +183,13 @@
             <div class="Form">
                 <h1>Thông tin</h1>
                 <div class="Input">
-                    <label for="">Tên địa điểm</label>
-                    <input type="text" id="">
+                    <label for="placeName">Tên địa điểm <span>bắt buộc</span></label>
+                    <input type="text" id="placeName">
                 </div>
 
                 <div class="Flex">
                     <div class="Input">
-                        <label for="address">Địa chỉ <span>không cần thiết</span></label>
+                        <label for="address">Địa chỉ <span>không bắt buộc</span></label>
                         <input type="text" id="address">
                     </div>
 
@@ -200,36 +198,57 @@
                     <button onclick="getCurrentLocation()"><i class="fa-solid fa-location-crosshairs"></i></button>
                 </div>
                 <div class="Input">
-                    <label for="">Ảnh</label>
-                    <input type="file" id="">
+                    <label for="numberOfPeople">Số người <span>bắt buộc</span></label>
+                    <input type="text" id="numberOfPeople" pattern="[0-9]*">
                 </div>
                 <div class="Input">
-                    <label for="">Giá</label>
-                    <input type="text" class="inputFM" id="Target" name="Target" pattern="[0-9]*">
+                    <label for="price">Giá <span>bắt buộc</span></label>
+                    <input type="text" class="inputFM" id="price" pattern="[0-9]*">
                 </div>
-                <div class="Input">
-                    <label for="">Số người</label>
-                    <input type="text" id="" pattern="[0-9]*" >
+                <div class="Flex">
+                    <div class="Input">
+                        <label for="time">Thời gian <span>không bắt buộc</span></label>
+                        <input type="time" id="time">
+                    </div>
+                    <div class="Input">
+                        <label for="date">Ngày <span>bắt buộc</span></label>
+                        <input type="date" id="date">
+                    </div>
                 </div>
+
                 <div class="Input">
-                    <label for="">Đánh Giá</label>
+                    <label for="rating">Đánh Giá <span>Nếu không đánh giá sẽ là 0 sao</span></label>
                     <ul class="ratings">
-                        <li class="star"></li>
-                        <li class="star"></li>
-                        <li class="star"></li>
-                        <li class="star"></li>
-                        <li class="star"></li>
-                      </ul>
+                        <li class="star" data-rating="5"></li>
+                        <li class="star" data-rating="4"></li>
+                        <li class="star" data-rating="3"></li>
+                        <li class="star" data-rating="2"></li>
+                        <li class="star" data-rating="1"></li>
+                    </ul>
+
+
+
                 </div>
                 <div class="Input">
-                    <label for="">Ghi chú</label>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <label for="note">Ghi chú <span>không bắt buộc</span></label>
+                    <textarea name="note" id="note" cols="30" rows="10"></textarea>
                 </div>
-                <button class="Confirm">Xác nhận</button>
+                <button class="Confirm" onclick="saveToLocalStorage()">Xác nhận</button>
 
 
             </div>
 
+            <div class="historyContainer" id="historyContainer">
+                <h2>Lịch sử</h2>
+                <button id="exportToExcel" onclick="exportToExcel()">Xuất Excel <i class="fa-solid fa-file-excel"></i></button>
+                <button onclick="deleteHistoryItem()">Xoá toàn bộ <i class="fa-solid fa-trash"></i></button>
+                <ul id="historyList"></ul>
+            </div>
+           
+
+            <!-- Include SheetJS library -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+          
         </div>
 
 
