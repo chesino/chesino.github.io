@@ -441,6 +441,7 @@ select:focus {
 }
 
 .Form .Flex button {
+    color: #000;
     font-size: 20px;
     height: 41px;
     width: 55px;
