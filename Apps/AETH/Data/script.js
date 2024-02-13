@@ -284,7 +284,7 @@ function getCurrentLocation() {
         });
     }, error => {
       console.error('Lỗi khi lấy vị trí:', error);
-      Warning('Lỗi', 'Không thể lấy vị trí hiện tại.');
+      Warning('Lỗi', 'Không thể lấy vị trí hiện tại. Bạn đã không cho phép truy cập vị trí của bạn.');
     });
   } else {
     Warning('Lỗi', "Trình duyệt không hỗ trợ định vị.");
