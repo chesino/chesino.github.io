@@ -160,10 +160,10 @@ $("#btnAECloud").click(function () {
 
   $([document.documentElement, document.body]).animate({
     scrollTop: $("#AECloud").offset().top
-  }, 2000);
+  }, 1000);
   setTimeout(function () {
     $("#Home").css("display", "flex");
-  }, 2000);
+  }, 1000);
 });
 
 
@@ -171,22 +171,22 @@ $("#Home").click(function () {
   $("#AETH").css("display", "block");
   $([document.documentElement, document.body]).animate({
     scrollTop: $("#AETH").offset().top
-  }, 2000);
+  }, 1000);
   setTimeout(function () {
     $("#AECloud").css("display", "none");
     $("#Home").css("display", "none");
     $("#ShareGo").css("display", "none");
-  }, 2000);
+  }, 1000);
 });
 
 $("#btnShareGo").click(function () {
   $("#ShareGo").css("display", "block");
   $([document.documentElement, document.body]).animate({
     scrollTop: $("#ShareGo").offset().top
-  }, 2000);
+  }, 1000);
   setTimeout(function () {
     $("#Home").css("display", "flex");
-  }, 2000);
+  }, 1000);
 });
 
 
