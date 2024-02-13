@@ -370,7 +370,7 @@ select {
     /*  other styles for aesthetics */
     padding: 5px 10px;
     font-size: 1.15rem;
-    background-color: #fff;
+    background-color: #eee;
     border: none;
     border-top-left-radius: 10px;
     color: #000;
@@ -472,6 +472,14 @@ select:focus {
 
 .Form .Flex .Input {
     width: 100%;
+}
+/* .Form #time,
+.Form #date {
+    width: 100%;
+    padding: 10px;
+} */
+input[type='date'], input[type='time'] {
+    -webkit-appearance: none;
 }
 
 .ratings {
@@ -600,5 +608,5 @@ select:focus {
     margin-top: 10px;
 }
 .historyContainer button:nth-child(3) {
-    background-color: red;
+    background-color: rgb(252, 45, 45);
 }

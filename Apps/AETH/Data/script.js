@@ -280,14 +280,14 @@ function getCurrentLocation() {
         })
         .catch(error => {
           console.error('Lỗi khi lấy địa chỉ từ tọa độ:', error);
-          alert('Không thể lấy địa chỉ từ tọa độ.');
+          Warning('Lỗi', 'Không thể lấy địa chỉ từ tọa độ.');
         });
     }, error => {
       console.error('Lỗi khi lấy vị trí:', error);
-      alert('Không thể lấy vị trí hiện tại.');
+      Warning('Lỗi', 'Không thể lấy vị trí hiện tại.');
     });
   } else {
-    alert("Trình duyệt không hỗ trợ định vị.");
+    Warning('Lỗi', "Trình duyệt không hỗ trợ định vị.");
   }
 }
 
@@ -359,25 +359,34 @@ function showHistory() {
   history.forEach(function (entry, index) {
     var historyItem = document.createElement('div');
     historyItem.classList.add('history-item');
-
     // Tạo nội dung cho mỗi mục trong lịch sử
+    var ratingStars = '';
+    for (var i = 0; i < entry.rating; i++) {
+      ratingStars += '<i class="fa-solid fa-star"></i>';
+    }
     var content = `
-  <!-- Thêm nút Xóa vào mỗi mục trong lịch sử -->
-  <button class="delete-btn" onclick="deleteHistoryItem(${index})"><i class="fa-solid fa-trash-can"></i></button>
-  <h3>${entry.placeName}</h3>
-  <p><strong>Địa chỉ:</strong> <a href="${entry.address}." target="_blank"><i class="fa-brands fa-google"></i>Maps</a></p>
-  <p><strong>Số người:</strong> ${entry.numberOfPeople}.</p>
-  <p><strong>Đánh giá:</strong> ${entry.rating}<i class="fa-solid fa-star"></i>.</p>
-  <p><strong>Thời gian:</strong> ${entry.time} ${entry.date}.</p>
-  <p><strong>Ghi chú:</strong> ${entry.note}.</p>
-  <p><strong>Tổng:</strong> ${entry.price}đ.</p>
-  <p><strong>Mỗi người:</strong> ${entry.paymentPerPerson}đ.</p>
-`;
-
-
+      <!-- Thêm nút Xóa vào mỗi mục trong lịch sử -->
+      <button class="delete-btn" onclick="deleteHistoryItem(${index})"><i class="fa-solid fa-trash-can"></i></button>
+      <h3>${entry.placeName}</h3>
+      <p><strong>Địa chỉ:</strong> <a href="${entry.address}." target="_blank"><i class="fa-brands fa-google"></i>Maps</a></p>
+      <p><strong>Số người:</strong> ${entry.numberOfPeople}.</p>
+      <p><strong>Đánh giá:</strong> ${ratingStars}</p>
+      <p><strong>Thời gian:</strong> ${entry.time} ${entry.date}.</p>
+      <p><strong>Ghi chú:</strong> ${entry.note}.</p>
+      <p><strong>Tổng:</strong> ${entry.price}đ.</p>
+      <p><strong>Mỗi người:</strong> ${entry.paymentPerPerson}đ.</p>
+    `;
     historyItem.innerHTML = content;
     historyContainer.appendChild(historyItem);
   });
+}
+
+function getStars(rating) {
+  let stars = '';
+  for (let i = 0; i < rating; i++) {
+    stars += '<i class="fa-solid fa-star"></i>';
+  }
+  return stars;
 }
 
 function saveToLocalStorage() {
@@ -398,7 +407,7 @@ function saveToLocalStorage() {
     rating = ratingElement.getAttribute('data-rating');
   } else {
     // Thông báo nếu phần tử không tồn tại
-    rating = 0;  
+    rating = 0;
   }
   // Tính toán giá trị thanh toán mỗi người
   var paymentPerPerson = price / numberOfPeople;
@@ -517,6 +526,11 @@ function deleteHistoryItem(index) {
 function exportToExcel() {
   var history = JSON.parse(localStorage.getItem('history'));
 
+  if (!history || history.length === 0) {
+    Fail("Lỗi","Không có dữ liệu để xuất ra file Excel.");
+    return;
+  }
+
   // Đổi tên thuộc tính từ placeName sang Tên địa điểm và loại bỏ dấu chấm trong giá
   history = history.map(function (entry) {
     var price = entry.price.replace(/\./g, ''); // Loại bỏ dấu chấm
@@ -548,6 +562,7 @@ function exportToExcel() {
 }
 
 
+
 // Chuyển đổi từ chuỗi sang mảng byte
 function s2ab(s) {
   var buf = new ArrayBuffer(s.length);
@@ -557,7 +572,7 @@ function s2ab(s) {
 }
 
 
-function deleteHistoryItemAll() {
+function deleteHistoryAllItem(index) {
   Swal.fire({
     title: 'Xác nhận xoá ?',
     text: 'Nếu xác nhận mục này sẽ được xoá.',
