@@ -571,6 +571,43 @@ function s2ab(s) {
   return buf;
 }
 
+// Hàm xuất file txt
+function exportToTxt() {
+  var history = JSON.parse(localStorage.getItem('history'));
+
+  if (!history || history.length === 0) {
+    Fail("Lỗi","Không có dữ liệu để xuất ra file Txt.");
+    return;
+  }
+
+  // Đổi tên thuộc tính từ placeName sang Tên địa điểm và loại bỏ dấu chấm trong giá
+  history = history.map(function (entry) {
+    var price = entry.price.replace(/\./g, ''); // Loại bỏ dấu chấm
+    var paymentPerPerson = entry.paymentPerPerson.replace(/\./g, ''); // Loại bỏ dấu chấm
+
+    return {
+      "Tên địa điểm": entry.placeName,
+      "Địa chỉ": entry.address,
+      "Số người": entry.numberOfPeople,
+      "Đánh giá": entry.rating,
+      "Thời gian": entry.time,
+      "Ngày": entry.date,
+      "Ghi chú": entry.note,
+      "Giá": entry.price,
+      "Mỗi người": entry.paymentPerPerson,
+    };
+  });
+
+  var txtContent = JSON.stringify(history, null, 2);
+  var blob = new Blob([txtContent], { type: 'text/plain' });
+  var url = URL.createObjectURL(blob);
+  var link = document.createElement('a');
+  link.href = url;
+  link.download = 'history.txt';
+  link.click();
+}
+
+
 
 function deleteHistoryAllItem(index) {
   Swal.fire({

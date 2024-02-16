@@ -565,6 +565,7 @@ input[type='date'], input[type='time'] {
     color: #f00;
 }
 
+
 .history-item h3 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -609,5 +610,8 @@ input[type='date'], input[type='time'] {
     margin-top: 10px;
 }
 .historyContainer button:nth-child(3) {
+    background-color: rgb(0, 140, 255);
+}
+.historyContainer button:nth-child(4) {
     background-color: rgb(252, 45, 45);
 }

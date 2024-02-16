@@ -240,15 +240,17 @@
 
             <div class="historyContainer" id="historyContainer">
                 <h2>Lịch sử</h2>
-                <button id="exportToExcel" onclick="exportToExcel()">Xuất Excel <i class="fa-solid fa-file-excel"></i></button>
+                <button id="exportToExcel" onclick="exportToExcel()">Xuất Excel <i
+                        class="fa-solid fa-file-excel"></i></button>
+                <button onclick="exportToTxt()">Xuất TXT <i class="fa-solid fa-file-lines"></i></button>
                 <button onclick="deleteHistoryAllItem()">Xoá toàn bộ <i class="fa-solid fa-trash"></i></button>
                 <ul id="historyList"></ul>
             </div>
-           
+
 
             <!-- Include SheetJS library -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-          
+
         </div>
 
 
