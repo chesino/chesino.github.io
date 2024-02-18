@@ -41,6 +41,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin: 10px 0;
         }
 
         #result {
@@ -64,6 +65,9 @@
         li {
             margin-bottom: 5px;
         }
+        li a {
+            color: greenyellow;
+        }
     </style>
 </head>
 
@@ -74,7 +78,8 @@
     <label for="fileB">Dữ liệu bạn bè cũ</label>
     <input type="file" id="fileB" />
     <button onclick="compareFiles()">So sánh ngay</button>
-    <button onclick="compareWithOriginal()">So sánh với File JSON gốc</button>
+    <button onclick="compareWithOriginal()">So sánh gốc</button>
+    <button onclick="compareWithOriginal2()">So sánh 18/2</button>
 
 
     <div id="result"></div>

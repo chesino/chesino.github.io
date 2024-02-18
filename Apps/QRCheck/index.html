@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Scanner</title>
+    <style>
+        #camera {
+            width: 100%;
+            height: 300px;
+            background-color: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Scanner</h1>
+    <div id="camera"></div>
+    <div id="result"></div>
+
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <script>
+        const codeReader = new ZXing.BrowserBarcodeReader();
+
+        codeReader.decodeFromInputVideoDevice(undefined, 'camera')
+            .then(result => {
+                const product = findProductByBarcode(result.text);
+                if (product) {
+                    document.getElementById('result').textContent = `Product found: ${product.name}, Price: ${product.price}`;
+                } else {
+                    document.getElementById('result').textContent = 'Product not found';
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+
+        const products = [
+            {
+                name: 'Product A',
+                price: 10.99,
+                barcode: '123123123',
+            },
+            {
+                name: 'Maxx ACNE',
+                price: 19.99,
+                barcode: '8934914113353',
+            },
+            // Add more products here
+        ];
+
+        function findProductByBarcode(barcode) {
+            return products.find(product => product.barcode === barcode);
+        }
+    </script>
+</body>
+</html>
