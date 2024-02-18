@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +24,13 @@
     <h1>Product Scanner</h1>
     <div id="camera"></div>
     <div id="result"></div>
+
+    <div style="width:100%">
+        <!-- add autoplay muted playsinline for iOS -->
+        <video id="cam" autoplay muted playsinline>Not available</video>
+        <canvas id="canvas" style="display:none"></canvas>  
+        <img id="photo" alt="The screen capture will appear in this box.">  
+    </div>
 
     <script src="https://unpkg.com/@zxing/library@latest"></script>
     <script>
