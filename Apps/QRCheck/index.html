@@ -1,71 +1,138 @@
+<div class="panel">
+    <button id="switchFrontBtn">Front Camera</button>
+    <button id="switchBackBtn">Back Camera</button>
+    <button id="snapBtn">Snap</button>
+</div>
+<div style="width:100%">
+    <!-- add autoplay muted playsinline for iOS -->
+    <video id="cam" autoplay muted playsinline>Not available</video>
+    <canvas id="canvas" style="display:none"></canvas>
+    <img id="photo" alt="The screen capture will appear in this box.">
+</div>
 
+<style>
+    .panel {
+  padding-bottom: 10px;
+}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Scanner</title>
-    <style>
-        #camera {
-            width: 100%;
-            height: 300px;
-            background-color: #000;
-            position: relative;
-            overflow: hidden;
-        }
+#cam {
+  border: 1px;
+  border-color: black;
+  border-style: solid;
+}
 
-        #result {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Product Scanner</h1>
-    <div id="camera"></div>
-    <div id="result"></div>
+#photo {
+  border: 1px;
+  border-color: black;
+  border-style: dashed;
+}
+</style>
 
-    <div style="width:100%">
-        <!-- add autoplay muted playsinline for iOS -->
-        <video id="cam" autoplay muted playsinline>Not available</video>
-        <canvas id="canvas" style="display:none"></canvas>  
-        <img id="photo" alt="The screen capture will appear in this box.">  
-    </div>
+<script>
+    /*
+Please try with devices with camera!
+*/
 
-    <script src="https://unpkg.com/@zxing/library@latest"></script>
-    <script>
-        const codeReader = new ZXing.BrowserBarcodeReader();
+/*
+Reference: 
+https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+https://developers.google.com/web/updates/2015/07/mediastream-deprecations?hl=en#stop-ended-and-active
+https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos
+*/
 
-        codeReader.decodeFromInputVideoDevice(undefined, 'camera')
-            .then(result => {
-                const product = findProductByBarcode(result.text);
-                if (product) {
-                    document.getElementById('result').textContent = `Product found: ${product.name}, Price: ${product.price}`;
-                } else {
-                    document.getElementById('result').textContent = 'Product not found';
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
+// reference to the current media stream
+var mediaStream = null;
 
-        const products = [
-            {
-                name: 'Product A',
-                price: 10.99,
-                barcode: '123123123',
-            },
-            {
-                name: 'Maxx ACNE',
-                price: 19.99,
-                barcode: '8934914113353',
-            },
-            // Add more products here
-        ];
+// Prefer camera resolution nearest to 1280x720.
+var constraints = { 
+  audio: false, 
+  video: { 
+    width: {ideal: 640}, 
+    height: {ideal: 480},
+    facingMode: "environment"
+  } 
+}; 
 
-        function findProductByBarcode(barcode) {
-            return products.find(product => product.barcode === barcode);
-        }
-    </script>
-</body>
-</html>
+async function getMediaStream(constraints) {
+  try {
+    mediaStream =  await navigator.mediaDevices.getUserMedia(constraints);
+    let video = document.getElementById('cam');    
+    video.srcObject = mediaStream;
+    video.onloadedmetadata = (event) => {
+      video.play();
+    };
+  } catch (err)  {    
+    console.error(err.message);   
+  }
+};
+
+async function switchCamera(cameraMode) {  
+  try {
+    // stop the current video stream
+    if (mediaStream != null && mediaStream.active) {
+      var tracks = mediaStream.getVideoTracks();
+      tracks.forEach(track => {
+        track.stop();
+      })      
+    }
+    
+    // set the video source to null
+    document.getElementById('cam').srcObject = null;
+    
+    // change "facingMode"
+    constraints.video.facingMode = cameraMode;
+    
+    // get new media stream
+    await getMediaStream(constraints);
+  } catch (err)  {    
+    console.error(err.message); 
+    alert(err.message);
+  }
+}
+
+function takePicture() {  
+  let canvas = document.getElementById('canvas');
+  let video = document.getElementById('cam');
+  let photo = document.getElementById('photo');  
+  let context = canvas.getContext('2d');
+  
+  const height = video.videoHeight;
+  const width = video.videoWidth;
+  
+  if (width && height) {    
+    canvas.width = width;
+    canvas.height = height;
+    context.drawImage(video, 0, 0, width, height);    
+    var data = canvas.toDataURL('image/png');
+    photo.setAttribute('src', data);
+  } else {
+    clearphoto();
+  }
+}
+
+function clearPhoto() {
+  let canvas = document.getElementById('canvas');
+  let photo = document.getElementById('photo');
+  let context = canvas.getContext('2d');
+  
+  context.fillStyle = "#AAA";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  var data = canvas.toDataURL('image/png');
+  photo.setAttribute('src', data);
+}
+
+document.getElementById('switchFrontBtn').onclick = (event) => {
+  switchCamera("user");
+}
+
+document.getElementById('switchBackBtn').onclick = (event) => {  
+  switchCamera("environment");
+}
+
+document.getElementById('snapBtn').onclick = (event) => {  
+  takePicture();
+  event.preventDefault();
+}
+
+clearPhoto();
+</script>
