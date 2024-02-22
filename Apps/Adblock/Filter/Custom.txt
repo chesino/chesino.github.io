@@ -28,3 +28,8 @@
 ##.notices.notices--block.js-notices
 ##.uix_welcomeSection
 ##.samBannerUnit
+###footer
+##.samItem
+##.uix_welcomeSection__inner
+##.js-notices.notices--block.notices
+
