@@ -24,3 +24,7 @@
 ##.catfish-bottom
 ##.notices
 ##.flex-section
+##.p-footer
+##.notices.notices--block.js-notices
+##.uix_welcomeSection
+##.samBannerUnit
