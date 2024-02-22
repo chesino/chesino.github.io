@@ -35,3 +35,5 @@
 ##.samItem
 ##.samCodeUnit
 ###209
+##.samCodeUnit
+##.samVideoOverlay
