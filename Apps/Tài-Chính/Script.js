@@ -172,7 +172,7 @@ function addMoney(cash, card) {
 
     if (cashValue > 0 || cardValue > 0 || cashWithdrawValue > 0 || cardWithdrawValue > 0) {
         if (cashValue > 0) {
-            transactionMessage += 'Số dư Tiền Mặt +' + cashValue.toLocaleString() + 'đ.';
+            transactionMessage += 'Tiền Mặt +' + cashValue.toLocaleString() + 'đ.';
             if (cashNote !== '') {
                 transactionMessage += cashNote + '.';
                 
@@ -180,21 +180,21 @@ function addMoney(cash, card) {
         }
 
         if (cardValue > 0) {
-            transactionMessage += 'Số dư Tiền Thẻ +' + cardValue.toLocaleString() + 'đ.';
+            transactionMessage += 'Tiền Thẻ +' + cardValue.toLocaleString() + 'đ.';
             if (cashNote !== '') {
                 transactionMessage += cashNote + '.';
             }
         }
 
         if (cashWithdrawValue > 0) {
-            transactionMessage += 'Số dư Tiền Mặt -' + cashWithdrawValue.toLocaleString() + 'đ.';
+            transactionMessage += 'Tiền Mặt -' + cashWithdrawValue.toLocaleString() + 'đ.';
             if (cashWithdrawNote !== '') {
                 transactionMessage += cashWithdrawNote + '.';
             }
         }
 
         if (cardWithdrawValue > 0) {
-            transactionMessage += 'Số dư Tiền Thẻ -' + cardWithdrawValue.toLocaleString() + 'đ.';
+            transactionMessage += 'Tiền Thẻ -' + cardWithdrawValue.toLocaleString() + 'đ.';
             if (cashWithdrawNote !== '') {
                 transactionMessage += cashWithdrawNote + '.';
             }
