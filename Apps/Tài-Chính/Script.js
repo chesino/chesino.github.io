@@ -161,9 +161,6 @@ function addMoney(cash, card) {
     document.getElementById('card').dataset.rawValue = 0;
     document.getElementById('cashWithdraw').dataset.rawValue = 0;
     document.getElementById('cardWithdraw').dataset.rawValue = 0;
-    
-    document.getElementById('cashNote').value = '';
-    document.getElementById('cashWithdrawNote').value = '';
 
     localStorage.setItem('cashAmount', cashAmount);
     localStorage.setItem('cardAmount', cardAmount);
@@ -207,6 +204,8 @@ function addMoney(cash, card) {
         transactionsHistory.unshift(transactionMessage);
         SaveHistory();
         displayTransactionHistory();
+        document.getElementById('cashNote').value = '';
+        document.getElementById('cashWithdrawNote').value = '';
         Trans('Thành công');
     }
     Rule503020();
