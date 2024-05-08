@@ -1,4 +1,3 @@
-
 function handlePasteClick() {
     navigator.clipboard.readText()
         .then(function (clipboardData) {
@@ -17,13 +16,13 @@ function handlePasteClick() {
             let transactionMessage = '';
 
             if (matches[0] !== null) {
-                var SoTienGD = matches[0].toLocaleString().replace(/,/g, '');
-                var SoTienGDr = matches[0].toLocaleString();
-                var ThoiGianGD = '[' + matches[1].toLocaleString().replace(/-/g, '/') + ']';
+                var SoTienGD = parseFloat(matches[0][0].replace(/,/g, ''));
+                var SoTienGDr = matches[0][0];
+                var ThoiGianGD = '[' + matches[1][0].replace(/-/g, '/') + ']';
 
                 if (matches[3] !== null) {
-                    var NguoiNhan = matches[3].toLocaleString().replace('toi', 'Chuyển tiền tới ').replace(/^toi | N$/g, '');
-                    var NguoiGui = matches[5].toLocaleString().replace('tu', 'Từ ');
+                    var NguoiNhan = matches[3][0].replace('toi', 'Chuyển tiền tới ').replace(/^toi | N$/g, '');
+                    var NguoiGui = matches[5][0].replace('tu', 'Từ ');
                     if (SoTienGD < 0) {
                         transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiNhan + '.';
                     } else {
