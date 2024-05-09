@@ -696,7 +696,26 @@ function Trans(T1) {
 }
 
 function Clear() {
+  Swal.fire({
+  title: "Bạn muốn xoá toàn bộ dữ liệu ?",
+  text: "Nên sao lưu dữ liệu trước khi xoá toàn bộ.",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Xác nhận",
+  cancelButtonText: "Hủy"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: "Đã xoá thành công !",
+      text: "Hãy tải lại trang để làm mới dữ liệu.",
+      icon: "success"
+    });
     localStorage.clear();
+  }
+});
+    
 }
 
 function Wallet532() {
@@ -731,3 +750,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
