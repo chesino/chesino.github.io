@@ -1,7 +1,17 @@
 function handlePasteClick() {
-    navigator.clipboard.readText()
+    navigator.clipboard.read()
+        .then(function (clipboardItems) {
+            return clipboardItems[0].getType();
+        })
+        .then(function (clipboardType) {
+            if (clipboardType === 'text') {
+                return navigator.clipboard.readText();
+            } else {
+                throw new Error('Unsupported clipboard item type');
+            }
+        })
         .then(function (clipboardData) {
-            alert("Đã nhấn")
+            alert("Đã nhấn 2");
             const inputText = clipboardData;
 
             const regexA = /[+-]?\d{1,3}(?:,\d{3})*(?:,\d{1,3})?(?= VND(?!\.))/;
