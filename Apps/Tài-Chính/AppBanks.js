@@ -1,6 +1,7 @@
 function handlePasteClick() {
     navigator.clipboard.readText()
         .then(function (clipboardData) {
+            alert("Đã nhấn")
             const inputText = clipboardData;
 
             const regexA = /[+-]?\d{1,3}(?:,\d{3})*(?:,\d{1,3})?(?= VND(?!\.))/;
