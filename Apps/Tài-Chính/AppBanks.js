@@ -16,13 +16,13 @@ function handlePasteClick() {
             let transactionMessage = '';
 
             if (matches[0] !== null) {
-                var SoTienGD = parseFloat(matches[0][0].replace(/,/g, ''));
-                var SoTienGDr = matches[0][0];
-                var ThoiGianGD = '[' + matches[1][0].replace(/-/g, '/') + ']';
+                let SoTienGD = parseFloat(matches[0][0].replace(/,/g, ''));
+                let SoTienGDr = matches[0][0];
+                let ThoiGianGD = '[' + matches[1][0].replace(/-/g, '/') + ']';
 
                 if (matches[3] !== null) {
-                    var NguoiNhan = matches[3][0].replace('toi', 'Chuyển tiền tới ').replace(/^toi | N$/g, '');
-                    var NguoiGui = matches[5][0].replace('tu', 'Từ ');
+                    let NguoiNhan = matches[3][0].startsWith('toi') ? 'Chuyển tiền tới ' + matches[3][0].replace(/^toi | N$/g, '') : matches[3][0];
+                    let NguoiGui = matches[5][0].startsWith('tu') ? 'Từ ' + matches[5][0].replace(/^tu /, '') : matches[5][0];
                     if (SoTienGD < 0) {
                         transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiNhan + '.';
                     } else {
@@ -52,11 +52,12 @@ function handlePasteClick() {
                     return;
                 }
             } else {
-                Fail('Không đúng định dạng hoặc không có dữ liệu.')
+                Fail('Không đúng định dạng hoặc không có dữ liệu.');
             }
         })
-        .catch(function () {
-            Warning('🤔 Có sao chép gì đâu mà dán.')
+        .catch(function (error) {
+            console.error('Lỗi: ', error);
+            Warning('🤔 Có sao chép gì đâu mà dán.');
         });
     Rule503020();
 }
