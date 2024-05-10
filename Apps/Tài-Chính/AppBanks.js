@@ -3,11 +3,9 @@ function handlePasteClick() {
     .then(function(clipboardData) {
       const inputText = clipboardData;
 
-
       let regexA, regexB, regexC, regexD, regexE, regexF;
 
-
-      if (inputText.includes("Thẻ VCB Visa")) {
+      if (inputText.includes("Thẻ VCB Visa")) {
         regexA = /[+-]?\d{1,3}(?:,\d{3})*(?:,\d{1,3})?(?= VND(?!\.))/;
         regexB = /\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}/;
         regexC = /\d{1,3}(?:,\d{3})*(?= VND\.)/;
@@ -21,7 +19,6 @@ function handlePasteClick() {
         regexD = /tu \d+ [A-Z\s]+/g;
       }
 
-
       const regexArr = [regexA, regexB, regexC, regexE, regexF, regexD];
 
       const matches = regexArr.map(regex => inputText.match(regex));
@@ -33,56 +30,92 @@ function handlePasteClick() {
         var SoTienGDr = matches[0][0];
         var ThoiGianGD = '[' + matches[1][0].replace(/-/g, '/') + ']';
 
-        let NoteGD = "";
-        if (inputText.includes("Thẻ VCB Visa")) {
-          SoTienGD = "-" + SoTienGD;
-          SoTienGDr = "-" + SoTienGDr;
-          NoteGD = "SD tại..." ;
-        };
-        if (inputText.includes("Hủy GD thẻ VCB Visa")) {
-          SoTienGD = "+" + SoTienGD;
-          SoTienGDr = "+" + SoTienGDr;
-          NoteGD = "Hoàn trả do huỷ GD" ;
-        };
-        if (inputText.includes("MOMO")) {
-          NoteGD = "GD MOMO."
+        let NoiDungGD = ''; // Khai báo biến 
+        // Swal prompt
+        (async () => {
+          const { value: text } = await Swal.fire({
+            input: "textarea",
+            inputLabel: "Nội dung giao dịch",
+            inputPlaceholder: "Hãy nhập nội dung giao dịch...",
+            inputAttributes: {
+              "aria-label": "Type your message here"
+            },
+            showCancelButton: true,
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Xác nhận",
+            confirmButtonColor: "#3085d6",
 
-        };
+          });
+          if (text || text === "") {
+            let NoiDungGD = text;
+
+            if (NoiDungGD != "") {
+              NoiDungGD += "."
+            }
+            if (inputText.includes("Thẻ VCB Visa")) {
+              SoTienGD = "-" + SoTienGD;
+              SoTienGDr = "-" + SoTienGDr;
+            };
+            if (inputText.includes("VED")) {
+              NoiDungGD += "Shopee.";
+            };
+
+            if (inputText.includes("Hủy GD thẻ VCB Visa")) {
+              SoTienGD = "+" + SoTienGD;
+              SoTienGDr = "+" + SoTienGDr;
+              NoiDungGD += "Hoàn trả do huỷ GD";
+            };
+
+            if (inputText.includes("MOMO")) {
+              NoiDungGD += "MOMO.";
+            };
+            if (inputText.includes("BEGROUP")) {
+              SoTienGD = "-" + SoTienGD;
+              SoTienGDr = "-" + SoTienGDr;
+              NoiDungGD += "BE.";
+            };
+            if (inputText.includes("CIRCLE K")) {
+              SoTienGD = "-" + SoTienGD;
+              SoTienGDr = "-" + SoTienGDr;
+              NoiDungGD += "CIRCLE K.";
+            };
 
 
 
+            // Thêm các dòng code cần thực thi sau khi nhập xong vào đây
+            if (matches[3] !== null) {
+              var NguoiNhan = matches[3][0].replace('toi', 'Chuyển tiền tới ').replace(/^toi | N$/g, '');
+              var NguoiGui = matches[5][0].replace('tu', 'Từ ');
+              if (SoTienGD < 0) {
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiNhan + '.';
+              } else {
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiGui + NguoiNhan + '.';
+              }
 
-        if (matches[3] !== null) {
-          var NguoiNhan = matches[3][0].replace('toi', 'Chuyển tiền tới ').replace(/^toi | N$/g, '');
-          var NguoiGui = matches[5][0].replace('tu', 'Từ ');
-          if (SoTienGD < 0) {
-            transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiNhan + '.';
-          } else {
-            transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiGui + NguoiNhan + '.';
+            } else {
+              if (SoTienGD < 0) {
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ.' + NoiDungGD;
+              } else {
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ.' + NoiDungGD;
+              }
+            }
+
+            displayTransaction(transactionMessage);
+            transactionsHistory.unshift(transactionMessage);
+            SaveHistory();
+            displayTransactionHistory();
+
+
+            if (SoTienGD < 0) {
+              addMoney(0, Number(SoTienGD));
+              return;
+            }
+            if (SoTienGD > 0) {
+              addMoney(0, Number(SoTienGD));
+              return;
+            }
           }
-
-        } else {
-          if (SoTienGD < 0) {
-            transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ.' + NoteGD;
-          } else {
-            transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ.' + NoteGD;
-          }
-        }
-
-        displayTransaction(transactionMessage);
-        transactionsHistory.unshift(transactionMessage);
-        SaveHistory();
-        displayTransactionHistory();
-
-
-        if (SoTienGD < 0) {
-          addMoney(0, Number(SoTienGD));
-          return;
-        }
-        if (SoTienGD > 0) {
-          addMoney(0, Number(SoTienGD));
-          return;
-        }
+        })();
       } else {
         Fail('Không đúng định dạng hoặc không có dữ liệu.')
       }
