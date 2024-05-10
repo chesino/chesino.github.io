@@ -29,10 +29,6 @@ button {
 
 #toggle-button {
     cursor: pointer;
-    margin:  auto;
-    right: 10px;
-    height: 50px;
-    width: 50px;
     font-size: 20px;
     display: flex;
     text-align: center;
@@ -141,9 +137,11 @@ button {
 .FuncBlock .Func {
     cursor: pointer;
     text-align: center;
+    display: block;
 }
 
-.FuncBlock .Func i {
+.FuncBlock .Func i,
+.FuncBlock .Func img{
     color: #ffffff;
     height: 40px;
     width: 40px;
@@ -171,8 +169,8 @@ button {
     background-color: #ff5555;
 }
 
-.FuncBlock .Func:nth-child(3) i {
-    background-color: #2456ff;
+.FuncBlock .Func:nth-child(3) img {
+    background-color: #fff;
 }
 
 .FuncBlock .Func:nth-child(4) i {
@@ -215,7 +213,6 @@ button {
     display: flex;
     gap: 10px;
     width: 100%;
-    height: 50px;
     margin: 10px 0;
 }
 .Transactions .Button button {
@@ -224,14 +221,13 @@ button {
     font-weight: bold;
     padding: 10px;
     width: 50px;
+    height: 50px;
     margin: 2px 0;
     border-radius: 10px;
     background-color: var(--MAIN);
     border: none;
 }
-.Transactions .Button button img {
-    height: 100%;
-}
+
 #Transactions p {
     font-size: 14px;
     margin: 10px 0;
