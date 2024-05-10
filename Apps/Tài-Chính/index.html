@@ -129,6 +129,7 @@
                 <br>
                 <label for="cashNote">Ghi chú:</label>
                 <input type="text" id="cashNote" name="cashNote" placeholder="Ghi chú (nếu có)">
+                
                 <button onclick="addMoney()">Nhập</button>
             </div>
             <div class="Card Tabcontent" id="B">
@@ -203,16 +204,14 @@
 
             <div class="Button">
                 <button onclick="exportTransactions()"><i class="fa-solid fa-circle-down"></i></button>
-                <!-- <button onclick="clearTransactions()"><i class="fa-solid fa-trash"></i></button> -->
-                <button onclick="Clear()"><i class="fa-solid fa-database"></i></button>
                 <button onclick="exportData()"><i class="fa-solid fa-file-arrow-down"></i></button>
                 <button onclick="importData()"><i class="fa-solid fa-file-arrow-up"></i></button>
-                <button onclick="handlePasteClick()"><img src="./IMG/Icon-Vietcombank.png" alt="" srcset=""></button>
+                <button onclick="handlePasteClick()" ><img src="./IMG/Icon-Vietcombank.png" alt="" srcset=""></button>
                <button onclick="Clear()"><i class="fa-solid fa-trash-can"></i></button>
             </div>
         </div>
 
-        <div id="toggle-button">HIHI</div>
+        <div id="toggle-button">DarkModeError</div>
     </div>
     <footer>
         <!-- Nội dung chân trang -->
@@ -222,9 +221,10 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="./Script.js"></script>
 <script src="./AppBanks.js"></script>
-<script src="/DATA/SweetAlert2.js"></script>
+<script src="./Script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="./DarkMode.js"></script>
 
 </html>
