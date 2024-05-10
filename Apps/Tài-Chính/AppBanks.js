@@ -82,9 +82,9 @@ function handlePasteClick() {
             // Thêm các dòng code cần thực thi sau khi nhập xong vào đây
             if (matches[3] !== null) {
               if (SoTienGD < 0) {
-                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ. ' + NoiDungGD + 'Banking.';
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ. ' + NoiDungGD ;
               } else {
-                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ. ' + NoiDungGD + 'Banking.';
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ. ' + NoiDungGD ;
               }
 
             } else {
