@@ -221,135 +221,67 @@ function SaveHistory() {
     // Lưu lịch sử giao dịch vào localStorage
     localStorage.setItem('transactionsHistory', JSON.stringify(transactionsHistory));
 }
-
 function recordDebt() {
-    const debtValue = parseInt(document.getElementById('debtAmount').dataset.rawValue) || 0;
-    const payWho = document.getElementById('payWho').value;
-    const debtWho = payWho;
-    const payAmount = parseInt(document.getElementById('payAmount').dataset.rawValue) || 0;
+  const debtValue = parseInt(document.getElementById('debtAmount').dataset.rawValue) || 0;
+  const payWho = document.getElementById('payWho').value;
+  const debtWho = payWho;
+  const payAmount = parseInt(document.getElementById('payAmount').dataset.rawValue) || 0;
 
-    let transactionMessage = '[' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '] ';
-    if (debtValue > 0) {
-        addMoney(debtValue)
-        debtAmount -= debtValue;
+  let transactionMessage = '[' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '] ';
+  if (debtValue > 0) {
+    addMoney(debtValue)
+    debtAmount -= debtValue;
+    const tiennoDiv = document.getElementById('tienno');
+    tiennoDiv.innerText = debtAmount.toLocaleString();
+    localStorage.setItem('debtAmount', debtAmount);
+    transactionMessage += 'Số dư Tiền Mặt +' + debtValue.toLocaleString() + 'đ. Mượn của ' + debtWho + '.';
+    displayTransaction(transactionMessage);
+    transactionsHistory.unshift(transactionMessage);
+    SaveHistory();
+    changeColor();
+  }
+  if (debtAmount < 0) {
+    if (payAmount > 0) {
+      if (cashAmount >= payAmount) {
+        addMoney(-payAmount, 0);
+        debtAmount += payAmount;
         const tiennoDiv = document.getElementById('tienno');
         tiennoDiv.innerText = debtAmount.toLocaleString();
         localStorage.setItem('debtAmount', debtAmount);
-        transactionMessage += 'Số dư Tiền Mặt +' + debtValue.toLocaleString() + 'đ. Mượn của ' + debtWho + '.';
+        transactionMessage += 'Số dư Tiền Mặt -' + payAmount.toLocaleString() + 'đ Trả cho ' + payWho + '.';
         displayTransaction(transactionMessage);
         transactionsHistory.unshift(transactionMessage);
-        SaveHistory();
-        changeColor();
-    }
-    if (debtAmount < 0) {
-        if (payAmount > 0) {
-            if (cashAmount >= payAmount) {
-                addMoney(-payAmount, 0);
-                debtAmount += payAmount;
-                const tiennoDiv = document.getElementById('tienno');
-                tiennoDiv.innerText = debtAmount.toLocaleString();
-                localStorage.setItem('debtAmount', debtAmount);
-                transactionMessage += 'Số dư Tiền Mặt -' + payAmount.toLocaleString() + 'đ Trả cho ' + payWho + '.';
-                displayTransaction(transactionMessage);
-                transactionsHistory.unshift(transactionMessage);
-            } else {
-                if (cardAmount >= payAmount) {
-                    addMoney(0, -payAmount);
-                    debtAmount += payAmount;
-                    const tiennoDiv = document.getElementById('tienno');
-                    tiennoDiv.innerText = debtAmount.toLocaleString();
-                    localStorage.setItem('debtAmount', debtAmount);
-                    transactionMessage += 'Số dư Tiền Thẻ -' + payAmount.toLocaleString() + 'đ Trả cho ' + payWho + '.';
-                    displayTransaction(transactionMessage);
-                    transactionsHistory.unshift(transactionMessage);
-                } else {
-                    Warning('Tài khoản của bạn không đủ để trả nợ.');
-                };
-            };
-            
-            SaveHistory();
-            changeColor();
-        }
-        Trans('Thành công');
-    } else {
-        Warning('Có nợ ai đâu mà trả 🤔')
-    }
-
-    document.getElementById('payWho').value = '';
-    document.getElementById('debtAmount').value = 0;
-    document.getElementById('payAmount').value = 0;
-    document.getElementById('debtAmount').dataset.rawValue = 0;
-    document.getElementById('payAmount').dataset.rawValue = 0;
-
-    changeColor();
-}
-
-function saveSavings() {
-    let transactionMessage = '[' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '] ';
-    const savingsValue = parseInt(document.getElementById('savingsAmount').dataset.rawValue) || 0;
-    if (savingsValue > 0) {
-
-        if (cashAmount >= savingsValue) {
-            addMoney(-savingsValue, 0);
-            savingsAmount += savingsValue;
-            transactionMessage += 'Số dư Tiết Kiệm +' + savingsValue.toLocaleString() + 'đ.';
-            displayTransaction(transactionMessage);
-            transactionsHistory.unshift(transactionMessage);
-            Trans('Thành công');
+      } else {
+        if (cardAmount >= payAmount) {
+          addMoney(0, -payAmount);
+          debtAmount += payAmount;
+          const tiennoDiv = document.getElementById('tienno');
+          tiennoDiv.innerText = debtAmount.toLocaleString();
+          localStorage.setItem('debtAmount', debtAmount);
+          transactionMessage += 'Số dư Tiền Thẻ -' + payAmount.toLocaleString() + 'đ Trả cho ' + payWho + '.';
+          displayTransaction(transactionMessage);
+          transactionsHistory.unshift(transactionMessage);
         } else {
-            if (cardAmount >= savingsValue) {
-                addMoney(0, -savingsValue);
-                savingsAmount += savingsValue;
-                transactionMessage += 'Số dư Tiết Kiệm +' + savingsValue.toLocaleString() + 'đ.';
-                displayTransaction(transactionMessage);
-                transactionsHistory.unshift(transactionMessage);
-            } else {
-                Warning('Không có đủ tiền bà đặt tiết kiệm 🤣.');
-            }
+          Warning('Tài khoản của bạn không đủ để trả nợ.');
+        };
+      };
 
-        }
-        
-        
-        SaveHistory();
-        const savingsTotalDiv = document.getElementById('savingsTotal');
-        savingsTotalDiv.innerText = savingsAmount.toLocaleString();
-        localStorage.setItem('savingsAmount', savingsAmount);
+      SaveHistory();
+      changeColor();
     }
-    document.getElementById('savingsAmount').value = '';
-    document.getElementById('withdrawalAmount').value = '';
-    document.getElementById('savingsAmount').dataset.rawValue = 0;
-    document.getElementById('withdrawalAmount').dataset.rawValue = 0;
+    Trans('Thành công');
+  } else {
+    Warning('Có nợ ai đâu mà trả 🤔')
+  }
 
-    Rule503020();
-    changeColor();
+  document.getElementById('payWho').value = '';
+  document.getElementById('debtAmount').value = 0;
+  document.getElementById('payAmount').value = 0;
+  document.getElementById('debtAmount').dataset.rawValue = 0;
+  document.getElementById('payAmount').dataset.rawValue = 0;
+
+  changeColor();
 }
-
-function withdrawSavings() {
-    let transactionMessage = new Date().toLocaleTimeString() + ' ' + new Date().toLocaleDateString() + ' - ';
-    const withdrawalValue = parseInt(document.getElementById('withdrawalAmount').dataset.rawValue) || 0;
-    if (withdrawalValue > 0 && withdrawalValue <= savingsAmount) {
-        savingsAmount -= withdrawalValue;
-        const savingsTotalDiv = document.getElementById('savingsTotal');
-        savingsTotalDiv.innerText = savingsAmount.toLocaleString();
-
-        addMoney(withdrawalValue);
-        localStorage.setItem('savingsAmount', savingsAmount);
-        transactionMessage += 'Số dư Tiết Kiệm -' + withdrawalValue.toLocaleString() + 'đ.';
-        displayTransaction(transactionMessage);
-        transactionsHistory.unshift(transactionMessage);
-        SaveHistory();
-        Trans('Thành công')
-    } else {
-        Warning('vượt quá số dư');
-    }
-    document.getElementById('savingsAmount').value = '';
-    document.getElementById('withdrawalAmount').value = '';
-    document.getElementById('savingsAmount').dataset.rawValue = 0;
-    document.getElementById('withdrawalAmount').dataset.rawValue = 0;
-    Rule503020();
-    changeColor();
-}
-
 function TinhTienMuaHang() {
     var GiaGocSanPham = document.getElementById('GiaGocSanPham').dataset.rawValue;
     var GiaSanPham = document.getElementById('GiaSanPham').dataset.rawValue;
@@ -481,19 +413,25 @@ function formatWithDots(value) {
 }
 
 function Note() {
-    var marquee = document.getElementById('marquee');
-    var inputText = confirm("Nhấn OK nếu bạn muốn thay đổi văn bản.");
+  (async () => {
+    const inputText = await Swal.fire({
+      input: 'textarea',
+      inputLabel: 'Cảnh Báo',
+      inputPlaceholder: 'Để lại dặn dò cho bản thân nào...',
+      inputAttributes: {
+        'aria-label': 'Type your message here'
+      },
+      showCancelButton: true
+    });
 
-    if (inputText) {
-        var text = prompt("Nhập văn bản của bạn:");
-        if (text !== null) {
-            marquee.innerText = text;
-            // Lưu văn bản vào local storage
-            localStorage.setItem('savedText', text);
-        } else {
-            alert("Bạn đã hủy nhập liệu.");
-        }
+    if (inputText.value) {
+      const marquee = document.getElementById('marquee');
+      marquee.innerText = inputText.value;
+      localStorage.setItem('savedText', inputText.value);
+    } else {
+      Warning("Bạn đã hủy nhập liệu.");
     }
+  })();
 }
 
 
@@ -549,7 +487,8 @@ function exportData() {
         totalAmount,
         debtAmount,
         savingsAmount,
-        transactionsHistory
+        transactionsHistory,
+        savedText: localStorage.getItem('savedText') // Thêm savedText vào dữ liệu xuất
     };
 
     const dataString = JSON.stringify(dataToExport);
