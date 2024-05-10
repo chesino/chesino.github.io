@@ -44,20 +44,24 @@
             <div class="FuncBlock">
                 <div class="Func" onclick="openTab(event, 'A')">
                     <i class="fa-solid fa-circle-plus"></i>
-                    <strong>Thu nhập</strong>
+                    <strong>Thu</strong>
                 </div>
                 <div class="Func" onclick="openTab(event, 'B')">
                     <i class="fa-solid fa-circle-minus"></i>
-                    <strong>Chi tiêu</strong>
+                    <strong>Chi</strong>
                 </div>
-                <div class="Func" onclick="openTab(event, 'D')">
-                    <i class="fa-solid fa-receipt"></i>
-                    <strong>Sổ Nợ</strong>
-                </div>
-                <div class="Func" onclick="openTab(event, 'E')">
-                    <i class="fa-solid fa-money-bill-trend-up"></i>
-                    <strong>Tiết kiệm</strong>
-                </div>
+                
+                 <div class="Func" onclick="handlePasteClick(event, 'B')">
+   <img src="./IMG/Icon-Vietcombank.png" alt="Vietcombank" >
+   <strong>VCB</strong>
+ </div>
+ 
+ <div class="Func" onclick="openTab(event, 'D')">
+  <i class="fa-solid fa-receipt"></i>
+  <strong>Sổ Nợ</strong>
+</div>
+  
+                
                 <div class="Func" onclick="openTab(event, 'C')">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <strong>Mua đồ</strong>
@@ -146,28 +150,6 @@
                 <input type="text" id="cashWithdrawNote" name="cashWithdrawNote" placeholder="Ghi chú (nếu có)">
                 <button onclick="addMoney()">Nhập</button>
             </div>
-            <div class="Card Tabcontent" id="D">
-                <h1>Ghi nợ</h1>
-                <label for="debtAmount">Số tiền nợ:</label>
-                <input type="text" class="inputFM" id="debtAmount" name="debtAmount" pattern="[0-9]*">
-                <br><br>
-                <label for="payAmount">Số tiền trả:</label>
-                <input type="text" class="inputFM" id="payAmount" name="payAmount" pattern="[0-9]*">
-                <br><br>
-                <label for="payWho">Của ai:</label>
-                <input type="text" id="payWho" value="">
-                <button onclick="recordDebt()">Ghi nợ</button>
-            </div>
-            <div class="Card Tabcontent" id="E">
-                <h1>Tiết kiệm</h1>
-                <label for="savingsAmount">Số tiền tiết kiệm:</label>
-                <input type="text" class="inputFM" id="savingsAmount" name="savingsAmount" pattern="[0-9]*">
-                <button onclick="saveSavings()">Tiết kiệm</button>
-                <br>
-                <label for="withdrawalAmount">Rút tiền tiết kiệm:</label>
-                <input type="text" class="inputFM" id="withdrawalAmount" name="withdrawalAmount" pattern="[0-9]*">
-                <button onclick="withdrawSavings()">Rút tiền</button>
-            </div>
 
             <div class="Card Tabcontent" id="C">
                 <h1>Mua đồ</h1>
@@ -182,6 +164,18 @@
                 <br>
                 <button onclick="TinhTienMuaHang()">Tính ngay</button>
             </div>
+                <div class="Card Tabcontent" id="D">
+      <h1>Ghi nợ</h1>
+      <label for="debtAmount">Số tiền nợ:</label>
+      <input type="text" class="inputFM" id="debtAmount" name="debtAmount" pattern="[0-9]*">
+      <br><br>
+      <label for="payAmount">Số tiền trả:</label>
+      <input type="text" class="inputFM" id="payAmount" name="payAmount" pattern="[0-9]*">
+      <br><br>
+      <label for="payWho">Của ai:</label>
+      <input type="text" id="payWho" value="">
+      <button onclick="recordDebt()">Ghi nợ</button>
+    </div>
 
             <div class="Card Tabcontent" id="F">
                 <h1>Rút tiền</h1>
@@ -206,12 +200,15 @@
                 <button onclick="exportTransactions()"><i class="fa-solid fa-circle-down"></i></button>
                 <button onclick="exportData()"><i class="fa-solid fa-file-arrow-down"></i></button>
                 <button onclick="importData()"><i class="fa-solid fa-file-arrow-up"></i></button>
-                <button onclick="handlePasteClick()" ><img src="./IMG/Icon-Vietcombank.png" alt="" srcset=""></button>
+           
+              
+                
+                
                <button onclick="Clear()"><i class="fa-solid fa-trash-can"></i></button>
+               <button id="toggle-button">DarkModeErro</button>
             </div>
         </div>
-
-        <div id="toggle-button">DarkModeError</div>
+        
     </div>
     <footer>
         <!-- Nội dung chân trang -->
