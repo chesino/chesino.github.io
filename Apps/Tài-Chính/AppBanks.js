@@ -14,12 +14,9 @@ function handlePasteClick() {
         regexA = /[+-]?\d{1,3}(?:,\d{3})*(?:,\d{1,3})?(?= VND(?!\.))/;
         regexB = /\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}/;
         regexC = /\d{1,3}(?:,\d{3})*(?= VND\.)/;
-        regexE = /toi\d{10} [A-Z\s]+|toi \d+ [A-Z\s]+/g;
-        regexF = /\([^)]+\)/;
-        regexD = /tu \d+ [A-Z\s]+/g;
       }
 
-      const regexArr = [regexA, regexB, regexC, regexE, regexF, regexD];
+      const regexArr = [regexA, regexB, regexC, regexE];
 
       const matches = regexArr.map(regex => inputText.match(regex));
 
@@ -84,12 +81,10 @@ function handlePasteClick() {
 
             // Thêm các dòng code cần thực thi sau khi nhập xong vào đây
             if (matches[3] !== null) {
-              var NguoiNhan = matches[3][0].replace('toi', 'Chuyển tiền tới ').replace(/^toi | N$/g, '');
-              var NguoiGui = matches[5][0].replace('tu', 'Từ ');
               if (SoTienGD < 0) {
-                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiNhan + '.';
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ. ' + NoiDungGD + 'Banking.';
               } else {
-                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + ' đ. ' + NguoiGui + NguoiNhan + '.';
+                transactionMessage = ThoiGianGD + ' Số dư Tiền Thẻ ' + SoTienGDr + 'đ. ' + NoiDungGD + 'Banking.';
               }
 
             } else {
