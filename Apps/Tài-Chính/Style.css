@@ -324,3 +324,11 @@ footer {
       left: -1000px /* same as your text width */
     }
   }
+
+  #TimeNow{
+    background-color: var(--MAIN);
+    border-radius: 5px;
+    color: black;
+    font-size: 14px;
+    padding: 2px;
+  }
