@@ -32,269 +32,131 @@
 </head>
 
 <body>
+  <header>
+    <h1>Các dự án của tôi</h1>
+    <button id="toggle-view" class="toggle-btn">Sắp Xếp</button>
+    <button class="toggle-mode-btn">🌚</button>
+  </header>
 
-    <div class="header">
-        <h2>Chesino ToolBox</h2>
-        <p>Tiện ích, Chia sẻ và Lưu trữ không giới hạn.</p>
-    </div>
+  <main>
+    <section class="gallery">
 
-    <div class="tab" id="navbar">
-        <a class="tablinks active" onclick="openTab(event, 'Home')"><i class="fa-solid fa-cloud-arrow-up"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Info')"><i class="fa-solid fa-circle-info"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Terms')"><i class="fa-solid fa-scale-balanced"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Member')"><i class="fa-solid fa-star"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Media')"><i class="fa-solid fa-circle-play"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Youtube')"><i class="fa-brands fa-youtube"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Note')"><i class="fa-solid fa-notes-medical"></i></a>
-        <a class="tablinks" onclick="openTab(event, 'Movie')"><i class="fa-solid fa-film"></i></a>
-
-    </div>
-
-    <div id="Home" class="tabcontent show">
-        <header>
-            <h1>Chesino Upload</h1>
-        </header>
-        <iframe
-            src='https://script.google.com/macros/s/AKfycbzdrKSm1nRFBL-3J_mYxtljJJc0SdPF4dwjGUHhh09qXw--E-wsVa8ETHsmE748282y/exec'></iframe>
-    </div>
-
-    <div id="Info" class="tabcontent">
-        <header>
-            <h1>Thông tin về Chesino Upload</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2>Giới thiệu</h2>
-                <p>Trang web này cho phép bạn tải lên và lưu trữ tài liệu một cách miễn phí và dễ dàng chia sẻ chúng.
-                </p>
-
-                <h2>Máy chủ</h2>
-                <p>Sử dụng máy chủ từ Google sẽ mang đến cho bạn trải nghiệm tốt nhất, nhanh chóng và an toàn.</p>
-
-                <h2>Thông tin</h2>
-                <p>Lập trình và phát triển bởi HunqD</p>
-            </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/AETH.png" alt="Sản phẩm">
         </div>
-
-
-    </div>
-
-    <div id="Terms" class="tabcontent">
-        <header>
-            <h1>Điều Khoản Sử Dụng HunqD Upload</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2>1. Chấp Nhận Điều Khoản</h2>
-                <p>Bằng cách truy cập hoặc sử dụng trang web tải lên tệp này <strong>HunqD Upload</strong>, bạn đồng ý
-                    tuân
-                    thủ và ràng buộc bởi các điều khoản và điều kiện sau đây. Nếu bạn không đồng ý với các điều khoản
-                    này,
-                    bạn không được sử dụng Trang web.</p>
-
-                <h2>2. Nội Dung Tải Lên</h2>
-                <p>Bạn chịu trách nhiệm tuyệt đối cho nội dung bạn tải lên lên Trang web. Bạn cam kết rằng bạn có quyền
-                    sở
-                    hữu hoặc có quyền sử dụng hợp pháp tất cả nội dung bạn tải lên.</p>
-
-                <p>Bạn đồng ý rằng việc tải lên hoặc chia sẻ nội dung chống phá, nội dung liên quan đến khủng bố, đồi
-                    trụy,
-                    hay bất kỳ hình thức nội dung bất hợp pháp nào là <strong>nghiêm cấm trên Trang web này.</strong>
-                </p>
-
-                <h2>3. Quyền Sử Dụng Nội Dung</h2>
-                <p>Bằng cách tải lên nội dung lên Trang web, bạn cấp cho chúng tôi một quyền không độc quyền, không giới
-                    hạn
-                    thời gian, không thể chuyển nhượng, và miễn phí sử dụng, sao chép, sửa đổi, phân phối và hiển thị
-                    nội
-                    dung đó, miễn là nó tuân theo các điều khoản và điều kiện này.</p>
-
-                <p>Chúng tôi có quyền loại bỏ hoặc thay đổi nội dung bạn tải lên mà chúng tôi cho là vi phạm các điều
-                    khoản
-                    sử dụng hoặc vi phạm quyền của bên thứ ba.</p>
-
-                <h2>4. Bảo Mật</h2>
-                <p>Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn theo chính sách bảo mật của chúng tôi. Tuy nhiên,
-                    bạn
-                    nên hiểu rằng việc tải lên thông tin cá nhân hoặc nhạy cảm có thể có rủi ro, và bạn tự chịu trách
-                    nhiệm
-                    về việc bảo vệ thông tin của mình.</p>
-
-                <h2>5. Giới Hạn Trách Nhiệm</h2>
-                <p>Trang web được cung cấp "nhưng như vậy" và chúng tôi không chịu trách nhiệm về bất kỳ mất mát hoặc
-                    thiệt
-                    hại nào do việc sử dụng Trang web gây ra.</p>
-
-                <h2>6. Thay Đổi Điều Khoản</h2>
-                <p>Chúng tôi có quyền thay đổi hoặc cập nhật các điều khoản sử dụng này mà không cần thông báo trước.
-                    Việc
-                    tiếp tục sử dụng Trang web sau khi các thay đổi được đăng tải đồng nghĩa với việc bạn chấp nhận các
-                    thay
-                    đổi đó.</p>
-
-                <h2>7. Liên Hệ</h2>
-                <p>Nếu bạn có bất kỳ câu hỏi hoặc ý kiến ​​về các điều khoản này, vui lòng liên hệ với chúng tôi qua <a
-                        href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Facebook</a> .</p>
-
-                <h2>8. Hiệu Lực</h2>
-                <p>Những điều khoản này có hiệu lực từ ngày bạn truy cập Trang web và tiếp tục áp dụng cho việc sử dụng
-                    Trang web cho đến khi bạn ngừng sử dụng hoặc chúng tôi chấm dứt quyền truy cập của bạn.</p>
-            </div>
+        <div class="card-content">
+          <h2>AETH</h2>
+          <p>Đây là dự án hỗ trợ cho chuyến đi chơi để lưu lại các chi phí cũng như đánh giá ghi chú các địa điểm.</p>
+          <a href="https://chesino.github.io/Apps/AETH/" target="_blank" class="btn">Truy cập</a>
         </div>
-        <header>
-            <h1>Về HunqD Movie</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2>Bản quyền</h2>
-               <p>
-                Chúng tôi chỉ sử dụng iframe từ nguồn mở thứ ba trên trang web của chúng tôi với mục đích tham khảo hoặc hiển thị thông tin.
-               </p>
-               <p>Chúng tôi cam kết tuân theo các quy định về bản quyền và tôn trọng quyền sở hữu trí tuệ của nguồn mở thứ ba.</p>
-               <p>Nếu bạn là chủ sở hữu hoặc đại diện của nguồn mở và không đồng ý với việc chúng tôi sử dụng iframe trên trang web của mình, vui lòng liên hệ với chúng tôi qua thông tin dưới đây để chúng tôi có thể gỡ bỏ nó: <a href="http://facebook.com/HunqD" target="_blank" rel="noopener noreferrer">Facebook</a>
-               </p>
-               <p>Chúng tôi cam kết hợp tác và giải quyết vấn đề này một cách hợp lý để đảm bảo tuân thủ đối với quyền sở hữu trí tuệ của bạn. Xin cảm ơn!"
-               </p>
-            </div>
-        </div>
-    </div>
-    <div id="Member" class="tabcontent">
-        <header>
-            <h1>Thành Viên VIP</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2>Thành viên VIP</h2>
-                <p>Giúp bạn lưu trữ dữ liệu của bạn lâu hơn và có thể tiết kiệm hơn.</p>
-                <p>Xem phim không giới hạn.</p>
-            </div>
-        </div>
-        <div class="pack">
-            <div class="package">
-                <h2>Gói VIP Basic</h2>
-                <p>Thời hạn lưu trữ: 15 Ngày</p>
-                <p>Dung lượng: 500Mb/Tệp</p>
-                <a href="#" class="button">Miễn Phí</a>
-            </div>
-            <div class="package">
-                <h2>Gói 100GB</h2>
-                <p>Thời hạn lưu trữ: 2 Tháng</p>
-                <p>Dung lượng: 10Gb/Tệp</p>
-                <p>Hỗ trợ sao lưu khi hết hạn gói.</p>
-                <a href="#" class="button">20.000đ/Tháng</a>
-            </div>
-            <div class="package">
-                <h2>Gói 500GB</h2>
-                <p>Thời hạn lưu trữ: 1 Năm</p>
-                <p>Dung lượng: 100Gb/Tệp</p>
-                <p>Hỗ trợ sao lưu khi hết hạn gói.</p>
-                <a href="#" class="button">50.000đ/Tháng</a>
-            </div>
-        </div>
-    </div>
+      </div>
 
-    <div id="Media" class="tabcontent">
-        <header>
-            <h1>Trình phát đa phương tiện</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2>Giới thiệu</h2>
-                <p>Hỗ trợ bạn xem các tệp đa phương tiện (mp3, mp4, ogg, vv.) bằng cách sử dụng ID hoặc Link.</p>
-                <h2>Tính năng</h2>
-                <p>Hỗ trợ chỉ phát âm thanh cho nhiều định dạng video.</p>
-                <h2>Sắp tới</h2>
-                <p>Hỗ trợ chuyển đổi Video sang Audio.</p>
-                <p>Xem chung bằng ID Phòng.</p>
-            </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/ADBLOCK.webp" alt="Sản phẩm">
         </div>
-
-        <div class="MediaPlayer">
-            <div class="SearchBox">
-                <select id="mediaType">
-                    <option value="video">Video</option>
-                    <option value="audio">Audio</option>
-                </select>
-                <input type="text" id="IDMedia" placeholder="Vui lòng nhập ID">
-                <input type="text" maxlength="3" placeholder="ID Phòng" disabled>
-                <button class="Search" onclick="playMedia()">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-            <div class="MediaBox" id="Player"></div>
+        <div class="card-content">
+          <h2>AdBlock</h2>
+          <p>Đây là các easylist hỗ trợ chặn quảng cáo được chỉnh sửa bởi cá nhân tôi.</p>
+          <a href="https://chesino.github.io/Apps/Adblock/" target="_blank" class="btn">Truy cập</a>
         </div>
-    </div>
+      </div>
 
-    <div id="Youtube" class="tabcontent">
-        <header>
-            <h1>Youtube Downloader</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2>Sắp phát hành</h2>
-                <p>Hỗ trợ tải nhạc, video từ Youtube hoàn toàn miễn phí.</p>
-            </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/IPA.jpeg" alt="Sản phẩm">
         </div>
-
-    </div>
-
-    <div id="Note" class="tabcontent">
-        <header>
-            <h1>Ghi chú</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2>Sắp phát hành</h2>
-                <p>Hỗ trợ ghi chú nhanh.</p>
-                <h2>Sắp tới</h2>
-                <p>Chia sẻ ghi chú bằng link.</p>
-            </div>
+        <div class="card-content">
+          <h2>iPA Store</h2>
+          <p>Lưu trữ các tệp .iPA dành cho iOS.</p>
+          <a href="https://chesino.github.io/Apps/iPA/" target="_blank" class="btn">Truy cập</a>
         </div>
-    </div>
+      </div>
 
-    <div id="Movie" class="tabcontent ">
-        <header>
-            <h1>Chesino Movie</h1>
-        </header>
-        <div class="container">
-            <div class="terms">
-                <h2 style="color: #ff2655; ;">Bản quyền</h2>
-               <p>
-                Chúng tôi chỉ sử dụng iframe từ nguồn mở thứ ba trên trang web của chúng tôi với mục đích tham khảo hoặc hiển thị thông tin.
-               </p>
-               <p>Chúng tôi cam kết tuân theo các quy định về bản quyền và tôn trọng quyền sở hữu trí tuệ của nguồn mở thứ ba.</p>
-               <p>Nếu bạn là chủ sở hữu hoặc đại diện của nguồn mở và không đồng ý với việc chúng tôi sử dụng iframe trên trang web của mình, vui lòng liên hệ với chúng tôi qua thông tin dưới đây để chúng tôi có thể gỡ bỏ nó: <a href="http://facebook.com/HunqD" target="_blank" rel="noopener noreferrer">Facebook</a>
-               </p>
-               <p>Chúng tôi cam kết hợp tác và giải quyết vấn đề này một cách hợp lý để đảm bảo tuân thủ đối với quyền sở hữu trí tuệ của bạn. Xin cảm ơn!"
-               </p>
-            </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/LOL.webp" alt="Sản phẩm">
         </div>
-        <div class="container ListMovie">
-            <div class="terms">
-                <h2>Doraemon Tập Dài - Nobita Và Vùng Đất Lý Tưởng Trên Bầu Trời (Doraemon Movie 42 - Nobita to Sora no Utopia)</h2>
-                <p>Nguồn: Dailymotion</p>
-                <div class="dailymotion"> 
-                    <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x8ncbnb" width="100%" height="100%" allowfullscreen title="Dailymotion Video Player" > </iframe>
-                </div>
-            </div>
-
-            <div class="terms">
-                <h2>Doraemon Movie 12 Nobita Ở Xứ Sở Nghìn Lẻ Một Đêm Lồng Tiếng Việt</h2>
-                <p>Nguồn: Dailymotion</p>
-                <div class="dailymotion"> 
-                    <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;overflow:hidden" frameborder="0" type="text/html" src="https://www.dailymotion.com/embed/video/x8l7d7b" width="100%" height="100%" allowfullscreen title="Dailymotion Video Player" > </iframe>
-                </div>
-            </div>
-            <div class="terms">
-               <a href="https://www.jenkastudiovn.net/" target="_blank" rel="noopener noreferrer">jenkastudiovn</a>
-            </div>
-            
-           
-          
+        <div class="card-content">
+          <h2>LOL Check</h2>
+          <p>Kiểm tra thông tin người chơi Liên Minh Huyền Thoại. Hiện đang bảo trì.</p>
+          <a href="https://chesino.github.io/Apps/LOL/" target="_blank" class="btn">Truy cập</a>
         </div>
+      </div>
 
-    </div>
 
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/Windows.webp" alt="Sản phẩm 1">
+        </div>
+        <div class="card-content">
+          <h2>Windows</h2>
+          <p>Hướng dẫn cài đặt Windows, Office,….</p>
+          <a href="https://chesino.github.io/Windows/" target="_blank" class="btn">Truy cập</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/JB.webp" alt="Sản phẩm 2">
+        </div>
+        <div class="card-content">
+          <h2>Jailbreak iOS</h2>
+          <p>Thêm nhanh Repo dành cho Sileo, Cydia, installer, Zebra.</p>
+          <a href="https://chesino.github.io/JB/" target="_blank" class="btn">Truy cập</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/AP2.webp" alt="Sản phẩm 2">
+        </div>
+        <div class="card-content">
+          <h2>Dự án AP2</h2>
+          <p>Dự án PLC vận hành trạm phân loại phôi.</p>
+          <a href="https://chesino.github.io/AP2/" target="_blank" class="btn">Truy cập</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/Social.jpeg" alt="Sản phẩm 2">
+        </div>
+        <div class="card-content">
+          <h2>HunqD Social</h2>
+          <p>Tiện ích mạng xã hội dành riêng cho bạn bè của Hùng.</p>
+          <a href="https://chesino.github.io/HunqD/" target="_blank" class="btn">Truy cập</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/Money.jpeg" alt="Sản phẩm 2">
+        </div>
+        <div class="card-content">
+          <h2>Quản lý tài chính</h2>
+          <p>Giúp bạn quản lý tài chính tốt hơn, sắp có bản cập nhật lớn.</p>
+          <a href="https://chesino.github.io/Apps/Tài-Ch%C3%ADnh/" target="_blank" class="btn">Truy cập</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="./DATA/IMG/UNO.jpeg" alt="Sản phẩm 2">
+        </div>
+        <div class="card-content">
+          <h2>UNO</h2>
+          <p>Đây là máy cộng điểm cho các người chơi.</p>
+          <a href="https://chesino.github.io/Apps/Tài-Ch%C3%ADnh/" target="_blank" class="btn">Truy cập</a>
+        </div>
+      </div>
+
+      <!-- Thêm nhiều sản phẩm theo định dạng trên -->
+    </section>
+  </main>
+  <footer>
+  <p>Lập trình và thiết kế bởi <b>Đinh Mạnh Hùng</b>.</p>
+</footer>
 </body>
 <script src="./DATA/Script.js"></script>
 
