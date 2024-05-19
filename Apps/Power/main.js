@@ -4,7 +4,7 @@ const playPauseBtn = document.getElementById('playPauseBtn');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 
-const videos = ['/Video/Video1.mp4', 'video2.mp4', 'video3.mp4'];
+const videos = ['./Video/Video1.mp4', 'video2.mp4', 'video3.mp4'];
 let currentVideoIndex = 0;
 
 playPauseBtn.addEventListener('click', () => {
