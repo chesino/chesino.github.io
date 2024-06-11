@@ -1,105 +1,208 @@
 @font-face {
-    font-family: RobotoMono;
-    src: url(/DATA/Font/RobotoMono-Regular.ttf);
+  font-family: RobotoMono;
+  src: url(/DATA/Font/RobotoMono-Regular.ttf);
+}
+
+:root {
+  --bg-color: #000;  /* Background color */
+  --text-color: #fff;  /* Text color */
+  --primary-color: #0f0;  /* Green for accents */
+  --secondary-color: #aaf;  /* Light gray for highlights */
+  --border-color: rgba(255, 255, 255, 0.2);  /* Semi-transparent white for borders */
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: RobotoMono;
-    background-color: #f4f4f4;
+  font-family: RobotoMono;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 header {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 5px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 5px;
 }
 
 main {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
-.Step {
-    max-width: 100%;
-    padding: 20px;
-    margin: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.Step,
+.Feed {
+  max-width: 100%;
+  padding: 20px;
+  margin: 20px;
+  background-color: #222;  /* Darker background for elements */
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--border-color);
 }
 
-.Step h2 {
-    font-size: 18px;
+.Head .Author {
+  display: grid;
+  grid-template-columns: 60px auto 30px;
+  gap: 2px;
 }
 
-.Step p {
-    margin: 10px 0;
+.Head .Author .Avatar {
+  text-align: center;
 }
 
-.Step .red {
-    color: red;
-    font-weight: bold;
+.Head .Author .Avatar img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }
 
-.Step ul {
-    padding: 0 20px;
+.Head .Author .Info .Name {
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.Step li {
-    margin: 5px 0;
+.Head .Author .Info .Time {
+  font-size: 14px;
+  color: var(--secondary-color);  /* Light gray for time */
 }
 
+.Head .Author .Func.Share {
+  cursor: pointer;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.Head .Author .Func.Share i {
+  font-size: 20px;
+  color: var(--primary-color);  /* Green for share icon */
+}
+
+.wp-block-video video {
+  max-width: 100%;
+  margin: 5px 0 0 0;
+}
+
+.Feed .Body ol {
+  list-style-type: upper-latin;
+  color: var(--secondary-color);  /* Light gray for list items */
+}
+
+.Feed .Body h1{
+  color: var(--primary-color);
+}
 .Step img {
-    display: block;
-    width: 100%;
-    border-radius: 6px;
-    margin: 10px auto;
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  margin: 10px auto;
+  border: 2px solid #fff;
 }
 
 .Step img.min {
-    width: 40%;
+  width: 40%;
+}
+.Step a {
+  color: var(--primary-color);
+}
+.Step iframe {
+  width: 100%;
+  border-radius: 10px;
+}
+.Feed .Body p {
+  font-size: 18px;
+  margin: 10px 0;
+  word-wrap: break-word;
+  color: var(--text-color);
+}
+
+.Feed .Body strong,
+.Feed .Body mark {
+  color: var(--primary-color) !important;  /* Green for emphasis */
+  font-weight: bold;
+}
+
+.Feed .Body blockquote {
+  font-size: 20px;
+  margin-top: 10px;
+  background-color: var(--bg-color);  /* Inherit background for quotes */
+  border-left: 3px solid var(--primary-color);
+  padding: 1px 0;
+  padding-left: 10px;
+}
+
+.Step h2 {
+  font-size: 18px;
+  color: var(--primary-color);  /* Green for steps title */
+}
+
+.Step p {
+  margin: 10px 0;
+  color: var(--text-color);
+}
+
+.Step .red {
+  color: red;
+  font-weight: bold;
+}
+
+.Step ul {
+  padding: 0 20px;
+}
+
+.Step li {
+  margin: 5px 0;
+  color: var(--text-color);
+  /* Sử dụng root variable --text-color */
+}
+.Step img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  margin: 10px auto;
+}
+
+.Step img.min {
+  width: 40%;
 }
 
 .Step iframe {
-    width: 100%;
-    border-radius: 10px;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .Btn {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  gap: 10px;
 }
 
 .Btn button {
-    color: #000;
-    cursor: pointer;
-    background-color: #39a6ff;
-    font-size: 18px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-
+  color: #000;
+  cursor: pointer;
+  background-color: var(--primary-color);  /* Green for buttons */
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
 }
 
 .Btn button:hover {
-    background-color: #777777;
+  background-color: #777777;
 }
 
 footer {
-    font-size: 12px;
-    text-align: center;
-    padding: 2px;
-    background-color: #333;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  font-size: 12px;
+  text-align: center;
+  padding: 2px;
+  padding-bottom: 12px;
+  background-color: var(--bg-color);  /* Green for footer */
+  color: var(--text-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
