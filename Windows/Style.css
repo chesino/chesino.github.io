@@ -149,14 +149,15 @@ main {
   font-weight: bold;
 }
 
-.Step ul {
-  padding: 0 20px;
+.Body ul {
+  padding: 0 10px; /* Reduced padding */
 }
 
-.Step li {
-  margin: 5px 0;
+.Body li {
+  word-break: break-word;
+  display: block;
+  margin: 5px;
   color: var(--text-color);
-  /* Sử dụng root variable --text-color */
 }
 .Step img {
   display: block;
