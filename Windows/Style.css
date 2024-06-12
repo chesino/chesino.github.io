@@ -86,6 +86,95 @@ main {
   margin: 5px 0 0 0;
 }
 
+.Body .Status {
+    padding: 5px;
+}
+
+.Body .Status h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.figure {
+    margin: 5px 0;
+}
+
+.Body .Status img,
+.Body .Status video {
+    height: auto;
+    width: 100% !important;
+    border-radius: 10px;
+    border: 2px solid var(--BodyBG);
+    box-sizing: border-box;
+}
+
+.Body .Status video {
+    background-color: var(--BodyBG);
+}
+
+
+.Body .Status .Content .wp-smiley {
+    border: none;
+}
+
+.Status .wp-block-gallery {
+    column-count: 2 !important;
+    --webkit-column-count: 2;
+    --moz-column-count: 2;
+    gap: 5px;
+    margin: 5px 0;
+}
+.Status .wp-block-gallery img {
+    border: 2px solid black;
+}
+/* Ẩn modal mặc định */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Hiển thị ảnh trong modal */
+.modal-content {
+    border-radius: 10px;
+    margin: 80px auto auto auto;
+    display: block;
+    max-width: 95%;
+    max-height: 100%;
+}
+
+/* Đóng modal */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+}
+/* Thêm kiểu dáng cho chữ caption */
+.caption {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px; /* Điều chỉnh khoảng cách giữa ảnh và chữ caption */
+}
+
+
+.Status .wp-block-image {
+    margin: 5px 0;
+}
+
+.Status .wp-block-gallery .wp-block-image {
+    margin: 0 auto;
+    text-align: center;
+}
 .Feed .Body ol {
   list-style-type: upper-latin;
   color: var(--secondary-color);  /* Light gray for list items */
@@ -133,7 +222,20 @@ main {
   padding: 1px 0;
   padding-left: 10px;
 }
-
+.Feed .Body blockquote a{
+  color: inherit;
+  text-decoration: none;
+}
+.Feed .Body  button {
+  color: #000;
+  cursor: pointer;
+  background-color: var(--primary-color);  /* Green for buttons */
+  font-size: 18px;
+  padding: 5px 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
+}
 .Step h2 {
   font-size: 18px;
   color: var(--primary-color);  /* Green for steps title */
@@ -195,6 +297,44 @@ main {
 .Btn button:hover {
   background-color: #777777;
 }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Hiển thị ảnh trong modal */
+.modal-content {
+    border-radius: 10px;
+    margin: 80px auto auto auto;
+    display: block;
+    max-width: 95%;
+    max-height: 100%;
+}
+
+/* Đóng modal */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+}
+/* Thêm kiểu dáng cho chữ caption */
+.caption {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 10px; /* Điều chỉnh khoảng cách giữa ảnh và chữ caption */
+}
+
 
 footer {
   font-size: 12px;
