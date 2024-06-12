@@ -239,3 +239,16 @@ for (const blockquote of blockquotes) {
 }
 
 }
+const toggleButton = document.getElementById('dark-mode-toggle');
+const body = document.body;
+
+function toggleDarkMode() {
+  const isDarkMode = localStorage.getItem('darkMode') === 'true'; // Check for existing preference
+  body.classList.toggle('dark-mode', !isDarkMode); // Toggle class based on preference
+  localStorage.setItem('darkMode', !isDarkMode); // Update local storage for persistence
+}
+
+toggleButton.addEventListener('click', toggleDarkMode);
+
+// Check for initial dark mode preference on page load
+toggleDarkMode();
