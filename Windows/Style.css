@@ -12,10 +12,19 @@
   /* Text color */
   --primary-color: #0f0;
   /* Green for accents */
-  --secondary-color: #aaf;
+  --secondary-color: #5E5E5E;
   /* Light gray for highlights */
   --border-color: rgba(255, 255, 255, 0.2);
   /* Semi-transparent white for borders */
+  --bgFeed: #222;
+}
+.dark-mode {
+  --bg-color: #fff;  /* Light background color */
+  --text-color: #000;  /* Dark text color */
+  --primary-color: #FF3737; /* Green for accents (remains unchanged) */
+  --secondary-color: #757575; /* Light gray for highlights (remains unchanged) */
+  --border-color: rgba(0, 0, 0, 0.2); /* Semi-transparent black for borders */
+  --bgFeed: #FBFBFB;
 }
 
 * {
@@ -50,7 +59,7 @@ main {
   max-width: 100%;
   padding: 20px;
   margin: 20px;
-  background-color: #222;
+  background-color: var(--bgFeed);
   /* Darker background for elements */
   border-radius: 8px;
   box-shadow: 0 0 10px var(--border-color);
@@ -386,4 +395,13 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+#dark-mode-toggle {
+  /* Customize button styles */
+  background-color: var(--primary-color); /* Use primary color for background */
+  color: var(--text-color); /* Use text color for contrast */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border-radius: 5px;
+  cursor: pointer; /* Indicate clickable area */
 }
