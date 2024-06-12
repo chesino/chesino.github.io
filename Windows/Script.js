@@ -190,10 +190,10 @@ function ReloadBlog() {
 
 
 
-
 function Modal() {
+  CopyCode();
   // Lấy tất cả các thẻ img có class là wp-block-gallery trong Feed
-  var images = document.querySelectorAll('.Feed .Status img');
+  var images = document.querySelectorAll('.Feedimg');
 
     images.forEach(function (img) {
         img.addEventListener('click', function () {
@@ -218,4 +218,24 @@ function Modal() {
 }
 
 
+function CopyCode() {
+  const blockquotes = document.querySelectorAll('.Feed .Body blockquote');
 
+for (const blockquote of blockquotes) {
+  const container = document.createElement('div'); // Tạo phần tử chứa
+  container.classList.add('copy-container'); // Thêm lớp CSS để tạo kiểu
+
+  const copyButton = document.createElement('button');
+  copyButton.innerHTML = '<i class="fa-regular fa-copy"></i>';
+  copyButton.addEventListener('click', () => {
+    const textToCopy = blockquote.textContent;
+    alert("Đã sao chép");
+    navigator.clipboard.writeText(textToCopy);
+  });
+
+  container.appendChild(copyButton); // Thêm nút vào phần tử chứa
+
+  blockquote.parentNode.insertBefore(container, blockquote.nextSibling); // Đặt phần tử chứa bên cạnh 
+}
+
+}
