@@ -239,16 +239,24 @@ for (const blockquote of blockquotes) {
 }
 
 }
-const toggleButton = document.getElementById('dark-mode-toggle');
-const body = document.body;
+const toggleThemeButton = document.getElementById('toggle-theme');
+const bodyElement = document.body;
 
-function toggleDarkMode() {
-  const isDarkMode = localStorage.getItem('darkMode') === 'true'; // Check for existing preference
-  body.classList.toggle('dark-mode', !isDarkMode); // Toggle class based on preference
-  localStorage.setItem('darkMode', !isDarkMode); // Update local storage for persistence
+toggleThemeButton.addEventListener('click', () => {
+  const isDarkMode = bodyElement.classList.contains('dark-mode');
+
+  if (isDarkMode) {
+    bodyElement.classList.remove('dark-mode');
+  } else {
+    bodyElement.classList.add('dark-mode');
+  }
+
+  // Lưu trạng thái vào local storage
+  localStorage.setItem('darkMode', isDarkMode ? 'false' : 'true');
+});
+
+// Kiểm tra trạng thái dark mode khi load trang
+const isDarkModeFromLocalStorage = localStorage.getItem('darkMode') === 'true';
+if (isDarkModeFromLocalStorage) {
+  bodyElement.classList.add('dark-mode');
 }
-
-toggleButton.addEventListener('click', toggleDarkMode);
-
-// Check for initial dark mode preference on page load
-toggleDarkMode();
