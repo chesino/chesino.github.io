@@ -1,10 +1,10 @@
 @font-face {
   font-family: Patricia;
-  src: url(/PatriciaGothic-Regular.woff);
+  src: url(./PatriciaGothic-Regular.woff);
 }
 @font-face {
   font-family: PatriciaBold;
-  src: url(/PatriciaGothic-Bold.woff);
+  src: url(./PatriciaGothic-Bold.woff);
 }
 * {
   margin: 0;
