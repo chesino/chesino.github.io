@@ -1,10 +1,10 @@
 @font-face {
   font-family: Patricia;
-  src: url(./PatriciaGothic-Regular.woff);
+  src: url(/DATA/Font/PatriciaGothic-Regular.woff);
 }
 @font-face {
   font-family: PatriciaBold;
-  src: url(./PatriciaGothic-Bold.woff);
+  src: url(/DATA/Font/PatriciaGothic-Bold.woff);
 }
 * {
   margin: 0;
@@ -68,6 +68,11 @@ header p {
   border-radius: 10px;
   padding: 10px;
   margin: 20px 0;
+}
+.Post img {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
 }
 ul {
   list-style-type: circle;
@@ -249,7 +254,6 @@ text-overflow: ellipsis;
   /* Inherit background for quotes */
   border: 3px solid var(--main-button-bg);
   border-radius: 5px;
-  border-bottom-left-radius: 0;
   padding: 1px 0;
   padding-left: 10px;
 }
@@ -260,12 +264,23 @@ text-overflow: ellipsis;
 
 
 .Feed .Body blockquote a {
-  font-size: 10px;
+  font-size: 12px;
   color: inherit;
   text-decoration: none;
 }
 
-
+.copy-container {
+  text-align: center;
+}
+.copy-container button {
+  border-radius: 5px;
+  margin-top: 2px;
+  width: 100%;
+}
+img {
+  max-width: 100%;
+  border-radius: 10px;
+}
 footer {
   display: flex;
   justify-content: center;
