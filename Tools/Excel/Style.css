@@ -11,7 +11,7 @@ body {
 }
 
 main .head {
-    font-size: 40px ;
+    font-size: 30px ;
     color: #1d6f42;
     border-radius: 10px;
     padding: 10px;
@@ -22,7 +22,7 @@ main .head {
 .Warning div {
     text-align: left;
     color: #ffffff;
-    background-color: #7a7a7a;
+    background-color: #202020;
     margin: 10px 0;
     padding: 10px;
     border-radius: 10px;
