@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #111;
+    color: #eee;
+}
+
+main .head {
+    font-size: 40px ;
+    color: #1d6f42;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.Warning div {
+    text-align: left;
+    color: #ffffff;
+    background-color: #7a7a7a;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+
+}
+.Warning div:hover {
+    cursor: pointer;
+    background-color: #000000;
+}
+h2 {
+    margin-bottom: 10px ;
+}
+main {
+    text-align: center;
+    padding: 20px;
+}
+button {
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #1d6f42;
+    border: none;
+    width: 100%;
+    padding: 20px 10px;
+    font-size: 30px;
+    border-radius: 10px;
+}
+button:hover {
+    background-color: #002712 !important;
+}
+
+.File {
+    text-align: center;
+}
+.Grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+}
+.Grid button:first-child {
+    background-color: #000000;
+}
+
+@media (min-width: 600px) {
+    main {
+        text-align: center;
+        padding: 0 20% ;
+    }
+}

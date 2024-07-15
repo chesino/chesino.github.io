@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+
+<head>
+    <!-- Tiêu đề trang -->
+    <title>Chesino/Excel</title>
+
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- Đảm bảo đặt meta tag sau -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/DATA/logo.png" />
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/DATA/logo.png" sizes="150x150" />
+
+    <!-- Ảnh -->
+    <meta property="og:image" content="/DATA/logo.png" />
+
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Style.css" />
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main>
+        <h1 class="head">Xoá mật khẩu Excel</h1>
+        <div class="Warning" id="warning">
+            <div class="Safe">
+                <h2><i class="fa-solid fa-shield"></i> An toàn</h2>
+                <p>Công cụ này không lưu trữ dữ liệu của bạn, vì mọi thứ đều được thực hiện bên trong trình duyệt của
+                    bạn bằng JavaScript.</p>
+            </div>
+            <div class="Security">
+                <h2><i class="fa-solid fa-key"></i> Bảo mật</h2>
+                <p>Công cụ không tiết lộ mật khẩu của tài liệu, chỉ xoá mật khẩu.</p>
+            </div>
+            <div class="Rules">
+                <h2><i class="fa-solid fa-circle-exclamation"></i> Điều khoản</h2>
+                <p>Khi sử dụng công cụ này, bạn đồng ý chịu hoàn toàn trách nhiệm pháp lý đối với mọi nội dung và mục
+                    đích sử dụng của bạn.</p>
+            </div>
+            <button onclick="acceptTerms();">
+                Chấp nhận điều khoản
+            </button>
+        </div>
+
+        <div class="File" id="file-select" hidden>
+            <h2>Chọn tài liệu cần mở khoá</h2>
+            <br>
+            <p class="lead">
+                Chọn tài liệu Excel của bạn có đuôi <b>.xslx</b> hoặc <b>.xlsm</b><br><br>
+                <button onclick="selectFile();">
+                    Chọn File
+                </button>
+                <!-- Element hidden to only use it via JS -->
+                <input id="input-file" type="file" style="display: none" />
+            </p>
+        </div>
+
+        <div id="error" hidden>
+            <h2><i class="fa-solid fa-triangle-exclamation"></i> Sảy ra lỗi </h2>
+            <p class="lead">
+                <span id="error-text">Tệp bạn đã chọn có vẻ không phải là tệp Excel!</span><br><br>
+                <button onclick="restart();">Thử lại</button>
+            </p>
+        </div>
+
+        <div id="file-confirm" hidden>
+            <h2>Xác nhận</h2>
+            <p class="lead">
+                <span id="file-confirm-text"></span><br><br>
+            </p>
+            <div class="Grid">
+                <button onclick="restart();">
+                    <i class="fa-solid fa-house"></i>
+                </button>
+                <button onclick="startProcessing();">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+
+        </div>
+        <div id="file-process-waiting" hidden>
+            <h2>Đang xoá mật khẩu...</h2>
+            <p class="lead">
+                <span id="file-process-waiting-text">
+                    Nếu hơn 30 giây vẫn chưa xong thì công cụ này không thể xử lý tệp của bạn
+                </span><br><br>
+            </p>
+            <button onclick="restart();">
+                <i class="fa-solid fa-rotate-left"></i>
+            </button>
+        </div>
+        <div id="file-process-finished" hidden>
+            <h2>Đã xoá mật khẩu thành công</h2>
+            <p class="lead">
+                <span id="file-process-finished-text">The file has been analysed and is ready to have its password
+                    removed.</span><br><br>
+            </p>
+            <div class="Grid">
+                <button onclick="restart();">
+                    <i class="fa-solid fa-house"></i>
+                </button>
+                <button onclick="downloadProcessedFile();">
+                    Tải về ngay
+                </button>
+            </div>
+
+            </p>
+            <!-- Used to download the final file with a specific name -->
+            <a id="zip-downloader-tag" href="" hidden></a>
+        </div>
+        <div id="end" hidden>
+            <h2>Cảm ơn bạn đã sử dụng công cụ này</h2>
+            <p class="lead">
+                Chúng tôi hy vọng mọi thứ diễn ra hoàn hảo với bạn và nó đã giúp ích cho bạn .<br><br>
+            </p>
+            <button onclick="restart();">
+                Tệp khác
+            </button>
+        </div>
+
+    </main>
+</body>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
+    integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="./Main.js"></script>
+
+</html>
