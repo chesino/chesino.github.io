@@ -1,0 +1,252 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Reset some basic styles */
+body,
+h1,
+h2,
+h3,
+p,
+button {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Set background and default text styles */
+body {
+  background-color: #1A1A1A;
+  color: #E0E0E0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.Card {
+  background-color: #333;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.Total {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+#daily-limit,
+.Alert {
+  font-weight: bold;
+  font-size: 12px;
+  color: #3C3C3C;
+  background-color: #F9D342;
+  padding: 2px 4px;
+  border-radius: 5px
+}
+
+/*
+.Card.Main,
+.Card.Daily{
+  box-shadow: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+*/
+.CardOpen {
+  display: none; /* Test */
+  font-size: 14px;
+  color: #000;
+  background-color: #F9D342;
+  width: calc(100%);
+  margin: -50px 0 20px 0;
+  padding: 20px;
+  padding-top: 40px;
+  z-index: -1;
+  border-radius: 0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  
+}
+
+.CardOpen .Total h1 {
+  color: #000;
+  font-size: 18px;
+}
+
+.CardOpen hr {
+  border: none;
+  background-color: #333;
+  height: 2px;
+  margin: 10px 0;
+}
+
+.CardOpen .Alert {
+  font-weight: bold;
+  font-size: 12px;
+  color: #F9D342;
+  background-color: #1A1A1A;
+  padding: 2px 4px;
+  border-radius: 5px
+}
+
+/* Style the container */
+.container {
+  background-color: #333;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Main header */
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #f9d342;
+}
+
+/* Sub headers */
+h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #f0e68c;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #F0E68C;
+  margin-top: 25px;
+}
+
+/* Style for inputs */
+input[type="number"],
+input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 2px solid #555;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  box-sizing: border-box;
+}
+
+/* Style for buttons */
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: #f9d342;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: #f0e68c;
+  color: #1a1a1a;
+}
+
+/* Style for the progress bar */
+.progress-bar {
+  width: 100%;
+  background-color: #555555;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 18px;
+  margin-top: 8px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #F9D342;
+  /* Màu của thanh tiến trình */
+  width: 0%;
+  border-radius: 15px;
+  transition: width 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1a1a;
+  font-size: 14px;
+}
+
+.CardOpen .progress-bar {
+  background-color: #555555;
+}
+.CardOpen .progress {
+  background-color: #000000;
+}
+.progress.over-limit {
+  background-color: #FF3420;
+  /* Màu đỏ khi vượt quá giới hạn */
+}
+
+/* Style for transaction list */
+
+.transaction-item,
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #555;
+}
+
+.transaction-item span,
+.history-item span {
+  flex: 1;
+}
+
+.transaction-item button,
+.history-item button {
+  margin-left: 15px;
+  padding: 8px;
+  background-color: #F9D342;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.transaction-item button:hover,
+.history-item button:hover {
+  background-color: #f0e68c;
+  color: #1a1a1a;
+}
+
+#remaining-balance {
+  font-weight: bold;
+}
+
+#remaining-balance span {
+  font-weight: normal;
+  color: #fff;
+  font-size: 14px;
+}
+
+.hr {
+  background-color: #F9D342;
+  height: 3px;
+  width: 100%;
+  margin: 5px 0 5px 0;
+}
+
+.history-list button {
+  margin: auto;
+}

@@ -3,10 +3,11 @@
     box-sizing: border-box;
 }
 :root {
-    --CL:black;
+    --CL:#000000;
     --BG:#1DCC70;
     --CARD: #ffffff;
-    --MAIN: #1DCC70;
+    --MAIN: #F9D342;
+    --Primary: rgb(46, 33, 10);
 }
 body {
     line-height: 1.6;
@@ -18,9 +19,9 @@ button {
     cursor: pointer;
 }
 .dark-mode {
-    --CL:white;
-    --BG:#000000;
-    --CARD: #111111;
+    --CL:#ffeeaf;
+    --BG:#1A1A1A;
+    --CARD: #333;
 }
 .MenuON {
     overflow: hidden;
@@ -57,7 +58,7 @@ button {
     padding: 10px 20px;
     width: 100%;
     margin: 10px 0;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.09);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
 .Card.Main .TotalMoney {
@@ -142,7 +143,8 @@ button {
 
 .FuncBlock .Func i,
 .FuncBlock .Func img{
-    color: #ffffff;
+    color: var(--MAIN);
+    background-color: var(--Primary);
     height: 40px;
     width: 40px;
     font-size: 20px;
@@ -160,7 +162,7 @@ button {
     font-weight: 600;
 }
 
-.FuncBlock .Func:nth-child(1) i {
+/* .FuncBlock .Func:nth-child(1) i {
     background-color: #1DCC70;
 }
 
@@ -183,7 +185,7 @@ button {
 
 .FuncBlock .Func:nth-child(6) i {
     background-color: #fd75ae;
-}
+} */
 
 /* .FuncBlock .Func.active i {
     border: 2px solid  ;

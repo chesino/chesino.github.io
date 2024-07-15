@@ -23,7 +23,7 @@
     <link rel="apple-touch-icon" href="./IMG/icon-square.png" sizes="150x150" />
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Style.css" />
-    
+
     <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
 
     <!-- FontAweSome fas fa icon -->
@@ -50,18 +50,18 @@
                     <i class="fa-solid fa-circle-minus"></i>
                     <strong>Chi</strong>
                 </div>
-                
-                 <div class="Func" onclick="handlePasteClick(event, 'B')">
-   <img src="./IMG/Icon-Vietcombank.png" alt="Vietcombank" >
-   <strong>VCB</strong>
- </div>
- 
- <div class="Func" onclick="openTab(event, 'D')">
-  <i class="fa-solid fa-receipt"></i>
-  <strong>Sổ Nợ</strong>
-</div>
-  
-                
+
+                <div class="Func" onclick="handlePasteClick(event, 'B')">
+                    <img src="./IMG/Icon-Vietcombank.png" alt="Vietcombank">
+                    <strong>VCB</strong>
+                </div>
+
+                <div class="Func" onclick="openTab(event, 'D')">
+                    <i class="fa-solid fa-receipt"></i>
+                    <strong>Sổ Nợ</strong>
+                </div>
+
+
                 <div class="Func" onclick="openTab(event, 'C')">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <strong>Mua đồ</strong>
@@ -97,24 +97,24 @@
             </div>
             <div class="Wallet532" id="Wallet532">
                 <div class="Card Money"
-                onclick="Info('Thiết yếu','Đây là gợi ý khoản tiền có thể chi tiêu cho nhu cầu thiết yếu.')">
-                <p>Thiết yếu <span id="ptsave50">50%</span></p>
-                <h1><span id="ThietYeu">0</span>đ</h1>
-            </div>
-            <div class="Card Money"
-                onclick="Info('Tiêu sài','Đây là gợi ý khoản tiền có thể chi tiêu cho nhu cầu cá nhân.')">
-                <p>Tiêu sài <span id="ptsave30">30%</span></p>
-                <h1><span id="TieuSai">0</span>đ</h1>
-            </div>
-            <div class="Card Money"
-                onclick="Info('Tiết kiệm','Đây là gợi ý khoản tiền có thể đầu từ hoặc tiết kiệm.\nChữ màu nhỏ màu xanh đó là khoảng tiền bạn nên thêm vào tiết kiệm của mình.')">
-                <p>Tiết kiệm <span id="ptsave20">20%</span></p>
-                <h1><span id="savingsTotal">0</span>đ <span id="save20"></span></h1>
-            </div>
-            <div class="Card Money" onclick="Info('Tổng tài sản','Đây là tổng tiền của bạn.')">
-                <p>Tổng tài sản <span>100%</span></p>
-                <h1><span id="ToltalMoney">0</span>đ</h1>
-            </div>
+                    onclick="Info('Thiết yếu','Đây là gợi ý khoản tiền có thể chi tiêu cho nhu cầu thiết yếu.')">
+                    <p>Thiết yếu <span id="ptsave50">50%</span></p>
+                    <h1><span id="ThietYeu">0</span>đ</h1>
+                </div>
+                <div class="Card Money"
+                    onclick="Info('Tiêu sài','Đây là gợi ý khoản tiền có thể chi tiêu cho nhu cầu cá nhân.')">
+                    <p>Tiêu sài <span id="ptsave30">30%</span></p>
+                    <h1><span id="TieuSai">0</span>đ</h1>
+                </div>
+                <div class="Card Money"
+                    onclick="Info('Tiết kiệm','Đây là gợi ý khoản tiền có thể đầu từ hoặc tiết kiệm.\nChữ màu nhỏ màu xanh đó là khoảng tiền bạn nên thêm vào tiết kiệm của mình.')">
+                    <p>Tiết kiệm <span id="ptsave20">20%</span></p>
+                    <h1><span id="savingsTotal">0</span>đ <span id="save20"></span></h1>
+                </div>
+                <div class="Card Money" onclick="Info('Tổng tài sản','Đây là tổng tiền của bạn.')">
+                    <p>Tổng tài sản <span>100%</span></p>
+                    <h1><span id="ToltalMoney">0</span>đ</h1>
+                </div>
             </div>
 
         </div>
@@ -133,7 +133,7 @@
                 <br>
                 <label for="cashNote">Ghi chú:</label>
                 <input type="text" id="cashNote" name="cashNote" placeholder="Ghi chú (nếu có)">
-                
+
                 <button onclick="addMoney()">Nhập</button>
             </div>
             <div class="Card Tabcontent" id="B">
@@ -164,18 +164,18 @@
                 <br>
                 <button onclick="TinhTienMuaHang()">Tính ngay</button>
             </div>
-                <div class="Card Tabcontent" id="D">
-      <h1>Ghi nợ</h1>
-      <label for="debtAmount">Số tiền nợ:</label>
-      <input type="text" class="inputFM" id="debtAmount" name="debtAmount" pattern="[0-9]*">
-      <br><br>
-      <label for="payAmount">Số tiền trả:</label>
-      <input type="text" class="inputFM" id="payAmount" name="payAmount" pattern="[0-9]*">
-      <br><br>
-      <label for="payWho">Của ai:</label>
-      <input type="text" id="payWho" value="">
-      <button onclick="recordDebt()">Ghi nợ</button>
-    </div>
+            <div class="Card Tabcontent" id="D">
+                <h1>Ghi nợ</h1>
+                <label for="debtAmount">Số tiền nợ:</label>
+                <input type="text" class="inputFM" id="debtAmount" name="debtAmount" pattern="[0-9]*">
+                <br><br>
+                <label for="payAmount">Số tiền trả:</label>
+                <input type="text" class="inputFM" id="payAmount" name="payAmount" pattern="[0-9]*">
+                <br><br>
+                <label for="payWho">Của ai:</label>
+                <input type="text" id="payWho" value="">
+                <button onclick="recordDebt()">Ghi nợ</button>
+            </div>
 
             <div class="Card Tabcontent" id="F">
                 <h1>Rút tiền</h1>
@@ -191,7 +191,7 @@
 
 
         <div class="Card Transactions">
-            <h1>Lịch sử giao dịch  <span id="TimeNow"></span></h1>
+            <h1>Lịch sử giao dịch <span id="TimeNow"></span></h1>
             <hr>
             <div id="Transactions">
             </div>
@@ -200,15 +200,11 @@
                 <button onclick="exportTransactions()"><i class="fa-solid fa-circle-down"></i></button>
                 <button onclick="exportData()"><i class="fa-solid fa-file-arrow-down"></i></button>
                 <button onclick="importData()"><i class="fa-solid fa-file-arrow-up"></i></button>
-           
-              
-                
-                
-               <button onclick="Clear()"><i class="fa-solid fa-trash-can"></i></button>
-               <button id="toggle-button">DarkModeErro</button>
+                <button onclick="Clear()"><i class="fa-solid fa-trash-can"></i></button>
+                <button id="toggle-button">DarkModeErro</button>
             </div>
         </div>
-        
+
     </div>
     <footer>
         <!-- Nội dung chân trang -->
