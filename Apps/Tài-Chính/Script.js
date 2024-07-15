@@ -690,21 +690,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function displayDateTime() {
-    const now = new Date();
-    const day = now.getDate();
-    const month = now.getMonth() + 1; // JavaScript months are zero-based
-    const year = now.getFullYear();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
+// function displayDateTime() {
+//     const now = new Date();
+//     const day = now.getDate();
+//     const month = now.getMonth() + 1; // JavaScript months are zero-based
+//     const year = now.getFullYear();
+//     const hours = now.getHours();
+//     const minutes = now.getMinutes();
+//     const seconds = now.getSeconds();
 
-    const formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
-    document.getElementById("TimeNow").innerText = formattedDateTime;
-}
+//     const formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+//     document.getElementById("TimeNow").innerText = formattedDateTime;
+// }
 
-// Gọi hàm displayDateTime() ban đầu
-displayDateTime();
+// // Gọi hàm displayDateTime() ban đầu
+// displayDateTime();
 
-// Cập nhật mỗi giây
-setInterval(displayDateTime, 1000);
+// // Cập nhật mỗi giây
+// setInterval(displayDateTime, 1000);
