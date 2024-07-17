@@ -162,6 +162,7 @@ $("#btnAECloud").click(function () {
     scrollTop: $("#AECloud").offset().top
   }, 1000);
   setTimeout(function () {
+    $("#AETH").css("display", "none");
     $("#Home").css("display", "flex");
   }, 1000);
 });
@@ -186,6 +187,7 @@ $("#btnShareGo").click(function () {
   }, 1000);
   setTimeout(function () {
     $("#Home").css("display", "flex");
+    $("#AETH").css("display", "none");
   }, 1000);
 });
 
@@ -368,7 +370,7 @@ function showHistory() {
       <!-- Thêm nút Xóa vào mỗi mục trong lịch sử -->
       <button class="delete-btn" onclick="deleteHistoryItem(${index})"><i class="fa-solid fa-trash-can"></i></button>
       <h3>${entry.placeName}</h3>
-      <p><strong>Địa chỉ:</strong> <a href="${entry.address}." target="_blank"><i class="fa-brands fa-google"></i>Maps</a></p>
+      <p><strong>Địa chỉ:</strong> <a href="${entry.address}" target="_blank"><i class="fa-brands fa-google"></i>Maps</a></p>
       <p><strong>Số người:</strong> ${entry.numberOfPeople}.</p>
       <p><strong>Đánh giá:</strong> ${ratingStars}</p>
       <p><strong>Thời gian:</strong> ${entry.time} ${entry.date}.</p>

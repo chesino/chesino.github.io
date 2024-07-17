@@ -148,7 +148,7 @@ button {
 
 .AETH .Head h1 span {
     font-size: 30px;
-    color: var(--Primary);
+    color: var(--Main);
 }
 
 .AETH .Head h1 span:nth-child(2) {
@@ -160,7 +160,7 @@ button {
 }
 
 .AETH .Head h1 strong {
-    color: rgb(255, 255, 255);
+    color: var(--Main);
     font-size: 12px;
 }
 
@@ -340,6 +340,7 @@ button {
 }
 
 #map {
+  
     height: 250px;
     width: 100%;
     border-radius: 10px;
@@ -368,7 +369,8 @@ button {
 }
 
 .mapboxgl-popup-tip {
-    border-top-color: var(--Primary) !important;;
+    border-top-color: var(--Primary) !important;
+    ;
 }
 
 
@@ -564,8 +566,8 @@ input[type='time'] {
 
 
 .history-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: var(--Primary2);
+    border: 2px solid var(--Main);
     border-radius: 5px;
     padding: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -578,7 +580,7 @@ input[type='time'] {
     right: 10px;
     border: none;
     background-color: transparent;
-    color: #999;
+    color: var(--Main);
     font-size: 20px;
     cursor: pointer;
     transition: color 0.2s ease-in-out;
@@ -640,3 +642,42 @@ input[type='time'] {
 .historyContainer button:nth-child(4) {
     background-color: rgb(252, 45, 45);
 }
+
+.swal2-popup,
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right,
+.swal2-icon.swal2-success .swal2-success-fix {
+    background-color: var(--Bg) !important;
+}
+
+.swal2-success-ring {
+    border-color: var(--Main) !important;
+}
+
+.swal2-icon.swal2-warning,
+.swal2-icon.swal2-error{
+    border-color: var(--Main) !important;
+    color: var(--Main) !important;
+}
+
+.swal2-success-line-long,
+.swal2-success-line-tip,
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: var(--Main) !important;
+}
+
+.swal2-title,
+.swal2-content {
+    color: var(--Main);
+}
+
+button[type=button]{
+    color: var(--Primary) !important;
+    background-color: var(--Main) !important;
+}
+
+button[type=button].swal2-cancel {
+    color: var(--Main) !important;
+    background-color: var(--Primary) !important;
+}
+
