@@ -227,4 +227,10 @@ https://da88.pro/
 ##.note
 ###floating_ads_bottom_textcss_container
 ##.copyright
-##.wpd-comment-left 
+
+! 17 thg 7, 2024 https://tvhay.in
+||tvhay.in/wp-content/themes/tvhay/images/sprite7.png$image
+##.wpd-comment-left
+tvhay.in###footer
+tvhay.in###logo
+tvhay.in###comment
