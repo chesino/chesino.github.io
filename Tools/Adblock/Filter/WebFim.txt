@@ -214,26 +214,15 @@ codevn.net##body:remove-class(swal2-shown)
 ##.popupchat_wrapper__lu9sH
 ##.footer_footer__GaW5f
 ###popup-giua-man-hinh
-||phimmoichillv.net.headerpcads
-###pm_quangcao
-##.comment
-||phimmoichillv.net.headerpcads
-###pm_quangcao
-##.comment
+
 
 
 ||phimmoichillv.net.headerpcads
-###pm_quangcao
-##.comment
-
-! 17 thg 7, 2024 https://phimmoichillv.net
 ||phimmoichillv.net/dev/images/logo.png$image
 phimmoichillv.net##.hidedesktop > center
 ||phimmoichillv.net/dev/images/logo.png$image
 phimmoichillv.net###tags
 ##.banner-ads
-
-##.block-cont
 https://da88.pro/
 ##.note
 ###floating_ads_bottom_textcss_container
