@@ -198,7 +198,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZGVudHVyZTA4IiwiYSI6ImNsczQ5cjhyNTEzbWUybW5xO
 
 const mapboxMap = new mapboxgl.Map({
   container: 'mapboxMap',
-  style: 'mapbox://styles/mapbox/streets-v11',
+  style: 'mapbox://styles/mapbox/dark-v11',
   center: [106.722, 10.795], // Tọa độ mặc định
   zoom: 10
 });
