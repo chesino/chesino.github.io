@@ -221,6 +221,11 @@ codevn.net##body:remove-class(swal2-shown)
 ###pm_quangcao
 ##.comment
 
+
+||phimmoichillv.net.headerpcads
+###pm_quangcao
+##.comment
+
 ! 17 thg 7, 2024 https://phimmoichillv.net
 ||phimmoichillv.net/dev/images/logo.png$image
 phimmoichillv.net##.hidedesktop > center
@@ -228,17 +233,9 @@ phimmoichillv.net##.hidedesktop > center
 phimmoichillv.net###tags
 ##.banner-ads
 
-! 17 thg 7, 2024 https://tvhay.in
-tvhay.in##.note
-tvhay.in###footer
-tvhay.in##.tags
-tvhay.in###comment
-tvhay.in###logo
-tvhay.in##.tabs-content.blockbody
-###floating_ads_bottom_textcss_container
 ##.block-cont
-||tvhay.in/wp-content/themes/tvhay/images/sprite7.png$image
-||tvhay.in/wp-content/themes/tvhay/images/sprite7.png$image
-https://iwin.net
-||tvhay.in/wp-content/themes/tvhay/images/sprite7.png$image
-
+https://da88.pro/
+##.note
+###floating_ads_bottom_textcss_container
+##.copyright
+##.wpd-comment-left 
