@@ -224,6 +224,7 @@ phimmoichillv.net##.hidedesktop > center
 phimmoichillv.net###tags
 ##.banner-ads
 https://da88.pro/
+https://greendragonworld.pro
 ##.note
 ###floating_ads_bottom_textcss_container
 ##.copyright
