@@ -229,8 +229,6 @@ phimmoichillv.net###tags
 ##.banner-ads
 
 ! 17 thg 7, 2024 https://tvhay.in
-tvhay.in##body > center
-tvhay.in##.block2
 tvhay.in##.note
 tvhay.in###footer
 tvhay.in##.tags
