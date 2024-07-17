@@ -235,3 +235,4 @@ https://greendragonworld.pro
 tvhay.in###footer
 tvhay.in###logo
 tvhay.in###comment
+tvhay.in##.center
