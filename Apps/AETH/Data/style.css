@@ -317,9 +317,7 @@ button {
     width: 100%;
 }
 
-/* .ShareGo {
-    display: block;
-} */
+
 
 .ShareGo .Head {
     position: absolute;
@@ -340,7 +338,6 @@ button {
 }
 
 #map {
-  
     height: 250px;
     width: 100%;
     border-radius: 10px;
@@ -655,7 +652,7 @@ input[type='time'] {
 }
 
 .swal2-icon.swal2-warning,
-.swal2-icon.swal2-error{
+.swal2-icon.swal2-error {
     border-color: var(--Main) !important;
     color: var(--Main) !important;
 }
@@ -671,7 +668,7 @@ input[type='time'] {
     color: var(--Main);
 }
 
-button[type=button]{
+button[type=button] {
     color: var(--Primary) !important;
     background-color: var(--Main) !important;
 }
@@ -680,4 +677,25 @@ button[type=button].swal2-cancel {
     color: var(--Main) !important;
     background-color: var(--Primary) !important;
 }
+.mapboxgl-ctrl-attrib-inner {
+    display: none;
+}
 
+@media (min-width: 610px) {
+    .GridShareGO {
+        display: grid;
+        grid-template-columns: 50% auto auto;
+    } 
+
+    .Map {
+        height: 100vh;
+    }
+    
+    .map-container {
+        height: 100vh !important;
+    }
+    .mapboxgl-canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}

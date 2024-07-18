@@ -1,3 +1,4 @@
+
 var vDynamic = 0;
 
 function Dynamic() {
@@ -197,40 +198,46 @@ $("#btnShareGo").click(function () {
 // mapboxgl.accessToken = 'pk.eyJ1IjoiZGVudHVyZTA4IiwiYSI6ImNsczRhaGY3bTExdHIybHF4eHRycHhhdzYifQ.5tZl5IYrRubtihFlnmK4mg';
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGVudHVyZTA4IiwiYSI6ImNsczQ5cjhyNTEzbWUybW5xOTdtaDZ6enYifQ.0rvi1bjq-EeSFaCkNRiJhQ';
 
+// Lấy phần tử chứa bản đồ
+const mapContainer = document.getElementById('mapboxMap');
 
+// Tạo bản đồ Mapbox
 const mapboxMap = new mapboxgl.Map({
   container: 'mapboxMap',
   style: 'mapbox://styles/mapbox/dark-v11',
-  center: [106.722, 10.795], // Tọa độ mặc định
+  center: [106.722, 10.795],
   zoom: 10
 });
 
-let currentMarker = null; // Biến để lưu trữ tham chiếu đến đánh dấu hiện tại
+// Biến để lưu trữ đánh dấu hiện tại
+let currentMarker = null;
 
+// Hàm tìm kiếm địa chỉ và thêm đánh dấu
 function searchAddress() {
   const address = document.getElementById('address').value;
 
   if (address) {
-    // Sử dụng Mapbox Geocoding API để tìm kiếm địa chỉ
+    // Sử dụng Mapbox Geocoding API
     fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${mapboxgl.accessToken}`)
       .then(response => response.json())
       .then(data => {
         if (data.features && data.features.length > 0) {
           const coordinates = data.features[0].center;
 
-          // Xoá đánh dấu cũ nếu tồn tại
+          // Xoá đánh dấu cũ
           if (currentMarker) {
             currentMarker.remove();
           }
 
-          // Thêm đánh dấu mới và hiển thị popup
+          // Thêm đánh dấu mới
           currentMarker = new mapboxgl.Marker()
             .setLngLat(coordinates)
             .addTo(mapboxMap)
             .setPopup(new mapboxgl.Popup().setHTML('Vị trí của bạn'))
             .togglePopup();
 
-          mapboxMap.flyTo({ center: coordinates, zoom: 15 });
+          // Điều chỉnh kích thước và vị trí bản đồ
+          fitMapToMarker();
         } else {
           alert('Không tìm thấy địa chỉ.');
         }
@@ -240,6 +247,30 @@ function searchAddress() {
       });
   }
 }
+
+// Hàm điều chỉnh kích thước và vị trí bản đồ
+function fitMapToMarkers() {
+  if (markers.length > 0) {
+    const bounds = new mapboxgl.LngLatBounds();
+    markers.forEach(marker => {
+      bounds.extend(marker.getLngLat());
+    });
+    mapboxMap.fitBounds(bounds, { padding: 40 });
+  }
+}
+
+// Điều chỉnh kích thước bản đồ khi cửa sổ thay đổi kích thước
+function resizeMap() {
+  const width = mapContainer.clientWidth;
+  const height = mapContainer.clientHeight;
+  mapboxMap.resize({
+    width: width,
+    height: height
+  });
+  fitMapToMarker();
+}
+
+
 
 function changeMapType() {
   const mapType = document.getElementById('mapType').value;
@@ -529,7 +560,7 @@ function exportToExcel() {
   var history = JSON.parse(localStorage.getItem('history'));
 
   if (!history || history.length === 0) {
-    Fail("Lỗi","Không có dữ liệu để xuất ra file Excel.");
+    Fail("Lỗi", "Không có dữ liệu để xuất ra file Excel.");
     return;
   }
 
@@ -578,7 +609,7 @@ function exportToTxt() {
   var history = JSON.parse(localStorage.getItem('history'));
 
   if (!history || history.length === 0) {
-    Fail("Lỗi","Không có dữ liệu để xuất ra file Txt.");
+    Fail("Lỗi", "Không có dữ liệu để xuất ra file Txt.");
     return;
   }
 
@@ -638,3 +669,7 @@ function deleteHistoryAllItem(index) {
   })
 
 }
+
+// Gọi hàm resizeMap khi trang được tải và khi cửa sổ thay đổi kích thước
+resizeMap(); // Gọi hàm ngay khi trang tải
+window.addEventListener('resize', resizeMap); 

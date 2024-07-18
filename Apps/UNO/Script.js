@@ -99,7 +99,7 @@ function addTally(itemName, quantity) {
         if (itemName == 'HunqD' || itemName == 'Hùng') {
             newTally.classList.add('HunqD');
         }
-        if (itemName == 'Hiền') {
+        if (itemName == 'Nam2') {
             newTally.classList.add('Hien');
         }
         if (itemName == 'Thiện') {

@@ -166,84 +166,88 @@
         </div>
 
         <div class="Block ShareGo" id="ShareGo">
-            <div class="Map">
-                <div class="map-container" id="mapboxMap"></div>
-                <div class="custom-select">
-                    <select id="mapType" onchange="changeMapType()">
-                        <option selected value="dark-v11">Tối</option>
-                        <option value="streets-v11">Sáng</option>
-                        <option value="satellite-v9">Vệ tinh</option>
-                    </select>
-                </div>
-                <div class="Head">
-                    <h1>Share<span>n</span>GO</h1>
-                </div>
-            </div>
 
-            <div class="Form">
-                <h1>Thông tin</h1>
-                <div class="Input">
-                    <label for="placeName">Tên địa điểm <span>bắt buộc</span></label>
-                    <input type="text" id="placeName">
-                </div>
-
-                <div class="Flex">
-                    <div class="Input">
-                        <label for="address">Địa chỉ <span>không bắt buộc</span></label>
-                        <input type="text" id="address">
+            <div class="GridShareGO">
+                <div class="Map">
+                    <div class="map-container" id="mapboxMap"></div>
+                    <div class="custom-select">
+                        <select id="mapType" onchange="changeMapType()">
+                            <option selected value="dark-v11">Tối</option>
+                            <option value="streets-v11">Sáng</option>
+                            <option value="satellite-v9">Vệ tinh</option>
+                        </select>
                     </div>
-
-                    <button onclick="searchAddress()"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <button onclick="Google()"><i class="fa-brands fa-google"></i></button>
-                    <button onclick="getCurrentLocation()"><i class="fa-solid fa-location-crosshairs"></i></button>
-                </div>
-                <div class="Input">
-                    <label for="numberOfPeople">Số người <span>bắt buộc</span></label>
-                    <input type="text" id="numberOfPeople" pattern="[0-9]*">
-                </div>
-                <div class="Input">
-                    <label for="price">Giá <span>bắt buộc</span></label>
-                    <input type="text" class="inputFM" id="price" pattern="[0-9]*">
-                </div>
-                <div class="Flex">
-                    <div class="Input">
-                        <label for="time">Thời gian <span>không bắt buộc</span></label>
-                        <input type="time" id="time">
-                    </div>
-                    <div class="Input">
-                        <label for="date">Ngày <span>bắt buộc</span></label>
-                        <input type="date" id="date">
+                    <div class="Head">
+                        <h1>Share<span>n</span>GO</h1>
                     </div>
                 </div>
 
-                <div class="Input">
-                    <label for="rating">Đánh Giá <span>Nếu không đánh giá sẽ là 0 sao</span></label>
-                    <ul class="ratings">
-                        <li class="star" data-rating="5"></li>
-                        <li class="star" data-rating="4"></li>
-                        <li class="star" data-rating="3"></li>
-                        <li class="star" data-rating="2"></li>
-                        <li class="star" data-rating="1"></li>
-                    </ul>
+                <div class="Form">
+                    <h1>Thông tin</h1>
+                    <div class="Input">
+                        <label for="placeName">Tên địa điểm <span>bắt buộc</span></label>
+                        <input type="text" id="placeName">
+                    </div>
+
+                    <div class="Flex">
+                        <div class="Input">
+                            <label for="address">Địa chỉ <span>không bắt buộc</span></label>
+                            <input type="text" id="address">
+                        </div>
+
+                        <button onclick="searchAddress()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button onclick="Google()"><i class="fa-brands fa-google"></i></button>
+                        <button onclick="getCurrentLocation()"><i class="fa-solid fa-location-crosshairs"></i></button>
+                    </div>
+                    <div class="Input">
+                        <label for="numberOfPeople">Số người <span>bắt buộc</span></label>
+                        <input type="text" id="numberOfPeople" pattern="[0-9]*">
+                    </div>
+                    <div class="Input">
+                        <label for="price">Giá <span>bắt buộc</span></label>
+                        <input type="text" class="inputFM" id="price" pattern="[0-9]*">
+                    </div>
+                    <div class="Flex">
+                        <div class="Input">
+                            <label for="time">Thời gian <span>không bắt buộc</span></label>
+                            <input type="time" id="time">
+                        </div>
+                        <div class="Input">
+                            <label for="date">Ngày <span>bắt buộc</span></label>
+                            <input type="date" id="date">
+                        </div>
+                    </div>
+
+                    <div class="Input">
+                        <label for="rating">Đánh Giá <span>Nếu không đánh giá sẽ là 0 sao</span></label>
+                        <ul class="ratings">
+                            <li class="star" data-rating="5"></li>
+                            <li class="star" data-rating="4"></li>
+                            <li class="star" data-rating="3"></li>
+                            <li class="star" data-rating="2"></li>
+                            <li class="star" data-rating="1"></li>
+                        </ul>
+
+                    </div>
+                    <div class="Input">
+                        <label for="note">Ghi chú <span>không bắt buộc</span></label>
+                        <textarea name="note" id="note" cols="30" rows="10"></textarea>
+                    </div>
+                    <button class="Confirm" onclick="saveToLocalStorage()">Xác nhận</button>
+
 
                 </div>
-                <div class="Input">
-                    <label for="note">Ghi chú <span>không bắt buộc</span></label>
-                    <textarea name="note" id="note" cols="30" rows="10"></textarea>
+
+                <div class="historyContainer" id="historyContainer">
+                    <h2>Lịch sử</h2>
+                    <button id="exportToExcel" onclick="exportToExcel()">Xuất Excel <i
+                            class="fa-solid fa-file-excel"></i></button>
+                    <button onclick="exportToTxt()">Xuất TXT <i class="fa-solid fa-file-lines"></i></button>
+                    <button onclick="deleteHistoryAllItem()">Xoá toàn bộ <i class="fa-solid fa-trash"></i></button>
+                    <ul id="historyList"></ul>
                 </div>
-                <button class="Confirm" onclick="saveToLocalStorage()">Xác nhận</button>
-
-
             </div>
 
-            <div class="historyContainer" id="historyContainer">
-                <h2>Lịch sử</h2>
-                <button id="exportToExcel" onclick="exportToExcel()">Xuất Excel <i
-                        class="fa-solid fa-file-excel"></i></button>
-                <button onclick="exportToTxt()">Xuất TXT <i class="fa-solid fa-file-lines"></i></button>
-                <button onclick="deleteHistoryAllItem()">Xoá toàn bộ <i class="fa-solid fa-trash"></i></button>
-                <ul id="historyList"></ul>
-            </div>
 
 
             <!-- Include SheetJS library -->

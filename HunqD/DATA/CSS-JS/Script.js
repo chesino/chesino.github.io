@@ -71,7 +71,7 @@ function SignIn() {
     if (result.name === 'Hùng Đinh') {
       HunqD();
     }
-    // Hùng, Hiền , Thiện , Hoa , Hoàng
+    // Hùng, Nam2 , Thiện , Hoa , Hoàng
     if (result.id === 61551995024526 || result.id === 100022625414871 || result.id === 100028302531768 || result.id === 100037528999692 || result.id === 100015905130912) {
       AETH();
     }
@@ -356,14 +356,14 @@ function SendMess() {
 
 function SignUp() {
   Swal.fire({
-    title: 'Bạn cần kết bạn với Hùng',
-    text: 'Để có tài khoản bạn cần kết bạn với Hùng và đợi 24 giờ sau khi kết bạn. Nếu xoá bạn bè tài khoản sẽ bị xoá khỏi danh sách sau 30 ngày.',
+    title: 'Bạn sẽ gửi 1 tin nhắn đăng ký tới Hùng',
+    text: 'Nếu xoá bạn bè tài khoản sẽ bị xoá khỏi danh sách sau 30 ngày.',
     icon: 'warning',
 
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Kết bạn ngay',
+    confirmButtonText: 'Gửi ngay',
     cancelButtonText: 'Huỷ'
   }).then((result) => {
     if (result.value) {
@@ -371,7 +371,7 @@ function SignUp() {
         'Đã mở Facebook',
         'Bạn sẽ được chuyển tới Facebook của Hùng.',
         'success',
-        window.open('https://www.facebook.com/profile.php?id=61551995024526', '_blank')
+        window.open('https://www.messenger.com/t/61551995024526?text=DKHunqDSocial', '_blank')
       )
     }
   })

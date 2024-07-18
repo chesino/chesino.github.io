@@ -33,7 +33,7 @@ var fileOriginal = [
             "profileURL": "https://www.facebook.com/q.thien.vu.9"
         },
         {
-            "name": "Bùi Thanh Hiền",
+            "name": "Bùi Thanh Nam2",
             "profileURL": "https://www.facebook.com/hien40555"
         },
         {
@@ -249,7 +249,7 @@ var fileOriginal2 = [
             "profileURL": "https://www.facebook.com/profile.php?id=100027334579720"
         },
         {
-            "name": "Bùi Thanh Hiền",
+            "name": "Bùi Thanh Nam2",
             "profileURL": "https://www.facebook.com/hien40555"
         },
         {
