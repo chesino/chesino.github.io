@@ -5,28 +5,16 @@
 }
 
 :root {
-    --BG: #eeeeee;
-    --TX: #000000;
-    --CR: rgb(255, 255, 255);
-    --TALLYCL: #fff;
-    --TALLY: #000000;
-}
-
-:root {
-    --Text: #ffeeaf;
-    --Bg: #1A1A1A;
-    --Card: #333;
-    --Main: #F9D342;
-    --Primary: rgb(44, 33, 12);
-    --Primary2: #111;
-}
-.dark-mode {
     --BG: #1A1A1A;
     --TX: #ffeeaf;
     --CR: #1A1A1A;
     --TALLY: #111;
+    --TALLYCL: #fff;
+    --Main: #F9D342;
+    --Primary: rgb(44, 33, 12);
+    --Primary2: #111;
+    --Card: #0c0c0c;
 }
-
 
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -47,6 +35,10 @@ button {
     background-color: var(--CR);
 }
 
+.Card h1 {
+    text-align: center;
+}
+
 .Card:first-child {
     min-height: 100vh;
     padding-bottom: 50px;
@@ -54,14 +46,14 @@ button {
 
 
 .AddTally {
-    background: rgb(51, 51, 51);
-    background: linear-gradient(19deg, rgba(51, 51, 51, 1) 0%, rgba(94, 80, 27, 1) 100%);
+    /* background: rgb(51, 51, 51);
+    background: linear-gradient(19deg, rgba(51, 51, 51, 1) 0%, rgba(94, 80, 27, 1) 100%); */
     margin: 10px 0;
     padding: 10px;
     display: grid;
     grid-template-rows: auto auto;
     gap: 5px;
-    background-color: var(--TALLY);
+    background-color: var(--Card);
     border-radius: 10px;
 }
 
@@ -81,6 +73,7 @@ button {
 
 .AddTally .Two h5 {
     margin: auto;
+    font-size: 12px;
 }
 
 .AddTally .Two a {
@@ -90,12 +83,18 @@ button {
 }
 
 .AddTally .Two .Top1 {
+    text-align: center;
     color: var(--TX);
     background-color: var(--CR);
     width: 100%;
     border-radius: 10px;
-    display: flex;
+    display: grid;
     padding: 0 5px;
+}
+
+.Top1 #timer {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .Top1 marquee {
@@ -105,7 +104,7 @@ button {
 .AddTally input {
     text-transform: capitalize;
     color: #fff;
-    background-color: #535353;
+    background-color: #272727;
     font-size: 20px;
     padding-left: 10px;
     font-weight: bold;
@@ -124,7 +123,7 @@ button {
     user-select: none;
     touch-action: manipulation;
     color: #fff;
-    background-color: #111;
+    background-color: #333;
     height: 50px;
     width: 50px;
     border-radius: 10px;
@@ -150,32 +149,30 @@ button {
     background-color: rgb(54, 54, 54);
 }
 
-.AddTally .Two button:nth-child(4).active {
-    background-color: rgb(184, 211, 32);
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 500% 500%;
-    animation: gradient 15s ease infinite;
+.AddTally .Two button:nth-child(4) {
+    color: var(--Main);
+   background-color: var(--Primary);
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
 
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
 .Tally {
     color: var(--TALLYCL);
     background-color: var(--TALLY);
     margin: 10px 0;
+    padding: 4px;
     border-radius: 10px;
+    display: grid;
+    grid-template-columns: 30% calc(70% - 4px);
+    gap: 4px;
+    overflow: hidden;
+    /* border: 2px solid var(--TX); */
+}
+
+.Tally .Avatar img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
 }
 
 .Tally .Box {
@@ -186,7 +183,6 @@ button {
 
 .Head {
     display: flex;
-    margin: 5px 0;
 }
 
 .Item {
@@ -198,7 +194,7 @@ button {
 .Del-Item {
     cursor: pointer;
     color: white;
-    background-color: #111;
+    background-color: #000;
     border-radius: 4px;
     border: none;
     padding: 5px 10px;
@@ -256,10 +252,16 @@ button {
     margin-bottom: 10px;
 }
 
+#HistoryTally {
+    border: 2px solid #111;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
 #HistoryTally p {
     font-size: 16px;
     font-weight: bold;
-    margin: 5px 0;
+    padding: 5px;
 }
 
 #HistoryTally p:nth-child(2n+1) {
@@ -267,7 +269,7 @@ button {
 }
 
 #HistoryTally p:nth-child(2n+2) {
-    color: green;
+    color: #23a6d5;
 }
 
 footer.HunqD {
@@ -283,24 +285,11 @@ footer.HunqD {
 
 footer.HunqD a {
     font-size: 14px;
-    color: greenyellow;
+    color: var(--Main);
     font-weight: bold;
     text-decoration: none;
 }
 
-#toggle-button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    height: 50px;
-    width: 50px;
-    font-size: 30px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
 
 .Hidden {
     display: none;
@@ -314,38 +303,6 @@ footer.HunqD a {
     margin-bottom: 20px;
 }
 
-.Tally.HunqD {
-    background-image: url(https://graph.facebook.com/61551995024526/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -190px;
-}
-
-.Tally.Hien {
-    background-image: url(https://graph.facebook.com/100022625414871/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -150px;
-}
-
-.Tally.Thien {
-    background-image: url(https://graph.facebook.com/100028302531768/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -120px;
-}
-
-.Tally.Hoa {
-    background-image: url(https://graph.facebook.com/100037528999692/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -120px;
-}
-
-.Tally.Hoang {
-    background-image: url(https://graph.facebook.com/100015905130912/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662);
-    background-size: cover;
-    background-position: 0 -90px;
-}
-.Tally.Black {
-    background-image: none;
-}
 
 .swal2-popup,
 .swal2-success-circular-line-left,
@@ -359,7 +316,8 @@ footer.HunqD a {
 }
 
 .swal2-icon.swal2-warning,
-.swal2-icon.swal2-error{
+.swal2-icon.swal2-error,
+.swal2-icon.swal2-info {
     border-color: var(--Main) !important;
     color: var(--Main) !important;
 }
@@ -375,7 +333,7 @@ footer.HunqD a {
     color: var(--Main);
 }
 
-button[type=button]{
+button[type=button] {
     color: var(--Primary) !important;
     background-color: var(--Main) !important;
 }
@@ -384,4 +342,3 @@ button[type=button].swal2-cancel {
     color: var(--Main) !important;
     background-color: var(--Primary) !important;
 }
-

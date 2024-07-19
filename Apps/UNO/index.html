@@ -36,8 +36,6 @@
 <body>
     <div class="Card">
         <h1>Ai là kẻ chiến thắng ?</h1>
-        <p>UNO</p>
-        <div id="toggle-button">toggle-button</div>
         <div class="AddTally">
             <div class="One">
                 <input type="text" id="itemName" placeholder="Ai ?">
@@ -48,10 +46,15 @@
                 <button id="resetButton"><i class="fa-solid fa-repeat"></i></button>
                 <button onclick="toggleSmartPoint()" id="smartpoint"><i
                         class="fa-solid fa-wand-magic-sparkles"></i></button>
-                <button class="active" id="ENAvatar" onclick="toggleENAvatar()"><i class="fa-solid fa-image"></i></button>
+                <button onclick="Info('Chế độ chơi giả vờ','Dành riêng cho bạn nào thích chơi ăn gian 🤪')" id="smartpoint">
+                    <i class="fa-solid fa-baby"></i>
+                </button>
+
                 <div class="Top1">
-                    <h5>Phiên bản 2.0 <a href="http://facebook.com/HunqD" target="_blank"
+
+                    <h5>Phiên bản 3.1 <a href="http://facebook.com/HunqD" target="_blank"
                             rel="noopener noreferrer">M.Hùng</a> </h5>
+                    <p id="timer" onclick="startTimer();">00:00:00</p>
                     <!-- <marquee behavior="" direction="">Hiện tại chưa cập nhật</marquee> -->
                 </div>
             </div>
@@ -73,6 +76,5 @@
 
 <script src="./Script.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
-<script src="/DATA/DarkMode.js"></script>
 
 </html>

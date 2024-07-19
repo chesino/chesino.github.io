@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     loadFromLocalStorage();
 });
@@ -10,17 +9,17 @@ itemNameEnter.addEventListener('keydown', (event) => {
     }
 });
 
+
+
 var Point = 1;
 var smartPointActive = false;
-
 function toggleSmartPoint() {
     var smartPoint = document.getElementById("smartpoint");
 
     if (smartPointActive) {
         smartPoint.classList.remove("active");
         Point = 1;
-        Done('SmartPoint đã tắt')
-
+        Fail('SmartPoint đã tắt');
     } else {
         smartPoint.classList.add("active");
 
@@ -30,38 +29,11 @@ function toggleSmartPoint() {
         // Lấy số lượng phần tử có class là "Tally"
         var tallyCount = tallyElements.length;
         Point = tallyCount;
-        Done('SmartPoint đã bật','Tính năng điểm thông minh, sẽ tự động tính toán số người chơi và cộng điểm một cách thông minh.')
+        Done('SmartPoint đã bật', 'Tính năng điểm thông minh, sẽ tự động tính toán số người chơi và cộng điểm một cách thông minh.');
     }
 
     smartPointActive = !smartPointActive;
 }
-
-var ENAvatar = true;
-
-function toggleENAvatar() {
-    var btnENAvatar = document.getElementById("ENAvatar");
-
-    if (ENAvatar) {
-        btnENAvatar.classList.remove("active");
-        // Lấy tất cả các phần tử có class chứa ".Tally"
-        var elements = document.querySelectorAll('.Tally');
-
-        // Lặp qua từng phần tử
-        elements.forEach(function (element) {
-            element.classList.add("Black");
-        });
-    } else {
-        btnENAvatar.classList.add("active");
-        var elements = document.querySelectorAll('.Tally');
-        elements.forEach(function (element) {
-            element.classList.remove("Black");
-        });
-    }
-
-    ENAvatar = !ENAvatar;
-}
-
-
 
 function UpdatePoint() {
     if (smartPointActive == true) {
@@ -76,54 +48,103 @@ function UpdatePoint() {
 
 }
 
+function Done(message, additionalInfo) {
+    console.log(message);
+    if (additionalInfo) {
+        console.log(additionalInfo);
+    }
+}
 
 const HistoryTally = document.getElementById("HistoryTally");
 let currentLog = null;
 let timeoutId = null;
 
-function addTally(itemName, quantity) {
+const jsonData = [
+    [
+        {
+            "name": "Hùng",
+            "fullname": "Hùng Đinh",
+            "id": 61551995024526,
+        },
+        {
+            "name": "Hoàng",
+            "fullname": "Lê Huy Hoàng",
+            "id": 100015905130912,
+        },
+        {
+            "name": "Hiền",
+            "fullname": "Bùi Thanh Hiền",
+            "id": 100022625414871,
+        },
+        {
+            "name": "Hoa",
+            "fullname": "Nguyễn Thị Thanh Hoa",
+            "id": 100037528999692,
+        },
+        {
+            "name": "Thiện",
+            "fullname": "Quang Thiện",
+            "id": 100028302531768,
+        },
+        {
+            "name": "Minh",
+            "fullname": "Vũ Trần Quang Minh ",
+            "id": 61552484927647,
+        },
 
+    ]
+];
+
+function findIdByName(itemName) {
+    // Loop through jsonData to find the matching item
+    for (let i = 0; i < jsonData[0].length; i++) {
+        if (jsonData[0][i].name === itemName) {
+            return jsonData[0][i].id;
+        }
+    }
+    // Return null if no match found
+    return null;
+}
+
+function addTally(itemName, quantity) {
+    // Get or set itemName and quantity from input or default values
     itemName = itemName || document.getElementById("itemName").value;
     quantity = quantity || 0;
 
-    // Chuyển chữ cái đầu của itemName thành chữ hoa
+    // Capitalize the first letter of itemName
     itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
 
-    // Bây giờ itemName chứa chuỗi với chữ cái đầu viết hoa
+    // Only proceed if itemName is not empty
     if (itemName.trim() !== "") {
         document.querySelector('.HistoryTally').classList.remove('Hidden');
 
+        // Create the new tally element
         var newTally = document.createElement("div");
         newTally.className = "Tally";
 
-        if (itemName == 'HunqD' || itemName == 'Hùng') {
-            newTally.classList.add('HunqD');
+        // Create the avatar element with the provided image URL
+        var avatar = document.createElement("div");
+        avatar.className = "Avatar";
+        var avatarImg = document.createElement("img");
+        var itemId = findIdByName(itemName);
+        if (itemId) {
+            avatarImg.src = `https://graph.facebook.com/${itemId}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+        } else {
+            avatarImg.src = "/DATA/logo.png"; // Replace with default avatar URL or handle as needed
         }
-        if (itemName == 'Nam2') {
-            newTally.classList.add('Hien');
-        }
-        if (itemName == 'Thiện') {
-            newTally.classList.add('Thien');
-        }
-        if (itemName == 'Hoa') {
-            newTally.classList.add('Hoa');
-        }
-        if (itemName == 'Hoàng') {
-            newTally.classList.add('Hoang');
-        }
+        avatar.appendChild(avatarImg);
 
-
+        // Create the box element
         var box = document.createElement("div");
         box.className = "Box";
 
+        // Create the head element with item name and delete button
         var head = document.createElement("div");
         head.className = "Head";
 
         var item = document.createElement("div");
         item.className = "Item";
         item.innerText = itemName;
-
-        var clickCount = 0;
 
         var delButton = document.createElement("button");
         delButton.className = "Del-Item";
@@ -141,16 +162,16 @@ function addTally(itemName, quantity) {
             }).then((result) => {
                 if (result.isConfirmed) {
                     newTally.remove();
-                    saveToLocalStorage();
+                    saveToLocalStorage(); // Assuming this function exists and handles local storage saving
                     Done('Xóa tất cả thành công.');
                 }
             });
         });
 
-
         head.appendChild(item);
         head.appendChild(delButton);
 
+        // Create the body element with buttons and input
         var body = document.createElement("div");
         body.className = "Body";
 
@@ -159,7 +180,7 @@ function addTally(itemName, quantity) {
         minusButton.addEventListener("click", function () {
             var inputNumber = body.querySelector("input");
             inputNumber.value = Math.max(0, parseInt(inputNumber.value) - 1);
-            logValueDelayed(itemName, -1);
+            logValueDelayed(itemName, -1); // Assuming this function exists
         });
 
         var numberInput = document.createElement("input");
@@ -179,24 +200,26 @@ function addTally(itemName, quantity) {
         body.appendChild(numberInput);
         body.appendChild(plusButton);
 
+        // Assemble the tally structure
         box.appendChild(head);
         box.appendChild(body);
+        newTally.appendChild(avatar);
         newTally.appendChild(box);
-
-
 
         document.getElementById("Tally").appendChild(newTally);
 
-        saveToLocalStorage();
+        saveToLocalStorage(); // Assuming this function exists and handles local storage saving
         document.getElementById("itemName").value = '';
+        startTimer();
     } else {
         Warning('Vui lòng nhập tên người chơi');
     }
 }
 
+
 function logValueDelayed(itemName, quantity) {
     const currentTime = new Date();
-    const timeString = `${currentTime.getHours()}:${currentTime.getMinutes()}}`;
+    const timeString = `${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}}`;
     const dateString = `${currentTime.getDate()}/${currentTime.getMonth() + 1}/${currentTime.getFullYear()}`;
 
     const logText = `${itemName} ${quantity > 0 ? '+' : ''}${quantity} lúc ${timeString} - ${dateString}`;
@@ -226,7 +249,7 @@ function logValueDelayed(itemName, quantity) {
 }
 
 function addToHistory(log) {
-    const timeString = `${log.time.getHours()}:${log.time.getMinutes()}`;
+    const timeString = `${log.time.getHours()}:${log.time.getMinutes()}:${log.time.getSeconds()}`;
     const dateString = `${log.time.getDate()}/${log.time.getMonth() + 1}/${log.time.getFullYear()}`;
     const logText = `${timeString} - ${log.itemName} ${log.quantity > 0 ? '+' : ''}${log.quantity}`;
 
@@ -295,12 +318,12 @@ const resetButton = document.getElementById("resetButton");
 resetButton.addEventListener("click", function () {
     Swal.fire({
         title: "Bạn có muốn đặt lại điểm số không ?",
-        text: "Tất cả các người chơi sẽ trở về số 0.",
+        text: "Tất cả các người chơi sẽ trở về số 0. Hãy tắt SmartPoint nếu bật nhé !",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yah sure chắc chắn là như vậy rồi",
+        confirmButtonText: "Yah sure",
         cancelButtonText: "Huỷ"
     }).then((result) => {
         if (result.isConfirmed) {
@@ -335,7 +358,7 @@ deleteAllButton.addEventListener("click", function () {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yah sure chắc chắn là như vậy rồi",
+        confirmButtonText: "Yah sure",
         cancelButtonText: "Huỷ"
     }).then((result) => {
         if (result.isConfirmed) {
@@ -346,6 +369,7 @@ deleteAllButton.addEventListener("click", function () {
             document.querySelector('.HistoryTally').classList.add('Hidden');
 
             Done('Xóa tất cả thành công.');
+            resetTimer();
         }
     });
 });
@@ -402,4 +426,52 @@ function Confirm(T1) {
             });
         }
     });
+}
+
+
+let startTime;
+let timerInterval;
+
+function pad(value) {
+    return value.toString().padStart(2, '0');
+}
+
+function updateTimer() {
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - startTime;
+    const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+    const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+    document.getElementById('timer').innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+    localStorage.setItem('timerStartTime', startTime);
+    localStorage.setItem('timerRunning', 'true');
+}
+
+function startTimer() {
+    if (!timerInterval) {
+        startTime = startTime || Date.now();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+}
+
+function resetTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    startTime = null;
+    document.getElementById('timer').innerText = '00:00:00';
+
+    localStorage.removeItem('timerStartTime');
+    localStorage.setItem('timerRunning', 'false');
+}
+
+window.onload = function() {
+    const storedStartTime = localStorage.getItem('timerStartTime');
+    const timerRunning = localStorage.getItem('timerRunning');
+
+    if (timerRunning === 'true' && storedStartTime) {
+        startTime = parseInt(storedStartTime, 10);
+        startTimer();
+    }
 }
