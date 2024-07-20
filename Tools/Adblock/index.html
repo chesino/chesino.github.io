@@ -1,117 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copy Links</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #fff;
-            background-color: #111;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Tiêu đề trang -->
+    <title>Chesino</title>
 
-        .link-container {
-            text-align: center;
-        }
+    <!-- Bộ giải mã và phân loại thiết bị -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-        .link-item {
-            margin: 10px;
-            display: flex;
-            gap: 10px;
-        
-        }
-        .link-item input {
-            display: block;
-            color: greenyellow;
-            background-color: #000;
-            border-radius: 10px;
-            padding: 10px;
-            border: none;
-            width: 100%;
-        }
+    <!-- Đảm bảo đặt meta tag sau -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-        .copyButton {
-            display: block;
-            padding: 10px;
-            cursor: pointer;
-            background-color: greenyellow;
-            border-radius: 10px;
-            border: none;
-        }
-    </style>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="/DATA/logo.png" />
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="/DATA/logo.png" sizes="150x150" />
+
+    <!-- Ảnh -->
+    <meta property="og:image" content="/DATA/logo.png" />
+
+    <!-- CSS của web -->
+    <link rel="stylesheet" href="./Styles.css" />
+    <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
+
+    <!-- FontAweSome fas fa icon -->
+    <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+    <h1>Bộ lọc chặn quảng cáo</h1>
+    <div id="links"></div>
+    <script>
+        const links = [
+            { name: "Easylist", url: "https://chesino.github.io/Tools/Adblock/Filter/Easylist.txt" },
+            { name: "Sàn thương mại điện tử", url: "https://chesino.github.io/Tools/Adblock/Filter/Shopping.txt" },
+            { name: "Web Phim", url: "https://chesino.github.io/Tools/Adblock/Filter/WebFim.txt" },
+            { name: "Tuỳ chỉnh", url: "https://chesino.github.io/Tools/Adblock/Filter/Custom.txt" },
+            { name: "VIP", url: "https://chesino.github.io/Tools/Adblock/Filter/VIP.txt" },
+            { name: "ADBVN", url: "https://abpvn.com/filter/abpvn-ApmCqa.txt" },
+            { name: "Tài khoản. Không đăng nhập iCloud", url: "5allahloveisrael@pixelinvestors.com" },
+            { name: "Mật khẩu. Không đăng nhập iCloud", url: "PalestinianAreTerrorist9)akwebguide.com" },
+        ];
 
-<div class="link-container">
-    <p>Bộ lộc chặn quảng cáo:</p>
-    <div id="linksContainer"></div>
-</div>
+        function copyLink(url) {
+            const tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            Done('Đã sao chép thành công', url);
+        }
 
-<script>
-    var links = [
-        "https://chesino.github.io/Apps/Adblock/Filter/Easylist.txt",
-        "https://chesino.github.io/Apps/Adblock/Filter/Shopping.txt",
-        "https://chesino.github.io/Apps/Adblock/Filter/WebFim.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances-cookies.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances-others.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/annoyances.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badlists.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2020.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2021.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2022.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2023.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2024.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-mobile.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/lan-block.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/legacy.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/quick-fixes.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/ubo-link-shorteners.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/ubol-filters.txt",
-        "https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt",
-        // Add more links as needed
-    ];
+        function createLinkElement(link, index) {
+            const container = document.createElement('div');
+            container.className = 'link-container';
 
-    function createLinkElements() {
-        var linksContainer = document.getElementById("linksContainer");
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = link.name;
+            input.readOnly = true;
 
-        links.forEach(function(link, index) {
-            var linkItem = document.createElement("div");
-            linkItem.classList.add("link-item");
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="fa-solid fa-copy"></i>';
+            button.onclick = () => copyLink(link.url);
 
-            var linkInput = document.createElement("input");
-            linkInput.type = "text";
-            linkInput.value = link;
-            linkInput.readOnly = true;
+            container.appendChild(input);
+            container.appendChild(button);
 
-            var copyButton = document.createElement("button");
-            copyButton.classList.add("copyButton");
-            copyButton.textContent = "Sao chép";
-            copyButton.onclick = function() {
-                copyLink(linkInput);
-            };
+            return container;
+        }
 
-            linkItem.appendChild(linkInput);
-            linkItem.appendChild(copyButton);
-            linksContainer.appendChild(linkItem);
+        const linksContainer = document.getElementById('links');
+        links.forEach((link, index) => {
+            const linkElement = createLinkElement(link, index);
+            linksContainer.appendChild(linkElement);
         });
-    }
 
-    function copyLink(inputElement) {
-        inputElement.select();
-        inputElement.setSelectionRange(0, 99999); /* For mobile devices */
-        document.execCommand("copy");
-        alert("Link copied: " + inputElement.value);
-    }
 
-    createLinkElements();
-</script>
+        function Done(T1, T2) {
+            Swal.fire(
+                T1,
+                T2,
+                'success'
+            )
+        }
 
+    </script>
 </body>
+<script src="/DATA/SweetAlert2.js"></script>
+
 </html>
