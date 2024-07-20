@@ -11,9 +11,9 @@
     --TALLY: #111;
     --TALLYCL: #fff;
     --Main: #F9D342;
-    --Primary: rgb(44, 33, 12);
+    --Primary: #2c210c;
     --Primary2: #111;
-    --Card: #0c0c0c;
+    --Card: #130c03;
 }
 
 body {
@@ -134,7 +134,8 @@ button {
 }
 
 .AddTally button:nth-child(2) {
-    background-color: rgb(0, 122, 0);
+    color: var(--Main);
+    background-color: var(--Primary);
 }
 
 .AddTally .Two button:nth-child(1) {
@@ -142,16 +143,16 @@ button {
 }
 
 .AddTally .Two button:nth-child(2) {
-    background-color: rgb(238, 155, 0);
+    color: #fff;
+    background-color: rgb(68, 151, 0);
 }
 
 .AddTally .Two button:nth-child(3) {
-    background-color: rgb(54, 54, 54);
+    background-color: rgb(255, 187, 0);
 }
 
 .AddTally .Two button:nth-child(4) {
-    color: var(--Main);
-   background-color: var(--Primary);
+   background-color: #23a6d5;
 }
 
 
@@ -296,7 +297,7 @@ footer.HunqD a {
 }
 
 #smartpoint.active {
-    background-color: rgb(0, 102, 255);
+    background-color: rgb(0, 0, 0);
 }
 
 .Tally .Head {

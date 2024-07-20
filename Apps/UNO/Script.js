@@ -447,31 +447,41 @@ function Confirm(T1) {
     });
 }
 
-
-let startTime;
-let timerInterval;
-
-function pad(value) {
-    return value.toString().padStart(2, '0');
-}
+let timerInterval = null;
+let startTime = null;
+let pausedTime = null;
+let isPaused = false;
 
 function updateTimer() {
-    const currentTime = Date.now();
+    const currentTime = isPaused ? pausedTime : Date.now();
     const elapsedTime = currentTime - startTime;
-    const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-    const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+    const hours = Math.floor(elapsedTime / 3600000);
+    const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
 
-    document.getElementById('timer').innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-
-    localStorage.setItem('timerStartTime', startTime);
-    localStorage.setItem('timerRunning', 'true');
+    document.getElementById('timer').innerText = 
+        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 function startTimer() {
-    if (!timerInterval) {
+    if (isPaused) {
+        startTime += Date.now() - pausedTime;  // Adjust startTime to account for paused duration
+        isPaused = false;
+    } else if (!timerInterval) {
         startTime = startTime || Date.now();
-        timerInterval = setInterval(updateTimer, 1000);
+    }
+    timerInterval = setInterval(updateTimer, 1000);
+    localStorage.setItem('timerRunning', 'true');
+    localStorage.setItem('timerStartTime', startTime.toString());
+}
+
+function pauseTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        pausedTime = Date.now();
+        isPaused = true;
+        localStorage.setItem('timerRunning', 'false');
     }
 }
 
@@ -479,6 +489,8 @@ function resetTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
     startTime = null;
+    pausedTime = null;
+    isPaused = false;
     document.getElementById('timer').innerText = '00:00:00';
 
     localStorage.removeItem('timerStartTime');
