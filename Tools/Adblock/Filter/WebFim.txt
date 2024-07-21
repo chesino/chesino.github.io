@@ -245,11 +245,13 @@ p##.announcement
 ##div.WebDescription:nth-of-type(3)
 ##.HdOp1.BgA.MnBrCn.Header > .EcBgA.MnBr > .Container > .Logo
 ##.mb_catfix_adv
-##.Adv ad-center-header
+##.Adv.ad-center-header
 ###comments
 ##.Wdgt
 ##.announcement
 ##.Logo
 ##.watch-notice
-##.Ads bellow_ads_player
+##.Ads.bellow_ads_player
 ##.schedule-title-main
+##.pc-catfixx
+###mv-keywords
