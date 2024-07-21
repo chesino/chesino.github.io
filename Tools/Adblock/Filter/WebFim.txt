@@ -255,3 +255,4 @@ p##.announcement
 ##.schedule-title-main
 ##.pc-catfixx
 ###mv-keywords
+##.social-button
