@@ -27,241 +27,38 @@
     <link rel="stylesheet" href="./Data/style.css">
     <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
 
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
-
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-    <div class="Container">
-        <div class="DynamicIsland" onclick="Dynamic()" id="dynamic">
-            <div class="Action" id="dAction">
-                <div class="Active One" id="dOne">
-                    <div class="Icon">
-                        <img src="./Data/frog.png" alt="" srcset="">
-                    </div>
-                    <div class="Icon" style="width: 30px;">
-                        <img width="100px" src="./Data/wave.gif" alt="" srcset="">
-                    </div>
-                </div>
-                <div class="Active Two" id="dTwo">
-                    <div class="Icon">
-                        <img src="./Data/frog.png" alt="" srcset="">
-                    </div>
-                    <div class="Content">
-                        <p>iPhone</p>
-                        <h1>AE Trá Hình 2.0</h1>
-                    </div>
-                    <div class="Icon">
-                        <i style="rotate: 135deg;" class="fa-solid fa-phone"></i>
-                    </div>
-                    <div class="Icon">
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                </div>
-            </div>
-
-            <audio id="myAudio">
+    <div class="head">
+        <div class="logo" onclick="PlayMusic()">
+            <img src="./Data/frog.png" alt="LOGO">
+            <audio id="myAudio2">
                 <source src="./Data/Music.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-            <audio id="myAudio2">
-                <source src="./Data/Ringtone.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
         </div>
-
-
-        <div class="AETH" id="AETH">
-            <div class="Head">
-                <h1>AE<span>Trá Hình</span><span>by <strong>M.Hùng</strong></span></h1>
-                <p>Dành riêng cho AE Trá Hình </p>
+        <div class="Chat">
+            
+            <div class="MessengerCount">
+                <i class="fa-brands fa-facebook-messenger"></i>
+                <div id="counter">0</div>
+                <p><span id="UpdateTime"></span></p>
             </div>
-            <div class="Body">
-                <div class="DIVFuncs">
-                    <div class="Func" id="btnShareGo">
-                        <div class="Icon">
-                            <i class="fa-solid fa-people-group"></i>
-                        </div>
-                        <div class="Label">
-                            Share & GO
-                        </div>
-                    </div>
-                    <div class="Func" id="btnAECloud">
-                        <div class="Icon">
-                            <i class="fa-solid fa-cloud"></i>
-                        </div>
-                        <div class="Label">
-                            AE Cloud
-                        </div>
-                    </div>
-                    <div class="Func" onclick="UNO()">
-                        <div class="Icon">
-                            <i class="fa-solid fa-face-laugh-beam"></i>
-                        </div>
-                        <div class="Label">
-                            UNO
-                        </div>
-                    </div>
-                    <div class="Func Active" onclick="Done('Chúc mừng','Bạn là thành viên Priority')">
-                        <div class="Icon">
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="Label">
-                            Priority
-                        </div>
-                    </div>
-
-                    <!-- <div class="Func" id="offDynamic" onclick="offDynamic()">
-                        <div class="Icon">
-                            <i class="fa-solid fa-mobile-button"></i>
-                        </div>
-                        <div class="Label">
-                            iPhone 15
-                        </div>
-                    </div>
-
-                    <div class="Func" onclick="Info('Sắp ra mắt','Hãy liên hệ Hùng nếu muốn có thêm tính năng mới.')">
-                        <div class="Icon">
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="Label">
-                            Sắp ra mắt
-                        </div>
-                    </div> -->
-                </div>
-            </div>
+            
+            <!-- <div class="Alert">
+                <p>Web đang bảo trì</p>
+            </div> -->
         </div>
-
-        <div class="Home" id="Home">
-            <img src="./Data/frog.png" alt="" srcset="">
-        </div>
-
-        <div class="Block AECloud" id="AECloud">
-            <div class="Head">
-                <h1>AE<span>Cloud</span> </h1>
-            </div>
-            <div class="Body">
-                <div class="DIVFuncs">
-                    <div class="Func" onclick="AEUpload()">
-                        <div class="Icon">
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                        </div>
-                        <div class="Label">
-                            Tải lên
-                        </div>
-                    </div>
-                    <div class="Func" onclick="AECloud()">
-                        <div class="Icon">
-                            <i class="fa-solid fa-cloud"></i>
-                        </div>
-                        <div class="Label">
-                            Truy cập thư mục
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="Block ShareGo" id="ShareGo">
-
-            <div class="GridShareGO">
-                <div class="Map">
-                    <div class="map-container" id="mapboxMap"></div>
-                    <div class="custom-select">
-                        <select id="mapType" onchange="changeMapType()">
-                            <option selected value="dark-v11">Tối</option>
-                            <option value="streets-v11">Sáng</option>
-                            <option value="satellite-v9">Vệ tinh</option>
-                        </select>
-                    </div>
-                    <div class="Head">
-                        <h1>Share<span>n</span>GO</h1>
-                    </div>
-                </div>
-
-                <div class="Form">
-                    <h1>Thông tin</h1>
-                    <div class="Input">
-                        <label for="placeName">Tên địa điểm <span>bắt buộc</span></label>
-                        <input type="text" id="placeName">
-                    </div>
-
-                    <div class="Flex">
-                        <div class="Input">
-                            <label for="address">Địa chỉ <span>không bắt buộc</span></label>
-                            <input type="text" id="address">
-                        </div>
-
-                        <button onclick="searchAddress()"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <button onclick="Google()"><i class="fa-brands fa-google"></i></button>
-                        <button onclick="getCurrentLocation()"><i class="fa-solid fa-location-crosshairs"></i></button>
-                    </div>
-                    <div class="Input">
-                        <label for="numberOfPeople">Số người <span>bắt buộc</span></label>
-                        <input type="text" id="numberOfPeople" pattern="[0-9]*">
-                    </div>
-                    <div class="Input">
-                        <label for="price">Giá <span>bắt buộc</span></label>
-                        <input type="text" class="inputFM" id="price" pattern="[0-9]*">
-                    </div>
-                    <div class="Flex">
-                        <div class="Input">
-                            <label for="time">Thời gian <span>không bắt buộc</span></label>
-                            <input type="time" id="time">
-                        </div>
-                        <div class="Input">
-                            <label for="date">Ngày <span>bắt buộc</span></label>
-                            <input type="date" id="date">
-                        </div>
-                    </div>
-
-                    <div class="Input">
-                        <label for="rating">Đánh Giá <span>Nếu không đánh giá sẽ là 0 sao</span></label>
-                        <ul class="ratings">
-                            <li class="star" data-rating="5"></li>
-                            <li class="star" data-rating="4"></li>
-                            <li class="star" data-rating="3"></li>
-                            <li class="star" data-rating="2"></li>
-                            <li class="star" data-rating="1"></li>
-                        </ul>
-
-                    </div>
-                    <div class="Input">
-                        <label for="note">Ghi chú <span>không bắt buộc</span></label>
-                        <textarea name="note" id="note" cols="30" rows="10"></textarea>
-                    </div>
-                    <button class="Confirm" onclick="saveToLocalStorage()">Xác nhận</button>
-
-
-                </div>
-
-                <div class="historyContainer" id="historyContainer">
-                    <h2>Lịch sử</h2>
-                    <button id="exportToExcel" onclick="exportToExcel()">Xuất Excel <i
-                            class="fa-solid fa-file-excel"></i></button>
-                    <button onclick="exportToTxt()">Xuất TXT <i class="fa-solid fa-file-lines"></i></button>
-                    <button onclick="deleteHistoryAllItem()">Xoá toàn bộ <i class="fa-solid fa-trash"></i></button>
-                    <ul id="historyList"></ul>
-                </div>
-            </div>
-
-
-
-            <!-- Include SheetJS library -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-
-        </div>
-
-
+       
     </div>
+   
 
+  
 </body>
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./Data/script.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
-
 </html>

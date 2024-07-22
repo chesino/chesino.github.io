@@ -589,3 +589,13 @@ strong {
     border: none;
     border-radius: 10px;
 }
+
+.swal2-timer-progress-bar {
+    background-color: var(--T3Box);
+}
+.swal2-popup.swal2-toast {
+    box-shadow: none !important;
+}
+.swal2-container.swal2-backdrop-show, .swal2-container.swal2-noanimation {
+    background: none !important;
+}

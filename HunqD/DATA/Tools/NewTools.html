@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to JSON Converter</title>
+</head>
+
+<body>
+    <h1>CSV to JSON Converter</h1>
+    <input type="file" id="csvFile" accept=".csv">
+    <button onclick="convertCsvToJson()">Convert</button>
+    <pre id="output"></pre>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        function convertCsvToJson() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+
+            if (file) {
+                Papa.parse(file, {
+                    header: true,
+                    complete: function (results) {
+                        const data = results.data;
+                        const jsonData = [data.map(convertRowToJson)];
+                        document.getElementById('output').textContent = JSON.stringify(jsonData, null, 2);
+                    }
+                });
+            } else {
+                alert('Please select a file.');
+            }
+        }
+
+        function convertRowToJson(row) {
+            return {
+                name: row.Name || "Unknown",
+                profileURL: row.Link || "https://www.facebook.com/",
+                timestamp: 0,
+                id: parseInt(row.UID) || 0,
+                point: 0,
+                mess: 0,
+                pass: "123"
+            };
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 const Version = '1.2.2'
 
-var timeUpdate = new Date('2024-01-31T23:00:00');
+var timeUpdate = new Date('2024-07-22T00:00:00');
 var timeDifference = new Date() - timeUpdate;
 let UpdateTime = ''
 // Chuyển đổi chênh lệch thời gian từ milliseconds sang phút và ngày
@@ -71,7 +71,7 @@ function SignIn() {
     if (result.name === 'Hùng Đinh') {
       HunqD();
     }
-    // Hùng, Nam2 , Thiện , Hoa , Hoàng
+    // Hùng, Hiền , Thiện , Hoa , Hoàng
     if (result.id === 61551995024526 || result.id === 100022625414871 || result.id === 100028302531768 || result.id === 100037528999692 || result.id === 100015905130912) {
       AETH();
     }
@@ -156,20 +156,19 @@ function SignIn() {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
 
-      ToolKit();
       DoneSignIn(`Tài khoản: ${result.name}`)
       setTimeout(() => {
         move(point, rank);
       }, 500);
 
-      setTimeout(() => {
-        if (result.pass === '123') {
-          Warning('Cảnh báo', 'Bạn đang sử dụng mật khẩu mặc định hãy thay đổi mật khẩu mới để bảo mật tài khoản. Hiện tại chưa thể thay đổi bằng cách tự động hãy nhắn tin cho Hùng để đổi mất khẩu mới!')
-        }
-        if (result.name === 'Khách') {
-          Warning('Cảnh báo', 'Bạn đang sử dụng tài khoản khách nên các tính năng sẽ bị giới hạn!');
-        }
-      }, 1000);
+      // setTimeout(() => {
+      //   if (result.pass === '123') {
+      //     Warning('Cảnh báo', 'Bạn đang sử dụng mật khẩu mặc định hãy thay đổi mật khẩu mới để bảo mật tài khoản. Hiện tại chưa thể thay đổi bằng cách tự động hãy nhắn tin cho Hùng để đổi mất khẩu mới!')
+      //   }
+      //   if (result.name === 'Khách') {
+      //     Warning('Cảnh báo', 'Bạn đang sử dụng tài khoản khách nên các tính năng sẽ bị giới hạn!');
+      //   }
+      // }, 2000);
 
     }, 1500);
 
