@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+
+<head>
+  <!-- Tiêu đề trang -->
+  <title>Chesino</title>
+
+  <!-- Bộ giải mã và phân loại thiết bị -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Đảm bảo đặt meta tag sau -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- Biểu tượng cho web -->
+  <link rel="icon" href="./DATA/logo.png" />
+
+  <!-- Biểu tượng iPhone -->
+  <link rel="apple-touch-icon" href="./DATA/logo.png" sizes="150x150" />
+
+  <!-- Ảnh -->
+  <meta property="og:image" content="./DATA/logo.png" />
+
+  <!-- CSS của web -->
+  <link rel="stylesheet" href="./Style.css" />
+
+  <!-- FontAweSome fas fa icon -->
+  <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="head">
+    <div class="avatar">
+      <img src="/DATA/logo.png" alt="avatar" srcset="/DATA/logo.png">
+    </div>
+    <div class="welcome">Chào buổi tối</div>
+    <div class="weather">25*C</div>
+  </div>
+
+  <h1>Chọn địa điểm để xem thời tiết</h1>
+  <button onclick="getWeatherByIP()">Dựa trên IP</button>
+  <button onclick="getWeatherByGeolocation()">Định vị</button>
+  <input type="text" id="manualLocation" placeholder="Nhập địa điểm">
+  <button onclick="getWeatherByManual()">Nhập thủ công</button>
+
+  <!-- Các phần tử HTML để hiển thị thông tin thời tiết -->
+  <div id="location"></div>
+  <div id="temperature"></div>
+  <div id="rain_chance"></div>
+  <div id="uv_index"></div>
+  <div id="wind_direction"></div>
+  <div id="condition"></div>
+
+  <div id="ip">ip</div>
+  <div id="organization"></div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script src="./Script.js"></script>
+
+</html>
