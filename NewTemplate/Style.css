@@ -20,6 +20,7 @@ body {
 }
 .head .avatar {
     height: 40px;
+    width: 40px;
 }
 .head .avatar img {
     display: block;
