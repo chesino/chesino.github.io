@@ -1,3 +1,15 @@
+:root {
+    --BG: #1A1A1A;
+    --TX: #ffeeaf;
+    --CR: #1A1A1A;
+    --TALLY: #111;
+    --TALLYCL: #fff;
+    --Main: #F9D342;
+    --Primary: #2c210c;
+    --Primary2: #111;
+    --Card: #181a1b;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +20,45 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: #181a1b;
     color: #eee;
+}
+
+.swal2-popup,
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right,
+.swal2-icon.swal2-success .swal2-success-fix {
+    background-color: var(--Card) !important;
+}
+
+.swal2-success-ring {
+    border-color: var(--Main) !important;
+}
+
+.swal2-icon.swal2-warning,
+.swal2-icon.swal2-error,
+.swal2-icon.swal2-info {
+    border-color: var(--Main) !important;
+    color: var(--Main) !important;
+}
+
+.swal2-success-line-long,
+.swal2-success-line-tip,
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: var(--Main) !important;
+}
+
+.swal2-title,
+.swal2-content {
+    color: var(--Main);
+}
+
+button[type=button] {
+    color: var(--Primary) !important;
+    background-color: var(--Main) !important;
+}
+
+button[type=button].swal2-cancel {
+    color: var(--Main) !important;
+    background-color: var(--Primary) !important;
 }
 
 .head {
@@ -49,11 +100,22 @@ body {
     font-size: 12px;
 }
 
+.weather div {
+    display: flex;
+    gap: 2px;
+}
+
+.weather .flex img {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+}
+
 .weatherAll {
     text-align: center;
     display: none;
     position: relative;
-    background-color: black;
+    background-color: #272727;
     margin: 0 10px;
     padding: 10px 20px;
     border-radius: 20px;
@@ -61,7 +123,7 @@ body {
 }
 
 .weatherAll #location {
-    font-size: 22px;
+    font-size: 14px;
 }
 
 .weatherAll #condition img {
@@ -98,6 +160,12 @@ body {
     border: none;
     padding: 10px;
     font-size: 16px;
+    border-radius: 0;
+}
+
+textarea:focus,
+input:focus {
+    outline: none;
 }
 
 .searchLocation button {
@@ -117,6 +185,76 @@ body {
     padding: 5px;
     border-radius: 20px;
 }
+
 .infoDevice {
     font-size: 12px;
+}
+
+main {
+    padding: 10px;
+}
+
+main .banner {
+    height: 150px;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main img {
+    max-width: 100%;
+}
+
+main .list {
+    cursor: pointer;
+    display: grid;
+    grid-auto-flow: column;
+    width: 100%;
+    gap: 10px;
+    overflow-x: scroll;
+    margin: 10px 0;
+    white-space: nowrap;
+    scrollbar-width: none;
+    border-radius: 10px;
+    background-color: #000;
+    padding: 5px;
+
+    display: none;
+}
+
+main .list .item {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 10px;
+    display: inline-block;
+    white-space: nowrap;
+    border: none;
+    border-radius: 10px;
+}
+
+main .list::-webkit-scrollbar {
+    display: none;
+}
+
+.mainCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-around;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.mainCard .Card {
+    width: 100%;
+    height: 300px;
+    background-color: #000;
+    border-radius: 20px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
 }
