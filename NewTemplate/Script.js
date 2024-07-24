@@ -66,7 +66,7 @@ const weatherConditionMap = {
 
 async function fetchWeather(latitude, longitude) {
     const location = `${latitude},${longitude}`;
-    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`);
+    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`);
     const data = await response.json();
 
     // Xử lý thông tin điều kiện thời tiết
