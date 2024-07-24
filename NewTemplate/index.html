@@ -43,19 +43,32 @@
       <h1>26°C</h1>
     </div>
   </div>
-  <div class="#weatherAll animate__animated" id="weatherAll">
-    <div id="location"></div>
-    <div id="temperature"></div>
-    <div id="rain_chance"></div>
-    <div id="uv_index"></div>
-    <div id="wind_direction"></div>
+  <div class="weatherAll animate__animated" id="weatherAll">
+    <h1 id="location"></h1>
     <div id="condition"></div>
-    <div id="ip">ip</div>
-    <div id="organization"></div>
-    <input type="text" id="manualLocation" placeholder="Nhập địa điểm">
-    <button onclick="getWeatherByIP()">Dựa trên IP</button>
-    <button onclick="getWeatherByGeolocation()">Định vị</button>
-    <button onclick="getWeatherByManual()">Nhập thủ công</button>
+    <h1 id="temperature"></h1>
+    <div class="More">
+      <p id="rain_chance">Chưa có dữ liệu</p>
+      <div id="uv_index"></div>
+      <div id="wind_direction"></div>
+    </div>
+
+    <div id="uv_warning">
+      <i class="fa-solid fa-exclamation-triangle"></i> <span id="uv_warning_text"></span>
+    </div>
+
+    <div class="searchLocation">
+      <input type="text" id="manualLocation" placeholder="Nhập địa điểm">
+      <button onclick="getWeatherByManual()"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button onclick="getWeatherByIP()">IP</button>
+      <button onclick="getWeatherByGeolocation()"><i class="fa-solid fa-location-arrow"></i></button>
+    </div>
+    <div class="infoDevice">
+      <div id="ip"></div>
+      <div id="organization"></div>
+    </div>
+   
+
   </div>
 
 

@@ -1,4 +1,4 @@
-const apiKey = 'bc74caf431bd4ff3aee191233242307';
+const apiKey = 'KZH7P9GUL9SBMVQ5MV4WDF23L'; // Thay thế bằng API Key của bạn
 
 // Bảng ánh xạ từ hướng gió quốc tế sang thuần Việt
 const windDirectionMap = {
@@ -19,89 +19,132 @@ const windDirectionMap = {
     'NW': 'Tây Bắc',
     'NNW': 'Bắc Tây Bắc'
 };
+
 // Bảng ánh xạ mã điều kiện thời tiết sang mô tả tiếng Việt
 const weatherConditionMap = {
-    1000: 'Trời quang đãng',
-    1003: 'Có mây',
-    1006: 'Có mây',
-    1009: 'Trời nhiều mây',
-    1030: 'Sương mù',
-    1063: 'Mưa rào lác đác',
-    1066: 'Tuyết nhẹ',
-    1069: 'Mưa tuyết',
-    1072: 'Sương mù và mưa rào nhẹ',
-    1087: 'Bão tố',
-    1114: 'Tuyết và bão tuyết',
-    1117: 'Tuyết dày và bão tuyết',
-    1135: 'Mưa nhỏ',
-    1139: 'Mưa nhẹ',
-    1147: 'Sương mù dày',
-    1150: 'Mưa nhỏ và sương mù',
-    1153: 'Mưa nhỏ và sương mù',
-    1168: 'Mưa nhẹ và băng giá',
-    1171: 'Mưa nhẹ và băng giá',
-    1180: 'Mưa rào và sương mù',
-    1183: 'Mưa rào nhẹ',
-    1186: 'Mưa rào nhẹ và sương mù',
-    1189: 'Mưa rào',
-    1192: 'Mưa rào lớn',
-    1194: 'Mưa rào lớn và gió mạnh',
-    1195: 'Mưa rào lớn và sấm sét',
-    1198: 'Mưa tuyết',
-    1199: 'Mưa tuyết dày',
-    1200: 'Tuyết nhẹ',
-    1201: 'Tuyết dày',
-    1204: 'Tuyết và mưa rào nhẹ',
-    1207: 'Tuyết và sương mù',
-    1210: 'Tuyết rơi',
-    1213: 'Tuyết rơi nhẹ',
-    1216: 'Tuyết rơi dày',
-    1219: 'Tuyết và sương mù',
-    1222: 'Bão tuyết',
-    1225: 'Bão tuyết và gió mạnh',
-    1230: 'Tuyết và mưa rào',
-    1233: 'Bão tuyết và sương mù',
-    1234: 'Bão tuyết dày'
+    'clear-day': 'Trời quang đãng',
+    'clear-night': 'Trời quang đãng',
+    'partly-cloudy-day': 'Có mây',
+    'partly-cloudy-night': 'Có mây',
+    'cloudy': 'Trời nhiều mây',
+    'rain': 'Mưa rào',
+    'sleet': 'Mưa tuyết',
+    'snow': 'Tuyết rơi',
+    'wind': 'Gió',
+    'fog': 'Sương mù',
+    'hail': 'Mưa đá',
+    'thunderstorm': 'Bão tố'
 };
 
 async function fetchWeather(latitude, longitude) {
-    const location = `${latitude},${longitude}`;
-    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`);
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitude},${longitude}?unitGroup=metric&key=${apiKey}&contentType=json`);
     const data = await response.json();
 
-    // Xử lý thông tin điều kiện thời tiết
-    const conditionCode = data.current.condition.code;
-    const conditionText = weatherConditionMap[conditionCode] || data.current.condition.text;
-    const conditionIcon = data.current.condition.icon;
 
-    document.getElementById('location').innerHTML = `<i class="fa-solid fa-location-arrow"></i> ${data.location.name}, ${data.location.region}, ${data.location.country} `;
-    document.getElementById('temperature').innerHTML = `<i class="fa-solid fa-temperature-three-quarters"></i> ${data.current.temp_c}°C`;
-    document.getElementById('rain_chance').innerHTML = `<i class="fa-solid fa-cloud-rain"></i> ${data.current.precip_mm} mm`;
-    document.getElementById('uv_index').innerHTML = `<i class="fa-solid fa-sun"></i> UV: ${data.current.uv}`;
+    
+    // Xử lý thông tin điều kiện thời tiết
+    const currentConditions = data.currentConditions;
+    const conditionCode = currentConditions.icon;
+    const conditionText = weatherConditionMap[conditionCode] || currentConditions.conditions;
+    const conditionIcon = `/DATA/Weather/${conditionCode}.svg`;
+
+    
+    document.getElementById('temperature').innerHTML = `${currentConditions.temp.toFixed(0)}°C`;
+    document.getElementById('rain_chance').innerHTML = `<i class="fa-solid fa-cloud-rain"></i> ${currentConditions.precip !== null ? currentConditions.precip.toFixed(1) : 0} mm`;
+    document.getElementById('uv_index').innerHTML = `<i class="fa-solid fa-sun"></i> UV: ${currentConditions.uvindex}`;
 
     // Chuyển đổi gió hướng sang định dạng thuần Việt
-    const windDir = data.current.wind_dir;
+    const windDir = currentConditions.winddir;
     const windDirection = windDirectionMap[windDir] || windDir;
-    document.getElementById('wind_direction').innerHTML = `<i class="fa-solid fa-wind"></i> ${windDirection} với tốc độ ${data.current.wind_kph} km/h`;
+    document.getElementById('wind_direction').innerHTML = `<i class="fa-solid fa-wind"></i> ${windDirection} ${currentConditions.windspeed.toFixed(1)} km/h`;
+    
+    reverseGeocodeNominatim(latitude, longitude).then(address => {
+        document.getElementById('location').innerHTML = address;
+        document.getElementById('weather').innerHTML = `<p> ${address} <i class="fa-solid fa-location-arrow"></i></p>
+        <h1>${currentConditions.temp.toFixed(0)}°C</h1>
+      `;
+    }).catch(error => {
+        console.error(error);
+    });
+    
+   
 
-    document.getElementById('weather').innerHTML = `<p> ${data.location.name} <i class="fa-solid fa-location-arrow"></i></p>
-      <h1>${data.current.temp_c.toFixed(0)}°C</h1>
-    `
     // Hiển thị thông tin điều kiện thời tiết
-    document.getElementById('condition').innerHTML = `
-        <div>Điều kiện thời tiết: ${conditionText}</div>
+    document.getElementById('condition').innerHTML = `<p>${conditionText}</p>
         <img src="${conditionIcon}" alt="${conditionText}" />
     `;
+
+    // Hiển thị cảnh báo UV nếu chỉ số UV cao
+    const uvIndex = currentConditions.uvindex;
+    const uvWarningDiv = document.getElementById('uv_warning');
+    const uvWarningText = document.getElementById('uv_warning_text');
+    let uvWarningMessage = '';
+    let uvWarningColor = '';
+
+    if (uvIndex <= 2) {
+        uvWarningMessage = 'UV Thấp: Thích hợp tắm nắng';
+        uvWarningColor = '#8fc900';
+    } else if (uvIndex <= 5) {
+        uvWarningMessage = 'UV Trung Bình: Cần che da';
+        uvWarningColor = '#fb0';
+    } else if (uvIndex <= 7) {
+        uvWarningMessage = 'UV Cao: Hạn chế ra ngoài trời';
+        uvWarningColor = '#ff8a00';
+    } else if (uvIndex <= 10) {
+        uvWarningMessage = 'UV Rất cao: Không nên ra ngoài trời';
+        uvWarningColor = '#ff3d00';
+    } else {
+        uvWarningMessage = 'UV Gắt: Rất có hại';
+        uvWarningColor = 'purple';
+    }
+
+    if (uvWarningMessage) {
+        uvWarningDiv.style.display = 'block';
+        uvWarningDiv.style.backgroundColor = uvWarningColor;
+        uvWarningText.innerHTML = uvWarningMessage;
+    } else {
+        uvWarningDiv.style.display = 'none';
+    }
 }
+
+async function reverseGeocodeNominatim(latitude, longitude) {
+    try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+        const data = await response.json();
+        console.log(data);
+        
+        let address = '';
+
+        if (data.address) {
+            if (data.address.village !== undefined) {
+                const originalSuburb = data.address.village || '';  // Đảm bảo có giá trị mặc định
+                const formattedSuburb = originalSuburb.replace(/^Xã\s/, 'X.');
+                address = formattedSuburb;
+            } else {
+                const originalSuburb = data.address.suburb || '';  // Đảm bảo có giá trị mặc định
+                const formattedSuburb = originalSuburb.replace(/^Phường\s/, 'P.');
+                address = formattedSuburb;
+            }
+            
+            return address.trim();
+        } else {
+            throw new Error('Không thể tìm thấy địa điểm.');
+        }
+    } catch (error) {
+        console.error('Lỗi khi tìm địa điểm:', error);
+        throw error;  // Ném lỗi để xử lý ở nơi gọi hàm
+    }
+}
+
+
+
 async function getWeatherByIP() {
     try {
-        // Thay YOUR_TOKEN bằng token API của bạn từ ipinfo.io
         const ipResponse = await fetch('https://ipinfo.io/json?token=8c35ace05458e6');
         const ipData = await ipResponse.json();
-
-        // Xuất thêm thông tin về IP và tổ chức
+         
         document.getElementById('ip').innerText = `IP: ${ipData.ip}`;
-        document.getElementById('organization').innerText = `Tổ chức: ${ipData.org}`;
+        document.getElementById('organization').innerText = `Nhà mạng: ${ipData.org}`;
 
         if (ipData.loc) {
             const [latitude, longitude] = ipData.loc.split(',');
@@ -113,7 +156,6 @@ async function getWeatherByIP() {
         console.error('Lỗi khi lấy thông tin từ IP:', error);
     }
 }
-
 
 function getWeatherByGeolocation() {
     if (navigator.geolocation) {
@@ -128,30 +170,47 @@ function getWeatherByGeolocation() {
         alert('Trình duyệt của bạn không hỗ trợ định vị địa lý.');
     }
 }
+async function geocodeAddress(address) {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
+    const data = await response.json();
 
-function getWeatherByManual() {
+    if (data.length > 0) {
+        const location = data[0];
+        return {
+            latitude: location.lat,
+            longitude: location.lon
+        };
+        
+    } else {
+        throw new Error('Không tìm thấy địa điểm.');
+    }
+  
+}
+
+async function getWeatherByManual() {
     const manualLocation = document.getElementById('manualLocation').value;
     if (manualLocation) {
-        fetchWeather(manualLocation);
+        try {
+            const { latitude, longitude } = await geocodeAddress(manualLocation);
+            fetchWeather(latitude, longitude);
+        } catch (error) {
+            alert(error.message);
+        }
     } else {
         alert('Vui lòng nhập địa điểm.');
     }
 }
 
-getWeatherByIP();
-
 function weatherAll() {
     var weatherAll = document.getElementById("weatherAll");
 
     if (weatherAll.style.display === "block") {
-        // Thêm lớp fadeOut để làm mờ và ẩn phần tử
         weatherAll.classList.add('animate__fadeOutUp');
         weatherAll.addEventListener('animationend', function() {
             weatherAll.style.display = 'none';
             weatherAll.classList.remove('animate__fadeOutUp');
         }, { once: true });
     } else {
-        // Đặt display là block trước khi thêm lớp fadeIn
         weatherAll.style.display = 'block';
         weatherAll.classList.add('animate__fadeInDown');
         weatherAll.addEventListener('animationend', function() {
