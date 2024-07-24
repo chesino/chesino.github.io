@@ -370,7 +370,7 @@ async function changerAvatar() {
             img.onload = function () {
                 document.getElementById('avatar').src = avatarUrl;
                 localStorage.setItem('avatarUrl', avatarUrl); // Save the URL to local storage
-                Swal.fire('Thành công!','Đã đổi anh đại diện thành công','success');
+                Swal.fire('Thành công!', 'Đã đổi anh đại diện thành công', 'success');
             };
             img.onerror = function () {
                 Swal.fire('Lỗi', 'Không thể nhận diện ID hoặc URL', 'error');
@@ -391,12 +391,14 @@ function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
-  }
+}
+
+

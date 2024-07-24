@@ -193,7 +193,9 @@ input:focus {
 .infoDevice {
     font-size: 12px;
 }
-
+button {
+    cursor: pointer;
+}
 main {
     padding: 10px 20px;
 }
@@ -225,6 +227,7 @@ main .list {
 }
 
 main .list .item {
+    cursor: pointer;
     grid-template-columns: 100px auto;
     font-size: 16px;
     font-weight: bold;
@@ -248,24 +251,28 @@ main .list .item .icon img {
     height: 100%;
     width: 100%;
 }
-
 main .list .item:nth-child(1) {
-    color: #ffda8f;
+    background-color: #ffee58;
+    color: #000;
 }
 
 main .list .item:nth-child(2) {
-    color: #08b7fc;
+    color: #ffda8f;
 }
 
 main .list .item:nth-child(3) {
-    color: #1877f2;
+    color: #08b7fc;
 }
 
 main .list .item:nth-child(4) {
-    color: rgb(87, 87, 87);
+    color: #1877f2;
 }
 
 main .list .item:nth-child(5) {
+    color: rgb(87, 87, 87);
+}
+
+main .list .item:nth-child(6) {
     color: red;
 }
 
