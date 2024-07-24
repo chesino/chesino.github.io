@@ -325,3 +325,78 @@ list.addEventListener('mousemove', (e) => {
     const walk = (x - startX) * 2; // Tốc độ kéo
     list.scrollLeft = scrollLeft - walk;
 });
+
+
+// Function to load the avatar from local storage
+function loadAvatar() {
+    const storedAvatarUrl = localStorage.getItem('avatarUrl');
+    if (storedAvatarUrl) {
+        document.getElementById('avatar').src = storedAvatarUrl;
+    }
+}
+
+// Function to load the avatar from local storage
+function loadAvatar() {
+    const storedAvatarUrl = localStorage.getItem('avatarUrl');
+    if (storedAvatarUrl) {
+        document.getElementById('avatar').src = storedAvatarUrl;
+    }
+}
+
+// Function to extract user ID from Facebook profile URL
+function extractUserId(url) {
+    const regex = /(?:id=|\/)(\d+)/;
+    const matches = url.match(regex);
+    return matches ? matches[1] : url;
+}
+
+// Function to change the avatar
+async function changerAvatar() {
+    const { value: text } = await Swal.fire({
+        input: 'text',
+        inputLabel: 'ID hoặc URL ',
+        inputPlaceholder: 'Nhập ID hoặc URL Facebook',
+        showCancelButton: true,
+        cancelButtonText: 'Huỷ',
+        confirmButtonText: 'Xác nhận'
+    });
+
+    if (text) {
+        const userIdOrUrl = extractUserId(text);
+        try {
+            const avatarUrl = `https://graph.facebook.com/${userIdOrUrl}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+            // Preload the image to check if it's a valid URL
+            const img = new Image();
+            img.onload = function () {
+                document.getElementById('avatar').src = avatarUrl;
+                localStorage.setItem('avatarUrl', avatarUrl); // Save the URL to local storage
+                Swal.fire('Thành công!','Đã đổi anh đại diện thành công','success');
+            };
+            img.onerror = function () {
+                Swal.fire('Lỗi', 'Không thể nhận diện ID hoặc URL', 'error');
+            };
+            img.src = avatarUrl;
+        } catch (error) {
+            Swal.fire('Lỗi', 'Lỗi không xác định.', 'error');
+        }
+    }
+}
+
+// Load the avatar when the page loads
+window.onload = loadAvatar;
+
+
+
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
