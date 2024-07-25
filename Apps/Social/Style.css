@@ -193,9 +193,11 @@ input:focus {
 .infoDevice {
     font-size: 12px;
 }
+
 button {
     cursor: pointer;
 }
+
 main {
     padding: 10px 20px;
 }
@@ -238,7 +240,7 @@ main .list .item {
     gap: 5px;
     border: none;
     border-radius: 10px;
-    background-color: #000;
+    background-color: #272727;
     color: #fff;
 }
 
@@ -251,13 +253,16 @@ main .list .item .icon img {
     height: 100%;
     width: 100%;
 }
+
 main .list .item:nth-child(1) {
     background-color: #ffee58;
     color: #000;
 }
+
 main .list .item:nth-child(2) {
     color: #ffaa00;
 }
+
 main .list .item:nth-child(3) {
     color: #ffaa64;
 }
@@ -283,9 +288,15 @@ main .list::-webkit-scrollbar {
 .tabcontent {
     display: none;
 }
+
 .tabcontent.show {
     display: block;
-} 
+}
+
+.tablinks.active {
+    background-color: #000000 !important;
+}
+
 .mainCard {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -308,32 +319,38 @@ main .list::-webkit-scrollbar {
     border-radius: 18px;
     overflow: hidden;
 }
-.mainCard .Card .image img{
-   display: block;
+
+.mainCard .Card .image img {
+    display: block;
 }
 
 .mainCard .Card .product {
     margin-top: 5px;
-    padding: 0 8px ;
+    padding: 0 8px;
 }
+
 .mainCard .Card .product .name {
     font-size: 16px;
 }
+
 .mainCard .Card .product .description {
     font-size: 12px;
     color: #949494;
 }
+
 .mainCard .Card .buy .price {
     font-size: 18px;
     font-weight: bold;
     margin-top: 10px;
 }
+
 .mainCard .Card .buy .priceroot {
     color: #eee;
     font-weight: lighter;
     font-size: 12px;
     text-decoration: line-through;
 }
+
 .mainCard .Card .buy {
     display: grid;
     grid-template-columns: auto 35px;
@@ -342,7 +359,8 @@ main .list::-webkit-scrollbar {
     padding: 0 8px;
     margin: 6px 0;
 }
-.mainCard .Card .buy button{
+
+.mainCard .Card .buy button {
     height: 35px;
     width: 35px;
     display: flex;
@@ -354,15 +372,21 @@ main .list::-webkit-scrollbar {
     font-size: 18px;
     border-radius: 8px;
     border: none;
-} 
+}
+
 .Card.Priority {
     color: #F9D342 !important;
     background-color: #2c210c !important;
+    background: rgb(249,211,66);
+background: linear-gradient(180deg, rgba(249,211,66,1) 0%, rgba(152,115,44,1) 20%, rgba(44,33,12,1) 100%);
 }
+
 .Card.Priority button {
     background-color: #F9D342 !important;
     color: #2c210c !important;
+    
 }
+
 .Card.Priority .image {
     border: 2px solid #F9D342 !important;
 }
@@ -371,10 +395,12 @@ main .list::-webkit-scrollbar {
     color: #fff !important;
     background-color: #156180 !important;
 }
+
 .Card.Diamond button {
     background-color: #00eeff !important;
     color: #000 !important;
 }
+
 .Card.Diamond .image {
     border: 2px solid #00eeff !important;
 }
@@ -383,24 +409,29 @@ main .list::-webkit-scrollbar {
     color: #fff !important;
     background-color: #454545 !important;
 }
+
 .Card.Platinum button {
     background-color: #9c9c9c !important;
     color: #fff !important;
 }
+
 .Card.Platinum .image {
     border: 2px solid #fff !important;
 }
+
 .Card.Ultimate {
     color: #fff !important;
     background-color: #000 !important;
-    background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(43,43,43,1) 25%, rgba(0,0,0,1) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(43, 43, 43, 1) 30%, rgba(0, 0, 0, 1) 100%);
 
 }
+
 .Card.Ultimate button {
     background-color: #fff !important;
     color: #000 !important;
 }
+
 .Card.Ultimate .image {
     border: 2px solid #fff !important;
 }
