@@ -39,7 +39,6 @@
       <img id="avatar" src="/DATA/logo.png" alt="avatar">
     </div>
     <div class="welcome">
-      Chào buổi tối
     </div>
     <div class="weather" id="weather" onclick="weatherAll()">
       <h1><i class="fa-solid fa-cloud"></i></h1>
@@ -78,7 +77,7 @@
       <img src="/DATA/IMG/Social.png" alt="" srcset="">
     </div>
     <div class="list tab">
-      <button class="item tablinks" >
+      <button class="item tablinks" onclick="Fail('Hiện tại chưa có ưu đãi nào 😓')">
         <div class="icon">
           <img src="/DATA/Icon/new.png" alt="" srcset="">
         </div>
@@ -86,12 +85,22 @@
           Ưu đãi
         </div>
       </button>
+
       <button class="item tablinks" onclick="openTab(event, 'Packs')">
         <div class="icon">
           <img src="/DATA/Icon/flash-card.png" alt="" srcset="">
         </div>
         <div class="label">
           Gói
+        </div>
+      </button>
+
+      <button class="item tablinks" onclick="Fail('Bạn không phải thành viên đặc biệt','Yêu cầu hạng thành viên từ bạch kim trở lên.')">
+        <div class="icon">
+          <img src="/DATA/Icon/diamond.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Đặc biệt
         </div>
       </button>
 
@@ -156,19 +165,38 @@
           </div>
         </div>
 
+        <div class="Card Platinum">
+          <div class="image">
+            <img src="/DATA/logo.png" alt="1">
+          </div>
+
+          <div class="product">
+            <h1 class="name">Gói Platinum 1T</h1>
+            <p class="description">1000 Follow, 1000 Like, Thành viên Bạch kim</p>
+          </div>
+          <div class="buy">
+            <p class="price">
+              <span class="priceroot">85.000đ</span>
+              69.000đ</p>
+            <button onclick="Warning('Đang cập nhật')">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+
         <div class="Card Diamond">
           <div class="image">
             <img src="/DATA/logo.png" alt="1">
           </div>
 
           <div class="product">
-            <h1 class="name">Gói Kim Cương</h1>
-            <p class="description">1000 Follow, 1000 Like</p>
+            <h1 class="name">Gói Diamond 1T</h1>
+            <p class="description">5000 Follow, 5000 Like, Thành viên Kim Cương</p>
           </div>
           <div class="buy">
             <p class="price">
-              <span class="priceroot">55.000đ</span>
-              50.000đ</p>
+              <span class="priceroot">299.000đ</span>
+              199.000đ</p>
             <button onclick="Warning('Đang cập nhật')">
               <i class="fa-solid fa-plus"></i>
             </button>
@@ -181,15 +209,35 @@
           </div>
 
           <div class="product">
-            <h1 class="name">Gói Priority</h1>
-            <p class="description">10.000 Follow, 10.000 Like</p>
+            <h1 class="name">Gói Priority 1T</h1>
+            <p class="description">10.000 Follow, 10.000 Like, Thành viên Priority</p>
           </div>
           <div class="buy">
             <p class="price">
-              <span class="priceroot">480.000đ</span>
-              450.000đ
+              <span class="priceroot">1.480.000đ</span>
+              999.999đ
             </p>
             <button onclick="Warning('Đang cập nhật')">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="Card Ultimate">
+          <div class="image">
+            <img src="/DATA/logo.png" alt="1">
+          </div>
+
+          <div class="product">
+            <h1 class="name">Gói Ultimate</h1>
+            <p class="description">∞ Follow, ∞ Like, Thành viên Tối Thượng</p>
+          </div>
+          <div class="buy">
+            <p class="price">
+              <span class="priceroot">10.000.000đ</span>
+              9.999.999đ
+            </p>
+            <button onclick="Warning('Gói này đã hết')">
               <i class="fa-solid fa-plus"></i>
             </button>
           </div>

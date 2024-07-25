@@ -146,7 +146,6 @@ async function reverseGeocodeNominatim(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
         const data = await response.json();
-        console.log(data);
         // Khởi tạo giá trị mặc định cho address và addressFull
         let address = '';
         let addressFull = '';
@@ -370,7 +369,7 @@ async function changerAvatar() {
             img.onload = function () {
                 document.getElementById('avatar').src = avatarUrl;
                 localStorage.setItem('avatarUrl', avatarUrl); // Save the URL to local storage
-                Swal.fire('Thành công!', 'Đăng nhập thành công', 'success');
+                Swal.fire('Thành công!', 'Đã đổi anh đại diện thành công', 'success');
             };
             img.onerror = function () {
                 Swal.fire('Lỗi', 'Không thể nhận diện ID hoặc URL', 'error');
@@ -384,6 +383,7 @@ async function changerAvatar() {
 
 // Load the avatar when the page loads
 window.onload = loadAvatar;
+
 
 
 
