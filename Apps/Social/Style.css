@@ -23,7 +23,7 @@
 
 body {
     font-family: BeFont;
-    background-color: #111;
+    background-color: #181a1b;
     color: #eee;
 }
 
@@ -122,7 +122,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     align-items: center;
     height: 70px;
     padding: 0 20px;
-    background-color: #181a1b;
+    background-color: #111;
     z-index: 2;
 }
 
