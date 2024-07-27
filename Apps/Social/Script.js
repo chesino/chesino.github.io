@@ -1,13 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Kiểm tra xem có vị trí lưu trong Local Storage không
-    const storedLocation = localStorage.getItem('location');
-    if (storedLocation) {
-        const [latitude, longitude] = storedLocation.split(',');
-        fetchWeather(latitude, longitude);
-    } else {
-        getCurrentLocation();
+    // Kiểm tra trạng thái tính năng từ Local Storage
+    const isLocationEnabled = localStorage.getItem('locationEnabled') === 'true';
+
+    const button = document.getElementById('toggle-location');
+    updateButton(button, isLocationEnabled);
+
+    if (isLocationEnabled) {
+        // Kiểm tra xem có vị trí lưu trong Local Storage không
+        const storedLocation = localStorage.getItem('location');
+        if (storedLocation) {
+            const [latitude, longitude] = storedLocation.split(',');
+            fetchWeather(latitude, longitude);
+        } else {
+            getCurrentLocation();
+        }
     }
+
+    button.addEventListener('click', () => {
+        const currentState = localStorage.getItem('locationEnabled') === 'true';
+        localStorage.setItem('locationEnabled', !currentState);
+
+        updateButton(button, !currentState);
+        if (currentState === false) {
+            Done('Đã mở', 'Đã mở tính năng tự động cập nhật thời tiết');
+        } else {
+            Done('Đã tắt', 'Đã tắt tính năng tự động cập nhật thời tiết');
+        }
+    });
 });
+
+function updateButton(button, isEnabled) {
+    if (isEnabled) {
+        button.innerHTML = '<i class="fa-solid fa-location-dot"></i>';
+    } else {
+        button.innerHTML = '<i class="fa-solid fa-location-pin-lock"></i>';
+    }
+}
 
 function getCurrentLocation() {
     if (navigator.geolocation) {
@@ -15,6 +43,7 @@ function getCurrentLocation() {
             position => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
+                localStorage.setItem('location', `${lat},${lon}`);
                 fetchWeather(lat, lon);
             },
             () => {
@@ -27,6 +56,8 @@ function getCurrentLocation() {
         getWeatherByIP();
     }
 }
+
+
 
 const apiKey = 'KZH7P9GUL9SBMVQ5MV4WDF23L'; // Thay thế bằng API Key của bạn
 
@@ -106,8 +137,7 @@ async function fetchWeather(latitude, longitude) {
 
 
     // Hiển thị thông tin điều kiện thời tiết
-    document.getElementById('condition').innerHTML = `<p>${conditionText}</p>
-        <img src="${conditionIcon}" alt="${conditionText}" />
+    document.getElementById('condition').innerHTML = `<img src="${conditionIcon}" alt="${conditionText}" /><h5>${conditionText}</h5>
     `;
 
     // Hiển thị cảnh báo UV nếu chỉ số UV cao
@@ -293,6 +323,23 @@ function Info(T1, T2) {
         'info'
     )
 }
+function DoneSignIn(T1) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: T1
+    });
+}
 
 const list = document.querySelector('.list');
 
@@ -326,67 +373,6 @@ list.addEventListener('mousemove', (e) => {
 });
 
 
-// Function to load the avatar from local storage
-function loadAvatar() {
-    const storedAvatarUrl = localStorage.getItem('avatarUrl');
-    if (storedAvatarUrl) {
-        document.getElementById('avatar').src = storedAvatarUrl;
-    }
-}
-
-// Function to load the avatar from local storage
-function loadAvatar() {
-    const storedAvatarUrl = localStorage.getItem('avatarUrl');
-    if (storedAvatarUrl) {
-        document.getElementById('avatar').src = storedAvatarUrl;
-    }
-}
-
-// Function to extract user ID from Facebook profile URL
-function extractUserId(url) {
-    const regex = /(?:id=|\/)(\d+)/;
-    const matches = url.match(regex);
-    return matches ? matches[1] : url;
-}
-
-// Function to change the avatar
-async function changerAvatar() {
-    const { value: text } = await Swal.fire({
-        input: 'text',
-        inputLabel: 'ID hoặc URL ',
-        inputPlaceholder: 'Nhập ID hoặc URL Facebook',
-        showCancelButton: true,
-        cancelButtonText: 'Huỷ',
-        confirmButtonText: 'Xác nhận'
-    });
-
-    if (text) {
-        const userIdOrUrl = extractUserId(text);
-        try {
-            const avatarUrl = `https://graph.facebook.com/${userIdOrUrl}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-            // Preload the image to check if it's a valid URL
-            const img = new Image();
-            img.onload = function () {
-                document.getElementById('avatar').src = avatarUrl;
-                localStorage.setItem('avatarUrl', avatarUrl); // Save the URL to local storage
-                Swal.fire('Thành công!', 'Đã đổi anh đại diện thành công', 'success');
-            };
-            img.onerror = function () {
-                Swal.fire('Lỗi', 'Không thể nhận diện ID hoặc URL', 'error');
-            };
-            img.src = avatarUrl;
-        } catch (error) {
-            Swal.fire('Lỗi', 'Lỗi không xác định.', 'error');
-        }
-    }
-}
-
-// Load the avatar when the page loads
-window.onload = loadAvatar;
-
-
-
-
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -402,3 +388,99 @@ function openTab(evt, tabName) {
 }
 
 
+
+function restoreUserInfo() {
+    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (storedUser) {
+        document.getElementById('avatar').src = storedUser.avatarUrl;
+        document.getElementById('username').textContent = storedUser.name;
+        document.getElementById('rank').textContent = storedUser.rank;
+    }
+}
+
+// Hàm kiểm tra và khôi phục thông tin từ local storage khi tải lại trang
+function restoreUserInfo() {
+    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (storedUser) {
+        document.getElementById('avatar').src = storedUser.avatarUrl;
+        document.getElementById('username').textContent = storedUser.name;
+        document.getElementById('rank').textContent = storedUser.rank;
+    }
+}
+
+function Login() {
+    Swal.fire({
+        title: 'Nhập ID Facebook:',
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Xác nhận',
+        showLoaderOnConfirm: true,
+        preConfirm: (userInput) => {
+            userInput = userInput.trim();
+            if (userInput) {
+                return fetch('./User.csv')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+                        return response.text();
+                    })
+                    .then(csvText => {
+                        let foundUser = null;
+                        Papa.parse(csvText, {
+                            header: true,
+                            skipEmptyLines: true,
+                            complete: function (results) {
+                                const users = results.data;
+                                for (let user of users) {
+                                    const uid = user.UID.trim();
+                                    const name = user.Name.trim();
+                                    const link = user.Link.trim();
+                                    let rank = user.Rank ? user.Rank.trim() : "";
+
+                                    if (!rank) {
+                                        rank = "Thành viên";
+                                    }
+
+                                    if (userInput === uid || userInput === link) {
+                                        const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+                                        foundUser = { uid, name, avatarUrl, rank };
+                                        break;
+                                    }
+
+                                }
+                            }
+
+                        });
+                        if (!foundUser) {
+                            throw new Error('Người dùng không tồn tại.');
+                        }
+                        return foundUser;
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(
+                            `Người dùng không tồn tại.`
+                        );
+                    });
+            }
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const user = result.value;
+            document.getElementById('avatar').src = user.avatarUrl;
+            document.getElementById('username').textContent = user.name;
+            document.getElementById('rank').textContent = user.rank;
+
+            // Lưu thông tin người dùng vào local storage
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            DoneSignIn('Đăng nhập thành công')
+        }
+    });
+}
+
+// Khôi phục thông tin người dùng khi tải lại trang
+window.onload = restoreUserInfo;

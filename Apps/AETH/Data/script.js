@@ -1,6 +1,6 @@
 window.onload = function () {
   const counter = document.getElementById('counter');
-  const targetNumber = 34846; // số mục tiêu mà bạn muốn đếm đến
+  const targetNumber = 36300; // số mục tiêu mà bạn muốn đếm đến
   const duration = 3000; // thời gian đếm (miliseconds)
 
   let currentNumber = 0;
@@ -22,7 +22,7 @@ window.onload = function () {
 };
 
 function UpdateTime() {
-  var timeUpdate = new Date('2024-07-24T00:00:00');
+  var timeUpdate = new Date('2024-07-28T00:00:00');
   var timeDifference = new Date() - timeUpdate;
   let UpdateTime = ''
   // Chuyển đổi chênh lệch thời gian từ milliseconds sang phút và ngày
