@@ -1,5 +1,5 @@
 // Tạo bản đồ và các lớp bản đồ
-var map = L.map('mapboxMap').setView([51.505, -0.09], 18); // Đặt mức zoom mặc định là 18
+var map = L.map('mapboxMap').setView([21.02745, 105.85485], 15); // Đặt mức zoom mặc định là 18
 
 var dark = L.tileLayer('https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=bJnZQVl8zwoZ2OblPXlr', {
     attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors',
@@ -61,7 +61,7 @@ function searchAddress() {
                         .bindPopup('Vị trí của bạn')
                         .openPopup();
 
-                    map.setView(coordinates, 20); // Đặt mức zoom là 18
+                    map.setView(coordinates, 18); // Đặt mức zoom là 18
                 } else {
                     alert('Không tìm thấy địa chỉ.');
                 }
@@ -94,7 +94,7 @@ function getCurrentLocation() {
                             .bindPopup('Vị trí hiện tại của bạn')
                             .openPopup();
 
-                        map.setView([lat, lng], 20);
+                        map.setView([lat, lng], 18);
                     }
                 })
                 .catch(error => {
