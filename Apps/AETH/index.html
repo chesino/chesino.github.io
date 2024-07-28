@@ -93,7 +93,7 @@
         </div>
 
         <div class="list tab">
-            <button class="item tablinks" onclick="openTab(event, 'ShareGo')">
+            <button class="item tablinks active" onclick="openTab(event, 'ShareGo')">
                 <div class="icon">
                     <img src="/DATA/Icon/new.png" alt="" srcset="">
                 </div>
@@ -102,7 +102,7 @@
                 </div>
             </button>
 
-            <button class="item tablinks active" onclick="openTab(event, 'AETH')">
+            <button id="tablinksAETH" class="item tablinks" onclick="openTab(event, 'AETH')">
                 <div class="icon">
                     <img src="/Apps/AETH/Data/frog.png" alt="" srcset="">
                 </div>
@@ -244,8 +244,9 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="./Data/script.js"></script>
 <script src="./Data/map.js"></script>
+<script src="./Data/script.js"></script>
+
 <script src="/DATA/SweetAlert2.js"></script>
 
 </html>

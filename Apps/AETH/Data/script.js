@@ -1,3 +1,114 @@
+
+// Hàm kiểm tra và khôi phục thông tin từ local storage khi tải lại trang
+function restoreUserInfo() {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+        try {
+            const user = JSON.parse(storedUser);
+            document.getElementById('avatar').src = user.avatarUrl;
+            document.getElementById('username').textContent = user.name;
+            document.getElementById('rank').textContent = user.rank;
+        } catch (error) {
+            console.error("Error parsing stored user data:", error);
+        }
+    } else {
+        console.log("No user info found in localStorage.");
+    }
+}
+
+function Login() {
+    Swal.fire({
+        title: 'Nhập ID Facebook:',
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Xác nhận',
+        showLoaderOnConfirm: true,
+        preConfirm: (userInput) => {
+            userInput = userInput.trim();
+            if (userInput) {
+                return fetch('/DATA/User.csv')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+                        return response.text();
+                    })
+                    .then(csvText => {
+                        let foundUser = null;
+                        Papa.parse(csvText, {
+                            header: true,
+                            skipEmptyLines: true,
+                            complete: function (results) {
+                                const users = results.data;
+                                for (let user of users) {
+                                    const uid = user.UID.trim();
+                                    const name = user.Name.trim();
+                                    const link = user.Link.trim();
+                                    let rank = user.Rank ? user.Rank.trim() : "";
+
+                                    if (!rank) {
+                                        rank = "Thành viên";
+                                    }
+
+                                    if (userInput === uid || userInput === link) {
+                                        const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+                                        foundUser = { uid, name, avatarUrl, rank };
+                                        break;
+                                    }
+                                }
+                            }
+                        });
+                        if (!foundUser) {
+                            throw new Error('Người dùng không tồn tại.');
+                        }
+                        return foundUser;
+                    })
+                    .catch(error => {
+                        Swal.showValidationMessage(
+                            `Người dùng không tồn tại.`
+                        );
+                    });
+            }
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const user = result.value;
+            document.getElementById('avatar').src = user.avatarUrl;
+            document.getElementById('username').textContent = user.name;
+            document.getElementById('rank').textContent = user.rank;
+
+            // Lưu thông tin người dùng vào local storage
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            var tablinksAETH = document.getElementById('tablinksAETH');
+            var idList = [
+                61552484927647,
+                100076640635944,
+                100015905130912,
+                100022625414871,
+                100037528999692
+            ];
+            
+            if (idList.includes(result.value.uid)) {
+                console.log('hi');
+                tablinksAETH.style.display = "flex";
+            }
+            
+
+            DoneSignIn('Đăng nhập thành công');
+        }
+
+    });
+}
+
+// Khôi phục thông tin người dùng khi tải lại trang
+window.onload = restoreUserInfo;
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // Kiểm tra trạng thái tính năng từ Local Storage
     const isLocationEnabled = localStorage.getItem('locationEnabled') === 'true';
@@ -386,113 +497,5 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-
-
-
-function restoreUserInfo() {
-    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (storedUser) {
-        document.getElementById('avatar').src = storedUser.avatarUrl;
-        document.getElementById('username').textContent = storedUser.name;
-        document.getElementById('rank').textContent = storedUser.rank;
-    }
-}
-
-// Hàm kiểm tra và khôi phục thông tin từ local storage khi tải lại trang
-function restoreUserInfo() {
-    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (storedUser) {
-        document.getElementById('avatar').src = storedUser.avatarUrl;
-        document.getElementById('username').textContent = storedUser.name;
-        document.getElementById('rank').textContent = storedUser.rank;
-    }
-}
-
-function Login() {
-    Swal.fire({
-        title: 'Nhập ID Facebook:',
-        input: 'text',
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Xác nhận',
-        showLoaderOnConfirm: true,
-        preConfirm: (userInput) => {
-            userInput = userInput.trim();
-            if (userInput) {
-                return fetch('/DATA/User.csv')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(csvText => {
-                        let foundUser = null;
-                        Papa.parse(csvText, {
-                            header: true,
-                            skipEmptyLines: true,
-                            complete: function (results) {
-                                const users = results.data;
-                                for (let user of users) {
-                                    const uid = user.UID.trim();
-                                    const name = user.Name.trim();
-                                    const link = user.Link.trim();
-                                    let rank = user.Rank ? user.Rank.trim() : "";
-
-                                    if (!rank) {
-                                        rank = "Thành viên";
-                                    }
-
-                                    
-                                    if (userInput === uid || userInput === link) {
-                                        if (userInput == 0) {
-                                            const avatarUrl = `/DATA/Logo.png`;
-                                            foundUser = { uid, name, avatarUrl, rank };
-                                            break;
-                                        } else {
-                                            const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-                                            foundUser = { uid, name, avatarUrl, rank };
-                                            break;
-                                        }
-                                      
-                                    }
-
-                                }
-                            }
-
-                        });
-                        if (!foundUser) {
-                            throw new Error('Người dùng không tồn tại.');
-                        }
-                        return foundUser;
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Người dùng không tồn tại.`
-                        );
-                    });
-            }
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const user = result.value;
-            document.getElementById('avatar').src = user.avatarUrl;
-            document.getElementById('username').textContent = user.name;
-            document.getElementById('rank').textContent = user.rank;
-
-            // Lưu thông tin người dùng vào local storage
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            DoneSignIn('Đăng nhập thành công')
-        }
-    });
-}
-
-// Khôi phục thông tin người dùng khi tải lại trang
-window.onload = restoreUserInfo;
-
-
 
 

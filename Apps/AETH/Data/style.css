@@ -347,6 +347,9 @@ main .list::-webkit-scrollbar {
 .tablinks.active {
     background-color: #000000 !important;
 }
+/* #tablinksAETH {
+    display: none;
+} */
 
 .mainCard {
     display: grid;
@@ -758,23 +761,21 @@ input[type='time'] {
 
 .historyContainer {
     background-color: var(--Primary2);
+    border-radius: 20px;
     padding: 10px;
 }
 
 .history-item {
-    border-radius: 10px;
+    border-radius: 20px;
     margin-top: 10px;
-}
-
-
-.history-item {
-    background-color: var(--Primary2);
+    background-color: #1b1b1b;
     border: 2px solid var(--Main);
-    border-radius: 5px;
     padding: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     position: relative;
 }
+
+
 
 .history-item .delete-btn {
     position: absolute;

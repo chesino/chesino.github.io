@@ -159,12 +159,12 @@ function saveToLocalStorage() {
 }
 
 // Hàm hiển thị lịch sử
-
+// Hàm hiển thị lịch sử
 function showHistory() {
     var historyContainer = document.getElementById('historyList');
     historyContainer.innerHTML = ''; // Xóa nội dung cũ của historyContainer trước khi cập nhật lịch sử mới
 
-    var history = JSON.parse(localStorage.getItem('history'));
+    var history = JSON.parse(localStorage.getItem('history')) || [];
 
     // Lặp qua mỗi mục trong lịch sử và tạo một div riêng cho nó
     history.forEach(function (entry, index) {
@@ -194,12 +194,35 @@ function showHistory() {
 
 // Hàm xóa một mục lịch sử
 function deleteHistoryItem(index) {
-    let history = JSON.parse(localStorage.getItem('history')) || [];
-    history.splice(index, 1);
-    localStorage.setItem('history', JSON.stringify(history));
-    showHistory();
+    Swal.fire({
+        title: 'Xác nhận xoá ?',
+        text: 'Nếu xác nhận mục này sẽ được xoá.',
+        icon: 'warning',
+
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xác nhận',
+        cancelButtonText: 'Huỷ'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire(
+                'Đã xoá thành công',
+                'Mục này đã bị xoá.',
+                'success',
+            ).then(() => {
+                const history = JSON.parse(localStorage.getItem('history')) || [];
+                history.splice(index, 1); // Xoá mục tại vị trí index
+                localStorage.setItem('history', JSON.stringify(history));
+                showHistory(); // Cập nhật hiển thị lịch sử sau khi xoá
+            });
+        }
+    })
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    showHistory();
+});
 // Hàm xóa toàn bộ lịch sử
 function deleteHistoryAllItem() {
     localStorage.removeItem('history');

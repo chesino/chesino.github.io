@@ -389,15 +389,6 @@ function openTab(evt, tabName) {
 
 
 
-function restoreUserInfo() {
-    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (storedUser) {
-        document.getElementById('avatar').src = storedUser.avatarUrl;
-        document.getElementById('username').textContent = storedUser.name;
-        document.getElementById('rank').textContent = storedUser.rank;
-    }
-}
-
 // Hàm kiểm tra và khôi phục thông tin từ local storage khi tải lại trang
 function restoreUserInfo() {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
