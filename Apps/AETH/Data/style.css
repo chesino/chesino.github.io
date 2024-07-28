@@ -121,7 +121,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     justify-content: space-between;
     align-items: center;
     padding: 6px 20px;
-    background-color: #121212;
+    background-color: #181a1b;
     z-index: 2;
 }
 
@@ -263,7 +263,7 @@ button {
 }
 
 main {
-    margin-top: 80px;
+    margin-top: 60px;
     padding: 10px 20px;
 }
 
