@@ -27,8 +27,10 @@ body {
     color: #eee;
 }
 
-.hide {
-    display: none !important;
+.hide,
+.tabAETH 
+.tabAETHMess {
+    display: none;
 }
 
 .forms-studio {
@@ -52,7 +54,7 @@ body {
 .swal2-success-circular-line-left,
 .swal2-success-circular-line-right,
 .swal2-icon.swal2-success .swal2-success-fix {
-    background-color: var(--Card) !important;
+    background-color: #1a1a1a !important;
 }
 
 .swal2-success-ring {
@@ -96,7 +98,7 @@ button[type=button].swal2-cancel {
     background: rgba(0, 0, 0, 0.884) !important;
 }
 
-body.swal2-toast-shown .swal2-container.swal2-top-end,
+body.swal2-toast-shown .swal2-container.swal2-bottom-end,
 body.swal2-toast-shown .swal2-container.swal2-top-right {
     background: none !important;
 }
@@ -347,9 +349,7 @@ main .list::-webkit-scrollbar {
 .tablinks.active {
     background-color: #000000 !important;
 }
-/* #tablinksAETH {
-    display: none;
-} */
+
 
 .mainCard {
     display: grid;
@@ -501,9 +501,9 @@ main .list::-webkit-scrollbar {
 .ShareGo .Head {
     position: absolute;
     top: 0;
-    padding: 0px 5px ;
-    z-index: 2;
-    background-color: var(--Primary);
+    padding: 2px 10px ;
+    z-index: 0;
+    background-color: #111;
     border-bottom-right-radius: 10px;
 }
 
@@ -551,7 +551,9 @@ main .list::-webkit-scrollbar {
     font-weight: bold;
     white-space: nowrap; /* Ngăn chặn xuống dòng */
 }
-
+.custom-select {
+    z-index: 0;
+}
 .Map {
     width: 100%;
     position: relative;
@@ -580,7 +582,7 @@ main .list::-webkit-scrollbar {
     position: absolute;
     bottom: 0;
     right: 0;
-    z-index: 2;
+    z-index: 0;
 }
 
 
@@ -848,14 +850,18 @@ input[type='time'] {
 .mess {
     text-align: center;
 }
-.mess .btn {
+.btn {
+    text-align: center;
     color: #fff;
     font-size: 18px;
     font-weight: bold;
     display: block;
     text-decoration: none;
-    background-color: #2d7aff;
-    border-radius: 20px;
+    background-color: #3d3d3d;
+    border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
+}
+.btn.mess {
+    background-color: #2d7aff;
 }

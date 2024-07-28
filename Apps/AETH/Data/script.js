@@ -8,6 +8,34 @@ function restoreUserInfo() {
             document.getElementById('avatar').src = user.avatarUrl;
             document.getElementById('username').textContent = user.name;
             document.getElementById('rank').textContent = user.rank;
+            CheckRank();
+        } catch (error) {
+            console.error("Error parsing stored user data:", error);
+        }
+    } else {
+        console.log("No user info found in localStorage.");
+    }
+}
+
+function CheckRank() {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+        try {
+            const user = JSON.parse(storedUser);
+
+            var tabAETH = document.getElementById('tabAETH');
+            var tabAETHMess = document.getElementById('tabAETHMess');
+
+            if (user.rank == 'Priority') {
+                tabAETH.style.display = "flex";
+                tabAETHMess.style.display = "none";
+            } else if (user.rank == 'AETH - Priority' || user.rank == 'Admin - Ultimate') {
+                tabAETH.style.display = "flex";
+                tabAETHMess.style.display = "flex";
+            } else {
+                tabAETH.style.display = "none";
+                tabAETHMess.style.display = "none";
+            }
         } catch (error) {
             console.error("Error parsing stored user data:", error);
         }
@@ -18,7 +46,7 @@ function restoreUserInfo() {
 
 function Login() {
     Swal.fire({
-        title: 'Nhập ID Facebook:',
+        title: 'Nhập Tên Facebook:',
         input: 'text',
         inputAttributes: {
             autocapitalize: 'off'
@@ -52,8 +80,8 @@ function Login() {
                                     if (!rank) {
                                         rank = "Thành viên";
                                     }
-
-                                    if (userInput === uid || userInput === link) {
+                                   
+                                    if (userInput === uid || userInput === name || userInput === link) {
                                         const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
                                         foundUser = { uid, name, avatarUrl, rank };
                                         break;
@@ -83,22 +111,8 @@ function Login() {
 
             // Lưu thông tin người dùng vào local storage
             localStorage.setItem('currentUser', JSON.stringify(user));
-            var tablinksAETH = document.getElementById('tablinksAETH');
-            var idList = [
-                61552484927647,
-                100076640635944,
-                100015905130912,
-                100022625414871,
-                100037528999692
-            ];
-            
-            if (idList.includes(result.value.uid)) {
-                console.log('hi');
-                tablinksAETH.style.display = "flex";
-            }
-            
-
             DoneSignIn('Đăng nhập thành công');
+            CheckRank();
         }
 
     });
@@ -123,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const [latitude, longitude] = storedLocation.split(',');
             fetchWeather(latitude, longitude);
         } else {
-            getCurrentLocation();
+            getCurrentLocationWeather();
         }
     }
 
@@ -148,7 +162,7 @@ function updateButton(button, isEnabled) {
     }
 }
 
-function getCurrentLocation() {
+function getCurrentLocationWeather() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             position => {
@@ -437,7 +451,7 @@ function Info(T1, T2) {
 function DoneSignIn(T1) {
     const Toast = Swal.mixin({
         toast: true,
-        position: "top-end",
+        position: "bottom-end",
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
