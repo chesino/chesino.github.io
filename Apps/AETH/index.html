@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
 
 <head>
     <!-- Tiêu đề trang -->
-    <title>AETH</title>
+    <title>Chesino</title>
 
     <!-- Bộ giải mã và phân loại thiết bị -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
     <!-- Đảm bảo đặt meta tag sau -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -24,41 +25,227 @@
     <meta property="og:image" content="/DATA/logo.png" />
 
     <!-- CSS của web -->
-    <link rel="stylesheet" href="./Data/style.css">
+    <link rel="stylesheet" href="./Data/style.css" />
     <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="/DATA/papaparse.min.js"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
-    <div class="head">
-        <div class="logo" onclick="PlayMusic()">
-            <img src="./Data/frog.png" alt="LOGO">
-            <audio id="myAudio2">
-                <source src="./Data/Music.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        <div class="Chat">
-            
-            <div class="MessengerCount">
-                <i class="fa-brands fa-facebook-messenger"></i>
-                <div id="counter">0</div>
-                <p><span id="UpdateTime"></span></p>
+    <header class="header">
+        <div class="head">
+            <div class="user">
+                <div class="avatar" onclick="Login()">
+                    <img id="avatar" src="/DATA/logo.png" alt="avatar">
+                </div>
+                <div class="infouser">
+                    <h1 id="username" class="username">Đinh Mạnh Hùng</h1>
+                    <p id="rank" class="rank">Thành viên Priority</p>
+                </div>
             </div>
-            
-            <!-- <div class="Alert">
-                <p>Web đang bảo trì</p>
-            </div> -->
-        </div>
-       
-    </div>
-   
 
-  
+            <div class="welcome">
+            </div>
+            <div class="weather" id="weather" onclick="weatherAll()">
+                <h1><i class="fa-solid fa-cloud"></i></h1>
+            </div>
+        </div>
+        <div class="weatherAll animate__animated" id="weatherAll">
+            <h1 id="location"></h1>
+            <div id="condition"></div>
+            <h1 id="temperature"></h1>
+            <div class="More">
+                <p id="rain_chance">Chưa có dữ liệu</p>
+                <div id="uv_index"></div>
+                <div id="wind_direction"></div>
+            </div>
+
+            <div id="uv_warning">
+                <i class="fa-solid fa-exclamation-triangle"></i> <span id="uv_warning_text"></span>
+            </div>
+
+            <div class="searchLocation">
+                <input type="text" id="manualLocation" placeholder="Nhập địa điểm">
+                <button onclick="getWeatherByManual()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button onclick="getWeatherByIP()">IP</button>
+                <button onclick="getWeatherByGeolocation()"><i class="fa-solid fa-location-arrow"></i></button>
+                <button id="toggle-location"><i class="fa-solid fa-location-pin-lock"></i></button>
+
+            </div>
+            <div class="infoDevice">
+                <div id="ip"></div>
+                <div id="organization"></div>
+            </div>
+
+
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="banner">
+            <img src="./Data/wallpaper.jpg" alt="" srcset="">
+        </div>
+
+        <div class="list tab">
+            <button class="item tablinks" onclick="openTab(event, 'ShareGo')">
+                <div class="icon">
+                    <img src="/DATA/Icon/new.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    Share & GO
+                </div>
+            </button>
+
+            <button class="item tablinks active" onclick="openTab(event, 'AETH')">
+                <div class="icon">
+                    <img src="/Apps/AETH/Data/frog.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    AE Cloud
+                </div>
+            </button>
+
+            <button class="item tablinks active" onclick="openTab(event, 'Mess')">
+                <div class="icon">
+                    <img src="/DATA/Icon/messenger.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    Thông tin Box Chat
+                </div>
+            </button>
+
+            <button class="item">Sắp ra mắt</button>
+
+        </div>
+
+        <div class="content">
+            <div class="tabcontent ShareGo show" id="ShareGo">
+                <div class="GridShareGO">
+                    <div class="Map">
+                        <div class="map-container" id="mapboxMap"></div>
+                        <div class="custom-select">
+                            <select id="mapType" onchange="changeMapType()">
+                                <option selected value="streets-v2-dark">Tối</option>
+                                <option value="basic-v2">Sáng</option>
+                                <option value="satellite">Vệ tinh</option>
+                            </select>
+                        </div>
+                        <div class="Head">
+                            <h1>Share<span>n</span>GO</h1>
+                        </div>
+                    </div>
+
+                    <div class="Form">
+                        <div class="Input">
+                            <label for="placeName">Tên địa điểm <span>bắt buộc</span></label>
+                            <input type="text" id="placeName">
+                        </div>
+
+                        <div class="Flex">
+                            <div class="Input">
+                                <label for="address">Địa chỉ <span>không bắt buộc</span></label>
+                                <input type="text" id="address">
+                            </div>
+
+                            <button onclick="searchAddress()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button onclick="Google()"><i class="fa-brands fa-google"></i></button>
+                            <button onclick="getCurrentLocation()"><i
+                                    class="fa-solid fa-location-crosshairs"></i></button>
+                        </div>
+                        <div class="Input People">
+                            <label for="numberOfPeople">Số người <span>bắt buộc</span></label>
+                            <div class="Flex">
+                                <input type="text" id="numberOfPeople" pattern="[0-9]*">
+                                <button id="6People"><i class="fa-solid fa-6"></i></button>
+                                <button id="minusButton"><i class="fa-solid fa-user-minus"></i></button>
+                                <button id="plusButton"><i class="fa-solid fa-user-plus"></i></button>
+                            </div>
+
+                        </div>
+                        <div class="Input">
+                            <label for="price">Giá <span>bắt buộc</span></label>
+                            <input type="text" class="inputFM" id="price" pattern="[0-9]*">
+                        </div>
+                        <div class="Flex">
+                            <div class="Input">
+                                <label for="time">Thời gian <span>không bắt buộc</span></label>
+                                <input type="time" id="time">
+                            </div>
+                            <div class="Input">
+                                <label for="date">Ngày <span>bắt buộc</span></label>
+                                <input type="date" id="date">
+                            </div>
+                        </div>
+
+                        <div class="Input">
+                            <label for="rating">Đánh Giá <span>Nếu không đánh giá sẽ là 0 sao</span></label>
+                            <ul class="ratings">
+                                <li class="star" data-rating="5"></li>
+                                <li class="star" data-rating="4"></li>
+                                <li class="star" data-rating="3"></li>
+                                <li class="star" data-rating="2"></li>
+                                <li class="star" data-rating="1"></li>
+                            </ul>
+
+                        </div>
+                        <div class="Input">
+                            <label for="note">Ghi chú <span>không bắt buộc</span></label>
+                            <textarea name="note" id="note" cols="30" rows="10"></textarea>
+                        </div>
+                        <button class="Confirm" onclick="saveToLocalStorage()">Xác nhận</button>
+
+
+                    </div>
+
+                    <div class="historyContainer" id="historyContainer">
+                        <h2>Lịch sử</h2>
+                        <button id="exportToExcel" onclick="exportToExcel()">Xuất Excel <i
+                                class="fa-solid fa-file-excel"></i></button>
+                        <button onclick="exportToTxt()">Xuất TXT <i class="fa-solid fa-file-lines"></i></button>
+                        <button onclick="deleteHistoryAllItem()">Xoá toàn bộ <i class="fa-solid fa-trash"></i></button>
+                        <ul id="historyList"></ul>
+                    </div>
+                </div>
+
+
+
+                <!-- Include SheetJS library -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+
+            </div>
+            <div id="AETH" class="tabcontent">
+                <div class='forms-studio'><iframe
+                        src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
+                </div>
+            </div>
+            <div id="Mess" class="tabcontent mess">
+                <h1>59724</h1>
+                <p>16:00:00 28/07/2024</p>
+                <h2>Khởi tạo: 25/05/2022</h2>
+                
+                <a class="btn" href="http://m.me/6329141997112579" target="_blank" rel="noopener noreferrer">Mở trong Messenger</a>
+            </div>
+        </div>
+
+
+
+
+
+    </main>
+
+
+
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="./Data/script.js"></script>
+<script src="./Data/map.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
+
 </html>
