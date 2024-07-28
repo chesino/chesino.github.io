@@ -91,7 +91,7 @@ function getCurrentLocation() {
                         }
 
                         currentMarker = L.marker([lat, lng]).addTo(map)
-                            .bindPopup('Vị trí hiện tại của bạn')
+                            .bindPopup('Bạn đang ở đây')
                             .openPopup();
 
                         map.setView([lat, lng], 18);
@@ -104,7 +104,7 @@ function getCurrentLocation() {
             console.error('Lỗi khi lấy vị trí hiện tại:', error);
         });
     } else {
-        alert('Trình duyệt của bạn không hỗ trợ Geolocation.');
+        Warning('Trình duyệt của bạn không hỗ trợ Geolocation.');
     }
 }
 
@@ -115,7 +115,7 @@ function Google() {
         const lng = currentMarker.getLatLng().lng;
         window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
     } else {
-        alert('Không có vị trí hiện tại.');
+        Warning('Không có vị trí hiện tại.');
     }
 }
 
@@ -269,7 +269,7 @@ function adjustNumberOfPeople(operation) {
     } else if (operation === 'plus') {
         currentValue += 1;
     } else {
-        currentValue += 6;
+        currentValue += 5;
     }
 
     input.value = currentValue;
@@ -336,9 +336,7 @@ function setDefaultDateTime() {
 }
 
 // Gọi hàm setDefaultDateTime() khi trang được tải
-window.onload = function () {
-    setDefaultDateTime();
-};
+setDefaultDateTime();
 
 
 $(function () {
