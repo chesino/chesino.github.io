@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 </head>
@@ -119,7 +120,7 @@
                     Messenger
                 </div>
             </button>
-            <button class="item tablinks" onclick="openTab(event, 'Album')">
+            <button id="tabAlbum" class="item tablinks" onclick="openTab(event, 'Album')">
                 <div class="icon">
                     <img src="/DATA/Icon/book.png" alt="" srcset="">
                 </div>
@@ -228,27 +229,32 @@
 
             </div>
             <div id="AETH" class="tabcontent">
-                <a class="btn" href="http://m.me/6329141997112579" target="_blank" rel="noopener noreferrer"> <i
-                        class="fa-brands fa-google-drive"></i> Thư mục Google Drive</a>
+                <div class="storage">
+
+                </div>
+                <a class="btn"
+                    href="https://drive.google.com/drive/folders/14yrdFluR8wuzHqUVUThQgCLttLFQmFDe?usp=drive_link"
+                    target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-google-drive"></i> Thư mục Google
+                    Drive</a>
                 <div class='forms-studio'><iframe
                         src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
                 </div>
             </div>
             <div id="Mess" class="tabcontent mess">
-                <h1>59824</h1>
-
                 <a class="btn mess" href="http://m.me/6329141997112579" target="_blank" rel="noopener noreferrer">Mở
                     trong Messenger</a>
             </div>
-            <div id="Album" class="tabcontent">
-                <h3 style="text-align: center;">Hiện tại không có bài đăng nào.</h3>
+            <div id="Album" class="tabcontent ">
+                <div id="rss-feed">
+
+                </div>
             </div>
 
         </div>
 
 
 
-
+       
 
     </main>
 
@@ -259,7 +265,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="./Data/map.js"></script>
 <script src="./Data/script.js"></script>
-
+<script src="./Data/blog.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
 
 </html>
