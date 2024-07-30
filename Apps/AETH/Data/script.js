@@ -51,7 +51,7 @@ function CheckRank() {
 
 function Login() {
     Swal.fire({
-        title: 'Nhập Tên Facebook:',
+        title: 'Nhập ID Facebook:',
         input: 'text',
         inputAttributes: {
             autocapitalize: 'off'
@@ -86,7 +86,7 @@ function Login() {
                                         rank = "Thành viên";
                                     }
 
-                                    if (userInput === uid || userInput === name || userInput === link) {
+                                    if (userInput === uid || userInput === link) {
                                         
                                         const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
                                         foundUser = { uid, name, avatarUrl, rank };
