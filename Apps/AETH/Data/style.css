@@ -28,7 +28,9 @@ body {
 }
 
 .hide,
-.tabAETH .tabAETHMess {
+#tabAETH ,
+#tabAETHMess,
+#tabAlbum {
     display: none;
 }
 
