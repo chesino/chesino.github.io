@@ -119,17 +119,45 @@ function Google() {
     }
 }
 
+$(function () {
+    var star = '.star',
+        selected = '.selected';
+
+    $(star).on('click', function () {
+        $(selected).each(function () {
+            $(this).removeClass('selected');
+        });
+        $(this).addClass('selected');
+    });
+
+});
+
 // Hàm lưu vào localStorage
 function saveToLocalStorage() {
     const placeName = document.getElementById('placeName').value;
-    const address = document.getElementById('address').value;
+    let address;
+
+    if (currentMarker) {
+        const lat = currentMarker.getLatLng().lat;
+        const lng = currentMarker.getLatLng().lng;
+        address = `https://www.google.com/maps?q=${lat},${lng}`;
+    } else {
+        address = document.getElementById('address').value;
+    }
     const numberOfPeople = document.getElementById('numberOfPeople').value;
     const price = document.getElementById('price').value;
     const priceraw = document.getElementById('price').dataset.rawValue;
     const time = document.getElementById('time').value;
     const date = document.getElementById('date').value;
     const note = document.getElementById('note').value;
-    const rating = document.querySelectorAll('.ratings .star.selected').length;
+    var ratingElement = document.querySelector('.ratings .star.selected');
+    var rating = null;
+    if (ratingElement) {
+        rating = ratingElement.getAttribute('data-rating');
+    } else {
+        // Thông báo nếu phần tử không tồn tại
+        rating = 0;
+    }
 
     if (!placeName || !numberOfPeople || !price || !date) {
         alert('Vui lòng điền đầy đủ thông tin bắt buộc.');
@@ -158,7 +186,6 @@ function saveToLocalStorage() {
     showHistory();
 }
 
-// Hàm hiển thị lịch sử
 // Hàm hiển thị lịch sử
 function showHistory() {
     var historyContainer = document.getElementById('historyList');
@@ -225,8 +252,28 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // Hàm xóa toàn bộ lịch sử
 function deleteHistoryAllItem() {
-    localStorage.removeItem('history');
-    showHistory();
+    Swal.fire({
+        title: 'Xác nhận xoá tất cả ?',
+        text: 'Nếu xác nhận toàn bộ mục này sẽ được xoá.',
+        icon: 'warning',
+
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xác nhận',
+        cancelButtonText: 'Huỷ'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire(
+                'Đã xoá thành công',
+                'Tất cả mục đã bị xoá.',
+                'success',
+            ).then(() => {
+                localStorage.removeItem('history');
+                showHistory();
+            });
+        }
+    })
 }
 
 // Hàm reset form
@@ -339,18 +386,6 @@ function setDefaultDateTime() {
 setDefaultDateTime();
 
 
-$(function () {
-    var star = '.star',
-        selected = '.selected';
-
-    $(star).on('click', function () {
-        $(selected).each(function () {
-            $(this).removeClass('selected');
-        });
-        $(this).addClass('selected');
-    });
-
-});
 
 
 function deleteHistoryItem(index) {
@@ -378,7 +413,8 @@ function deleteHistoryItem(index) {
             });
         }
     })
-}function exportToExcel() {
+}
+function exportToExcel() {
     var history = JSON.parse(localStorage.getItem('history'));
 
     if (!history || history.length === 0) {
