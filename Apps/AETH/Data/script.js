@@ -48,7 +48,7 @@ function CheckRank() {
         console.log("No user info found in localStorage.");
     }
 }
-localStorage.clear()
+
 function Login() {
     Swal.fire({
         title: 'Nhập ID Facebook:',
