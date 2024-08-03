@@ -332,13 +332,6 @@ main .list .item .icon img {
 }
 
 
-main .list .item:nth-child(1) {
-    background-color: #01812b;
-}
-
-main .list .item:nth-child(2) {
-    color: #15ff00;
-}
 
 
 
@@ -1111,21 +1104,28 @@ input[type='time'] {
     margin-top: 2px;
     width: 100%;
 }
-
-.Gas .Card{
+.MainGas {
     background-color: #0e0e0e;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.Gas .Card{
+    background-color: #1a1a1a;
     border-radius: 10px;
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+    align-items: center;
+    margin-bottom: 10px;
 }
 .Gas .Card h1{
-    font-size: 24px;
+    font-size: 22px;
 }
 .Gas .Card .blockprice {
+    font-family: monospace;
     text-align: right;
-    background-color: #000000;
+    background-color: #000;
     padding: 4px 10px;
     border-radius: 6px;
     width: 120px;
@@ -1142,6 +1142,22 @@ input[type='time'] {
 .negative {
     color: rgb(61, 253, 61);
 }
+.Gas .Footer {
+    display: block;
+    text-align: center;
+}
+.Gas .Footer #dateupdate br{
+    display: none;
+}
+.Gas .Footer #dateupdate {
+    font-size: 14px
+}
+.Gas .Footer .source a{
+    color: yellowgreen;
+    text-decoration: none;
+    font-family: BeFontBold;
+}
+
 .CalculatorGas {
     background-color: #0e0e0e;
     border-radius: 8px;
@@ -1149,16 +1165,18 @@ input[type='time'] {
     text-align: center;
 }
 
-input[type="number"], select {
+.CalculatorGas input[type="number"],.CalculatorGas select {
     width: calc(100% - 22px);
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ddd;
+    color: #fff;
+    background-color: #000;
+    border: none;
     border-radius: 4px;
     font-size: 16px;
 }
 
-button {
+.CalculatorGas button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -1169,6 +1187,9 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.CalculatorGas button:hover {
     background-color: #218838;
+}
+.CalculatorGas #result {
+    margin: 10px 0;
 }

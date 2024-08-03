@@ -1,16 +1,19 @@
-
 let gas95Price = 0;
 
 async function fetchData() {
     try {
-        const response = await fetch('https://cors-anywhere.herokuapp.com/https://www.pvoil.com.vn/tin-gia-xang-dau');
-        const text = await response.text();
+        const response = await fetch('https://api.allorigins.win/get?url=https://www.pvoil.com.vn/tin-gia-xang-dau');
+        const data = await response.json();
+        const text = data.contents;
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
 
         const table = doc.querySelector('.table');
 
         if (table) {
+            const dateUpdateElement = table.querySelector('thead tr span strong');
+            const dateUpdate = dateUpdateElement ? dateUpdateElement.innerText : 'N/A';
+            
             const rows = table.querySelectorAll('tbody tr');
             const prices = {
                 gas95: 'N/A',
@@ -40,25 +43,28 @@ async function fetchData() {
 
             rows.forEach(row => {
                 const cells = row.querySelectorAll('td');
+                
                 if (cells.length > 3) {
                     const product = cells[1].innerText.trim();
-                    const price = cells[2].innerText.trim().split(' ')[0];
+                    const price = cells[2].innerText.trim().replace(/\./g, '');
                     updatePrices(product, price, false);
 
-                    const salePrice = cells[3].innerText.trim().split(' ')[0];
+                    const salePrice = cells[3].innerText.trim().replace(/\./g, '');
                     updatePrices(product, salePrice, true);
                 }
             });
 
-            document.getElementById('gas-95').innerText = prices.gas95 + 'đ';
-            document.getElementById('gas-92').innerText = prices.gas92 + 'đ';
-            document.getElementById('oil-do').innerText = prices.oilDO + 'đ';
-            document.getElementById('oil-ko').innerText = prices.oilKO + 'đ';
+            document.getElementById('gas-95').innerText = formatWithDots(prices.gas95) + 'đ';
+            document.getElementById('gas-92').innerText = formatWithDots(prices.gas92) + 'đ';
+            document.getElementById('oil-do').innerText = formatWithDots(prices.oilDO) + 'đ';
+            document.getElementById('oil-ko').innerText = formatWithDots(prices.oilKO) + 'đ';
 
             updateSalePrice('gas-95s', prices.gas95s + 'đ');
             updateSalePrice('gas-92s', prices.gas92s + 'đ');
             updateSalePrice('oil-dos', prices.oilDOs + 'đ');
             updateSalePrice('oil-kos', prices.oilKOs + 'đ');
+
+            document.getElementById('dateupdate').innerText = dateUpdate;
         } else {
             Fail('Lỗi', 'Không thể cập nhật giá xăng dầu');
         }
@@ -110,7 +116,6 @@ function calculate() {
 
     // Calculate cost of refills
     const totalCost = gas95Price * totalConsumption;
-    
     
     // Display results
     document.getElementById('result').innerHTML =
