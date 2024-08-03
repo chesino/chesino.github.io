@@ -143,7 +143,7 @@
         </div>
 
         <div class="content">
-            <div class="tabcontent ShareGo show" id="ShareGo">
+            <div class="tabcontent ShareGo " id="ShareGo">
                 <div class="GridShareGO">
                     <div class="Map">
                         <div class="map-container" id="mapboxMap"></div>
@@ -238,8 +238,8 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
 
             </div>
-            <div class="tabcontent Gas " id="Gas">
-                
+            <div class="tabcontent Gas show" id="Gas">
+
 
                 <div class="MainGas">
                     <div class="Card">
@@ -272,15 +272,15 @@
                     </div>
                     <div class="Footer">
                         <p id="dateupdate"></p>
-                        <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank" rel="noopener noreferrer">Pvoil Việt Nam</a></p>
+                        <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank"
+                                rel="noopener noreferrer">Pvoil Việt Nam</a></p>
                     </div>
-                   
+
                 </div>
 
 
                 <div class="CalculatorGas">
-                    <h1>Tính toán</h1>
-                    <p style="font-size: 12px;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất nhiều</p>
+                    <h1>Số lần đổ xăng</h1>
                     <input type="number" id="distance" placeholder="Quảng đường (Km)">
                     <select name="loaixe" id="typebike">
                         <option value="vario">Vario 125 [2.16L/100km - 5.5L]</option>
@@ -289,10 +289,35 @@
                     </select>
                     <input type="number" id="customConsumption" placeholder="Mức tiêu thụ tùy chỉnh (L/100Km)">
                     <button onclick="calculate()">Tính toán</button>
-                    <br>
-                    <div id="result">
-                    </div>
+                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất nhiều</p>
+                    <div id="result"></div>
+                </div>
 
+                <div class="CalculatorGas">
+                    <h1>Đổ xăng theo mức</h1>
+                    
+                    <label for="fuelGauge">Chọn số mức xăng còn lại:</label>
+                    <select id="fuelGauge">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+
+                    <label for="vehicle">Chọn loại xe:</label>
+                    <select id="vehicle">
+                        <option value="vario">Vario 125 [2.16L/100km - 5.5L]</option>
+                        <option value="winner">Winner X [1.99L/100km - 4.5L]</option>
+                        <option value="sonic">Sonic [2.069L/100km - 4L]</option>
+                    </select>
+
+                    <button onclick="calculate2()">Tính toán</button>
+                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất nhiều</p>
+
+                    <p id="result2"></p>
                 </div>
             </div>
             <div id="AETH" class="tabcontent">

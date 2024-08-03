@@ -1163,6 +1163,7 @@ input[type='time'] {
     border-radius: 8px;
     padding: 20px;
     text-align: center;
+    margin: 10px 0;
 }
 
 .CalculatorGas input[type="number"],.CalculatorGas select {
@@ -1186,10 +1187,16 @@ input[type='time'] {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+.CalculatorGas h1 {
+    margin-bottom: 10px;
+}
 .CalculatorGas button:hover {
     background-color: #218838;
 }
-.CalculatorGas #result {
+
+.CalculatorGas #result, #result2 {
     margin: 10px 0;
+    background-color: #000;
+    padding: 10px;
+    border-radius: 10px;
 }

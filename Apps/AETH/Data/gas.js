@@ -13,7 +13,7 @@ async function fetchData() {
         if (table) {
             const dateUpdateElement = table.querySelector('thead tr span strong');
             const dateUpdate = dateUpdateElement ? dateUpdateElement.innerText : 'N/A';
-            
+
             const rows = table.querySelectorAll('tbody tr');
             const prices = {
                 gas95: 'N/A',
@@ -43,7 +43,7 @@ async function fetchData() {
 
             rows.forEach(row => {
                 const cells = row.querySelectorAll('td');
-                
+
                 if (cells.length > 3) {
                     const product = cells[1].innerText.trim();
                     const price = cells[2].innerText.trim().replace(/\./g, '');
@@ -116,7 +116,7 @@ function calculate() {
 
     // Calculate cost of refills
     const totalCost = gas95Price * totalConsumption;
-    
+
     // Display results
     document.getElementById('result').innerHTML =
         `
@@ -124,6 +124,37 @@ function calculate() {
         <h2>Đổ xăng: ${refills} lần</h2>
         <h2>RON 95: ${formatWithDots(totalCost)}đ</h2>
         `
+
+  
+}
+
+function calculate2() {
+    const fuelGauge = document.getElementById("fuelGauge").value;
+    const vehicle = document.getElementById("vehicle").value;
+
+    let fuelCapacity, fuelConsumption;
+
+    if (vehicle === "vario") {
+        fuelCapacity = 5.5;
+        fuelConsumption = 2.16;
+    } else if (vehicle === "winner") {
+        fuelCapacity = 4.5;
+        fuelConsumption = 1.99;
+    } else if (vehicle === "sonic") {
+        fuelCapacity = 4.0;
+        fuelConsumption = 2.069;
+    }
+
+    const fuelPerGauge = fuelCapacity / 6;
+    const remainingFuel = fuelPerGauge * fuelGauge;
+    const distanceCanTravel = (remainingFuel / fuelConsumption) * 100;
+    const fuelToFull = fuelCapacity - remainingFuel;
+
+    document.getElementById("result2").innerHTML = `
+                                <p>1 vạch xăng tương đương với ${fuelPerGauge.toFixed(2)} lít.</p>
+                                <p>Nếu còn ${fuelGauge} vạch xăng, xe có thể đi được ${distanceCanTravel.toFixed(2)} km.</p>
+                                <p>Cần đổ thêm ${fuelToFull.toFixed(2)} lít ( ${formatWithDots(gas95Price*fuelToFull.toFixed(2))+ 'đ'}) để đầy bình.</p>
+                            `;
 }
 
 function formatWithDots(value) {
