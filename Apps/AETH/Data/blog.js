@@ -137,7 +137,7 @@ function ReloadBlog() {
                 button.addEventListener('click', function () {
                     const story = button.closest('.Feed');
                     const storyId = story.id;
-                    const currentUrl = 'https://chesino.github.io/Windows/';
+                    const currentUrl = 'https://chesino.github.io/Apps/AETH/';
                     const shareUrl = `${currentUrl}#${storyId}`;
 
                     // Cập nhật URL chứa #StoryID vào clipboard

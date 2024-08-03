@@ -89,6 +89,7 @@
     </header>
 
     <main class="main">
+
         <div class="banner">
             <img src="./Data/wallpaper.jpg" alt="" srcset="">
         </div>
@@ -96,10 +97,18 @@
         <div class="list tab">
             <button class="item tablinks active" onclick="openTab(event, 'ShareGo')">
                 <div class="icon">
-                    <img src="/DATA/Icon/new.png" alt="" srcset="">
+                    <img src="/DATA/Icon/street-map.png" alt="" srcset="">
                 </div>
                 <div class="label">
                     Share & GO
+                </div>
+            </button>
+            <button class="item tablinks" onclick="openTab(event, 'Gas')">
+                <div class="icon">
+                    <img src="/DATA/Icon/petrol-pump.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    Giá xăng
                 </div>
             </button>
 
@@ -125,7 +134,7 @@
                     <img src="/DATA/Icon/book.png" alt="" srcset="">
                 </div>
                 <div class="label">
-                    Album Ảnh
+                    AETH Blog
                 </div>
             </button>
 
@@ -205,7 +214,8 @@
                         </div>
                         <div class="Input">
                             <label for="note">Ghi chú <span>không bắt buộc</span></label>
-                            <textarea placeholder="Có thể ghi cảm nhận, người trả tiền v.v" name="note" id="note" cols="30" rows="10"></textarea>
+                            <textarea placeholder="Có thể ghi cảm nhận, người trả tiền v.v" name="note" id="note"
+                                cols="30" rows="10"></textarea>
                         </div>
                         <button class="Confirm" onclick="saveToLocalStorage()">Xác nhận</button>
 
@@ -227,6 +237,53 @@
                 <!-- Include SheetJS library -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
 
+            </div>
+            <div class="tabcontent Gas " id="Gas">
+
+                <div class="Card">
+                    <h1>Xăng RON 95-III</h1>
+                    <div class="blockprice">
+                        <p class="price" id="gas-95">0đ</p>
+                        <p class="status" id="gas-95s">0đ</p>
+                    </div>
+                </div>
+
+                <div class="Card">
+                    <h1>Xăng E5 RON 92-II</h1>
+                    <div class="blockprice">
+                        <p class="price" id="gas-92">0đ</p>
+                        <p class="status" id="gas-92s">0đ</p>
+                    </div>
+                </div>
+                <div class="Card">
+                    <h1>Dầu DO 0,05S-II</h1>
+                    <div class="blockprice">
+                        <p class="price" id="oil-do">0đ</p>
+                        <p class="status" id="oil-dos">0đ</p>
+                    </div>
+                </div>
+                <div class="Card">
+                    <h1>Dầu KO</h1>
+                    <div class="blockprice">
+                        <p class="price" id="oil-ko">0đ</p>
+                        <p class="status" id="oil-kos">0đ</p>
+                    </div>
+                </div>
+
+                <div class="CalculatorGas">
+                    <h1>Tính toán</h1>
+                    <input type="number" id="distance" placeholder="Quảng đường (Km)">
+                    <select name="loaixe" id="typebike">
+                        <option value="vario">Vario 125</option>
+                        <option value="winner">Winner X v2</option>
+                        <option value="sonic">Sonic</option>
+                    </select>
+                    <input type="number" id="customConsumption" placeholder="Mức tiêu thụ tùy chỉnh (L/100Km)">
+                    <button onclick="calculate()">Tính toán</button>
+                    <div id="result">
+                    </div>
+
+                </div>
             </div>
             <div id="AETH" class="tabcontent">
                 <div class="storage">
@@ -254,7 +311,7 @@
 
 
 
-       
+
 
     </main>
 
@@ -266,6 +323,7 @@
 <script src="./Data/map.js"></script>
 <script src="./Data/script.js"></script>
 <script src="./Data/blog.js"></script>
+<script src="./Data/gas.js"></script>
 <script src="/DATA/SweetAlert2.js"></script>
 
 </html>

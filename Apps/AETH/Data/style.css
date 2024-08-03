@@ -601,7 +601,7 @@ main .list::-webkit-scrollbar {
 
 
 
-select {
+.Map select {
     text-align: center;
     appearance: none;
     /*  safari  */
@@ -889,14 +889,15 @@ input[type='time'] {
 .Feed {
     background-color: #111;
     padding: 10px;
-    text-align: center;
     border-radius: 10px;
+    margin: 10px 0;
 }
 
 .Feed .Head {
     background-color: #252525;
     padding: 10px;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .Head .Author {
@@ -1072,19 +1073,17 @@ input[type='time'] {
 
 .Feed .Body blockquote {
     font-size: 18px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 10px;
-    background-color: var(--main-bg);
-    /* Inherit background for quotes */
-    border: 3px solid var(--main-button-bg);
-    border-radius: 5px;
+    margin: 10px 0;
+    background-color: #000;
+    border-left: 3px solid #fff;
     padding: 1px 0;
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 .Feed .Body blockquote p {
-    font-family: monospace;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 18px;
 }
 
@@ -1104,4 +1103,65 @@ input[type='time'] {
     border-radius: 5px;
     margin-top: 2px;
     width: 100%;
+}
+
+.Gas .Card{
+    background-color: #0e0e0e;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.Gas .Card h1{
+    font-size: 26px;
+}
+.Gas .Card .blockprice {
+    text-align: right;
+    background-color: #000;
+    padding: 4px 10px;
+    border-radius: 6px;
+    width: 120px;
+}
+.Gas .Card .blockprice .price {
+    font-size: 22px;
+}
+.Gas .Card .blockprice .status {
+    font-size: 12px;
+}
+.positive {
+    color: red;
+}
+.negative {
+    color: rgb(61, 253, 61);
+}
+.CalculatorGas {
+    background-color: #0e0e0e;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+input[type="number"], select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
 }
