@@ -14,6 +14,10 @@
     font-family: BeFont;
     src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Light.ttf);
 }
+@font-face {
+    font-family: BeFontBold;
+    src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Bold.ttf);
+}
 
 * {
     margin: 0;
@@ -25,6 +29,9 @@ body {
     font-family: BeFont;
     background-color: #181a1b;
     color: #eee;
+}
+h1,h2 {
+    font-family: BeFontBold;
 }
 
 .hide,
@@ -1114,7 +1121,7 @@ input[type='time'] {
     margin: 10px 0;
 }
 .Gas .Card h1{
-    font-size: 26px;
+    font-size: 24px;
 }
 .Gas .Card .blockprice {
     text-align: right;
