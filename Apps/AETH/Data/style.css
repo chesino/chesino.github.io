@@ -1125,7 +1125,7 @@ input[type='time'] {
 }
 .Gas .Card .blockprice {
     text-align: right;
-    background-color: #000;
+    background-color: #000000;
     padding: 4px 10px;
     border-radius: 6px;
     width: 120px;

@@ -316,7 +316,7 @@ function adjustNumberOfPeople(operation) {
     } else if (operation === 'plus') {
         currentValue += 1;
     } else {
-        currentValue += 5;
+        currentValue += 6;
     }
 
     input.value = currentValue;
