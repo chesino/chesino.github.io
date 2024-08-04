@@ -22,7 +22,10 @@
     <link rel="apple-touch-icon" href="/DATA/logo.png" sizes="150x150" />
 
     <!-- Ảnh -->
-    <meta property="og:image" content="/DATA/logo.png" />
+    <meta property="og:image" content="./Data/wallpaper.jpg" />
+    <meta property="og:title" content="AETH" />
+    <meta property="og:description" content="Thiết kế và lập trình Hùng Đinh" />
+
 
     <!-- CSS của web -->
     <link rel="stylesheet" href="./Data/style.css" />
@@ -47,7 +50,7 @@
                 </div>
                 <div class="infouser">
                     <h1 id="username" class="username">Khách</h1>
-                    <p id="rank" class="rank">Chế độ khách</p>
+                    <p id="rank" class="rank">Nhấn vào ảnh để đăng nhập</p>
                 </div>
             </div>
 
@@ -103,6 +106,16 @@
                     Share & GO
                 </div>
             </button>
+
+            <button id="tabBlog" class="item tablinks" onclick="openTab(event, 'Blog')">
+                <div class="icon">
+                    <img src="/DATA/Icon/book.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    AETH Blog
+                </div>
+            </button>
+
             <button class="item tablinks" onclick="openTab(event, 'Gas')">
                 <div class="icon">
                     <img src="/DATA/Icon/petrol-pump.png" alt="" srcset="">
@@ -118,15 +131,6 @@
                 </div>
                 <div class="label">
                     AE Cloud
-                </div>
-            </button>
-
-            <button id="tabBlog" class="item tablinks" onclick="openTab(event, 'Blog')">
-                <div class="icon">
-                    <img src="/DATA/Icon/book.png" alt="" srcset="">
-                </div>
-                <div class="label">
-                    AETH Blog
                 </div>
             </button>
 
@@ -241,25 +245,23 @@
 
             </div>
             <div class="tabcontent Gas " id="Gas">
-
-
                 <div class="MainGas">
                     <div class="Card">
-                        <h1>Xăng RON 95-III</h1>
+                        <h1>Xăng RON 95</h1>
                         <div class="blockprice">
                             <p class="price" id="gas-95">0đ</p>
                             <p class="status" id="gas-95s">0đ</p>
                         </div>
                     </div>
                     <div class="Card">
-                        <h1>Xăng E5 RON 92-II</h1>
+                        <h1>Xăng RON 92</h1>
                         <div class="blockprice">
                             <p class="price" id="gas-92">0đ</p>
                             <p class="status" id="gas-92s">0đ</p>
                         </div>
                     </div>
                     <div class="Card">
-                        <h1>Dầu DO 0,05S-II</h1>
+                        <h1>Dầu DO 0,05S</h1>
                         <div class="blockprice">
                             <p class="price" id="oil-do">0đ</p>
                             <p class="status" id="oil-dos">0đ</p>
@@ -272,28 +274,11 @@
                             <p class="status" id="oil-kos">0đ</p>
                         </div>
                     </div>
-                    <div class="Footer">
-                        <p id="dateupdate"></p>
-                        <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank"
-                                rel="noopener noreferrer">Pvoil Việt Nam</a></p>
-                    </div>
-
                 </div>
-
-
-                <div class="CalculatorGas">
-                    <h1>Số lần đổ xăng</h1>
-                    <input type="number" id="distance" placeholder="Quảng đường (Km)">
-                    <select name="loaixe" id="typebike">
-                        <option value="vario">Vario 125 [2.16L/100km - 5.5L]</option>
-                        <option value="winner">Winner X [1.99L/100km - 4.5L]</option>
-                        <option value="sonic">Sonic [2.069L/100km - 4L]</option>
-                    </select>
-                    <input type="number" id="customConsumption" placeholder="Mức tiêu thụ tùy chỉnh (L/100Km)">
-                    <button onclick="calculate()">Tính toán</button>
-                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất
-                        nhiều</p>
-                    <div id="result"></div>
+                <div class="Footer">
+                    <p id="dateupdate"></p>
+                    <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank"
+                            rel="noopener noreferrer">Pvoil Việt Nam</a></p>
                 </div>
 
                 <div class="CalculatorGas">
@@ -322,6 +307,21 @@
                         nhiều</p>
 
                     <p id="result2"></p>
+                </div>
+
+                <div class="CalculatorGas">
+                    <h1>Số lần đổ xăng</h1>
+                    <input type="number" id="distance" placeholder="Quảng đường (Km)">
+                    <select name="loaixe" id="typebike">
+                        <option value="vario">Vario 125 [2.16L/100km - 5.5L]</option>
+                        <option value="winner">Winner X [1.99L/100km - 4.5L]</option>
+                        <option value="sonic">Sonic [2.069L/100km - 4L]</option>
+                    </select>
+                    <input type="number" id="customConsumption" placeholder="Mức tiêu thụ tùy chỉnh (L/100Km)">
+                    <button onclick="calculate()">Tính toán</button>
+                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất
+                        nhiều</p>
+                    <div id="result"></div>
                 </div>
             </div>
             <div id="AETH" class="tabcontent">

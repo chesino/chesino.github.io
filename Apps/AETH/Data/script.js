@@ -23,23 +23,18 @@ function CheckRank() {
         try {
             const user = JSON.parse(storedUser);
 
-            var tabAETH = document.getElementById('tabAETH');
-            var tabAETHMess = document.getElementById('tabAETHMess');
-            var tabBlog = document.getElementById('tabBlog');
+            var body = document.querySelector('body');
             
-
             if (user.rank == 'Priority') {
-                tabAETH.style.display = "flex";
-                tabAETHMess.style.display = "none";
-                tabBlog.style.display = "none";
+                body.classList.remove('AETH-mode');
+                body.classList.add('Priority-mode');
             } else if (user.rank == 'AETH - Priority' || user.rank == 'Admin - Ultimate') {
-                tabAETH.style.display = "flex";
-                tabAETHMess.style.display = "flex";
-                tabBlog.style.display = "flex";
+                body.classList.add('AETH-mode');
+                body.classList.add('Priority-mode');
             } else {
-                tabAETH.style.display = "none";
-                tabAETHMess.style.display = "none";
-                tabBlog.style.display = "none";
+                body.classList.remove('AETH-mode');
+                body.classList.remove('Priority-mode');
+                body.classList.add('Normal-mode');
             }
         } catch (error) {
             console.error("Error parsing stored user data:", error);
@@ -87,7 +82,7 @@ function Login() {
                                     }
 
                                     if (userInput === uid || userInput === link) {
-                                        
+
                                         const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
                                         foundUser = { uid, name, avatarUrl, rank };
                                         break;
@@ -159,7 +154,7 @@ function Login2() {
                                     if (!rank) {
                                         rank = "Thành viên";
                                     }
-                                   
+
                                     if (userInput === uid || userInput === name || userInput === link) {
                                         const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
                                         foundUser = { uid, name, avatarUrl, rank };

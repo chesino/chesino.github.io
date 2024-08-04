@@ -14,6 +14,7 @@
     font-family: BeFont;
     src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Light.ttf);
 }
+
 @font-face {
     font-family: BeFontBold;
     src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Bold.ttf);
@@ -30,12 +31,23 @@ body {
     background-color: #181a1b;
     color: #eee;
 }
-h1,h2 {
+
+h1,
+h2 {
     font-family: BeFontBold;
 }
 
+.Priority-mode #tabAETH,
+.Priority-mode #tabBlog {
+    display: flex;
+}
+
+.AETH-mode #tabAETHMess {
+    display: flex;
+}
+
 .hide,
-#tabAETH ,
+#tabAETH,
 #tabAETHMess,
 #tabBlog {
     display: none;
@@ -1104,24 +1116,33 @@ input[type='time'] {
     margin-top: 2px;
     width: 100%;
 }
+
 .MainGas {
     background-color: #0e0e0e;
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
+    display: grid;
+    grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+    gap: 10px;
+    align-items: center;
+    overflow: auto;
+    gap: 10px;
 }
-.Gas .Card{
+
+.Gas .Card {
     background-color: #1a1a1a;
     border-radius: 10px;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
 }
-.Gas .Card h1{
-    font-size: 22px;
+
+.Gas .Card h1 {
+    font-size: 16px;
 }
+
 .Gas .Card .blockprice {
     font-family: monospace;
     text-align: right;
@@ -1130,29 +1151,37 @@ input[type='time'] {
     border-radius: 6px;
     width: 120px;
 }
+
 .Gas .Card .blockprice .price {
-    font-size: 22px;
+    font-size: 18px;
 }
+
 .Gas .Card .blockprice .status {
     font-size: 12px;
 }
+
 .positive {
     color: red;
 }
+
 .negative {
     color: rgb(61, 253, 61);
 }
+
 .Gas .Footer {
     display: block;
     text-align: center;
 }
-.Gas .Footer #dateupdate br{
+
+.Gas .Footer #dateupdate br {
     display: none;
 }
+
 .Gas .Footer #dateupdate {
     font-size: 14px
 }
-.Gas .Footer .source a{
+
+.Gas .Footer .source a {
     color: yellowgreen;
     text-decoration: none;
     font-family: BeFontBold;
@@ -1166,7 +1195,8 @@ input[type='time'] {
     margin: 10px 0;
 }
 
-.CalculatorGas input[type="number"],.CalculatorGas select {
+.CalculatorGas input[type="number"],
+.CalculatorGas select {
     width: calc(100% - 22px);
     padding: 10px;
     margin: 10px 0;
@@ -1187,14 +1217,17 @@ input[type='time'] {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .CalculatorGas h1 {
     margin-bottom: 10px;
 }
+
 .CalculatorGas button:hover {
     background-color: #218838;
 }
 
-.CalculatorGas #result, #result2 {
+.CalculatorGas #result,
+#result2 {
     margin: 10px 0;
     background-color: #111;
     padding: 10px;
