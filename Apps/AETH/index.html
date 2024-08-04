@@ -121,6 +121,15 @@
                 </div>
             </button>
 
+            <button id="tabBlog" class="item tablinks" onclick="openTab(event, 'Blog')">
+                <div class="icon">
+                    <img src="/DATA/Icon/book.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    AETH Blog
+                </div>
+            </button>
+
             <button id="tabAETHMess" class="item tablinks" onclick="openTab(event, 'Mess')">
                 <div class="icon">
                     <img src="/DATA/Icon/messenger.png" alt="" srcset="">
@@ -129,14 +138,7 @@
                     Messenger
                 </div>
             </button>
-            <button id="tabAlbum" class="item tablinks" onclick="openTab(event, 'Album')">
-                <div class="icon">
-                    <img src="/DATA/Icon/book.png" alt="" srcset="">
-                </div>
-                <div class="label">
-                    AETH Blog
-                </div>
-            </button>
+
 
             <button class="item">Sắp ra mắt</button>
 
@@ -289,13 +291,14 @@
                     </select>
                     <input type="number" id="customConsumption" placeholder="Mức tiêu thụ tùy chỉnh (L/100Km)">
                     <button onclick="calculate()">Tính toán</button>
-                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất nhiều</p>
+                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất
+                        nhiều</p>
                     <div id="result"></div>
                 </div>
 
                 <div class="CalculatorGas">
                     <h1>Đổ xăng theo mức</h1>
-                    
+
                     <label for="fuelGauge">Chọn số mức xăng còn lại:</label>
                     <select id="fuelGauge">
                         <option value="0">0</option>
@@ -315,7 +318,8 @@
                     </select>
 
                     <button onclick="calculate2()">Tính toán</button>
-                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất nhiều</p>
+                    <p style="font-size: 12px; margin: 10px 0;">*Chỉ mang tính chất tham khảo vì thực tế sẽ khác rất
+                        nhiều</p>
 
                     <p id="result2"></p>
                 </div>
@@ -332,14 +336,13 @@
                         src='https://script.google.com/macros/s/AKfycbwrsA3fk55dVroCrDa7kTXk1KTJmi5KkJXoEA17xewwWR31h0vZe6QXBcU34ZyyDoOK/exec'></iframe>
                 </div>
             </div>
+            <div id="Blog" class="tabcontent ">
+                <div id="rss-feed">
+                </div>
+            </div>
             <div id="Mess" class="tabcontent mess">
                 <a class="btn mess" href="http://m.me/6329141997112579" target="_blank" rel="noopener noreferrer">Mở
                     trong Messenger</a>
-            </div>
-            <div id="Album" class="tabcontent ">
-                <div id="rss-feed">
-
-                </div>
             </div>
 
         </div>

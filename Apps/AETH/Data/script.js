@@ -25,21 +25,21 @@ function CheckRank() {
 
             var tabAETH = document.getElementById('tabAETH');
             var tabAETHMess = document.getElementById('tabAETHMess');
-            var tabAlbum = document.getElementById('tabAlbum');
+            var tabBlog = document.getElementById('tabBlog');
             
 
             if (user.rank == 'Priority') {
                 tabAETH.style.display = "flex";
                 tabAETHMess.style.display = "none";
-                tabAlbum.style.display = "none";
+                tabBlog.style.display = "none";
             } else if (user.rank == 'AETH - Priority' || user.rank == 'Admin - Ultimate') {
                 tabAETH.style.display = "flex";
                 tabAETHMess.style.display = "flex";
-                tabAlbum.style.display = "flex";
+                tabBlog.style.display = "flex";
             } else {
                 tabAETH.style.display = "none";
                 tabAETHMess.style.display = "none";
-                tabAlbum.style.display = "none";
+                tabBlog.style.display = "none";
             }
         } catch (error) {
             console.error("Error parsing stored user data:", error);

@@ -1,5 +1,5 @@
 // Tạo bản đồ và các lớp bản đồ
-var map = L.map('mapboxMap').setView([21.02745, 105.85485], 15); // Đặt mức zoom mặc định là 18
+var map = L.map('mapboxMap').setView([10.7763897,106.6985642], 15); // Đặt mức zoom mặc định là 18
 
 var dark = L.tileLayer('https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=bJnZQVl8zwoZ2OblPXlr', {
     attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors',

@@ -37,7 +37,7 @@ h1,h2 {
 .hide,
 #tabAETH ,
 #tabAETHMess,
-#tabAlbum {
+#tabBlog {
     display: none;
 }
 
@@ -1196,7 +1196,7 @@ input[type='time'] {
 
 .CalculatorGas #result, #result2 {
     margin: 10px 0;
-    background-color: #000;
+    background-color: #111;
     padding: 10px;
     border-radius: 10px;
 }
