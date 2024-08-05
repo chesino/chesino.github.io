@@ -1235,9 +1235,11 @@ input[type='time'] {
     padding: 10px;
     border-radius: 10px;
 }
+
 .PIP {
     text-align: center;
 }
+
 .PIP input[type="file"] {
     display: none;
 }
@@ -1252,10 +1254,17 @@ input[type='time'] {
     border: none;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    margin: 10px;
+    margin: 10px 0;
     display: block;
 }
 
 .PIP .custom-file-upload:hover {
     background-color: #0056b3;
+}
+
+.PIP #video,
+.PIP #image {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 10px;
 }
