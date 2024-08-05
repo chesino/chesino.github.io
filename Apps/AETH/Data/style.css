@@ -336,6 +336,8 @@ main .list .item {
 main .list .item .icon {
     width: 22px;
     height: 22px;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 main .list .item .icon img {
@@ -1232,4 +1234,28 @@ input[type='time'] {
     background-color: #111;
     padding: 10px;
     border-radius: 10px;
+}
+.PIP {
+    text-align: center;
+}
+.PIP input[type="file"] {
+    display: none;
+}
+
+.PIP .custom-file-upload {
+    display: inline-block;
+    padding: 12px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    display: block;
+}
+
+.PIP .custom-file-upload:hover {
+    background-color: #0056b3;
 }

@@ -133,7 +133,14 @@
                     AE Cloud
                 </div>
             </button>
-
+            <button class="item tablinks" onclick="openTab(event, 'PIP')">
+                <div class="icon">
+                    <img src="/DATA/Icon/PIP.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    PIP
+                </div>
+            </button>
             <button id="tabAETHMess" class="item tablinks" onclick="openTab(event, 'Mess')">
                 <div class="icon">
                     <img src="/DATA/Icon/messenger.png" alt="" srcset="">
@@ -343,6 +350,15 @@
             <div id="Mess" class="tabcontent mess">
                 <a class="btn mess" href="http://m.me/6329141997112579" target="_blank" rel="noopener noreferrer">Mở
                     trong Messenger</a>
+            </div>
+            <div id="PIP" class="tabcontent PIP ">
+                <h1>PIP</h1>
+                <p>Hỗ trợ Ảnh, Video</p>
+                <p>Picture in Picture là một tính năng xem video trong một cửa sổ nhỏ trên màn hình trong khi bạn lướt trang web khác hay làm làm việc trên các ứng dụng khác trên máy tính, điện thoại</p>
+                <input type="file" id="fileInput" accept="image/*,video/*">
+                <label for="fileInput" class="custom-file-upload">Chọn tệp</label>
+                <video id="video" controls hidden></video>
+                <img id="image" hidden>
             </div>
 
         </div>

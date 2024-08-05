@@ -586,3 +586,39 @@ function openTab(evt, tabName) {
 }
 
 
+//PIP iOS Android
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const videoElement = document.getElementById('video');
+    const imageElement = document.getElementById('image');
+
+    if (file.type.startsWith('video/')) {
+        const url = URL.createObjectURL(file);
+        videoElement.src = url;
+        videoElement.hidden = false;
+        imageElement.hidden = true;
+
+        videoElement.addEventListener('loadeddata', () => {
+            videoElement.requestPictureInPicture();
+        });
+
+    } else if (file.type.startsWith('image/')) {
+        const url = URL.createObjectURL(file);
+        imageElement.src = url;
+        imageElement.hidden = false;
+        videoElement.hidden = true;
+
+        // Fake PiP for images by using fullscreen
+        imageElement.addEventListener('click', () => {
+            if (imageElement.requestFullscreen) {
+                imageElement.requestFullscreen();
+            } else if (imageElement.webkitRequestFullscreen) { // Safari
+                imageElement.webkitRequestFullscreen();
+            } else if (imageElement.msRequestFullscreen) { // IE11
+                imageElement.msRequestFullscreen();
+            }
+        });
+    }
+});
