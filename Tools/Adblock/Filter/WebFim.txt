@@ -237,8 +237,7 @@ tvhay.in###logo
 tvhay.in###comment
 tvhay.in##.center
 
-
-! 21 thg 7, 2024 https://animevietsub.app
+! 5 thg 8, 2024 https://animevietsub.app
 p##.announcement
 ||lh6.googleusercontent.com/niNvqW87lyRKXDaWknU-K7iiTx6_sAPg_cyDtbJhk_RhXK1hFYPGjIsdM9F6DDyqsDD9IdPZv3hKHkkM2lNZGMFaDdvll8bV6B0n3SFONcjrGY9YY1gM6KQd28Zl=s0$image
 ##section.Wdgt:nth-of-type(2)
@@ -246,8 +245,8 @@ p##.announcement
 ##.HdOp1.BgA.MnBrCn.Header > .EcBgA.MnBr > .Container > .Logo
 ##.mb_catfix_adv
 ##.Adv.ad-center-header
-###comments
-##.Wdgt
+##.Adv
+##.Ads
 ##.announcement
 ##.Logo
 ##.watch-notice
