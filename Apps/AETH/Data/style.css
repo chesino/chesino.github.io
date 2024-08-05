@@ -1136,13 +1136,16 @@ input[type='time'] {
     background-color: #1a1a1a;
     border-radius: 10px;
     padding: 10px;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
 }
 
 .Gas .Card h1 {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .Gas .Card .blockprice {
