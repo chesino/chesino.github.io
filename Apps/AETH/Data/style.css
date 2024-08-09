@@ -1138,14 +1138,12 @@ input[type='time'] {
     padding: 10px;
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
+    gap: 5px;
+    align-items: center;
 }
 
 .Gas .Card h1 {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 12px;
 }
 
 .Gas .Card .blockprice {
