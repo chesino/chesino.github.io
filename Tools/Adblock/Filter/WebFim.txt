@@ -255,3 +255,14 @@ p##.announcement
 ##.pc-catfixx
 ###mv-keywords
 ##.social-button
+##.ad-container
+iwin.net
+https://ads3.choigod55.com/
+
+###popup-giua-man-hinh
+
+! 10 thg 8, 2024 https://tvhay.in
+||tvhay.in/ads/da88/720x90f.gif$image
+###popup-giua-man-hinh
+##.center
+###floating_ads_bottom_textcss_container
