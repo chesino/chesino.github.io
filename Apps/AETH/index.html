@@ -33,9 +33,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="/DATA/papaparse.min.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
+    <!-- MAP -->
+    <link rel="stylesheet" href="/DATA/leaflet/leaflet.css" />
+    <script src="/DATA/leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    
 
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
@@ -99,14 +102,14 @@
 
         <div class="Setting animate__animated" id="SettingAll">
             <div class="Item">
-                <label for="toggleBlog">Tự động tải bài viết</label>
+                <label for="toggleBlog">Bài viết</label>
                 <label class="switch">
                     <input type="checkbox" id="toggleBlog">
                     <span class="slider round"></span>
                 </label>
             </div>
             <div class="Item">
-                <label for="toggleGas">Tự động lấy giá xăng</label>
+                <label for="toggleGas">Giá xăng</label>
                 <label class="switch">
                     <input type="checkbox" id="toggleGas">
                     <span class="slider round"></span>
@@ -114,7 +117,7 @@
             </div>
 
             <div class="Item">
-                <label for="toggleWeather">Tự động lấy thời tiết</label>
+                <label for="toggleWeather">Thời tiết</label>
                 <label class="switch">
                     <input type="checkbox" id="toggleWeather">
                     <span class="slider"></span>
@@ -122,9 +125,17 @@
             </div>
 
             <div class="Item">
-                <label for="toggleLogin">Tự động đăng nhập</label>
+                <label for="toggleLogin">Đăng nhập</label>
                 <label class="switch">
                     <input type="checkbox" id="toggleLogin">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="Item">
+                <label for="toggle-theme">Sáng Tối</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-theme">
                     <span class="slider"></span>
                 </label>
             </div>
@@ -202,9 +213,14 @@
                 </div>
             </button>
 
-
-            <button class="item">Sắp ra mắt</button>
-
+            <button id="tabDEV" class="item tablinks" onclick="openTab(event, 'Dev')">
+                <div class="icon">
+                    <img src="/DATA/Icon/code.png" alt="" srcset="">
+                </div>
+                <div class="label">
+                    Lập Trình Viên
+                </div>
+            </button>
         </div>
 
         <div class="content">
@@ -234,6 +250,7 @@
                             <div class="Input">
                                 <label for="address">Địa chỉ <span>không bắt buộc</span></label>
                                 <input type="text" id="address">
+                                <div id="suggestions" class="suggestions"></div>
                             </div>
 
                             <button onclick="searchAddress()"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -387,7 +404,7 @@
                 <div class="storage">
 
                 </div>
-                <a class="btn"
+                <a class="Btn"
                     href="https://drive.google.com/drive/folders/14yrdFluR8wuzHqUVUThQgCLttLFQmFDe?usp=drive_link"
                     target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-google-drive"></i> Thư mục Google
                     Drive</a>
@@ -404,7 +421,7 @@
                 </div>
             </div>
             <div id="Mess" class="tabcontent mess">
-                <a class="btn mess" href="http://m.me/6231911936932572" target="_blank" rel="noopener noreferrer">Mở AE
+                <a class="Btn mess" href="http://m.me/6231911936932572" target="_blank" rel="noopener noreferrer">Mở AE
                     Thân Thiện</a>
             </div>
             <div id="PIP" class="tabcontent PIP ">
@@ -416,6 +433,13 @@
                 <p>Chỉ hỗ trợ ảnh & video</p>
                 <video id="video" controls hidden loop></video>
                 <canvas id="canvas" hidden></canvas>
+            </div>
+
+            <div id="Dev" class="tabcontent Dev ">
+                <h1>Bảng Lỗi</h1>
+                <div class="Error" id="ErrorLog">
+                    <div class="log"></div>
+                </div>
             </div>
 
         </div>

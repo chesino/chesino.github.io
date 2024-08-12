@@ -1,13 +1,44 @@
 :root {
-    --BG: #1A1A1A;
-    --TX: #ffeeaf;
-    --CR: #1A1A1A;
-    --TALLY: #111;
-    --TALLYCL: #fff;
-    --Main: #F9D342;
-    --Primary: #2c210c;
-    --Primary2: #111;
-    --Card: #111;
+    --Background: #fffffe;
+    --Background2: #d8eefe;
+    --Background3: #000000;
+    --Head: #d8eefe;
+    --HeadText: #000;
+    --Text: #000;
+    --Paragraph: #5f6c7b;
+    --MainColor: #3da9fc;
+    --Button: #3da9fc;
+    --ButtonText: #fffffe;
+    --ButtonActive: #000000;
+    --Popup: #eee;
+    --PopupText: #111;
+    --Card: #094067;
+    --Card2: #3da9fc;
+    --CardText: #d8eefe;
+    --Input: #d8eefe;
+    --InputText: #000;
+}
+
+.Dark-mode {
+    --Background: #181a1b;
+    --Background2: #111;
+    --Background3: #000000;
+    --Head: #181a1b;
+    --HeadText: #eee;
+    --Text: #eee;
+    --Paragraph: #eee;
+    --MainColor: #F9D342;
+    --Button: #F9D342;
+    --ButtonText: #2c210c;
+    --ButtonActive: #000000;
+    --Popup: #eee;
+    --PopupText: #111;
+    --Card: #0e0e0e;
+    --Card2: #111111;
+    --CardText: #eee;
+    --Input: #111;
+    --InputText: #eee;
+
 }
 
 @font-face {
@@ -28,8 +59,8 @@
 
 body {
     font-family: BeFont;
-    background-color: #181a1b;
-    color: #eee;
+    background-color: var(--Background);
+    color: var(--Text);
 }
 
 h1,
@@ -43,9 +74,9 @@ h2 {
     display: flex;
 }
 
-/* .AETH-mode #tabAETHMess {
+.Dev-mode #tabDEV {
     display: flex;
-} */
+}
 
 .hide,
 #tabAETH,
@@ -76,39 +107,39 @@ h2 {
 .swal2-success-circular-line-left,
 .swal2-success-circular-line-right,
 .swal2-icon.swal2-success .swal2-success-fix {
-    background-color: #1a1a1a !important;
+    background-color: var(--Popup) !important;
 }
 
 .swal2-success-ring {
-    border-color: var(--Main) !important;
+    border-color: var(--Button) !important;
 }
 
 .swal2-icon.swal2-warning,
 .swal2-icon.swal2-error,
 .swal2-icon.swal2-info {
-    border-color: var(--Main) !important;
-    color: var(--Main) !important;
+    border-color: var(--Button) !important;
+    color: var(--Button) !important;
 }
 
 .swal2-success-line-long,
 .swal2-success-line-tip,
 .swal2-icon.swal2-error [class^=swal2-x-mark-line] {
-    background-color: var(--Main) !important;
+    background-color: var(--Button) !important;
 }
 
 .swal2-title,
 .swal2-content {
-    color: var(--Main);
+    color: var(--PopupText);
 }
 
 button[type=button] {
-    color: var(--Primary) !important;
-    background-color: var(--Main) !important;
+    color: var(--ButtonText) !important;
+    background-color: var(--Button) !important;
 }
 
 button[type=button].swal2-cancel {
-    color: var(--Main) !important;
-    background-color: var(--Primary) !important;
+    color: var(--ButtonText) !important;
+    background-color: var(--Paragraph) !important;
 }
 
 .swal2-popup.swal2-toast {
@@ -126,14 +157,12 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .swal2-timer-progress-bar {
-    background-color: #F9D342 !important;
+    background-color: var(--Button) !important;
 }
 
 .swal2-validation-message {
     background-color: #111 !important;
 }
-
-
 
 #loading-screen {
     position: fixed;
@@ -192,7 +221,8 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     justify-content: space-between;
     align-items: center;
     padding: 6px 20px;
-    background-color: #181a1b;
+    color: var(--HeadText);
+    background-color: var(--Head);
     z-index: 2;
 }
 
@@ -253,7 +283,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     text-align: center;
     display: none;
     position: relative;
-    background-color: #000;
+    background-color: var(--Background2);
     padding: 10px 20px;
     border-radius: 20px;
     border-top-left-radius: 0;
@@ -279,20 +309,26 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     display: flex;
     justify-content: space-around;
     gap: 2px;
-    background-color: #181a1b;
+    background-color: var(--Background);
     padding: 10px;
     margin: 10px 0;
     border-radius: 20px;
 }
 
 .Btn {
+    display: block;
+    color: var(--ButtonText);
+    background-color: var(--Button);
     font-size: 20px;
     font-weight: bold;
-    padding: 15px;
+    padding: 10px;
     width: 100%;
     border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 10px 0;
     border: none;
-    background-color: var(--Main);
 }
 
 .Btn.Reset {
@@ -306,7 +342,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     display: none;
     text-align: center;
     position: relative;
-    background-color: #000;
+    background-color: var(--Background2);
     padding: 20px;
     border-radius: 20px;
     border-top-left-radius: 0;
@@ -348,7 +384,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #111;
+    background-color: var(--Background3);
     transition: .4s;
     border-radius: 13px;
     ;
@@ -364,18 +400,18 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     /* Kích thước bóng tròn nhỏ hơn */
     left: 2px;
     bottom: 2px;
-    background-color: white;
+    background-color: var(--Button);
     transition: .4s;
     border-radius: 50%;
 }
 
 .Setting input:checked+.slider {
-    background-color: var(--Main);
+    background-color: var(--Button);
 }
 
 .Setting input:checked+.slider:before {
     transform: translateX(24px);
-    background-color: #000000;
+    background-color: var(--ButtonText);
 }
 
 .Setting label {
@@ -393,8 +429,8 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .searchLocation #manualLocation {
-    color: #eee;
-    background-color: #181a1b;
+    color: var(--Paragraph);
+    background-color: var(--Background);
     border: none;
     padding: 10px;
     font-size: 16px;
@@ -410,8 +446,8 @@ input:focus {
     font-weight: bold;
     font-size: 18px;
     width: 100%;
-    color: #eee;
-    background-color: #0e0e0e;
+    color: var(--ButtonText);
+    background-color: var(--Button);
     border: none;
 }
 
@@ -419,15 +455,15 @@ input:focus {
     font-weight: bold;
     font-size: 18px;
     width: 100%;
-    color: #eee;
-    background-color: #0e0e0e;
+    color: var(--ButtonText);
+    background-color: var(--Button);
     border: none;
     padding: 10px;
     border-radius: 10px;
 }
 
 #uv_warning {
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 1px 1px 1px --Paragraph;
     font-size: 16px;
     font-weight: bold;
     display: none;
@@ -486,8 +522,8 @@ main .list .item {
     gap: 5px;
     border: none;
     border-radius: 10px;
-    background-color: #272727;
-    color: #fff;
+    background-color: var(--Button);
+    color: var(--ButtonText);
 }
 
 main .list .item .icon {
@@ -502,12 +538,6 @@ main .list .item .icon img {
     width: 100%;
 }
 
-
-
-
-
-
-
 main .list::-webkit-scrollbar {
     display: none;
 }
@@ -521,7 +551,8 @@ main .list::-webkit-scrollbar {
 }
 
 .tablinks.active {
-    background-color: #000000 !important;
+    color: var(--MainColor) !important;
+    background-color: var(--ButtonActive) !important;
 }
 
 
@@ -535,7 +566,7 @@ main .list::-webkit-scrollbar {
 
 .mainCard .Card {
     width: 100%;
-    background-color: #111;
+    background-color: var(--Card);
     border-radius: 20px;
     padding: 10px;
     display: flex;
@@ -656,13 +687,6 @@ main .list::-webkit-scrollbar {
 
 }
 
-
-/* Custom */
-.ShareGo {
-    border-radius: 20px;
-    overflow: hidden;
-}
-
 .Card.Ultimate button {
     background-color: #fff !important;
     color: #000 !important;
@@ -673,24 +697,30 @@ main .list::-webkit-scrollbar {
 }
 
 
+/* Custom */
+.ShareGo {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
 .ShareGo .Head {
     position: absolute;
     top: 0;
     padding: 2px 10px;
     z-index: 0;
-    background-color: #111;
+    background-color: var(--Background);
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .ShareGo .Head h1 {
-    color: var(--Main);
+    color: var(--MainColor);
     font-size: 16px;
 }
 
 .ShareGo .Head h1 span {
     font-size: 10px;
-    color: var(--Text);
+    color: var(--Background3);
 }
 
 #mapboxMap {
@@ -698,6 +728,34 @@ main .list::-webkit-scrollbar {
     width: 100%;
     border-radius: 10px;
     z-index: 0;
+}
+
+.suggestions {
+    background-color: var(--Background3);
+    position: absolute;
+    width: calc(100% - 40px);
+    max-height: 220px;
+    border-radius: 10px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+    background-color: var(--Background2);
+    margin: 4px;
+    border-radius: 10px;
+}
+
+.suggestion-item:hover {
+    background-color: var(--ButtonActive);
+}
+
+.leaflet-marker-icon {
+    border-radius: 50%;
+    border: 3px solid var(--MainColor);
+    background-color: var(--Background);
 }
 
 .leaflet-right {
@@ -711,18 +769,18 @@ main .list::-webkit-scrollbar {
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-    background-color: #111 !important;
-    color: #eee !important;
+    background-color: var(--Popup) !important;
+    color: var(--PopupText) !important;
 }
 
 .leaflet-bar a {
-    color: #fff !important;
-    background-color: #313131 !important;
+    color: var(--ButtonText) !important;
+    background-color: var(--Button) !important;
     border: none !important;
 }
 
 .leaflet-container .leaflet-control-attribution {
-    background-color: #111 !important;
+    background-color: var(--Background3) !important;
 }
 
 .custom-div-icon .custom-marker {
@@ -745,7 +803,7 @@ main .list::-webkit-scrollbar {
     height: 220px;
     overflow: hidden;
     border-radius: 20px;
-    border: 2px solid black;
+    border: 5px solid var(--MainColor);
     margin: 0;
 }
 
@@ -754,11 +812,11 @@ main .list::-webkit-scrollbar {
 }
 
 .mapboxgl-popup-content {
-    background-color: var(--Primary) !important;
+    background-color: var(--MainColor) !important;
 }
 
 .mapboxgl-popup-tip {
-    border-top-color: var(--Primary) !important;
+    border-top-color: var(--MainColor) !important;
     ;
 }
 
@@ -780,11 +838,11 @@ main .list::-webkit-scrollbar {
     /*  other styles for aesthetics */
     padding: 5px 10px;
     font-size: 1.15rem;
-    background-color: #111;
+    background-color: var(--Button);
     border: none;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    color: #eee;
+    color: var(--ButtonText);
     cursor: pointer;
     font-weight: bold;
 }
@@ -818,7 +876,7 @@ select:focus {
 
 
 .Form {
-    background-color: var(--Bg);
+    background-color: var(--Background);
     color: var(--Text);
     padding: 10px 0;
     display: flex;
@@ -838,11 +896,11 @@ select:focus {
 }
 
 .Form input {
-    color: var(--Main);
+    color: var(--InputText);
     width: 100%;
     display: block;
     border: none;
-    background-color: var(--Primary2);
+    background-color: var(--Input);
     border-radius: 10px;
     font-size: 18px;
     padding: 10px;
@@ -854,13 +912,13 @@ select:focus {
 }
 
 .Form .Flex button {
-    color: var(--Main);
+    color: var(--ButtonText);
     font-size: 20px;
     height: 41px;
     width: 55px;
     border-radius: 10px;
     border: none;
-    background-color: var(--Primary);
+    background-color: var(--Button);
 }
 
 .Form textarea {
@@ -872,8 +930,8 @@ select:focus {
     box-sizing: border-box;
     border: none;
     border-radius: 10px;
-    color: var(--Main);
-    background-color: var(--Primary2);
+    color: var(--Text);
+    background-color: var(--Background2);
     resize: none;
 }
 
@@ -898,11 +956,11 @@ select:focus {
 } */
 input[type='date'],
 input[type='time'] {
-    -webkit-appearance: none;
+    appearance: none;
 }
 
 .ratings {
-    background-color: var(--Primary2);
+    background-color: var(--Input);
     border-radius: 10px;
     list-style-type: none;
     margin: 0;
@@ -918,7 +976,7 @@ input[type='time'] {
     line-height: 40px;
     display: inline-block;
     transition: color 0.2s ease;
-    color: var(--Primary);
+    color: var(--Background3);
 }
 
 .star:before {
@@ -933,7 +991,7 @@ input[type='time'] {
 .star:hover~.star,
 .star.selected~.star {
     transition: color 0.8s ease;
-    color: var(--Main);
+    color: var(--MainColor);
 }
 
 .Form button.Confirm {
@@ -944,12 +1002,13 @@ input[type='time'] {
     width: 100%;
     border-radius: 10px;
     border: none;
-    color: var(--Primary);
-    background-color: var(--Main);
+    color: var(--ButtonText);
+    background-color: var(--Button);
 }
 
 .historyContainer {
-    background-color: var(--Primary2);
+    color: var(--Text);
+    background-color: var(--Background2);
     border-radius: 20px;
     padding: 10px;
 }
@@ -957,8 +1016,8 @@ input[type='time'] {
 .history-item {
     border-radius: 20px;
     margin-top: 10px;
-    background-color: #1b1b1b;
-    border: 2px solid var(--Main);
+    background-color: var(--Background);
+    border: 2px solid var(--MainColor);
     padding: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -1039,33 +1098,21 @@ input[type='time'] {
     text-align: center;
 }
 
-.btn {
-    text-align: center;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    display: block;
-    text-decoration: none;
-    background-color: #3d3d3d;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
 .btn.mess {
     background-color: #2d7aff;
 }
 
 /* Blog */
 .Feed {
-    background-color: #111;
+    color: var(--CardText);
+    background-color: var(--Card);
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
 }
 
 .Feed .Head {
-    background-color: #252525;
+    background-color: var(--Card2);
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -1095,7 +1142,7 @@ input[type='time'] {
 
 .Head .Author .Info .Time {
     font-size: 12px;
-    color: var(--main-paragraph-color);
+    color: var(--MainColor);
     /* Light gray for time */
 }
 
@@ -1109,7 +1156,7 @@ input[type='time'] {
 
 .Head .Author .Func.Share i {
     font-size: 20px;
-    color: var(--main-button-bg);
+    color: var(--MainColor);
     /* Green for share icon */
 }
 
@@ -1160,12 +1207,12 @@ input[type='time'] {
     height: auto;
     width: 100% !important;
     border-radius: 10px;
-    border: 2px solid var(--main-bg);
+    border: 2px solid var(--Background);
     box-sizing: border-box;
 }
 
 .Body .Status video {
-    background-color: var(--main-bg);
+    background-color: var(--Background);
 }
 
 
@@ -1237,7 +1284,7 @@ input[type='time'] {
 
 .Feed .Body strong,
 .Feed .Body mark {
-    color: var(--primary-color) !important;
+    color: var(--Paragraph) !important;
     /* Green for emphasis */
     font-weight: bold;
 }
@@ -1277,7 +1324,8 @@ input[type='time'] {
 }
 
 .MainGas {
-    background-color: #0e0e0e;
+    background-color: var(--Card);
+    color: var(--CardText);
     padding: 10px;
     border-radius: 10px;
 }
@@ -1292,7 +1340,8 @@ input[type='time'] {
 }
 
 .Gas .Card {
-    background-color: #1a1a1a;
+    color: var(--CardText);
+    background-color: var(--Card2);
     border-radius: 10px;
     padding: 10px;
     width: 100%;
@@ -1352,7 +1401,8 @@ input[type='time'] {
 }
 
 .CalculatorGas {
-    background-color: #0e0e0e;
+    color: var(--CardText);
+    background-color: var(--Card);
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -1364,8 +1414,8 @@ input[type='time'] {
     width: calc(100% - 22px);
     padding: 10px;
     margin: 10px 0;
-    color: #fff;
-    background-color: #000;
+    color: var(--InputText);
+    background-color: var(--Input);
     border: none;
     border-radius: 4px;
     font-size: 16px;
@@ -1393,7 +1443,7 @@ input[type='time'] {
 .CalculatorGas #result,
 #result2 {
     margin: 10px 0;
-    background-color: #111;
+    background-color: var(--Background2);
     padding: 10px;
     border-radius: 10px;
 }
@@ -1410,8 +1460,8 @@ input[type='time'] {
     display: inline-block;
     padding: 12px 20px;
     cursor: pointer;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--Button);
+    color: var(--ButtonText);
     border-radius: 10px;
     border: none;
     font-size: 18px;
@@ -1421,7 +1471,7 @@ input[type='time'] {
 }
 
 .PIP .custom-file-upload:hover {
-    background-color: #0056b3;
+    background-color: var(--ButtonActive);
 }
 
 .PIP #video,
@@ -1429,4 +1479,32 @@ input[type='time'] {
     margin-top: 20px;
     max-width: 100%;
     border-radius: 10px;
+}
+
+.Dev .Error {
+    margin: 10px 0;
+    color: yellowgreen;
+    background-color: #000;
+    border-left: 2px solid greenyellow;
+    padding-left: 10px;
+}
+
+.log {
+    color: #9cdcfe;
+}
+
+.error {
+    color: #f44747;
+}
+
+.warn {
+    color: #ffdd57;
+}
+
+.info {
+    color: #dcdcaa;
+}
+
+.timestamp {
+    color: #6a9955;
 }

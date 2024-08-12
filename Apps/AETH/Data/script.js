@@ -38,8 +38,10 @@ function CheckRank(user = null) {
 
     if (rank === 'Priority') {
         body.classList.add('Priority-mode');
-    } else if (rank === 'AETH - Priority' || rank === 'Admin - Ultimate') {
+    } else if (rank === 'AETH - Priority') {
         body.classList.add('AETH-mode', 'Priority-mode');
+    } else if (rank === 'Admin - Ultimate') {
+        body.classList.add('AETH-mode', 'Priority-mode', 'Dev-mode');
     } else {
         body.classList.add('Normal-mode');
     }
@@ -654,4 +656,89 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     updateProgress();
+});
+
+// Lưu trữ các hàm console gốc
+const originalLog = console.log;
+const originalError = console.error;
+const originalWarn = console.warn;
+const originalInfo = console.info;
+
+// Hàm để định dạng thời gian hiện tại
+function formatTimestamp() {
+    const now = new Date();
+    return now.toISOString().replace('T', ' ').replace('Z', '');
+}
+
+// Hàm để ghi log vào #ErrorLog với kiểu
+function writeToErrorLog(message, type) {
+    const errorLog = document.getElementById('ErrorLog');
+    if (errorLog) {
+        const newMessage = document.createElement('div');
+        newMessage.className = type;
+
+        const timestampSpan = document.createElement('span');
+        timestampSpan.className = 'timestamp';
+        timestampSpan.textContent = `[${formatTimestamp()}] `;
+
+        const messageSpan = document.createElement('span');
+        messageSpan.className = 'message';
+        messageSpan.textContent = (typeof message === 'object' && message !== null) ? JSON.stringify(message, null, 2) : message;
+
+        newMessage.appendChild(timestampSpan);
+        newMessage.appendChild(messageSpan);
+        errorLog.appendChild(newMessage);
+        errorLog.scrollTop = errorLog.scrollHeight; // Tự động cuộn xuống cuối
+    }
+}
+
+// Ghi đè console.log
+console.log = function (...args) {
+    writeToErrorLog(args.length === 1 ? args[0] : args, 'log');
+    originalLog.apply(console, args);
+};
+
+// Ghi đè console.error
+console.error = function (...args) {
+    writeToErrorLog(args.length === 1 ? args[0] : args, 'error');
+    originalError.apply(console, args);
+};
+
+// Ghi đè console.warn
+console.warn = function (...args) {
+    writeToErrorLog(args.length === 1 ? args[0] : args, 'warn');
+    originalWarn.apply(console, args);
+};
+
+// Ghi đè console.info
+console.info = function (...args) {
+    writeToErrorLog(args.length === 1 ? args[0] : args, 'info');
+    originalInfo.apply(console, args);
+};
+
+
+//DarkMode
+const toggleThemeButton = document.getElementById('toggle-theme');
+const bodyElement = document.body;
+
+// Set the initial state based on localStorage
+const isDarkModeFromLocalStorage = localStorage.getItem('darkMode') === 'true';
+if (isDarkModeFromLocalStorage) {
+    bodyElement.classList.add('Dark-mode');
+    toggleThemeButton.checked = true;
+} else {
+    toggleThemeButton.checked = false;
+}
+
+toggleThemeButton.addEventListener('change', () => {
+    const isDarkMode = toggleThemeButton.checked;
+
+    if (isDarkMode) {
+        bodyElement.classList.add('Dark-mode');
+    } else {
+        bodyElement.classList.remove('Dark-mode');
+    }
+
+    // Save the state in localStorage
+    localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
 });

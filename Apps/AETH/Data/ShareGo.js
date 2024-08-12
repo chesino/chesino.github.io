@@ -1,23 +1,45 @@
+const storedUser = localStorage.getItem('currentUser');
+if (storedUser) {
+    try {
+        const user = JSON.parse(storedUser);
+        var customIcon = L.icon({
+            iconUrl: `${user.avatarUrl}`, // Đường dẫn đến hình ảnh của biểu tượng
+            iconSize: [45, 45], // Kích thước của biểu tượng (chiều rộng, chiều cao)
+            popupAnchor: [0, -20] // Điểm neo của popup so với biểu tượng
+        });
+
+    } catch (error) {
+        console.error("Error parsing stored user data:", error);
+    }
+} else {
+    var customIcon = L.icon({
+        iconUrl: './Data/frog.png', // Đường dẫn đến hình ảnh của biểu tượng
+        iconSize: [45, 45], // Kích thước của biểu tượng (chiều rộng, chiều cao)
+        popupAnchor: [0, -20] // Điểm neo của popup so với biểu tượng
+    });
+}
+
 // Tạo bản đồ và các lớp bản đồ
 var map = L.map('mapboxMap').setView([10.7763897, 106.6985642], 15); // Đặt mức zoom mặc định là 18
 
 var dark = L.tileLayer('https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=bJnZQVl8zwoZ2OblPXlr', {
-    attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors',
+    attribution: '<a href="https://www.facebook.com/HunqD/">Hùng Đinh</a> Maptiler',
     maxZoom: 22 // Đặt maxZoom 
 });
 
 var light = L.tileLayer('https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=bJnZQVl8zwoZ2OblPXlr', {
-    attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors',
+    attribution: '<a href="https://www.facebook.com/HunqD/">Hùng Đinh</a> Maptiler',
     maxZoom: 22 // Đặt maxZoom 
 });
 
 var satellite = L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=bJnZQVl8zwoZ2OblPXlr', {
-    attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors',
+    attribution: '<a href="https://www.facebook.com/HunqD/">Hùng Đinh</a> Maptiler',
     maxZoom: 22 // Đặt maxZoom 
 });
 
 // Mặc định sử dụng lớp bản đồ Streets v2 Dark
 dark.addTo(map);
+map.invalidateSize();
 
 // Hàm thay đổi loại bản đồ
 function changeMapType() {
@@ -36,10 +58,78 @@ function changeMapType() {
         map.removeLayer(light);
         satellite.addTo(map);
     }
-}
 
+    map.invalidateSize(); // Đảm bảo kích thước bản đồ được cập nhật
+}
 // Biến để lưu trữ đánh dấu hiện tại
 let currentMarker = null;
+
+const addressInput = document.getElementById('address');
+const suggestionsContainer = document.getElementById('suggestions');
+const geocoder = new L.Control.Geocoder.Nominatim(); // Sử dụng Geocoder Nominatim
+
+// Hàm debounce để giảm số lượng yêu cầu gửi đến server
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+// Hàm tìm kiếm địa chỉ và cập nhật gợi ý
+function updateSuggestions(query) {
+    if (query.length > 2) {
+        geocoder.geocode(query, function(results) {
+            suggestionsContainer.innerHTML = ''; // Xóa gợi ý cũ
+
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.textContent = result.name;
+
+                    div.addEventListener('click', function () {
+                        addressInput.value = result.name;
+                        suggestionsContainer.innerHTML = ''; // Xóa gợi ý
+                        const coordinates = [result.center.lat, result.center.lng];
+                        if (currentMarker) {
+                            currentMarker.remove();
+                        }
+                        currentMarker = L.marker(coordinates, { icon: customIcon }).addTo(map)
+                            .bindPopup(result.properties.name)
+                            .openPopup();
+                        map.setView(coordinates, 18);
+                    });
+                    suggestionsContainer.appendChild(div);
+                });
+            } else {
+                suggestionsContainer.innerHTML = '<div class="suggestion-item">Không tìm thấy</div>';
+            }
+        });
+    } else {
+        suggestionsContainer.innerHTML = ''; // Xóa gợi ý khi không đủ ký tự
+    }
+}
+
+// Sử dụng debounce để giảm số lượng yêu cầu
+const debouncedUpdateSuggestions = debounce(updateSuggestions, 300);
+
+// Lắng nghe sự kiện input
+addressInput.addEventListener('input', function() {
+    const query = addressInput.value;
+    debouncedUpdateSuggestions(query);
+});
+
+// Ẩn danh sách gợi ý khi nhấp ra ngoài
+document.addEventListener('click', function(e) {
+    if (!addressInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+        suggestionsContainer.innerHTML = '';
+    }
+});
+
+
+
 
 // Hàm tìm kiếm địa chỉ và thêm đánh dấu
 function searchAddress() {
@@ -51,16 +141,17 @@ function searchAddress() {
             .then(data => {
                 if (data.length > 0) {
                     const coordinates = [data[0].lat, data[0].lon];
+                    console.log('Coordinates:', coordinates); // Kiểm tra tọa độ
 
                     if (currentMarker) {
                         currentMarker.remove();
                     }
 
-                    currentMarker = L.marker(coordinates).addTo(map)
+                    currentMarker = L.marker(coordinates, { icon: customIcon }).addTo(map)
                         .bindPopup('Vị trí của bạn')
                         .openPopup();
 
-                    map.setView(coordinates, 18); // Đặt mức zoom là 18
+                    map.setView(coordinates, 18);
                 } else {
                     alert('Không tìm thấy địa chỉ.');
                 }
@@ -70,6 +161,7 @@ function searchAddress() {
             });
     }
 }
+
 
 // Hàm lấy vị trí hiện tại
 function getCurrentLocation() {
@@ -88,7 +180,7 @@ function getCurrentLocation() {
                             currentMarker.remove();
                         }
 
-                        currentMarker = L.marker([lat, lng]).addTo(map)
+                        currentMarker = L.marker([lat, lng], { icon: customIcon }).addTo(map)
                             .bindPopup('Bạn đang ở đây')
                             .openPopup();
 
@@ -245,10 +337,6 @@ function deleteHistoryItem(index) {
     })
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    showHistory();
-});
-
 // Hàm xóa toàn bộ lịch sử
 function deleteHistoryAllItem() {
     Swal.fire({
@@ -289,21 +377,6 @@ function resetForm() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    showHistory();
-
-    document.querySelectorAll('.ratings .star').forEach(star => {
-        star.addEventListener('click', function () {
-            const rating = parseInt(this.getAttribute('data-rating'));
-            document.querySelectorAll('.ratings .star').forEach(star => {
-                star.classList.remove('selected');
-            });
-            for (let i = 0; i < rating; i++) {
-                document.querySelectorAll('.ratings .star')[i].classList.add('selected');
-            }
-        });
-    });
-});
 
 function adjustNumberOfPeople(operation) {
     var input = document.getElementById('numberOfPeople');
