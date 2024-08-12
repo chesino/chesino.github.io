@@ -1,4 +1,4 @@
-ReloadBlog();
+
 function ReloadBlog() {
 
     const rssUrl1 = 'https://aethblogpro.wordpress.com/feed/';
@@ -186,9 +186,6 @@ function ReloadBlog() {
         })
         .catch(error => console.log(error));
 }
-
-
-
 
 function Modal() {
     // Lấy tất cả các thẻ img có class là wp-block-gallery trong Feed

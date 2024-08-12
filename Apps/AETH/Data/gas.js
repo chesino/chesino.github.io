@@ -86,7 +86,6 @@ function updateSalePrice(elementId, price) {
     }
 }
 
-fetchData();
 
 function calculate() {
     const distance = parseFloat(document.getElementById('distance').value);

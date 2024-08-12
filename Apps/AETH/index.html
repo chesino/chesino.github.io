@@ -42,10 +42,19 @@
 </head>
 
 <body>
+    <div id="loading-screen">
+        <div class="logo">
+            <img src="/DATA/logo.png" alt="Logo"> <!-- Thay logo.png bằng đường dẫn đến logo của bạn -->
+        </div>
+        <div class="loading-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
     <header class="header">
         <div class="head">
             <div class="user">
-                <div class="avatar" onclick="Login()">
+                <div class="avatar" onclick="SettingAll()">
                     <img id="avatar" src="/DATA/logo.png" alt="avatar">
                 </div>
                 <div class="infouser">
@@ -60,6 +69,7 @@
                 <h1><i class="fa-solid fa-cloud"></i></h1>
             </div>
         </div>
+
         <div class="weatherAll animate__animated" id="weatherAll">
             <h1 id="location"></h1>
             <div id="condition"></div>
@@ -79,21 +89,60 @@
                 <button onclick="getWeatherByManual()"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <button onclick="getWeatherByIP()">IP</button>
                 <button onclick="getWeatherByGeolocation()"><i class="fa-solid fa-location-arrow"></i></button>
-                <button id="toggle-location"><i class="fa-solid fa-location-pin-lock"></i></button>
-
             </div>
             <div class="infoDevice">
                 <div id="ip"></div>
                 <div id="organization"></div>
                 <p>WeatherAPI</p>
             </div>
+        </div>
+
+        <div class="Setting animate__animated" id="SettingAll">
+            <div class="Item">
+                <label for="toggleBlog">Tự động tải bài viết</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggleBlog">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="Item">
+                <label for="toggleGas">Tự động lấy giá xăng</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggleGas">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <div class="Item">
+                <label for="toggleWeather">Tự động lấy thời tiết</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggleWeather">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="Item">
+                <label for="toggleLogin">Tự động đăng nhập</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggleLogin">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="ItemBtn">
+                <button class="Btn" onclick="Login()()"><i class="fa-solid fa-user"></i> Đăng nhập</button>
+                <button class="Btn Reset" onclick="ClearData()"><i class="fa-solid fa-eraser"></i></button>
+            </div>
+
+
 
 
         </div>
+
+
     </header>
 
-    <main class="main">
-
+    <main class="main" id="main-content">
         <div class="banner">
             <img src="./Data/wallpaper.jpg" alt="" srcset="">
         </div>
@@ -134,6 +183,7 @@
                     AE Cloud
                 </div>
             </button>
+
             <button class="item tablinks" onclick="openTab(event, 'PIP')">
                 <div class="icon">
                     <img src="/DATA/Icon/PIP.png" alt="" srcset="">
@@ -142,6 +192,7 @@
                     PIP
                 </div>
             </button>
+
             <button id="tabAETHMess" class="item tablinks" onclick="openTab(event, 'Mess')">
                 <div class="icon">
                     <img src="/DATA/Icon/messenger.png" alt="" srcset="">
@@ -245,49 +296,49 @@
                         <ul id="historyList"></ul>
                     </div>
                 </div>
-
-
-
-                <!-- Include SheetJS library -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-
             </div>
+
             <div class="tabcontent Gas " id="Gas">
                 <div class="MainGas">
-                    <div class="Card">
-                        <h1>Xăng RON 95</h1>
-                        <div class="blockprice">
-                            <p class="price" id="gas-95">0đ</p>
-                            <p class="status" id="gas-95s">0đ</p>
+                    <div class="CardsContainer">
+                        <div class="Card">
+                            <h1>Xăng RON 95</h1>
+                            <div class="blockprice">
+                                <p class="price" id="gas-95">0đ</p>
+                                <p class="status" id="gas-95s">0đ</p>
+                            </div>
+                        </div>
+                        <div class="Card">
+                            <h1>Xăng RON 92</h1>
+                            <div class="blockprice">
+                                <p class="price" id="gas-92">0đ</p>
+                                <p class="status" id="gas-92s">0đ</p>
+                            </div>
+                        </div>
+                        <div class="Card">
+                            <h1>Dầu DO 0,05S</h1>
+                            <div class="blockprice">
+                                <p class="price" id="oil-do">0đ</p>
+                                <p class="status" id="oil-dos">0đ</p>
+                            </div>
+                        </div>
+                        <div class="Card">
+                            <h1>Dầu KO</h1>
+                            <div class="blockprice">
+                                <p class="price" id="oil-ko">0đ</p>
+                                <p class="status" id="oil-kos">0đ</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="Card">
-                        <h1>Xăng RON 92</h1>
-                        <div class="blockprice">
-                            <p class="price" id="gas-92">0đ</p>
-                            <p class="status" id="gas-92s">0đ</p>
-                        </div>
-                    </div>
-                    <div class="Card">
-                        <h1>Dầu DO 0,05S</h1>
-                        <div class="blockprice">
-                            <p class="price" id="oil-do">0đ</p>
-                            <p class="status" id="oil-dos">0đ</p>
-                        </div>
-                    </div>
-                    <div class="Card">
-                        <h1>Dầu KO</h1>
-                        <div class="blockprice">
-                            <p class="price" id="oil-ko">0đ</p>
-                            <p class="status" id="oil-kos">0đ</p>
-                        </div>
+
+
+                    <div class="Footer">
+                        <p id="dateupdate"></p>
+                        <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank"
+                                rel="noopener noreferrer">Pvoil Việt Nam</a></p>
                     </div>
                 </div>
-                <div class="Footer">
-                    <p id="dateupdate"></p>
-                    <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank"
-                            rel="noopener noreferrer">Pvoil Việt Nam</a></p>
-                </div>
+
 
                 <div class="CalculatorGas">
                     <h1>Đổ xăng theo mức</h1>
@@ -346,16 +397,23 @@
             </div>
             <div id="Blog" class="tabcontent ">
                 <div id="rss-feed">
+                    <button onclick="ReloadBlog()">Tải bài viết</button>
+                    <br>
+                    <br>
+                    <p>Bạn có thể vào mục cài đặt > bật tự động tải bài viết. Để có thể tự tải bài viết mới nhất</p>
                 </div>
             </div>
             <div id="Mess" class="tabcontent mess">
-                <a class="btn mess" href="http://m.me/6329141997112579" target="_blank" rel="noopener noreferrer">Mở
-                    trong Messenger</a>
+                <a class="btn mess" href="http://m.me/6231911936932572" target="_blank" rel="noopener noreferrer">Mở AE
+                    Thân Thiện</a>
             </div>
             <div id="PIP" class="tabcontent PIP ">
                 <h1>Chọn ảnh hoặc video</h1>
+
                 <input type="file" id="fileInput" accept="image/*,video/*">
-                <label for="fileInput" class="custom-file-upload">Chọn tệp</label>
+                <label for="fileInput" class="custom-file-upload"><i class="fa-solid fa-arrow-up-from-bracket"></i> Chọn
+                    tệp</label>
+                <p>Chỉ hỗ trợ ảnh & video</p>
                 <video id="video" controls hidden loop></video>
                 <canvas id="canvas" hidden></canvas>
             </div>
@@ -364,12 +422,11 @@
 
     </main>
 
-
-
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="./Data/map.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+<script src="./Data/ShareGo.js"></script>
 <script src="./Data/script.js"></script>
 <script src="./Data/blog.js"></script>
 <script src="./Data/gas.js"></script>

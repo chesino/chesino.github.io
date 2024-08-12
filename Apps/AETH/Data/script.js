@@ -1,5 +1,4 @@
-
-// Hàm kiểm tra và khôi phục thông tin từ local storage khi tải lại trang
+// USER LOGIN
 function restoreUserInfo() {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
@@ -8,7 +7,7 @@ function restoreUserInfo() {
             document.getElementById('avatar').src = user.avatarUrl;
             document.getElementById('username').textContent = user.name;
             document.getElementById('rank').textContent = user.rank;
-            CheckRank();
+            CheckRank(user);
         } catch (error) {
             console.error("Error parsing stored user data:", error);
         }
@@ -17,30 +16,32 @@ function restoreUserInfo() {
     }
 }
 
-function CheckRank() {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
+function CheckRank(user = null) {
+    if (!user) {
+        const storedUser = localStorage.getItem('currentUser');
+        if (!storedUser) {
+            console.log("No user info found in localStorage.");
+            return;
+        }
         try {
-            const user = JSON.parse(storedUser);
-
-            var body = document.querySelector('body');
-            
-            if (user.rank == 'Priority') {
-                body.classList.remove('AETH-mode');
-                body.classList.add('Priority-mode');
-            } else if (user.rank == 'AETH - Priority' || user.rank == 'Admin - Ultimate') {
-                body.classList.add('AETH-mode');
-                body.classList.add('Priority-mode');
-            } else {
-                body.classList.remove('AETH-mode');
-                body.classList.remove('Priority-mode');
-                body.classList.add('Normal-mode');
-            }
+            user = JSON.parse(storedUser);
         } catch (error) {
             console.error("Error parsing stored user data:", error);
+            return;
         }
+    }
+
+    const body = document.querySelector('body');
+    const rank = user.rank || 'Normal';
+
+    body.classList.remove('AETH-mode', 'Priority-mode', 'Normal-mode');
+
+    if (rank === 'Priority') {
+        body.classList.add('Priority-mode');
+    } else if (rank === 'AETH - Priority' || rank === 'Admin - Ultimate') {
+        body.classList.add('AETH-mode', 'Priority-mode');
     } else {
-        console.log("No user info found in localStorage.");
+        body.classList.add('Normal-mode');
     }
 }
 
@@ -56,49 +57,15 @@ function Login() {
         showLoaderOnConfirm: true,
         preConfirm: (userInput) => {
             userInput = userInput.trim();
-            if (userInput != '') {
+            if (userInput) {
                 return fetch('/DATA/User.csv')
                     .then(response => {
-                        if (!response.ok) {
-                            throw new Error(response.statusText);
-                        }
+                        if (!response.ok) throw new Error(response.statusText);
                         return response.text();
                     })
-                    .then(csvText => {
-                        let foundUser = null;
-                        Papa.parse(csvText, {
-                            header: true,
-                            skipEmptyLines: true,
-                            complete: function (results) {
-                                const users = results.data;
-                                for (let user of users) {
-                                    const uid = user.UID.trim();
-                                    const name = user.Name.trim();
-                                    const link = user.Link.trim();
-                                    let rank = user.Rank ? user.Rank.trim() : "";
-
-                                    if (!rank) {
-                                        rank = "Thành viên";
-                                    }
-
-                                    if (userInput === uid || userInput === link) {
-
-                                        const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-                                        foundUser = { uid, name, avatarUrl, rank };
-                                        break;
-                                    }
-                                }
-                            }
-                        });
-                        if (!foundUser) {
-                            Login2();
-                        }
-                        return foundUser;
-                    })
+                    .then(csvText => parseCSV(csvText, userInput))
                     .catch(error => {
-                        Swal.showValidationMessage(
-                            `Người dùng không tồn tại.`
-                        );
+                        Swal.showValidationMessage('Người dùng không tồn tại.');
                     });
             }
         },
@@ -106,136 +73,50 @@ function Login() {
     }).then((result) => {
         if (result.isConfirmed) {
             const user = result.value;
-            document.getElementById('avatar').src = user.avatarUrl;
-            document.getElementById('username').textContent = user.name;
-            document.getElementById('rank').textContent = user.rank;
-
-            // Lưu thông tin người dùng vào local storage
+            updateUserInfo(user);
             localStorage.setItem('currentUser', JSON.stringify(user));
             DoneSignIn('Đăng nhập thành công');
-            CheckRank();
+            CheckRank(user);
         }
-
     });
 }
-function Login2() {
-    Swal.fire({
-        title: 'Nhập ID Facebook:',
-        input: 'text',
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Xác nhận',
-        showLoaderOnConfirm: true,
-        preConfirm: (userInput) => {
-            userInput = userInput.trim();
-            if (userInput) {
-                return fetch('/DATA/UserFull.csv')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(response.statusText);
-                        }
-                        return response.text();
-                    })
-                    .then(csvText => {
-                        let foundUser = null;
-                        Papa.parse(csvText, {
-                            header: true,
-                            skipEmptyLines: true,
-                            complete: function (results) {
-                                const users = results.data;
-                                for (let user of users) {
-                                    const uid = user.UID.trim();
-                                    const name = user.Name.trim();
-                                    const link = user.Link.trim();
-                                    let rank = user.Rank ? user.Rank.trim() : "";
 
-                                    if (!rank) {
-                                        rank = "Thành viên";
-                                    }
+function parseCSV(csvText, userInput) {
+    let foundUser = null;
+    Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        complete: function (results) {
+            const users = results.data;
+            for (const user of users) {
+                const uid = user.UID.trim();
+                const name = user.Name.trim();
+                const link = user.Link.trim();
+                const CommonName = user.CommonName.trim();
+                let rank = user.Rank ? user.Rank.trim() : "Thành viên";
 
-                                    if (userInput === uid || userInput === name || userInput === link) {
-                                        const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
-                                        foundUser = { uid, name, avatarUrl, rank };
-                                        break;
-                                    }
-                                }
-                            }
-                        });
-                        if (!foundUser) {
-                            throw new Error('Người dùng không tồn tại.');
-                        }
-                        return foundUser;
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(
-                            `Người dùng không tồn tại.`
-                        );
-                    });
+                if (userInput === uid || userInput === link || userInput === CommonName) {
+                    const avatarUrl = `https://graph.facebook.com/${uid}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+                    foundUser = { uid, name, avatarUrl, rank };
+                    break;
+                }
             }
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const user = result.value;
-            document.getElementById('avatar').src = user.avatarUrl;
-            document.getElementById('username').textContent = user.name;
-            document.getElementById('rank').textContent = user.rank;
-
-            // Lưu thông tin người dùng vào local storage
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            DoneSignIn('Đăng nhập thành công');
-            CheckRank();
-        }
-
-    });
-}
-// Khôi phục thông tin người dùng khi tải lại trang
-window.onload = restoreUserInfo;
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Kiểm tra trạng thái tính năng từ Local Storage
-    const isLocationEnabled = localStorage.getItem('locationEnabled') === 'true';
-
-    const button = document.getElementById('toggle-location');
-    updateButton(button, isLocationEnabled);
-
-    if (isLocationEnabled) {
-        // Kiểm tra xem có vị trí lưu trong Local Storage không
-        const storedLocation = localStorage.getItem('location');
-        if (storedLocation) {
-            const [latitude, longitude] = storedLocation.split(',');
-            fetchWeather(latitude, longitude);
-        } else {
-            getCurrentLocationWeather();
-        }
-    }
-
-    button.addEventListener('click', () => {
-        const currentState = localStorage.getItem('locationEnabled') === 'true';
-        localStorage.setItem('locationEnabled', !currentState);
-
-        updateButton(button, !currentState);
-        if (currentState === false) {
-            Done('Đã mở', 'Đã mở tính năng tự động cập nhật thời tiết');
-        } else {
-            Done('Đã tắt', 'Đã tắt tính năng tự động cập nhật thời tiết');
         }
     });
-});
-
-function updateButton(button, isEnabled) {
-    if (isEnabled) {
-        button.innerHTML = '<i class="fa-solid fa-location-dot"></i>';
-    } else {
-        button.innerHTML = '<i class="fa-solid fa-location-pin-lock"></i>';
-    }
+    if (!foundUser) throw new Error('Người dùng không tồn tại.');
+    return foundUser;
 }
 
-function getCurrentLocationWeather() {
+function updateUserInfo(user) {
+    document.getElementById('avatar').src = user.avatarUrl;
+    document.getElementById('username').textContent = user.name;
+    document.getElementById('rank').textContent = user.rank;
+}
+
+// WEATHER
+const apiKey = 'KZH7P9GUL9SBMVQ5MV4WDF23L'; // Thay thế bằng API Key của bạn
+
+function getWeatherAuto() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             position => {
@@ -254,10 +135,6 @@ function getCurrentLocationWeather() {
         getWeatherByIP();
     }
 }
-
-
-
-const apiKey = 'KZH7P9GUL9SBMVQ5MV4WDF23L'; // Thay thế bằng API Key của bạn
 
 // Bảng ánh xạ từ hướng gió quốc tế sang thuần Việt
 const windDirectionMap = {
@@ -299,8 +176,6 @@ async function fetchWeather(latitude, longitude) {
     const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitude},${longitude}?unitGroup=metric&key=${apiKey}&contentType=json`);
     const data = await response.json();
 
-
-
     // Xử lý thông tin điều kiện thời tiết
     const currentConditions = data.currentConditions;
     const conditionCode = currentConditions.icon;
@@ -330,9 +205,6 @@ async function fetchWeather(latitude, longitude) {
     }).catch(error => {
         console.error('Lỗi khi lấy địa điểm:', error);
     });
-
-
-
 
     // Hiển thị thông tin điều kiện thời tiết
     document.getElementById('condition').innerHTML = `<img src="${conditionIcon}" alt="${conditionText}" /><h5>${conditionText}</h5>
@@ -370,6 +242,7 @@ async function fetchWeather(latitude, longitude) {
         uvWarningDiv.style.display = 'none';
     }
 }
+
 async function reverseGeocodeNominatim(latitude, longitude) {
     try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
@@ -406,9 +279,6 @@ async function reverseGeocodeNominatim(latitude, longitude) {
     }
 }
 
-
-
-
 async function getWeatherByIP() {
     try {
         const ipResponse = await fetch('https://ipinfo.io/json?token=8c35ace05458e6');
@@ -441,6 +311,7 @@ function getWeatherByGeolocation() {
         alert('Trình duyệt của bạn không hỗ trợ định vị địa lý.');
     }
 }
+
 async function geocodeAddress(address) {
     const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1`);
     const data = await response.json();
@@ -472,7 +343,7 @@ async function getWeatherByManual() {
     }
 }
 
-
+//ANIMATION
 function weatherAll() {
     var weatherAll = document.getElementById("weatherAll");
 
@@ -491,7 +362,25 @@ function weatherAll() {
     }
 }
 
+function SettingAll() {
+    var SettingAll = document.getElementById("SettingAll");
 
+    if (SettingAll.style.display === "block") {
+        SettingAll.classList.add('animate__fadeOutUp');
+        SettingAll.addEventListener('animationend', function () {
+            SettingAll.style.display = 'none';
+            SettingAll.classList.remove('animate__fadeOutUp');
+        }, { once: true });
+    } else {
+        SettingAll.style.display = 'block';
+        SettingAll.classList.add('animate__fadeInDown');
+        SettingAll.addEventListener('animationend', function () {
+            SettingAll.classList.remove('animate__fadeInDown');
+        }, { once: true });
+    }
+}
+
+//SweetAlert2
 function Done(T1, T2) {
     Swal.fire(
         T1,
@@ -507,6 +396,7 @@ function Fail(T1, T2) {
         'error'
     )
 }
+
 function Warning(T1, T2) {
     Swal.fire(
         T1,
@@ -514,6 +404,7 @@ function Warning(T1, T2) {
         'warning'
     )
 }
+
 function Info(T1, T2) {
     Swal.fire(
         T1,
@@ -521,6 +412,7 @@ function Info(T1, T2) {
         'info'
     )
 }
+
 function DoneSignIn(T1) {
     const Toast = Swal.mixin({
         toast: true,
@@ -539,8 +431,9 @@ function DoneSignIn(T1) {
     });
 }
 
-const list = document.querySelector('.list');
 
+//MENU
+const list = document.querySelector('.list');
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -587,7 +480,7 @@ function openTab(evt, tabName) {
 
 
 //PIP iOS Android
-document.getElementById('fileInput').addEventListener('change', async function(event) {
+document.getElementById('fileInput').addEventListener('change', async function (event) {
     const file = event.target.files[0];
     if (!file) return;
 
@@ -601,7 +494,7 @@ document.getElementById('fileInput').addEventListener('change', async function(e
         const url = URL.createObjectURL(file);
         videoElement.src = url;
         videoElement.hidden = false;
-        
+
         // Wait for video to be ready for playback
         videoElement.onloadedmetadata = async () => {
             try {
@@ -637,7 +530,7 @@ document.getElementById('fileInput').addEventListener('change', async function(e
                     if (document.pictureInPictureEnabled) {
                         await videoElement.requestPictureInPicture();
                     } else {
-                        alert("Your browser does not support Picture-in-Picture.");
+                        Fail("Lỗi", "Your browser does not support Picture-in-Picture.");
                     }
                 } catch (error) {
                     console.error('Failed to enter PiP mode:', error);
@@ -645,4 +538,120 @@ document.getElementById('fileInput').addEventListener('change', async function(e
             };
         };
     }
+});
+
+//SETTING
+const defaultSwitchStates = {
+    toggleBlog: false,        // Mặc định là tắt
+    toggleGas: false,        // Mặc định là tắt
+    toggleWeather: false,    // Mặc định là tắt
+    toggleLogin: true        // Mặc định là bật
+};
+
+
+
+// Lấy trạng thái từ localStorage khi tải trang
+document.addEventListener("DOMContentLoaded", function () {
+    // Cài đặt trạng thái mặc định từ cấu hình
+    for (const [id, defaultState] of Object.entries(defaultSwitchStates)) {
+        const savedState = localStorage.getItem(id);
+        const isChecked = savedState !== null ? savedState === 'true' : defaultState;
+        document.getElementById(id).checked = isChecked;
+
+        // Gọi hàm tương ứng nếu công tắc được bật
+        if (isChecked) {
+            switch (id) {
+                case 'toggleBlog':
+                    ReloadBlog();
+                    break;
+                case 'toggleGas':
+                    fetchData();
+                    break;
+                case 'toggleWeather':
+                    getWeatherAuto();
+                    break;
+                case 'toggleLogin':
+                    restoreUserInfo();
+                    break;
+            }
+        }
+    }
+});
+
+// Xử lý sự kiện khi nhấn công tắc
+document.querySelectorAll('.switch input').forEach(function (el) {
+    el.addEventListener('change', function () {
+        const id = this.id;
+        const status = this.checked;
+        localStorage.setItem(id, status);
+
+        // Gọi hàm tương ứng nếu công tắc được bật
+        if (status) {
+            switch (id) {
+                case 'toggleBlog':
+                    ReloadBlog();
+                    break;
+                case 'toggleGas':
+                    fetchData();
+                    break;
+                case 'toggleWeather':
+                    getWeatherAuto();
+                    break;
+                case 'toggleLogin':
+                    restoreUserInfo();
+                    break;
+            }
+        }
+    });
+});
+
+function ClearData() {
+    Swal.fire({
+        title: 'Xác nhận đặt tất cả ?',
+        text: 'Nếu xác nhận toàn bộ dữ liệu [Ngoại trừ lịch sử chuyến đi] sẽ bị xoá và đặt lại.',
+        icon: 'warning',
+
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xác nhận',
+        cancelButtonText: 'Huỷ'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire(
+                'Đã xoá thành công',
+                'Tất cả mục đã bị xoá.',
+                'success',
+            ).then(() => {
+                localStorage.clear();
+            });
+        }
+    })
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    const progressBar = document.querySelector('.progress');
+
+    let progress = 0;
+
+    function updateProgress() {
+        if (progress < 100) {
+            progress += 1;
+            progressBar.style.width = progress + '%';
+            setTimeout(updateProgress, 20); // Điều chỉnh tốc độ tiến trình nếu cần
+        } else {
+            // Đợi 0.5 giây trước khi ẩn trang loading
+            setTimeout(() => {
+                loadingScreen.style.opacity = 0;
+                mainContent.style.display = 'block';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 300); // Đợi 0.5 giây để hiệu ứng chuyển tiếp hoạt động
+            }, 500); // Đợi 0.5 giây sau khi đạt 100%
+        }
+    }
+
+    updateProgress();
 });

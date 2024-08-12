@@ -1,5 +1,5 @@
 // Tạo bản đồ và các lớp bản đồ
-var map = L.map('mapboxMap').setView([10.7763897,106.6985642], 15); // Đặt mức zoom mặc định là 18
+var map = L.map('mapboxMap').setView([10.7763897, 106.6985642], 15); // Đặt mức zoom mặc định là 18
 
 var dark = L.tileLayer('https://api.maptiler.com/maps/streets-v2-dark/{z}/{x}/{y}.png?key=bJnZQVl8zwoZ2OblPXlr', {
     attribution: '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> contributors',
@@ -42,7 +42,6 @@ function changeMapType() {
 let currentMarker = null;
 
 // Hàm tìm kiếm địa chỉ và thêm đánh dấu
-// Hàm tìm kiếm địa chỉ và thêm đánh dấu
 function searchAddress() {
     const address = document.getElementById('address').value;
 
@@ -71,7 +70,6 @@ function searchAddress() {
             });
     }
 }
-
 
 // Hàm lấy vị trí hiện tại
 function getCurrentLocation() {
@@ -250,6 +248,7 @@ function deleteHistoryItem(index) {
 document.addEventListener('DOMContentLoaded', function () {
     showHistory();
 });
+
 // Hàm xóa toàn bộ lịch sử
 function deleteHistoryAllItem() {
     Swal.fire({
@@ -305,7 +304,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
 
 function adjustNumberOfPeople(operation) {
     var input = document.getElementById('numberOfPeople');
@@ -381,12 +379,8 @@ function setDefaultDateTime() {
         timeInput.value = currentTime; // Thiết lập giờ mặc định là giờ hiện tại nếu không có dữ liệu
     }
 }
-
 // Gọi hàm setDefaultDateTime() khi trang được tải
 setDefaultDateTime();
-
-
-
 
 function deleteHistoryItem(index) {
     Swal.fire({
@@ -414,6 +408,7 @@ function deleteHistoryItem(index) {
         }
     })
 }
+
 function exportToExcel() {
     var history = JSON.parse(localStorage.getItem('history'));
 
@@ -486,7 +481,6 @@ function exportToTxt() {
     link.download = 'history.txt';
     link.click();
 }
-
 
 // Chuyển đổi từ chuỗi sang mảng byte
 function s2ab(s) {
