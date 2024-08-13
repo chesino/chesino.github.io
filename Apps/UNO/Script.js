@@ -149,7 +149,7 @@ function addTally(itemName, quantity) {
         if (itemId) {
             avatarImg.src = `https://graph.facebook.com/${itemId}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
         } else {
-            avatarImg.src = "/DATA/logo.png"; // Replace with default avatar URL or handle as needed
+            avatarImg.src = "/DATA/Logo/logo.png"; // Replace with default avatar URL or handle as needed
         }
         avatar.appendChild(avatarImg);
 

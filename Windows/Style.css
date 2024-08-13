@@ -1,10 +1,10 @@
 @font-face {
   font-family: Patricia;
-  src: url(/DATA/Font/PatriciaGothic-Regular.woff);
+  src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Light.ttf);
 }
 @font-face {
   font-family: PatriciaBold;
-  src: url(/DATA/Font/PatriciaGothic-Bold.woff);
+  src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Bold.ttf);
 }
 * {
   margin: 0;

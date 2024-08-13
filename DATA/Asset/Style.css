@@ -483,6 +483,10 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    transition: none;
+}
+.logo {
+    transition: none;
 }
 
 .logo img {
@@ -490,6 +494,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     border-radius: 50%;
     display: block;
     /* Điều chỉnh kích thước logo nếu cần */
+    transition: none;
 }
 
 .loading-bar {
@@ -1850,4 +1855,16 @@ input[type='time'] {
 
 .timestamp {
     color: #6a9955;
+}
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+footer a{
+    color: var(--Text);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
 }

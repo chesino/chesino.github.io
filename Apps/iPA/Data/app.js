@@ -111,7 +111,7 @@ const apps = [
   },
   {
     "type": "iPA",
-    "logo": "https://chesino.github.io/DATA/logo.png",
+    "logo": "https://chesino.github.io/DATA/Logo/logo.png",
     "name": "SGv3 - Việt Hóa",
     "os": "iOS",
     "version": "0.20.16",

@@ -4,7 +4,7 @@
 
 <head>
   <!-- Tiêu đề trang -->
-  <title>Chesino</title>
+  <title>AETH</title>
 
   <!-- Bộ giải mã và phân loại thiết bị -->
   <meta charset="UTF-8" />
@@ -16,521 +16,260 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
 
   <!-- Biểu tượng cho web -->
-  <link rel="icon" href="./DATA/logo.png" />
+  <link rel="icon" href="/DATA/Logo/logo.png" />
 
   <!-- Biểu tượng iPhone -->
-  <link rel="apple-touch-icon" href="./DATA/logo.png" sizes="150x150" />
+  <link rel="apple-touch-icon" href="/DATA/Logo/logo.png" sizes="150x150" />
 
   <!-- Ảnh -->
-  <meta property="og:image" content="./DATA/logo.png" />
+  <meta property="og:image" content="./Data/wallpaper.jpg" />
+  <meta property="og:title" content="AETH" />
+  <meta property="og:description" content="Thiết kế và lập trình Hùng Đinh" />
+
 
   <!-- CSS của web -->
-  <link rel="stylesheet" href="./DATA/Style.css" />
-  <link rel="stylesheet" href="/DATA/SweetAlert2dark.css">
+  <link rel="stylesheet" href="./Data/Asset/Style.css" />
+  <link rel="stylesheet" href="/DATA/Extend/SweetAlert2dark.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <script src="/DATA/Extend/papaparse.min.js"></script>
 
   <!-- FontAweSome fas fa icon -->
   <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <div class="head">
-    <div class="avatar" onclick="changerAvatar()">
-      <img id="avatar" src="/DATA/logo.png" alt="avatar">
+  <div id="loading-screen">
+    <div class="logo">
+      <img src="/DATA/LOGO_PNG/1.png" alt="Logo"> <!-- Thay logo.png bằng đường dẫn đến logo của bạn -->
+      <h1 class="WelcomePriority">Priority</h1>
     </div>
-    <div class="welcome">
-      
-    </div>
-    <div class="weather" id="weather" onclick="weatherAll()">
-      <h1><i class="fa-solid fa-cloud"></i></h1>
+    <div class="loading-bar">
+      <div class="progress"></div>
     </div>
   </div>
-  <div class="weatherAll animate__animated" id="weatherAll">
-    <h1 id="location"></h1>
-    <div id="condition"></div>
-    <h1 id="temperature"></h1>
-    <div class="More">
-      <p id="rain_chance">Chưa có dữ liệu</p>
-      <div id="uv_index"></div>
-      <div id="wind_direction"></div>
+
+  <header class="header">
+    <div class="head">
+      <div class="user">
+        <div class="avatar" onclick="SettingAll()">
+          <img id="avatar" src="/DATA/Logo/logo.png" alt="avatar">
+        </div>
+        <div class="infouser">
+          <h1 id="username" class="username">Khách</h1>
+          <p id="rank" class="rank">Nhấn vào ảnh để đăng nhập</p>
+        </div>
+      </div>
+
+      <div class="welcome">
+      </div>
+      <div class="weather" id="weather" onclick="weatherAll()">
+        <h1><i class="fa-solid fa-cloud"></i></h1>
+      </div>
     </div>
 
-    <div id="uv_warning">
-      <i class="fa-solid fa-exclamation-triangle"></i> <span id="uv_warning_text"></span>
+    <div class="weatherAll animate__animated" id="weatherAll">
+      <h1 id="location"></h1>
+      <div id="condition"></div>
+      <h1 id="temperature"></h1>
+      <div class="More">
+        <p id="rain_chance">Chưa có dữ liệu</p>
+        <div id="uv_index"></div>
+        <div id="wind_direction"></div>
+      </div>
+
+      <div id="uv_warning">
+        <i class="fa-solid fa-exclamation-triangle"></i> <span id="uv_warning_text"></span>
+      </div>
+
+      <div class="searchLocation">
+        <input type="text" id="manualLocation" placeholder="Nhập địa điểm">
+        <button onclick="getWeatherByManual()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button onclick="getWeatherByIP()">IP</button>
+        <button onclick="getWeatherByGeolocation()"><i class="fa-solid fa-location-arrow"></i></button>
+      </div>
+      <div class="infoDevice">
+        <div id="ip"></div>
+        <div id="organization"></div>
+        <p>WeatherAPI</p>
+      </div>
     </div>
 
-    <div class="searchLocation">
-      <input type="text" id="manualLocation" placeholder="Nhập địa điểm">
-      <button onclick="getWeatherByManual()"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <button onclick="getWeatherByIP()">IP</button>
-      <button onclick="getWeatherByGeolocation()"><i class="fa-solid fa-location-arrow"></i></button>
+    <div class="Setting animate__animated" id="SettingAll">
+      <div class="Item">
+        <label for="toggleGas">Giá xăng</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleGas">
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="Item">
+        <label for="toggleWeather">Thời tiết</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleWeather">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="Item">
+        <label for="toggleLogin">Đăng nhập</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleLogin">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="Item">
+        <label for="toggle-theme">Sáng Tối</label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-theme">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="ItemBtn">
+        <button class="Btn" onclick="Login()()"><i class="fa-solid fa-user"></i> Đăng nhập</button>
+        <button class="Btn Reset" onclick="ClearData()"><i class="fa-solid fa-eraser"></i></button>
+      </div>
+
+
+
+
     </div>
-    <div class="infoDevice">
-      <div id="ip"></div>
-      <div id="organization"></div>
-    </div>
 
 
-  </div>
+  </header>
 
-  <main class="main">
+  <main class="main" id="main-content">
     <div class="banner">
-      <img src="/DATA/logo.png" alt="logo">
+      <img src="/DATA/Banner/Dark.png" alt="" srcset="">
     </div>
+
     <div class="list tab">
-      <button class="item tablinks" onclick="openTab(event, 'All')">
+      <button class="item tablinks active" onclick="openTab(event, 'Home')">
         <div class="icon">
-          <img src="/DATA/Icon/app-development.png" alt="1">
+          <img src="/DATA/Icon/app-development.png" alt="" srcset="">
         </div>
         <div class="label">
-          Tất cả dự án
+          Dự Án
         </div>
       </button>
 
-      <button class="item tablinks" onclick="openTab(event, 'Tools')">
+      <button class="item tablinks" onclick="openTab(event, 'Gas')">
         <div class="icon">
-          <img src="/DATA/Icon/technical-support.png" alt="" srcset="">
+          <img src="/DATA/Icon/petrol-pump.png" alt="" srcset="">
         </div>
         <div class="label">
-          Cung cụ
+          Giá xăng
         </div>
       </button>
 
-      <button class="item tablinks" onclick="openTab(event, 'Apps')">
+      <button class="item tablinks" onclick="openTab(event, 'PIP')">
         <div class="icon">
-          <img src="/DATA/Icon/apps.png" alt="" srcset="">
+          <img src="/DATA/Icon/PIP.png" alt="" srcset="">
         </div>
         <div class="label">
-          Ứng dụng
+          PIP
         </div>
       </button>
 
-      <button class="item tablinks" onclick="openTab(event, 'Info')">
+      <button id="tabDEV" class="item tablinks" onclick="openTab(event, 'Dev')">
         <div class="icon">
-          <img src="/DATA/Icon/info.png" alt="" srcset="">
+          <img src="/DATA/Icon/code.png" alt="" srcset="">
         </div>
         <div class="label">
-          Thông tin
+          Lập Trình Viên
         </div>
       </button>
-
     </div>
 
-    <div id="All" class="tabcontent show">
-      <div class="mainCard">
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/Excel.webp" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Excel Tools <span>1.0.1</span></h1>
-            <p class="description">Xoá mật khẩu tài liệu Excel.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Tools/Excel/index.html" target="_blank" rel="noopener noreferrer">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/AETH.png" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">AETH <span>2.2.0</span></h1>
-            <p class="description">Lưu lại các chi phí cũng như đánh giá ghi chú các địa điểm.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/AETH/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/ADBLOCK.webp" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Chặn quảng cáo <span>5.2.1</span></h1>
-            <p class="description">Giúp bạn chặn những quảng cáo phiền phức.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Tools/Adblock/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/IPA.jpeg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">iPA Store<span>1.2.0</span></h1>
-            <p class="description">Kho iPA iOS.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/iPA/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/Money.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Quản lý tài chính<span>2.1.1</span></h1>
-            <p class="description">Giúp bạn quản lý tài chính tốt hơn, đang trong quá trình phát triển thêm.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/Tài-Chính/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/UNO.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">UNO<span>3.1</span></h1>
-            <p class="description">Đây là máy cộng điểm cho các người chơi.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/UNO/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/JB.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Repo Jailbreak<span>1.0</span></h1>
-            <p class="description">Dành riêng cho iPhone Jailbreak.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/UNO/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/social-media.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">HunqD Toolkit<span>1.2.2</span></h1>
-            <p class="description">Tiện ích dành riêng cho bạn bè của Hùng.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./HunqD/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/Windows.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Windows<span>1.0.2</span></h1>
-            <p class="description">Hỗ trợ phần mềm, cài Windows và kích hoạt bản quyền Windows - Office,...</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Windows/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
+    <div class="content">
+      <div id="Home" class="tabcontent Home show">
+       <h1>Đang bảo trì</h1>
+       <p>Rất tiếc vì điều này</p>
+       <br>
+       <a class="Btn" href="./Apps/AETH/index.html" target="_blank" rel="noopener noreferrer">AETH</a>
+       <a class="Btn" href="./Tools/Adblock/index.html" target="_blank" rel="noopener noreferrer">AdBlock</a>
+       <a class="Btn" href="./Tools/Excel/index.html" target="_blank" rel="noopener noreferrer">Xoá Mật Khẩu Excel</a>
+       <a class="Btn" href="./Apps/UNO/index.html" target="_blank" rel="noopener noreferrer">UNO</a>
       </div>
-    </div>
 
-    <div id="Tools" class="tabcontent">
-      <div class="mainCard">
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/Excel.webp" alt="1">
+      <div class="tabcontent Gas " id="Gas">
+        <div class="MainGas">
+          <div class="CardsContainer">
+            <div class="Card">
+              <h1>Xăng RON 95</h1>
+              <div class="blockprice">
+                <p class="price" id="gas-95">0đ</p>
+                <p class="status" id="gas-95s">0đ</p>
+              </div>
+            </div>
+            <div class="Card">
+              <h1>Xăng RON 92</h1>
+              <div class="blockprice">
+                <p class="price" id="gas-92">0đ</p>
+                <p class="status" id="gas-92s">0đ</p>
+              </div>
+            </div>
+            <div class="Card">
+              <h1>Dầu DO 0,05S</h1>
+              <div class="blockprice">
+                <p class="price" id="oil-do">0đ</p>
+                <p class="status" id="oil-dos">0đ</p>
+              </div>
+            </div>
+            <div class="Card">
+              <h1>Dầu KO</h1>
+              <div class="blockprice">
+                <p class="price" id="oil-ko">0đ</p>
+                <p class="status" id="oil-kos">0đ</p>
+              </div>
+            </div>
           </div>
 
-          <div class="product">
-            <h1 class="name">Excel Tools <span>1.0.1</span></h1>
-            <p class="description">Xoá mật khẩu tài liệu Excel.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Tools/Excel/index.html" target="_blank" rel="noopener noreferrer">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+
+          <div class="Footer">
+            <p id="dateupdate"></p>
+            <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank"
+                rel="noopener noreferrer">Pvoil Việt Nam</a></p>
           </div>
         </div>
-        
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/ADBLOCK.webp" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Chặn quảng cáo <span>5.2.1</span></h1>
-            <p class="description">Giúp bạn chặn những quảng cáo phiền phức.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Tools/Adblock/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/JB.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Repo Jailbreak<span>1.0</span></h1>
-            <p class="description">Dành riêng cho iPhone Jailbreak.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/UNO/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/social-media.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">HunqD Toolkit<span>1.2.2</span></h1>
-            <p class="description">Tiện ích dành riêng cho bạn bè của Hùng.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./HunqD/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/Windows.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Windows<span>1.0.2</span></h1>
-            <p class="description">Hỗ trợ phần mềm, cài Windows và kích hoạt bản quyền Windows - Office,...</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Windows/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
       </div>
-    </div>
 
-    <div id="Apps" class="tabcontent ">
-      <div class="mainCard">
+      <div id="PIP" class="tabcontent PIP ">
+        <h1>Chọn ảnh hoặc video</h1>
 
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/AETH.png" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">AETH <span>2.0.1</span></h1>
-            <p class="description">Lưu lại các chi phí cũng như đánh giá ghi chú các địa điểm.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/AETH/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/IPA.jpeg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">iPA Store<span>1.2.0</span></h1>
-            <p class="description">Kho iPA iOS.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/iPA/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/Money.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Quản lý tài chính<span>2.1.1</span></h1>
-            <p class="description">Giúp bạn quản lý tài chính tốt hơn, đang trong quá trình phát triển thêm.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/Tài-Chính/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/UNO.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">UNO<span>3.1</span></h1>
-            <p class="description">Đây là máy cộng điểm cho các người chơi.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Apps/UNO/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/social-media.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">HunqD Toolkit<span>1.2.2</span></h1>
-            <p class="description">Tiện ích dành riêng cho bạn bè của Hùng.</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./HunqD/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="Card">
-          <div class="image">
-            <img src="/DATA/IMG/Windows.jpg" alt="1">
-          </div>
-
-          <div class="product">
-            <h1 class="name">Windows<span>1.0.2</span></h1>
-            <p class="description">Hỗ trợ phần mềm, cài Windows và kích hoạt bản quyền Windows - Office,...</p>
-          </div>
-          <div class="buy">
-            <p class="price">
-              Miễn phí
-            </p>
-            <a href="./Windows/index.html" target="_blank" rel="noopener noreferrer">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
+        <input type="file" id="fileInput" accept="image/*,video/*">
+        <label for="fileInput" class="custom-file-upload"><i class="fa-solid fa-arrow-up-from-bracket"></i> Chọn
+          tệp</label>
+        <p>Chỉ hỗ trợ ảnh & video</p>
+        <video id="video" controls hidden loop></video>
+        <canvas id="canvas" hidden></canvas>
       </div>
-    </div>
 
-    <div id="Info" class="tabcontent">
-      <h1>Thông tin</h1>
-      <br>
-      <p>Thiết kế & lập trình bởi <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a>.</p>
-    </div>
+      <div id="Dev" class="tabcontent Dev ">
+        <h1>Bảng Lỗi</h1>
+        <div class="Error" id="ErrorLog">
+          <div class="log">
+            Không có lỗi gì sảy ra cả 👍
+          </div>
+        </div>
+      </div>
 
-    <div class="AdBanner">
-      <img src="./DATA/logo.png" alt="" srcset="">
     </div>
 
   </main>
-
+  <footer>
+    <p>Thiết kế và lập trình bởi: <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a></p>
+  </footer>
 
 </body>
 
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="./DATA/Script.js"></script>
-<script src="/DATA/SweetAlert2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+<script src="./Data/Asset/Script.js"></script>
+<script src="./DATA/Asset/PIP.js"></script>
+<script src="./Data/Asset/Gas.js"></script>
+<script src="/DATA/Extend/SweetAlert2.js"></script>
 
 </html>
