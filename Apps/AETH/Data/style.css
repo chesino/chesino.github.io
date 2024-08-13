@@ -1,22 +1,42 @@
 :root {
     --Background: #fffffe;
-    --Background2: #d8eefe;
-    --Background3: #000000;
-    --Head: #d8eefe;
-    --HeadText: #000;
     --Text: #000;
-    --Paragraph: #5f6c7b;
-    --MainColor: #3da9fc;
-    --Button: #3da9fc;
-    --ButtonText: #fffffe;
-    --ButtonActive: #000000;
-    --Popup: #eee;
-    --PopupText: #111;
-    --Card: #094067;
-    --Card2: #3da9fc;
-    --CardText: #d8eefe;
-    --Input: #d8eefe;
-    --InputText: #000;
+    --Head-Background: #fff;
+    --Head-Text: #000;
+
+    --Setting-Background: #000000;
+    --Setting-Text: #fff;
+    --Setting-BTN: #fff;
+    --Setting-BTN-Text: #000;
+    --Setting-BTN-Primary: #353535;
+    --Setting-BTN-Text-Primary: #ffffff;
+    --Setting-Switch: #797979;
+    --Setting-Switch-Dot: #ffffff;
+    --Setting-Switch-Checked: #fff;
+    --Setting-Switch-Dot-Checked: #000;
+
+    --List-Background: #000;
+    --List-Text: #fff;
+    --List-Background-Active: #fff;
+    --List-Text-Active: #000;
+
+    --Map-Background: #000;
+    --Map-BTN: #000;
+    --Map-BTN-Text: #fff;
+    --SnG-Head-Background: #000;
+    --SnG-Head-Text: #fff;
+    --SnG-Input: #111;
+    --SnG-Input-Text: #fff;
+    --SnG-BTN: #111;
+    --SnG-BTN-Text: #fff;
+    --Map-Marker-icon: #fff;
+    --SnG-Star: #F9D342;
+    --SnG-BTN-Main: #000;
+    --SnG-BTN-Main-Text: #fff;
+    --SnG-History-Background: #111;
+    --SnG-History-Text: #fff;
+    --SnG-History-Item-Background: #fff;
+    --SnG-History-Item-Text: #000000;
 }
 
 .Dark-mode {
@@ -221,8 +241,8 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     justify-content: space-between;
     align-items: center;
     padding: 6px 20px;
-    color: var(--HeadText);
-    background-color: var(--Head);
+    color: var(--Head-Text);
+    background-color: var(--Head-Background);
     z-index: 2;
 }
 
@@ -280,10 +300,11 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .weatherAll {
+    color: var(--Setting-Text);
+    background-color: var(--Setting-Background);
     text-align: center;
     display: none;
     position: relative;
-    background-color: var(--Background2);
     padding: 10px 20px;
     border-radius: 20px;
     border-top-left-radius: 0;
@@ -305,11 +326,11 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .weatherAll .More {
+    background-color: var(--Setting-BTN-Primary);
     font-size: 18px;
     display: flex;
     justify-content: space-around;
     gap: 2px;
-    background-color: var(--Background);
     padding: 10px;
     margin: 10px 0;
     border-radius: 20px;
@@ -317,8 +338,8 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 
 .Btn {
     display: block;
-    color: var(--ButtonText);
-    background-color: var(--Button);
+    color: var(--Setting-BTN-Text);
+    background-color: var(--Setting-BTN);
     font-size: 20px;
     font-weight: bold;
     padding: 10px;
@@ -332,17 +353,18 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .Btn.Reset {
-    color: #000;
-    background-color: #d4d4d4;
+    color: var(--Setting-BTN-Text-Primary);
+    background-color: var(--Setting-BTN-Primary);
     padding: 10px;
     font-size: 16px;
 }
 
 .Setting {
+    color: var(--Setting-Text);
+    background-color: var(--Setting-Background);
     display: none;
     text-align: center;
     position: relative;
-    background-color: var(--Background2);
     padding: 20px;
     border-radius: 20px;
     border-top-left-radius: 0;
@@ -384,7 +406,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--Background3);
+    background-color: var(--Setting-Switch);
     transition: .4s;
     border-radius: 13px;
     ;
@@ -400,18 +422,18 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     /* Kích thước bóng tròn nhỏ hơn */
     left: 2px;
     bottom: 2px;
-    background-color: var(--Button);
+    background-color: var(--Setting-Switch-Dot);
     transition: .4s;
     border-radius: 50%;
 }
 
 .Setting input:checked+.slider {
-    background-color: var(--Button);
+    background-color: var(--Setting-Switch-Checked);
 }
 
 .Setting input:checked+.slider:before {
     transform: translateX(24px);
-    background-color: var(--ButtonText);
+    background-color: var(--Setting-Switch-Dot-Checked);
 }
 
 .Setting label {
@@ -446,8 +468,8 @@ input:focus {
     font-weight: bold;
     font-size: 18px;
     width: 100%;
-    color: var(--ButtonText);
-    background-color: var(--Button);
+    color: var(--Setting-BTN-Text-Primary);
+    background-color: var(--Setting-BTN-Primary);
     border: none;
 }
 
@@ -511,19 +533,19 @@ main .list {
 }
 
 main .list .item {
+    color: var(--List-Text);
+    background-color: var(--List-Background);
     cursor: pointer;
     grid-template-columns: 100px auto;
     font-size: 16px;
     font-weight: bold;
-    padding: 8px 10px;
+    padding: 6px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
     border: none;
     border-radius: 10px;
-    background-color: var(--Button);
-    color: var(--ButtonText);
 }
 
 main .list .item .icon {
@@ -551,8 +573,9 @@ main .list::-webkit-scrollbar {
 }
 
 .tablinks.active {
-    color: var(--MainColor) !important;
-    background-color: var(--ButtonActive) !important;
+    color: var(--List-Text-Active) !important;
+    background-color: var(--List-Background-Active) !important;
+    border: 3px solid var(--List-Text-Active) !important; 
 }
 
 
@@ -708,30 +731,28 @@ main .list::-webkit-scrollbar {
     top: 0;
     padding: 2px 10px;
     z-index: 0;
-    background-color: var(--Background);
+    color: var(--SnG-Head-Text);
+    background-color: var(--SnG-Head-Background);
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .ShareGo .Head h1 {
-    color: var(--MainColor);
     font-size: 16px;
 }
 
 .ShareGo .Head h1 span {
     font-size: 10px;
-    color: var(--Background3);
 }
 
 #mapboxMap {
     height: 100%;
     width: 100%;
-    border-radius: 10px;
     z-index: 0;
 }
 
 .suggestions {
-    background-color: var(--Background3);
+    background-color: var(--SnG-Head-Background);
     position: absolute;
     width: calc(100% - 40px);
     max-height: 220px;
@@ -743,19 +764,19 @@ main .list::-webkit-scrollbar {
 .suggestion-item {
     padding: 8px;
     cursor: pointer;
-    background-color: var(--Background2);
+    background-color: var(--SnG-Head-Text);
     margin: 4px;
     border-radius: 10px;
 }
 
 .suggestion-item:hover {
-    background-color: var(--ButtonActive);
+    background-color: var(--SnG-Head-Background);
 }
 
 .leaflet-marker-icon {
     border-radius: 50%;
-    border: 3px solid var(--MainColor);
-    background-color: var(--Background);
+    border: 3px solid var(--Map-Marker-icon);
+    background-color: var(--Map-Background);
 }
 
 .leaflet-right {
@@ -769,18 +790,20 @@ main .list::-webkit-scrollbar {
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-    background-color: var(--Popup) !important;
-    color: var(--PopupText) !important;
+    background-color: var(--Map-BTN) !important;
+    color: var(--Map-BTN-Text) !important;
 }
 
 .leaflet-bar a {
-    color: var(--ButtonText) !important;
-    background-color: var(--Button) !important;
+    color: var(--SnG-BTN-Text) !important;
+    background-color: var(--SnG-BTN) !important;
     border: none !important;
 }
 
 .leaflet-container .leaflet-control-attribution {
-    background-color: var(--Background3) !important;
+    color: #fff;
+    background-color:#000000 !important;
+    border-top-right-radius: 10px;
 }
 
 .custom-div-icon .custom-marker {
@@ -803,7 +826,7 @@ main .list::-webkit-scrollbar {
     height: 220px;
     overflow: hidden;
     border-radius: 20px;
-    border: 5px solid var(--MainColor);
+    border: 5px solid var(--Map-Background);
     margin: 0;
 }
 
@@ -812,12 +835,11 @@ main .list::-webkit-scrollbar {
 }
 
 .mapboxgl-popup-content {
-    background-color: var(--MainColor) !important;
+    background-color: var(--Map-Background) !important;
 }
 
 .mapboxgl-popup-tip {
-    border-top-color: var(--MainColor) !important;
-    ;
+    border-top-color: var(--Map-Background) !important;
 }
 
 
@@ -831,18 +853,16 @@ main .list::-webkit-scrollbar {
 
 
 .Map select {
+    color: var(--Map-BTN-Text);
+    background-color: var(--Map-BTN);
     text-align: center;
     appearance: none;
-    /*  safari  */
     -webkit-appearance: none;
-    /*  other styles for aesthetics */
     padding: 5px 10px;
     font-size: 1.15rem;
-    background-color: var(--Button);
     border: none;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    color: var(--ButtonText);
     cursor: pointer;
     font-weight: bold;
 }
@@ -896,11 +916,11 @@ select:focus {
 }
 
 .Form input {
-    color: var(--InputText);
+    color: var(--SnG-Input-Text);
+    background-color: var(--SnG-Input);
     width: 100%;
     display: block;
     border: none;
-    background-color: var(--Input);
     border-radius: 10px;
     font-size: 18px;
     padding: 10px;
@@ -912,13 +932,13 @@ select:focus {
 }
 
 .Form .Flex button {
-    color: var(--ButtonText);
+    color: var(--SnG-BTN-Text);
+    background-color: var(--SnG-BTN);
     font-size: 20px;
     height: 41px;
-    width: 55px;
+    width: 60px;
     border-radius: 10px;
     border: none;
-    background-color: var(--Button);
 }
 
 .Form textarea {
@@ -930,8 +950,8 @@ select:focus {
     box-sizing: border-box;
     border: none;
     border-radius: 10px;
-    color: var(--Text);
-    background-color: var(--Background2);
+    color: var(--SnG-Input-Text);
+    background-color: var(--SnG-Input);
     resize: none;
 }
 
@@ -960,7 +980,7 @@ input[type='time'] {
 }
 
 .ratings {
-    background-color: var(--Input);
+    background-color: var(--SnG-Input);
     border-radius: 10px;
     list-style-type: none;
     margin: 0;
@@ -976,7 +996,7 @@ input[type='time'] {
     line-height: 40px;
     display: inline-block;
     transition: color 0.2s ease;
-    color: var(--Background3);
+    color: var(--SnG-BTN-Text);
 }
 
 .star:before {
@@ -991,7 +1011,7 @@ input[type='time'] {
 .star:hover~.star,
 .star.selected~.star {
     transition: color 0.8s ease;
-    color: var(--MainColor);
+    color: var(--SnG-Star);
 }
 
 .Form button.Confirm {
@@ -1002,13 +1022,13 @@ input[type='time'] {
     width: 100%;
     border-radius: 10px;
     border: none;
-    color: var(--ButtonText);
-    background-color: var(--Button);
+    color: var(--SnG-BTN-Main-Text);
+    background-color:var(--SnG-BTN-Main);
 }
 
 .historyContainer {
-    color: var(--Text);
-    background-color: var(--Background2);
+    color: var(--SnG-History-Text);
+    background-color: var(--SnG-History-Background);
     border-radius: 20px;
     padding: 10px;
 }
@@ -1016,8 +1036,9 @@ input[type='time'] {
 .history-item {
     border-radius: 20px;
     margin-top: 10px;
-    background-color: var(--Background);
-    border: 2px solid var(--MainColor);
+    color: var(--SnG-History-Item-Text);
+    background-color: var(--SnG-History-Item-Background);
+    border: 2px solid var(--SnG-History-Item-Text);
     padding: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     position: relative;
