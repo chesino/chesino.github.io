@@ -1,65 +1,341 @@
 :root {
-    --Background: #fffffe;
-    --Text: #000;
-    --Head-Background: #fff;
-    --Head-Text: #000;
+    --Background: #FFFFFF;
+    --Text: #000000;
+    --Head-Background: #FFFFFF;
+    --Head-Text: #000000;
+    --Head-Shadow: #35353586;
 
-    --Setting-Background: #000000;
-    --Setting-Text: #fff;
-    --Setting-BTN: #fff;
-    --Setting-BTN-Text: #000;
-    --Setting-BTN-Primary: #353535;
+    --Setting-Background: #D3E3FC;
+    --Setting-Text: #00887A;
+    --Setting-BTN: #003135;
+    --Setting-BTN-Text: #AFDDE5;
+    --Setting-BTN-Primary: #0fa4af;
     --Setting-BTN-Text-Primary: #ffffff;
-    --Setting-Switch: #797979;
+    --Setting-Switch: #353535;
     --Setting-Switch-Dot: #ffffff;
-    --Setting-Switch-Checked: #fff;
-    --Setting-Switch-Dot-Checked: #000;
+    --Setting-Switch-Checked: #00887A;
+    --Setting-Switch-Dot-Checked: #FFFFFF;
 
-    --List-Background: #000;
-    --List-Text: #fff;
-    --List-Background-Active: #fff;
-    --List-Text-Active: #000;
+    --List-Background: #D3E3FC;
+    --List-Text: #77a6F7;
+    --List-Background-Active: #77a6F7;
+    --List-Text-Active: #FFF;
 
-    --Map-Background: #000;
-    --Map-BTN: #000;
-    --Map-BTN-Text: #fff;
-    --SnG-Head-Background: #000;
-    --SnG-Head-Text: #fff;
-    --SnG-Input: #111;
-    --SnG-Input-Text: #fff;
-    --SnG-BTN: #111;
-    --SnG-BTN-Text: #fff;
+    --Map-Background: #77a6F7;
+    --Map-BTN: #77a6F7;
+    --Map-BTN-Text: #FFFFFF;
+    --SnG-Head-Background: #77a6F7;
+    --SnG-Head-Text: #FFFFFF;
+    --SnG-Input: #D3E3FC;
+    --SnG-Input-Text: #77a6F7;
+    --SnG-BTN: #77a6F7;
+    --SnG-BTN-Text: #FFFFFF;
     --Map-Marker-icon: #fff;
-    --SnG-Star: #F9D342;
-    --SnG-BTN-Main: #000;
-    --SnG-BTN-Main-Text: #fff;
-    --SnG-History-Background: #111;
+    --SnG-Star: #77a6F7;
+    --SnG-BTN-Main: #77a6F7;
+    --SnG-BTN-Main-Text: #FFFFFF;
+    --SnG-History-Background: #00887A;
     --SnG-History-Text: #fff;
     --SnG-History-Item-Background: #fff;
     --SnG-History-Item-Text: #000000;
+
+    --Feed-Text: #000000;
+    --Feed-Background: #77a6F7;
+    --Feed-Head: #ffffff;
+    --Feed-Text-Head: #ff0000;
+
+    --Card-Main-Text: #FFFFFF;
+    --Card-Main-Background: #77a6F7;
+    --Card-Text: #000;
+    --Card-Background: #ffffff;
+    --Card-Input-Text: #000;
+    --Card-Input: #eee;
+    --Card-BTN-Text: #ffffff;
+    --Card-BTN: #00887A;
+    --Loading-Bar: #77a6F7;
+    --Loading: #b4b4b4;
+
+    --Popup-Text:#00887A;
+    --Popup:#77a6F7;
+    --Popup-BTN-Main-Text: #fff;
+    --Popup-BTN-Main: #00887A;
+    --Popup-BTN-Text: #fff;
+    --Popup-BTN: #003135;
+}
+
+.Basic-mode {
+    --Background: #FFFFFF;
+    --Text: #000000;
+    --Head-Background: #FFFFFF;
+    --Head-Text: #000000;
+    --Head-Shadow: #35353586;
+
+    --Setting-Background: #FFFFFF;
+    --Setting-Text: #000000;
+    --Setting-BTN: #000000;
+    --Setting-BTN-Text: #ffffff;
+    --Setting-BTN-Primary: #5c5c5c;
+    --Setting-BTN-Text-Primary: #ffffff;
+    --Setting-Switch: #5c5c5c;
+    --Setting-Switch-Dot: #ffffff;
+    --Setting-Switch-Checked: #000000;
+    --Setting-Switch-Dot-Checked: #FFFFFF;
+
+    --List-Background: #5c5c5c;
+    --List-Text: #ffffff;
+    --List-Background-Active: #000000;
+    --List-Text-Active: #FFF;
+
+    --Map-Background: #000000;
+    --Map-BTN: #000000;
+    --Map-BTN-Text: #FFFFFF;
+    --SnG-Head-Background: #000000;
+    --SnG-Head-Text: #FFFFFF;
+    --SnG-Input: #5c5c5c;
+    --SnG-Input-Text: #ffffff;
+    --SnG-BTN: #000000;
+    --SnG-BTN-Text: #FFFFFF;
+    --Map-Marker-icon: #fff;
+    --SnG-Star: #000000;
+    --SnG-BTN-Main: #000000;
+    --SnG-BTN-Main-Text: #FFFFFF;
+    --SnG-History-Background: #000000;
+    --SnG-History-Text: #fff;
+    --SnG-History-Item-Background: #fff;
+    --SnG-History-Item-Text: #000000;
+
+    --Feed-Text: #ffffff;
+    --Feed-Background: #000000;
+    --Feed-Head: #ffffff;
+    --Feed-Head-Text: #000000;
+    --Feed-Text-Head: #ff0000;
+
+    --Card-Main-Text: #ffffff;
+    --Card-Main-Background: #000000;
+    --Card-Text: #000;
+    --Card-Background: #ffffff;
+    --Card-Input-Text: #000;
+    --Card-Input: #eee;
+    --Card-BTN-Text: #000000;
+    --Card-BTN: #ffffff;
+    --Card-Gas-Text: #ffffff;
+    --Card-Gas-Background: #000000;
+
+    --Loading-Bar: #fff;
+    --Loading: #5c5c5c;
+
+    --Popup-Text:#000000;
+    --Popup:#fff;
+    --Popup-BTN-Main-Text: #ffffff;
+    --Popup-BTN-Main: #000000;
+    --Popup-BTN-Text: #fff;
+    --Popup-BTN: #5c5c5c;
 }
 
 .Dark-mode {
-    --Background: #181a1b;
-    --Background2: #111;
-    --Background3: #000000;
-    --Head: #181a1b;
-    --HeadText: #eee;
-    --Text: #eee;
-    --Paragraph: #eee;
-    --MainColor: #F9D342;
-    --Button: #F9D342;
-    --ButtonText: #2c210c;
-    --ButtonActive: #000000;
-    --Popup: #eee;
-    --PopupText: #111;
-    --Card: #0e0e0e;
-    --Card2: #111111;
-    --CardText: #eee;
-    --Input: #111;
-    --InputText: #eee;
+    --Background: #121212;
+    --Text: #E0E0E0;
+    --Head-Background: #1F1F1F;
+    --Head-Text: #FFFFFF;
+    --Head-Shadow: #000000;
+    
+    --Setting-Background: #1F1F1F;
+    --Setting-Text: #E0E0E0;
+    --Setting-BTN: #333333;
+    --Setting-BTN-Text: #FFFFFF;
+    --Setting-BTN-Primary: #3E3E3E;
+    --Setting-BTN-Text-Primary: #E0E0E0;
+    --Setting-Switch: #525252;
+    --Setting-Switch-Dot: #757575;
+    --Setting-Switch-Checked: #003a61;
+    --Setting-Switch-Dot-Checked: #FFFFFF;
 
+    --List-Background: #1F1F1F;
+    --List-Text: #E0E0E0;
+    --List-Background-Active: #333333;
+    --List-Text-Active: #FFFFFF;
+
+    --Map-Background: #1F1F1F;
+    --Map-BTN: #333333;
+    --Map-BTN-Text: #FFFFFF;
+    --SnG-Head-Background: #1F1F1F;
+    --SnG-Head-Text: #FFFFFF;
+    --SnG-Input: #333333;
+    --SnG-Input-Text: #E0E0E0;
+    --SnG-BTN: #003a61;
+    --SnG-BTN-Text: #FFFFFF;
+    --Map-Marker-icon: #FFFFFF;
+    --SnG-Star: #8fd2ff;
+    --SnG-BTN-Main: #003a61;
+    --SnG-BTN-Main-Text: #FFFFFF;
+    --SnG-History-Background: #1F1F1F;
+    --SnG-History-Text: #E0E0E0;
+    --SnG-History-Item-Background: #333333;
+    --SnG-History-Item-Text: #E0E0E0;
+
+    --Feed-Text: #E0E0E0;
+    --Feed-Background: #1F1F1F;
+    --Feed-Head: #1F1F1F;
+    --Feed-Text-Head: #E0E0E0;
+
+    --Card-Main-Text: #E0E0E0;
+    --Card-Main-Background: #1F1F1F;
+    --Card-Text: #FFFFFF;
+    --Card-Background: #333333;
+    --Card-Input-Text: #E0E0E0;
+    --Card-Input: #525252;
+    --Card-BTN-Text: #E0E0E0;
+    --Card-BTN: #003a61;
+    --Card-Gas-Text: #ffffff;
+    --Card-Gas-Background: #000000;
+
+    --Loading-Bar: #fff;
+    --Loading: #1F1F1F;
+
+    --Popup-Text:#ffffff;
+    --Popup:#1F1F1F;
+    --Popup-BTN-Main-Text: #ffffff;
+    --Popup-BTN-Main: #003a61;
+    --Popup-BTN-Text: #fff;
+    --Popup-BTN: #5c5c5c;
 }
+
+.Priority-mode.Dark-mode {
+    --Background: #161414;
+    --Text: #d7c08e; /* Vàng nâu nhẹ */
+    --Head-Background: #1A1A1A;
+    --Head-Text: #d7c08e;
+    --Head-Shadow: #000000;
+
+    --Setting-Background: #1A1A1A;
+    --Setting-Text: #d7c08e;
+    --Setting-BTN: #333333;
+    --Setting-BTN-Text: #d7c08e;
+    --Setting-BTN-Primary: #d7c08e;
+    --Setting-BTN-Text-Primary: #000000;
+    --Setting-Switch: #111111;
+    --Setting-Switch-Dot: #d7c08e;
+    --Setting-Switch-Checked: #d7c08e;
+    --Setting-Switch-Dot-Checked: #000000;
+
+    --List-Background: #1A1A1A;
+    --List-Text: #d7c08e;
+    --List-Background-Active: #d7c08e;
+    --List-Text-Active: #000000;
+
+    --Map-Background: #1A1A1A;
+    --Map-BTN: #d7c08e;
+    --Map-BTN-Text: #000000;
+    --SnG-Head-Background: #1A1A1A;
+    --SnG-Head-Text: #d7c08e;
+    --SnG-Input: #333333;
+    --SnG-Input-Text: #d7c08e;
+    --SnG-BTN: #bda172;
+    --SnG-BTN-Text: #000000;
+    --Map-Marker-icon: #d7c08e;
+    --SnG-Star: #d7c08e;
+    --SnG-BTN-Main: #bda172;
+    --SnG-BTN-Main-Text: #000000;
+    --SnG-History-Background: #1A1A1A;
+    --SnG-History-Text: #d7c08e;
+    --SnG-History-Item-Background: #333333;
+    --SnG-History-Item-Text: #d7c08e;
+
+    --Feed-Text: #d7c08e;
+    --Feed-Background: #1A1A1A;
+    --Feed-Head: #1A1A1A;
+    --Feed-Text-Head: #d7c08e;
+
+    --Card-Main-Text: #d7c08e;
+    --Card-Main-Background: #1A1A1A;
+    --Card-Text: #d7c08e;
+    --Card-Background: #333333;
+    --Card-Input-Text: #d7c08e;
+    --Card-Input: #525252;
+    --Card-BTN-Text: #000000;
+    --Card-BTN: #d7c08e;
+    --Card-Gas-Text: #ffffff;
+    --Card-Gas-Background: #000000;
+
+    --Loading-Bar: #d7c08e;
+    --Loading: #1F1F1F;
+
+    --Popup-Text:#d7c08e;
+    --Popup:#161414;
+    --Popup-BTN-Main-Text: #000;
+    --Popup-BTN-Main: #d7c08e;
+    --Popup-BTN-Text: #fff;
+    --Popup-BTN: #333333;
+}
+.Priority-mode {
+    --Background: #f4f4f4;
+    --Text: #333333;
+    --Head-Background: #ffffff;
+    --Head-Text: #b08d57;
+    --Head-Shadow: #cccccc;
+
+    --Setting-Background: #ffffff;
+    --Setting-Text: #333333;
+    --Setting-BTN: #b08d57;
+    --Setting-BTN-Text: #ffffff;
+    --Setting-BTN-Primary: #333333;
+    --Setting-BTN-Text-Primary: #b08d57;
+    --Setting-Switch: #e0e0e0;
+    --Setting-Switch-Dot: #b08d57;
+    --Setting-Switch-Checked: #b08d57;
+    --Setting-Switch-Dot-Checked: #ffffff;
+
+    --List-Background: #e0e0e0;
+    --List-Text: #b08d57;
+    --List-Background-Active: #b08d57;
+    --List-Text-Active: #ffffff;
+
+    --Map-Background: #ffffff;
+    --Map-BTN: #b08d57;
+    --Map-BTN-Text: #ffffff;
+    --SnG-Head-Background: #ffffff;
+    --SnG-Head-Text: #b08d57;
+    --SnG-Input: #e0e0e0;
+    --SnG-Input-Text: #333333;
+    --SnG-BTN: #b08d57;
+    --SnG-BTN-Text: #ffffff;
+    --Map-Marker-icon: #b08d57;
+    --SnG-Star: #b08d57;
+    --SnG-BTN-Main: #b08d57;
+    --SnG-BTN-Main-Text: #ffffff;
+    --SnG-History-Background: #ffffff;
+    --SnG-History-Text: #333333;
+    --SnG-History-Item-Background: #f5f5f5;
+    --SnG-History-Item-Text: #b08d57;
+
+    --Feed-Text: #333333;
+    --Feed-Background: #e0e0e0;
+    --Feed-Head: #b08d57;
+    --Feed-Text-Head: #b08d57;
+
+    --Card-Main-Text: #333333;
+    --Card-Main-Background: #e0e0e0;
+    --Card-Text: #333333;
+    --Card-Background: #b08d57;
+    --Card-Input-Text: #333333;
+    --Card-Input: #ffffff;
+    --Card-BTN-Text: #ffffff;
+    --Card-BTN: #b08d57;
+    --Card-Gas-Text: #ffffff;
+    --Card-Gas-Background: #000000;
+
+    --Loading-Bar: #d7c08e;
+    --Loading: #e0e0e0;
+
+    --Popup-Text:#b08d57;
+    --Popup:#f4f4f4;
+    --Popup-BTN-Main-Text: #ffffff;
+    --Popup-BTN-Main: #b08d57;
+    --Popup-BTN-Text: #fff;
+    --Popup-BTN: #333333;
+}
+
+
 
 @font-face {
     font-family: BeFont;
@@ -93,7 +369,10 @@ h2 {
 .Priority-mode #tabAETHMess {
     display: flex;
 }
-
+.Priority-mode .WelcomePriority {
+    display: block;
+    color: var(--Loading-Bar);
+}
 .Dev-mode #tabDEV {
     display: flex;
 }
@@ -101,7 +380,9 @@ h2 {
 .hide,
 #tabAETH,
 #tabAETHMess,
-#tabBlog {
+#tabBlog,
+#tabDEV,
+.WelcomePriority {
     display: none;
 }
 
@@ -128,38 +409,39 @@ h2 {
 .swal2-success-circular-line-right,
 .swal2-icon.swal2-success .swal2-success-fix {
     background-color: var(--Popup) !important;
+    border-color: var(--Popup-Text) !important;
 }
 
 .swal2-success-ring {
-    border-color: var(--Button) !important;
+    border-color: var(--Popup-Text) !important;
 }
 
 .swal2-icon.swal2-warning,
 .swal2-icon.swal2-error,
 .swal2-icon.swal2-info {
-    border-color: var(--Button) !important;
-    color: var(--Button) !important;
+    border-color: var(--Popup-Text) !important;
+    color: var(--Popup-Text) !important;
 }
 
 .swal2-success-line-long,
 .swal2-success-line-tip,
 .swal2-icon.swal2-error [class^=swal2-x-mark-line] {
-    background-color: var(--Button) !important;
+    background-color: var(--Popup-Text) !important;
 }
 
 .swal2-title,
 .swal2-content {
-    color: var(--PopupText);
+    color: var(--Popup-Text) !important;
 }
 
 button[type=button] {
-    color: var(--ButtonText) !important;
-    background-color: var(--Button) !important;
+    color: var(--Popup-BTN-Main-Text) !important;
+    background-color: var(--Popup-BTN-Main) !important;
 }
 
 button[type=button].swal2-cancel {
-    color: var(--ButtonText) !important;
-    background-color: var(--Paragraph) !important;
+    color: var(--Popup-BTN-Text) !important;
+    background-color: var(--Popup-BTN) !important;
 }
 
 .swal2-popup.swal2-toast {
@@ -177,7 +459,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .swal2-timer-progress-bar {
-    background-color: var(--Button) !important;
+    background-color: var(--Popup-Text) !important;
 }
 
 .swal2-validation-message {
@@ -190,7 +472,9 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000;
+    color: var(--Text);
+    background-color: var(--Background);
+    text-align: center;
     /* Màu nền của trang loading */
     display: flex;
     flex-direction: column;
@@ -200,7 +484,9 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .logo img {
-    max-width: 200px;
+    max-width: 150px;
+    border-radius: 50%;
+    display: block;
     /* Điều chỉnh kích thước logo nếu cần */
 }
 
@@ -208,7 +494,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     width: 100%;
     max-width: 300px;
     height: 10px;
-    background-color: #111;
+    background-color: var(--Loading);
     border-radius: 10px;
     overflow: hidden;
     margin-top: 20px;
@@ -218,7 +504,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     width: 0;
     height: 10px;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: var(--Loading-Bar);
     /* Màu của thanh tiến trình */
     transition: width 0.4s ease;
 }
@@ -243,6 +529,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     padding: 6px 20px;
     color: var(--Head-Text);
     background-color: var(--Head-Background);
+    box-shadow: 0px 0px 10px 1px var(--Head-Shadow);
     z-index: 2;
 }
 
@@ -326,6 +613,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .weatherAll .More {
+    color: var(--Setting-BTN-Text-Primary);
     background-color: var(--Setting-BTN-Primary);
     font-size: 18px;
     display: flex;
@@ -338,8 +626,8 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 
 .Btn {
     display: block;
-    color: var(--Setting-BTN-Text);
-    background-color: var(--Setting-BTN);
+    color: var(--Map-BTN-Text);
+    background-color: var(--Map-BTN);
     font-size: 20px;
     font-weight: bold;
     padding: 10px;
@@ -370,6 +658,29 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     z-index: 0;
+}
+
+.Setting .Btn {
+    display: block;
+    color: var(--Setting-BTN-Text);
+    background-color: var(--Setting-BTN);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: none;
+}
+
+.Setting .Btn.Reset {
+    color: var(--Setting-BTN-Text-Primary);
+    background-color: var(--Setting-BTN-Primary);
+    padding: 10px;
+    font-size: 16px;
 }
 
 .Setting .ItemBtn {
@@ -451,12 +762,14 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .searchLocation #manualLocation {
-    color: var(--Paragraph);
     background-color: var(--Background);
-    border: none;
+    border: 2px solid var(--Setting-BTN);
     padding: 10px;
     font-size: 16px;
     border-radius: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: 0;
 }
 
 textarea:focus,
@@ -468,8 +781,8 @@ input:focus {
     font-weight: bold;
     font-size: 18px;
     width: 100%;
-    color: var(--Setting-BTN-Text-Primary);
-    background-color: var(--Setting-BTN-Primary);
+    color: var(--Setting-BTN-Text);
+    background-color: var(--Setting-BTN);
     border: none;
 }
 
@@ -477,8 +790,8 @@ input:focus {
     font-weight: bold;
     font-size: 18px;
     width: 100%;
-    color: var(--ButtonText);
-    background-color: var(--Button);
+    color: var(--Map-BTN-Text);
+    background-color: var(--Map-BTN);
     border: none;
     padding: 10px;
     border-radius: 10px;
@@ -575,7 +888,6 @@ main .list::-webkit-scrollbar {
 .tablinks.active {
     color: var(--List-Text-Active) !important;
     background-color: var(--List-Background-Active) !important;
-    border: 3px solid var(--List-Text-Active) !important; 
 }
 
 
@@ -748,11 +1060,12 @@ main .list::-webkit-scrollbar {
 #mapboxMap {
     height: 100%;
     width: 100%;
+    border-radius: 10px;
     z-index: 0;
 }
 
 .suggestions {
-    background-color: var(--SnG-Head-Background);
+    background-color: var(--SnG-Input);
     position: absolute;
     width: calc(100% - 40px);
     max-height: 220px;
@@ -764,13 +1077,13 @@ main .list::-webkit-scrollbar {
 .suggestion-item {
     padding: 8px;
     cursor: pointer;
-    background-color: var(--SnG-Head-Text);
+    background-color: var(--SnG-Head-Background);
     margin: 4px;
     border-radius: 10px;
 }
 
 .suggestion-item:hover {
-    background-color: var(--SnG-Head-Background);
+    background-color: var(--SnG-Head-Text);
 }
 
 .leaflet-marker-icon {
@@ -802,7 +1115,7 @@ main .list::-webkit-scrollbar {
 
 .leaflet-container .leaflet-control-attribution {
     color: #fff;
-    background-color:#000000 !important;
+    background-color: #000000 !important;
     border-top-right-radius: 10px;
 }
 
@@ -1018,18 +1331,17 @@ input[type='time'] {
     font-size: 20px;
     font-weight: bold;
     padding: 15px;
-    margin-bottom: 40px;
     width: 100%;
     border-radius: 10px;
     border: none;
     color: var(--SnG-BTN-Main-Text);
-    background-color:var(--SnG-BTN-Main);
+    background-color: var(--SnG-BTN-Main);
 }
 
 .historyContainer {
     color: var(--SnG-History-Text);
     background-color: var(--SnG-History-Background);
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 10px;
 }
 
@@ -1125,15 +1437,16 @@ input[type='time'] {
 
 /* Blog */
 .Feed {
-    color: var(--CardText);
-    background-color: var(--Card);
+    color: var(--Feed-Text);
+    background-color: var(--Feed-Background);
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
 }
 
 .Feed .Head {
-    background-color: var(--Card2);
+    color: var(--Feed-Head-Text);
+    background-color: var(--Feed-Head);
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -1163,7 +1476,6 @@ input[type='time'] {
 
 .Head .Author .Info .Time {
     font-size: 12px;
-    color: var(--MainColor);
     /* Light gray for time */
 }
 
@@ -1177,7 +1489,6 @@ input[type='time'] {
 
 .Head .Author .Func.Share i {
     font-size: 20px;
-    color: var(--MainColor);
     /* Green for share icon */
 }
 
@@ -1228,7 +1539,7 @@ input[type='time'] {
     height: auto;
     width: 100% !important;
     border-radius: 10px;
-    border: 2px solid var(--Background);
+    /* border: 2px solid var(--Background); */
     box-sizing: border-box;
 }
 
@@ -1305,7 +1616,7 @@ input[type='time'] {
 
 .Feed .Body strong,
 .Feed .Body mark {
-    color: var(--Paragraph) !important;
+    color: var(--Feed-Text-Head) !important;
     /* Green for emphasis */
     font-weight: bold;
 }
@@ -1313,8 +1624,9 @@ input[type='time'] {
 .Feed .Body blockquote {
     font-size: 18px;
     margin: 10px 0;
-    background-color: #000;
-    border-left: 3px solid #fff;
+    color: var(--Text);
+    background-color: var(--Background);
+    border-left: 3px solid #000;
     padding: 1px 0;
     padding-left: 5px;
 }
@@ -1345,8 +1657,8 @@ input[type='time'] {
 }
 
 .MainGas {
-    background-color: var(--Card);
-    color: var(--CardText);
+    color: var(--Card-Main-Text);
+    background-color: var(--Card-Main-Background);
     padding: 10px;
     border-radius: 10px;
 }
@@ -1361,8 +1673,8 @@ input[type='time'] {
 }
 
 .Gas .Card {
-    color: var(--CardText);
-    background-color: var(--Card2);
+    color: var(--Card-Text);
+    background-color: var(--Card-Background);
     border-radius: 10px;
     padding: 10px;
     width: 100%;
@@ -1379,7 +1691,8 @@ input[type='time'] {
 .Gas .Card .blockprice {
     font-family: monospace;
     text-align: right;
-    background-color: #000;
+    color: var(--Card-Gas-Text);
+    background-color: var(--Card-Gas-Background);
     padding: 4px 10px;
     border-radius: 6px;
     width: 120px;
@@ -1422,8 +1735,8 @@ input[type='time'] {
 }
 
 .CalculatorGas {
-    color: var(--CardText);
-    background-color: var(--Card);
+    color: var(--Card-Main-Text);
+    background-color: var(--Card-Main-Background);
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -1435,19 +1748,21 @@ input[type='time'] {
     width: calc(100% - 22px);
     padding: 10px;
     margin: 10px 0;
-    color: var(--InputText);
-    background-color: var(--Input);
+    color: var(--Card-Input-Text);
+    background-color: var(--Card-Input);
     border: none;
     border-radius: 4px;
     font-size: 16px;
 }
 
 .CalculatorGas button {
+    font-weight: bold;
     padding: 10px 20px;
     border: none;
+    width: 200px;
     border-radius: 4px;
-    background-color: #28a745;
-    color: #fff;
+    background-color: var(--Card-BTN);
+    color: var(--Card-BTN-Text);
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -1464,7 +1779,8 @@ input[type='time'] {
 .CalculatorGas #result,
 #result2 {
     margin: 10px 0;
-    background-color: var(--Background2);
+    color: var(--Text);
+    background-color: var(--Background);
     padding: 10px;
     border-radius: 10px;
 }
@@ -1481,8 +1797,8 @@ input[type='time'] {
     display: inline-block;
     padding: 12px 20px;
     cursor: pointer;
-    background-color: var(--Button);
-    color: var(--ButtonText);
+    background-color: var(--Map-BTN);
+    color: var(--Map-BTN-Text);
     border-radius: 10px;
     border: none;
     font-size: 18px;
@@ -1508,10 +1824,14 @@ input[type='time'] {
     background-color: #000;
     border-left: 2px solid greenyellow;
     padding-left: 10px;
+    padding: 5px 0;
+    overflow: hidden;
+    font-size: 18px;
 }
 
 .log {
-    color: #9cdcfe;
+    color: greenyellow;
+    padding-left: 10px;
 }
 
 .error {

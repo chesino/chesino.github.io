@@ -16,6 +16,35 @@ function restoreUserInfo() {
     }
 }
 
+function loadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    const progressBar = document.querySelector('.progress');
+    if (loadingScreen.style.display == 'none') {
+        loadingScreen.style.display = 'flex';
+        loadingScreen.style.opacity = 1;
+        let progress = 0;
+
+        function updateProgress() {
+            if (progress < 100) {
+                progress += 1;
+                progressBar.style.width = progress + '%';
+                setTimeout(updateProgress, 20); // Điều chỉnh tốc độ tiến trình nếu cần
+            } else {
+                // Đợi 0.5 giây trước khi ẩn trang loading
+                setTimeout(() => {
+                    loadingScreen.style.opacity = 0;
+                    mainContent.style.display = 'block';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 300); // Đợi 0.5 giây để hiệu ứng chuyển tiếp hoạt động
+                }, 500); // Đợi 0.5 giây sau khi đạt 100%
+            }
+        }
+        updateProgress();
+    }
+}
+
 function CheckRank(user = null) {
     if (!user) {
         const storedUser = localStorage.getItem('currentUser');
@@ -33,7 +62,7 @@ function CheckRank(user = null) {
 
     const body = document.querySelector('body');
     const rank = user.rank || 'Normal';
-
+    loadingScreen();
     body.classList.remove('AETH-mode', 'Priority-mode', 'Normal-mode');
 
     if (rank === 'Priority') {
@@ -550,8 +579,6 @@ const defaultSwitchStates = {
     toggleLogin: true        // Mặc định là bật
 };
 
-
-
 // Lấy trạng thái từ localStorage khi tải trang
 document.addEventListener("DOMContentLoaded", function () {
     // Cài đặt trạng thái mặc định từ cấu hình
@@ -654,9 +681,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 500); // Đợi 0.5 giây sau khi đạt 100%
         }
     }
-
     updateProgress();
 });
+
 
 // Lưu trữ các hàm console gốc
 const originalLog = console.log;
@@ -738,7 +765,6 @@ toggleThemeButton.addEventListener('change', () => {
     } else {
         bodyElement.classList.remove('Dark-mode');
     }
-
     // Save the state in localStorage
     localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
 });
