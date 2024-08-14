@@ -366,6 +366,10 @@ h2 {
     font-family: BeFontBold;
 }
 
+button:hover
+,.Btn:hover{
+    background-color: var(--Card-Background) ;
+}
 .Priority-mode #tabAETH,
 .Priority-mode #tabBlog,
 .Priority-mode #tabAETHMess {
@@ -547,6 +551,7 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
 }
 
 .head .avatar {
+    cursor: pointer;
     height: 50px;
     width: 50px;
 }
