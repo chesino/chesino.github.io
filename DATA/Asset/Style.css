@@ -61,6 +61,8 @@
     --Popup-BTN-Main: #00887A;
     --Popup-BTN-Text: #fff;
     --Popup-BTN: #003135;
+
+    --Card: #272727;
 }
 
 .Basic-mode {
@@ -965,7 +967,9 @@ main .list::-webkit-scrollbar {
     padding: 0 8px;
     margin: 6px 0;
 }
-
+.mainCard .Card .buy a {
+    text-decoration: none;
+}
 .mainCard .Card .buy button {
     height: 35px;
     width: 35px;

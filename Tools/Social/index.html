@@ -4,7 +4,7 @@
 
 <head>
   <!-- Tiêu đề trang -->
-  <title>Hunq</title>
+  <title>Hunq Social</title>
 
   <!-- Bộ giải mã và phân loại thiết bị -->
   <meta charset="UTF-8" />
@@ -28,7 +28,7 @@
 
 
   <!-- CSS của web -->
-  <link rel="stylesheet" href="./DATA/Asset/Style.css" />
+  <link rel="stylesheet" href="/DATA/Asset/Style.css" />
   <link rel="stylesheet" href="/DATA/Extend/SweetAlert2dark.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <script src="/DATA/Extend/papaparse.min.js"></script>
@@ -144,132 +144,92 @@
     <div class="banner">
       <img src="/DATA/Banner/Dark.png" alt="" srcset="">
     </div>
-
     <div class="list tab">
-      <button class="item tablinks active" onclick="openTab(event, 'Home')">
+      <button class="item tablinks" onclick="Fail('Hiện tại chưa có ưu đãi nào 😓')">
         <div class="icon">
-          <img src="/DATA/Icon/app-development.png" alt="" srcset="">
+          <img src="/DATA/Icon/gift-box.png" alt="" srcset="">
         </div>
         <div class="label">
-          Dự Án
+          Khuyến mãi
         </div>
       </button>
 
-      <button class="item tablinks" onclick="openTab(event, 'Gas')">
+      <button class="item tablinks active" onclick="openTab(event, 'AETH')">
         <div class="icon">
-          <img src="/DATA/Icon/petrol-pump.png" alt="" srcset="">
+          <img src="/Apps/AETH/Data/frog.png" alt="" srcset="">
         </div>
         <div class="label">
-          Giá xăng
+          AETH
         </div>
       </button>
 
-      <button class="item tablinks" onclick="openTab(event, 'PIP')">
+
+      <button class="item tablinks active" onclick="openTab(event, 'Packs')">
         <div class="icon">
-          <img src="/DATA/Icon/PIP.png" alt="" srcset="">
+          <img src="/DATA/Icon/flash-card.png" alt="" srcset="">
         </div>
         <div class="label">
-          PIP
+          Gói
         </div>
       </button>
 
-      <button id="tabDEV" class="item tablinks" onclick="openTab(event, 'Dev')">
+      <button class="item tablinks"
+        onclick="Fail('Bạn không phải thành viên đặc biệt','Yêu cầu hạng thành viên từ bạch kim trở lên.')">
         <div class="icon">
-          <img src="/DATA/Icon/code.png" alt="" srcset="">
+          <img src="/DATA/Icon/diamond.png" alt="" srcset="">
         </div>
         <div class="label">
-          Lập Trình Viên
+          Đặc biệt
         </div>
       </button>
+
+      <button class="item tablinks" onclick="openTab(event, 'Like')">
+        <div class="icon">
+          <img src="/DATA/Icon/like.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Thích
+        </div>
+      </button>
+
+      <button class="item tablinks" onclick="openTab(event, 'Follow')">
+        <div class="icon">
+          <img src="/DATA/Icon/facebook.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Theo dõi
+        </div>
+      </button>
+      <button class="item">Sắp ra mắt</button>
+
     </div>
 
     <div class="content">
-      <div id="Home" class="tabcontent Home show">
-       <h1>Đang bảo trì</h1>
-       <p>Rất tiếc vì điều này</p>
-       <br>
-       <a class="Btn" href="./Apps/AETH/index.html" target="_blank" rel="noopener noreferrer">AETH</a>
-       <a class="Btn" href="./Tools/Adblock/index.html" target="_blank" rel="noopener noreferrer">AdBlock</a>
-       <a class="Btn" href="./Tools/Excel/index.html" target="_blank" rel="noopener noreferrer">Xoá Mật Khẩu Excel</a>
-       <a class="Btn" href="./Apps/UNO/index.html" target="_blank" rel="noopener noreferrer">UNO</a>
+      <div id="Packs" class="tabcontent show">
+        <div class="mainCard" id="PacksOne"></div>
       </div>
 
-      <div class="tabcontent Gas " id="Gas">
-        <div class="MainGas">
-          <div class="CardsContainer">
-            <div class="Card">
-              <h1>Xăng RON 95</h1>
-              <div class="blockprice">
-                <p class="price" id="gas-95">0đ</p>
-                <p class="status" id="gas-95s">0đ</p>
-              </div>
-            </div>
-            <div class="Card">
-              <h1>Xăng RON 92</h1>
-              <div class="blockprice">
-                <p class="price" id="gas-92">0đ</p>
-                <p class="status" id="gas-92s">0đ</p>
-              </div>
-            </div>
-            <div class="Card">
-              <h1>Dầu DO 0,05S</h1>
-              <div class="blockprice">
-                <p class="price" id="oil-do">0đ</p>
-                <p class="status" id="oil-dos">0đ</p>
-              </div>
-            </div>
-            <div class="Card">
-              <h1>Dầu KO</h1>
-              <div class="blockprice">
-                <p class="price" id="oil-ko">0đ</p>
-                <p class="status" id="oil-kos">0đ</p>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="Footer">
-            <p id="dateupdate"></p>
-            <p class="source">Nguồn: <a href="http://pvoil.com.vn/tin-gia-xang-dau" target="_blank"
-                rel="noopener noreferrer">Pvoil Việt Nam</a></p>
-          </div>
-        </div>
+      <div id="Like" class="tabcontent">
+        <div class="mainCard" id="LikePacks"></div>
       </div>
 
-      <div id="PIP" class="tabcontent PIP ">
-        <h1>Chọn ảnh hoặc video</h1>
-
-        <input type="file" id="fileInput" accept="image/*,video/*">
-        <label for="fileInput" class="custom-file-upload"><i class="fa-solid fa-arrow-up-from-bracket"></i> Chọn
-          tệp</label>
-        <p>Chỉ hỗ trợ ảnh & video</p>
-        <video id="video" controls hidden loop></video>
-        <canvas id="canvas" hidden></canvas>
-      </div>
-
-      <div id="Dev" class="tabcontent Dev ">
-        <h1>Bảng Lỗi</h1>
-        <div class="Error" id="ErrorLog">
-          <div class="log">
-            Không có lỗi gì sảy ra cả 👍
-          </div>
-        </div>
+      <div id="Follow" class="tabcontent">
+        <div class="mainCard" id="FollowPacks"></div>
       </div>
 
     </div>
-
   </main>
   <footer>
-    <p>Thiết kế và lập trình bởi: <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a></p>
+    <p>Thiết kế và lập trình bởi: <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh
+        Hùng</a></p>
   </footer>
 
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-<script src="./DATA/Asset/Script.js"></script>
-<script src="./DATA/Asset/PIP.js"></script>
-<script src="./DATA/Asset/Gas.js"></script>
+<script src="./Data/Main.js"></script>
+<script src="/DATA/Asset/Script.js"></script>
 <script src="/DATA/Extend/SweetAlert2.js"></script>
 
 </html>

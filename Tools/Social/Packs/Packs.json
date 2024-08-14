@@ -1,0 +1,94 @@
+{
+    "PacksOne": [
+        {
+            "ImagePack": "/DATA/Logo/iconApps.png",
+            "PackName": "Gói Bạc",
+            "Details": {
+                "Follow": 100,
+                "Like": 100
+            },
+            "OriginalPrice": "12.000đ",
+            "DiscountedPrice": "10.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        },
+        {
+            "ImagePack": "/DATA/Logo/iconApps.png",
+            "PackName": "Gói Vàng",
+            "Details": {
+                "Follow": 500,
+                "Like": 500
+            },
+            "OriginalPrice": "35.000đ",
+            "DiscountedPrice": "30.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        },
+        {
+            "ImagePack": "/DATA/Logo/iconApps.png",
+            "PackName": "Gói Platinum 1T",
+            "Details": {
+                "Follow": 1000,
+                "Like": 1000,
+                "Membership": "Thành viên Bạch kim"
+            },
+            "OriginalPrice": "85.000đ",
+            "DiscountedPrice": "69.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        },
+        {
+            "ImagePack": "/DATA/Logo/iconApps.png",
+            "PackName": "Gói Diamond 1T",
+            "Details": {
+                "Follow": 1000,
+                "Like": 1000,
+                "Membership": "Thành viên Bạch kim"
+            },
+            "OriginalPrice": "85.000đ",
+            "DiscountedPrice": "69.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        }
+    ],
+    "LikePacks": [
+        {
+            "ImagePack": "100 👍",
+            "PackName": "100 👍",
+            "Details": {
+                "Like": 100,
+                "Description": "100 Like bài viết"
+            },
+            "Price": "5.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        },
+        {
+            "ImagePack": "500 👍",
+            "PackName": "500 👍",
+            "Details": {
+                "Like": 500,
+                "Description": "500 Like bài viết"
+            },
+            "Price": "15.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        }
+    ],
+    "FollowPacks": [
+        {
+            "ImagePack": "100 Follow",
+            "PackName": "100 Follow",
+            "Details": {
+                "Follow": 100,
+                "Description": "100 Người theo dõi"
+            },
+            "Price": "7.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        },
+        {
+            "ImagePack": "500 Follow",
+            "PackName": "500 Follow",
+            "Details": {
+                "Follow": 500,
+                "Description": "500 Người theo dõi"
+            },
+            "Price": "20.000đ",
+            "Link": "/DATA/Logo/iconApps.png"
+        }
+    ]
+}
