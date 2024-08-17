@@ -140,11 +140,7 @@ function UpdateForm() {
                 document.getElementById("message").style.color = "var(--SnG-BTN-Main-Text)";
                 document.getElementById("submit-button").disabled = false;
                 document.getElementById("orderForm").reset();
-    
-                setTimeout(function () {
-                    document.getElementById("message").textContent = "";
-                    document.getElementById("message").style.display = "none";
-                }, 5000);
+
             })
             .catch(function (error) {
                 // Handle errors, you can display an error message here
