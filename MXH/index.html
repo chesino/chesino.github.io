@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
+
+<head>
+  <!-- Tiêu đề trang -->
+  <title>Hunq</title>
+
+  <!-- Bộ giải mã và phân loại thiết bị -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Đảm bảo đặt meta tag sau -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- Biểu tượng cho web -->
+  <link rel="icon" href="/DATA/Logo/logo.png" />
+
+  <!-- Biểu tượng iPhone -->
+  <link rel="apple-touch-icon" href="/DATA/Logo/iconApps.png" sizes="150x150" />
+
+  <!-- Ảnh -->
+  <meta property="og:image" content="./Data/wallpaper.jpg" />
+  <meta property="og:title" content="AETH" />
+  <meta property="og:description" content="Thiết kế và lập trình Hùng Đinh" />
+
+
+  <!-- CSS của web -->
+  <link rel="stylesheet" href="/DATA/Asset/Style.css" />
+  <link rel="stylesheet" href="/DATA/Extend/SweetAlert2dark.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <script src="/DATA/Extend/papaparse.min.js"></script>
+
+  <link rel="stylesheet" href="./MainStyle.css" />
+
+  <!-- FontAweSome fas fa icon -->
+  <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="loading-screen">
+    <div class="logo">
+      <img src="/DATA/LOGO_PNG/1.png" alt="Logo"> <!-- Thay logo.png bằng đường dẫn đến logo của bạn -->
+      <h1 class="WelcomePriority">Priority</h1>
+    </div>
+    <div class="loading-bar">
+      <div class="progress"></div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="head">
+      <div class="user">
+        <div class="avatar" onclick="SettingAll()">
+          <img id="avatar" src="/DATA/Logo/logo.png" alt="avatar">
+        </div>
+        <div class="infouser">
+          <h1 id="username" class="username">Khách</h1>
+          <p id="rank" class="rank">Nhấn vào ảnh để đăng nhập</p>
+        </div>
+      </div>
+
+      <div class="welcome">
+      </div>
+      <div class="weather" id="weather" onclick="weatherAll()">
+        <h1><i class="fa-solid fa-cloud"></i></h1>
+      </div>
+    </div>
+
+    <div class="weatherAll animate__animated" id="weatherAll">
+      <h1 id="location"></h1>
+      <div id="condition"></div>
+      <h1 id="temperature"></h1>
+      <div class="More">
+        <p id="rain_chance">Chưa có dữ liệu</p>
+        <div id="uv_index"></div>
+        <div id="wind_direction"></div>
+      </div>
+
+      <div id="uv_warning">
+        <i class="fa-solid fa-exclamation-triangle"></i> <span id="uv_warning_text"></span>
+      </div>
+
+      <div class="searchLocation">
+        <input type="text" id="manualLocation" placeholder="Nhập địa điểm">
+        <button onclick="getWeatherByManual()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button onclick="getWeatherByIP()">IP</button>
+        <button onclick="getWeatherByGeolocation()"><i class="fa-solid fa-location-arrow"></i></button>
+      </div>
+      <div class="infoDevice">
+        <div id="ip"></div>
+        <div id="organization"></div>
+        <p>WeatherAPI</p>
+      </div>
+    </div>
+
+    <div class="Setting animate__animated" id="SettingAll">
+      <div class="Item">
+        <label for="toggleGas">Giá xăng</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleGas">
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div class="Item">
+        <label for="toggleWeather">Thời tiết</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleWeather">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="Item">
+        <label for="toggleLogin">Đăng nhập</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleLogin">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="Item">
+        <label for="toggle-theme">Sáng Tối</label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-theme">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="ItemBtn">
+        <button class="Btn" onclick="Login()()"><i class="fa-solid fa-user"></i> Đăng nhập</button>
+        <button class="Btn Reset" onclick="ClearData()"><i class="fa-solid fa-eraser"></i></button>
+      </div>
+
+
+
+
+    </div>
+
+
+  </header>
+
+  <main class="main" id="main-content">
+    <div class="banner">
+      <img src="/DATA/Banner/Dark.png" alt="" srcset="">
+    </div>
+
+    <div class="list tab">
+      <button class="item tablinks active" onclick="openTab(event, 'Welcome')">
+        <div class="icon">
+          <img src="/DATA/Icon/info.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Hướng dẫn
+        </div>
+      </button>
+      <button class="item tablinks" onclick="openTab(event, 'Home')">
+        <div class="icon">
+          <img src="/DATA/Icon/social-media.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Dịch vụ
+        </div>
+      </button>
+
+      <button class="item tablinks" onclick="openTab(event, 'Price')">
+        <div class="icon">
+          <img src="/DATA/Icon/price-tag.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Bảng giá
+        </div>
+      </button>
+
+      <button id="tabDEV" class="item tablinks" onclick="openTab(event, 'Order')">
+        <div class="icon">
+          <img src="/DATA/Icon/clipboard.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Đơn hàng
+        </div>
+      </button>
+
+      <button class="item tablinks" onclick="openTab(event, 'Support')">
+        <div class="icon">
+          <img src="/DATA/Icon/help-desk.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Hỗ trợ
+        </div>
+      </button>
+
+      <button id="tabDEV" class="item tablinks" onclick="openTab(event, 'Dev')">
+        <div class="icon">
+          <img src="/DATA/Icon/code.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Lập Trình Viên
+        </div>
+      </button>
+    </div>
+
+    <div class="content">
+      <div id="Welcome" class="tabcontent show">
+        <h1>Hiện tại đang cập nhật</h1>
+      </div>
+      <div class="tabcontent" id="Home">
+        <form id="orderForm" class="orderForm" method="POST">
+
+          <div class="MXH-Input">
+            <label for="customer">Hunq ID <span>(Có thể nhập Email hoặc SĐT của bạn)</span></label>
+            <input name="Hunq ID" type="text" id="customer" name="customer" required>
+          </div>
+
+          <div class="MXH-Input">
+            <label for="platform">Nền tảng</label>
+            <select id="platform" name="Platform" onchange="updateServiceOptions()" required>
+              <option selected disabled>Chọn nền tảng</option>
+              <option value="facebook">Facebook</option>
+              <option value="tiktok">TikTok</option>
+            </select>
+          </div>
+
+          <div class="MXH-Input">
+            <label for="service">Dịch vụ</label>
+            <select id="service" name="Service" onchange="calculateTotalPrice()" required>
+              <option>Vui lòng chọn nền tảng</option>
+            </select>
+          </div>
+
+          <div class="MXH-Input">
+            <label for="quantity">Số lượng:</label>
+            <input type="text" id="quantity" name="Quantity" onchange="calculateTotalPrice()" required>
+          </div>
+
+          <div class="MXH-Input">
+            <label for="link_id">Link, ID Bài viết <span> <a href="#">Xem hướng dẫn tại đây</a></span></label>
+            <input type="text" id="link_id" name="Link ID" required>
+          </div>
+
+          <div class="MXH-Input">
+            <label for="discount">Mã giảm giá:</label>
+            <input type="text" id="discount" name="Discount" onchange="calculateTotalPrice()">
+            <div id="discountInfo" class="discount-info">
+              <!-- Thông tin giảm giá sẽ được cập nhật ở đây -->
+            </div>
+          </div>
+
+          <div class="MXH-Input">
+            <label for="total_price">Tổng</label>
+            <input type="text" id="total_price" name="Total" readonly>
+          </div>
+
+          <div class="MXH-Input">
+            <label for="payment">Thanh toán</label>
+            <select id="payment" name="Payment" onchange="togglePaymentMethod()">
+              <option disabled selected>Chọn phương thức thanh toán</option>
+              <option value="momo">QR MoMo</option>
+              <option value="banking">Chuyển khoản</option>
+            </select>
+          </div>
+
+          <div id="MoMo" class="payment-method">
+            <h3>Thanh toán bằng MOMO</h3>
+
+            <div class="Transfer">
+              <h1>ĐINH MẠNH HÙNG</h1>
+              <div class="QR">
+                <img src="./QR.jpg" alt="QR_MoMo">
+              </div>
+              <p>Hoặc</p>
+              <a class="Momo" href="http://me.momo.vn/chesino" target="_blank" rel="noopener noreferrer">
+                Chuyển tiền qua MOMO
+              </a>
+            </div>
+          </div>
+
+          <div id="Banking" class="payment-method">
+            <h3>Chuyển khoản bằng QR</h3>
+            <div class="Transfer">
+              <h1>ĐINH MẠNH HÙNG</h1>
+              <div class="QR">
+                <img src="./QR.jpg" alt="QR_MoMo">
+              </div>
+            </div>
+          </div>
+          <div id="message"></div>
+          <button onclick="UpdateForm()" type="submit" id="submit-button">Xác nhận</button>
+        </form>
+      </div>
+      <div id="Price" class="tabcontent">
+        <h1>Hiện tại đang cập nhật</h1>
+      </div>
+      <div id="Support" class="tabcontent">
+        <h1>Hiện tại đang cập nhật</h1>
+      </div>
+      <div id="Order" class="tabcontent">
+        <h1>Hiện tại đang cập nhật</h1>
+      </div>
+      <div id="Dev" class="tabcontent Dev ">
+        <h1>Bảng Lỗi</h1>
+        <div class="Error" id="ErrorLog">
+          <div class="log">
+            Không có lỗi gì sảy ra cả 👍
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+  <footer>
+    <p>Thiết kế và lập trình bởi: <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh
+        Hùng</a></p>
+  </footer>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+<script src="./Main.js"></script>
+<script src="/DATA/Asset/Script.js"></script>
+<script src="/DATA/Extend/SweetAlert2.js"></script>
+
+</html>

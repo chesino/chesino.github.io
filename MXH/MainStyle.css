@@ -1,0 +1,124 @@
+.orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 50px;
+}
+
+.MXH-Input label span {
+    font-size: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--SnG-Input-Text);
+}
+
+select,
+input[type="text"],
+input[type="number"],
+button {
+    color: var(--SnG-Input-Text);
+    background-color: var(--SnG-Input);
+    width: 100%;
+    display: block;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+select {
+    cursor: pointer;
+}
+
+select:focus,
+input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+button {
+    background-color: var(--SnG-BTN-Main);
+    color: var(--SnG-BTN-Main-Text);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+
+#total_price {
+    background-color: #000000;
+    font-size: 26px;
+    text-align: right;
+}
+
+.payment-method {
+    display: none;
+    color: var(--SnG-BTN-Text);
+    background-color: var(--Card-Main-Text);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.payment-method h3 {
+    margin-top: 0;
+}
+
+.discount-info {
+    font-weight: bold;
+    margin: 5px 0 10px 0;
+}
+
+
+.Transfer a {
+    text-decoration: none;
+}
+.Transfer h1  {
+    color:  var(--Text);
+    background-color: var(--Background);
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+.QR {
+    width: 100%;
+    margin: 10px auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.QR img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+#message {
+    color: var(--Card-Main-Text);
+    padding: 10px;
+    border-radius: 10px;
+}
+.Momo {
+    display: block;
+    width: 100%;
+    background-color: #a91f6c;
+    color: #fff;
+    margin: 10px 0;
+    font-size: 20px;
+    padding: 20px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#submit-button {
+    padding: 20px 0;
+}
