@@ -181,16 +181,30 @@ function GetCustomerToTransfer() {
     const service = document.getElementById('service').value;
     const quantity = document.getElementById('quantity').value;
 
+    // Lấy thời gian hiện tại
+    let now = new Date();
+
+    // Lấy các thành phần giờ, phút, ngày, tháng, năm
+    let hours = now.getHours().toString().padStart(2, '0');
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    let day = now.getDate().toString().padStart(2, '0');
+    let month = (now.getMonth() + 1).toString().padStart(2, '0'); // getMonth() trả về giá trị từ 0-11, nên cần +1
+    let year = now.getFullYear().toString().slice(2); // Lấy hai chữ số cuối của năm
+
+    // Ghép các thành phần lại theo định dạng HHMMDDMMYY
+    // ${year} -${day}${month}
+    let timeString = `${hours}${minutes}`;
+
     if (Customer != '') {
         // Lấy 5 số cuối của Customer
-        const lastFiveDigits = Customer.slice(-5);
+        const lastFiveDigits = Customer.slice(-3);
 
         // Xác định các giá trị platform và service
         const platformCode = platform === 'tiktok' ? 'T' : 'F';
         const serviceCode = service === 'like' ? 'L' : (service === 'follow' ? 'F' : 'V');
 
         // Tạo giá trị cuối cùng
-        const result = lastFiveDigits + platformCode + serviceCode + quantity;
+        const result = lastFiveDigits + platformCode + timeString;
 
         // Đặt giá trị vào Transfer
         Transfer.value = result;
