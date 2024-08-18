@@ -63,6 +63,7 @@
     --Popup-BTN: #003135;
 
     --Card: #272727;
+    --HR: #272727;
 }
 
 .Basic-mode {
@@ -368,6 +369,15 @@ h2 {
     font-family: BeFontBold;
 }
 
+hr {
+    background-color: var(--HR);
+    border: none;
+    height: 2px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px auto;
+ 
+}
 button:hover
 ,.Btn:hover{
     background-color: var(--Card-Background) ;
@@ -710,7 +720,31 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     margin-bottom: 10px;
     padding: 5px 0;
 }
+.Setting .ItemID {
+    display: grid;
+    grid-template-columns: calc(80% - 10px) 20%;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.Setting .ItemID .Btn {
+    margin: 0;
+}
 
+.Setting #HunqID{
+    padding: 10px;
+    background-color: var(--Background);
+    color: var(--SnG-Input-Text);
+    width: 100%;
+    display: block;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px;
+    font-weight: bold;
+}
+.Setting #HunqID::selection {
+    background-color: transparent;
+}
 .Setting .switch {
     position: relative;
     display: inline-block;
@@ -866,7 +900,7 @@ main .list .item {
     grid-template-columns: 100px auto;
     font-size: 16px;
     font-weight: bold;
-    padding: 6px 10px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1866,6 +1900,7 @@ input[type='time'] {
     color: #6a9955;
 }
 footer {
+    font-size: 12px;
     position: fixed;
     bottom: 10px;
     width: 100%;
@@ -1875,5 +1910,5 @@ footer a{
     color: var(--Text);
     text-decoration: none;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
 }

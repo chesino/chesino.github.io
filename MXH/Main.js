@@ -30,14 +30,18 @@ function formatWithDots(value) {
 
 const serviceOptions = {
     facebook: [
-        { value: 'like', text: 'Thích', price: 10 },
-        { value: 'follow', text: 'Theo dõi', price: 20 },
-        { value: 'viewstory', text: 'Lượt xem tin', price: 5 }
+        { value: 'like', text: 'Thích [Min 100]', price: 45 },
+        { value: 'follow', text: 'Theo dõi [Min 100]', price: 50 },
+        { value: 'viewstory', text: 'Lượt xem tin [Min 1,000]', price: 30 },
+        { value: 'viewvideo', text: 'Lượt xem video, reel [Min 1,000]', price: 40 },
+        { value: 'shareSV1', text: 'Chia sẻ [SV1 - Min 1,000] ', price: 35 },
+        { value: 'shareSV2', text: 'Chia sẻ [SV2 - Min 1,000] ', price: 500 },
     ],
     tiktok: [
-        { value: 'like', text: 'Thích', price: 15 },
-        { value: 'follow', text: 'Theo dõi', price: 25 },
-        { value: 'view', text: 'Lượt xem', price: 10 }
+        { value: 'like', text: 'Thích [Min 100]', price: 30 },
+        { value: 'follow', text: 'Theo dõi [Min 100]', price: 70 },
+        { value: 'view', text: 'Lượt xem [Min 1,000]', price: 15 },
+        { value: 'save', text: 'Lưu video [Min 100]', price: 15 }
     ]
 };
 
@@ -66,6 +70,7 @@ function calculateTotalPrice() {
     const totalPrice = pricePerUnit * quantity;
 
     applyDiscount(totalPrice);
+    GetCustomerToTransfer();
 }
 
 function applyDiscount(totalPrice) {
@@ -96,21 +101,21 @@ function togglePaymentMethod() {
 }
 function UpdateForm() {
     document.getElementById("orderForm").addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent the default form submission
-        document.getElementById("message").textContent = "Đang lên đơn..";
-        document.getElementById("message").style.display = "block";
+        e.preventDefault();
+        document.getElementById("submit-button").textContent = "Đang lên đơn..";
+        document.getElementById("submit-button").style.display = "block";
         document.getElementById("submit-button").disabled = true;
-    
-    
+
+
         // Collect the form data
         var formData = new FormData(this);
         var keyValuePairs = [];
         for (var pair of formData.entries()) {
             keyValuePairs.push(pair[0] + "=" + pair[1]);
         }
-    
+
         var formDataString = keyValuePairs.join("&");
-    
+
         // Send a POST request to your Google Apps Script
         fetch(
             "https://script.google.com/macros/s/AKfycbya-qUWSHMJsh-2nZJRN__mg_S3A9Tul_85tGLigl09RUPKToSWipvK88AgIQy0260Z3w/exec",
@@ -133,11 +138,8 @@ function UpdateForm() {
             })
             .then(function (data) {
                 // Display a success message
-                document.getElementById("message").textContent =
-                    "Đã lên đơn thành công sau khi xác nhận thanh toán sẽ lên đơn!";
-                document.getElementById("message").style.display = "block";
-                document.getElementById("message").style.backgroundColor = "var(--SnG-BTN-Main)";
-                document.getElementById("message").style.color = "var(--SnG-BTN-Main-Text)";
+                document.getElementById("submit-button").textContent =
+                    "Đã lên đơn thành công sau thanh toán sẽ bắt đầu chạy !";
                 document.getElementById("submit-button").disabled = false;
                 document.getElementById("orderForm").reset();
 
@@ -155,5 +157,70 @@ function UpdateForm() {
 
 function getNewRecord() {
     document.getElementById("orderForm").reset();
-
 };
+
+
+function GetIDtoCustomer() {
+    const HunqID = document.getElementById('HunqID').value;
+    const Customer = document.getElementById('customer');
+    if (HunqID != '') {
+        Customer.value = HunqID
+    } else {
+        Fail('Lỗi', 'Bạn chưa đăng nhập');
+    }
+}
+
+function ClickWelcome() {
+    document.getElementById('list-tab-welcome').click();
+}
+
+function GetCustomerToTransfer() {
+    const Customer = document.getElementById('customer').value;
+    const Transfer = document.getElementById('TransferBank');
+    const platform = document.getElementById('platform').value;
+    const service = document.getElementById('service').value;
+    const quantity = document.getElementById('quantity').value;
+
+    if (Customer != '') {
+        // Lấy 5 số cuối của Customer
+        const lastFiveDigits = Customer.slice(-5);
+
+        // Xác định các giá trị platform và service
+        const platformCode = platform === 'tiktok' ? 'T' : 'F';
+        const serviceCode = service === 'like' ? 'L' : (service === 'follow' ? 'F' : 'V');
+
+        // Tạo giá trị cuối cùng
+        const result = lastFiveDigits + platformCode + serviceCode + quantity;
+
+        // Đặt giá trị vào Transfer
+        Transfer.value = result;
+    } else {
+        Fail('Lỗi', 'Bạn chưa điền Hunq ID');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Gán sự kiện click cho phần tử TransferBank
+    const transferElement = document.getElementById('TransferBank');
+
+    transferElement.addEventListener('click', () => {
+        // Tạo một phần tử textarea tạm thời để sao chép nội dung
+        const textarea = document.createElement('textarea');
+        textarea.value = transferElement.value;
+
+        // Thêm textarea vào body
+        document.body.appendChild(textarea);
+
+        // Chọn nội dung của textarea
+        textarea.select();
+
+        // Sao chép nội dung vào clipboard
+        document.execCommand('copy');
+
+        // Xóa textarea tạm thời
+        document.body.removeChild(textarea);
+
+        // Thông báo cho người dùng (tuỳ chọn)
+        DoneSignIn('Đã sao chép nội dung chuyển khoản');
+    });
+});

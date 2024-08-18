@@ -10,6 +10,16 @@
     font-size: 10px;
 }
 
+.MXH-Input label span a {
+    font-size: 12px;
+    color: var(--Text);
+}
+
+.Hide {
+    display: none !important;
+}
+
+
 label {
     display: block;
     font-weight: bold;
@@ -17,10 +27,9 @@ label {
     color: var(--SnG-Input-Text);
 }
 
-select,
-input[type="text"],
-input[type="number"],
-button {
+#Home select,
+#Home input[type="text"],
+#Home input[type="number"]{
     color: var(--SnG-Input-Text);
     background-color: var(--SnG-Input);
     width: 100%;
@@ -38,7 +47,6 @@ select {
 
 select:focus,
 input:focus {
-    border-color: #4CAF50;
     outline: none;
 }
 
@@ -49,11 +57,12 @@ button {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+    padding: 0;
 }
 
 
 #total_price {
-    background-color: #000000;
+    background-color: #000000 !important;
     font-size: 26px;
     text-align: right;
 }
@@ -80,15 +89,17 @@ button {
 .Transfer a {
     text-decoration: none;
 }
-.Transfer h1  {
-    color:  var(--Text);
+
+.Transfer h1 {
+    color: var(--Text);
     background-color: var(--Background);
     padding: 5px;
     margin: 10px 0;
     border-radius: 10px;
 }
+
 .QR {
-    width: 100%;
+    width: 60%;
     margin: 10px auto;
     overflow: hidden;
     border-radius: 10px;
@@ -99,11 +110,13 @@ button {
     width: 100%;
     height: 100%;
 }
+
 #message {
     color: var(--Card-Main-Text);
     padding: 10px;
     border-radius: 10px;
 }
+
 .Momo {
     display: block;
     width: 100%;
@@ -121,4 +134,124 @@ button {
 
 #submit-button {
     padding: 20px 0;
+}
+
+.MXH-Input .Grid {
+    display: grid;
+    grid-template-columns: calc(80% - 10px) 20%;
+    gap: 10px;
+}
+
+.MXH-Input .Grid button {
+    margin: 0;
+}
+.MXH-Input.Transfer .Red {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* style.css */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#TransferBank {
+    cursor: pointer;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+tr:first-child td {
+    border-top-style: solid;
+}
+
+tr td:first-child {
+    border-left-style: solid;
+}
+
+th,
+td {
+    font-size: 12px;
+    border: 2px solid var(--Text);
+    padding: 15px;
+    text-align: center;
+
+}
+
+td b,
+td.Bold {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: BeFontBold;
+}
+
+th {
+    background-color: var(--Text);
+    color: var(--Background);
+}
+
+
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.comparison-table td:nth-child(2),
+.comparison-table td:nth-child(3) {
+    width: 150px;
+}
+
+.tabcontent p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.tabcontent#Welcome {
+    margin-bottom: 50px;
+}
+.tabcontent#Welcome h2 {
+    display: inline-block;
+    text-align: center;
+    background-color: var(--Text);
+    color: var(--Background);
+    padding: 2px 10px;
+    font-size: 20px;
+    border-radius: 3px;
+    margin: 10px 0 5px 0;
+}
+.tabcontent .Red {
+    color: rgb(255, 81, 81);
+    font-weight: bold;
+}
+
+.tabcontent textarea {
+    width: 100%;
+    height: 120px;
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 550;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 10px;
+    color: var(--SnG-Input-Text);
+    background-color: var(--SnG-Input);
+    resize: none;
+}
+
+#TransferBank {
+    text-align: center;
+    margin-top: 10px;
 }

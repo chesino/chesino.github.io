@@ -7,6 +7,7 @@ function restoreUserInfo() {
             document.getElementById('avatar').src = user.avatarUrl;
             document.getElementById('username').textContent = user.name;
             document.getElementById('rank').textContent = user.rank;
+            document.getElementById('HunqID').value = user.uid; // Thêm dòng này để xuất user.UID
             CheckRank(user);
         } catch (error) {
             console.error("Error parsing stored user data:", error);
@@ -15,6 +16,7 @@ function restoreUserInfo() {
         console.log("No user info found in localStorage.");
     }
 }
+
 
 function loadingScreen() {
     const loadingScreen = document.getElementById('loading-screen');
@@ -154,7 +156,11 @@ function updateUserInfo(user) {
     document.getElementById('avatar').src = user.avatarUrl;
     document.getElementById('username').textContent = user.name;
     document.getElementById('rank').textContent = user.rank;
+    document.getElementById('HunqID').value = user.uid; 
 }
+
+
+
 
 // WEATHER
 const apiKey = 'KZH7P9GUL9SBMVQ5MV4WDF23L'; // Thay thế bằng API Key của bạn
@@ -713,3 +719,19 @@ toggleThemeButton.addEventListener('change', () => {
     // Save the state in localStorage
     localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
 });
+
+
+function CopyHunqID() {
+    const inputElement = document.getElementById('HunqID');
+    inputElement.select();  // Chọn giá trị trong thẻ input
+    
+    // Sao chép giá trị vào clipboard
+    try {
+        document.execCommand('copy');
+        DoneSignIn('Đã sao chép thành công'); 
+    } catch (err) {
+        console.error('Sao chép không thành công', err);
+    }
+}
+
+document.getElementById('CopyHunqID').addEventListener('click', CopyHunqID);

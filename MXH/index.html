@@ -97,7 +97,12 @@
     </div>
 
     <div class="Setting animate__animated" id="SettingAll">
-      <div class="Item">
+      <div class="ItemID">
+        <input id="HunqID" type="text" value="" readonly>
+        <button id="CopyHunqID" class="Btn Reset"><i class="fa-solid fa-copy"></i></button>
+      </div>
+
+      <div class="Item Hide">
         <label for="toggleGas">Giá xăng</label>
         <label class="switch">
           <input type="checkbox" id="toggleGas">
@@ -130,12 +135,9 @@
       </div>
 
       <div class="ItemBtn">
-        <button class="Btn" onclick="Login()()"><i class="fa-solid fa-user"></i> Đăng nhập</button>
+        <button class="Btn" onclick="Login()"><i class="fa-solid fa-user"></i> Đăng nhập</button>
         <button class="Btn Reset" onclick="ClearData()"><i class="fa-solid fa-eraser"></i></button>
       </div>
-
-
-
 
     </div>
 
@@ -148,7 +150,7 @@
     </div>
 
     <div class="list tab">
-      <button class="item tablinks active" onclick="openTab(event, 'Welcome')">
+      <button id="list-tab-welcome" class="item tablinks active" onclick="openTab(event, 'Welcome')">
         <div class="icon">
           <img src="/DATA/Icon/info.png" alt="" srcset="">
         </div>
@@ -167,7 +169,7 @@
 
       <button class="item tablinks" onclick="openTab(event, 'Price')">
         <div class="icon">
-          <img src="/DATA/Icon/price-tag.png" alt="" srcset="">
+          <img src="/DATA/Icon/flash-card.png" alt="" srcset="">
         </div>
         <div class="label">
           Bảng giá
@@ -204,14 +206,45 @@
 
     <div class="content">
       <div id="Welcome" class="tabcontent show">
-        <h1>Hiện tại đang cập nhật</h1>
+        <h1>Hướng dẫn</h1>
+        <h2>Hunq ID</h2>
+        <p>Đây là mã cá nhân của bạn trên Hunq, mã này để tích điểm cũng như hỗ trợ bạn khi
+          gặp lỗi đơn hàng.</p>
+        <p>Có thể xem trạng t</p>
+        <hr>
+        <h2>Nền Tảng</h2>
+        <p>Lựa chọn nền tảng Facebook, TikTok,…</p>
+        <hr>
+        <h2>Dịch vụ</h2>
+        <p>Lựa chọn dịch vụ cần sử dụng tăng lượt theo dõi, thích bài viết,...</p>
+        <hr>
+        <h2>Số lượng</h2>
+        <p>Nhập số lượng muốn muốn tăng</p>
+        <p class="Red">Lưu ý đặt tối thiểu là [Min] của dịch vụ đó</p>
+        <hr>
+        <h2>Link, ID Bài Viết</h2>
+        <p>Bạn chỉ cần bấm chia sẽ > sao chép liên kết dán vào đây</p>
+        <p class="Red">https://www.facebook.com/share/p/xxxxx/</p>
+        <p class="Red">Nếu như không biết cách lấy hay liên hệ hỗ trợ.</p>
+        <hr>
+        <h2>Mã giảm giá</h2>
+        <p>Các mã giảm giá sẽ dựa vào loại tài khoản của bạn.</p>
+        <hr>
+        <h2>Ghi chú</h2>
+        <p>Nên ghi số lượng ban đầu của bài viết.</p>
+        <hr>
+        <h2>Thanh toán</h2>
+        <p class="Red">Cần chú ý ghi đúng nội dung chuyển khoản để hệ thống có thể xác nhận.</p>
       </div>
+
       <div class="tabcontent" id="Home">
         <form id="orderForm" class="orderForm" method="POST">
-
           <div class="MXH-Input">
             <label for="customer">Hunq ID <span>(Có thể nhập Email hoặc SĐT của bạn)</span></label>
-            <input name="Hunq ID" type="text" id="customer" name="customer" required>
+            <div class="Grid">
+              <input name="Hunq ID" type="text" id="customer" name="customer" required>
+              <button class="Btn" type="button" onclick="GetIDtoCustomer()"><i class="fa-solid fa-link"></i></button>
+            </div>
           </div>
 
           <div class="MXH-Input">
@@ -236,7 +269,8 @@
           </div>
 
           <div class="MXH-Input">
-            <label for="link_id">Link, ID Bài viết <span> <a href="#">Xem hướng dẫn tại đây</a></span></label>
+            <label for="link_id">Link, ID Bài viết <span> <a href="#" onclick="ClickWelcome()">Xem hướng dẫn tại
+                  đây</a></span></label>
             <input type="text" id="link_id" name="Link ID" required>
           </div>
 
@@ -249,8 +283,19 @@
           </div>
 
           <div class="MXH-Input">
+            <label for="note">Ghi chú:</label>
+            <textarea name="Note" id="note" placeholder="Có thể ghi chú số lượng ban đầu"></textarea>
+          </div>
+
+          <div class="MXH-Input">
             <label for="total_price">Tổng</label>
             <input type="text" id="total_price" name="Total" readonly>
+          </div>
+
+          <div class="MXH-Input Transfer">
+            <label for="total_price">Nội dung chuyển tiền <span>(Nhấn để sao chép)</span></label>
+            <input id="TransferBank" type="text" readonly>
+            <p class="Red">Lưu ý: Sai nội dung chuyển tiền sẽ bị trừ 10% phí.</p>
           </div>
 
           <div class="MXH-Input">
@@ -262,18 +307,15 @@
             </select>
           </div>
 
+
+
           <div id="MoMo" class="payment-method">
             <h3>Thanh toán bằng MOMO</h3>
-
             <div class="Transfer">
-              <h1>ĐINH MẠNH HÙNG</h1>
-              <div class="QR">
-                <img src="./QR.jpg" alt="QR_MoMo">
-              </div>
-              <p>Hoặc</p>
               <a class="Momo" href="http://me.momo.vn/chesino" target="_blank" rel="noopener noreferrer">
                 Chuyển tiền qua MOMO
               </a>
+              <p class="Red">Hãy nhớ sao chép nội dung chuyển tiền</p>
             </div>
           </div>
 
@@ -284,14 +326,62 @@
               <div class="QR">
                 <img src="./QR.jpg" alt="QR_MoMo">
               </div>
+              <p class="Red">Hãy nhớ sao chép nội dung chuyển tiền</p>
             </div>
           </div>
+
           <div id="message"></div>
-          <button onclick="UpdateForm()" type="submit" id="submit-button">Xác nhận</button>
+          <button class="Btn" onclick="UpdateForm()" type="submit" id="submit-button">Xác nhận</button>
         </form>
       </div>
+
       <div id="Price" class="tabcontent">
-        <h1>Hiện tại đang cập nhật</h1>
+        <h1>Gói thành viên</h1>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Đặc quyền</th>
+              <th>Thành viên</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Giá</td>
+              <td><b>Miễn phí</b></td>
+              <td><b>500.000đ/Năm đầu</b><br>(Các năm tiếp theo 399K)</td>
+            </tr>
+            <tr>
+              <td>Ưu đãi lần đầu</td>
+              <td><b>Giảm 5% cho dịch vụ đầu tiên</b><br>Đơn hàng tối thiểu 50k</td>
+              <td class="Bold">Lần đầu mua gói tặng miễn phí 5K theo dõi Facebook & TikTok (Tối đa 600K)</td>
+            </tr>
+            <tr>
+              <td>Giảm giá dịch vụ</td>
+              <td class="Bold">X</td>
+              <td><b>Giảm 5%</b><br>Đơn hàng tối thiểu 5k</td>
+            </tr>
+            <tr>
+              <td>Giao diện</td>
+              <td>Thông thường</td>
+              <td class="Bold">Priority</td>
+            </tr>
+            <tr>
+              <td>Hỗ trợ</td>
+              <td>Sắp xếp theo hàng chờ<br>(12-76 giờ)<br>(Không hỗ trợ ngày lễ)</td>
+              <td>Ưu tiên không phải chờ<br>(T2-CN)<br>(Có hỗ trợ ngày lễ)</td>
+            </tr>
+            <tr>
+              <td>Tính năng nâng cao</td>
+              <td class="Bold">X</td>
+              <td class="Bold">Có</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="button-container">
+          <button class="Btn">Sắp ra mắt</button>
+        </div>
       </div>
       <div id="Support" class="tabcontent">
         <h1>Hiện tại đang cập nhật</h1>
@@ -312,7 +402,7 @@
 
   </main>
   <footer>
-    <p>Thiết kế và lập trình bởi: <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh
+    <p>Design & Developer <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh
         Hùng</a></p>
   </footer>
 
