@@ -179,6 +179,7 @@
     --Feed-Text: #E0E0E0;
     --Feed-Background: #1F1F1F;
     --Feed-Head: #1F1F1F;
+    --Feed-Head-Text: #000000;
     --Feed-Text-Head: #E0E0E0;
 
     --Card-Main-Text: #E0E0E0;
@@ -247,6 +248,7 @@
     --Feed-Text: #d7c08e;
     --Feed-Background: #1A1A1A;
     --Feed-Head: #d7c08e;
+    --Feed-Head-Text: #000000;
     --Feed-Text-Head: #d7c08e;
 
     --Card-Main-Text: #d7c08e;
@@ -314,6 +316,7 @@
     --Feed-Text: #333333;
     --Feed-Background: #e0e0e0;
     --Feed-Head: #b08d57;
+    --Feed-Head-Text: #ffffff;
     --Feed-Text-Head: #b08d57;
 
     --Card-Main-Text: #333333;
@@ -376,7 +379,6 @@ hr {
     border-radius: 10px;
     width: 100%;
     margin: 10px auto;
- 
 }
 button:hover
 ,.Btn:hover{
@@ -936,6 +938,13 @@ main .list::-webkit-scrollbar {
 .tablinks.active {
     color: var(--List-Text-Active) !important;
     background-color: var(--List-Background-Active) !important;
+}
+main .tablinks .label {
+    display: none;
+    transition: width 2s;
+}
+main .tablinks.active .label {
+    display: block;
 }
 
 

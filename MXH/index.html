@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" href="/DATA/Logo/iconApps.png" sizes="150x150" />
 
   <!-- Ảnh -->
-  <meta property="og:image" content="./Data/wallpaper.jpg" />
+  <meta property="og:image" content="/DATA/Banner/PriorityDark.png" />
   <meta property="og:title" content="Hunq" />
   <meta property="og:description" content="Dịch vụ mạng xã hội" />
 
@@ -172,7 +172,7 @@
           <img src="/DATA/Icon/flash-card.png" alt="" srcset="">
         </div>
         <div class="label">
-          Bảng giá
+          Thành viên
         </div>
       </button>
 
@@ -210,7 +210,7 @@
         <h2>Hunq ID</h2>
         <p>Đây là mã cá nhân của bạn trên Hunq, mã này để tích điểm cũng như hỗ trợ bạn khi
           gặp lỗi đơn hàng.</p>
-        <p>Có thể xem ở mục tài khoản</p>
+        <p>Có thể liên kết nhanh</p>
         <hr>
         <h2>Nền Tảng</h2>
         <p>Lựa chọn nền tảng Facebook, TikTok,…</p>
@@ -251,8 +251,8 @@
             <label for="platform">Nền tảng</label>
             <select id="platform" name="Platform" onchange="updateServiceOptions()" required>
               <option selected disabled>Chọn nền tảng</option>
-              <option value="facebook">Facebook</option>
-              <option value="tiktok">TikTok</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Tiktok">TikTok</option>
             </select>
           </div>
 
@@ -302,8 +302,8 @@
             <label for="payment">Thanh toán</label>
             <select id="payment" name="Payment" onchange="togglePaymentMethod()">
               <option disabled selected>Chọn phương thức thanh toán</option>
-              <option value="momo">QR MoMo</option>
-              <option value="banking">Chuyển khoản</option>
+              <option value="MoMo">QR MoMo</option>
+              <option value="Banking">Chuyển khoản</option>
             </select>
           </div>
 
@@ -378,16 +378,36 @@
             </tr>
           </tbody>
         </table>
-
+        <p>*Giá có thể thay đổi</p>
+        <p>Với những tính năng mới được bổ sung liên tục, gói Priority cam kết đem đến cho quý khách hàng một hành trình
+          đẳng cấp, khác biệt.</p>
         <div class="button-container">
-          <button class="Btn">Sắp ra mắt</button>
+          <a class="Btn" href="http://m.me/ChesinoPage?text=DKPriority" target="_blank" rel="noopener noreferrer">Liên
+            hệ mua ngay</a>
         </div>
       </div>
       <div id="Support" class="tabcontent">
-        <h1>Hiện tại đang cập nhật</h1>
+        <h1>Thành viên</h1>
+        <p>Sắp xếp theo hàng chờ
+          <br>
+          (12-76 giờ)
+          (Không hỗ trợ ngày lễ)</p>
+        <a class="Btn" href="http://m.me/ChesinoPage" target="_blank" rel="noopener noreferrer"><i
+            class="fa-brands fa-facebook-messenger"></i> Nhắn tin</a>
+        <hr>
+        <h1>Dành riêng cho Priority</h1>
+        <p>Ưu tiên không phải chờ
+          <br>
+          (T2-CN)
+          (Có hỗ trợ ngày lễ)</p>
+        <button class="Btn NONPriority" onclick="Fail('Lỗi','Bạn không phải khách hàng ưu tiên')">Dành riêng Priority</button>
+        <a class="Btn Priority" href="http://m.me/ChesinoPage?text=SPPriority" target="_blank"
+          rel="noopener noreferrer">Dành riêng Priority</a>
       </div>
       <div id="Order" class="tabcontent">
-        <h1>Hiện tại đang cập nhật</h1>
+        <iframe
+          src="https://script.google.com/macros/s/AKfycbwsV2k33xbV6W4hHs6mCwwEBLOsDsVvwSjhvuNW6PXMiylziReaMNzOqM7OC-fWcpKKNQ/exec"
+          frameborder="0"></iframe>
       </div>
       <div id="Dev" class="tabcontent Dev ">
         <h1>Bảng Lỗi</h1>

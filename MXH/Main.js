@@ -29,19 +29,19 @@ function formatWithDots(value) {
 }
 
 const serviceOptions = {
-    facebook: [
-        { value: 'like', text: 'Thích [Min 100]', price: 45 },
-        { value: 'follow', text: 'Theo dõi [Min 100]', price: 50 },
-        { value: 'viewstory', text: 'Lượt xem tin [Min 1,000]', price: 30 },
-        { value: 'viewvideo', text: 'Lượt xem video, reel [Min 1,000]', price: 40 },
-        { value: 'shareSV1', text: 'Chia sẻ [SV1 - Min 1,000] ', price: 35 },
-        { value: 'shareSV2', text: 'Chia sẻ [SV2 - Min 1,000] ', price: 500 },
+    Facebook: [
+        { value: 'Like', text: 'Thích [Min 100]', price: 45 },
+        { value: 'Follow', text: 'Theo dõi [Min 100]', price: 50 },
+        { value: 'Viewstory', text: 'Lượt xem tin [Min 1,000]', price: 30 },
+        { value: 'Viewvideo', text: 'Lượt xem video, reel [Min 1,000]', price: 40 },
+        { value: 'ShareSV1', text: 'Chia sẻ [SV1 - Min 1,000] ', price: 35 },
+        { value: 'ShareSV2', text: 'Chia sẻ [SV2 - Min 1,000] [Chia sẻ Group] ', price: 500 },
     ],
-    tiktok: [
-        { value: 'like', text: 'Thích [Min 100]', price: 30 },
-        { value: 'follow', text: 'Theo dõi [Min 100]', price: 70 },
-        { value: 'view', text: 'Lượt xem [Min 1,000]', price: 15 },
-        { value: 'save', text: 'Lưu video [Min 100]', price: 15 }
+    Tiktok: [
+        { value: 'Like', text: 'Thích [Min 100]', price: 30 },
+        { value: 'Follow', text: 'Theo dõi [Min 100]', price: 70 },
+        { value: 'View', text: 'Lượt xem [Min 1,000]', price: 15 },
+        { value: 'Save', text: 'Lưu video [Min 100]', price: 15 }
     ]
 };
 

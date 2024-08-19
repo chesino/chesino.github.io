@@ -44,7 +44,9 @@ label {
 select {
     cursor: pointer;
 }
-
+.select-selected {
+    padding: 10px;
+}
 select:focus,
 input:focus {
     outline: none;
@@ -150,7 +152,6 @@ button {
     margin-top: 5px;
 }
 
-/* style.css */
 .comparison-table {
     width: 100%;
     border-collapse: collapse;
@@ -254,4 +255,31 @@ th {
 #TransferBank {
     text-align: center;
     margin-top: 10px;
+}
+
+
+#Order iframe {
+    width: 100%;
+    border-radius: 20px;
+    min-height: 60vh;
+    border: none;
+    overflow: hidden;
+}
+#Order {
+    padding-bottom: 50px;
+    overflow: hidden;
+}
+.Btn.NONPriority {
+    color: #fff;
+    background-color: #b08d57;
+    display: block  !important;
+}
+.Priority-mode .Btn.NONPriority {
+    display: none  !important;
+}
+.Btn.Priority {
+    display: none  !important;
+}
+.Priority-mode .Btn.Priority {
+    display: block  !important;
 }
