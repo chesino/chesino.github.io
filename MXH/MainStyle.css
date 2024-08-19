@@ -29,7 +29,7 @@ label {
 
 #Home select,
 #Home input[type="text"],
-#Home input[type="number"]{
+#Home input[type="number"] {
     color: var(--SnG-Input-Text);
     background-color: var(--SnG-Input);
     width: 100%;
@@ -44,9 +44,11 @@ label {
 select {
     cursor: pointer;
 }
+
 .select-selected {
     padding: 10px;
 }
+
 select:focus,
 input:focus {
     outline: none;
@@ -147,6 +149,7 @@ button {
 .MXH-Input .Grid button {
     margin: 0;
 }
+
 .MXH-Input.Transfer .Red {
     font-size: 14px;
     margin-top: 5px;
@@ -220,9 +223,11 @@ th {
     font-size: 16px;
     margin-bottom: 10px;
 }
+
 .tabcontent#Welcome {
     margin-bottom: 50px;
 }
+
 .tabcontent#Welcome h2 {
     display: inline-block;
     text-align: center;
@@ -233,6 +238,7 @@ th {
     border-radius: 3px;
     margin: 10px 0 5px 0;
 }
+
 .tabcontent .Red {
     color: rgb(255, 81, 81);
     font-weight: bold;
@@ -265,21 +271,36 @@ th {
     border: none;
     overflow: hidden;
 }
+
 #Order {
     padding-bottom: 50px;
     overflow: hidden;
 }
+
 .Btn.NONPriority {
     color: #fff;
     background-color: #b08d57;
-    display: block  !important;
+    display: block !important;
 }
+
 .Priority-mode .Btn.NONPriority {
-    display: none  !important;
+    display: none !important;
 }
+
 .Btn.Priority {
-    display: none  !important;
+    display: none !important;
 }
+
 .Priority-mode .Btn.Priority {
-    display: block  !important;
+    display: block !important;
 }
+
+
+/* Style cho desktop */
+@media (min-width: 768px) {
+    main {
+        max-width: 600px;
+        margin: 60px auto;
+    }
+}
+

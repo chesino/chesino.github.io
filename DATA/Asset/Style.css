@@ -900,7 +900,7 @@ main .list .item {
     background-color: var(--List-Background);
     cursor: pointer;
     grid-template-columns: 100px auto;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     padding: 10px;
     display: flex;
@@ -912,8 +912,8 @@ main .list .item {
 }
 
 main .list .item .icon {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
     border-radius: 4px;
     overflow: hidden;
 }

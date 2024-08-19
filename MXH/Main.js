@@ -96,8 +96,8 @@ function applyDiscount(totalPrice) {
 
 function togglePaymentMethod() {
     const payment = document.getElementById('payment').value;
-    document.getElementById('MoMo').style.display = payment === 'momo' ? 'block' : 'none';
-    document.getElementById('Banking').style.display = payment === 'banking' ? 'block' : 'none';
+    document.getElementById('MoMo').style.display = payment === 'MoMo' ? 'block' : 'none';
+    document.getElementById('Banking').style.display = payment === 'Banking' ? 'block' : 'none';
 }
 function UpdateForm() {
     document.getElementById("orderForm").addEventListener("submit", function (e) {
@@ -139,17 +139,21 @@ function UpdateForm() {
             .then(function (data) {
                 // Display a success message
                 document.getElementById("submit-button").textContent =
-                    "Đã lên đơn thành công sau thanh toán sẽ bắt đầu chạy !";
+                    "Đã lên đơn thành công sau khi xác thanh toán sẽ bắt đầu chạy !";
                 document.getElementById("submit-button").disabled = false;
                 document.getElementById("orderForm").reset();
-
+                setTimeout(function () {
+                    document.getElementById("submit-button").textContent = "Xác nhận";
+                    document.getElementById("submit-button").style.display = "none";
+                }, 5000);
+    
             })
             .catch(function (error) {
                 // Handle errors, you can display an error message here
                 console.error(error);
-                document.getElementById("message").textContent =
+                document.getElementById("submit-button").textContent =
                     "Lỗi phát sinh.";
-                document.getElementById("message").style.display = "block";
+                document.getElementById("submit-button").style.display = "block";
             });
     });
 }
