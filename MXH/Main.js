@@ -144,7 +144,6 @@ function UpdateForm() {
                 document.getElementById("orderForm").reset();
                 setTimeout(function () {
                     document.getElementById("submit-button").textContent = "Xác nhận";
-                    document.getElementById("submit-button").style.display = "none";
                 }, 5000);
     
             })
@@ -191,13 +190,14 @@ function GetCustomerToTransfer() {
     // Lấy các thành phần giờ, phút, ngày, tháng, năm
     let hours = now.getHours().toString().padStart(2, '0');
     let minutes = now.getMinutes().toString().padStart(2, '0');
+    let seconds = now.getSeconds().toString().padStart(2, '0');
     let day = now.getDate().toString().padStart(2, '0');
     let month = (now.getMonth() + 1).toString().padStart(2, '0'); // getMonth() trả về giá trị từ 0-11, nên cần +1
     let year = now.getFullYear().toString().slice(2); // Lấy hai chữ số cuối của năm
 
     // Ghép các thành phần lại theo định dạng HHMMDDMMYY
     // ${year} -${day}${month}
-    let timeString = `${hours}${minutes}`;
+    let timeString = `${hours}${minutes}${seconds}`;
 
     if (Customer != '') {
         // Lấy 5 số cuối của Customer
