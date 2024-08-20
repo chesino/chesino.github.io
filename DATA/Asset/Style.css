@@ -950,9 +950,9 @@ main .tablinks.active .label {
 
 .mainCard {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: calc(50%  - 5px) calc(50% - 5px);
     justify-content: space-around;
-    gap: 20px;
+    gap: 10px;
     margin: 20px 0;
 }
 
@@ -992,7 +992,7 @@ main .tablinks.active .label {
 .mainCard .Card .buy .price {
     font-size: 18px;
     font-weight: bold;
-    margin-top: 10px;
+    margin: 0;
 }
 
 .mainCard .Card .buy .priceroot {
@@ -1008,7 +1008,6 @@ main .tablinks.active .label {
     justify-content: space-between;
     align-items: end;
     padding: 0 8px;
-    margin: 6px 0;
 }
 .mainCard .Card .buy a {
     text-decoration: none;
