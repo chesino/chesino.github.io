@@ -225,6 +225,15 @@
           * Sau 5 lần mã giảm giá có thể vẫn hiển thị sử dụng được nhưng hệ thống sẽ không tính cho bạn.
         </p>
         <hr>
+        <h2>Vấn đề thanh toán</h2>
+        <p>Sau khi chuyển khoản hệ thống sẽ tự động kiểm tra khoảng 1-5 phút, nhưng nếu lâu hơn thì cũng không cần
+          lo lắng có thể dịch vụ bên ngân hàng đang chậm hoặc gặp
+          lỗi.</p>
+        <p>Nếu như sau 30 phút đơn hàng vẫn ở trạng thái "Đã lên đơn chờ thanh toán" hãy nhắn tin để được hỗ trợ.
+        </p>
+        <p>Bạn yên tâm nếu như hệ thống đã nhận tiền nhưng trạng thái đơn hàng
+          vẫn chưa chạy thì bạn có thể yêu cầu hoàn tiền 100%.</p>
+        <hr>
         <h1>Hướng dẫn</h1>
         <h2>Hunq ID</h2>
         <p>Đây là mã cá nhân của bạn trên Hunq, mã này để tích điểm cũng như hỗ trợ bạn khi
@@ -255,9 +264,10 @@
         <h2>Thanh toán</h2>
         <p>Cần chú ý ghi đúng nội dung chuyển khoản để hệ thống có thể xác nhận.</p>
         <p class="Red">Nếu sai nội dung chuyển khoản sẽ bị trừ 10% phí dịch vụ.</p>
+
       </div>
 
-      <div class="tabcontent" id="Home">
+      <div class="tabcontent " id="Home">
         <form id="orderForm" class="orderForm" method="POST">
           <div class="MXH-Input">
             <label for="customer">Hunq ID <span>(Có thể nhập Email hoặc SĐT của bạn)</span></label>
@@ -279,7 +289,7 @@
           <div class="MXH-Input">
             <label for="service">Dịch vụ</label>
             <select id="service" name="Service" onchange="calculateTotalPrice()" required>
-              <option>Vui lòng chọn nền tảng</option>
+              <option disabled>Vui lòng chọn nền tảng</option>
             </select>
           </div>
 
@@ -306,53 +316,51 @@
             <label for="note">Ghi chú:</label>
             <textarea name="Note" id="note" placeholder="Có thể ghi chú số lượng ban đầu"></textarea>
           </div>
-
+          <div class="MXH-Input Transfer">
+            <label for="total_price">Mã đơn hàng</label>
+            <input name="Order" id="TransferBankForm" type="text" readonly="">
+          </div>
           <div class="MXH-Input">
             <label for="total_price">Tổng</label>
             <input type="text" id="total_price" name="Total" readonly>
           </div>
-
-          <div class="MXH-Input Transfer">
-            <label for="total_price">Nội dung chuyển tiền <span>(Nhấn để sao chép)</span></label>
-            <input name="Order" id="TransferBank" type="text" readonly>
-            <p class="Red">Lưu ý: Sai nội dung chuyển tiền sẽ bị trừ 10% phí.</p>
-          </div>
-
-          <div class="MXH-Input">
-            <label for="payment">Thanh toán</label>
-            <select id="payment" name="Payment" onchange="togglePaymentMethod()">
-              <option disabled selected>Chọn phương thức thanh toán</option>
-              <option value="MoMo">QR MoMo</option>
-              <option value="Banking">Chuyển khoản</option>
-            </select>
-          </div>
-
-
-
-          <div id="MoMo" class="payment-method">
-            <h3>Thanh toán bằng MOMO</h3>
-            <div class="Transfer">
-              <a class="Momo" href="http://me.momo.vn/chesino" target="_blank" rel="noopener noreferrer">
-                Chuyển tiền qua MOMO
-              </a>
-              <p class="Red">Hãy nhớ sao chép nội dung chuyển tiền</p>
-            </div>
-          </div>
-
-          <div id="Banking" class="payment-method">
-            <h3>Chuyển khoản bằng QR</h3>
-            <div class="Transfer">
-              <h1>ĐINH MẠNH HÙNG</h1>
-              <div class="QR">
-                <img src="./QR.jpg" alt="QR_MoMo">
-              </div>
-              <p class="Red">Hãy nhớ sao chép nội dung chuyển tiền</p>
-            </div>
-          </div>
-
-          <div id="message"></div>
           <button class="Btn" onclick="UpdateForm()" type="submit" id="submit-button">Xác nhận</button>
         </form>
+
+        <div id="ThanhToan">
+          <div class="payment-method">
+            <h3>Lưu ý</h3>
+            <p>Sau khi chuyển khoản hệ thống sẽ tự động kiểm tra khoảng 1-5 phút, nhưng nếu lâu hơn thì cũng không cần
+              lo lắng có thể dịch vụ bên ngân hàng đang chậm hoặc gặp
+              lỗi.</p>
+            <p>Nếu như sau 30 phút đơn hàng vẫn ở trạng thái "Đã lên đơn chờ thanh toán" hãy nhắn tin để được hỗ trợ.
+            </p>
+            <p class="Red">Bạn yên tâm nếu như hệ thống đã nhận tiền nhưng trạng thái đơn hàng
+              vẫn chưa chạy thì bạn có thể yêu cầu hoàn tiền 100%.</p>
+            <br>
+            <hr>
+            <br>
+            <h3>Chuyển khoản thủ công</h3>
+            <p>Ngân hàng: <strong>Viet Capital Bank (BVBank)</strong></p>
+            <p>Tên tài khoản: <strong>MOMO DINH MANH HUNG</strong></p>
+            <p onclick="copyText('99MM24030M09540726')">Số tài khoản: <strong>99MM24030M09540726</strong> <i
+                class="fa-solid fa-copy"></i></p>
+            <p>Số tiền: <strong id="total_price_banking"></strong></p>
+            <p>Nội dung: <strong id="TransferBank" name="Order"></strong> <i id="copyTransferBank" class="fa-solid fa-copy"></i></p>
+            <p class="Red">Lưu ý: Sai nội dung chuyển tiền sẽ bị trừ 10% phí.</p>
+            <br>
+            <hr>
+            <br>
+            <h3>Chuyển khoản bằng QR</h3>
+            <p class="Red">Khuyên dùng số tiền & nội dung đã có sẵn trong QR.</p>
+            <div class="Transfer">
+              <div class="QR">
+                <img id="imgbanking" src="./QR.jpg" alt="QR_MoMo">
+              </div>
+            </div>
+            <button class="Btn" onclick="ResetForm()">Tạo đơn mới</button>
+          </div>
+        </div>
       </div>
 
       <div class="tabcontent" id="Shop">
@@ -684,7 +692,6 @@
         </div>
       </div>
 
-
       <div id="Price" class="tabcontent">
         <h1>Gói thành viên</h1>
         <table class="comparison-table">
@@ -737,6 +744,7 @@
             hệ mua ngay</a>
         </div>
       </div>
+
       <div id="Support" class="tabcontent">
         <h1>Thành viên</h1>
         <p>Sắp xếp theo hàng chờ
@@ -758,11 +766,13 @@
         <a class="Btn Priority" href="http://m.me/ChesinoPage?text=SPPriority" target="_blank"
           rel="noopener noreferrer">Dành riêng Priority</a>
       </div>
+
       <div id="Order" class="tabcontent">
         <iframe
           src="https://script.google.com/macros/s/AKfycbwU0k1_I-p4zLF-Ez-cEZTGW-mRHn3oos4zyQYHffpFVELVYJBupSQaRzoBTl8yzypZiw/exec"
           frameborder="0"></iframe>
       </div>
+
       <div id="Dev" class="tabcontent Dev ">
         <h1>Bảng Lỗi</h1>
         <div class="Error" id="ErrorLog">

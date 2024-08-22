@@ -3,7 +3,6 @@
     flex-direction: column;
     gap: 10px;
     padding: 10px 0;
-    margin-bottom: 50px;
 }
 
 .MXH-Input label span {
@@ -72,16 +71,26 @@ button {
 }
 
 .payment-method {
-    display: none;
     color: var(--SnG-BTN-Text);
     background-color: var(--Card-Main-Text);
     padding: 15px;
     border-radius: 10px;
     text-align: center;
 }
-
+.payment-method strong {
+    font-size: 16px;
+} 
+.payment-method p {
+    text-align: left;
+    margin: 10px 0;
+}
 .payment-method h3 {
-    margin-top: 0;
+    font-family: BeFontBold;
+    font-size: 24px;
+    margin: 0 0 10px 0;
+}
+.payment-method input {
+    text-align: center;
 }
 
 .discount-info {
@@ -103,10 +112,11 @@ button {
 }
 
 .QR {
-    width: 60%;
+    width: 100%;
     margin: 10px auto;
     overflow: hidden;
     border-radius: 10px;
+    border: 3px solid var(--Background);
 }
 
 .QR img {
@@ -115,11 +125,6 @@ button {
     height: 100%;
 }
 
-#message {
-    color: var(--Card-Main-Text);
-    padding: 10px;
-    border-radius: 10px;
-}
 
 .Momo {
     display: block;
@@ -258,11 +263,6 @@ th {
     resize: none;
 }
 
-#TransferBank {
-    text-align: center;
-    margin-top: 10px;
-}
-
 
 #Order iframe {
     width: 100%;
@@ -294,7 +294,17 @@ th {
 .Priority-mode .Btn.Priority {
     display: block !important;
 }
+#ThanhToan {
+    display: none;
+}
+#ThanhToan .Btn {
+    color: var(--Map-BTN);
+    background-color: var(--Map-BTN-Text);
+}
 
+/* #orderForm {
+    display: none;
+} */
 
 /* Style cho desktop */
 @media (min-width: 768px) {

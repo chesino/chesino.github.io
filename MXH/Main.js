@@ -45,7 +45,6 @@ const serviceOptions = {
     ]
 };
 
-
 function updateServiceOptions() {
     const platform = document.getElementById('platform').value;
     const serviceSelect = document.getElementById('service');
@@ -73,36 +72,10 @@ function calculateTotalPrice() {
     GetCustomerToTransfer();
 }
 
-function applyDiscount(totalPrice) {
-    const discountCode = document.getElementById('discount').value.toUpperCase();
-    let finalPrice = totalPrice;
-    let discountPercent = 0;
-
-    if (discountCodes[discountCode]) {
-        discountPercent = discountCodes[discountCode];
-        finalPrice = finalPrice - (finalPrice * discountPercent / 100);
-    }
-
-    document.getElementById('total_price').value = formatWithDots(finalPrice) + 'đ';
-
-    // Cập nhật thông tin giảm giá
-    const discountInfo = document.getElementById('discountInfo');
-    if (discountPercent > 0) {
-        discountInfo.innerHTML = `Đã giảm <span>${discountPercent}%</span> - Tiết kiệm <span>${formatWithDots(totalPrice * discountPercent / 100)}đ</span>`;
-    } else {
-        discountInfo.innerHTML = '';
-    }
-}
-
-function togglePaymentMethod() {
-    const payment = document.getElementById('payment').value;
-    document.getElementById('MoMo').style.display = payment === 'MoMo' ? 'block' : 'none';
-    document.getElementById('Banking').style.display = payment === 'Banking' ? 'block' : 'none';
-}
 function UpdateForm() {
     document.getElementById("orderForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        document.getElementById("submit-button").textContent = "Đang lên đơn..";
+        document.getElementById("submit-button").textContent = "Đang lên đơn";
         document.getElementById("submit-button").style.display = "block";
         document.getElementById("submit-button").disabled = true;
 
@@ -138,14 +111,11 @@ function UpdateForm() {
             })
             .then(function (data) {
                 // Display a success message
-                document.getElementById("submit-button").textContent =
-                    "Đã lên đơn thành công sau khi xác thanh toán sẽ bắt đầu chạy !";
-                document.getElementById("submit-button").disabled = false;
-                document.getElementById("orderForm").reset();
-                setTimeout(function () {
-                    document.getElementById("submit-button").textContent = "Xác nhận";
-                }, 5000);
-    
+                var ThanhToan = document.getElementById("ThanhToan");
+                var orderForm = document.getElementById("orderForm");
+
+                orderForm.style.display = 'none';
+                ThanhToan.style.display = 'block';
             })
             .catch(function (error) {
                 // Handle errors, you can display an error message here
@@ -157,11 +127,21 @@ function UpdateForm() {
     });
 }
 
+function ResetForm() {
+    var ThanhToan = document.getElementById("ThanhToan");
+    var orderForm = document.getElementById("orderForm");
 
+    orderForm.style.display = 'block';
+    ThanhToan.style.display = 'none';
+    document.getElementById("submit-button").disabled = false;
+    document.getElementById("orderForm").reset();
+    document.getElementById("submit-button").textContent = "Xác nhận";
+
+
+}
 function getNewRecord() {
     document.getElementById("orderForm").reset();
 };
-
 
 function GetIDtoCustomer() {
     const HunqID = document.getElementById('HunqID').value;
@@ -177,54 +157,58 @@ function ClickWelcome() {
     document.getElementById('list-tab-welcome').click();
 }
 
-function GetCustomerToTransfer() {
-    const Customer = document.getElementById('customer').value;
-    const Transfer = document.getElementById('TransferBank');
-    const platform = document.getElementById('platform').value;
-    const service = document.getElementById('service').value;
-    const quantity = document.getElementById('quantity').value;
-
-    // Lấy thời gian hiện tại
-    let now = new Date();
-
-    // Lấy các thành phần giờ, phút, ngày, tháng, năm
-    let hours = now.getHours().toString().padStart(2, '0');
-    let minutes = now.getMinutes().toString().padStart(2, '0');
-    let seconds = now.getSeconds().toString().padStart(2, '0');
-    let day = now.getDate().toString().padStart(2, '0');
-    let month = (now.getMonth() + 1).toString().padStart(2, '0'); // getMonth() trả về giá trị từ 0-11, nên cần +1
-    let year = now.getFullYear().toString().slice(2); // Lấy hai chữ số cuối của năm
-
-    // Ghép các thành phần lại theo định dạng HHMMDDMMYY
-    // ${year} -${day}${month}
-    let timeString = `${hours}${minutes}${seconds}`;
-
-    if (Customer != '') {
-        // Lấy 5 số cuối của Customer
-        const lastFiveDigits = Customer.slice(-3);
-
-        // Xác định các giá trị platform và service
-        const platformCode = platform === 'tiktok' ? 'T' : 'F';
-        const serviceCode = service === 'like' ? 'L' : (service === 'follow' ? 'F' : 'V');
-
-        // Tạo giá trị cuối cùng
-        const result = lastFiveDigits + platformCode + timeString;
-
-        // Đặt giá trị vào Transfer
-        Transfer.value = result;
-    } else {
-        Fail('Lỗi', 'Bạn chưa điền Hunq ID');
-    }
-}
-
 document.addEventListener('DOMContentLoaded', (event) => {
     // Gán sự kiện click cho phần tử TransferBank
     const transferElement = document.getElementById('TransferBank');
+    const TransferBankForm = document.getElementById('TransferBankForm');
+    const copyTransferBank = document.getElementById('copyTransferBank');
 
+    copyTransferBank.addEventListener('click', () => {
+        // Tạo một phần tử textarea tạm thời để sao chép nội dung
+        const textarea = document.createElement('textarea');
+        textarea.value = transferElement.textContent;
+
+        // Thêm textarea vào body
+        document.body.appendChild(textarea);
+
+        // Chọn nội dung của textarea
+        textarea.select();
+
+        // Sao chép nội dung vào clipboard
+        document.execCommand('copy');
+
+        // Xóa textarea tạm thời
+        document.body.removeChild(textarea);
+
+        // Thông báo cho người dùng (tuỳ chọn)
+        DoneSignIn('Đã sao chép nội dung chuyển khoản');
+    });
+
+    TransferBankForm.addEventListener('click', () => {
+        // Tạo một phần tử textarea tạm thời để sao chép nội dung
+        const textarea = document.createElement('textarea');
+        textarea.value = transferElement.textContent;
+
+        // Thêm textarea vào body
+        document.body.appendChild(textarea);
+
+        // Chọn nội dung của textarea
+        textarea.select();
+
+        // Sao chép nội dung vào clipboard
+        document.execCommand('copy');
+
+        // Xóa textarea tạm thời
+        document.body.removeChild(textarea);
+
+        // Thông báo cho người dùng (tuỳ chọn)
+        DoneSignIn('Đã sao chép mã đơn hàng');
+    });
+    
     transferElement.addEventListener('click', () => {
         // Tạo một phần tử textarea tạm thời để sao chép nội dung
         const textarea = document.createElement('textarea');
-        textarea.value = transferElement.value;
+        textarea.innerText = transferElement.textContent;
 
         // Thêm textarea vào body
         document.body.appendChild(textarea);
@@ -242,3 +226,95 @@ document.addEventListener('DOMContentLoaded', (event) => {
         DoneSignIn('Đã sao chép nội dung chuyển khoản');
     });
 });
+
+function copyText(text) {
+    // Tạo một phần tử input tạm thời
+    var input = document.createElement("input");
+    // Gán giá trị của text vào input
+    input.value = text;
+    // Thêm input vào body
+    document.body.appendChild(input);
+    // Tự động chọn toàn bộ nội dung trong input
+    input.select();
+    // Thực hiện lệnh copy
+    document.execCommand("copy");
+    // Xóa input khỏi body
+    document.body.removeChild(input);
+    DoneSignIn('Sao chép STK thành công.')
+}
+
+
+function applyDiscount(totalPrice) {
+    const discountCode = document.getElementById('discount').value.toUpperCase();
+    let finalPrice = totalPrice;
+    let discountPercent = 0;
+
+    if (discountCodes[discountCode]) {
+        discountPercent = discountCodes[discountCode];
+        finalPrice = finalPrice - (finalPrice * discountPercent / 100);
+    }
+
+    document.getElementById('total_price').value = formatWithDots(finalPrice) + 'đ';
+    document.getElementById('total_price_banking').innerText = formatWithDots(finalPrice) + 'đ';
+
+    // Cập nhật thông tin giảm giá
+    const discountInfo = document.getElementById('discountInfo');
+    if (discountPercent > 0) {
+        discountInfo.innerHTML = `Đã giảm <span>${discountPercent}%</span> - Tiết kiệm <span>${formatWithDots(totalPrice * discountPercent / 100)}đ</span>`;
+    } else {
+        discountInfo.innerHTML = '';
+    }
+
+    // Sau khi áp dụng giảm giá, gọi hàm để cập nhật ảnh
+    updateBankingImage(finalPrice);
+}
+
+function GetCustomerToTransfer() {
+    const Customer = document.getElementById('customer').value;
+    const Transfer = document.getElementById('TransferBank');
+    const TransferBankForm = document.getElementById('TransferBankForm');
+    const platform = document.getElementById('platform').value;
+    const service = document.getElementById('service').value;
+
+    // Lấy thời gian hiện tại
+    let now = new Date();
+    let hours = now.getHours().toString().padStart(2, '0');
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    let seconds = now.getSeconds().toString().padStart(2, '0');
+    let day = now.getDate().toString().padStart(2, '0');
+    let month = (now.getMonth() + 1).toString().padStart(2, '0');
+    let year = now.getFullYear().toString().slice(2);
+    let timeString = `${hours}${minutes}${seconds}`;
+
+    if (Customer != '') {
+        const lastFiveDigits = Customer.slice(-3);
+        const platformCode = platform === 'Tiktok' ? 'T' : 'F';
+        const serviceCode = service === 'Like' ? 'L' : (service === 'Follow' ? 'F' : 'V');
+        const result = lastFiveDigits + platformCode + timeString;
+
+        Transfer.innerText = result;
+        TransferBankForm.value = result;
+
+        // Gọi hàm để cập nhật ảnh với kết quả này
+        updateBankingImage(null, result);
+    } else {
+        GetIDtoCustomer();
+    }
+}
+
+function updateBankingImage(finalPrice, description) {
+    const BANK_ID = 'VCCB';
+    const ACCOUNT_NO = '99MM24030M09540726';
+    const TEMPLATE = 'compact2';
+    const ACCOUNT_NAME = 'MOMO DINH MANH HUNG';
+
+    // Sử dụng giá trị finalPrice nếu không có giá trị được truyền vào
+    finalPrice = finalPrice !== null ? finalPrice : document.getElementById('total_price').value.replace('đ', '').replace(/\./g, '');
+    description = description || document.getElementById('TransferBank').value;
+
+    // Tạo URL ảnh với các giá trị đã thay thế
+    const imageUrl = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-${TEMPLATE}.png?amount=${finalPrice}&addInfo=${description}&accountName=${ACCOUNT_NAME}`;
+
+    // Cập nhật src của thẻ img
+    document.getElementById('imgbanking').src = imageUrl;
+}

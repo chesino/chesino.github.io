@@ -271,6 +271,9 @@
     --Popup-BTN-Main: #d7c08e;
     --Popup-BTN-Text: #fff;
     --Popup-BTN: #333333;
+
+    --Card: #272727;
+    --HR: #333333;
 }
 .Priority-mode {
     --Background: #f4f4f4;
@@ -339,6 +342,9 @@
     --Popup-BTN-Main: #b08d57;
     --Popup-BTN-Text: #fff;
     --Popup-BTN: #333333;
+
+    --Card: #b08d57;
+    --HR: #333333;
 }
 
 
@@ -929,6 +935,7 @@ main .list::-webkit-scrollbar {
 
 .tabcontent {
     display: none;
+    padding-bottom: 50px;
 }
 
 .tabcontent.show {
@@ -958,7 +965,8 @@ main .tablinks.active .label {
 
 .mainCard .Card {
     width: 100%;
-    background-color: var(--Card);
+    color: var(--Card-Text);
+    background-color: var(--Card-Main-Background);
     border-radius: 20px;
     padding: 10px;
     display: flex;
@@ -973,6 +981,7 @@ main .tablinks.active .label {
 
 .mainCard .Card .image img {
     display: block;
+    background-color: #000;
 }
 
 .mainCard .Card .product {
@@ -996,7 +1005,7 @@ main .tablinks.active .label {
 }
 
 .mainCard .Card .buy .priceroot {
-    color: #eee;
+    color: var(--Card);
     font-weight: lighter;
     font-size: 12px;
     text-decoration: line-through;
