@@ -40,7 +40,7 @@ const serviceOptions = {
     Tiktok: [
         { value: 'Like', text: 'Thích [Min 100]', price: 30 },
         { value: 'Follow', text: 'Theo dõi [Min 100]', price: 70 },
-        { value: 'View', text: 'Lượt xem [Min 1,000]', price: 15 },
+        { value: 'View', text: 'Lượt xem [Min 1,000]', price: 10 },
         { value: 'Save', text: 'Lưu video [Min 100]', price: 15 }
     ]
 };
