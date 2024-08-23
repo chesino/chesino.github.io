@@ -1005,7 +1005,7 @@ main .tablinks.active .label {
 }
 
 .mainCard .Card .buy .priceroot {
-    color: var(--Card);
+    color: rgb(255, 69, 69);
     font-weight: lighter;
     font-size: 12px;
     text-decoration: line-through;

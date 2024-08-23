@@ -301,6 +301,17 @@ th {
     color: var(--Map-BTN);
     background-color: var(--Map-BTN-Text);
 }
+.Body .Status h1 {
+    font-size: 24px;
+}
+.Head .Author .Info .Time {
+    font-size: 14px;
+    margin-top: 5px;
+}
+.Feed .Body strong, .Feed .Body mark {
+    color: rgb(255, 81, 81) !important;
+    font-weight: bold;
+}
 
 /* #orderForm {
     display: none;
