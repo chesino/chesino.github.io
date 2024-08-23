@@ -61,8 +61,8 @@ function ReloadBlog() {
                 let author = '';
                 let srcIMG = '';
                 if (creator === 'HunqD') {
-                    author = 'Đinh Mạnh Hùng';
-                    srcIMG = 'https://graph.facebook.com/61551995024526/picture?type=large&amp;access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662';
+                    author = 'Admin';
+                    srcIMG = '/DATA/Logo/iconApps.png';
                 } else {
                     author = 'Không rõ';
                     srcIMG = '/DATA/Logo/logo.png';
