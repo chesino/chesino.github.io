@@ -3,64 +3,64 @@
     --Text: #000000;
     --Head-Background: #FFFFFF;
     --Head-Text: #000000;
-    --Head-Shadow: #35353586;
+    --Head-Shadow: #ffffff;
 
-    --Setting-Background: #D3E3FC;
-    --Setting-Text: #00887A;
-    --Setting-BTN: #003135;
-    --Setting-BTN-Text: #AFDDE5;
-    --Setting-BTN-Primary: #0fa4af;
+    --Setting-Background: #f1f2f4;
+    --Setting-Text: #000000;
+    --Setting-BTN: #303133;
+    --Setting-BTN-Text: #ffffff;
+    --Setting-BTN-Primary: #000000;
     --Setting-BTN-Text-Primary: #ffffff;
-    --Setting-Switch: #353535;
+    --Setting-Switch: #b6b6b6;
     --Setting-Switch-Dot: #ffffff;
-    --Setting-Switch-Checked: #00887A;
+    --Setting-Switch-Checked: #000000;
     --Setting-Switch-Dot-Checked: #FFFFFF;
 
-    --List-Background: #D3E3FC;
-    --List-Text: #77a6F7;
-    --List-Background-Active: #77a6F7;
+    --List-Background: #f1f2f4;
+    --List-Text: #2e2e2e;
+    --List-Background-Active: #303133;
     --List-Text-Active: #FFF;
 
-    --Map-Background: #77a6F7;
-    --Map-BTN: #77a6F7;
+    --Map-Background: #2e2e2e;
+    --Map-BTN: #2e2e2e;
     --Map-BTN-Text: #FFFFFF;
-    --SnG-Head-Background: #77a6F7;
+    --SnG-Head-Background: #2e2e2e;
     --SnG-Head-Text: #FFFFFF;
-    --SnG-Input: #D3E3FC;
-    --SnG-Input-Text: #77a6F7;
-    --SnG-BTN: #77a6F7;
+    --SnG-Input: #f1f2f4;
+    --SnG-Input-Text: #2e2e2e;
+    --SnG-BTN: #2e2e2e;
     --SnG-BTN-Text: #FFFFFF;
     --Map-Marker-icon: #fff;
-    --SnG-Star: #77a6F7;
-    --SnG-BTN-Main: #77a6F7;
+    --SnG-Star: #2e2e2e;
+    --SnG-BTN-Main: #2e2e2e;
     --SnG-BTN-Main-Text: #FFFFFF;
-    --SnG-History-Background: #00887A;
+    --SnG-History-Background: #303133;
     --SnG-History-Text: #fff;
     --SnG-History-Item-Background: #fff;
     --SnG-History-Item-Text: #000000;
 
     --Feed-Text: #000000;
-    --Feed-Background: #77a6F7;
+    --Feed-Background: #f1f2f4;
     --Feed-Head: #ffffff;
     --Feed-Text-Head: #ff0000;
 
     --Card-Main-Text: #FFFFFF;
-    --Card-Main-Background: #77a6F7;
+    --Card-Main-Background: #2e2e2e;
     --Card-Text: #000;
     --Card-Background: #ffffff;
     --Card-Input-Text: #000;
     --Card-Input: #eee;
     --Card-BTN-Text: #ffffff;
-    --Card-BTN: #00887A;
-    --Loading-Bar: #77a6F7;
+    --Card-BTN: #303133;
+    --Loading-Bar: #2e2e2e;
     --Loading: #b4b4b4;
 
-    --Popup-Text:#00887A;
-    --Popup:#77a6F7;
+    --Popup-Text:#ffffff;
+    --Popup:#2e2e2e;
     --Popup-BTN-Main-Text: #fff;
-    --Popup-BTN-Main: #00887A;
+    --Popup-BTN-Main: #000000;
     --Popup-BTN-Text: #fff;
-    --Popup-BTN: #003135;
+    --Popup-BTN: #000000;
 
     --Card: #272727;
     --HR: #272727;
@@ -178,8 +178,8 @@
 
     --Feed-Text: #E0E0E0;
     --Feed-Background: #1F1F1F;
-    --Feed-Head: #1F1F1F;
-    --Feed-Head-Text: #000000;
+    --Feed-Head: #333333;
+    --Feed-Head-Text: #ffffff;
     --Feed-Text-Head: #E0E0E0;
 
     --Card-Main-Text: #E0E0E0;
@@ -560,7 +560,6 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
     padding: 6px 20px;
     color: var(--Head-Text);
     background-color: var(--Head-Background);
-    box-shadow: 0px 0px 10px 1px var(--Head-Shadow);
     z-index: 2;
 }
 
@@ -982,6 +981,7 @@ main .tablinks.active .label {
 .mainCard .Card .image img {
     display: block;
     background-color: #000;
+    width: 100%;;
 }
 
 .mainCard .Card .product {
