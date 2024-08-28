@@ -37,13 +37,13 @@ main .center a {
 /* Main Title */
 h1 {
     font-size: 2.5rem;
-    color: #2c3e50;
     text-align: center;
 }
 
 /* Content Styling */
 .content {
-    padding: 20px;
+    text-align: center;
+    padding: 30px 0;
 }
 
 .content .main {
@@ -76,11 +76,17 @@ h1 {
     color: #27ae60;
 }
 
+.lcgtg:first-child {
+    margin: 0;
+}
+.lcgtg {
+    margin: 50px 0;
+}
+
 /* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
 tr.trtd,
@@ -89,7 +95,13 @@ tr.trletrong {
     background-color: #ecf0f1;
     transition: background-color 0.3s ease;
 }
-
+tr.trlenho {
+    background-color: yellow;
+}
+tr.trletrong {
+    color: #fff;
+    background-color: #ff2e17;
+}
 tr.trtd:hover,
 tr.trlenho:hover,
 tr.trletrong:hover {
@@ -152,4 +164,52 @@ td span {
         font-size: 0.8rem;
     }
 
+}
+
+.Main {
+    background-color: #eee;
+    padding: 10px;
+    background-image: url(/Apps/Lịch-Công-Giáo/DATA/Jesus.png);
+    background-size: cover;
+    border-radius: 20px;
+}
+.Homnay {
+    color: #000;
+    background-color: #eeeeee8e;
+    border-radius: 16px;
+    padding: 0 0 20px 0 ;
+    overflow: hidden;
+}
+.Main .Le {
+    text-align: center;
+}
+.Main .Le .ngayhomnay {
+    font-size: 30px;
+}
+.Main .Le .lehomnay {
+    font-size: 20px;
+    border-radius: 6px;
+    padding: 6px 0;
+}
+.Main .Le .loaile {
+    font-size: 16px;
+    padding: 5px 0;
+}
+.Main .AoLeTinMung {
+    text-align: center;
+}
+#tinmung br {
+    display: none;
+}
+
+.Main .AoLe {
+    margin: auto;
+    height: 35px;
+    width: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.Main .AoLe img{
+    width: 100%;
+    filter: drop-shadow(0 0 0.75rem rgb(255, 255, 255));
 }
