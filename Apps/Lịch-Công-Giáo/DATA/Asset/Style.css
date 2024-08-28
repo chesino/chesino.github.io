@@ -1,0 +1,155 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Main Container */
+main {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
+
+main .center {
+    text-align: center;
+}
+
+main .center a {
+    font-weight: bold;
+    color: #ff2e17;
+    text-decoration: none;
+}
+
+/* Main Title */
+h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Content Styling */
+.content {
+    padding: 20px;
+}
+
+.content .main {
+    background-color: #eeeeee;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+/* Paragraph Styling */
+.content p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* Highlight Date and Event */
+#date-saint {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #2980b9;
+}
+
+#celebration-type {
+    font-size: 1.2rem;
+    color: #e74c3c;
+}
+
+#priest-vestment-color {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+tr.trtd,
+tr.trlenho,
+tr.trletrong {
+    background-color: #ecf0f1;
+    transition: background-color 0.3s ease;
+}
+
+tr.trtd:hover,
+tr.trlenho:hover,
+tr.trletrong:hover {
+    background-color: #bdc3c7;
+}
+
+td {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+td p {
+    margin: 5px 0;
+}
+
+td span {
+    font-weight: bold;
+}
+
+.pgae {
+    display: none;
+}
+
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .content p {
+        font-size: 1rem;
+    }
+
+    td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .pgae a {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    main {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .content p {
+        font-size: 0.9rem;
+    }
+
+    td {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+}

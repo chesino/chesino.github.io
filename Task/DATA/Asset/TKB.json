@@ -1,0 +1,34 @@
+{
+    "A": {
+        "T2": "Toán, Tiếng Việt, Anh",
+        "T3": "Toán",
+        "T4": "Vật Lý, Hóa Học, Sinh Học",
+        "T5": "Lịch Sử, Địa Lý",
+        "T6": "Thể Dục, Âm Nhạc",
+        "Ngày cập nhật": "1/1/2024"
+    },
+    "B": {
+        "T2": "Ngữ Văn, Tiếng Việt, Anh",
+        "T3": "Toán, Tin Học",
+        "T4": "Vật Lý, Hóa Học",
+        "T5": "Sinh Học, Địa Lý",
+        "T6": "Thể Dục, Mỹ Thuật",
+        "Ngày cập nhật": "2/1/2024"
+    },
+    "C": {
+        "T2": "Toán, Vật Lý, Hóa Học",
+        "T3": "Tiếng Việt, Âm Nhạc",
+        "T4": "Sinh Học, Địa Lý",
+        "T5": "Lịch Sử, Giáo Dục Công Dân",
+        "T6": "Thể Dục, Tin Học",
+        "Ngày cập nhật": "3/1/2024"
+    },
+    "D": {
+        "T2": "Toán, Tiếng Anh",
+        "T3": "Văn Học, Lịch Sử",
+        "T4": "Địa Lý, Giáo Dục Công Dân",
+        "T5": "Vật Lý, Hóa Học",
+        "T6": "Thể Dục, Nghệ Thuật",
+        "Ngày cập nhật": "4/1/2024"
+    }
+}
