@@ -95,7 +95,8 @@ function calculate() {
     const data = {
         vario: { consumption: 2.16, tankCapacity: 5.5 },
         winner: { consumption: 1.99, tankCapacity: 4.5 },
-        sonic: { consumption: 2.069, tankCapacity: 4 }
+        sonic: { consumption: 2.069, tankCapacity: 4 },
+        sirus: { consumption: 1.57, tankCapacity: 3.8 }
     };
 
     if (isNaN(distance) || distance <= 0 || !data[bikeType]) {
@@ -136,6 +137,10 @@ function calculate2() {
     if (vehicle === "vario") {
         fuelCapacity = 5.5;
         fuelConsumption = 2.16;
+    } 
+    else if (vehicle === "sirus") {
+        fuelCapacity = 3.8;
+        fuelConsumption = 1.57;
     } else if (vehicle === "winner") {
         fuelCapacity = 4.5;
         fuelConsumption = 1.99;
@@ -143,7 +148,7 @@ function calculate2() {
         fuelCapacity = 4.0;
         fuelConsumption = 2.069;
     }
-
+    
     const fuelPerGauge = fuelCapacity / 6;
     const remainingFuel = fuelPerGauge * fuelGauge;
     const distanceCanTravel = (remainingFuel / fuelConsumption) * 100;
