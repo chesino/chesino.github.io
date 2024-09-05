@@ -167,6 +167,7 @@
           Dịch vụ
         </div>
       </button>
+
       <button class="item tablinks" onclick="openTab(event, 'Shop')">
         <div class="icon">
           <img src="/DATA/Icon/shop.png" alt="shop" srcset="">
@@ -175,21 +176,22 @@
           Cửa hàng
         </div>
       </button>
+
+      <button class="item tablinks" onclick="openTab(event, 'Order')">
+        <div class="icon">
+          <img src="/DATA/Icon/checklist.png" alt="" srcset="">
+        </div>
+        <div class="label">
+          Đơn hàng
+        </div>
+      </button>
+
       <button class="item tablinks" onclick="openTab(event, 'Price')">
         <div class="icon">
           <img src="/DATA/Icon/flash-card.png" alt="" srcset="">
         </div>
         <div class="label">
           Thành viên
-        </div>
-      </button>
-
-      <button class="item tablinks" onclick="openTab(event, 'Order')">
-        <div class="icon">
-          <img src="/DATA/Icon/clipboard.png" alt="" srcset="">
-        </div>
-        <div class="label">
-          Đơn hàng
         </div>
       </button>
 
@@ -348,7 +350,29 @@
       </div>
 
       <div class="tabcontent" id="Shop">
+        <p>Nếu là *Priority có thể yêu cầu các ứng dụng, game miễn phí.</p>
+        <p>*Không áp dụng với Priority trải nghiệm.</p>
         <div class="mainCard">
+
+          <div class="Card">
+            <div class="image">
+              <img src="./Asset/Shop/minecraftPE.png" alt="1">
+            </div>
+
+            <div class="product">
+              <h1 class="name">Minecraft iOS</h1>
+              <p class="description">Mướn tài khoản tải, hỗ trợ cập nhật 5k/lần. <br>Hạn sử dụng 1 lần tải.</p>
+            </div>
+            <div class="buy">
+              <p class="price">
+                <span class="priceroot">~170.000đ</span>
+                15.000đ
+              </p>
+              <button onclick="Warning('Đang cập nhật')">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </button>
+            </div>
+          </div>
 
           <div class="Card">
             <div class="image">

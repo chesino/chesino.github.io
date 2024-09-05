@@ -1,5 +1,6 @@
 const discountCodes = {
-    'HUNQTVM': 5
+    'VJPPRO5': 5,
+    'FREE10': 10 
 };
 
 const inputElements = document.querySelectorAll('.inputFM');
@@ -146,8 +147,9 @@ function getNewRecord() {
 function GetIDtoCustomer() {
     const HunqID = document.getElementById('HunqID').value;
     const Customer = document.getElementById('customer');
+
     if (HunqID != '') {
-        Customer.value = HunqID
+        Customer.value = HunqID;
     } else {
         Fail('Lỗi', 'Bạn chưa đăng nhập');
     }
@@ -204,7 +206,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Thông báo cho người dùng (tuỳ chọn)
         DoneSignIn('Đã sao chép mã đơn hàng');
     });
-    
+
     transferElement.addEventListener('click', () => {
         // Tạo một phần tử textarea tạm thời để sao chép nội dung
         const textarea = document.createElement('textarea');
@@ -249,10 +251,22 @@ function applyDiscount(totalPrice) {
     let finalPrice = totalPrice;
     let discountPercent = 0;
 
-    if (discountCodes[discountCode]) {
-        discountPercent = discountCodes[discountCode];
-        finalPrice = finalPrice - (finalPrice * discountPercent / 100);
+    
+
+    const Rank = document.getElementById('rank').textContent;
+    if (Rank === 'Admin - Ultimate') {
+        discountPercent = 50;
+    } else if (Rank === 'Priority') {
+        discountPercent = 5;
+    } else if (Rank === 'Cộng tác viên') {
+        discountPercent = 2;
     }
+
+    if (discountCodes[discountCode]) {
+        discountPercent += discountCodes[discountCode];
+    }
+
+    finalPrice = finalPrice - (finalPrice * discountPercent / 100);
 
     document.getElementById('total_price').value = formatWithDots(finalPrice) + 'đ';
     document.getElementById('total_price_banking').innerText = formatWithDots(finalPrice) + 'đ';

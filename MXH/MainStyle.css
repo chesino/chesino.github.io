@@ -65,9 +65,10 @@ button {
 
 
 #total_price {
-    background-color: #000000 !important;
-    font-size: 26px;
-    text-align: right;
+    color: var(--Background) !important;
+    background-color: var(--Text) !important;
+    font-size: 30px !important;
+    text-align: center;
 }
 
 .payment-method {
@@ -313,6 +314,9 @@ th {
     font-weight: bold;
 }
 
+#TransferBankForm {
+    cursor: pointer;
+}
 /* #orderForm {
     display: none;
 } */
