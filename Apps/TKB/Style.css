@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.5s ease;
+}
+
+@font-face {
+    font-family: BeFont;
+    src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Light.ttf);
+}
+body {
+    font-family: BeFont;
+}
+.Thu {
+    background-color: #eee;
+    margin: 10px;
+    padding: 10px;
+}
+ul{
+    list-style: none;
+
+}
+li{
+    background-color: #d8d6d6;
+    margin: 10px;
+    padding: 10px;
+}

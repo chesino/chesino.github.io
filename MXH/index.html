@@ -40,6 +40,8 @@
 </head>
 
 <body>
+
+
   <div id="loading-screen">
     <div class="logo">
       <img src="/DATA/LOGO_PNG/1.png" alt="Logo"> <!-- Thay logo.png bằng đường dẫn đến logo của bạn -->
@@ -332,7 +334,8 @@
             <p onclick="copyText('99MM24030M09540726')">Số tài khoản: <strong>99MM24030M09540726</strong> <i
                 class="fa-solid fa-copy"></i></p>
             <p>Số tiền: <strong id="total_price_banking"></strong></p>
-            <p>Nội dung: <strong id="TransferBank" name="Order"></strong> <i id="copyTransferBank" class="fa-solid fa-copy"></i></p>
+            <p>Nội dung: <strong id="TransferBank" name="Order"></strong> <i id="copyTransferBank"
+                class="fa-solid fa-copy"></i></p>
             <p class="Red">Lưu ý: Sai nội dung chuyển tiền sẽ bị trừ 10% phí.</p>
             <br>
             <hr>
@@ -350,9 +353,24 @@
       </div>
 
       <div class="tabcontent" id="Shop">
+        <div class="Cart">
+          <div id="cart"></div>
+          <button  class="Btn" id="checkoutButton" onclick="showCheckout()" style="display:none;">
+            Thanh toán
+          </button>
+
+          <div id="checkout" style="display:none;">
+            <h2>Thông tin thanh toán</h2>
+            <p>Tổng tiền: <span id="totalPrice">0đ</span></p>
+            <button class="Btn" onclick="confirmCheckout()">Xác nhận thanh toán</button>
+          </div>
+        </div>
+
+
         <p>Nếu là *Priority có thể yêu cầu các ứng dụng, game miễn phí.</p>
         <p>*Không áp dụng với Priority trải nghiệm.</p>
-        <div class="mainCard">
+
+        <div class="mainCard" id="products">
 
           <div class="Card">
             <div class="image">
@@ -803,6 +821,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
 <script src="./Main.js"></script>
+<script src="./Shop.js"></script>
 <script src="./Asset/Blog.js"></script>
 <script src="/DATA/Asset/Script.js"></script>
 <script src="/DATA/Extend/SweetAlert2.js"></script>

@@ -329,3 +329,64 @@ th {
     }
 }
 
+
+.Cart {
+    position: fixed;
+    display: none;
+    bottom: 30px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--Card-Main-Background);
+    padding: 10px;
+}
+#cart {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.CartItem {
+    display: grid;
+    grid-template-columns: 50px auto auto;
+    gap: 10px;
+    text-align: left;
+    align-items: center;
+}
+.CartItem .image {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.CartItem .image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.CartItem .quantity {
+    display: flex;
+    justify-content: flex-end;
+}
+.CartItem .quantity .quantityitem {
+    font-size: 18px;
+    background-color: var(--Background);
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.CartItem .quantity button{
+    font-size: 18px;
+    height: 30px;
+    width: 30px;
+}
+.CartItem .quantity .del {
+    background-color: red;
+    margin: 0 5px;
+}
+
+.CartItem .name h2{
+    font-size: 18px;
+}
