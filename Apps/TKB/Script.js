@@ -537,3 +537,5 @@ document.addEventListener('DOMContentLoaded', function () {
         renderTimetable(classSelect.value);
     });
 });
+
+
