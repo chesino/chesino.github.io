@@ -413,9 +413,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const timetable = timetables[classKey];
 
-        // const today = new Date();
+        const today = new Date();
         // Set a fixed date for testing
-        const today = new Date(2024, 8, 10, 11, 0, 0); // 8:00 AM on 10/9/2024
+        // const today = new Date(2024, 8, 10, 11, 0, 0); // 8:00 AM on 10/9/2024
         const todayDay = today.getDay(); // 0 (Sunday) to 6 (Saturday)
         const todayName = daysOfWeek[todayDay === 0 ? 6 : todayDay - 1]; // Convert 0-6 to "Thứ 2" - "Chủ nhật"
         console.log(`Today is: ${todayName}`);
