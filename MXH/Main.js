@@ -49,7 +49,7 @@ const serviceOptions = {
 function updateServiceOptions() {
     const platform = document.getElementById('platform').value;
     const serviceSelect = document.getElementById('service');
-    serviceSelect.innerHTML = '<option>Vui lòng chọn dịch vụ</option>'; // Reset the service options
+    serviceSelect.innerHTML = '<option selected disabled>Vui lòng chọn dịch vụ</option>'; // Reset the service options
 
     serviceOptions[platform].forEach(service => {
         const option = document.createElement('option');
@@ -302,7 +302,24 @@ function GetCustomerToTransfer() {
 
     if (Customer != '') {
         const lastFiveDigits = Customer.slice(-3);
-        const platformCode = platform === 'Tiktok' ? 'T' : 'F';
+        let platformCode;
+        switch (platform) {
+          case 'Tiktok':
+            platformCode = 'T';
+            break;
+          case 'Facebook':
+            platformCode = 'F';
+            break;
+          case 'IDApple':
+            platformCode = 'A';
+            break;
+          case 'UpdateApps':
+            platformCode = 'U';
+            break;
+          default:
+            platformCode = '?'; // Giá trị mặc định nếu không khớp với platform nào
+        }
+        
         const serviceCode = service === 'Like' ? 'L' : (service === 'Follow' ? 'F' : 'V');
         const result = lastFiveDigits + platformCode + timeString;
 

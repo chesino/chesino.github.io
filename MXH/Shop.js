@@ -7,21 +7,21 @@ const products = [
     "image": "./Asset/Shop/minecraftPE.png"
   },
   {
-    "name": "Netflix 4K",
+    "name": "Netflix 4K 1T",
     "description": "Tài khoản dùng riêng. Hạn sử dụng 1 Tháng.",
     "price": "75.000đ",
     "priceroot": "~260.000đ",
     "image": "./Asset/Shop/Netflix.jpg"
   },
   {
-    "name": "Netflix 4K",
+    "name": "Netflix 4K 6T",
     "description": "Tài khoản dùng riêng. Hạn sử dụng 6 Tháng.",
     "price": "400.000đ",
     "priceroot": "~1.560.000đ",
     "image": "./Asset/Shop/Netflix.jpg"
   },
   {
-    "name": "Spotify Premium",
+    "name": "Spotify Premium 1M",
     "description": "Tài khoản dùng riêng. Hạn sử dụng 1 Tháng.",
     "price": "25.000đ",
     "priceroot": "~59.000đ",
@@ -203,7 +203,7 @@ const showCheckout = () => {
 
 // Xác nhận thanh toán
 const confirmCheckout = () => {
-  alert('Thanh toán thành công!');
+  Fail('Lỗi','Tính năng này đang phát triển')
   cart.length = 0; // Xóa giỏ hàng sau khi thanh toán
   renderCart();
   document.getElementById('checkout').style.display = 'none';

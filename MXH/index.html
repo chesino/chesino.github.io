@@ -277,7 +277,7 @@
           <div class="MXH-Input">
             <label for="service">Dịch vụ</label>
             <select id="service" name="Service" onchange="calculateTotalPrice()" required>
-              <option disabled>Vui lòng chọn nền tảng</option>
+              <option selected disabled>Vui lòng chọn nền tảng</option>
             </select>
           </div>
 
@@ -287,8 +287,8 @@
           </div>
 
           <div class="MXH-Input">
-            <label for="link_id">Link, ID Bài viết <span> <a href="#" onclick="ClickWelcome()">Xem hướng dẫn tại
-                  đây</a></span></label>
+            <label for="link_id">Link, ID Bài viết<span> <a href="#" onclick="ClickWelcome()">Xem hướng dẫn tại
+                  đây</a></span>
             <input type="text" id="link_id" name="Link ID" required>
           </div>
 
@@ -355,7 +355,7 @@
       <div class="tabcontent" id="Shop">
         <div class="Cart">
           <div id="cart"></div>
-          <button  class="Btn" id="checkoutButton" onclick="showCheckout()" style="display:none;">
+          <button class="Btn" id="checkoutButton" onclick="showCheckout()" style="display:none;">
             Thanh toán
           </button>
 

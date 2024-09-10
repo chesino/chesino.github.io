@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi Thời khóa biểu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: #f9f9f9;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+        .copy-button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chuyển đổi Thời khóa biểu</h1>
+    <textarea id="inputText" placeholder="Nhập thời khóa biểu tại đây..."></textarea>
+    <input type="text" id="jsonName" placeholder="Nhập tên JSON (mặc định là 'abc')" />
+    <button onclick="convertToJSON()">Chuyển đổi</button>
+    <div id="result"></div>
+    <button class="copy-button" onclick="copyToClipboard()">Sao chép JSON</button>
+
+    <script>
+        function convertToJSON() {
+            const text = document.getElementById('inputText').value.trim();
+            const lines = text.split('\n');
+            const days = lines[0].split('\t').slice(1);
+            const schedule = {};
+
+            for (let i = 1; i < lines.length; i++) {
+                const cols = lines[i].split('\t');
+                const time = cols[0];
+                
+                for (let j = 1; j < cols.length; j++) {
+                    const subject = cols[j].trim();
+                    if (!subject) continue;
+                    
+                    if (!schedule[days[j - 1]]) {
+                        schedule[days[j - 1]] = [];
+                    }
+
+                    schedule[days[j - 1]].push({
+                        "Môn học": subject,
+                        "Thời gian": time
+                    });
+                }
+            }
+
+            // Sort the days
+            const sortedSchedule = {};
+            const orderedDays = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
+            orderedDays.forEach(day => {
+                if (schedule[day]) {
+                    sortedSchedule[day] = schedule[day];
+                }
+            });
+
+            // Get JSON name from input
+            const jsonName = document.getElementById('jsonName').value.trim() || 'abc';
+
+            const jsonString = JSON.stringify({ [jsonName]: sortedSchedule }, null, 2);
+            document.getElementById('result').textContent = jsonString;
+        }
+
+        function copyToClipboard() {
+            const result = document.getElementById('result').textContent;
+            navigator.clipboard.writeText(result).then(() => {
+                alert('Đã sao chép JSON vào clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

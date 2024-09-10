@@ -13,7 +13,7 @@ body {
     font-family: BeFont;
 }
 .Thu {
-    background-color: #eee;
+    background-color: #c5c5c5;
     margin: 10px;
     padding: 10px;
 }
@@ -22,7 +22,29 @@ ul{
 
 }
 li{
+    position: relative;
+    display: block;
     background-color: #d8d6d6;
     margin: 10px;
     padding: 10px;
 }
+li .time {
+    width: 120px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(155, 154, 154);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.Thu .TietHoc:nth-child(3) {
+    margin-top: 30px;
+}
+.Active {
+    background-color: yellow; /* Ví dụ để dễ thấy */
+    font-weight: bold;
+}
+

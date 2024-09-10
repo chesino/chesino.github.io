@@ -332,13 +332,14 @@ th {
 
 .Cart {
     position: fixed;
-    display: none;
-    bottom: 30px;
+    display: block;
+    bottom: 0;
     right: 0;
     left: 0;
     width: 100%;
     background-color: var(--Card-Main-Background);
     padding: 10px;
+    padding-bottom: 25px;
 }
 #cart {
     display: flex;
@@ -381,12 +382,13 @@ th {
     font-size: 18px;
     height: 30px;
     width: 30px;
+    border-radius: 8px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 }
 .CartItem .quantity .del {
-    background-color: red;
+    background-color: rgb(185, 0, 0);
     margin: 0 5px;
 }
 
-.CartItem .name h2{
+.CartItem .name   h2{
     font-size: 18px;
 }
