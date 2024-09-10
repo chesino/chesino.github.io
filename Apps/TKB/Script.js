@@ -268,139 +268,139 @@ const timetables = {
         ]
     },
     "lop91": {
-    "Thứ 2": [
-      {
-        "Môn học": "Chào cờ",
-        "Thời gian": "7:00 - 7:45"
-      },
-      {
-        "Môn học": "Toán",
-        "Thời gian": "7:45 - 8:30"
-      },
-      {
-        "Môn học": "Ngoại ngữ",
-        "Thời gian": "8:45 - 9:30"
-      },
-      {
-        "Môn học": "Ngữ văn",
-        "Thời gian": "9:30 - 10:15"
-      },
-      {
-        "Môn học": "Sinh hoạt lớp",
-        "Thời gian": "10:15 - 11:00"
-      }
-    ],
-    "Thứ 3": [
-      {
-        "Môn học": "Hóa học",
-        "Thời gian": "7:00 - 7:45"
-      },
-      {
-        "Môn học": "GDCD",
-        "Thời gian": "7:45 - 8:30"
-      },
-      {
-        "Môn học": "Ngữ văn",
-        "Thời gian": "8:45 - 9:30"
-      },
-      {
-        "Môn học": "Ngữ văn",
-        "Thời gian": "9:30 - 10:15"
-      },
-      {
-        "Môn học": "Sinh học",
-        "Thời gian": "10:15 - 11:00"
-      },
-      {
-        "Môn học": "GD Địa Phương",
-        "Thời gian": "13:45 - 14:30"
-      },
-      {
-        "Môn học": "Tin học",
-        "Thời gian": "14:45 - 15:30"
-      },
-      {
-        "Môn học": "Thể dục",
-        "Thời gian": "15:30 - 16:15"
-      },
-      {
-        "Môn học": "Thể dục",
-        "Thời gian": "16:15 - 17:00"
-      }
-    ],
-    "Thứ 4": [
-      {
-        "Môn học": "Toán",
-        "Thời gian": "7:00 - 7:45"
-      },
-      {
-        "Môn học": "Vật lí",
-        "Thời gian": "7:45 - 8:30"
-      },
-      {
-        "Môn học": "*HĐTNHN",
-        "Thời gian": "8:45 - 9:30"
-      },
-      {
-        "Môn học": "Lịch sử và Địa lý",
-        "Thời gian": "9:30 - 10:15"
-      }
-    ],
-    "Thứ 5": [
-      {
-        "Môn học": "Ngoại ngữ",
-        "Thời gian": "7:00 - 7:45"
-      },
-      {
-        "Môn học": "Lịch sử và Địa lý",
-        "Thời gian": "7:45 - 8:30"
-      },
-      {
-        "Môn học": "Toán",
-        "Thời gian": "8:45 - 9:30"
-      },
-      {
-        "Môn học": "Toán",
-        "Thời gian": "9:30 - 10:15"
-      }
-    ],
-    "Thứ 6": [
-      {
-        "Môn học": "Vật lí",
-        "Thời gian": "7:00 - 7:45"
-      },
-      {
-        "Môn học": "Âm nhạc",
-        "Thời gian": "7:45 - 8:30"
-      },
-      {
-        "Môn học": "Công nghệ",
-        "Thời gian": "8:45 - 9:30"
-      },
-      {
-        "Môn học": "Lịch sử và Địa lý",
-        "Thời gian": "9:30 - 10:15"
-      }
-    ],
-    "Thứ 7": [
-      {
-        "Môn học": "Ngữ văn",
-        "Thời gian": "7:00 - 7:45"
-      },
-      {
-        "Môn học": "Công nghệ",
-        "Thời gian": "7:45 - 8:30"
-      },
-      {
-        "Môn học": "Mỹ thuật",
-        "Thời gian": "8:45 - 9:30"
-      },
-      {
-        "Môn học": "Ngoại ngữ",
-        "Thời gian": "9:30 - 10:15"
-      }
-    ]
-  }
+        "Thứ 2": [
+            {
+                "Môn học": "Chào cờ",
+                "Thời gian": "7:00 - 7:45"
+            },
+            {
+                "Môn học": "Toán",
+                "Thời gian": "7:45 - 8:30"
+            },
+            {
+                "Môn học": "Ngoại ngữ",
+                "Thời gian": "8:45 - 9:30"
+            },
+            {
+                "Môn học": "Ngữ văn",
+                "Thời gian": "9:30 - 10:15"
+            },
+            {
+                "Môn học": "Sinh hoạt lớp",
+                "Thời gian": "10:15 - 11:00"
+            }
+        ],
+        "Thứ 3": [
+            {
+                "Môn học": "Hóa học",
+                "Thời gian": "7:00 - 7:45"
+            },
+            {
+                "Môn học": "GDCD",
+                "Thời gian": "7:45 - 8:30"
+            },
+            {
+                "Môn học": "Ngữ văn",
+                "Thời gian": "8:45 - 9:30"
+            },
+            {
+                "Môn học": "Ngữ văn",
+                "Thời gian": "9:30 - 10:15"
+            },
+            {
+                "Môn học": "Sinh học",
+                "Thời gian": "10:15 - 11:00"
+            },
+            {
+                "Môn học": "GD Địa Phương",
+                "Thời gian": "13:45 - 14:30"
+            },
+            {
+                "Môn học": "Tin học",
+                "Thời gian": "14:45 - 15:30"
+            },
+            {
+                "Môn học": "Thể dục",
+                "Thời gian": "15:30 - 16:15"
+            },
+            {
+                "Môn học": "Thể dục",
+                "Thời gian": "16:15 - 17:00"
+            }
+        ],
+        "Thứ 4": [
+            {
+                "Môn học": "Toán",
+                "Thời gian": "7:00 - 7:45"
+            },
+            {
+                "Môn học": "Vật lí",
+                "Thời gian": "7:45 - 8:30"
+            },
+            {
+                "Môn học": "*HĐTNHN",
+                "Thời gian": "8:45 - 9:30"
+            },
+            {
+                "Môn học": "Lịch sử và Địa lý",
+                "Thời gian": "9:30 - 10:15"
+            }
+        ],
+        "Thứ 5": [
+            {
+                "Môn học": "Ngoại ngữ",
+                "Thời gian": "7:00 - 7:45"
+            },
+            {
+                "Môn học": "Lịch sử và Địa lý",
+                "Thời gian": "7:45 - 8:30"
+            },
+            {
+                "Môn học": "Toán",
+                "Thời gian": "8:45 - 9:30"
+            },
+            {
+                "Môn học": "Toán",
+                "Thời gian": "9:30 - 10:15"
+            }
+        ],
+        "Thứ 6": [
+            {
+                "Môn học": "Vật lí",
+                "Thời gian": "7:00 - 7:45"
+            },
+            {
+                "Môn học": "Âm nhạc",
+                "Thời gian": "7:45 - 8:30"
+            },
+            {
+                "Môn học": "Công nghệ",
+                "Thời gian": "8:45 - 9:30"
+            },
+            {
+                "Môn học": "Lịch sử và Địa lý",
+                "Thời gian": "9:30 - 10:15"
+            }
+        ],
+        "Thứ 7": [
+            {
+                "Môn học": "Ngữ văn",
+                "Thời gian": "7:00 - 7:45"
+            },
+            {
+                "Môn học": "Công nghệ",
+                "Thời gian": "7:45 - 8:30"
+            },
+            {
+                "Môn học": "Mỹ thuật",
+                "Thời gian": "8:45 - 9:30"
+            },
+            {
+                "Môn học": "Ngoại ngữ",
+                "Thời gian": "9:30 - 10:15"
+            }
+        ]
+    }
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -539,3 +539,34 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Update
+// Hàm để thêm số 0 vào trước các số nhỏ hơn 10
+function addZero(num) {
+    return num < 10 ? '0' + num : num;
+}
+
+// Hàm để lấy và định dạng ngày giờ hiện tại
+function getCurrentDateTime() {
+    const today = new Date();
+    const days = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+    const dayName = days[today.getDay()];
+    const day = today.getDate();
+    const month = today.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0, nên cần cộng 1
+    const year = today.getFullYear();
+    const hours = addZero(today.getHours());
+    const minutes = addZero(today.getMinutes());
+    const seconds = addZero(today.getSeconds());
+
+    return `${hours}:${minutes}:${seconds} \n ${dayName}, ${day} thg ${month}`;
+}
+
+// Hàm cập nhật thời gian mỗi giây
+function updateTime() {
+    document.getElementById('currentDate').innerText = getCurrentDateTime();
+}
+
+// Cập nhật thời gian ngay khi trang được tải
+updateTime();
+
+// Cập nhật thời gian mỗi giây
+setInterval(updateTime, 1000);

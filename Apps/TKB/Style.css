@@ -51,9 +51,21 @@ li .time {
 }
 
 .First {
+    display: grid;
+    grid-template-columns: calc(60% - 10px) 40%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.Today {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    text-align: center;
 }
 .SelectClass{
     background-color: #ffffff;
