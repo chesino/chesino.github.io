@@ -9,46 +9,24 @@
     font-family: BeFont;
     src: url(/DATA/Font/Be_Vietnam_Pro/BeVietnamPro-Light.ttf);
 }
+
 body {
     font-family: BeFont;
     background-color: #ccc;
 }
+
 .Thu {
     background-color: #ffffff;
     padding: 10px;
     border-radius: 10px;
     margin: 10px 0;
 }
-ul{
-    list-style: none;
 
-}
-li{
-    position: relative;
-    display: block;
-    background-color: #d8d6d6;
-    margin: 10px;
-    padding: 10px;
-}
-li .time {
-    width: 120px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: rgb(155, 154, 154);
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
 .Thu .TietHoc:nth-child(3) {
     margin-top: 30px;
 }
-.Active {
-    background-color: yellow; /* Ví dụ để dễ thấy */
-    font-weight: bold;
-}
+
+
 
 .First {
     display: grid;
@@ -57,7 +35,10 @@ li .time {
     justify-content: center;
     gap: 10px;
 }
+
 .Today {
+    font-size: 20px;
+    font-weight: bold;
     background-color: #ffffff;
     height: 80px;
     width: 100%;
@@ -67,7 +48,8 @@ li .time {
     border-radius: 10px;
     text-align: center;
 }
-.SelectClass{
+
+.SelectClass {
     background-color: #ffffff;
     height: 80px;
     width: 100%;
@@ -75,7 +57,7 @@ li .time {
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
 }
 
 .SelectClass label {
@@ -83,33 +65,34 @@ li .time {
     font-weight: bold;
     margin-right: 10px;
     color: #333;
-  }
-  
-  .SelectClass select {
+}
+
+.SelectClass select {
     display: block;
     width: 100%;
-    font-size: 16px;
-    padding: 8px 12px;
+    height: 100%;
+    font-size: 18px;
+    padding: 10px 12px;
     border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
+    border: none;
+    background-color: #ffffff4f;
     color: #333;
     transition: all 0.3s ease;
-  }
-  
-  .SelectClass select:hover {
+}
+
+.SelectClass select:hover {
     border-color: #888;
-  }
-  
-  .SelectClass select:focus {
+}
+
+.SelectClass select:focus {
     outline: none;
     border-color: #555;
     background-color: #e0e0e0;
-  }
-  
-  .SelectClass select option {
+}
+
+.SelectClass select option {
     padding: 10px;
-  }
+}
 
 .VideoBG {
     position: fixed;
@@ -122,10 +105,12 @@ li .time {
     min-height: 100vh;
     min-width: 100%;
 }
+
 .Main {
     padding: 20px;
     padding-bottom: 100vh;
 }
+
 footer {
     color: #ffffff;
     font-size: 12px;
@@ -133,9 +118,45 @@ footer {
     width: 100%;
     text-align: center;
 }
-footer a{
+
+footer a {
     color: greenyellow;
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
+}
+
+.MonHoc {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    margin: 10px 0;
+    background-color: #c4c4c4;
+    min-height: 50px;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.MonHoc .name {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.MonHoc .time {
+    text-align: center;
+    padding: 0 5px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 6px;
+}
+.Active {
+    background-color: rgb(128, 255, 116);
+    /* Ví dụ để dễ thấy */
+    font-weight: bold;
 }

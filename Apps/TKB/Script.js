@@ -110,7 +110,7 @@ const timetables = {
                 "Thời gian": "8:45 - 9:30"
             },
             {
-                "Môn học": "*HĐTN",
+                "Môn học": "Hoạt động trải nghiệm",
                 "Thời gian": "9:30 - 10:15"
             },
             {
@@ -140,7 +140,7 @@ const timetables = {
     "lop65": {
         "Thứ 2": [
             {
-                "Môn học": "GD Địa Phương",
+                "Môn học": "Giáo dục địa phương",
                 "Thời gian": "7:00 - 7:45"
             },
             {
@@ -208,7 +208,7 @@ const timetables = {
                 "Thời gian": "13:45 - 14:30"
             },
             {
-                "Môn học": "GDCD",
+                "Môn học": "Giáo Dục Công Dân",
                 "Thời gian": "14:45 - 15:30"
             },
             {
@@ -252,7 +252,7 @@ const timetables = {
                 "Thời gian": "14:45 - 15:30"
             },
             {
-                "Môn học": "*HĐTNHN",
+                "Môn học": "Hoạt động trải nghiệm - hướng nghiệp",
                 "Thời gian": "15:30 - 16:15"
             }
         ],
@@ -296,7 +296,7 @@ const timetables = {
                 "Thời gian": "7:00 - 7:45"
             },
             {
-                "Môn học": "GDCD",
+                "Môn học": "Giáo Dục Công Dân",
                 "Thời gian": "7:45 - 8:30"
             },
             {
@@ -338,7 +338,7 @@ const timetables = {
                 "Thời gian": "7:45 - 8:30"
             },
             {
-                "Môn học": "*HĐTNHN",
+                "Môn học": "Hoạt động trải nghiệm - hướng nghiệp",
                 "Thời gian": "8:45 - 9:30"
             },
             {
@@ -413,110 +413,104 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const timetable = timetables[classKey];
 
-        function updateTimetable() {
-            const today = new Date();
-            const todayDay = today.getDay(); // 0 (Sunday) to 6 (Saturday)
-            const todayName = daysOfWeek[todayDay === 0 ? 6 : todayDay - 1]; // Convert 0-6 to "Thứ 2" - "Chủ nhật"
-            console.log(`Today is: ${todayName}`);
-            const sortedDays = sortDaysStartingFrom(todayName);
+        // Lấy ngày giờ hiện tại
+        const today = new Date();
+        const todayDay = today.getDay(); // 0 (Sunday) to 6 (Saturday)
+        const todayName = daysOfWeek[todayDay === 0 ? 6 : todayDay - 1]; // Convert 0-6 to "Thứ 2" - "Chủ nhật"
+        console.log(`Today is: ${todayName}`);
+        const sortedDays = sortDaysStartingFrom(todayName);
 
-            sortedDays.forEach(day => {
-                const subjects = timetable[day];
-                if (!subjects) return;
+        sortedDays.forEach(day => {
+            const subjects = timetable[day];
+            if (!subjects) return;
 
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'Thu';
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'Thu';
 
-                const dayTitle = document.createElement('h1');
-                dayTitle.textContent = day;
+            const dayTitle = document.createElement('h1');
+            dayTitle.textContent = day;
 
-                if (day === todayName) {
-                    const todaySpan = document.createElement('span');
-                    todaySpan.textContent = ' (hôm nay)';
-                    dayTitle.appendChild(todaySpan);
-                }
+            if (day === todayName) {
+                const todaySpan = document.createElement('span');
+                todaySpan.textContent = ' (hôm nay)';
+                dayTitle.appendChild(todaySpan);
+            }
 
-                dayDiv.appendChild(dayTitle);
+            dayDiv.appendChild(dayTitle);
 
-                const morningSubjects = subjects.filter(subject => {
-                    const time = subject["Thời gian"].split(" - ")[0];
-                    return isMorning(time);
-                });
-
-                const afternoonSubjects = subjects.filter(subject => {
-                    const time = subject["Thời gian"].split(" - ")[0];
-                    return !isMorning(time);
-                });
-
-                if (morningSubjects.length > 0) {
-                    const morningDiv = document.createElement('div');
-                    morningDiv.className = 'TietHoc';
-                    const morningTitle = document.createElement('h2');
-                    morningTitle.textContent = 'Sáng';
-                    morningDiv.appendChild(morningTitle);
-
-                    const ulMorning = document.createElement('ul');
-                    morningSubjects.forEach(subject => {
-                        const liElement = document.createElement('li');
-                        liElement.textContent = subject["Môn học"];
-
-                        const spanTime = document.createElement('span');
-                        spanTime.className = 'time';
-                        spanTime.textContent = subject["Thời gian"];
-
-                        if (day === todayName && isSubjectActive(subject["Thời gian"], today)) {
-                            liElement.classList.add('Active');
-                        }
-
-                        liElement.appendChild(spanTime);
-                        ulMorning.appendChild(liElement);
-                    });
-                    morningDiv.appendChild(ulMorning);
-                    dayDiv.appendChild(morningDiv);
-                }
-
-                if (afternoonSubjects.length > 0) {
-                    const afternoonDiv = document.createElement('div');
-                    afternoonDiv.className = 'TietHoc';
-                    const afternoonTitle = document.createElement('h2');
-                    afternoonTitle.textContent = 'Chiều';
-                    afternoonDiv.appendChild(afternoonTitle);
-
-                    const ulAfternoon = document.createElement('ul');
-                    afternoonSubjects.forEach(subject => {
-                        const liElement = document.createElement('li');
-                        liElement.textContent = subject["Môn học"];
-
-                        const spanTime = document.createElement('span');
-                        spanTime.className = 'time';
-                        spanTime.textContent = subject["Thời gian"];
-
-                        if (day === todayName && isSubjectActive(subject["Thời gian"], today)) {
-                            liElement.classList.add('Active');
-                        }
-
-                        liElement.appendChild(spanTime);
-                        ulAfternoon.appendChild(liElement);
-                    });
-                    afternoonDiv.appendChild(ulAfternoon);
-                    dayDiv.appendChild(afternoonDiv);
-                }
-
-                TKBContainer.appendChild(dayDiv);
+            const morningSubjects = subjects.filter(subject => {
+                const time = subject["Thời gian"].split(" - ")[0];
+                return isMorning(time);
             });
-        }
 
-        // Initial render
-        updateTimetable();
+            const afternoonSubjects = subjects.filter(subject => {
+                const time = subject["Thời gian"].split(" - ")[0];
+                return !isMorning(time);
+            });
 
-        // Update every second
-        setInterval(updateTimetable, 1000);
+            if (morningSubjects.length > 0) {
+                const morningDiv = document.createElement('div');
+                morningDiv.className = 'TietHoc';
+                const morningTitle = document.createElement('h2');
+                morningTitle.textContent = 'Sáng';
+                morningDiv.appendChild(morningTitle);
+
+                morningSubjects.forEach(subject => {
+                    const subjectDiv = document.createElement('div');
+                    subjectDiv.className = 'MonHoc';
+
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'name';
+                    nameDiv.textContent = subject["Môn học"];
+
+                    const timeDiv = document.createElement('div');
+                    timeDiv.className = 'time';
+                    timeDiv.textContent = subject["Thời gian"];
+
+                    if (day === todayName && isSubjectActive(subject["Thời gian"], today)) {
+                        subjectDiv.classList.add('Active');
+                    }
+
+                    subjectDiv.appendChild(nameDiv);
+                    subjectDiv.appendChild(timeDiv);
+                    morningDiv.appendChild(subjectDiv);
+                });
+                dayDiv.appendChild(morningDiv);
+            }
+
+            if (afternoonSubjects.length > 0) {
+                const afternoonDiv = document.createElement('div');
+                afternoonDiv.className = 'TietHoc';
+                const afternoonTitle = document.createElement('h2');
+                afternoonTitle.textContent = 'Chiều';
+                afternoonDiv.appendChild(afternoonTitle);
+
+                afternoonSubjects.forEach(subject => {
+                    const subjectDiv = document.createElement('div');
+                    subjectDiv.className = 'MonHoc';
+
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'name';
+                    nameDiv.textContent = subject["Môn học"];
+
+                    const timeDiv = document.createElement('div');
+                    timeDiv.className = 'time';
+                    timeDiv.textContent = subject["Thời gian"];
+
+                    if (day === todayName && isSubjectActive(subject["Thời gian"], today)) {
+                        subjectDiv.classList.add('Active');
+                    }
+
+                    subjectDiv.appendChild(nameDiv);
+                    subjectDiv.appendChild(timeDiv);
+                    afternoonDiv.appendChild(subjectDiv);
+                });
+                dayDiv.appendChild(afternoonDiv);
+            }
+
+            TKBContainer.appendChild(dayDiv);
+        });
     }
-
-    // Call renderTimetable with the selected class key, for example:
-    renderTimetable('classKey'); // Replace 'classKey' with the actual key or logic to select the class
-});
-
 
     function sortDaysStartingFrom(startDay) {
         const startIndex = daysOfWeek.indexOf(startDay);
@@ -543,11 +537,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Render lần đầu khi trang tải
     renderTimetable(classSelect.value);
 
+    // Lặp lại render mỗi phút
+    setInterval(() => {
+        renderTimetable(classSelect.value);
+    }, 60000);
+
     // Lắng nghe sự thay đổi của dropdown
     classSelect.addEventListener('change', function () {
         renderTimetable(classSelect.value);
     });
 });
+
+
+
 
 
 // Update
