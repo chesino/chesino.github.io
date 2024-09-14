@@ -400,6 +400,332 @@ const timetables = {
                 "Thời gian": "9:30 - 10:15"
             }
         ]
+    },
+    "EzHunq": {
+        "Thứ 2": [
+            {
+                "Môn học": "Kỹ năng học hiệu quả",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Đọc sách dễ hiểu",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Thư giãn, video kiến thức",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 3": [
+            {
+                "Môn học": "Tập thể dục nhẹ",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Luyện nghe tiếng Anh",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Toán tư duy cơ bản",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 4": [
+            {
+                "Môn học": "Viết ghi chú thông minh",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Đọc tài liệu cơ bản",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Thiền hoặc thư giãn",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 5": [
+            {
+                "Môn học": "Thực hành ghi nhớ",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Xem video khoa học",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Đọc sách phát triển bản thân",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 6": [
+            {
+                "Môn học": "Tự học môn mới",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Tập thể dục nhẹ",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Ôn lại kiến thức",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 7": [
+            {
+                "Môn học": "Luyện nói tiếng Anh",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Tự học về lĩnh vực thích",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "TED Talk, tài liệu khoa học",
+                "Thời gian": "14:00 - 15:00"
+            }
+        ]
+    },
+    "NorHunq": {
+        "Thứ 2": [
+            {
+                "Môn học": "Quản lý thời gian",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Đọc sách chuyên môn",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Video kiến thức nâng cao",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 3": [
+            {
+                "Môn học": "Tập thể dục",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Thực hành tiếng Anh",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Học toán trung cấp",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 4": [
+            {
+                "Môn học": "Viết bài/thuyết trình",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Đọc tài liệu chuyên ngành",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Thiền/thư giãn",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 5": [
+            {
+                "Môn học": "Ôn tập kiến thức",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Viết báo cáo ngắn",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Tự học lập trình hoặc toán",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 6": [
+            {
+                "Môn học": "Tập thể dục nhẹ",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Học thêm về công nghệ",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Nghiên cứu tài chính",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 7": [
+            {
+                "Môn học": "Học tiếng Anh nâng cao",
+                "Thời gian": "07:00 - 08:00"
+            },
+            {
+                "Môn học": "Khóa học online ngắn",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Tư duy phản biện, video",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ]
+    },
+    "ProHunq": {
+        "Thứ 2": [
+            {
+                "Môn học": "Học chuyên sâu",
+                "Thời gian": "07:00 - 09:00"
+            },
+            {
+                "Môn học": "Giải bài tập khó",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Video nghiên cứu học thuật",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 3": [
+            {
+                "Môn học": "Diễn đàn chuyên môn",
+                "Thời gian": "07:00 - 09:00"
+            },
+            {
+                "Môn học": "Lập trình/toán nâng cao",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Đọc tài liệu học thuật",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 4": [
+            {
+                "Môn học": "Viết bài nghiên cứu",
+                "Thời gian": "07:00 - 09:00"
+            },
+            {
+                "Môn học": "Ôn tập và kiểm tra",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Thiền/thư giãn",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 5": [
+            {
+                "Môn học": "Tự học theo chủ đề yêu thích",
+                "Thời gian": "07:00 - 09:00"
+            },
+            {
+                "Môn học": "Khóa học online",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Đọc sách học thuật",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 6": [
+            {
+                "Môn học": "Tập thể dục",
+                "Thời gian": "07:00 - 09:00"
+            },
+            {
+                "Môn học": "Nghiên cứu sâu chuyên ngành",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Video nghiên cứu học thuật",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ],
+        "Thứ 7": [
+            {
+                "Môn học": "Học tiếng Anh chuyên ngành",
+                "Thời gian": "07:00 - 09:00"
+            },
+            {
+                "Môn học": "Lập trình hoặc tài chính",
+                "Thời gian": "10:00 - 11:00"
+            },
+            {
+                "Môn học": "Ôn lại kiến thức",
+                "Thời gian": "14:00 - 15:00"
+            },
+            {
+                "Môn học": "Thư giãn",
+                "Thời gian": "19:00 - 20:00"
+            }
+        ]
     }
 };
 
@@ -547,10 +873,6 @@ document.addEventListener('DOMContentLoaded', function () {
         renderTimetable(classSelect.value);
     });
 });
-
-
-
-
 
 // Update
 // Hàm để thêm số 0 vào trước các số nhỏ hơn 10

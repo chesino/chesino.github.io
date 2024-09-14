@@ -107,7 +107,7 @@ body {
 }
 
 .Main {
-    padding: 20px;
+    padding: 10px;
     padding-bottom: 100vh;
 }
 
@@ -159,4 +159,18 @@ footer a {
     background-color: rgb(128, 255, 116);
     /* Ví dụ để dễ thấy */
     font-weight: bold;
+}
+.Alert {
+    position: fixed;
+    width: 100%;
+    background-color: #ffffff;
+    top: 0;
+    left: 0;
+    padding: 5px 10px;
+}
+.IMG img {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 0;
 }
