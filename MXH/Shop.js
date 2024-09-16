@@ -1,12 +1,5 @@
 const products = [
   {
-    "name": "Minecraft iOS",
-    "description": "Mướn tài khoản tải, hỗ trợ cập nhật 5k/lần. Hạn sử dụng 1 lần tải.",
-    "price": "15.000đ",
-    "priceroot": "~170.000đ",
-    "image": "./Asset/Shop/minecraftPE.png"
-  },
-  {
     "name": "Netflix 4K 1T",
     "description": "Tài khoản dùng riêng. Hạn sử dụng 1 Tháng.",
     "price": "75.000đ",
