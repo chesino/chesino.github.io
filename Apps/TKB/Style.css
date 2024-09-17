@@ -174,3 +174,47 @@ footer a {
     border-radius: 10px;
     margin: 10px 0;
 }
+.info-section {
+    background-color: #ffffff;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.section-title {
+    color: green;
+    background-color: #75ff81;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.category {
+    background-color: white;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.category-title {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.info-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.info-list li {
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
