@@ -734,6 +734,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const TKBContainer = document.getElementById('TKB');
     const daysOfWeek = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
 
+    // Kiểm tra xem đã có lựa chọn trong localStorage chưa
+    if (localStorage.getItem('selectedClass')) {
+        classSelect.value = localStorage.getItem('selectedClass');
+    }
+
     function renderTimetable(classKey) {
         TKBContainer.innerHTML = ''; // Xóa nội dung cũ
 
@@ -868,8 +873,9 @@ document.addEventListener('DOMContentLoaded', function () {
         renderTimetable(classSelect.value);
     }, 60000);
 
-    // Lắng nghe sự thay đổi của dropdown
+    // Lắng nghe sự thay đổi của dropdown và lưu vào localStorage
     classSelect.addEventListener('change', function () {
+        localStorage.setItem('selectedClass', classSelect.value); // Lưu giá trị vào localStorage
         renderTimetable(classSelect.value);
     });
 });
