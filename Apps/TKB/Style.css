@@ -222,6 +222,7 @@ footer a {
 .Theme-Logo {
     position: absolute;
     height: 80px;
+    width: 80px;
 }
 .Theme-Logo img {
     width: 100%;
