@@ -9,6 +9,76 @@
     --CARD: #ffffff;
     --MAIN: #f3c86c;
     --Primary: #1A1A1A;
+
+    --Background: #161414;
+    --Text: #d7c08e; /* Vàng nâu nhẹ */
+    --Head-Background: #161414;
+    --Head-Text: #d7c08e;
+    --Head-Shadow: #161414;
+
+    --Setting-Background: #1A1A1A;
+    --Setting-Text: #d7c08e;
+    --Setting-BTN: #333333;
+    --Setting-BTN-Text: #d7c08e;
+    --Setting-BTN-Primary: #d7c08e;
+    --Setting-BTN-Text-Primary: #000000;
+    --Setting-Switch: #111111;
+    --Setting-Switch-Dot: #d7c08e;
+    --Setting-Switch-Checked: #d7c08e;
+    --Setting-Switch-Dot-Checked: #000000;
+
+    --List-Background: #1A1A1A;
+    --List-Text: #d7c08e;
+    --List-Background-Active: #d7c08e;
+    --List-Text-Active: #000000;
+
+    --Map-Background: #1A1A1A;
+    --Map-BTN: #d7c08e;
+    --Map-BTN-Text: #000000;
+    --SnG-Head-Background: #1A1A1A;
+    --SnG-Head-Text: #d7c08e;
+    --SnG-Input: #333333;
+    --SnG-Input-Text: #d7c08e;
+    --SnG-BTN: #bda172;
+    --SnG-BTN-Text: #000000;
+    --Map-Marker-icon: #d7c08e;
+    --SnG-Star: #d7c08e;
+    --SnG-BTN-Main: #bda172;
+    --SnG-BTN-Main-Text: #000000;
+    --SnG-History-Background: #1A1A1A;
+    --SnG-History-Text: #d7c08e;
+    --SnG-History-Item-Background: #333333;
+    --SnG-History-Item-Text: #d7c08e;
+
+    --Feed-Text: #d7c08e;
+    --Feed-Background: #1A1A1A;
+    --Feed-Head: #d7c08e;
+    --Feed-Head-Text: #000000;
+    --Feed-Text-Head: #d7c08e;
+
+    --Card-Main-Text: #d7c08e;
+    --Card-Main-Background: #1A1A1A;
+    --Card-Text: #d7c08e;
+    --Card-Background: #d7c08e;
+    --Card-Input-Text: #d7c08e;
+    --Card-Input: #525252;
+    --Card-BTN-Text: #000000;
+    --Card-BTN: #d7c08e;
+    --Card-Gas-Text: #ffffff;
+    --Card-Gas-Background: #000000;
+
+    --Loading-Bar: #d7c08e;
+    --Loading: #1F1F1F;
+
+    --Popup-Text:#d7c08e;
+    --Popup:#1d1d1d;
+    --Popup-BTN-Main-Text: #000;
+    --Popup-BTN-Main: #d7c08e;
+    --Popup-BTN-Text: #fff;
+    --Popup-BTN: #333333;
+
+    --Card: #272727;
+    --HR: #333333;
 }
 
 body {
@@ -20,6 +90,36 @@ body {
 
 button {
     cursor: pointer;
+}
+
+.swal2-popup,
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right,
+.swal2-icon.swal2-success .swal2-success-fix {
+    background-color: var(--Popup) !important;
+    border-color: var(--Popup-Text) !important;
+}
+
+.swal2-success-ring {
+    border-color: var(--Popup-Text) !important;
+}
+
+.swal2-icon.swal2-warning,
+.swal2-icon.swal2-error,
+.swal2-icon.swal2-info {
+    border-color: var(--Popup-Text) !important;
+    color: var(--Popup-Text) !important;
+}
+
+.swal2-success-line-long,
+.swal2-success-line-tip,
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: var(--Popup-Text) !important;
+}
+
+.swal2-title,
+.swal2-content {
+    color: var(--Popup-Text) !important;
 }
 
 .dark-mode {
@@ -358,7 +458,7 @@ footer {
 .Fixed {
     position: fixed;
     width: calc(100% - 20px);
-    bottom: 20px;
+    bottom: 10px;
     padding: 10px;
     z-index: 999;
     border-radius: 40px;
