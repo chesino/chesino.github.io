@@ -4,11 +4,11 @@
 }
 
 :root {
-    --CL: #000000;
+    --CL: #161414;
     --BG: #fff;
     --CARD: #ffffff;
-    --MAIN: #F9D342;
-    --Primary: rgb(46, 33, 10);
+    --MAIN: #f3c86c;
+    --Primary: #1A1A1A;
 }
 
 body {
@@ -24,7 +24,7 @@ button {
 
 .dark-mode {
     --CL: #ffeeaf;
-    --BG: #1A1A1A;
+    --BG: #161414;
     --CARD: #333;
 }
 
@@ -68,15 +68,6 @@ button {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
-.Card.Main {
-    background: rgb(255,255,255);
-background: linear-gradient(19deg, rgba(255,255,255,1) 0%, rgba(233,196,60,1) 100%);
-}
-
-.dark-mode .Card.Main {
-    background: rgb(51, 51, 51);
-    background: linear-gradient(19deg, rgba(51, 51, 51, 1) 0%, rgba(94, 80, 27, 1) 100%);
-}
 
 
 
@@ -154,7 +145,6 @@ background: linear-gradient(19deg, rgba(255,255,255,1) 0%, rgba(233,196,60,1) 10
 .FuncBlock {
     width: 100%;
     overflow-x: auto;
-    margin: 10px 0;
     display: flex;
     justify-content: space-between;
 }
@@ -217,15 +207,16 @@ background: linear-gradient(19deg, rgba(255,255,255,1) 0%, rgba(233,196,60,1) 10
 
 
 .Card.Card.Tabcontent {
-    width: 100%;
+    width: calc(100% - 20px);
     position: fixed;
     margin: 0 -10px;
-    bottom: 0;
+    bottom: 80px;
     display: none;
     min-height: 320px;
     background-color: #000000;
     border: 3px solid var(--MAIN);
     z-index: 3;
+    margin:  0;
 }
 
 .Card.Tabcontent h1,
@@ -365,4 +356,11 @@ footer {
     color: black;
     font-size: 14px;
     padding: 2px 5px;
+}
+.Fixed {
+    position: fixed;
+    width: calc(100% - 20px);
+    bottom: 0;
+    padding: 10px 20px;
+    z-index: 999;
 }
