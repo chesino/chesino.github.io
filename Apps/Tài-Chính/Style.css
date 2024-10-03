@@ -210,9 +210,8 @@ button {
     width: calc(100% - 20px);
     position: fixed;
     margin: 0 -10px;
-    bottom: 80px;
+    bottom: 100px;
     display: none;
-    min-height: 320px;
     background-color: #000000;
     border: 3px solid var(--MAIN);
     z-index: 3;
@@ -360,7 +359,7 @@ footer {
 .Fixed {
     position: fixed;
     width: calc(100% - 20px);
-    bottom: 0;
+    bottom: 20px;
     padding: 10px 20px;
     z-index: 999;
 }
