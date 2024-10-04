@@ -10,26 +10,32 @@
 
 :root {
     --Background: #161414;
-    --Text: #d7c08e; /* Vàng nâu nhẹ */
+    --Text: #d7c08e;
+    /* Vàng nâu nhẹ */
 }
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     /* transition: background-color 0.5s ease; */
 }
+
 body {
+    font-family: BeFont;
     background-color: var(--Background);
     color: var(--Text);
 }
+
 .Menu {
     padding: 10px;
     position: fixed;
     width: 100%;
-    bottom: 10px;    
+    bottom: 10px;
 }
+
 .Func {
-    background-color: red;
+    background-color: rgb(27, 27, 27);
     padding: 10px;
     border-radius: 20px;
     display: flex;
@@ -37,17 +43,128 @@ body {
     align-content: center;
     justify-content: space-around;
 }
+
 .FuncBTN {
     border-radius: 50%;
     height: 50px;
     width: 50px;
     border: none;
     padding: 5px;
-    background-color: #d7c08e;
+    background-color: #353535;
+    cursor: pointer;
 
 }
+
 .FuncBTN i {
+    color: #d7c08e;
     font-size: 26px;
     display: block;
     width: 100%;
+}
+
+.Home {
+    padding: 10px;
+}
+
+.Box {
+    background-color: #353535;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+/* Dọc */
+.Menu.Rotate {
+    width: auto !important;
+    right: 0;
+}
+
+.Menu.Rotate .Func {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+}
+
+.Banner {
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.Banner img {
+    width: 100%;
+    display: block;
+}
+
+.MainWallet {
+    background-color: #222222;
+    margin-top: 10px;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.Wallet {
+    font-size: 14px;
+    font-weight: bold;
+    color: #161414;
+    background-color: #d7c08e;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.Wallet i {
+    font-size: 20px;
+}
+
+#daily-limit,
+.Alert {
+    font-weight: bold;
+    font-size: 12px;
+    color: #3C3C3C;
+    background-color: #d7c08e;
+    padding: 2px 4px;
+    border-radius: 5px
+}
+
+/* Style for the progress bar */
+.progress-bar {
+    width: 100%;
+    background-color: #555555;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 18px;
+    margin-top: 8px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #F9D342;
+    /* Màu của thanh tiến trình */
+    width: 0%;
+    border-radius: 15px;
+    transition: width 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    font-size: 14px;
+}
+
+.progress-bar {
+    background-color: #555555;
+}
+
+.progress {
+    background-color: #000000;
+}
+
+.progress.over-limit {
+    background-color: #FF3420;
+    /* Màu đỏ khi vượt quá giới hạn */
 }

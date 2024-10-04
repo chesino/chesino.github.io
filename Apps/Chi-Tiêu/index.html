@@ -39,17 +39,67 @@
 
 <body>
     <main>
-        <div class="Menu">
-            <div class="Func">
-                <button class="FuncBTN">
-                    <i class="fa-solid fa-circle-plus"></i>
+        <div class="Home">
+            <div class="Box">
+                <div class="Banner">
+                    <img src="/DATA/Banner/PriorityDark.png" alt="" srcset="">
+                </div>
+                <div class="MainWallet">
+                    <div class="Wallet Total">
+                        <i class="fa-solid fa-wallet"></i> Tổng
+                        <p>100.000.000đ</p>
+                    </div>
+                    <div class="Wallet Card">
+                        <i class="fa-solid fa-money-bill"></i> Tiền mặt
+                        <p>40.000.000đ</p>
+                    </div>
+                    <div class="Wallet Cash">
+                        <i class="fa-solid fa-credit-card"></i> Tiền thẻ
+                        <p>60.000.000đ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="Box">
+                <h1>Chi tiêu trong ngày</h1>
+            </div>
+            <div class="Box">
+                <h1>Cảnh báo tài chính</h1>
+            </div>
+            <div class="Box">
+                <h1>Lịch sử giao dịch</h1>
+            </div>
+            <div class="Box">
+                <h1>Trợ lý tài chính</h1>
+            </div>
+            <div class="Box">
+                <h1>Thống kê tài chính</h1>
+            </div>
+            <div class="Box">
+                <h1>Cài đặt</h1>
+                <button class="FuncBTN" onclick="MenuRotate()">
+                    Xoay
                 </button>
+            </div>
+
+        </div>
+        <div class="Menu" id="MenuFunc">
+            <div class="Func">
+                <button class="FuncBTN"><i class="fa-solid fa-circle-plus"></i></button>
                 <button class="FuncBTN"><i class="fa-solid fa-circle-minus"></i></button>
                 <button class="FuncBTN"><i class="fa-solid fa-money-bill-transfer"></i></button>
-                <button class="FuncBTN">Gợi ý</button>
+                <button class="FuncBTN"><i class="fa-solid fa-piggy-bank"></i></button>
+                <button class="FuncBTN"><i class="fa-solid fa-receipt"></i></button>
+                <button class="FuncBTN"><i class="fa-solid fa-chart-pie"></i></button>
             </div>
         </div>
+
     </main>
+
 </body>
 
+<script>
+    function MenuRotate() {
+        document.getElementById('MenuFunc').classList.toggle('Rotate');
+    }
+</script>
 </html>
