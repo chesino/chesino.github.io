@@ -25,17 +25,34 @@ body {
     font-family: BeFont;
     background-color: var(--Background);
     color: var(--Text);
+    padding-bottom: 100px;
 }
 
-.Menu {
-    padding: 10px;
+.MenuBlock {
     position: fixed;
     width: 100%;
     bottom: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Menu {
+    position: relative;
+}
+
+.MenuBox {
+    background-color: #1b1b1b;
+    width: 100%;
+    position: relative;
+    top: 0;
+    padding: 10px;
+    border-radius: 20px;
 }
 
 .Func {
-    background-color: rgb(27, 27, 27);
+    background-color: #1b1b1b;
     padding: 10px;
     border-radius: 20px;
     display: flex;
@@ -66,20 +83,16 @@ body {
     padding: 10px;
 }
 
-.Box {
-    background-color: #353535;
-    padding: 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-}
-
 /* Dọc */
-.Menu.Rotate {
+.MenuBlock.Rotate {
+    flex-direction: row;
+}
+.MenuBlock.Rotate .Menu {
     width: auto !important;
     right: 0;
 }
 
-.Menu.Rotate .Func {
+.MenuBlock.Rotate .Menu .Func {
     display: flex;
     flex-direction: column-reverse;
     gap: 10px;
@@ -106,6 +119,7 @@ body {
     display: flex;
     justify-content: space-around;
     gap: 10px;
+    overflow: auto;
 }
 
 .Wallet {
@@ -122,49 +136,16 @@ body {
     font-size: 20px;
 }
 
-#daily-limit,
-.Alert {
-    font-weight: bold;
-    font-size: 12px;
-    color: #3C3C3C;
-    background-color: #d7c08e;
-    padding: 2px 4px;
-    border-radius: 5px
+.Box {
+    background-color: #353535;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+.Box:first-child {
+    margin-bottom: 30px;
 }
 
-/* Style for the progress bar */
-.progress-bar {
-    width: 100%;
-    background-color: #555555;
-    border-radius: 15px;
-    overflow: hidden;
-    height: 18px;
-    margin-top: 8px;
-}
-
-.progress {
-    height: 100%;
-    background-color: #F9D342;
-    /* Màu của thanh tiến trình */
-    width: 0%;
-    border-radius: 15px;
-    transition: width 0.5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1a1a1a;
-    font-size: 14px;
-}
-
-.progress-bar {
-    background-color: #555555;
-}
-
-.progress {
-    background-color: #000000;
-}
-
-.progress.over-limit {
-    background-color: #FF3420;
-    /* Màu đỏ khi vượt quá giới hạn */
+.Box .head {
+    font-size: 18px;
 }

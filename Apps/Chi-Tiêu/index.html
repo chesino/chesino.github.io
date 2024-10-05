@@ -60,19 +60,24 @@
                 </div>
             </div>
             <div class="Box">
-                <h1>Chi tiêu trong ngày</h1>
+                <h1 class="head">Chi tiêu trong ngày</h1>
+                <p>Gợi ý tối đa chi tiêu trong ngày là bao nhiêu.</p>
             </div>
             <div class="Box">
-                <h1>Cảnh báo tài chính</h1>
+                <h1 class="head">Cảnh báo tài chính</h1>
+                <p>Các chi tiêu có biến động lớn gần đây, vầ sẽ đưa ra cảnh báo.</p>
             </div>
             <div class="Box">
-                <h1>Lịch sử giao dịch</h1>
+                <h1 class="head">Lịch sử giao dịch</h1>
+                <p>Hiển thị lịch sử thu chi</p>
             </div>
             <div class="Box">
-                <h1>Trợ lý tài chính</h1>
+                <h1 class="head">Trợ lý tài chính</h1>
+                <p>Hỗ trợ nhập liệu thu chi và gợi ý tiết kiệm tính toán cho các mục tiêu.</p>
             </div>
             <div class="Box">
-                <h1>Thống kê tài chính</h1>
+                <h1 class="head">Thống kê tài chính</h1>
+                <p>Thông kê tài chính sẽ ổn định hay bất ổn, nhằm giúp trợ lý đưa ra các dự đoán và gợi ý tốt cho người dùng.</p>
             </div>
             <div class="Box">
                 <h1>Cài đặt</h1>
@@ -82,16 +87,23 @@
             </div>
 
         </div>
-        <div class="Menu" id="MenuFunc">
-            <div class="Func">
-                <button class="FuncBTN"><i class="fa-solid fa-circle-plus"></i></button>
-                <button class="FuncBTN"><i class="fa-solid fa-circle-minus"></i></button>
-                <button class="FuncBTN"><i class="fa-solid fa-money-bill-transfer"></i></button>
-                <button class="FuncBTN"><i class="fa-solid fa-piggy-bank"></i></button>
-                <button class="FuncBTN"><i class="fa-solid fa-receipt"></i></button>
-                <button class="FuncBTN"><i class="fa-solid fa-chart-pie"></i></button>
+        <div class="MenuBlock" id="MenuBlock">
+            <div class="MenuBox">
+                hello
+            </div>
+
+            <div class="Menu">
+                <div class="Func">
+                    <button class="FuncBTN"><i class="fa-solid fa-circle-plus"></i></button>
+                    <button class="FuncBTN"><i class="fa-solid fa-circle-minus"></i></button>
+                    <button class="FuncBTN"><i class="fa-solid fa-money-bill-transfer"></i></button>
+                    <button class="FuncBTN"><i class="fa-solid fa-piggy-bank"></i></button>
+                    <button class="FuncBTN"><i class="fa-solid fa-receipt"></i></button>
+                    <button onclick="MenuRotate()" class="FuncBTN"><i class="fa-solid fa-chart-pie"></i></button>
+                </div>
             </div>
         </div>
+        
 
     </main>
 
@@ -99,7 +111,7 @@
 
 <script>
     function MenuRotate() {
-        document.getElementById('MenuFunc').classList.toggle('Rotate');
+        document.getElementById('MenuBlock').classList.toggle('Rotate');
     }
 </script>
 </html>

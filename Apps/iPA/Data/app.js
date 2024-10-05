@@ -260,13 +260,13 @@ const apps = [
     "downloadLink": "https://t.me/ipafire"
   },
   {
-    "type": "iPA",
-    "logo": "https://private-user-images.githubusercontent.com/102235607/292650709-0feaa3eb-2c27-4cc0-9fa8-704db9f0a40f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjgxMDgwMTUsIm5iZiI6MTcyODEwNzcxNSwicGF0aCI6Ii8xMDIyMzU2MDcvMjkyNjUwNzA5LTBmZWFhM2ViLTJjMjctNGNjMC05ZmE4LTcwNGRiOWYwYTQwZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMDA1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTAwNVQwNTU1MTVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kYjY0NWIxZWE3NThlNTBjNTkxMDZmY2JmZTU2YjJmNDNlYTc3MDg5MDFjYjYxMGY2MTY1ZTQzNzgyYjMyZDA0JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.gSoDEqr95zjcMtqqYI1fw4yz96fYOoXUwwDOGQRWAjI",
+    "type": "Tweak",
+    "logo": "./Data/LogoApps/Geranium.png",
     "name": "Geranium",
     "os": "iOS",
     "version": "1.1.3",
     "size": "6.1Mb",
-    "description": "Vị trí",
+    "description": "Chỉnh sửa vị trí",
     "downloadLink": "https://github.com/c22dev/Geranium/releases/download/1.1.3/Geranium.tipa"
   },
   
