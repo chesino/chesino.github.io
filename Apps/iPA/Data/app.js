@@ -259,5 +259,16 @@ const apps = [
     "description": "Kênh Telegram",
     "downloadLink": "https://t.me/ipafire"
   },
+  {
+    "type": "iPA",
+    "logo": "./Data/LogoApps/iPAFire.jpg",
+    "name": "Geranium",
+    "os": "iOS",
+    "version": "1.1.3",
+    "size": "0KB",
+    "description": "",
+    "downloadLink": "https://github.com/c22dev/Geranium/releases/download/1.1.3/Geranium.tipa"
+  },
+  
 ];
 
