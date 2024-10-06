@@ -11,6 +11,7 @@
 :root {
     --Background: #161414;
     --Text: #d7c08e;
+    --Main: #d7c08e;
     /* Vàng nâu nhẹ */
 }
 
@@ -86,6 +87,7 @@ body {
 /* Dọc */
 .MenuBlock.Rotate {
     flex-direction: row;
+    align-items: flex-end;
 }
 
 .MenuBlock.Rotate .Menu {
@@ -151,21 +153,18 @@ body {
 .Box .head {
     font-size: 18px;
 }
-
 nav {
     width: 100%;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin: 10px 0;
 }
 
-nav input {
-    display: none;
-}
-
 nav label {
+    font-size: 18px;
+    width: auto;
     text-align: center;
     font-family: sans-serif;
     padding: 10px;
@@ -173,17 +172,18 @@ nav label {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
+    flex-grow: 1; /* Để tất cả các label chiếm cùng một lượng không gian */
 }
 
 nav label:last-child {
-    grid-column: span 2;
-    /* Cho phần tử cuối chiếm 2 cột */
+    flex-grow: 2; /* Cho phần tử cuối cùng chiếm gấp đôi không gian của các phần tử khác */
 }
 
-nav input:checked+label {
+nav input:checked + label {
     color: #161414;
     background: #d7c08e;
 }
+
 
 .wrapper {
     display: inline-flex;
@@ -242,15 +242,9 @@ input[type="radio"] {
     background: #d7c08e;
 }
 
-#option-1:checked:checked~.option-1 .dot,
-#option-2:checked:checked~.option-2 .dot {
-    background: #161414;
-}
-
-#option-1:checked:checked~.option-1 .dot::before,
-#option-2:checked:checked~.option-2 .dot::before {
-    opacity: 1;
-    transform: scale(1);
+#option-1:checked:checked~.option-1 i,
+#option-2:checked:checked~.option-2 i {
+    color: #161414;
 }
 
 .wrapper .option span {
@@ -263,3 +257,37 @@ input[type="radio"] {
 #option-2:checked:checked~.option-2 span {
     color: #161414;
 }
+
+input:focus {
+    outline: none;
+}
+
+.InputBox input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: right;
+    margin: 5px 0;
+    padding: 10px 5px 0 0;
+    border-bottom: 2px solid var(--Main);
+    border-radius: 0;
+    color: var(--Main);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.InputBox button {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    width: 100%;
+    margin: 5px 0;
+    border-radius: 10px;
+    background-color: var(--Main);
+    border: none;
+}
+
+/* .MenuBox.Thu {
+    display: none;
+} */
