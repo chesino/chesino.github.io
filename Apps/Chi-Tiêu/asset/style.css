@@ -87,6 +87,7 @@ body {
 .MenuBlock.Rotate {
     flex-direction: row;
 }
+
 .MenuBlock.Rotate .Menu {
     width: auto !important;
     right: 0;
@@ -142,10 +143,123 @@ body {
     border-radius: 20px;
     margin-bottom: 10px;
 }
+
 .Box:first-child {
     margin-bottom: 30px;
 }
 
 .Box .head {
     font-size: 18px;
+}
+
+nav {
+    width: 100%;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+nav input {
+    display: none;
+}
+
+nav label {
+    text-align: center;
+    font-family: sans-serif;
+    padding: 10px;
+    border: 2px solid #d7c08e;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+nav label:last-child {
+    grid-column: span 2;
+    /* Cho phần tử cuối chiếm 2 cột */
+}
+
+nav input:checked+label {
+    color: #161414;
+    background: #d7c08e;
+}
+
+.wrapper {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    gap: 10px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    margin: 10px 0;
+}
+
+.wrapper .option {
+    background: #161414;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px;
+    border: 2px solid #d7c08e;
+    transition: all 0.3s ease;
+}
+
+.wrapper .option .dot {
+    height: 20px;
+    width: 20px;
+    background: #d7c08e;
+    border-radius: 50%;
+    position: relative;
+}
+
+.wrapper .option .dot::before {
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #d7c08e;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+#option-1:checked:checked~.option-1,
+#option-2:checked:checked~.option-2 {
+    border-color: #d7c08e;
+    background: #d7c08e;
+}
+
+#option-1:checked:checked~.option-1 .dot,
+#option-2:checked:checked~.option-2 .dot {
+    background: #161414;
+}
+
+#option-1:checked:checked~.option-1 .dot::before,
+#option-2:checked:checked~.option-2 .dot::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.wrapper .option span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d7c08e;
+}
+
+#option-1:checked:checked~.option-1 span,
+#option-2:checked:checked~.option-2 span {
+    color: #161414;
 }
