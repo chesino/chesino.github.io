@@ -1750,6 +1750,7 @@ input[type='time'] {
 }
 
 .Gas .Card h1 {
+    color: var(--Card-Gas-Background);
     font-size: 12px;
 }
 
