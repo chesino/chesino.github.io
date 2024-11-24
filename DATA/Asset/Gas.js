@@ -27,10 +27,14 @@ async function fetchData() {
             };
 
             const updatePrices = (product, price, isSale) => {
+
+                
                 if (product.includes('Xăng RON 95')) {
+                    console.log(  isSale ? prices.gas95s = price : prices.gas95 = price);
+                    
                     isSale ? prices.gas95s = price : prices.gas95 = price;
                     if (!isSale) {
-                        gas95Price = price.replace('.', ''); // Set gas95Price for calculation
+                        gas95Price = price; // Set gas95Price for calculation
                     }
                 } else if (product.includes('Xăng E5 RON 92')) {
                     isSale ? prices.gas92s = price : prices.gas92 = price;

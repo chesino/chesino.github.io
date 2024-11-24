@@ -229,7 +229,7 @@ for (const blockquote of blockquotes) {
   copyButton.innerHTML = '<i class="fa-regular fa-copy"></i>';
   copyButton.addEventListener('click', () => {
     const textToCopy = blockquote.textContent;
-    alert("Đã sao chép");
+    DoneSignIn('Đã sao chép')
     navigator.clipboard.writeText(textToCopy);
   });
 
@@ -238,7 +238,27 @@ for (const blockquote of blockquotes) {
   blockquote.parentNode.insertBefore(container, blockquote.nextSibling); // Đặt phần tử chứa bên cạnh 
 }
 
+
 }
+
+function DoneSignIn(T1) {
+  const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+      }
+  });
+  Toast.fire({
+      icon: "success",
+      title: T1
+  });
+}
+
 const toggleThemeButton = document.getElementById('toggle-theme');
 const bodyElement = document.body;
 
