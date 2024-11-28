@@ -83,20 +83,20 @@ function renderTables() {
         const formattedDateTime = formatDateTime(item.dateTime);
 
         const row = `
-            <tr>
-                <td>${item.checker}</td>
-                <td>${item.relatedPerson} ${item.relatedPersonName}</td>
-                <td>${formattedDateTime}</td> <!-- Hiển thị thời gian đã định dạng -->
-                <td>${areaDetails}</td>
-                <td>${item.position}</td>
-                <td>${item.issue}</td>
-                <td>${item.description || ""}</td>
-                <td>${item.status}</td>
-                <td>
-                    <button onclick="openPopup(${index})"><i class="fas fa-pen"></i></button>
+           <td data-label="Người kiểm tra">${item.checker}</td>
+                <td data-label="Người liên quan">${item.relatedPerson} ${item.relatedPersonName}</td>
+                <td data-label="Thời gian">${formatDateTime(item.dateTime)}</td>
+                <td data-label="Khu vực">${areaDetails}</td>
+                <td data-label="Vị trí">${item.position}</td>
+                <td data-label="Vấn đề">${item.issue}</td>
+                <td data-label="Mô tả">${item.description || ""}</td>
+                <td data-label="Tình trạng">${item.status}</td>
+                <td data-label="Thao Tác">
+                <div class="Func">
+                    <button onclick="openPopup(${index})"><i class="fas fa-edit"></i></button>
                     <button onclick="deleteReport(${index})"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
+                </div>
+            </td>
         `;
         tableBody.innerHTML += row;  // Thêm hàng mới vào bảng
     });
