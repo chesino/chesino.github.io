@@ -152,8 +152,8 @@ document.getElementById("damageForm").addEventListener("submit", function (e) {
 // Chỉnh sửa báo cáo
 // Mở popup chỉnh sửa
 function openPopup(index) {
-    const item = filteredData.length > 0 ? filteredData[index] : data[index];  // Kiểm tra nếu filteredData có dữ liệu
-    editIndex = data.indexOf(item);  // Lấy đúng chỉ số gốc từ `data`
+    const item = data[index];  // Lấy dữ liệu gốc từ chỉ số
+    editIndex = index;  // Lưu chỉ số chỉnh sửa vào biến toàn cục
 
     document.getElementById("editRelatedPerson").value = item.relatedPerson || "";
     document.getElementById("editRelatedPersonName").value = item.relatedPersonName || "";
@@ -208,8 +208,6 @@ document.getElementById("editForm").addEventListener("submit", function (e) {
 });
 
 
-
-
 // Đóng popup chỉnh sửa
 function closePopup() {
     document.getElementById("editPopup").style.display = "none";
@@ -229,15 +227,9 @@ function deleteReport(index) {
         cancelButtonText: 'Hủy'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Xóa báo cáo tại chỉ số index
-            data.splice(index, 1);
-
-            // Lưu lại dữ liệu vào localStorage
+            data.splice(index, 1);  // Xóa báo cáo tại chỉ số gốc
             saveToLocalStorage();
-
-            // Cập nhật bảng sau khi xóa
             renderTables();
-
             Swal.fire(
                 'Đã xóa!',
                 'Báo cáo đã được xóa thành công.',
@@ -313,8 +305,6 @@ function exportExcel() {
         showConfirmButton: false
     });
 }
-
-
 
 
 function exportTXT() {
@@ -401,13 +391,13 @@ function filterReports() {
 }
 
 
-
 // Cập nhật lại renderFilteredTables để nhận dữ liệu đã lọc
 function renderFilteredTables(filteredData) {
     const tableBody = document.getElementById("reportsTable").querySelector("tbody");
     tableBody.innerHTML = "";
 
-    filteredData.forEach((item, index) => {
+    filteredData.forEach((item) => {
+        const originalIndex = data.indexOf(item);  // Lấy chỉ số gốc từ data
         const areaDetails = [
             item.area,
             item.areaFirst !== "0" ? item.areaFirst : "",
@@ -429,8 +419,8 @@ function renderFilteredTables(filteredData) {
                 <td data-label="Tình trạng">${item.status}</td>
                 <td data-label="Thao Tác">
                     <div class="Func">
-                        <button onclick="openPopup(${index})"><i class="fas fa-edit"></i></button>
-                        <button onclick="deleteReport(${data.indexOf(item)})"><i class="fas fa-trash"></i></button>
+                        <button onclick="openPopup(${originalIndex})"><i class="fas fa-edit"></i></button>
+                        <button onclick="deleteReport(${originalIndex})"><i class="fas fa-trash"></i></button>
                     </div>
                 </td>
             </tr>
