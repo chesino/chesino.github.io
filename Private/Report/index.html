@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
     <!-- Style SweetAlert2 -->
     <link rel="stylesheet" href="/DATA/Extend/SweetAlert2dark.css">
-    
+
     <!-- Biểu tượng cho web -->
     <link rel="icon" href="/DATA/Logo/logo.png" />
 
@@ -31,9 +31,10 @@
         <h1>Quản lý Hư Hỏng</h1>
         <!-- Tab -->
         <div class="tab">
-            <button class="tablinks active" onclick="openTab(event, 'AddReport')">Thêm Báo Cáo</button>
-            <button class="tablinks" onclick="openTab(event, 'ViewReports')">Xem Báo Cáo</button>
-            <button class="tablinks" onclick="openTab(event, 'DataReports')">Dữ liệu</button>
+            <button class="tablinks active" onclick="openTab(event, 'AddReport')"><i class="fa-solid fa-flag"></i></button>
+            <button class="tablinks" onclick="openTab(event, 'ViewReports')"><i class="fa-solid fa-table"></i></button>
+            <button class="tablinks" onclick="openTab(event, 'DataReports')"><i class="fa-solid fa-database"></i></button>
+            <button class="tablinks" onclick="openTab(event, 'DayCounter')"><i class="fa-solid fa-calendar-days"></i></button>
         </div>
 
         <!-- Thêm báo cáo -->
@@ -50,7 +51,7 @@
                 <label for="relatedPerson">Người liên quan:</label>
                 <div class="Zone">
                     <select id="relatedPerson">
-                        <option value="">Không</option>
+                        <option value="">Không có</option>
                         <option value="Khách hàng">Khách hàng</option>
                         <option value="Bảo vệ Win">Bảo vệ Win</option>
                         <option value="Unicons">Unicons [C3 & B3]</option>
@@ -61,7 +62,7 @@
                         <option value="Yow Gaol">Yow Gaol [Thi công điện]</option>
                         <option value="Khang Nam">Khang Nam [Thi công điện]</option>
                         <option value="Paragon">Paragon [Đèn thoát hiểm & khẩn cấp]</option>
-                        <option value="Khác">Khác</option>
+                        <option value="">Khác</option>
                     </select>
                     <input type="text" id="relatedPersonName" placeholder="Tên cụ thể (nếu có)">
                 </div>
@@ -111,6 +112,9 @@
                     <option value="Sảnh thang máy">Sảnh thang máy</option>
                     <option value="Phòng bảo vệ">Phòng bảo vệ</option>
                     <option value="Nhà phụ trợ">Nhà phụ trợ</option>
+                    <option value="Trạm điện">Trạm điện</option>
+                    <option value="Phòng bơm PCCC">Phòng bơm PCCC</option>
+                    <option value="Máy phát điện">Máy phát điện</option>
                     <option value="Nhà xe">Nhà xe</option>
                     <option value="Hạ tầng">Hạ tầng</option>
                     <option value="Khác">Khác</option>
@@ -176,7 +180,12 @@
                     <option value="">Mặc định</option>
                     <option value="newest">Mới nhất</option>
                     <option value="oldest">Cũ nhất</option>
+                    <option value="7days">Quá 7 ngày</option>
+                    <option value="1month">Quá 1 tháng</option>
+                    <option value="45days">Quá 45 ngày</option>
                 </select>
+
+
 
                 <input type="text" id="searchContent" placeholder="Tìm kiếm nội dung" oninput="filterReports()">
             </div>
@@ -231,7 +240,7 @@
                             <option value="Yow Gaol">Yow Gaol [Thi công điện]</option>
                             <option value="Khang Nam">Khang Nam [Thi công điện]</option>
                             <option value="Paragon">Paragon [Đèn thoát hiểm & khẩn cấp]</option>
-                            <option value="Khác">Khác</option>
+                            <option value="">Khác</option>
                         </select>
                         <input type="text" id="editRelatedPersonName" placeholder="Tên cụ thể (nếu có)">
                     </div>
@@ -251,6 +260,7 @@
                             <option value="0">-</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
+                            <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
 
@@ -277,6 +287,9 @@
                         <option value="Sảnh thang máy">Sảnh thang máy</option>
                         <option value="Phòng bảo vệ">Phòng bảo vệ</option>
                         <option value="Nhà phụ trợ">Nhà phụ trợ</option>
+                        <option value="Trạm điện">Trạm điện</option>
+                        <option value="Phòng bơm PCCC">Phòng bơm PCCC</option>
+                        <option value="Máy phát điện">Máy phát điện</option>
                         <option value="Nhà xe">Nhà xe</option>
                         <option value="Hạ tầng">Hạ tầng</option>
                         <option value="Khác">Khác</option>
@@ -341,10 +354,24 @@
             </div>
         </div>
 
+        <div class="tabcontent" id="DayCounter">
+            <h1>Bộ đếm thời gian</h1>
+            <p><strong>Cách đây 7 ngày:</strong> <span id="days-7"></span></p>
+            <p><strong>Cách đây 30 ngày:</strong> <span id="days-30"></span></p>
+            <p><strong>Cách đây 45 ngày:</strong> <span id="days-45"></span></p>
+            <p><strong>Số ngày còn lại trong tháng:</strong> <span id="days-left"></span></p>
+            <p><strong>Số ngày trong tháng này:</strong> <span id="days-in-month"></span></p>
+
+            <!-- Thêm input cho người dùng -->
+            <div class="DayCounter-Input">
+                <strong>Cách đây</strong>
+                <input type="number" id="input-days" value="1" min="1">
+                <strong>ngày:</strong>
+                <span id="days-input"></span>
+            </div>
+        </div>
 
     </div>
-
-
 </body>
 <script src="./Asset/main.js"></script>
 <!-- Thư ciện SweetAlert2 -->

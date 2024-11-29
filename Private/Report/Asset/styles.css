@@ -51,11 +51,9 @@ h1 {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 20px;
     transition: background-color 0.3s;
     color: #555;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
 }
 
 
@@ -68,12 +66,19 @@ h1 {
     background-color: #6ac76c;
     color: white;
     font-weight: bold;
+    border-radius: 0;
+}
+.tab button.active:first-child{
+    border-top-left-radius: 10px;
+}
+.tab button.active:last-child{
+    border-top-right-radius: 10px;
 }
 
 .tabcontent {
     display: none;
     background: #d4d3d3;
-    padding: 10px ;
+    padding: 10px;
     border: 2px solid #6ac76c;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -424,8 +429,9 @@ select {
 }
 
 .import-caption {
-    margin: 0 ;
+    margin: 0;
 }
+
 .import-caption h1 {
     margin: 0;
 }
@@ -443,6 +449,63 @@ select {
     outline: none;
 }
 
+
+#DayCounter h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#DayCounter p {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 15px 0;
+}
+.DayCounter-Input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#DayCounter strong {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+#DayCounter span {
+    font-weight: bold;
+    color: #2a9d8f;
+}
+
+#DayCounter input {
+    display: block;
+    width: 150px;
+    font-size: 1rem;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#DayCounter .result p {
+    background-color: #e9f7f6;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#DayCounter .result p:last-child {
+    margin-bottom: 0;
+}
+
+/* Media query để thay đổi font-size trên màn hình nhỏ */
+@media (max-width: 600px) {
+    #DayCounter h1 {
+        font-size: 2rem;
+    }
+
+    #DayCounter p {
+        font-size: 1rem;
+    }
+}
 
 
 
@@ -492,6 +555,7 @@ select {
         margin-bottom: .625em;
         padding: 5px;
     }
+
     table tr:last-child {
         margin: 0;
     }

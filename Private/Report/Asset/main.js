@@ -1,5 +1,6 @@
 let data = [];
 let editIndex = null;
+let filteredData = [];  // Mảng lưu dữ liệu sau khi lọc
 
 document.addEventListener("DOMContentLoaded", function () {
     const storedData = localStorage.getItem("reportsData");
@@ -151,10 +152,9 @@ document.getElementById("damageForm").addEventListener("submit", function (e) {
 // Chỉnh sửa báo cáo
 // Mở popup chỉnh sửa
 function openPopup(index) {
-    const item = data[index];
-    editIndex = index;
+    const item = filteredData.length > 0 ? filteredData[index] : data[index];  // Kiểm tra nếu filteredData có dữ liệu
+    editIndex = data.indexOf(item);  // Lấy đúng chỉ số gốc từ `data`
 
-    // Đảm bảo gán giá trị chuỗi cho các trường
     document.getElementById("editRelatedPerson").value = item.relatedPerson || "";
     document.getElementById("editRelatedPersonName").value = item.relatedPersonName || "";
     document.getElementById("editChecker").value = item.checker || "";
@@ -168,9 +168,9 @@ function openPopup(index) {
     document.getElementById("editDescription").value = item.description || "";
     document.getElementById("editStatus").value = item.status || "";
 
-    // Hiển thị popup chỉnh sửa
     document.getElementById("editPopup").style.display = "block";
 }
+
 
 
 // Xử lý cập nhật dữ liệu từ form chỉnh sửa
@@ -346,10 +346,7 @@ function exportTXT() {
 }
 
 
-
-
-//Filter
-
+//Tìm kiếm & Lọc dữ liệu
 function filterReports() {
     const checkerFilter = document.getElementById("filterChecker").value.toLowerCase();
     const areaFilter = document.getElementById("filterArea").value.toLowerCase();
@@ -357,16 +354,27 @@ function filterReports() {
     const contentSearch = document.getElementById("searchContent").value.toLowerCase();
     const timeFilter = document.getElementById("filterTime").value;
 
+    const now = new Date();
+
     const filteredData = data.filter(item => {
-        // Lọc theo các tiêu chí chọn và tìm kiếm
+        const itemDate = new Date(item.dateTime);
+        
+        // Default time range match
+        let timeRangeMatch = true;
+        if (timeFilter === "7days") {
+            timeRangeMatch = (now - itemDate) > 7 * 24 * 60 * 60 * 1000; // Quá 7 ngày
+        } else if (timeFilter === "1month") {
+            timeRangeMatch = (now - itemDate) > 30 * 24 * 60 * 60 * 1000; // Quá 1 tháng
+        } else if (timeFilter === "45days") {
+            timeRangeMatch = (now - itemDate) > 45 * 24 * 60 * 60 * 1000; // Quá 45 ngày
+        }
+
         const areaDetails = [
             item.area,
             item.areaFirst !== "0" ? item.areaFirst : "",
             item.areaLast !== "0" ? item.areaLast : "",
             item.floor !== "0" ? item.floor : "",
-        ]
-            .filter(Boolean)
-            .join("-").toLowerCase();
+        ].filter(Boolean).join("-").toLowerCase();
 
         return (
             (checkerFilter === "" || item.checker.toLowerCase().includes(checkerFilter)) &&
@@ -374,24 +382,25 @@ function filterReports() {
             (statusFilter === "" || item.status.toLowerCase().includes(statusFilter)) &&
             (contentSearch === "" || (
                 item.checker.toLowerCase().includes(contentSearch) ||
-                item.dateTime.toLowerCase().includes(contentSearch) ||
                 areaDetails.includes(contentSearch) ||
                 item.position.toLowerCase().includes(contentSearch) ||
                 item.issue.toLowerCase().includes(contentSearch) ||
                 item.description.toLowerCase().includes(contentSearch)
-            ))
+            )) &&
+            timeRangeMatch
         );
     });
 
-    // Sắp xếp theo thời gian nếu có yêu cầu
     if (timeFilter === "newest") {
-        filteredData.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));  // Sắp xếp từ mới nhất
+        filteredData.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
     } else if (timeFilter === "oldest") {
-        filteredData.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));  // Sắp xếp từ cũ nhất
+        filteredData.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
     }
 
-    renderFilteredTables(filteredData); // Hiển thị lại bảng đã lọc
+    renderFilteredTables(filteredData);
 }
+
+
 
 // Cập nhật lại renderFilteredTables để nhận dữ liệu đã lọc
 function renderFilteredTables(filteredData) {
@@ -421,7 +430,7 @@ function renderFilteredTables(filteredData) {
                 <td data-label="Thao Tác">
                     <div class="Func">
                         <button onclick="openPopup(${index})"><i class="fas fa-edit"></i></button>
-                        <button onclick="deleteReport(${index})"><i class="fas fa-trash"></i></button>
+                        <button onclick="deleteReport(${data.indexOf(item)})"><i class="fas fa-trash"></i></button>
                     </div>
                 </td>
             </tr>
@@ -429,6 +438,7 @@ function renderFilteredTables(filteredData) {
         tableBody.innerHTML += row;
     });
 }
+
 
 document.getElementById("importFile").addEventListener("change", function (e) {
     const file = e.target.files[0];
@@ -487,3 +497,44 @@ function exportJSON() {
     });
 }
 
+function calculateDate(daysAgo) {
+    const today = new Date();
+    today.setDate(today.getDate() - daysAgo);
+    
+    // Định dạng lại ngày theo dd/mm/yyyy
+    const day = String(today.getDate()).padStart(2, '0'); // Thêm số 0 nếu ngày có 1 chữ số
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Thêm số 0 nếu tháng có 1 chữ số
+    const year = today.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+
+  function daysLeftInMonth() {
+    const today = new Date();
+    const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // Lấy ngày cuối tháng
+    const remainingDays = lastDayOfMonth.getDate() - today.getDate();
+    return remainingDays;
+  }
+
+  function daysInCurrentMonth() {
+    const today = new Date();
+    const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // Lấy ngày cuối tháng
+    return lastDayOfMonth.getDate();
+  }
+
+  // Hàm cập nhật kết quả cho input ngày
+  function updateCustomDate() {
+    const inputDays = document.getElementById('input-days').value;
+    const result = calculateDate(inputDays);
+    document.getElementById('days-input').textContent = result;
+  }
+
+  // Hiển thị kết quả ban đầu
+  document.getElementById('days-7').textContent = calculateDate(7);
+  document.getElementById('days-30').textContent = calculateDate(30);
+  document.getElementById('days-45').textContent = calculateDate(45);
+  document.getElementById('days-left').textContent = daysLeftInMonth();
+  document.getElementById('days-in-month').textContent = daysInCurrentMonth();
+
+  // Cập nhật kết quả khi người dùng thay đổi giá trị input
+  document.getElementById('input-days').addEventListener('input', updateCustomDate);
