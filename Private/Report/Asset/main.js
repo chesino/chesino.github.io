@@ -70,6 +70,7 @@ function renderTables() {
     const tableBody = document.getElementById("reportsTable").querySelector("tbody");
     tableBody.innerHTML = "";  // Làm sạch bảng trước khi render lại
 
+    // Lặp qua mảng dữ liệu và tạo các hàng mới trong bảng
     data.forEach((item, index) => {
         const areaDetails = [
             item.area,
@@ -80,24 +81,21 @@ function renderTables() {
             .filter(Boolean)
             .join("-"); // Ghép các phần tử thành chuỗi với dấu '-'
 
-        // Sử dụng formatDateTime để định dạng thời gian
-        const formattedDateTime = formatDateTime(item.dateTime);
-
         const row = `
-           <td data-label="Người kiểm tra">${item.checker}</td>
-                <td data-label="Người liên quan">${item.relatedPerson} ${item.relatedPersonName}</td>
-                <td data-label="Thời gian">${formatDateTime(item.dateTime)}</td>
-                <td data-label="Khu vực">${areaDetails}</td>
-                <td data-label="Vị trí">${item.position}</td>
-                <td data-label="Vấn đề">${item.issue}</td>
-                <td data-label="Mô tả">${item.description || ""}</td>
-                <td data-label="Tình trạng">${item.status}</td>
-                <td data-label="Thao Tác">
-                <div class="Func">
-                    <button onclick="openPopup(${index})"><i class="fas fa-edit"></i></button>
+            <tr>
+                <td>${item.checker}</td>
+                <td>${item.relatedPerson} ${item.relatedPersonName}</td>
+                <td>${item.dateTime}</td>
+                <td>${areaDetails}</td>
+                <td>${item.position}</td>
+                <td>${item.issue}</td>
+                <td>${item.description || ""}</td>
+                <td>${item.status}</td>
+                <td>
+                    <button onclick="openPopup(${index})"><i class="fas fa-pen"></i></button>
                     <button onclick="deleteReport(${index})"><i class="fas fa-trash"></i></button>
-                </div>
-            </td>
+                </td>
+            </tr>
         `;
         tableBody.innerHTML += row;  // Thêm hàng mới vào bảng
     });
@@ -106,20 +104,16 @@ function renderTables() {
 
 
 
+
+
 // Thêm báo cáo
 document.getElementById("damageForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const relatedPersonElement = document.getElementById("relatedPerson");
-    const relatedPerson = relatedPersonElement ? relatedPersonElement.value : "Không xác định";
-
-    const relatedPersonNameElement = document.getElementById("relatedPersonName");
-    const relatedPersonName = relatedPersonNameElement ? relatedPersonNameElement.value : "";
-
     const newReport = {
         checker: document.getElementById("checker").value,
-        relatedPerson: relatedPerson,
-        relatedPersonName: relatedPersonName,
+        relatedPerson: document.getElementById("relatedPerson").value || "Không xác định",
+        relatedPersonName: document.getElementById("relatedPersonName").value || "",
         dateTime: document.getElementById("dateTime").value,
         area: document.getElementById("areaInput").value,
         areaFirst: document.getElementById("areaFirstInput").value,
@@ -131,18 +125,18 @@ document.getElementById("damageForm").addEventListener("submit", function (e) {
         status: document.getElementById("status").value,
     };
 
-    data.push(newReport);
-    saveToLocalStorage();
-    renderTables();
-    document.getElementById("damageForm").reset();
+    data.push(newReport);  // Thêm báo cáo mới vào dữ liệu cục bộ
+    saveToFirebase(data);  // Lưu dữ liệu vào Firebase
+    renderTables();  // Cập nhật bảng
+    document.getElementById("damageForm").reset();  // Reset form
 
-    // Thông báo SweetAlert2
+    // Sử dụng SweetAlert2 để thông báo thêm báo cáo thành công
     Swal.fire({
         icon: 'success',
-        title: 'Thêm thành công!',
-        text: 'Báo cáo đã được thêm thành công.',
-        timer: 3000,
-        showConfirmButton: false
+        title: 'Thêm báo cáo thành công!',
+        text: 'Báo cáo của bạn đã được lưu vào hệ thống.',
+        showConfirmButton: false,
+        timer: 1500
     });
 });
 
@@ -192,20 +186,22 @@ document.getElementById("editForm").addEventListener("submit", function (e) {
         status: document.getElementById("editStatus").value,
     };
 
-    data[editIndex] = updatedReport;
-    saveToLocalStorage();
-    renderTables();
-    closePopup();
+    data[editIndex] = updatedReport;  // Cập nhật dữ liệu cục bộ
+    saveToFirebase(data);  // Lưu lại vào Firebase
+    renderTables();  // Cập nhật bảng
+    closePopup();  // Đóng popup
 
-    // Thông báo SweetAlert2
+    // Thông báo người dùng bằng SweetAlert2
     Swal.fire({
         icon: 'success',
-        title: 'Chỉnh sửa thành công!',
-        text: 'Báo cáo đã được cập nhật.',
-        timer: 3000,
-        showConfirmButton: false
+        title: 'Cập nhật báo cáo thành công!',
+        text: 'Báo cáo của bạn đã được cập nhật.',
+        showConfirmButton: false,
+        timer: 1500
     });
 });
+
+
 
 
 // Đóng popup chỉnh sửa
@@ -217,27 +213,29 @@ function closePopup() {
 // Xóa báo cáo
 function deleteReport(index) {
     Swal.fire({
-        title: 'Bạn có chắc chắn?',
-        text: 'Bạn có chắc chắn muốn xóa báo cáo này?',
+        title: 'Bạn có chắc chắn muốn xóa báo cáo này?',
+        text: "Bạn sẽ không thể khôi phục lại báo cáo!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Xóa',
-        cancelButtonText: 'Hủy'
+        confirmButtonText: 'Yes, xóa!'
     }).then((result) => {
         if (result.isConfirmed) {
-            data.splice(index, 1);  // Xóa báo cáo tại chỉ số gốc
-            saveToLocalStorage();
-            renderTables();
+            data.splice(index, 1);  // Xóa báo cáo khỏi dữ liệu cục bộ
+            saveToFirebase(data);  // Lưu lại vào Firebase
+            renderTables();  // Cập nhật bảng
+
+            // Thông báo người dùng bằng SweetAlert2
             Swal.fire(
                 'Đã xóa!',
-                'Báo cáo đã được xóa thành công.',
+                'Báo cáo của bạn đã bị xóa.',
                 'success'
             );
         }
     });
 }
+
 
 
 
@@ -348,7 +346,7 @@ function filterReports() {
 
     const filteredData = data.filter(item => {
         const itemDate = new Date(item.dateTime);
-        
+
         // Default time range match
         let timeRangeMatch = true;
         if (timeFilter === "7days") {
@@ -490,41 +488,79 @@ function exportJSON() {
 function calculateDate(daysAgo) {
     const today = new Date();
     today.setDate(today.getDate() - daysAgo);
-    
+
     // Định dạng lại ngày theo dd/mm/yyyy
     const day = String(today.getDate()).padStart(2, '0'); // Thêm số 0 nếu ngày có 1 chữ số
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Thêm số 0 nếu tháng có 1 chữ số
     const year = today.getFullYear();
 
     return `${day}/${month}/${year}`;
-  }
+}
 
-  function daysLeftInMonth() {
+function daysLeftInMonth() {
     const today = new Date();
     const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // Lấy ngày cuối tháng
     const remainingDays = lastDayOfMonth.getDate() - today.getDate();
     return remainingDays;
-  }
+}
 
-  function daysInCurrentMonth() {
+function daysInCurrentMonth() {
     const today = new Date();
     const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // Lấy ngày cuối tháng
     return lastDayOfMonth.getDate();
-  }
+}
 
-  // Hàm cập nhật kết quả cho input ngày
-  function updateCustomDate() {
+// Hàm cập nhật kết quả cho input ngày
+function updateCustomDate() {
     const inputDays = document.getElementById('input-days').value;
     const result = calculateDate(inputDays);
     document.getElementById('days-input').textContent = result;
-  }
+}
 
-  // Hiển thị kết quả ban đầu
-  document.getElementById('days-7').textContent = calculateDate(7);
-  document.getElementById('days-30').textContent = calculateDate(30);
-  document.getElementById('days-45').textContent = calculateDate(45);
-  document.getElementById('days-left').textContent = daysLeftInMonth();
-  document.getElementById('days-in-month').textContent = daysInCurrentMonth();
+// Hiển thị kết quả ban đầu
+document.getElementById('days-7').textContent = calculateDate(7);
+document.getElementById('days-30').textContent = calculateDate(30);
+document.getElementById('days-45').textContent = calculateDate(45);
+document.getElementById('days-left').textContent = daysLeftInMonth();
+document.getElementById('days-in-month').textContent = daysInCurrentMonth();
 
-  // Cập nhật kết quả khi người dùng thay đổi giá trị input
-  document.getElementById('input-days').addEventListener('input', updateCustomDate);
+// Cập nhật kết quả khi người dùng thay đổi giá trị input
+document.getElementById('input-days').addEventListener('input', updateCustomDate);
+
+
+function Done(T1) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: T1
+    });
+}
+
+function Fail(T1) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "error",
+        title: T1
+    });
+}
+

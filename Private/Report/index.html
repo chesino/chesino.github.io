@@ -24,6 +24,13 @@
     <meta property="og:image" content="/DATA/Banner/PriorityDark.png" />
     <meta property="og:title" content="Hunq" />
     <meta property="og:description" content="Thiết kế và lập trình Hùng Đinh" />
+
+    <!-- Firebase App Compat -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+
+    <!-- Firebase Database Compat -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+
 </head>
 
 <body>
@@ -31,10 +38,13 @@
         <h1>Quản lý Hư Hỏng</h1>
         <!-- Tab -->
         <div class="tab">
-            <button class="tablinks active" onclick="openTab(event, 'AddReport')"><i class="fa-solid fa-flag"></i></button>
+            <button class="tablinks active" onclick="openTab(event, 'AddReport')"><i
+                    class="fa-solid fa-flag"></i></button>
             <button class="tablinks" onclick="openTab(event, 'ViewReports')"><i class="fa-solid fa-table"></i></button>
-            <button class="tablinks" onclick="openTab(event, 'DataReports')"><i class="fa-solid fa-database"></i></button>
-            <button class="tablinks" onclick="openTab(event, 'DayCounter')"><i class="fa-solid fa-calendar-days"></i></button>
+            <button class="tablinks" onclick="openTab(event, 'DataReports')"><i
+                    class="fa-solid fa-database"></i></button>
+            <button class="tablinks" onclick="openTab(event, 'DayCounter')"><i
+                    class="fa-solid fa-calendar-days"></i></button>
         </div>
 
         <!-- Thêm báo cáo -->
@@ -319,7 +329,7 @@
 
         <!-- Quản lý dữ liệu -->
         <div class="tabcontent" id="DataReports">
-            <h1>Tải xuống dữ liệu</h1>
+            <h1 class="head">Tải xuống dữ liệu</h1>
             <div class="export-buttons">
                 <button onclick="exportJSON()">
                     <img src="./Asset/icon/Json.png" alt="exportJSON" srcset="./Asset/icon/Json.png">
@@ -342,7 +352,7 @@
                     <p>Mở rộng</p>
                 </button>
             </div>
-            <h1>Khôi phục dữ liệu</h1>
+            <h1 class="head">Khôi phục dữ liệu</h1>
             <div class="import-buttons-">
                 <label for="importFile" class="import-file-button">
                     <img src="./Asset/icon/Json.png" alt="exportJSON" srcset="./Asset/icon/Json.png">
@@ -352,6 +362,19 @@
                     </div>
                 </label>
                 <input type="file" id="importFile" />
+            </div>
+            <h1 class="head">Đồng bộ</h1>
+            <div class="sync-DIV">
+                <div id="serverStatus">
+                    Trạng thái máy chủ: <span id="statusText">Đang kiểm tra...</span>
+                </div>
+                <div class="sync-buttons">
+                    <button id="toggleSyncButton" onclick="toggleAutoSync()">Bật tự động đồng bộ</button>
+                    <button id="checkStatusButton" onclick="checkFirebaseStatus()">Kiểm tra trạng thái máy chủ</button>
+                    <button onclick="saveDataAsBlobToFirebase(data)">Lưu Blob vào Firebase</button>
+                    <!-- Nút đồng bộ dữ liệu -->
+                    <button id="syncButton" onclick="syncFromFirebase()">Đồng bộ dữ liệu từ Firebase</button>
+                </div>
             </div>
         </div>
 
@@ -374,8 +397,12 @@
 
     </div>
 </body>
+
+
+<script src="./Asset/SyncData.js"></script>
 <script src="./Asset/main.js"></script>
-<!-- Thư ciện SweetAlert2 -->
+<!-- Thư viện SweetAlert2 -->
 <script src="/DATA/Extend/SweetAlert2.js"></script>
+
 
 </html>

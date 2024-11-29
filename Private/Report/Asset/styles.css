@@ -68,10 +68,12 @@ h1 {
     font-weight: bold;
     border-radius: 0;
 }
-.tab button.active:first-child{
+
+.tab button.active:first-child {
     border-top-left-radius: 10px;
 }
-.tab button.active:last-child{
+
+.tab button.active:last-child {
     border-top-right-radius: 10px;
 }
 
@@ -461,11 +463,13 @@ select {
     color: #555;
     margin: 15px 0;
 }
+
 .DayCounter-Input {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 #DayCounter strong {
     font-size: 1.2rem;
     color: #333;
@@ -505,6 +509,52 @@ select {
     #DayCounter p {
         font-size: 1rem;
     }
+}
+
+
+#DataReports .head {
+    margin: 20px 0;
+}
+
+.sync-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.sync-buttons button {
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6ac76c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sync-buttons button:hover {
+    background-color: #3e8e41;
+    transform: translateY(-2px);
+}
+
+.sync-buttons button:active {
+    transform: translateY(0);
+}
+
+#serverStatus {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+#statusText {
+    font-weight: bold;
+    color: #ff6600;
+    /* màu cam cho trạng thái */
 }
 
 
