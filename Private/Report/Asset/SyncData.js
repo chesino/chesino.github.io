@@ -39,7 +39,7 @@ function syncFromFirebase() {
             if (snapshot.exists()) {
                 const firebaseData = snapshot.val(); // Dữ liệu lấy từ Firebase
                 data = firebaseData; // Cập nhật dữ liệu cục bộ
-                Done('Đồng bộ thành công dữ liệu')
+                Done('Đồng bộ dữ liệu thành công')
                 renderTables(); // Gọi hàm renderTables để cập nhật bảng
             } else {
                 Fail("Không có dữ liệu.");
