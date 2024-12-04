@@ -1,97 +1,173 @@
 <!DOCTYPE html>
 <html lang="vi">
-<!-- Shift + Alt + F  để sắp xếp lại code ( format code )-->
-<html>
 
 <head>
-    <!-- Tiêu đề trang -->
-    <title>Chesino</title>
-
-    <!-- Bộ giải mã và phân loại thiết bị -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
-    <!-- Đảm bảo đặt meta tag sau -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <!-- Biểu tượng cho web -->
-    <link rel="icon" href="/DATA/Logo/logo.png" />
-
-    <!-- Biểu tượng iPhone -->
-   <link rel="apple-touch-icon" href="/DATA/Logo/iconApps.png" sizes="150x150" />
-
-    <!-- Ảnh -->
-    <meta property="og:image" content="/DATA/Logo/logo.png" />
-
-    <!-- CSS của web -->
-    <link rel="stylesheet" href="./Styles.css" />
-    <link rel="stylesheet" href="/DATA/Extend/SweetAlert2dark.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adblock Filters</title>
+    <script src="/DATA/Extend/SweetAlert2.js"></script>
 
     <!-- FontAweSome fas fa icon -->
     <script src="https://kit.fontawesome.com/9392097706.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.5s ease;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282828;
+            margin: 0;
+            color: #333;
+            padding: 10px;
+        }
+
+        .container {
+            width: 100%;
+            margin: 10px auto;
+            background: #181818;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .container:first-child {
+            margin-top: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: #181818;
+            padding: 15px;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .link-list,
+        .apps-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #111;
+        }
+
+        .link-item:last-child {
+            border-bottom: none;
+        }
+
+        .link-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .link-name:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: #000;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .copy-btn i {
+            font-size: 22px;
+        }
+
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Bộ lọc chặn quảng cáo</h1>
-    <div id="links"></div>
+    <!-- <div class="container">
+        <div class="header">
+            <h1>Phần mềm</h1>
+        </div>
+        <div class="apps-list">
+            <div class="app">
+                <img src="./img/UBlock_Origin.png" alt="" srcset="">
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container">
+        <div class="header">
+            <h1>Bộ lọc chặn quảng cáo</h1>
+        </div>
+        <ul class="link-list" id="linkList"></ul>
+    </div>
+
+
     <script>
         const links = [
-            { name: "Easylist", url: "https://chesino.github.io/Tools/Adblock/Filter/Easylist.txt" },
-            { name: "Sàn thương mại điện tử", url: "https://chesino.github.io/Tools/Adblock/Filter/Shopping.txt" },
-            { name: "Web Phim", url: "https://chesino.github.io/Tools/Adblock/Filter/WebFim.txt" },
+
+            { name: "Easylist Private", url: "https://chesino.github.io/Tools/Adblock/Filter/Easylist.txt" },
+            { name: "Easylist Official", url: "https://easylist.to/easylist/easylist.txt" },
+            { name: "Chặn Shoping", url: "https://chesino.github.io/Tools/Adblock/Filter/Shopping.txt" },
+            { name: "Xem Phim", url: "https://chesino.github.io/Tools/Adblock/Filter/WebFim.txt" },
             { name: "Tuỳ chỉnh", url: "https://chesino.github.io/Tools/Adblock/Filter/Custom.txt" },
-            { name: "VIP", url: "https://chesino.github.io/Tools/Adblock/Filter/VIP.txt" },
-            { name: "ADBVN", url: "https://abpvn.com/filter/abpvn-ApmCqa.txt" },
+            { name: "ABPVN 12/2024", url: "https://chesino.github.io/Tools/Adblock/Filter/VN.txt" },
         ];
 
-        function copyLink(url) {
-            const tempInput = document.createElement('input');
-            tempInput.value = url;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            Done('Đã sao chép thành công', url);
-        }
+        const linkList = document.getElementById('linkList');
 
-        function createLinkElement(link, index) {
-            const container = document.createElement('div');
-            container.className = 'link-container';
-
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = link.name;
-            input.readOnly = true;
-
-            const button = document.createElement('button');
-            button.innerHTML = '<i class="fa-solid fa-copy"></i>';
-            button.onclick = () => copyLink(link.url);
-
-            container.appendChild(input);
-            container.appendChild(button);
-
-            return container;
-        }
-
-        const linksContainer = document.getElementById('links');
-        links.forEach((link, index) => {
-            const linkElement = createLinkElement(link, index);
-            linksContainer.appendChild(linkElement);
+        links.forEach(link => {
+            const li = document.createElement('li');
+            li.className = 'link-item';
+            li.innerHTML = `
+                <a href="${link.url}" target="_blank" class="link-name">${link.name}</a>
+                <button class="copy-btn" onclick="copyToClipboard('${link.url}')"><i class="far fa-copy"></i></button>
+            `;
+            linkList.appendChild(li);
         });
 
-
-        function Done(T1, T2) {
-            Swal.fire(
-                T1,
-                T2,
-                'success'
-            )
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: 'Sao chép thành công',
+                    toast: true,
+                    position: "bottom-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+            }).catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Không thể sao chép URL. Vui lòng thử lại.',
+                    confirmButtonColor: '#4CAF50',
+                    theme: 'dark',
+                });
+                console.error('Không thể sao chép: ', err);
+            });
         }
 
     </script>
 </body>
-<script src="/DATA/Extend/SweetAlert2.js"></script>
 
 </html>
