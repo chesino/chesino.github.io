@@ -77,6 +77,12 @@
             text-decoration: underline;
         }
 
+        .link-description {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0;
+        }
+
         .copy-btn {
             background-color: #4CAF50;
             border: none;
@@ -119,14 +125,38 @@
 
     <script>
         const links = [
-
-            { name: "Easylist Private", url: "https://chesino.github.io/Tools/Adblock/Filter/Easylist.txt" },
-            { name: "Easylist Official", url: "https://easylist.to/easylist/easylist.txt" },
-            { name: "Chặn Shoping", url: "https://chesino.github.io/Tools/Adblock/Filter/Shopping.txt" },
-            { name: "Xem Phim", url: "https://chesino.github.io/Tools/Adblock/Filter/WebFim.txt" },
-            { name: "Tuỳ chỉnh", url: "https://chesino.github.io/Tools/Adblock/Filter/Custom.txt" },
-            { name: "ABPVN 12/2024", url: "https://chesino.github.io/Tools/Adblock/Filter/VN.txt" },
+            {
+                name: "Easylist Private",
+                url: "https://chesino.github.io/Tools/Adblock/Filter/Easylist.txt",
+                description: "Easy List đã tuỳ chỉnh riêng"
+            },
+            {
+                name: "Easylist Official",
+                url: "https://easylist.to/easylist/easylist.txt",
+                description: "Bộ lọc hính thức từ Easylist"
+            },
+            {
+                name: "Chặn Shoping",
+                url: "https://chesino.github.io/Tools/Adblock/Filter/Shopping.txt",
+                description: "Danh sách chặn các trang mua sắm trực tuyến"
+            },
+            {
+                name: "Xem Phim",
+                url: "https://chesino.github.io/Tools/Adblock/Filter/WebFim.txt",
+                description: "Danh sách chặn quảng cáo trên các trang phim"
+            },
+            {
+                name: "Tuỳ chỉnh",
+                url: "https://chesino.github.io/Tools/Adblock/Filter/Custom.txt",
+                description: "Danh sách chặn tuỳ chỉnh riêng"
+            },
+            {
+                name: "ABPVN 12/2024",
+                url: "https://chesino.github.io/Tools/Adblock/Filter/VN.txt",
+                description: "Danh sách chặn quảng cáo cho Việt Nam (cập nhật tháng 12/2024)"
+            }
         ];
+
 
         const linkList = document.getElementById('linkList');
 
@@ -134,11 +164,17 @@
             const li = document.createElement('li');
             li.className = 'link-item';
             li.innerHTML = `
-                <a href="${link.url}" target="_blank" class="link-name">${link.name}</a>
-                <button class="copy-btn" onclick="copyToClipboard('${link.url}')"><i class="far fa-copy"></i></button>
+                <div class="Info"> 
+                    <a href="${link.url}" target="_blank" class="link-name">${link.name}</a>
+                    <p class="link-description">${link.description}</p>
+                </div>
+                <button class="copy-btn" onclick="copyToClipboard('${link.url}')">
+                    <i class="far fa-copy"></i>
+                </button>
             `;
             linkList.appendChild(li);
         });
+
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
