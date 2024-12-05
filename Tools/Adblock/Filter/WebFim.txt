@@ -304,3 +304,95 @@ animevietsub.run##.Footer > .Container
 
 ##.ad_location
 ##.above_of_player
+! 24 thg 10, 2024 https://tvhay.cx
+tvhay.cx###preload-2 > div
+tvhay.cx##body > center
+tvhay.cx##.block2
+tvhay.cx##.block1
+
+! 24 thg 10, 2024 https://www.phimmoi01.net
+||www.phimmoi01.net/wp-content/themes/halimmovies/media/img/header-bg.jpg$image
+###popup-giua-man-hinh
+##.ad-container
+##.Adv 
+##.ad-center-header
+##.pc_catfix_adv
+
+! 24 thg 10, 2024 https://animevietsub.run
+animevietsub.run##.below-player
+||cdn.animevietsub.run/data/logo/logoz.png$image
+animevietsub.run##.Footer > .Container
+||cdn.animevietsub.run/data/logo/logoz.png$image
+##.pc-catfixx
+||lh6.googleusercontent.com/niNvqW87lyRKXDaWknU-K7iiTx6_sAPg_cyDtbJhk_RhXK1hFYPGjIsdM9F6DDyqsDD9IdPZv3hKHkkM2lNZGMFaDdvll8bV6B0n3SFONcjrGY9YY1gM6KQd28Zl=s0$image
+
+##.ad_location
+##.above_of_player
+
+! 26 thg 10, 2024 https://phimmoisz.biz
+phimmoisz.biz##.adas-preload-popup-overlay
+phimmoisz.biz##.adas-preload-popup
+
+##.sda-wrapper 
+##.sda-catfish
+
+! 27 thg 10, 2024 https://motchillid.net
+motchillid.net###mp-preload-popup-overlay
+motchillid.net##center
+
+! 2 thg 11, 2024 https://designerviet.com
+||data.designerviet.com/qc/temu.jpg$image
+
+! 8 thg 11, 2024 https://www.aowvn.org
+www.aowvn.org##div:nth-of-type(10)
+
+! 10 thg 11, 2024 https://phimlau.pro
+phimlau.pro##.banner-top
+phimlau.pro##.fix-hidden > .logo
+phimlau.pro##.fcmpbox
+phimlau.pro##header:nth-of-type(5)
+phimlau.pro##.dt-no-post
+
+! 15 thg 11, 2024 https://z.tvhayw.org
+z.tvhayw.org##div.container:nth-of-type(2)
+z.tvhayw.org##.catfish-bottom.catfish-bottom-desktop
+||ads.starzd.com/ok9pc2.gif$image
+
+! 26 thg 11, 2024 https://imgur.com
+imgur.com##.Sticky.Top
+
+! 30 thg 11, 2024 https://mobalytics.gg
+mobalytics.gg##.m-bz6vl
+mobalytics.gg##.m-19ndchq
+mobalytics.gg##.m-1ch5v5w
+
+! 2 thg 12, 2024 https://cssgradient.io
+||cssgradient.io/images/banner-4372da89.png$image
+||cssgradient.io/images/banner-4372da89.png$image
+
+! 6 thg 12, 2024 https://lmssplus.org
+lmssplus.org##.md\:bottom-0.bg-opacity-40.bg-purple-200.transform.-translate-x-1\/2.max-w-\[645px\].w-full.z-50.left-1\/2.bottom-\[60px\].fixed.shadow-sm.text-card-foreground.border.rounded-lg
+
+! 6 thg 12, 2024 https://tftplus.org
+tftplus.org##.md\:bottom-0.bg-opacity-40.bg-purple-200.transform.-translate-x-1\/2.max-w-\[645px\].w-full.z-50.left-1\/2.bottom-\[60px\].fixed.shadow-sm.text-card-foreground.border.rounded-lg
+tftplus.org##.Footer_wrapper__JZxXj
+
+! 6 thg 12, 2024 https://vuaphimmoi1.com
+vuaphimmoi1.com##.block-note.page-single.block-wrapper
+
+! 6 thg 12, 2024 https://tvhayw.org
+
+! 6 thg 12, 2024 https://tvhayw.org
+tvhayw.org##div.container:nth-of-type(2)
+tvhayw.org##.catfish-bottom.catfish-bottom-desktop
+tvhayw.org##.block1
+tvhayw.org##.block2
+tvhayw.org###logo
+tvhayw.org###comment
+||ads.starzd.com/6686z4.gif$image
+||ads.starzd.com/6686z4.gif$image
+||ads.starzd.com/i9z3.gif$image
+tvhayw.org##.copyright
+tvhayw.org##.catfish-bottom.catfish-bottom-mobile
+||ads.starzd.com/i9z3.gif$image
+
