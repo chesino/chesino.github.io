@@ -1,6 +1,6 @@
 const discountCodes = {
     'VJPPRO5': 5,
-    'FREE10': 10 
+    'FREE10': 10
 };
 
 const inputElements = document.querySelectorAll('.inputFM');
@@ -31,18 +31,19 @@ function formatWithDots(value) {
 
 const serviceOptions = {
     Facebook: [
-        { value: 'Like', text: 'Thích [Min 100]', price: 45 },
-        { value: 'Follow', text: 'Theo dõi [Min 100]', price: 50 },
-        { value: 'Viewstory', text: 'Lượt xem tin [Min 1,000]', price: 30 },
-        { value: 'Viewvideo', text: 'Lượt xem video, reel [Min 1,000]', price: 40 },
-        { value: 'ShareSV1', text: 'Chia sẻ [SV1 - Min 1,000] ', price: 35 },
-        { value: 'ShareSV2', text: 'Chia sẻ [SV2 - Min 1,000] [Chia sẻ Group] ', price: 500 },
+        { value: 'Like', text: 'Lượt thích [45đ - SL ít nhất 100]', price: 45 },
+        { value: 'Follow', text: 'Lượt theo dõi [50đ - SL ít nhất 100]', price: 50 },
+        { value: 'Viewstory', text: 'Lượt xem tin [30đ - SL ít nhất 1,000]', price: 30 },
+        { value: 'Viewvideo', text: 'Lượt xem video, reel [40đ - SL ít nhất 1,000]', price: 40 },
+        { value: 'ShareSV1', text: 'Chia sẻ [35đ - SL ít nhất 1,000] ', price: 35 },
+        { value: 'ShareSV2', text: 'Chia sẻ [500đ - SL ít nhất 1,000] [Chia sẻ Group] ', price: 500 },
     ],
     Tiktok: [
-        { value: 'Like', text: 'Thích [Min 100]', price: 30 },
-        { value: 'Follow', text: 'Theo dõi [Min 100]', price: 70 },
-        { value: 'View', text: 'Lượt xem [Min 1,000]', price: 10 },
-        { value: 'Save', text: 'Lưu video [Min 100]', price: 15 }
+        { value: 'Like', text: 'Thích [30đ - SL ít nhất 100]', price: 30 },
+        { value: 'Follow', text: 'Theo dõi [Chậm] [70đ - SL ít nhất 100]', price: 70 },
+        { value: 'Follow Fast', text: 'Theo dõi [Nhanh] [90đ - SL ít nhất 100]', price: 90 },
+        { value: 'View', text: 'Lượt xem [10đ - SL ít nhất 1,000]', price: 10 },
+        { value: 'Save', text: 'Lưu video [15đ - SL ít nhất 100]', price: 15 }
     ]
 };
 
@@ -251,7 +252,7 @@ function applyDiscount(totalPrice) {
     let finalPrice = totalPrice;
     let discountPercent = 0;
 
-    
+
 
     const Rank = document.getElementById('rank').textContent;
     if (Rank === 'Admin - Ultimate') {
@@ -259,7 +260,7 @@ function applyDiscount(totalPrice) {
     } else if (Rank === 'Priority') {
         discountPercent = 5;
     } else if (Rank === 'Cộng tác viên') {
-        discountPercent = 2;
+        discountPercent = 0;
     }
 
     if (discountCodes[discountCode]) {
@@ -304,22 +305,22 @@ function GetCustomerToTransfer() {
         const lastFiveDigits = Customer.slice(-3);
         let platformCode;
         switch (platform) {
-          case 'Tiktok':
-            platformCode = 'T';
-            break;
-          case 'Facebook':
-            platformCode = 'F';
-            break;
-          case 'IDApple':
-            platformCode = 'A';
-            break;
-          case 'UpdateApps':
-            platformCode = 'U';
-            break;
-          default:
-            platformCode = '?'; // Giá trị mặc định nếu không khớp với platform nào
+            case 'Tiktok':
+                platformCode = 'T';
+                break;
+            case 'Facebook':
+                platformCode = 'F';
+                break;
+            case 'IDApple':
+                platformCode = 'A';
+                break;
+            case 'UpdateApps':
+                platformCode = 'U';
+                break;
+            default:
+                platformCode = '?'; // Giá trị mặc định nếu không khớp với platform nào
         }
-        
+
         const serviceCode = service === 'Like' ? 'L' : (service === 'Follow' ? 'F' : 'V');
         const result = lastFiveDigits + platformCode + timeString;
 

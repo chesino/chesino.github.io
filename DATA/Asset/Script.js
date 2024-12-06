@@ -84,8 +84,6 @@ function CheckRank(user = null) {
         bannerImg.src = '/DATA/Banner/PriorityDark.png';
     } else if (rank === 'Cộng tác viên') {
         body.classList.add('CTV-mode');
-        // Thay đổi nguồn của hình ảnh nếu rank là 'Admin - Ultimate'
-        bannerImg.src = '/DATA/Banner/PriorityDark.png';
     } else {
         body.classList.add('Normal-mode');
         // Thay đổi nguồn của hình ảnh nếu rank là khác
