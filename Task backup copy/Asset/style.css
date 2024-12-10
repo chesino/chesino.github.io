@@ -10,17 +10,9 @@
         padding: 5px !important;
         border: none !important;
         border-radius: 0 !important;
-        width: 80mm !important;
-    }
-    @page {
-        size: 80mm auto;
-        margin: 0;
     }
 
 }
-
-
-
 
 .service-card {
     border: 1px solid #ddd;
@@ -37,7 +29,6 @@
 }
 
 .invoice {
-    width: 80mm ;
     margin: 10px;
     padding: 5px;
     border: 2px dashed black;
@@ -52,9 +43,9 @@
     margin-top: 0 !important;
 }
 
-img.Logo-invoice  {
+.Logo-invoice img {
     display: block;
-    width: 30% !important;
+    width: 30%;
     margin: 0 auto;
 }
 
@@ -73,7 +64,6 @@ img.Logo-invoice  {
 }
 
 #invoiceOutput td:last-child {
-    font-size: 20px;
     font-weight: bold;
     text-align: right;
 }
@@ -86,41 +76,4 @@ img.Logo-invoice  {
 
 .Total p {
     font-size: 12px;
-}
-tr.end {
-    border-top: var(--bs-border-width) solid;
-}
-
-.card {
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    border-radius: 15px;
-    border: none;
-}
-.form-control, .form-select {
-    border-radius: 10px;
-    padding: 10px 15px;
-}
-.btn {
-    border-radius: 10px;
-    padding: 10px 20px;
-}
-.service-card {
-    transition: transform 0.2s;
-}
-.service-card:hover {
-    transform: translateY(-5px);
-}
-@media (max-width: 768px) {
-    .sticky-total {
-        position: sticky;
-        bottom: 0;
-        background: white;
-        padding: 15px;
-        box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-}
-
-.col-md-3.mb-2 .card {
-    background-color: #e2e2e2 !important;
 }

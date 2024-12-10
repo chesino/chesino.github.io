@@ -1,141 +1,113 @@
 [
     {
-        "id": "1",
         "service": "Cắt uốn thiết kế tóc ngắn",
         "price": 600
     },
     {
-        "id": "2",
         "service": "Cắt uốn thiết kế tóc lỡ",
         "price": 700
     },
     {
-        "id": "3",
         "service": "Cắt thiết kế tóc dài",
         "price": 800
     },
     {
-        "id": "4",
         "service": "Cắt Nhuộm tóc ngắn",
         "price": 600
     },
     {
-        "id": "5",
         "service": "Cắt Nhuộm tóc lỡ",
         "price": 700
     },
     {
-        "id": "6",
         "service": "Cắt Nhuộm tóc dài",
         "price": 800
     },
     {
-        "id": "7",
         "service": "Cắt Duỗi tóc ngắn",
         "price": 600
     },
     {
-        "id": "8",
         "service": "Cắt Duỗi tóc lỡ",
         "price": 700
     },
     {
-        "id": "9",
         "service": "Cắt Duỗi tóc dài",
         "price": 800
     },
     {
-        "id": "10",
         "service": "Cắt uốn thiết kế tóc ngắn",
         "price": 1000
     },
     {
-        "id": "11",
         "service": "Cắt uốn thiết kế tóc lỡ",
         "price": 1100
     },
     {
-        "id": "12",
         "service": "Cắt uốn thiết kế tóc dài",
         "price": 1200
     },
     {
-        "id": "13",
         "service": "Cắt Nhuộm tóc ngắn",
         "price": 1000
     },
     {
-        "id": "14",
         "service": "Cắt Nhuộm tóc lỡ",
         "price": 1100
     },
     {
-        "id": "15",
         "service": "Cắt Nhuộm tóc dài",
         "price": 1200
     },
     {
-        "id": "16",
         "service": "Cắt Duỗi tóc ngắn",
         "price": 1000
     },
     {
-        "id": "17",
         "service": "Cắt Duỗi tóc lỡ",
         "price": 1100
     },
     {
-        "id": "18",
         "service": "Cắt Duỗi tóc dài",
         "price": 1200
     },
     {
-        "id": "19",
         "service": "Uốn phồng chân",
         "price": 300
     },
     {
-        "id": "20",
         "service": "Uốn phồng chân full đầu",
         "price": 500
     },
     {
-        "id": "21",
         "service": "Phá ngôi mái",
         "price": 200
     },
     {
-        "id": "22",
         "service": "Phá ngôi + uốn mái",
         "price": 300
     },
     {
-        "id": "23",
         "service": "Tẩy light viền 2 lần + nhuộm màu",
         "price": 800
     },
     {
-        "id": "24",
         "service": "Tẩy baby light 2 lần + lên màu",
         "price": 1800
     },
     {
-        "id": "25",
         "service": "Tẩy full",
         "price": 1000
     },
     {
-        "id": "26",
         "service": "Phục hồi olaplex (60k/1ml)",
         "price": 60
     },
     {
-        "id": "27",
         "service": "Phục hồi Keratin tóc ngắn",
         "price": 700
     },
     {
-        "id": "28",
         "service": "Hấp collagen tươi",
         "price": 500
     }

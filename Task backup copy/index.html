@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hóa Đơn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./Asset/style.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <form id="invoiceForm">
+            <h2 class="text-center">Lập Hóa Đơn Dịch Vụ</h2>
+            <div class="mb-3">
+                <label for="customerName" class="form-label">Khách hàng</label>
+                <input type="text" class="form-control" id="customerName" placeholder="Nhập tên khách hàng">
+            </div>
+            <div class="mb-3">
+                <label for="employeeName" class="form-label">Nhân viên</label>
+                <input type="text" class="form-control" id="employeeName" placeholder="Nhập tên nhân viên" required>
+            </div>
+            <div class="mb-3">
+                <label for="paymentMethod" class="form-label">Thanh toán</label>
+                <select class="form-select" id="paymentMethod" required>
+                    <option value="cash">Tiền mặt</option>
+                    <option value="bank">Chuyển khoản</option>
+                </select>
+            </div>
+            <div class="mb-3 d-none" id="cashInput">
+                <label for="cashGiven" class="form-label">Số tiền khách đưa</label>
+                <input type="number" class="form-control" id="cashGiven" placeholder="Nhập số tiền" min="0">
+            </div>
+            <div id="serviceList" class="mb-3">
+                <!-- Các dịch vụ sẽ được hiển thị tại đây -->
+            </div>
+            <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
+        </form>
+
+
+    </div>
+    <div class="invoice">
+        <div id="invoiceOutput" class="mt-4">
+       
+        </div>
+        <button id="generateInvoiceBtn" class="btn btn-success mt-3 d-none" onclick="window.print()">In hóa đơn</button>
+    </div>
+
+    <script src="./Asset/main.js"></script>
+</body>
+
+</html>

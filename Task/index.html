@@ -4,50 +4,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hóa Đơn</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Hóa Đơn Dịch Vụ</title>
     <link rel="stylesheet" href="./Asset/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .card {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            border: none;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            padding: 10px 15px;
+        }
+
+        .btn {
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .service-card {
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .sticky-total {
+                position: sticky;
+                bottom: 0;
+                background: white;
+                padding: 15px;
+                box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <div class="container mt-4">
+<body class="bg-light">
+    <div class="container py-4">
         <form id="invoiceForm">
-            <h2 class="text-center">Lập Hóa Đơn Dịch Vụ</h2>
-            <div class="mb-3">
-                <label for="customerName" class="form-label">Khách hàng</label>
-                <input type="text" class="form-control" id="customerName" placeholder="Nhập tên khách hàng">
+            <!-- Header -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">
+                        <i class="fas fa-file-invoice"></i> Lập Hóa Đơn Dịch Vụ
+                    </h2>
+                    <div class="row">
+                        <!-- Thông tin khách hàng -->
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="customerName"
+                                    placeholder="Nhập tên khách hàng">
+                                <label for="customerName"><i class="fas fa-user"></i> Khách hàng</label>
+                            </div>
+                        </div>
+                        <!-- Thông tin nhân viên -->
+                        <div class="col-md-6 mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="employeeName" required>
+                                    <option value="NV1">NV1</option>
+                                    <option value="NV2">NV2</option>
+                                </select>
+                                <label for="employeeName"><i class="fas fa-user-tie"></i> Nhân viên</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Phương thức thanh toán -->
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="paymentMethod" required>
+                            <option value="cash">Tiền mặt</option>
+                            <option value="bank">Chuyển khoản</option>
+                        </select>
+                        <label for="paymentMethod"><i class="fas fa-money-bill"></i> Phương thức thanh toán</label>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="employeeName" class="form-label">Nhân viên</label>
-                <input type="text" class="form-control" id="employeeName" placeholder="Nhập tên nhân viên" required>
+            <!-- Danh sách dịch vụ -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-3"><i class="fas fa-list"></i> Danh Sách Dịch Vụ</h4>
+                    <div class="row g-3" id="serviceList">
+                        <!-- Dịch vụ sẽ được render ở đây -->
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="paymentMethod" class="form-label">Thanh toán</label>
-                <select class="form-select" id="paymentMethod" required>
-                    <option value="cash">Tiền mặt</option>
-                    <option value="bank">Chuyển khoản</option>
-                </select>
+            <!-- Giỏ hàng -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-3"><i class="fas fa-shopping-cart"></i> Giỏ Hàng</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Dịch vụ</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                    <th>Thành tiền</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartItemsList">
+                                <!-- Giỏ hàng sẽ được render ở đây -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3 d-none" id="cashInput">
-                <label for="cashGiven" class="form-label">Số tiền khách đưa</label>
-                <input type="number" class="form-control" id="cashGiven" placeholder="Nhập số tiền" min="0">
+            <!-- Tổng kết và thanh toán -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="discountCode" placeholder="Mã giảm giá">
+                                <button type="button" class="btn btn-secondary" onclick="applyDiscount()">
+                                    <i class="fas fa-tag"></i> Áp dụng
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 sticky-total">
+                            <div class="bg-light p-3 rounded">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Tổng tiền:</span>
+                                    <span id="totalAmount">0 ₫</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Giảm giá:</span>
+                                    <span id="discountAmount">0 ₫</span>
+                                </div>
+                                <div class="d-flex justify-content-between fw-bold">
+                                    <span>Thành tiền:</span>
+                                    <span id="finalAmount">0 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-check"></i> Tạo hóa đơn
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div id="serviceList" class="mb-3">
-                <!-- Các dịch vụ sẽ được hiển thị tại đây -->
-            </div>
-            <button type="submit" class="btn btn-primary">Tạo hóa đơn</button>
         </form>
-
-
-    </div>
-    <div class="invoice">
-        <div id="invoiceOutput" class="mt-4">
-       
+        <!-- Kết quả hóa đơn -->
+        <div class="invoice mt-4">
+            <div id="invoiceOutput" class="card">
+                <!-- Nội dung hóa đơn sẽ được render ở đây -->
+            </div>
+            <div class="text-center mt-3">
+                <button id="generateInvoiceBtn" class="btn btn-success btn-lg d-none" onclick="window.print()">
+                    <i class="fas fa-print"></i> In hóa đơn
+                </button>
+            </div>
         </div>
-        <button id="generateInvoiceBtn" class="btn btn-success mt-3 d-none" onclick="window.print()">In hóa đơn</button>
     </div>
-
     <script src="./Asset/main.js"></script>
+
+    <script src="/DATA/Extend/SweetAlert2.js"></script>
 </body>
 
 </html>
