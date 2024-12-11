@@ -97,21 +97,17 @@ body {
 
 /* Dark Mode Theme */
 body.dark-mode {
-    --primary: #D4AF37; /* Vàng kim loại */
-    --secondary: #C0C0C0; /* Bạc */
-    --accent: #8B5C33; /* Đồng */
-    --background: #0A0A0A; /* Đen mờ, cực kỳ tối */
-    --surface: #1C1C1C; /* Màu xám đen tối */
-    --text: #F5F5F5; /* Trắng sáng nhẹ */
-    --border: #333333; /* Màu xám đậm cho viền */
+    --primary: #BB86FC;
+    --secondary: #03DAC5;
+    --accent: #CF6679;
+    --background: #121212;
+    --surface: #1E1E1E;
+    --text: #E5E5E5;
+    --border: #333;
 
     /* Background Card */
-    --background-card-item: #2E2E2E; /* Xám đen nhẹ cho thẻ */
-    
-    /* Optional: Added highlight for luxury */
-    --highlight: #F1C27D; /* Màu da sáng nhẹ, thể hiện sự sang trọng */
+    --background-card-item: #1E1E1E;
 }
-
 
 /* Transition for Dark Mode */
 body.dark-mode {
@@ -681,7 +677,4 @@ button:hover {
 
 .history-item button:hover {
     background: #218838;
-}
-#history {
-    display: none;
 }

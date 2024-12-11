@@ -168,15 +168,6 @@ class CartManager {
             domElements.totalElement.textContent = `${final.toLocaleString()}đ`;
         }
     }
-
-    static getFinalTotal() {
-        const subtotal = cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
-        const discountPercent = Number(domElements.discountPercent?.value) || 0;
-        const discountAmount = Number(domElements.discountAmount?.value) || 0;
-        const percentDiscount = subtotal * (discountPercent / 100);
-        const totalDiscount = percentDiscount + discountAmount;
-        return subtotal - totalDiscount;
-    }
 }
 
 // UI Management
@@ -198,6 +189,7 @@ class UIManager {
             this.showError('Không thể tải dữ liệu sản phẩm');
         }
     }
+
 
     static renderProducts() {
         if (domElements.productsContainer) {
@@ -334,14 +326,15 @@ class BillManager {
 
     static formatDateTime(date) {
         const pad = (num) => String(num).padStart(2, '0');
+
         const hours = pad(date.getHours());
         const minutes = pad(date.getMinutes());
         const day = pad(date.getDate());
         const month = pad(date.getMonth() + 1);
         const year = date.getFullYear();
+
         return `${hours}:${minutes} ${day}/${month}/${year}`;
     }
-
     static printBill() {
         const printWindow = window.open('', '', 'width=80mm');
         if (printWindow) {
@@ -359,7 +352,7 @@ class BillManager {
                             table {
                                 width: 100%;
                                 border-collapse: collapse;
-                                margin: 10px 0;
+                                margin: 15px 0;
                             }
                             th, td {
                                 padding: 8px;
@@ -368,13 +361,10 @@ class BillManager {
                             }
                             .preview-header {
                                 text-align: center;
-                                margin-bottom: 10px;
+                                margin-bottom: 20px;
                             }
-                            .preview-header h3 {
-                                margin: 0px ;
-                            }
-                            .bill-info p{
-                                margin: 5px 0;
+                            .bill-info {
+                                margin: 15px 0;
                             }
                             .bill-summary {
                                 margin-top: 15px;
@@ -390,15 +380,7 @@ class BillManager {
                                 margin-top: 30px;
                             }
                             .preview-table th {
-                                font-size: 14px;
                                 border: 2px solid black ;
-                            }
-                            .preview-table td{
-                                font-size: 13px;
-                            }
-                            .preview-table td:last-child {
-                                text-align: right;
-                                font-weight: bold;
                             }
                         </style>
                     </head>
@@ -417,11 +399,11 @@ class BillManager {
             `);
         }
     }
-
     static generateBillHTML() {
         const customerName = document.getElementById('customer-name')?.value || '';
         const staffName = document.getElementById('staff-name')?.value || '';
-        const paymentMethod = document.getElementById('payment-method')?.value || '';
+        const PaymentMethod = document.getElementById('Payment-method')?.value || '';
+
         const billTime = document.getElementById('bill-time')?.value || this.formatDateTime(new Date());
 
         const subtotal = cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
@@ -430,9 +412,6 @@ class BillManager {
         const percentDiscount = subtotal * (discountPercent / 100);
         const totalDiscount = percentDiscount + discountAmount;
         const total = subtotal - totalDiscount;
-
-        // Tạo chuỗi mô tả cho các sản phẩm
-        const itemsString = cart.map(item => `${item.product} (${item.quantity})`).join(', ');
 
         return `
             <div class="preview-header">
@@ -447,11 +426,11 @@ class BillManager {
                 <p>Thời gian: ${billTime}</p>
                 <p>Khách hàng: ${customerName}</p>
                 <p>Thu ngân: ${staffName}</p>
-                <p>Thanh toán: ${paymentMethod}</p>
+                <p>Thanh toán: ${PaymentMethod}</p>
             </div>
             <table class="preview-table">
                 <tr>
-                    <th>#</th>
+                    <th>STT</th>
                     <th>Dịch vụ</th>
                     <th>SL</th>
                     <th>Đơn giá</th>
@@ -462,8 +441,8 @@ class BillManager {
                         <td>${index + 1}</td>
                         <td>${item.product}</td>
                         <td>${item.quantity}</td>
-                        <td>${(item.price).toLocaleString()}</td>
-                        <td>${(item.quantity * (item.price)).toLocaleString()}</td>
+                        <td>${item.price.toLocaleString()}đ</td>
+                        <td>${(item.quantity * item.price).toLocaleString()}đ</td>
                     </tr>
                 `).join('')}
             </table>
@@ -479,11 +458,21 @@ class BillManager {
     }
 }
 
-{/* <td>${item.price >= 1000000 ? `${(item.price / 1000000).toFixed(1).replace(/\.0$/, '')}M` : `${(item.price / 1000).toFixed(1).replace(/\.0$/, '')}K`}</td>
-<td>${item.quantity * item.price >= 1000000 ? `${((item.quantity * item.price) / 1000000).toFixed(1).replace(/\.0$/, '')}M` : `${((item.quantity * item.price) / 1000).toFixed(1).replace(/\.0$/, '')}K`}</td> */}
+// Initialize application
+document.addEventListener('DOMContentLoaded', () => {
+    UIManager.initialize();
+});
 
-// History Management
-// Lịch sử Hóa đơn
+// Export functions for HTML
+window.POS = {
+    showPreview: () => BillManager.showPreview(),
+    printBill: () => BillManager.printBill(),
+    clearCart: () => CartManager.clearCart()
+};
+
+
+// Lưu lịch sử hoá đơn cục bộ
+// Quản lý lưu trữ hóa đơn
 class HistoryManager {
     static STORAGE_KEY = 'invoice_history';
 
@@ -497,6 +486,23 @@ class HistoryManager {
         return JSON.parse(localStorage.getItem(this.STORAGE_KEY) || '[]');
     }
 
+    static clearHistory() {
+        Swal.fire({
+            title: 'Xác nhận xóa?',
+            text: 'Bạn có chắc muốn xóa toàn bộ lịch sử?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem(this.STORAGE_KEY);
+                this.renderHistory();
+                UIManager.showToast('Đã xóa lịch sử');
+            }
+        });
+    }
+
     static renderHistory() {
         const historyList = document.getElementById('history-list');
         const history = this.getHistory();
@@ -506,98 +512,89 @@ class HistoryManager {
                 <p>Thời gian: ${invoice.datetime}</p>
                 <p>Khách hàng: ${invoice.customer}</p>
                 <p>Thu ngân: ${invoice.cashier}</p>
-                <p>Sản phẩm: ${invoice.items}</p>
-                <p>Thanh toán: ${invoice.payment}</p>
-                <p>Tổng tiền: ${invoice.total}đ</p>
+                <p>Tổng tiền: ${invoice.total.toLocaleString()}đ</p>
                 <button onclick="HistoryManager.viewDetails(${index})">Chi tiết</button>
             </div>
         `).join('');
     }
 
-    static clearHistory() {
-        localStorage.removeItem(this.STORAGE_KEY);
-        this.renderHistory();
-        UIManager.showToast('Đã xóa lịch sử');
+    static downloadAsExcel() {
+        const history = this.getHistory();
+        const ws = XLSX.utils.json_to_sheet(history);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Lịch sử hóa đơn");
+        XLSX.writeFile(wb, "lich-su-hoa-don.xlsx");
     }
 
-    // Tải xuống lịch sử hóa đơn dưới dạng JSON
     static downloadAsJSON() {
         const history = this.getHistory();
-        const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
+        const dataStr = JSON.stringify(history, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'invoice_history.json';
+        a.download = 'lich-su-hoa-don.json';
         a.click();
         URL.revokeObjectURL(url);
-        UIManager.showToast('Đã tải xuống lịch sử hóa đơn dưới dạng JSON.');
-    }
-
-    // Tải xuống lịch sử hóa đơn dưới dạng Excel
-    static downloadAsExcel() {
-        const history = this.getHistory();
-        const worksheet = XLSX.utils.json_to_sheet(history, { header: ["datetime", "customer", "cashier", "items", "payment", "total"] });
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Hóa Đơn");
-        XLSX.writeFile(workbook, "invoice_history.xlsx");
-        UIManager.showToast('Đã tải xuống lịch sử hóa đơn dưới dạng Excel.');
     }
 }
 
-// Lưu hóa đơn vào LocalStorage
+// Sửa đổi hàm lưu hóa đơn
 async function saveInvoice() {
-    const customer = document.getElementById('customer-name').value;
-    const cashier = document.getElementById('staff-name').value;
+    const customer = document.getElementById('customer').value;
+    const cashier = document.getElementById('cashier').value;
 
-    if (!cashier || cart.length === 0) {
+    if (!customer || !cashier || cart.length === 0) {
         UIManager.showToast('Vui lòng điền đầy đủ thông tin và thêm sản phẩm');
         return;
     }
-    console.log(CartManager);
-
-    const itemsString = cart.map(item => `${item.product} (${item.quantity})`).join(', ');
-    const finalTotal = CartManager.getFinalTotal();
 
     const invoiceData = {
-        datetime: new Date().toISOString(),
+        datetime: new Date().toLocaleString(),
         customer: customer,
         cashier: cashier,
-        items: itemsString,
-        total: finalTotal.toLocaleString(),
-        payment: document.getElementById('payment-method').value || 'Chưa xác định'
+        items: cart,
+        total: calculateTotal(),
+        payment: document.getElementById('payment').value
     };
 
-    HistoryManager.saveInvoice(invoiceData); // Lưu vào LocalStorage
-    cart = []; // Xóa giỏ hàng
-    CartManager.saveCart(); // Cập nhật giỏ hàng
-    CartManager.updateDisplay();
-    UIManager.showToast('Đã lưu hóa đơn thành công');
+    try {
+        // Gửi dữ liệu đến Google Sheets Web App
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwZmIBH0YKDq4HZ3stB7HFYTQHvWTxFjtuE9d6KPkaf6X2Kkz46W7pnsJhymeMD9L3loA/exec', {
+            method: 'POST',
+            body: JSON.stringify(invoiceData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            // Lưu vào local storage
+            HistoryManager.saveInvoice(invoiceData);
+
+            // Xóa giỏ hàng
+            cart = [];
+            CartManager.saveCart();
+            CartManager.updateDisplay();
+
+            // Reset form
+            document.getElementById('customer').value = '';
+            document.getElementById('cashier').value = '';
+
+            UIManager.showToast('Đã lưu hóa đơn thành công');
+        } else {
+            throw new Error('Lỗi khi lưu hóa đơn');
+        }
+    } catch (error) {
+        UIManager.showToast('Lỗi: ' + error.message);
+    }
 }
 
-// Initialize application
-document.addEventListener('DOMContentLoaded', () => {
-    UIManager.initialize();
-});
 
-// Export functions for HTML
-window.POS = {
-    showPreview: () => BillManager.showPreview(),
-    printBill: () => BillManager.printBill(),
-    clearCart: () => CartManager.clearCart(),
-    saveInvoice: () => saveInvoice() // Thêm hàm để lưu hóa đơn
-};
-
-// Gọi hàm renderHistory lúc khởi động
-document.addEventListener('DOMContentLoaded', function () {
-    HistoryManager.renderHistory();
-});
-
-// Kiểm tra khi giỏ hàng không trống
-document.addEventListener('DOMContentLoaded', () => {
-    CartManager.loadCart();
-});
+//TAB
+// Quản lý các tab
 function switchTab(tabName) {
-    // Ẩn tất cả nội dung tab
+    // Ẩn tất cả tab content
     const tabContents = document.querySelectorAll('.tab-content');
     tabContents.forEach(tab => tab.style.display = 'none');
 
@@ -607,7 +604,7 @@ function switchTab(tabName) {
 
     // Hiển thị tab được chọn
     document.getElementById(tabName).style.display = 'block';
-
+    
     // Thêm active class cho tab button được chọn
     event.currentTarget.classList.add('active');
 
@@ -617,14 +614,14 @@ function switchTab(tabName) {
     }
 }
 
-// Khởi tạo tab mặc định lúc trang load
-document.addEventListener('DOMContentLoaded', function () {
+// Khởi tạo tab mặc định khi trang load
+document.addEventListener('DOMContentLoaded', function() {
     // Hiển thị tab đầu tiên theo mặc định
     const defaultTab = document.querySelector('.tab-content');
     if (defaultTab) {
         defaultTab.style.display = 'block';
     }
-
+    
     const defaultTabButton = document.querySelector('.tab-button');
     if (defaultTabButton) {
         defaultTabButton.classList.add('active');
