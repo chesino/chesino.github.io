@@ -192,12 +192,43 @@ class UIManager {
 
     static async loadProducts() {
         try {
-            const response = await fetch('./Data/DB-Product.json');
-            products = await response.json();
-            this.renderProducts();
+            const localData = localStorage.getItem('products');
+            if (localData) {
+                products = JSON.parse(localData);
+                this.renderProducts();
+            } else {
+                console.warn('No local data found. Please sync with the server.');
+                this.showError('Không tìm thấy dữ liệu, vui lòng đồng bộ dữ liệu.');
+            }
         } catch (error) {
             console.error('Error loading products:', error);
             this.showError('Không thể tải dữ liệu sản phẩm');
+        }
+    }
+
+    static async syncProducts() {
+        try {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec?token=PRO&sheet=Product');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            const newData = await response.json();
+            const localData = JSON.parse(localStorage.getItem('products')) || [];
+
+            if (JSON.stringify(localData) !== JSON.stringify(newData)) {
+                localStorage.setItem('products', JSON.stringify(newData));
+                console.log('Data synced and updated in localStorage.');
+                this.showToast('Dữ liệu đã được đồng bộ và cập nhật, Vui lòng chờ 3 giây.');
+                setTimeout(() => {
+                    location.reload();
+                }, 3000);
+
+            } else {
+                console.log('Local data is up to date. No changes made.');
+                this.showToast('Dữ liệu đã được đồng bộ, không có thay đổi.');
+            }
+        } catch (error) {
+            console.error('Error syncing products:', error);
+            this.showError('Không thể đồng bộ dữ liệu sản phẩm');
         }
     }
 
@@ -546,20 +577,18 @@ class HistoryManager {
     }
 
     static renderHistory() {
-        const historyList = document.getElementById('history-list');
+        const historyList = document.getElementById('historylist');
         const history = this.getHistory();
-
         historyList.innerHTML = history.map((invoice, index) => `
-            <div class="history-item">
-                <p>Thời gian: ${invoice.datetime}</p>
-                <p>Khách hàng: ${invoice.customer}</p>
-                <p>Thu ngân: ${invoice.cashier}</p>
-                <p>Sản phẩm: ${invoice.items}</p>
-                <p>Thanh toán: ${invoice.payment}</p>
-                <p>Tổng tiền: ${invoice.total}đ</p>
-                <button onclick="HistoryManager.viewDetails(${index})">Chi tiết</button>
-            </div>
-        `).join('');
+        <div class="history-item">
+          <p>Thời gian: ${invoice.datetime}</p>
+          <p>Khách hàng: ${invoice.customer}</p>
+          <p>Thu ngân: ${invoice.cashier}</p>
+          <p>Sản phẩm: ${invoice.items}</p>
+          <p>Thanh toán: ${invoice.payment}</p>
+          <p>Tổng tiền: ${invoice.total}đ</p>
+        </div>
+      `).join('');
     }
 
     static clearHistory() {
@@ -568,7 +597,6 @@ class HistoryManager {
         UIManager.showToast('Đã xóa lịch sử');
     }
 
-    // Tải xuống lịch sử hóa đơn dưới dạng JSON
     static downloadAsJSON() {
         const history = this.getHistory();
         const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
@@ -581,7 +609,6 @@ class HistoryManager {
         UIManager.showToast('Đã tải xuống lịch sử hóa đơn dưới dạng JSON.');
     }
 
-    // Tải xuống lịch sử hóa đơn dưới dạng Excel
     static downloadAsExcel() {
         const history = this.getHistory();
         const worksheet = XLSX.utils.json_to_sheet(history, { header: ["datetime", "customer", "cashier", "items", "payment", "total"] });
@@ -590,37 +617,108 @@ class HistoryManager {
         XLSX.writeFile(workbook, "invoice_history.xlsx");
         UIManager.showToast('Đã tải xuống lịch sử hóa đơn dưới dạng Excel.');
     }
+
+    static printInvoice(datetime, customer, cashier, items, payment, total) {
+        const billHTML = BillManager.generateBillHTML(datetime, customer, cashier, items, payment, total);
+        BillManager.printBill(billHTML);
+    }
+}
+
+async function SendToGoogleSheet(jsonData) {
+    // Định dạng datetime
+    function formatDate(datetime) {
+        const dateObj = new Date(datetime);
+
+        const time = dateObj.toLocaleTimeString("vi-VN", { hour12: false }); // "10:26:53"
+        const date = dateObj.toLocaleDateString("vi-VN"); // "15/12/2024"
+
+        return `${time} ${date}`;
+    }
+
+    // Thay đổi giá trị datetime
+    jsonData.datetime = formatDate(jsonData.datetime);
+
+    // Hàm chuyển JSON sang query string
+    function jsonToQueryString(json) {
+        return Object.keys(json)
+            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
+            .join('&');
+    }
+
+    // Sử dụng hàm
+    const queryString = jsonToQueryString(jsonData);
+
+    // Chuyển đổi jsonData sang query string
+    const formDataString = queryString;
+
+    try {
+        // Gửi request (Thay URL bằng URL Google Apps Script của bạn)
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbzXoV0BNeooHkKGONwtFyfJrdPG_aGKlMWihXzw6f_sLkQoMESSEKw7ahN77J7wFxOO_Q/exec",
+            {
+                redirect: "follow",
+                method: "POST",
+                body: formDataString,
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                }
+            }
+        );
+
+        if (response.ok) {
+            // Xử lý phản hồi thành công
+            console.log("Gửi thành công");
+        } else {
+            throw new Error("Lỗi khi gửi đơn hàng");
+        }
+    } catch (error) {
+        // Xử lý lỗi
+        console.error(error);
+        console.log("Đã xảy ra lỗi trong quá trình gửi dữ liệu");
+    }
 }
 
 // Lưu hóa đơn vào LocalStorage
 async function saveInvoice() {
     const customer = document.getElementById('customer-name').value;
     const cashier = document.getElementById('staff-name').value;
+    const discount = document.getElementById('discount-info').textContent;
+
 
     if (!cashier || cart.length === 0) {
         UIManager.showToast('Vui lòng điền đầy đủ thông tin và thêm sản phẩm');
         return;
     }
-    console.log(CartManager);
 
     const itemsString = cart.map(item => `${item.product} (${item.quantity})`).join(', ');
     const finalTotal = CartManager.getFinalTotal();
-
     const invoiceData = {
         datetime: new Date().toISOString(),
         customer: customer,
         cashier: cashier,
         items: itemsString,
+        discount: discount,
         total: finalTotal.toLocaleString(),
         payment: document.getElementById('payment-method').value || 'Chưa xác định'
     };
 
     HistoryManager.saveInvoice(invoiceData); // Lưu vào LocalStorage
-    cart = []; // Xóa giỏ hàng
+    try {
+        await SendToGoogleSheet(invoiceData);
+    } catch (error) {
+        console.error("Error sending data:", error);
+    }
+    // cart = []; // Xóa giỏ hàng
     CartManager.saveCart(); // Cập nhật giỏ hàng
     CartManager.updateDisplay();
     UIManager.showToast('Đã lưu hóa đơn thành công');
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    UIManager.initialize();
+});
+
+
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
@@ -632,12 +730,16 @@ window.POS = {
     showPreview: () => BillManager.showPreview(),
     printBill: () => BillManager.printBill(),
     clearCart: () => CartManager.clearCart(),
-    saveInvoice: () => saveInvoice() // Thêm hàm để lưu hóa đơn
+    saveInvoice: () => saveInvoice()
 };
 
 // Gọi hàm renderHistory lúc khởi động
 document.addEventListener('DOMContentLoaded', function () {
     HistoryManager.renderHistory();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    CartManager.loadCart();
 });
 
 // Kiểm tra khi giỏ hàng không trống
@@ -676,5 +778,150 @@ document.addEventListener('DOMContentLoaded', function () {
     const defaultTabButton = document.querySelector('.tab-button');
     if (defaultTabButton) {
         defaultTabButton.classList.add('active');
+    }
+});
+
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec/exec?token=PRO&sheet=Customer";
+let customers = [];
+
+// Tải dữ liệu khách hàng từ Google Sheets
+window.addEventListener('load', () => {
+    loadCustomerData();
+});
+
+function loadCustomerData() {
+
+
+    fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+            customers = data;
+            UIManager.showToast('Đã kiểm tra xong hệ thống!');
+            document.getElementById("customer-name").disabled = false; // Mở khoá input tìm kiếm
+        })
+        .catch(error => {
+            document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
+            document.getElementById("customer-name").disabled = false;
+        });
+}
+
+// Tìm kiếm khách hàng
+const input = document.getElementById('customer-name');
+const suggestionsBox = document.getElementById('suggestions');
+
+input.addEventListener('input', () => {
+    const query = input.value.toLowerCase();
+    suggestionsBox.innerHTML = '';
+
+    if (query.trim() === '') {
+        suggestionsBox.style.display = 'none';
+        return;
+    }
+
+    const matches = customers.filter(customer =>
+        customer.Name.toLowerCase().includes(query) ||
+        (customer.Phone && customer.Phone.toString().includes(query))
+    );
+
+    if (matches.length > 0) {
+        matches.forEach(match => {
+            const suggestion = document.createElement('div');
+            suggestion.innerHTML = `
+        <strong>${match.Name}</strong>
+        <span>${match.Sex} | ${match.Role} | ${match.Phone}</span>
+    `;
+            suggestion.addEventListener('click', () => {
+                input.value = match.Name;
+                suggestionsBox.style.display = 'none';
+            });
+            suggestionsBox.appendChild(suggestion);
+        });
+        suggestionsBox.style.display = 'block';
+    } else {
+        // Gợi ý thêm khách hàng mới
+        suggestionsBox.innerHTML = `
+    <div>
+        Không tìm thấy khách hàng.
+        <button id="addNewCustomerBtn">Thêm khách hàng mới</button>
+    </div>
+`;
+        document.getElementById('addNewCustomerBtn').addEventListener('click', showAddCustomerPopup);
+        suggestionsBox.style.display = 'block';
+    }
+});
+
+// Hiển thị SweetAlert2 để thêm khách hàng mới
+function showAddCustomerPopup() {
+    Swal.fire({
+        title: 'Thêm khách hàng mới',
+        html: `
+            <input type="text" id="newCustomerName" class="swal2-input" placeholder="Tên khách hàng">
+            <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại">
+            <input type="email" id="newCustomerEmail" class="swal2-input" placeholder="Email">
+            <input type="number" id="newCustomerAge" class="swal2-input" placeholder="Tuổi">
+            <select  class="swal2-select" name="newCustomerSex" id="newCustomerSex">
+                <option value="Nữ">Nữ</option>
+                <option value="Nam">Nam</option>
+            </select>
+            <input type="text" id="newCustomerSocial" class="swal2-input" placeholder="Mạng xã hội">
+            <input type="text" id="newCustomerAddress" class="swal2-input" placeholder="Địa chỉ">
+            <select  class="swal2-select" name="newCustomerRole" id="newCustomerRole">
+                <option value="Member">Member</option>
+                <option value="VIP">VIP</option>
+            </select>
+            `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: 'Thêm',
+        cancelButtonText: 'Hủy',
+        preConfirm: () => {
+            const newCustomer = {
+                Name: document.getElementById('newCustomerName').value,
+                Phone: document.getElementById('newCustomerPhone').value,
+                Email: document.getElementById('newCustomerEmail').value || '',
+                Age: document.getElementById('newCustomerAge').value || '',
+                Sex: document.getElementById('newCustomerSex').value,
+                Social: document.getElementById('newCustomerSocial').value || '',
+                Adress: document.getElementById('newCustomerAddress').value || '',
+                Role: document.getElementById('newCustomerRole').value,
+                sheetName: "Customer"
+            };
+
+            // Kiểm tra xem các trường có trống không
+            const isValid = Object.values(newCustomer);
+            if (!isValid) {
+                Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin.');
+                return false;
+
+            }
+            return newCustomer;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const newCustomer = result.value;
+
+            // Gửi dữ liệu khách hàng mới vào Google Sheets
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new URLSearchParams(newCustomer)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                    loadCustomerData();
+                })
+                .catch(error => {
+                    // Swal.fire('Lỗi!', 'Có lỗi xảy ra khi thêm khách hàng.', 'error');
+                    Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                });
+        }
+    });
+}
+
+// Đóng hộp gợi ý khi click ra ngoài
+document.addEventListener('click', (event) => {
+    if (!input.contains(event.target) && !suggestionsBox.contains(event.target)) {
+        suggestionsBox.style.display = 'none';
     }
 });

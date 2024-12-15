@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Data Viewer</title>
+</head>
+<body>
+  <h1>Google Sheets Data</h1>
+  <button id="fetchDataBtn">Fetch Data</button>
+  <pre id="output"></pre>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwN4jOLGu56pI8fqCt1sgq7Mf_0SbvIRIzZLNGGpAg2QjuYLpW7_CkxjnHUOo-gKmJoLQ/exec"; // Thay URL web app đã deploy vào đây
+
+    document.getElementById("fetchDataBtn").addEventListener("click", () => {
+      // Làm rỗng nội dung hiển thị
+      document.getElementById("output").textContent = "Loading...";
+      
+      // Gửi yêu cầu GET đến Apps Script
+      fetch(scriptURL)
+        .then(response => response.json()) // Chuyển response thành JSON
+        .then(data => {
+            console.log(data);
+            
+          // Hiển thị dữ liệu JSON được lấy
+          document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          document.getElementById("output").textContent = "Error fetching data.";
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Form</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Thêm khách hàng mới</h2>
+    
+    <label for="Name">Tên:</label>
+    <input type="text" id="Name" required>
+
+    <label for="Phone">Số điện thoại:</label>
+    <input type="text" id="Phone" required>
+
+    <label for="Email">Email:</label>
+    <input type="email" id="Email">
+
+    <label for="Age">Tuổi:</label>
+    <input type="number" id="Age">
+
+    <label for="Sex">Giới tính:</label>
+    <select id="Sex">
+        <option value="nam">Nam</option>
+        <option value="nu">Nữ</option>
+    </select>
+
+    <label for="Social">Mạng xã hội (Facebook, Instagram...):</label>
+    <input type="text" id="Social">
+
+    <label for="Adress">Địa chỉ:</label>
+    <input type="text" id="Adress">
+
+    <label for="Character">Tính cách:</label>
+    <input type="text" id="Character">
+
+    <label for="Point">Điểm:</label>
+    <input type="number" id="Point" value="0">
+
+    <label for="Role">Vai trò:</label>
+    <select id="Role">
+        <option value="Thanh viên">Thành viên</option>
+        <option value="VIP">VIP</option>
+    </select>
+
+    <button id="addCustomerBtn">Thêm khách hàng</button>
+
+    <div id="message" class="message"></div>
+</div>
+
+<script>
+// URL của Google Apps Script
+const scriptURL = "https://script.google.com/macros/s/AKfycbwN4jOLGu56pI8fqCt1sgq7Mf_0SbvIRIzZLNGGpAg2QjuYLpW7_CkxjnHUOo-gKmJoLQ/exec";
+
+// Lắng nghe sự kiện click để thêm khách hàng
+document.getElementById('addCustomerBtn').addEventListener('click', () => {
+    // Lấy giá trị từ các input
+    const newCustomer = {
+        Name: document.getElementById('Name').value,
+        Phone: document.getElementById('Phone').value,
+        Email: document.getElementById('Email').value,
+        Age: document.getElementById('Age').value,
+        Sex: document.getElementById('Sex').value,
+        Social: document.getElementById('Social').value,
+        Adress: document.getElementById('Adress').value,
+        Character: document.getElementById('Character').value,
+        Point: document.getElementById('Point').value,
+        Role: document.getElementById('Role').value,
+        sheetName: "Customer" // Gửi dữ liệu vào sheet "Customer"
+    };
+
+    // Kiểm tra tất cả trường đã được nhập hay chưa
+    if (!newCustomer.Name || !newCustomer.Phone) {
+        document.getElementById('message').textContent = 'Tên và số điện thoại là bắt buộc!';
+        return;
+    }
+
+    // Gửi dữ liệu khách hàng mới vào Google Sheets qua POST request
+    fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams(newCustomer)
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+        document.getElementById('message').textContent = 'Khách hàng mới đã được thêm!';
+        clearForm();  // Dọn sạch form sau khi thêm khách hàng
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('message').textContent = 'Có lỗi xảy ra khi thêm khách hàng!';
+    });
+});
+
+// Hàm dọn sạch form sau khi thêm khách hàng thành công
+function clearForm() {
+    document.getElementById('Name').value = '';
+    document.getElementById('Phone').value = '';
+    document.getElementById('Email').value = '';
+    document.getElementById('Age').value = '';
+    document.getElementById('Sex').value = 'nam';
+    document.getElementById('Social').value = '';
+    document.getElementById('Adress').value = '';
+    document.getElementById('Character').value = '';
+    document.getElementById('Point').value = '0';
+    document.getElementById('Role').value = 'Thanh viên';
+}
+</script>
+
+</body>
+</html>

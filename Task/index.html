@@ -17,23 +17,24 @@
             <h1>Mai Tây <span>Hair Salon</span></h1>
         </div>
 
-        <div class="tab-buttons">
-            <div class="tab-button" onclick="switchTab('pos')">POS</div>
-            <div class="tab-button" onclick="switchTab('history')">Lịch sử hóa đơn</div>
-        </div>
+        <div class="flex">
+            <div class="tab-buttons">
+                <div class="tab-button" onclick="switchTab('pos')">POS</div>
+                <div class="tab-button" onclick="switchTab('history')">Lịch sử</div>
+            </div>
 
-        <div class="style-toggle">
-            <div class="dropdown">
-                <button class="dropbtn" onclick="toggleDropdown()">Choose Style ▼</button>
-                <div class="dropdown-content">
-                    <button onclick="toggleStyle('light')">Light</button>
-                    <button onclick="toggleStyle('dark')">Dark</button>
-                    <button onclick="toggleStyle('dark-luxury')">Dark Luxury</button>
-                    <button onclick="toggleStyle('light-luxury')">Light Luxury</button>
+            <div class="style-toggle">
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleDropdown()">Choose Style ▼</button>
+                    <div class="dropdown-content">
+                        <button onclick="toggleStyle('light')">Light</button>
+                        <button onclick="toggleStyle('dark')">Dark</button>
+                        <button onclick="toggleStyle('dark-luxury')">Dark Luxury</button>
+                        <button onclick="toggleStyle('light-luxury')">Light Luxury</button>
+                    </div>
                 </div>
             </div>
         </div>
-
     </header>
 
     <div class="tab-container">
@@ -41,6 +42,7 @@
             <div class="container">
                 <div class="Scroll">
                     <div class="products" id="products"></div>
+                    <button style="border-radius: 16px;" onclick="UIManager.syncProducts()" ><i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
                 </div>
 
                 <div class="cart">
@@ -69,6 +71,9 @@
                             <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
                                 placeholder="Nhập tên khách hàng">
                         </div>
+                        <div id="suggestions"></div>
+                        <div id="error-message" class="error"></div>
+
                         <div class="input-group">
                             <label>Thu ngân:</label>
                             <select name="staff-name" id="staff-name">
@@ -149,11 +154,12 @@
             <div class="history-controls">
                 <button onclick="HistoryManager.downloadAsExcel()">Tải xuống (Excel)</button>
                 <button onclick="HistoryManager.downloadAsJSON()">Tải xuống (JSON)</button>
-                <button onclick="HistoryManager.clearHistory()">Xóa tất cả</button>
+                <button disabled onclick="HistoryManager.clearHistory()">Xóa tất cả</button>
             </div>
-            <div id="history-list"></div>
+            <div id="historylist"></div>
         </div>
     </div>
+
     <footer class="footer">
         Powered by <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a>
     </footer>

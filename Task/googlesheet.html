@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm khách hàng</title>
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+        /* Một số kiểu cho giao diện */
+        #suggestions {
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            background-color: white;
+            width: 100%;
+            z-index: 100;
+        }
+
+        #suggestions div {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        #suggestions div:hover {
+            background-color: #f0f0f0;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            max-width: 400px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            position: relative;
+            /* Để định vị hộp gợi ý */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .swal2-container input,
+        .swal2-select {
+            margin: 10px 0 !important;
+            width: 100%;
+            border: 2px solid black !important;
+            border-radius: 10px;
+            height: 2.625em;
+            padding: 0 .75em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Tìm kiếm khách hàng</h2>
+
+        <label for="customer-name">Nhập tên khách hàng:</label>
+        <input type="text" id="customer-name" placeholder="Tìm kiếm tên khách hàng..." disabled>
+        <div id="suggestions"></div>
+        <div id="error-message" class="error"></div>
+
+        <div id="output"></div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const scriptURL = "https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec/exec?token=PRO&sheet=Customer";
+        let customers = [];
+
+        // Tải dữ liệu khách hàng từ Google Sheets
+        window.addEventListener('load', () => {
+            loadCustomerData();
+        });
+
+        function loadCustomerData() {
+            document.getElementById("output").textContent = "Loading...";
+
+            fetch(scriptURL)
+                .then(response => response.json())
+                .then(data => {
+                    customers = data;
+                    document.getElementById("output").textContent = JSON.stringify(customers, null, 2);
+                    document.getElementById("customer-name").disabled = false; // Mở khoá input tìm kiếm
+                })
+                .catch(error => {
+                    document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
+                    document.getElementById("customer-name").disabled = false;
+                });
+        }
+
+        // Tìm kiếm khách hàng
+        const input = document.getElementById('customer-name');
+        const suggestionsBox = document.getElementById('suggestions');
+
+        input.addEventListener('input', () => {
+            const query = input.value.toLowerCase();
+            suggestionsBox.innerHTML = '';
+
+            if (query.trim() === '') {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
+
+            const matches = customers.filter(customer =>
+                customer.Name.toLowerCase().includes(query) ||
+                (customer.Phone && customer.Phone.toString().includes(query))
+            );
+
+            if (matches.length > 0) {
+                matches.forEach(match => {
+                    const suggestion = document.createElement('div');
+                    suggestion.innerHTML = `
+                <strong>${match.Name}</strong>
+                <span>${match.Sex} | ${match.Role} | ${match.Phone}</span>
+            `;
+                    suggestion.addEventListener('click', () => {
+                        input.value = match.Name;
+                        suggestionsBox.style.display = 'none';
+                    });
+                    suggestionsBox.appendChild(suggestion);
+                });
+                suggestionsBox.style.display = 'block';
+            } else {
+                // Gợi ý thêm khách hàng mới
+                suggestionsBox.innerHTML = `
+            <div>
+                Không tìm thấy khách hàng.
+                <button id="addNewCustomerBtn">Thêm khách hàng mới</button>
+            </div>
+        `;
+                document.getElementById('addNewCustomerBtn').addEventListener('click', showAddCustomerPopup);
+                suggestionsBox.style.display = 'block';
+            }
+        });
+
+        // Hiển thị SweetAlert2 để thêm khách hàng mới
+        function showAddCustomerPopup() {
+            Swal.fire({
+                title: 'Thêm khách hàng mới',
+                html: `
+                        <input type="text" id="newCustomerName" class="swal2-input" placeholder="Tên khách hàng">
+                        <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại">
+                        <input type="email" id="newCustomerEmail" class="swal2-input" placeholder="Email">
+                        <input type="number" id="newCustomerAge" class="swal2-input" placeholder="Tuổi">
+                        <select  class="swal2-select" name="newCustomerSex" id="newCustomerSex">
+                            <option value="Nữ">Nữ</option>
+                            <option value="Nam">Nam</option>
+                        </select>
+                        <input type="text" id="newCustomerSocial" class="swal2-input" placeholder="Mạng xã hội">
+                        <input type="text" id="newCustomerAddress" class="swal2-input" placeholder="Địa chỉ">
+                        <input type="text" id="newCustomerCharacter" class="swal2-input" placeholder="Tính cách">
+                        <select  class="swal2-select" name="newCustomerRole" id="newCustomerRole">
+                            <option value="Member">Member</option>
+                            <option value="VIP">VIP</option>
+                        </select>
+                    `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'Thêm',
+                cancelButtonText: 'Hủy',
+                preConfirm: () => {
+                    const newCustomer = {
+                        Name: document.getElementById('newCustomerName').value,
+                        Phone: document.getElementById('newCustomerPhone').value,
+                        Email: document.getElementById('newCustomerEmail').value || '',
+                        Age: document.getElementById('newCustomerAge').value || '',
+                        Sex: document.getElementById('newCustomerSex').value,
+                        Social: document.getElementById('newCustomerSocial').value || '',
+                        Adress: document.getElementById('newCustomerAddress').value || '',
+                        Character: document.getElementById('newCustomerCharacter').value || '',
+                        Role: document.getElementById('newCustomerRole').value,
+                        sheetName: "Customer"
+                    };
+
+                    // Kiểm tra xem các trường có trống không
+                    const isValid = Object.values(newCustomer);
+                    if (!isValid) {
+                        Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin.');
+                        return false;
+
+                    }
+                    return newCustomer;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const newCustomer = result.value;
+
+                    // Gửi dữ liệu khách hàng mới vào Google Sheets
+                    fetch(scriptURL, {
+                        method: 'POST',
+                        body: new URLSearchParams(newCustomer)
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                            loadCustomerData();
+                        })
+                        .catch(error => {
+                            // Swal.fire('Lỗi!', 'Có lỗi xảy ra khi thêm khách hàng.', 'error');
+                            Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                            loadCustomerData();
+                        });
+                }
+            });
+        }
+
+        // Đóng hộp gợi ý khi click ra ngoài
+        document.addEventListener('click', (event) => {
+            if (!input.contains(event.target) && !suggestionsBox.contains(event.target)) {
+                suggestionsBox.style.display = 'none';
+            }
+        });
+
+    </script>
+</body>
+
+</html>
