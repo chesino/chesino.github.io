@@ -12,14 +12,31 @@
 </head>
 
 <body class="">
-    <div class="tab-container">
-        <!-- Tab buttons -->
+    <header class="header">
+        <div class="logo">
+            <h1>Mai Tây <span>Hair Salon</span></h1>
+        </div>
+
         <div class="tab-buttons">
             <div class="tab-button" onclick="switchTab('pos')">POS</div>
             <div class="tab-button" onclick="switchTab('history')">Lịch sử hóa đơn</div>
         </div>
 
-        <!-- Tab contents -->
+        <div class="style-toggle">
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()">Choose Style ▼</button>
+                <div class="dropdown-content">
+                    <button onclick="toggleStyle('light')">Light</button>
+                    <button onclick="toggleStyle('dark')">Dark</button>
+                    <button onclick="toggleStyle('dark-luxury')">Dark Luxury</button>
+                    <button onclick="toggleStyle('light-luxury')">Light Luxury</button>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="tab-container">
         <div id="pos" class="tab-content">
             <div class="container">
                 <div class="Scroll">
@@ -27,20 +44,30 @@
                 </div>
 
                 <div class="cart">
-                    <div class="cart-header">
+                    <!-- <div class="cart-header">
                         <h2>Giỏ hàng</h2>
-                    </div>
+                    </div> -->
                     <!-- Các mặt hàng trong giỏ -->
-                    <div id="cart-items"></div>
+                    <div class="cart-items-div">
+                        <div class="cart-items-head">
+                            <p>Tên dịch vụ</p>
+                            <p>SL</p>
+                            <p>Đơn giá</p>
+                        </div>
+                        <div id="cart-items">
+                        </div>
+                    </div>
+
                     <!-- Thông tin hóa đơn -->
                     <div class="bill-info-inputs">
                         <div class="input-group">
                             <label>Thời gian:</label>
-                            <input type="text" id="bill-time" readonly>
+                            <input type="datetime-local" id="bill-time">
                         </div>
                         <div class="input-group">
                             <label>Khách hàng:</label>
-                            <input type="text" id="customer-name" placeholder="Nhập tên khách hàng">
+                            <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
+                                placeholder="Nhập tên khách hàng">
                         </div>
                         <div class="input-group">
                             <label>Thu ngân:</label>
@@ -70,8 +97,8 @@
                     <!-- Phần tổng cộng -->
                     <div class="total">
                         <div class="total-details">
-                            <p>Số lượng sản phẩm: <span id="total-items">0</span></p>
-                            <p>Tổng tiền hàng: <span id="subtotal">0đ</span></p>
+                            <p>Số lượng: <span id="total-items">0</span></p>
+                            <p>Tổng tiền: <span id="subtotal">0đ</span></p>
                             <div id="discount-info"></div>
                             <h3>Thành tiền: <span id="total">0đ</span></h3>
                         </div>
@@ -127,13 +154,13 @@
             <div id="history-list"></div>
         </div>
     </div>
-
-
-
-
+    <footer class="footer">
+        Powered by <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a>
+    </footer>
     <!-- Scripts -->
     <script src="/DATA/Extend/SweetAlert2.js"></script>
     <script src="./Asset/main.js"></script>
+    <script src="./Asset/theme.js"></script>
 </body>
 
 </html>

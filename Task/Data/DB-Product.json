@@ -1,5 +1,10 @@
 [
     {
+        "id": "0",
+        "product": "Khác",
+        "price": 0
+    },
+    {
         "id": "1",
         "product": "Cắt uốn thiết kế tóc ngắn",
         "price": 600000
@@ -127,7 +132,7 @@
     {
         "id": "26",
         "product": "Phục hồi olaplex (60k/1ml)",
-        "price": 60
+        "price": 60000
     },
     {
         "id": "27",

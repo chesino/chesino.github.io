@@ -117,8 +117,10 @@ class CartManager {
                         onchange="CartManager.updateItem(${index}, 'quantity', this.value)">
                     <input type="number" value="${item.price}" 
                         onchange="CartManager.updateItem(${index}, 'price', this.value)">
-                    <span>${(item.quantity * item.price).toLocaleString()}đ</span>
-                    <i class="fas fa-trash" onclick="CartManager.removeItem(${index})"></i>
+                    <div class="end">
+                        <span class="price">${(item.quantity * item.price).toLocaleString()}đ</span>
+                        <i class="fas fa-trash" onclick="CartManager.removeItem(${index})"></i>
+                    </div>
                 </div>
             `).join('');
         }
@@ -202,9 +204,9 @@ class UIManager {
     static renderProducts() {
         if (domElements.productsContainer) {
             domElements.productsContainer.innerHTML = products.map(product => `
-                <div class="product-item" onclick="CartManager.addItem(${JSON.stringify(product).replace(/"/g, "'")})">
+                <div class="service-card" onclick="CartManager.addItem(${JSON.stringify(product).replace(/"/g, "'")})">
                     <h3>${product.product}</h3>
-                    <p>${product.price.toLocaleString()}đ</p>
+                    <p class="price">${product.price.toLocaleString()}đ</p>
                 </div>
             `).join('');
         }
@@ -347,57 +349,97 @@ class BillManager {
         if (printWindow) {
             printWindow.document.write(`
                 <html>
-                    <head>
+                   <head>
                         <title>In hóa đơn</title>
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
                         <style>
-                            body { 
-                                font-family: Arial, sans-serif;
-                                padding: 20px;
-                                max-width: 80mm;
+                            body {
+                                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                                padding: 0 10px;
+                                width: 80mm;
                                 margin: 0 auto;
                             }
+
                             table {
                                 width: 100%;
                                 border-collapse: collapse;
                                 margin: 10px 0;
                             }
-                            th, td {
-                                padding: 8px;
+
+                            th,
+                            td {
+                                padding: 8px 2px;
                                 text-align: left;
                                 border-bottom: 1px solid #ddd;
                             }
+
                             .preview-header {
                                 text-align: center;
                                 margin-bottom: 10px;
                             }
-                            .preview-header h3 {
-                                margin: 0px ;
+
+                            .preview-header h2,
+                            .preview-header h3,
+                            .preview-header p {
+                                margin: 0px;
                             }
-                            .bill-info p{
+
+                            .bill-info p {
+                                font-size: 14px;
                                 margin: 5px 0;
                             }
+
                             .bill-summary {
                                 margin-top: 15px;
                                 text-align: right;
                             }
+
                             .total {
                                 font-weight: bold;
                                 font-size: 1.2em;
                                 margin-top: 10px;
                             }
+
                             .bill-footer {
                                 text-align: center;
-                                margin-top: 30px;
+                                margin-top: 20px;
                             }
+                            .bill-footer p {
+                                margin: 10px ;
+                            }
+
                             .preview-table th {
-                                font-size: 14px;
-                                border: 2px solid black ;
-                            }
-                            .preview-table td{
                                 font-size: 13px;
+                                border: 2px solid black;
                             }
+
+                            .preview-table td {
+                                font-size: 14px;
+                            }
+
                             .preview-table td:last-child {
                                 text-align: right;
+                                font-weight: bold;
+                            }
+                            .info-Salon {
+                                margin-top: 5px;
+                                padding: 0 10px;
+                            }
+                            .info-Salon .flex {
+                                display: flex;
+                                justify-content: space-between;
+                                font-weight: 500;
+                            }
+                            .info-Salon i {
+                                font-size: 16px;
+                            }
+                            .info-Salon .location {
+                                font-size: 14px;
+                                text-align: left;
+                                margin-bottom: 3px;
+                            }
+                            .Hunq {
+                                font-size: 12px;
                                 font-weight: bold;
                             }
                         </style>
@@ -406,17 +448,15 @@ class BillManager {
                         ${this.generateBillHTML()}
                         <script>
                             window.onload = function() { 
-                                window.print();
-                                window.onfocus = function() { 
-                                    window.close(); 
-                                }
-                            }
+                               window.print();
+                            };
                         </script>
                     </body>
                 </html>
             `);
         }
     }
+
 
     static generateBillHTML() {
         const customerName = document.getElementById('customer-name')?.value || '';
@@ -435,11 +475,19 @@ class BillManager {
         const itemsString = cart.map(item => `${item.product} (${item.quantity})`).join(', ');
 
         return `
+            <head>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            </head>
             <div class="preview-header">
-                <img src="./Asset/Logo.png" alt="Logo" style="width: 100px">
-                <h2>ABC Hair Salon</h2>
-                <p>Việt Nam</p>
-                <p>0912.123.123</p>
+                <img src="./Asset/Logo.png" alt="Logo" style="width: 120px">
+                <h2>Mai Tây Hair Salon</h2>
+                <div class="info-Salon">
+                    <p class="location"><i class="fa-solid fa-location-dot"></i> 4A Hiền Hoà, Phước Thái, Long Thành, ĐN</p>
+                    <div class="flex">
+                        <p><i class="fa-brands fa-facebook"></i> MaiTayHairSalon</p>
+                        <p><i class="fa-solid fa-phone"></i> 0938123962</p>
+                    </div>
+                </div>
                 <hr>
                 <h3>HOÁ ĐƠN THANH TOÁN</h3>
             </div>
@@ -472,8 +520,8 @@ class BillManager {
                 ${totalDiscount > 0 ? `<p>Chiết khấu: ${totalDiscount.toLocaleString()}đ</p>` : ''}
                 <p class="total">Tổng tiền: ${total.toLocaleString()}đ</p>
             </div>
-            <div class="bill-footer">
-                <p>Cảm ơn quý khách!</p>
+             <div class="bill-footer">
+                <p class="Hunq">Powered by Đinh Mạnh Hùng</p>
             </div>
         `;
     }
