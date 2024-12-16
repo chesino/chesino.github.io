@@ -652,7 +652,7 @@ class BillManager {
                             margin: 0;
                         }
                         .Banking .alert {
-                            font-size: 10px;
+                            font-size: 12px;
                             font-weight: normal;
                         }
                         .Banking h1 {
