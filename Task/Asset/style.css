@@ -41,6 +41,36 @@ h3 {
     --text-color: #fff;
 }
 
+.xmas {
+    --background-color: #F1F1F1;
+    /* Màu nền sáng để tạo cảm giác ấm áp */
+    --card-bg: #FFFFFF;
+    /* Màu trắng cho thẻ */
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    /* Đổ bóng nhẹ cho thẻ */
+    --price-color: #D32F2F;
+    /* Màu đỏ rực rỡ cho giá */
+    --button-bg: #388E3C;
+    /* Màu xanh lá cây đậm cho nút bấm */
+    --button-hover-bg: #2C6F2F;
+    /* Màu xanh lá cây đậm hơn khi hover */
+    --text-color: #212121;
+    /* Màu chữ tối */
+    --accent-color: #FBC02D;
+    /* Màu vàng cho những điểm nhấn */
+}
+
+.xmas .header {
+    background-color: var(--price-color);
+    color: var(--background-color);
+}
+.xmas .tab-button {
+    color: var(--price-color);
+}
+.xmas button {
+    background-color: var(--price-color);
+    color: var(--background-color);
+}
 /* Dark Luxury Style */
 .dark-luxury {
     --background-color: #161414;

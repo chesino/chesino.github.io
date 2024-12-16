@@ -29,9 +29,9 @@
 </head>
 
 <body class="">
-  
+
     <header class="header">
-      
+
         <div class="logo">
             <h1>Mai Tây <span>Hair Salon</span></h1>
         </div>
@@ -40,8 +40,9 @@
             <div class="tab-buttons">
                 <div class="flex">
                     <div class="tab-button" onclick="switchTab('pos')"><i class="fa-solid fa-receipt"></i></div>
-                    <div class="tab-button" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i>
-                    </div>
+                    <div class="tab-button" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="tab-button" onclick="switchTab('setting')"><i class="fa-solid fa-gear"></i></div>
+                    
                 </div>
 
             </div>
@@ -52,7 +53,7 @@
                     <div class="dropdown-content">
                         <button onclick="toggleStyle('light')">Light</button>
                         <button onclick="toggleStyle('dark')">Dark</button>
-                        <button onclick="toggleStyle('dark-luxury')">Dark Luxury</button>
+                        <button onclick="toggleStyle('xmas')">Noel</button>
                         <button onclick="toggleStyle('light-luxury')">Light Luxury</button>
                     </div>
                 </div>
@@ -175,6 +176,7 @@
         </div>
 
         <div id="history" class="tab-content">
+
             <div class="history-controls">
                 <button onclick="HistoryManager.downloadAsExcel()">Tải xuống (Excel)</button>
                 <button onclick="HistoryManager.downloadAsJSON()">Tải xuống (JSON)</button>
@@ -182,8 +184,15 @@
             </div>
             <div id="historylist"></div>
         </div>
+
+        <div id="setting" class="tab-content">
+            <div class="control">
+                <button id="sync-customers" onclick="loadCustomerData()">Đồng Bộ Khách Hàng</button>
+            </div>
+        </div>
+
     </div>
-    <button id="sync-customers" onclick="loadCustomerData()">Đồng Bộ Khách Hàng</button>
+
 
 
     <footer class="footer">
