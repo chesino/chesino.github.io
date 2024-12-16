@@ -40,9 +40,10 @@
             <div class="tab-buttons">
                 <div class="flex">
                     <div class="tab-button" onclick="switchTab('pos')"><i class="fa-solid fa-receipt"></i></div>
-                    <div class="tab-button" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="tab-button" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
                     <div class="tab-button" onclick="switchTab('setting')"><i class="fa-solid fa-gear"></i></div>
-                    
+
                 </div>
 
             </div>
@@ -64,11 +65,8 @@
     <div class="tab-container">
         <div id="pos" class="tab-content">
             <div class="container">
-                <div class="Scroll">
-                    <div class="products" id="products"></div>
-                    <button style="border-radius: 16px;" onclick="UIManager.syncProducts()"><i
-                            class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
-                </div>
+                <div class="products" id="products"></div>
+
 
                 <div class="cart">
                     <!-- <div class="cart-header">
@@ -77,7 +75,7 @@
                     <!-- Các mặt hàng trong giỏ -->
                     <div class="cart-items-div">
                         <div class="cart-items-head">
-                            <p>Tên dịch vụ</p>
+                            <p>Dịch vụ</p>
                             <p>SL</p>
                             <p>Đơn giá</p>
                         </div>
@@ -86,69 +84,76 @@
                     </div>
 
                     <!-- Thông tin hóa đơn -->
-                    <div class="bill-info-inputs">
-                        <div class="input-group">
-                            <label>Thời gian:</label>
-                            <input type="datetime-local" id="bill-time">
-                        </div>
-                        <div class="input-group">
-                            <label>Khách hàng:</label>
-                            <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
-                                placeholder="Nhập tên khách hàng">
-                        </div>
-                        <div id="suggestions"></div>
-                        <div id="error-message" class="error"></div>
+                    <div class="Two">
+                        <div class="bill-info-inputs">
+                            <div class="input-group">
+                                <label>Thời gian:</label>
+                                <input type="datetime-local" id="bill-time" readonly>
+                            </div>
+                            <div class="input-group">
+                                <label>Khách hàng:</label>
+                                <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
+                                    placeholder="Nhập tên khách hàng">
+                            </div>
+                            <div id="suggestions"></div>
+                            <div id="error-message" class="error"></div>
 
-                        <div class="input-group">
-                            <label>Thu ngân:</label>
-                            <select name="staff-name" id="staff-name">
-                                <option value="Chủ tiệm">Chủ tiệm</option>
-                                <option value="NV1">NV1</option>
-                                <option value="NV2">NV2</option>
-                            </select>
+                            <div class="input-group">
+                                <label>Thu ngân:</label>
+                                <select name="staff-name" id="staff-name">
+                                    <option value="Chủ tiệm">Chủ tiệm</option>
+                                    <option value="NV1">NV1</option>
+                                    <option value="NV2">NV2</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Thanh toán:</label>
+                                <select name="payment method" id="payment-method">
+                                    <option value="Tiền mặt">Tiền mặt</option>
+                                    <option value="Chuyển khoản">Chuyển khoản</option>
+                                </select>
+                            </div>
+                            <!-- Phần chiết khấu -->
+                            <div class="input-group">
+                                <label>Chiết khấu:</label>
+                                <input type="number" id="discount" min="0" max="100" placeholder="%"
+                                    onchange="updateTotal()">
+                                <input type="number" id="discountAmount" min="0" placeholder="Số tiền"
+                                    onchange="updateTotal()">
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label>Thanh toán:</label>
-                            <select name="payment method" id="payment-method">
-                                <option value="Tiền mặt">Tiền mặt</option>
-                                <option value="Chuyển khoản">Chuyển khoản</option>
-                            </select>
-                        </div>
-                        <!-- Phần chiết khấu -->
-                        <div class="input-group">
-                            <label>Chiết khấu:</label>
-                            <input type="number" id="discount" min="0" max="100" placeholder="%"
-                                onchange="updateTotal()">
-                            <input type="number" id="discountAmount" min="0" placeholder="Số tiền"
-                                onchange="updateTotal()">
+
+                        <!-- Phần tổng cộng -->
+                        <div class="End">
+                            <div class="total">
+                                <div class="total-details">
+                                    <p>Số lượng: <span id="total-items">0</span></p>
+                                    <p>Tổng tiền: <span id="subtotal">0đ</span></p>
+                                    <div id="discount-info"></div>
+                                    <h3>Thành tiền: <span id="total">0đ</span></h3>
+                                </div>
+                            </div>
+
+                            <!-- Các nút chức năng -->
+                            <div class="cart-actions">
+                                <button onclick="CartManager.clearCart()" class="clear-cart-btn">
+                                    <i class="fas fa-trash"></i> Xóa giỏ hàng
+                                </button>
+                                <!-- <button onclick="BillManager.showPreview()" class="preview-btn">
+                                    <i class="fas fa-eye"></i> Xem trước
+                                </button> -->
+                                <button onclick="BillManager.printBill()" class="print-btn">
+                                    <i class="fas fa-print"></i> In hóa đơn
+                                </button>
+                                <button class="sync-data-btn" onclick="saveInvoice()">
+                                    <i class="fas fa-save"></i> Lưu hoá đơn
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Phần tổng cộng -->
-                    <div class="total">
-                        <div class="total-details">
-                            <p>Số lượng: <span id="total-items">0</span></p>
-                            <p>Tổng tiền: <span id="subtotal">0đ</span></p>
-                            <div id="discount-info"></div>
-                            <h3>Thành tiền: <span id="total">0đ</span></h3>
-                        </div>
-                    </div>
 
-                    <!-- Các nút chức năng -->
-                    <div class="cart-actions">
-                        <button onclick="CartManager.clearCart()" class="clear-cart-btn">
-                            <i class="fas fa-trash"></i> Xóa giỏ hàng
-                        </button>
-                        <button onclick="BillManager.showPreview()" class="preview-btn">
-                            <i class="fas fa-eye"></i> Xem trước
-                        </button>
-                        <button onclick="BillManager.printBill()" class="print-btn">
-                            <i class="fas fa-print"></i> In hóa đơn
-                        </button>
-                        <button class="sync-data-btn" onclick="saveInvoice()">
-                            <i class="fas fa-save"></i> Lưu hoá đơn
-                        </button>
-                    </div>
+
                 </div>
             </div>
 
@@ -162,7 +167,7 @@
             <div class="cart-overlay"></div>
 
             <!-- Modal xem trước hóa đơn -->
-            <div id="preview-modal" class="modal">
+            <!-- <div id="preview-modal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal">&times;</span>
                     <div id="print-preview"></div>
@@ -172,7 +177,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div id="history" class="tab-content">
@@ -188,6 +193,8 @@
         <div id="setting" class="tab-content">
             <div class="control">
                 <button id="sync-customers" onclick="loadCustomerData()">Đồng Bộ Khách Hàng</button>
+                <button onclick="UIManager.syncProducts()">
+                    <i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
             </div>
         </div>
 
@@ -202,7 +209,7 @@
     <script src="/DATA/Extend/SweetAlert2.js"></script>
     <!-- <script src="./Asset/main.js"></script> -->
     <script src="./Asset/mainPRO.js"></script>
-    <!-- <script src="./Asset/Sync.js"></script> -->
+    <script src="./Asset/Sync.js"></script>
     <script src="./Asset/theme.js"></script>
 </body>
 

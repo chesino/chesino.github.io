@@ -14,7 +14,7 @@ function loadCustomerData() {
             if (localDataArray.length === 0) {
                 customers = data;
                 localStorage.setItem("customers", JSON.stringify(customers));
-                UIManager.showToast('Đã tải dữ liệu từ Google Sheets và lưu vào localStorage.');
+                UIManager.showToast('Đã đồng bộ khách hàng.');
             } else {
                 // So sánh giữa localStorage và dữ liệu từ Google Sheets
                 const isSameData = JSON.stringify(localDataArray) === JSON.stringify(data);
@@ -38,6 +38,7 @@ function loadCustomerData() {
             document.getElementById("customer-name").disabled = false;
         });
 }
+
 
 // Thêm sự kiện để gọi loadCustomerData khi nhấn nút "Đồng Bộ Khách Hàng"
 const syncButton = document.getElementById("sync-customers");
@@ -67,15 +68,14 @@ input.addEventListener('input', () => {
         customer.Name.toLowerCase().includes(query) ||
         (0 + customer.Phone && (0 + customer.Phone).toString().includes(query)),
     );
-    
-    
+
 
     if (matches.length > 0) {
         matches.forEach(match => {
             const suggestion = document.createElement('div');
             suggestion.innerHTML = `
-                <strong>${match.Name}</strong>
-                <span>${match.Sex} | ${match.Role} | 0${match.Phone}</span>
+                <h1>${match.Name}</h1>
+                <p> 0${match.Phone} - ${match.Role} - ${match.Birthday} </p>
             `;
             suggestion.addEventListener('click', () => {
                 input.value = match.Name + " [***" + match.Phone.slice(-2) + ']';
@@ -104,11 +104,10 @@ function showAddCustomerPopup() {
     Swal.fire({
         title: 'Thêm khách hàng mới',
         html: `
-                    <button onclick="GetSDT()">PP</button>
             <input type="text" id="newCustomerName" class="swal2-input" placeholder="Tên khách hàng">
-            <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại (có thể bắt đầu bằng 0)">
+            <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại">
             <input type="email" id="newCustomerEmail" class="swal2-input" placeholder="Email">
-            <input type="number" id="newCustomerAge" class="swal2-input" placeholder="Tuổi">
+            <input type="date" id="newCustomerBirthday" class="swal2-input" placeholder="Ngày sinh">
             <select class="swal2-select" name="newCustomerSex" id="newCustomerSex">
                 <option value="Nữ">Nữ</option>
                 <option value="Nam">Nam</option>
@@ -132,7 +131,7 @@ function showAddCustomerPopup() {
                 Name: newCustomerName,
                 Phone: newCustomerPhone, // Giữ nguyên số điện thoại, bao gồm cả số 0
                 Email: document.getElementById('newCustomerEmail').value || '',
-                Age: document.getElementById('newCustomerAge').value || '',
+                Birthday: document.getElementById('newCustomerBirthday').value || '',
                 Sex: document.getElementById('newCustomerSex').value,
                 Social: document.getElementById('newCustomerSocial').value || '',
                 Address: document.getElementById('newCustomerAddress').value || '',
@@ -160,7 +159,8 @@ function showAddCustomerPopup() {
                     loadCustomerData(); // Tải lại dữ liệu khách hàng
                 })
                 .catch(error => {
-                    Swal.fire('Thất bại!', 'Không thể thêm khách hàng!', 'error');
+                    Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                    loadCustomerData(); // Tải lại dữ liệu khách hàng
                 });
         }
     });

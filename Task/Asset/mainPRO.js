@@ -197,7 +197,8 @@ class UIManager {
                 this.renderProducts();
             } else {
                 console.warn('No local data found. Please sync with the server.');
-                this.showError('Không tìm thấy dữ liệu, vui lòng đồng bộ dữ liệu.');
+                UIManager.syncProducts();
+                // this.showError('Không tìm thấy dữ liệu, vui lòng đồng bộ dữ liệu.');
             }
         } catch (error) {
             console.error('Error loading products:', error);
@@ -383,117 +384,37 @@ class BillManager {
     }
 
     static printBill() {
-        const printWindow = window.open('', '', 'width=80mm');
+        const printWindow = window.open('', '', 'width=500,height=1000,scrollbars=yes');
+
         if (printWindow) {
             printWindow.document.write(`
                 <html>
-                   <head>
+                    <head>
                         <title>In hóa đơn</title>
                         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
                         <style>
-                            body {
-                                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-                                padding: 0 10px;
-                                width: 80mm;
-                                margin: 0 auto;
-                            }
-
-                            table {
-                                width: 100%;
-                                border-collapse: collapse;
-                                margin: 10px 0;
-                            }
-
-                            th,
-                            td {
-                                padding: 8px 2px;
-                                text-align: left;
-                                border-bottom: 1px solid #ddd;
-                            }
-
-                            .preview-header {
-                                text-align: center;
-                                margin-bottom: 10px;
-                            }
-
-                            .preview-header h2,
-                            .preview-header h3,
-                            .preview-header p {
-                                margin: 0px;
-                            }
-
-                            .bill-info p {
-                                font-size: 14px;
-                                margin: 5px 0;
-                            }
-
-                            .bill-summary {
-                                margin-top: 15px;
-                                text-align: right;
-                            }
-
-                            .total {
-                                font-weight: bold;
-                                font-size: 1.2em;
-                                margin-top: 10px;
-                            }
-
-                            .bill-footer {
-                                text-align: center;
-                                margin-top: 20px;
-                            }
-                            .bill-footer p {
-                                margin: 10px ;
-                            }
-
-                            .preview-table th {
-                                font-size: 13px;
-                                border: 2px solid black;
-                            }
-
-                            .preview-table td {
-                                font-size: 14px;
-                            }
-
-                            .preview-table td:last-child {
-                                text-align: right;
-                                font-weight: bold;
-                            }
-                            .info-Salon {
-                                margin-top: 5px;
-                                padding: 0 10px;
-                            }
-                            .info-Salon .flex {
-                                display: flex;
-                                justify-content: space-between;
-                                font-weight: 500;
-                            }
-                            .info-Salon i {
-                                font-size: 16px;
-                            }
-                            .info-Salon .location {
-                                font-size: 14px;
-                                text-align: left;
-                                margin-bottom: 3px;
-                            }
-                            .Hunq {
-                                font-size: 12px;
-                                font-weight: bold;
-                            }
+                            /* Your existing CSS styles here */
                         </style>
                     </head>
                     <body>
                         ${this.generateBillHTML()}
                         <script>
-                            window.onload = function() { 
-                               window.print();
+                            window.onload = function() {
+                                setTimeout(function() {
+                                
+                                    window.print();
+                                    window.close(); // Optionally close the print window afterward
+                                    alert("Nhớ lưu hoá đơn");
+                                }, 500); // Adjust timeout as necessary
                             };
                         </script>
                     </body>
                 </html>
             `);
+            printWindow.document.close(); // Close the document stream after writing
         }
     }
+
 
     static generateBillHTML() {
         const customerName = document.getElementById('customer-name')?.value || '';
@@ -740,6 +661,7 @@ class HistoryManager {
         const history = this.getHistory();
         history.push(invoiceData);
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(history));
+        cart = [];
     }
 
     static getHistory() {
@@ -846,12 +768,16 @@ async function SendToGoogleSheet(jsonData) {
 
 // Lưu hóa đơn vào LocalStorage
 async function saveInvoice() {
+    const saveButton = document.querySelector('.sync-data-btn');
+    saveButton.disabled = true; // Vô hiệu hóa nút
+
     const customer = document.getElementById('customer-name').value;
     const cashier = document.getElementById('staff-name').value;
     const discount = document.getElementById('discount-info').textContent;
 
     if (!cashier || cart.length === 0) {
-        UIManager.showToast('Vui lòng điền đầy đủ thông tin và thêm sản phẩm');
+        UIManager.showError('Vui lòng điền đầy đủ thông tin và thêm sản phẩm');
+        saveButton.disabled = false; // Kích hoạt lại nút
         return;
     }
 
@@ -864,18 +790,25 @@ async function saveInvoice() {
         items: itemsString,
         discount: discount,
         total: finalTotal.toLocaleString(),
-        payment: document.getElementById('payment-method').value || 'Chưa xác định'
+        payment: document.getElementById('payment-method').value || 'Chưa xác định',
     };
 
     HistoryManager.saveInvoice(invoiceData); // Lưu vào LocalStorage
+
     try {
         await SendToGoogleSheet(invoiceData);
     } catch (error) {
         console.error("Error sending data:", error);
     }
+
     CartManager.saveCart(); // Cập nhật giỏ hàng
     CartManager.updateDisplay();
     UIManager.showToast('Đã lưu hóa đơn thành công');
+
+    setTimeout(() => {
+        saveButton.disabled = false; // Kích hoạt lại nút sau khi hoàn thành
+    }, 1000);
+  
 }
 
 // Initialize application
@@ -920,3 +853,4 @@ document.addEventListener('DOMContentLoaded', function () {
         defaultTabButton.classList.add('active');
     }
 });
+

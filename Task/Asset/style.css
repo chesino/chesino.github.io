@@ -64,13 +64,16 @@ h3 {
     background-color: var(--price-color);
     color: var(--background-color);
 }
+
 .xmas .tab-button {
     color: var(--price-color);
 }
+
 .xmas button {
     background-color: var(--price-color);
     color: var(--background-color);
 }
+
 /* Dark Luxury Style */
 .dark-luxury {
     --background-color: #161414;
@@ -157,13 +160,14 @@ h3 {
 
 .style-toggle .dropbtn {
     text-transform: capitalize;
-    padding: 10px;
+    height: 40px;
+    padding: 5px;
     cursor: pointer;
     border: none;
     border-radius: 10px;
     background: var(--card-bg);
-    border: 2px solid var(--background-color);
-    color: var(--text-color);
+    border: 2px solid var(--primary);
+    color: var(--primary);
     transition: all 0.3s ease;
     margin: auto;
 }
@@ -214,6 +218,7 @@ h3 {
 
 .header {
     justify-content: space-between;
+    color: var(--primary);
     background-color: var(--card-bg);
     width: 100%;
     z-index: 99;
@@ -245,7 +250,7 @@ h3 {
 .tab-buttons .flex {
     display: flex;
     align-items: center;
-    border: 2px solid var(--background-color);
+    border: 2px solid var(--primary);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -265,7 +270,9 @@ h3 {
 }
 
 .tab-content {
+    display: none;
     border-radius: 0 0 5px 5px;
+    padding: 20px;
 }
 
 
@@ -383,22 +390,10 @@ body {
 
 
 
-
-/* Layout */
 .container {
-    min-height: 100vh;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    padding: 10px;
-    padding-bottom: 50px;
 }
 
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* Products Grid */
 .products {
@@ -410,14 +405,8 @@ body {
 
 
 /* Cart Styles */
-.cart {
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius-lg);
-    padding: 20px;
-    position: sticky;
-    top: var(--spacing-md);
-    margin: 10px;
-}
+
+
 
 .cart h2 {
     color: var(--primary);
@@ -428,6 +417,9 @@ body {
 
 .cart-items-div {
     margin-bottom: var(--spacing-sm);
+    height: calc(100%);
+    overflow: auto;
+    margin-right: 10px;
 }
 
 .cart-items-head {
@@ -453,6 +445,7 @@ body {
 
 .cart-item input {
     font-size: 16px;
+    font-weight: bold;
     padding: var(--spacing-sm);
     border: 2px solid var(--text-color);
     border-radius: 5px;
@@ -497,9 +490,16 @@ body {
     font-size: 1.2rem;
 }
 
+
+.sync-data-btn {
+    background-color: rgb(31, 170, 31);
+    padding: 15px;
+}
+
 button {
+    font-size: 18px;
     width: 100%;
-    padding: var(--spacing-md);
+    padding: 15px;
     margin-top: var(--spacing-sm);
     border: none;
     border-radius: var(--border-radius-md);
@@ -508,6 +508,13 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+button:disabled,
+button[disabled] {
+    border: 1px solid #999999 !important;
+    background-color: #cccccc !important;
+    color: #666666 !important;
 }
 
 button:hover {
@@ -554,6 +561,37 @@ button:hover {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    .cart-toggle {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: white;
+        box-shadow: var(--shadow-lg);
+        z-index: 1000;
+        border: none;
+        cursor: pointer;
+    }
+
+    .cart-toggle .cart-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--accent);
+        color: white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .header {
         position: fixed;
     }
@@ -582,7 +620,6 @@ button:hover {
 
     .products {
         gap: 10px;
-        padding: 10px;
     }
 
     .container {
@@ -692,15 +729,15 @@ button:hover {
 }
 
 
-/* Mobile Cart Toggle Button */
 .cart-toggle {
+    font-size: 30px;
     display: none;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    bottom: 40px;
+    right: 40px;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
     background-color: var(--primary);
     color: white;
     box-shadow: var(--shadow-lg);
@@ -711,13 +748,13 @@ button:hover {
 
 .cart-toggle .cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: var(--accent);
+    top: -15px;
+    right: -15px;
+    background-color: var(--primary);
     color: white;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
     font-size: 12px;
     display: flex;
     align-items: center;
@@ -725,55 +762,60 @@ button:hover {
 }
 
 /* Mobile Cart Styles */
-@media (max-width: 768px) {
-    .cart-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.cart-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .cart {
-        margin: 10px;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: calc(100% - 20px);
-        height: 88vh;
-        max-width: 100%;
-        transition: right 0.3s ease;
-        z-index: 999;
-        overflow-y: auto;
-    }
+.cart {
+    position: fixed;
+    bottom: -100%;
+    right: 0;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: var(--border-radius-lg);
+    max-width: 100%;
+    transition: bottom 0.5s ease;
+    z-index: 999;
+    overflow-y: auto;
+    margin: 20px;
+    display: grid;
+    padding: 20px;
+    grid-template-columns: auto 40%;
+    background-color: var(--card-bg);
+}
 
-    .cart.active {
-        right: 0;
-    }
 
-    .cart-close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: none;
-        border: none;
-        color: var(--text);
-        width: auto;
-        padding: 10px;
-    }
+.cart.active {
+    bottom: 0;
+    left: 0;
+}
 
-    .cart-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 998;
-    }
+.cart-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text);
+    width: auto;
+    padding: 10px;
+}
 
-    .cart-overlay.active {
-        display: block;
-    }
+.cart-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+.cart-overlay.active {
+    display: block;
 }
 
 
@@ -795,7 +837,7 @@ button:hover {
 .clear-cart-btn {
     background-color: #ff4444;
     color: white;
-    padding: var(--spacing-md);
+    padding: 10px;
     border: none;
     border-radius: var(--border-radius-md);
     cursor: pointer;
@@ -890,6 +932,7 @@ button:hover {
 .print-btn {
     background-color: #007bff;
     color: white;
+    padding: 10px;
 }
 
 .print-btn:hover {
@@ -927,15 +970,9 @@ button:hover {
     margin-top: 10px;
 }
 
-.Scroll {
-    padding-right: 5px;
-    display: block;
-    height: 100%;
-}
 
 .bill-info-inputs {
-    margin-top: 20px;
-    border: 2px solid #dc3545;
+    color: #000;
     padding: 10px;
     border-radius: 10px;
 }
@@ -1007,7 +1044,7 @@ button:hover {
 }
 
 #suggestions {
-    border: 1px solid #ccc;
+    border: 2px solid var(--primary);
     max-height: 200px;
     overflow-y: auto;
     display: none;
@@ -1021,18 +1058,27 @@ button:hover {
 }
 
 #suggestions div {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 10px;
     padding: 8px;
     cursor: pointer;
 }
-
+#suggestions div h1 {
+    font-size: 18px;
+}
+#suggestions div p {
+    font-size: 12px;
+}
 #suggestions div:hover {
-    background-color: #f0f0f0;
+    background-color: var(--background);
 }
 
 #addNewCustomerBtn {
-    background-color: var(--primary);
+    margin-top: 0;
     padding: 10px;
-
+    background-color: var(--primary);
 }
 
 .swal2-input,
@@ -1052,15 +1098,19 @@ button:hover {
 }
 
 .swal2-actions button {
-    border-radius: 10px;
+    border-radius: 10px !important;
+    padding: 15px;
 }
 
 .swal2-actions button:first-child {
     background-color: var(--primary) !important;
     border-radius: 10px;
-    padding: 15px;
+
 }
 
 .swal2-content {
     padding: 10px 20px !important;
+}
+.swal2-html-container {
+    padding: 0;
 }
