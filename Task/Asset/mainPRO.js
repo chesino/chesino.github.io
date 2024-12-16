@@ -137,7 +137,6 @@ class CartManager {
     }
 
     static calculateTotal() {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         const subtotal = cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
         const discountPercent = Number(domElements.discountPercent?.value) || 0;
         const discountAmount = Number(domElements.discountAmount?.value) || 0;
@@ -221,7 +220,6 @@ class UIManager {
                 setTimeout(() => {
                     location.reload();
                 }, 3000);
-
             } else {
                 console.log('Local data is up to date. No changes made.');
                 this.showToast('Dữ liệu đã được đồng bộ, không có thay đổi.');
@@ -246,23 +244,19 @@ class UIManager {
     static setupEventListeners() {
         // Mobile cart toggle
         domElements.cartToggle?.addEventListener('click', () => {
-            console.log('Cart toggle clicked');
             if (domElements.cartElement?.classList.contains('active')) {
-                console.log('Closing cart');
                 this.closeCart();
             } else {
-                console.log('Opening cart');
                 this.openCart();
             }
-        });
-
-        document.getElementById("sync-customers").addEventListener('click', () => {
-            loadCustomerData(); // Gọi loadCustomerData khi nhấn nút
         });
 
         domElements.cartClose?.addEventListener('click', () => this.closeCart());
         domElements.cartOverlay?.addEventListener('click', () => this.closeCart());
 
+        document.getElementById("sync-customers").addEventListener('click', () => {
+            loadCustomerData(); // Gọi loadCustomerData khi nhấn nút
+        });
         // Discount inputs
         domElements.discountPercent?.addEventListener('input', () => CartManager.calculateTotal());
         domElements.discountAmount?.addEventListener('input', () => CartManager.calculateTotal());
@@ -377,7 +371,6 @@ class BillManager {
         // Đóng modal khi click bên ngoài
         overlay?.addEventListener('click', closeModal);
     }
-
 
     static formatDateTime(date) {
         const pad = (num) => String(num).padStart(2, '0');
@@ -502,7 +495,6 @@ class BillManager {
         }
     }
 
-
     static generateBillHTML() {
         const customerName = document.getElementById('customer-name')?.value || '';
         const staffName = document.getElementById('staff-name')?.value || '';
@@ -520,63 +512,227 @@ class BillManager {
         const itemsString = cart.map(item => `${item.product} (${item.quantity})`).join(', ');
 
         return `
-            <head>
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-            </head>
-            <div class="preview-header">
-                <img src="./Asset/Logo.png" alt="Logo" style="width: 120px">
-                <h2>Mai Tây Hair Salon</h2>
-                <div class="info-Salon">
-                    <p class="location"><i class="fa-solid fa-location-dot"></i> 4A Hiền Hoà, Phước Thái, Long Thành, ĐN</p>
-                    <div class="flex">
-                        <p><i class="fa-brands fa-facebook"></i> MaiTayHairSalon</p>
-                        <p><i class="fa-solid fa-phone"></i> 0938123962</p>
+            <html>
+                <head>
+                    <title>In hóa đơn</title>
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                    <style>
+                        body {
+                            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                            padding: 0 10px;
+                            width: 80mm;
+                            margin: 0 auto;
+                        }
+
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin: 10px 0;
+                        }
+
+                        th,
+                        td {
+                            padding: 8px 2px;
+                            text-align: left;
+                            border-bottom: 1px solid #ddd;
+                        }
+
+                        .preview-header {
+                            text-align: center;
+                            margin-bottom: 10px;
+                        }
+
+                        .preview-header h2,
+                        .preview-header h3,
+                        .preview-header p {
+                            margin: 0px;
+                        }
+
+                        .bill-info p {
+                            font-size: 14px;
+                            margin: 5px 0;
+                        }
+
+                        .bill-summary {
+                            margin-top: 15px;
+                            text-align: right;
+                        }
+
+                        .total {
+                            font-weight: bold;
+                            font-size: 1.2em;
+                            margin-top: 10px;
+                        }
+
+                        .bill-footer {
+                            text-align: center;
+                            margin-top: 20px;
+                        }
+
+                        .bill-footer p {
+                            margin: 10px;
+                        }
+
+                        .preview-table th {
+                            font-size: 13px;
+                            border: 2px solid black;
+                        }
+
+                        .preview-table td {
+                            font-size: 14px;
+                        }
+
+                        .preview-table td:last-child {
+                            text-align: right;
+                            font-weight: bold;
+                        }
+
+                        .info-Salon {
+                            margin-top: 5px;
+                            padding: 0 10px;
+                        }
+
+                        .info-Salon .flex {
+                            display: flex;
+                            justify-content: space-between;
+                            font-weight: 500;
+                        }
+
+                        .info-Salon i {
+                            font-size: 16px;
+                        }
+
+                        .info-Salon .location {
+                            font-size: 14px;
+                            text-align: left;
+                            margin-bottom: 3px;
+                        }
+
+                        .Hunq {
+                            font-size: 12px;
+                            font-weight: bold;
+                        }
+
+                        .QR-Banking img {
+                            display: block;
+                            height: 100px;
+                            width: 100px;
+                            margin: auto;
+                        }
+
+                        .QR-Banking {
+                            text-align: center;
+                            width: 100%;
+                            margin: auto;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            gap: 5px;
+                            border: 2px solid black;
+                            padding: 2px;
+                        }
+
+                        .QR-Banking p {
+                            font-size: 12px;
+                            font-weight: bold;
+                        }
+
+                        .QR-Banking h1 {
+                            text-transform: capitalize;
+                            font-size: 14px;
+                            margin: 0;
+                        }
+
+                        .Banking {
+                            text-align: left;
+                            border-left: 2px solid black;
+                            padding-left: 10px;
+                        }
+                        .Banking  p {
+                            margin: 0;
+                        }
+                        .Banking .alert {
+                            font-size: 10px;
+                            font-weight: normal;
+                        }
+                        .Banking h1 {
+                            font-size: 30px;
+                        }
+                    </style>
+                </head>
+
+                <body>
+                    <div class="preview-header">
+                        <img src="./Asset/Logo.png" alt="Logo" style="width: 120px">
+                        <h2>Mai Tây Hair Salon</h2>
+                        <div class="info-Salon">
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> 4A Hiền Hoà, Phước Thái, Long Thành, ĐN</p>
+                            <div class="flex">
+                                <p><i class="fa-brands fa-facebook"></i> MaiTayHairSalon</p>
+                                <p><i class="fa-solid fa-phone"></i> 0938123962</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <h3>HOÁ ĐƠN THANH TOÁN</h3>
                     </div>
-                </div>
-                <hr>
-                <h3>HOÁ ĐƠN THANH TOÁN</h3>
-            </div>
-            <div class="bill-info">
-                <p>Thời gian: ${billTime}</p>
-                <p>Khách hàng: ${customerName}</p>
-                <p>Thu ngân: ${staffName}</p>
-                <p>Thanh toán: ${paymentMethod}</p>
-            </div>
-            <table class="preview-table">
-                <tr>
-                    <th>#</th>
-                    <th>Dịch vụ</th>
-                    <th>SL</th>
-                    <th>Đơn giá</th>
-                    <th>Thành tiền</th>
-                </tr>
-                ${cart.map((item, index) => `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${item.product}</td>
-                        <td>${item.quantity}</td>
-                        <td>${(item.price).toLocaleString()}</td>
-                        <td>${(item.quantity * (item.price)).toLocaleString()}</td>
-                    </tr>
-                `).join('')}
-            </table>
-            <div class="bill-summary">
-                <p>Thành tiền: ${subtotal.toLocaleString()}đ</p>
-                ${totalDiscount > 0 ? `<p>Chiết khấu: ${totalDiscount.toLocaleString()}đ</p>` : ''}
-                <p class="total">Tổng tiền: ${total.toLocaleString()}đ</p>
-            </div>
-             <div class="bill-footer">
-                <p class="Hunq">Powered by Đinh Mạnh Hùng</p>
-            </div>
+                     <div class="bill-info">
+                        <p>Thời gian: ${billTime}</p>
+                        <p>Khách hàng: ${customerName}</p>
+                        <p>Thu ngân: ${staffName}</p>
+                        <p>Thanh toán: ${paymentMethod}</p>
+                    </div>
+                   <table class="preview-table">
+                        <tr>
+                            <th>#</th>
+                            <th>Dịch vụ</th>
+                            <th>SL</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                        ${cart.map((item, index) => `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${item.product}</td>
+                                <td>${item.quantity}</td>
+                                <td>${(item.price).toLocaleString()}</td>
+                                <td>${(item.quantity * (item.price)).toLocaleString()}</td>
+                            </tr>
+                        `).join('')}
+                    </table>
+                    <div class="bill-summary">
+                        <p>Thành tiền: ${subtotal.toLocaleString()}đ</p>
+                        ${totalDiscount > 0 ? `<p>Chiết khấu: ${totalDiscount.toLocaleString()}đ</p>` : ''}
+                        <p class="total">Tổng tiền: ${total.toLocaleString()}đ</p>
+                    </div>
+                    <div class="QR-Banking">
+                        <div class="QR">
+                            <img src="./Asset/img/QR_Banking.png" alt="QR Thanh Toán" srcset="./Asset/img/QR_Banking.png">
+                        </div>
+                        <div class="Banking">
+                            <p>BIDV - DINH HOA XUAN MAI</p>
+                            <h1>8834272720</h1>
+                            <p class="alert">Quý khách vui lòng kiểm tra lại thông tin trước khi chuyển khoản.</p>
+                        </div>
+                    </div>
+                    <div class="bill-footer">
+                        <p class="Hunq">Powered by Đinh Mạnh Hùng</p>
+                    </div>
+
+                    <!-- <script>
+                        window.onload = function() { 
+                        window.print();
+                        };
+                    </script> -->
+
+
+                </body>
+
+                </html>
         `;
     }
 }
 
-{/* <td>${item.price >= 1000000 ? `${(item.price / 1000000).toFixed(1).replace(/\.0$/, '')}M` : `${(item.price / 1000).toFixed(1).replace(/\.0$/, '')}K`}</td>
-<td>${item.quantity * item.price >= 1000000 ? `${((item.quantity * item.price) / 1000000).toFixed(1).replace(/\.0$/, '')}M` : `${((item.quantity * item.price) / 1000).toFixed(1).replace(/\.0$/, '')}K`}</td> */}
-
 // History Management
-// Lịch sử Hóa đơn
 class HistoryManager {
     static STORAGE_KEY = 'invoice_history';
 
@@ -638,6 +794,7 @@ class HistoryManager {
     }
 }
 
+// Tải hóa đơn ra Google Sheets
 async function SendToGoogleSheet(jsonData) {
     // Định dạng datetime
     function formatDate(datetime) {
@@ -662,9 +819,6 @@ async function SendToGoogleSheet(jsonData) {
     // Sử dụng hàm
     const queryString = jsonToQueryString(jsonData);
 
-    // Chuyển đổi jsonData sang query string
-    const formDataString = queryString;
-
     try {
         // Gửi request (Thay URL bằng URL Google Apps Script của bạn)
         const response = await fetch(
@@ -672,7 +826,7 @@ async function SendToGoogleSheet(jsonData) {
             {
                 redirect: "follow",
                 method: "POST",
-                body: formDataString,
+                body: queryString,
                 headers: {
                     "Content-Type": "text/plain;charset=utf-8",
                 }
@@ -680,13 +834,11 @@ async function SendToGoogleSheet(jsonData) {
         );
 
         if (response.ok) {
-            // Xử lý phản hồi thành công
             console.log("Gửi thành công");
         } else {
             throw new Error("Lỗi khi gửi đơn hàng");
         }
     } catch (error) {
-        // Xử lý lỗi
         console.error(error);
         console.log("Đã xảy ra lỗi trong quá trình gửi dữ liệu");
     }
@@ -697,7 +849,6 @@ async function saveInvoice() {
     const customer = document.getElementById('customer-name').value;
     const cashier = document.getElementById('staff-name').value;
     const discount = document.getElementById('discount-info').textContent;
-
 
     if (!cashier || cart.length === 0) {
         UIManager.showToast('Vui lòng điền đầy đủ thông tin và thêm sản phẩm');
@@ -722,44 +873,20 @@ async function saveInvoice() {
     } catch (error) {
         console.error("Error sending data:", error);
     }
-    // cart = []; // Xóa giỏ hàng
     CartManager.saveCart(); // Cập nhật giỏ hàng
     CartManager.updateDisplay();
     UIManager.showToast('Đã lưu hóa đơn thành công');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    UIManager.initialize();
-});
-
-
-
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
     UIManager.initialize();
-});
-
-// Export functions for HTML
-window.POS = {
-    showPreview: () => BillManager.showPreview(),
-    printBill: () => BillManager.printBill(),
-    clearCart: () => CartManager.clearCart(),
-    saveInvoice: () => saveInvoice()
-};
-
-// Gọi hàm renderHistory lúc khởi động
-document.addEventListener('DOMContentLoaded', function () {
     HistoryManager.renderHistory();
-});
-
-document.addEventListener('DOMContentLoaded', () => {
     CartManager.loadCart();
 });
 
-// Kiểm tra khi giỏ hàng không trống
-document.addEventListener('DOMContentLoaded', () => {
-    CartManager.loadCart();
-});
+
+// Hàm switchTab
 function switchTab(tabName) {
     // Ẩn tất cả nội dung tab
     const tabContents = document.querySelectorAll('.tab-content');
@@ -783,7 +910,6 @@ function switchTab(tabName) {
 
 // Khởi tạo tab mặc định lúc trang load
 document.addEventListener('DOMContentLoaded', function () {
-    // Hiển thị tab đầu tiên theo mặc định
     const defaultTab = document.querySelector('.tab-content');
     if (defaultTab) {
         defaultTab.style.display = 'block';
@@ -792,152 +918,5 @@ document.addEventListener('DOMContentLoaded', function () {
     const defaultTabButton = document.querySelector('.tab-button');
     if (defaultTabButton) {
         defaultTabButton.classList.add('active');
-    }
-});
-
-
-const scriptURL = "https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec/exec?token=PRO&sheet=Customer";
-let customers = [];
-
-// Tải dữ liệu khách hàng từ Google Sheets
-window.addEventListener('load', () => {
-    loadCustomerData();
-});
-
-function loadCustomerData() {
-
-
-    fetch(scriptURL)
-        .then(response => response.json())
-        .then(data => {
-            customers = data;
-            UIManager.showToast('Đã kiểm tra xong hệ thống!');
-            document.getElementById("customer-name").disabled = false; // Mở khoá input tìm kiếm
-        })
-        .catch(error => {
-            document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
-            document.getElementById("customer-name").disabled = false;
-        });
-}
-
-// Tìm kiếm khách hàng
-const input = document.getElementById('customer-name');
-const suggestionsBox = document.getElementById('suggestions');
-
-input.addEventListener('input', () => {
-    const query = input.value.toLowerCase();
-    suggestionsBox.innerHTML = '';
-
-    if (query.trim() === '') {
-        suggestionsBox.style.display = 'none';
-        return;
-    }
-
-    const matches = customers.filter(customer =>
-        customer.Name.toLowerCase().includes(query) ||
-        (customer.Phone && customer.Phone.toString().includes(query))
-    );
-
-    if (matches.length > 0) {
-        matches.forEach(match => {
-            const suggestion = document.createElement('div');
-            suggestion.innerHTML = `
-        <strong>${match.Name}</strong>
-        <span>${match.Sex} | ${match.Role} | ${match.Phone}</span>
-    `;
-            suggestion.addEventListener('click', () => {
-                input.value = match.Name;
-                suggestionsBox.style.display = 'none';
-            });
-            suggestionsBox.appendChild(suggestion);
-        });
-        suggestionsBox.style.display = 'block';
-    } else {
-        // Gợi ý thêm khách hàng mới
-        suggestionsBox.innerHTML = `
-    <div>
-        Không tìm thấy khách hàng.
-        <button id="addNewCustomerBtn">Thêm khách hàng mới</button>
-    </div>
-`;
-        document.getElementById('addNewCustomerBtn').addEventListener('click', showAddCustomerPopup);
-        suggestionsBox.style.display = 'block';
-    }
-});
-
-// Hiển thị SweetAlert2 để thêm khách hàng mới
-function showAddCustomerPopup() {
-    Swal.fire({
-        title: 'Thêm khách hàng mới',
-        html: `
-            <button onclick="GetSDT()">PP</button>
-            <input type="text" id="newCustomerName" class="swal2-input" placeholder="Tên khách hàng">
-            <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại">
-            <input type="email" id="newCustomerEmail" class="swal2-input" placeholder="Email">
-            <input type="number" id="newCustomerAge" class="swal2-input" placeholder="Tuổi">
-            <select  class="swal2-select" name="newCustomerSex" id="newCustomerSex">
-                <option value="Nữ">Nữ</option>
-                <option value="Nam">Nam</option>
-            </select>
-            <input type="text" id="newCustomerSocial" class="swal2-input" placeholder="Mạng xã hội">
-            <input type="text" id="newCustomerAddress" class="swal2-input" placeholder="Địa chỉ">
-            <select  class="swal2-select" name="newCustomerRole" id="newCustomerRole">
-                <option value="Member">Member</option>
-                <option value="VIP">VIP</option>
-            </select>
-              
-            `,
-        focusConfirm: false,
-        showCancelButton: true,
-        confirmButtonText: 'Thêm',
-        cancelButtonText: 'Hủy',
-        preConfirm: () => {
-            const newCustomer = {
-                Name: document.getElementById('newCustomerName').value,
-                Phone: document.getElementById('newCustomerPhone').value,
-                Email: document.getElementById('newCustomerEmail').value || '',
-                Age: document.getElementById('newCustomerAge').value || '',
-                Sex: document.getElementById('newCustomerSex').value,
-                Social: document.getElementById('newCustomerSocial').value || '',
-                Adress: document.getElementById('newCustomerAddress').value || '',
-                Role: document.getElementById('newCustomerRole').value,
-                sheetName: "Customer"
-            };
-
-            // Kiểm tra xem các trường có trống không
-            const isValid = Object.values(newCustomer);
-            if (!isValid) {
-                Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin.');
-                return false;
-
-            }
-            return newCustomer;
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const newCustomer = result.value;
-
-            // Gửi dữ liệu khách hàng mới vào Google Sheets
-            fetch(scriptURL, {
-                method: 'POST',
-                body: new URLSearchParams(newCustomer)
-            })
-                .then(response => response.json())
-                .then(result => {
-                    Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
-                    loadCustomerData();
-                })
-                .catch(error => {
-                    // Swal.fire('Lỗi!', 'Có lỗi xảy ra khi thêm khách hàng.', 'error');
-                    Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
-                });
-        }
-    });
-}
-
-// Đóng hộp gợi ý khi click ra ngoài
-document.addEventListener('click', (event) => {
-    if (!input.contains(event.target) && !suggestionsBox.contains(event.target)) {
-        suggestionsBox.style.display = 'none';
     }
 });

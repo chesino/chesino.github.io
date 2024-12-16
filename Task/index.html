@@ -29,15 +29,21 @@
 </head>
 
 <body class="">
+  
     <header class="header">
+      
         <div class="logo">
             <h1>Mai Tây <span>Hair Salon</span></h1>
         </div>
 
         <div class="flex">
             <div class="tab-buttons">
-                <div class="tab-button" onclick="switchTab('pos')">POS</div>
-                <div class="tab-button" onclick="switchTab('history')">Lịch sử</div>
+                <div class="flex">
+                    <div class="tab-button" onclick="switchTab('pos')"><i class="fa-solid fa-receipt"></i></div>
+                    <div class="tab-button" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                </div>
+
             </div>
 
             <div class="style-toggle">
@@ -59,7 +65,8 @@
             <div class="container">
                 <div class="Scroll">
                     <div class="products" id="products"></div>
-                    <button style="border-radius: 16px;" onclick="UIManager.syncProducts()" ><i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
+                    <button style="border-radius: 16px;" onclick="UIManager.syncProducts()"><i
+                            class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
                 </div>
 
                 <div class="cart">
@@ -176,13 +183,17 @@
             <div id="historylist"></div>
         </div>
     </div>
+    <button id="sync-customers" onclick="loadCustomerData()">Đồng Bộ Khách Hàng</button>
+
 
     <footer class="footer">
         Powered by <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a>
     </footer>
     <!-- Scripts -->
     <script src="/DATA/Extend/SweetAlert2.js"></script>
-    <script src="./Asset/main.js"></script>
+    <!-- <script src="./Asset/main.js"></script> -->
+    <script src="./Asset/mainPRO.js"></script>
+    <!-- <script src="./Asset/Sync.js"></script> -->
     <script src="./Asset/theme.js"></script>
 </body>
 
