@@ -1,0 +1,366 @@
+@font-face {
+    font-family: BeFont;
+    src: url(./Font/Be_Vietnam_Pro/BeVietnamPro-Light.ttf);
+}
+
+@font-face {
+    font-family: BeFontBold;
+    src: url(./Font/Be_Vietnam_Pro/BeVietnamPro-Bold.ttf);
+}
+
+@font-face {
+    font-family: Ephesis;
+    src: url(./Font/Ephesis/Ephesis-Regular.ttf);
+}
+
+h1,
+h2,
+h3 {
+    font-family: BeFontBold;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-body: #e8ecf3;
+    --text-body: #333;
+}
+
+body {
+    font-family: BeFontBold;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: --;
+}
+
+button {
+    font-size: 18px;
+    width: 100%;
+    padding: 15px;
+    margin-top: var(--spacing-sm);
+    border: none;
+    border-radius: var(--border-radius-md);
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:disabled,
+button[disabled] {
+    border: 1px solid #999999 !important;
+    background-color: #cccccc !important;
+    color: #666666 !important;
+}
+
+button:hover {
+    background-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #00000094;
+    border-radius: 10px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #00000094;
+    max-height: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Headẻr */
+.header {
+    justify-content: space-between;
+    color: var(--primary);
+    background-color: var(--card-bg);
+    width: 100%;
+    z-index: 99;
+    display: flex;
+    padding: 0 10px;
+}
+
+.header .logo h1 {
+    font-family: Ephesis;
+    font-size: 40px;
+}
+
+.header .logo span {
+    position: absolute;
+    font-family: BeFont;
+    font-size: 14px;
+    margin-top: 12px;
+    margin-left: 5px;
+}
+
+.header .flex {
+    display: flex;
+}
+
+.tab-buttons .flex {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tab-button {
+    cursor: pointer;
+    background-color: var(--background-color);
+    padding: 5px 12px;
+    transition: all 0.5s ease;
+}
+
+
+.tab-button.active {
+    font-weight: bold;
+    background: var(--primary);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+}
+
+
+.style-toggle {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.style-toggle .dropdown {
+    display: block;
+    margin: 0;
+}
+
+.style-toggle .dropbtn {
+    text-transform: capitalize;
+    height: 40px;
+    padding: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background: var(--card-bg);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    transition: all 0.3s ease;
+    margin: auto;
+}
+
+.style-toggle .dropbtn:hover {
+    transform: none;
+}
+
+
+.style-toggle .dropdown-content {
+    width: 150px;
+    position: absolute;
+    margin-top: 10px;
+    right: 20px;
+    background: var(--card-bg);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 5%;
+    opacity: 0;
+    /* Để thêm hiệu ứng mượt */
+    visibility: hidden;
+}
+
+.style-toggle .dropdown-content button {
+    padding: 10px 20px;
+    width: 100%;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 0;
+    color: var(--text-color);
+    transition: background 0.2s ease;
+}
+
+.style-toggle .dropdown-content button:hover {
+    background: #111;
+    color: #fff;
+}
+
+.style-toggle .dropdown-content.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Container */
+.tab-content {
+    display: none;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.products {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 10px;
+}
+
+
+
+.cart h2 {
+    color: var(--primary);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--accent);
+}
+
+.cart-items-div {
+    margin-bottom: var(--spacing-sm);
+    height: calc(100%);
+    overflow: auto;
+    margin-right: 10px;
+}
+
+.cart-items-head {
+    display: grid;
+    grid-template-columns: auto 80px 150px;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.cart-items-head p {
+    font-weight: bold;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: auto 80px 150px;
+    gap: var(--spacing-sm);
+    align-items: center;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.288);
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.cart-item input {
+    font-size: 16px;
+    font-weight: bold;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--text-color);
+    border-radius: 5px;
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+.cart-item input:nth-child(2) {
+    width: 100%;
+}
+
+.cart-item input:nth-child(3) {
+    width: 100%;
+}
+
+.cart-item i {
+    color: #ff4444;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+}
+
+.cart-item .end {
+    margin-left: auto;
+    grid-column: 4 / 2;
+}
+
+.cart-item .price {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.total {
+    padding: 0;
+    color: var(--text-color);
+    border-radius: var(--border-radius-md);
+    text-align: right;
+}
+
+.total h3 {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.sync-data-btn {
+    background-color: rgb(31, 170, 31);
+    padding: 15px;
+}
+
+.print-preview {
+    width: 302px;
+    background-color: white;
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg) auto;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    display: none;
+}
+
+.preview-header {
+    text-align: center;
+    margin: 5px 0;
+}
+
+.preview-header img {
+    max-width: 100px;
+    margin-bottom: var(--spacing-md);
+}
+
+.preview-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.preview-table th {
+    border: 2px solid black !important;
+}
+
+.preview-table th,
+.preview-table td {
+    padding: var(--spacing-sm);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.product-item,
+.cart-item {
+    animation: fadeIn 0.3s ease;
+}
