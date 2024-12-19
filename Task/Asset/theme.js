@@ -13,6 +13,13 @@ window.onclick = function (event) {
         dropdownContent.classList.remove('show');
     }
 };
+
+// Map lớp CSS sang văn bản hiển thị
+const styleNames = {
+    'light': 'Sáng',
+    'dark': 'Tối',
+};
+
 // Hàm để cập nhật giao diện và lưu vào localStorage
 function toggleStyle(style) {
     document.body.className = style; // Thay đổi lớp của body
@@ -20,21 +27,21 @@ function toggleStyle(style) {
 
     // Cập nhật văn bản của nút thả xuống
     const dropdownButton = document.querySelector('.dropbtn');
-    dropdownButton.textContent = `${style.replace('-', ' ')} ▼`; // Ví dụ: 'dark-luxury' thành 'Dark Luxury'
+    dropdownButton.textContent = `${styleNames[style]} ▼`; // Lấy tên từ styleNames
     toggleDropdown();
 }
-
 
 // Khởi chạy: Tải chế độ từ localStorage khi trang được tải
 window.onload = function () {
     const savedStyle = localStorage.getItem('selectedStyle');
     const dropdownButton = document.querySelector('.dropbtn');
 
-    if (savedStyle) {
+    if (savedStyle && styleNames[savedStyle]) {
         document.body.className = savedStyle; // Áp dụng chế độ đã lưu
-        dropdownButton.textContent = `${savedStyle.replace('-', ' ')} ▼`; // Cập nhật văn bản nút
+        dropdownButton.textContent = `${styleNames[savedStyle]} ▼`; // Cập nhật văn bản nút
     } else {
-        document.body.className = 'light'; // Áp dụng chế độ mặc định
-        dropdownButton.textContent = 'light ▼'; // Chế độ mặc định
+        const defaultStyle = 'light'; // Chế độ mặc định
+        document.body.className = defaultStyle;
+        dropdownButton.textContent = `${styleNames[defaultStyle]} ▼`; // Cập nhật văn bản nút mặc định
     }
 };

@@ -487,11 +487,12 @@ class BillManager {
 
                         .bill-footer {
                             text-align: center;
-                            margin-top: 20px;
+                            margin-top: 10px;
                         }
 
                         .bill-footer p {
-                            margin: 10px;
+                            font-size: 20px;
+                            font-weight: bold;
                         }
 
                         .preview-table th {
@@ -530,7 +531,7 @@ class BillManager {
                         }
 
                         .Hunq {
-                            font-size: 12px;
+                            font-size: 12px !important;
                             font-weight: bold;
                         }
 
@@ -636,16 +637,9 @@ class BillManager {
                         </div>
                     </div>
                     <div class="bill-footer">
+                        <p>Cảm ơn quý khách ❤️</p>
                         <p class="Hunq">Powered by Đinh Mạnh Hùng</p>
                     </div>
-
-                    <!-- <script>
-                        window.onload = function() { 
-                        window.print();
-                        };
-                    </script> -->
-
-
                 </body>
 
                 </html>
@@ -808,7 +802,7 @@ async function saveInvoice() {
     setTimeout(() => {
         saveButton.disabled = false; // Kích hoạt lại nút sau khi hoàn thành
     }, 1000);
-  
+
 }
 
 // Initialize application

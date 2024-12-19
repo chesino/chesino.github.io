@@ -52,10 +52,10 @@
                 <div class="dropdown">
                     <button class="dropbtn" onclick="toggleDropdown()">Choose Style ▼</button>
                     <div class="dropdown-content">
-                        <button onclick="toggleStyle('light')">Light</button>
-                        <button onclick="toggleStyle('dark')">Dark</button>
-                        <button onclick="toggleStyle('xmas')">Noel</button>
-                        <button onclick="toggleStyle('light-luxury')">Light Luxury</button>
+                        <button onclick="toggleStyle('light')">Sáng</button>
+                        <button onclick="toggleStyle('dark')">Tối</button>
+                        <!-- <button onclick="toggleStyle('xmas')">Noel</button> -->
+                        <!-- <button onclick="toggleStyle('light-luxury')">Light Luxury</button> -->
                     </div>
                 </div>
             </div>
@@ -102,8 +102,7 @@
                                 <label>Thu ngân:</label>
                                 <select name="staff-name" id="staff-name">
                                     <option value="Chủ tiệm">Chủ tiệm</option>
-                                    <option value="NV1">NV1</option>
-                                    <option value="NV2">NV2</option>
+                                    <option value="Nhân viên">Nhân viên</option>
                                 </select>
                             </div>
                             <div class="input-group">
@@ -140,7 +139,7 @@
                                     <i class="fas fa-trash"></i> Xóa giỏ hàng
                                 </button>
                                 <!-- <button onclick="BillManager.showPreview()" class="preview-btn">
-                                    <i class="fas fa-eye"></i> Xem trước
+                                    <i class="fas fa-eye"></i> Xem trước hoá đơn
                                 </button> -->
                                 <button onclick="BillManager.printBill()" class="print-btn">
                                     <i class="fas fa-print"></i> In hóa đơn
@@ -159,7 +158,7 @@
 
             <!-- Nút toggle giỏ hàng mobile -->
             <button class="cart-toggle">
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fa-solid fa-bag-shopping"></i>
                 <span class="cart-count">0</span>
             </button>
 
@@ -167,7 +166,7 @@
             <div class="cart-overlay"></div>
 
             <!-- Modal xem trước hóa đơn -->
-            <!-- <div id="preview-modal" class="modal">
+            <div id="preview-modal" class="modal">
                 <div class="modal-content">
                     <span class="close-modal">&times;</span>
                     <div id="print-preview"></div>
@@ -177,7 +176,7 @@
                         </button>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
 
         <div id="history" class="tab-content">
@@ -192,7 +191,7 @@
 
         <div id="setting" class="tab-content">
             <div class="control">
-                <button id="sync-customers" onclick="loadCustomerData()">Đồng Bộ Khách Hàng</button>
+                <button id="sync-customers" onclick="loadCustomerData()"><i class="fa-solid fa-address-book"></i> Đồng Bộ Khách Hàng</button>
                 <button onclick="UIManager.syncProducts()">
                     <i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
             </div>

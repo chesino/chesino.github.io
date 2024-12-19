@@ -39,7 +39,6 @@ function loadCustomerData() {
         });
 }
 
-
 // Thêm sự kiện để gọi loadCustomerData khi nhấn nút "Đồng Bộ Khách Hàng"
 const syncButton = document.getElementById("sync-customers");
 syncButton.addEventListener('click', loadCustomerData);
@@ -75,7 +74,7 @@ input.addEventListener('input', () => {
             const suggestion = document.createElement('div');
             suggestion.innerHTML = `
                 <h1>${match.Name}</h1>
-                <p> 0${match.Phone} - ${match.Role} - ${match.Birthday} </p>
+                <p> 0${match.Phone} | ${match.Role} |${match.Address} </p>
             `;
             suggestion.addEventListener('click', () => {
                 input.value = match.Name + " [***" + match.Phone.slice(-2) + ']';
@@ -96,8 +95,6 @@ input.addEventListener('input', () => {
         suggestionsBox.style.display = 'block';
     }
 });
-
-
 
 // Hiển thị SweetAlert2 để thêm khách hàng mới
 function showAddCustomerPopup() {
@@ -146,12 +143,24 @@ function showAddCustomerPopup() {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            const newCustomer = result.value;
+            //Mới
+            function jsonToQueryString(json) {
+                return Object.keys(json)
+                    .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined) // Lọc các giá trị rỗng, null hoặc undefined
+                    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key])) // Mã hóa và ghép cặp key=value
+                    .join("&"); // Nối các cặp bằng '&'
+            }
+
+            const newCustomer = jsonToQueryString(result.value);
 
             // Gửi dữ liệu khách hàng mới vào Google Sheets
             fetch(scriptURL, {
-                method: 'POST',
-                body: new URLSearchParams(newCustomer)
+                redirect: "follow",
+                method: "POST",
+                body: newCustomer,
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                }
             })
                 .then(response => response.json())
                 .then(result => {
@@ -165,7 +174,6 @@ function showAddCustomerPopup() {
         }
     });
 }
-
 
 // Đóng hộp gợi ý khi click ra ngoài
 document.addEventListener('click', (event) => {
