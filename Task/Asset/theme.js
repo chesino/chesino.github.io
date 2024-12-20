@@ -18,6 +18,7 @@ window.onclick = function (event) {
 const styleNames = {
     'light': 'Sáng',
     'dark': 'Tối',
+    'xmas': 'Noel'
 };
 
 // Hàm để cập nhật giao diện và lưu vào localStorage
@@ -45,3 +46,5 @@ window.onload = function () {
         dropdownButton.textContent = `${styleNames[defaultStyle]} ▼`; // Cập nhật văn bản nút mặc định
     }
 };
+
+
