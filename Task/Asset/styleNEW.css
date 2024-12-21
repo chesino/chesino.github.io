@@ -1006,8 +1006,16 @@ input:focus {
     padding: 15px;
 }
 
-/* Footer */
 
+/* Version */
+.version {
+    font-size: 20px;
+    text-align: center;
+}
+.version p {
+    font-size: 10px;
+}
+/* Footer */
 .footer {
     position: fixed;
     font-size: 10px;
@@ -1017,6 +1025,7 @@ input:focus {
     background-color: var(--footer-bg);
     padding: 5px 10px;
     border-top-left-radius: 10px;
+    z-index: 999;
 }
 
 .footer a {
@@ -1030,6 +1039,9 @@ input:focus {
 
 /* Mobile  */
 @media (max-width: 768px) {
+    body {
+        padding-bottom: 50px;
+    }
     .header {
         position: fixed;
     }
@@ -1054,7 +1066,6 @@ input:focus {
 
     .container {
         padding: 10px 0;
-        padding-bottom: 50px;
     }
 
     .products {
@@ -1163,6 +1174,5 @@ input:focus {
         left: 0;
         border-radius: 0;
         border-top-right-radius: 10px;
-        padding-bottom: 10px;
     }
 }

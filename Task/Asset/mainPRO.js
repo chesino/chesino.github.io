@@ -1,4 +1,8 @@
-// Constants & Global Variables
+let version = '1.0.2'
+let dateUpdate = '21/12/2024'
+document.getElementById('version').innerHTML = 'Phiên bản '+ version + `<p>Ngày cập nhật ${dateUpdate}</p>`;
+
+
 const STORAGE_KEY = 'pos_cart';
 let products = [];
 let cart = [];
@@ -207,6 +211,7 @@ class UIManager {
     }
 
     static async syncProducts() {
+        UIManager.Loading();
         try {
             const response = await fetch('https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec?token=PRO&sheet=Product');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -216,7 +221,6 @@ class UIManager {
 
             if (JSON.stringify(localData) !== JSON.stringify(newData)) {
                 localStorage.setItem('products', JSON.stringify(newData));
-                console.log('Data synced and updated in localStorage.');
                 this.showToast('Dữ liệu đã được đồng bộ và cập nhật, Vui lòng chờ 3 giây.');
                 setTimeout(() => {
                     location.reload();
@@ -323,6 +327,14 @@ class UIManager {
             });
         });
     }
+    static Loading() {
+        Swal.fire({
+            title: 'Vui lòng chờ',
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        })
+    }
 }
 
 // Bill Management
@@ -334,44 +346,72 @@ class BillManager {
             return;
         }
 
-        // Lấy các elements
-        const modal = document.getElementById('preview-modal');
-        const overlay = document.querySelector('.cart-overlay');
-        const billTimeInput = document.getElementById('bill-time');
-        const previewContent = document.getElementById('print-preview');
-        const closeBtn = document.querySelector('.close-modal');
-
-        // Kiểm tra elements tồn tại
-        if (!modal || !billTimeInput || !previewContent || !overlay) {
-            console.error('Không tìm thấy các elements cần thiết');
-            return;
-        }
-
-        // Set thời gian hiện tại
-        const currentTime = new Date();
-        billTimeInput.value = this.formatDateTime(currentTime);
-
-        // Hiển thị modal và overlay
-        modal.classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Tắt cuộn trang
-
         // Gắn HTML cho nội dung hóa đơn
-        previewContent.innerHTML = this.generateBillHTML();
+        const billHTML = this.generateBillHTML();
 
-        // Sự kiện đóng modal
-        const closeModal = () => {
-            modal.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = ''; // Bật lại cuộn trang
-        };
+        // Tạo nội dung cho cửa sổ xem trước
+        const previewContent = `
+            <html>
+                <head>
+                    <title>Xem trước hóa đơn</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 20px;
+                            padding: 0;
+                        }
+                        .bill-header {
+                            text-align: center;
+                            margin-bottom: 20px;
+                        }
+                        .bill-content {
+                            border-radius: 5px;
+                            background-color: #f9f9f9;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="bill-content">
+                        ${billHTML}
+                    </div>
+                    <script>
+                        // Đóng cửa sổ khi nhấn phím Esc
+                        document.addEventListener('keydown', (event) => {
+                            if (event.key === 'Escape') {
+                                window.close();
+                            }
+                        });
+                    </script>
+                </body>
+            </html>
+        `;
 
-        // Nút đóng
-        closeBtn?.addEventListener('click', closeModal);
+        // Tính toán vị trí cửa sổ
+        const windowWidth = 350; // Chiều rộng của cửa sổ
+        const windowHeight = 900; // Chiều cao của cửa sổ
+        const screenWidth = window.innerWidth; // Chiều rộng màn hình
+        const screenHeight = window.innerHeight; // Chiều cao màn hình
+        const left = Math.floor((screenWidth - windowWidth) / 0); // Vị trí trái của cửa sổ
+        const top = Math.floor((screenHeight - windowHeight) / 0); // Vị trí trên của cửa sổ
 
-        // Đóng modal khi click bên ngoài
-        overlay?.addEventListener('click', closeModal);
+        // Mở cửa sổ mới và chỉ định vị trí
+        const previewWindow = window.open(
+            '',
+            '_blank',
+            `width=${windowWidth},height=${windowHeight},left=${left},top=${top}`
+        );
+
+        if (previewWindow) {
+            previewWindow.document.open();
+            previewWindow.document.write(previewContent);
+            previewWindow.document.close();
+        } else {
+            console.error('Không thể mở cửa sổ xem trước.');
+        }
     }
+
+
+
 
     static formatDateTime(date) {
         const pad = (num) => String(num).padStart(2, '0');
@@ -848,3 +888,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+// Phím tắt
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'Escape': // Đóng giỏ hàng
+            UIManager.closeCart();
+            break;
+        case 'F2': // Mở giỏ hàng
+            UIManager.openCart();
+            break;
+        case 'F8': // Xem trước hoá đơn
+            BillManager.showPreview();
+            break;
+        // case 'F': //  Lưu hoá đơn
+        //     saveInvoice();
+        //     break;
+        case 'F9': // In hoá đơn
+            BillManager.printBill();
+            break;
+        // case '': // Đổi Theme
+        //     cycleStyle();
+        //     break;
+        case 'Delete': // Xoá giỏ hàng
+            CartManager.clearCart()
+            break;
+        // default:
+        //     console.log(`Phím ${event.key} không được gán hành động.`);
+    }
+});

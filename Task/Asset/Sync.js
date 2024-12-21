@@ -2,42 +2,53 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTu
 let customers = [];
 
 // Hàm tải dữ liệu khách hàng
+let isDataLoaded = false; // Biến trạng thái để đảm bảo chỉ chạy một lần
+let isFetching = false; // Biến để kiểm soát quá trình fetch đang diễn ra
+
 function loadCustomerData() {
+    UIManager.Loading();
+    if (isDataLoaded || isFetching) {
+        console.log("Dữ liệu đang được tải hoặc đã tải xong. Không cần tải lại.");
+        return;
+    }
+
+    isFetching = true; // Đặt trạng thái đang tải dữ liệu
+
     const localData = localStorage.getItem("customers");
     const localDataArray = JSON.parse(localData || '[]');
 
-    // Tải dữ liệu từ Google Sheets
     fetch(scriptURL)
         .then(response => response.json())
         .then(data => {
-            // Nếu chưa có dữ liệu trong localStorage thì lưu từ Google Sheets vào localStorage
             if (localDataArray.length === 0) {
                 customers = data;
                 localStorage.setItem("customers", JSON.stringify(customers));
                 UIManager.showToast('Đã đồng bộ khách hàng.');
             } else {
-                // So sánh giữa localStorage và dữ liệu từ Google Sheets
                 const isSameData = JSON.stringify(localDataArray) === JSON.stringify(data);
 
                 if (isSameData) {
                     UIManager.showToast('Không có khách hàng mới.');
-                    customers = localDataArray; // Sử dụng dữ liệu từ localStorage
+                    customers = localDataArray;
                 } else {
-                    // Cập nhật dữ liệu trong localStorage nếu có sự khác biệt
                     customers = data;
                     localStorage.setItem("customers", JSON.stringify(customers));
                     UIManager.showToast('Đã cập nhật danh sách khách hàng.');
                 }
             }
 
-            // Mở khóa input tìm kiếm
-            document.getElementById("customer-name").disabled = false;
+            isDataLoaded = true; // Đặt trạng thái đã tải xong
         })
         .catch(error => {
+            console.error("Error loading customer data:", error);
             document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
+        })
+        .finally(() => {
+            isFetching = false; // Dọn dẹp trạng thái fetch
             document.getElementById("customer-name").disabled = false;
         });
 }
+
 
 // Thêm sự kiện để gọi loadCustomerData khi nhấn nút "Đồng Bộ Khách Hàng"
 const syncButton = document.getElementById("sync-customers");
