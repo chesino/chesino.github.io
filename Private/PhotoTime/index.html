@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Editor</title>
+    <style>
+        /* Reset mặc định */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #3e5c93;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-3px);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #3e5c93;
+        }
+
+        input[type="file"],
+        input[type="text"],
+        input[type="number"],
+        input[type="color"],
+        select,
+        input[type="datetime-local"],
+        button {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #3e5c93;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #fff;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            border: 2px dashed #3e5c93;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        input[type="file"]:hover {
+            background: rgba(62, 92, 147, 0.05);
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="color"]:focus,
+        select:focus,
+        input[type="datetime-local"]:focus {
+            border-color: #2c3e50;
+            box-shadow: 0 0 5px rgba(44, 62, 80, 0.5);
+            outline: none;
+        }
+
+        button {
+            background-color: #3e5c93;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #1c2a4b;
+            transform: translateY(0);
+        }
+
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            background-color: #ecf0f1;
+            max-height: 500px;
+            max-width: 100%;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                grid-template-columns: auto;
+            }
+
+            .control-group {
+                margin: 10px 0;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="color"],
+            select,
+            input[type="datetime-local"],
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+
+        #swatch {
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        input[type="color"] {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background: none;
+            border: 0;
+            cursor: pointer;
+            height: 46px;
+            padding: 0;
+            width: auto;
+            border: 2px solid #3e5c93;
+        }
+
+        *:focus {
+            border-radius: 0;
+            outline: none;
+        }
+
+        ::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        ::-webkit-color-swatch {
+            border: 0;
+            border-radius: 0;
+        }
+
+        ::-moz-color-swatch,
+        ::-moz-focus-inner {
+            border: 0;
+        }
+
+        ::-moz-focus-inner {
+            padding: 0;
+        }
+        .Flex {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <input type="file" id="upload" multiple accept="image/*">
+        <div id="preview" class="controls"></div>
+        <div class="controls">
+            <div>
+                <label for="text">Văn bản:</label>
+                <input type="text" id="text" placeholder="Enter text">
+            </div>
+            <div>
+                <label for="font">Phông chữ:</label>
+                <select id="font">
+                    <option value="Arial">Arial</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                </select>
+            </div>
+            <div>
+                <label for="size">Cỡ chữ:</label>
+                <input type="number" id="size" min="10" max="100" value="20">
+            </div>
+            <div id="swatch">
+                <label for="color">Màu chữ:</label>
+                <input type="color" id="color" name="color" value="#000000">
+            </div>
+            <div>
+                <label for="position">Vị trí chữ:</label>
+                <select id="position">
+                    <option value="top-left">Trên cùng bên trái</option>
+                    <option value="top-right" selected>Trên cùng bên phải</option>
+                    <option value="bottom-left">Dưới cùng bên trái</option>
+                    <option value="bottom-right">Dưới cùng bên phải</option>
+                </select>
+            </div>
+            <div>
+                <label for="location">Địa điểm:</label>
+                <input type="text" id="location" placeholder="Nhập thủ công">
+            </div>
+            <div>
+                <label for="datetime">Thời gian:</label>
+                <div class="Flex">
+                    <input type="datetime-local" id="datetime">
+                    <button id="set-current-datetime">Hiện tại</button>
+                </div>
+
+            </div>
+        </div>
+        <canvas id="canvas"></canvas>
+        <button id="download">Tải hình</button>
+    </div>
+
+    <script>
+        const upload = document.getElementById('upload');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const textInput = document.getElementById('text');
+        const fontSelect = document.getElementById('font');
+        const sizeInput = document.getElementById('size');
+        const colorInput = document.getElementById('color');
+        const positionSelect = document.getElementById('position');
+        const locationInput = document.getElementById('location');
+        const datetimeInput = document.getElementById('datetime');
+        const setCurrentDatetimeButton = document.getElementById('set-current-datetime');
+        const downloadButton = document.getElementById('download');
+
+        let images = [];
+        let currentImageSrc = '';
+
+        upload.addEventListener('change', () => {
+            images = Array.from(upload.files).filter(file => file.type.startsWith('image/'));
+            if (images.length > 0) {
+                loadImage(images[0]);
+            } else {
+                alert('Hãy tải ảnh lên.');
+            }
+        });
+
+        setCurrentDatetimeButton.addEventListener('click', () => {
+            const now = new Date();
+
+            // Lấy giờ, phút, giây và định dạng chuẩn (hh:mm:ss)
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+
+            // Lấy ngày, tháng, năm và định dạng chuẩn (dd/mm/yyyy)
+            const day = now.getDate().toString().padStart(2, '0');
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const year = now.getFullYear();
+
+            // Định dạng hiển thị cho input (yyyy-MM-ddTHH:mm)
+            const formattedDatetimeInput = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+            // Định dạng hiển thị cho ảnh (hh:mm:ss dd/mm/yyyy)
+            const formattedDatetimeDisplay = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+
+            // Cập nhật vào input datetime-local
+            datetimeInput.value = formattedDatetimeInput;
+
+            // Cập nhật ngày giờ hiển thị lên ảnh
+            datetimeInput.setAttribute('data-formatted', formattedDatetimeDisplay);  // Lưu định dạng hiển thị cho ảnh
+            applyText();  // Cập nhật lại ảnh
+        });
+
+
+
+        function loadImage(file) {
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                currentImageSrc = e.target.result;
+                const img = new Image();
+                img.src = currentImageSrc;
+                img.onload = () => {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                    applyText();
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function applyText() {
+            const text = textInput.value;
+            const font = fontSelect.value;
+            const color = colorInput.value;
+            const position = positionSelect.value;
+            const location = locationInput.value;
+            const datetime = datetimeInput.getAttribute('data-formatted'); // Lấy giá trị đã format từ thuộc tính data-formatted
+
+            // Lấy kích thước của ảnh
+            const img = new Image();
+            img.src = currentImageSrc;
+            img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Tính toán font size dựa trên chiều cao của ảnh
+                const imageHeight = img.height;
+                const imageWidth = img.width;
+                const baseFontSize = 20;  // Font size tối thiểu
+                const scaleFactor = 0.05; // Tỉ lệ font so với chiều cao ảnh (có thể điều chỉnh tùy theo nhu cầu)
+                const fontSize = Math.max(baseFontSize, imageHeight * scaleFactor); // Kích thước font tự động
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+
+                ctx.font = `${fontSize}px ${font}`;
+
+                const textHeight = fontSize;
+
+                const drawText = (content, x, y) => {
+                    if (!content) return;
+                    const textWidth = ctx.measureText(content).width;
+                    ctx.fillStyle = color;
+                    ctx.fillText(content, x, y);
+                };
+
+                let x, y;
+                switch (position) {
+                    case 'top-left':
+                        x = 10;
+                        y = textHeight + 10;
+                        break;
+                    case 'top-right':
+                        x = canvas.width - 10;
+                        y = textHeight + 10;
+                        ctx.textAlign = 'right';
+                        break;
+                    case 'bottom-left':
+                        x = 10;
+                        y = canvas.height - 10;
+                        break;
+                    case 'bottom-right':
+                        x = canvas.width - 10;
+                        y = canvas.height - 10;
+                        ctx.textAlign = 'right';
+                        break;
+                }
+
+                let currentY = y;
+
+                if (datetime) {
+                    drawText(datetime, x, currentY);
+                    currentY += textHeight + 10;
+                }
+
+                if (location) {
+                    drawText(location, x, currentY);
+                    currentY += textHeight + 10;
+                }
+
+                if (text) {
+                    drawText(text, x, currentY);
+                }
+            };
+        }
+
+
+
+        [textInput, fontSelect, sizeInput, colorInput, positionSelect, locationInput, datetimeInput].forEach(input => {
+            input.addEventListener('input', applyText);
+        });
+
+        downloadButton.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = `Hunq_${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    </script>
+</body>
+
+</html>
