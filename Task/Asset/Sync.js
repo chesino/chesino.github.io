@@ -6,11 +6,12 @@ let isDataLoaded = false; // Biến trạng thái để đảm bảo chỉ chạ
 let isFetching = false; // Biến để kiểm soát quá trình fetch đang diễn ra
 
 function loadCustomerData() {
-    UIManager.Loading();
+
     if (isDataLoaded || isFetching) {
         console.log("Dữ liệu đang được tải hoặc đã tải xong. Không cần tải lại.");
         return;
     }
+    UIManager.Loading();
 
     isFetching = true; // Đặt trạng thái đang tải dữ liệu
 
@@ -49,7 +50,7 @@ function loadCustomerData() {
         });
 }
 
-
+// Hàm chọn khách hàng
 // Thêm sự kiện để gọi loadCustomerData khi nhấn nút "Đồng Bộ Khách Hàng"
 const syncButton = document.getElementById("sync-customers");
 syncButton.addEventListener('click', loadCustomerData);
@@ -60,6 +61,9 @@ document.getElementById("customer-name").addEventListener('focus', () => {
     const localDataArray = JSON.parse(localData || '[]');
     customers = localDataArray; // Gán giá trị từ localStorage vào customers
 });
+
+
+const exportedCustomer = []; // Mảng toàn cục để lưu trữ dữ liệu
 
 // Tìm kiếm khách hàng
 const input = document.getElementById('customer-name');
@@ -83,25 +87,36 @@ input.addEventListener('input', () => {
     if (matches.length > 0) {
         matches.forEach(match => {
             const suggestion = document.createElement('div');
+
+            // Thêm class dựa trên giá trị của match.Role
+            if (match.Role === 'VIP') {
+                suggestion.classList.add('VIP');
+            } else if (match.Role === 'Thành viên') {
+                suggestion.classList.add('Member');
+            }
+
             suggestion.innerHTML = `
-                <h1>${match.Name}</h1>
-                <p> 0${match.Phone} | ${match.Role} |${match.Address} </p>
+                <h1>${match.Name} <span>[${match.Role}]</span></h1> 
+                <p> 0${match.Phone} | ${match.Total.toLocaleString()}đ | ${match.Usage} </p>
             `;
             suggestion.addEventListener('click', () => {
+                // Lưu dữ liệu vào mảng
+                exportedCustomer.push(input.value = match);
                 input.value = match.Name + " [***" + match.Phone.slice(-2) + ']';
                 suggestionsBox.style.display = 'none';
             });
             suggestionsBox.appendChild(suggestion);
         });
+
         suggestionsBox.style.display = 'block';
     } else {
         // Gợi ý thêm khách hàng mới
         suggestionsBox.innerHTML = `
-            <div>
-                Không tìm thấy khách hàng.
-                <button id="addNewCustomerBtn">Thêm khách hàng mới</button>
-            </div>
-        `;
+                <div>
+                    Không tìm thấy khách hàng.
+                    <button id="addNewCustomerBtn">Thêm khách hàng mới</button>
+                </div>
+            `;
         document.getElementById('addNewCustomerBtn').addEventListener('click', showAddCustomerPopup);
         suggestionsBox.style.display = 'block';
     }
@@ -192,3 +207,4 @@ document.addEventListener('click', (event) => {
         suggestionsBox.style.display = 'none';
     }
 });
+

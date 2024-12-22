@@ -1,6 +1,6 @@
-let version = '1.0.2'
-let dateUpdate = '21/12/2024'
-document.getElementById('version').innerHTML = 'Phiên bản '+ version + `<p>Ngày cập nhật ${dateUpdate}</p>`;
+let version = '1.0.3'
+let dateUpdate = '22/12/2024'
+document.getElementById('version').innerHTML = 'Phiên bản ' + version + `<p>Ngày cập nhật ${dateUpdate}</p>`;
 
 
 const STORAGE_KEY = 'pos_cart';
@@ -410,9 +410,6 @@ class BillManager {
         }
     }
 
-
-
-
     static formatDateTime(date) {
         const pad = (num) => String(num).padStart(2, '0');
         const hours = pad(date.getHours());
@@ -815,6 +812,15 @@ async function saveInvoice() {
         return;
     }
 
+    try {
+        customerPoints(); // Gọi customerPoints và chờ hoàn thành
+    } catch (error) {
+        console.error("Error calculating customer points:", error);
+        UIManager.showError('Không thể lưu hoá đơn');
+        saveButton.disabled = false; // Kích hoạt lại nút nếu có lỗi
+        return;
+    }
+
     const itemsString = cart.map(item => `${item.product} (${item.quantity})`).join(', ');
     const finalTotal = CartManager.getFinalTotal();
     const invoiceData = {
@@ -842,6 +848,17 @@ async function saveInvoice() {
     setTimeout(() => {
         saveButton.disabled = false; // Kích hoạt lại nút sau khi hoàn thành
     }, 1000);
+}
+
+async function customerPoints() {
+    // Sử dụng exportedCustomer trong các hàm khác
+    function useMatches() {
+        exportedCustomer.forEach(match => {
+            console.log(match.Name);
+        });
+    }
+
+    useMatches();
 
 }
 

@@ -909,19 +909,34 @@ input:focus {
 }
 
 #suggestions div {
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-    justify-content: start;
-    border-bottom: 1px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
     gap: 10px;
     padding: 8px;
     cursor: pointer;
 }
 
+#suggestions .VIP {
+    background: linear-gradient(50deg,
+            hsla(43, 68%, 64%, 1) 0%,
+            /* Gold base */
+            hsla(60, 100%, 90%, 1) 20%,
+            /* Light Gold */
+            hsla(42, 69%, 55%, 1) 80%,
+            /* Gold darker */
+            hsla(39, 57%, 52%, 1) 100%
+            /* Deep Gold */
+        );
+}
+
+
+
 #suggestions div h1 {
     font-size: 18px;
 }
+#suggestions div h1 span {
+    font-size: 12px;
+}
+
 
 #suggestions div p {
     font-size: 12px;
@@ -1012,9 +1027,11 @@ input:focus {
     font-size: 20px;
     text-align: center;
 }
+
 .version p {
     font-size: 10px;
 }
+
 /* Footer */
 .footer {
     position: fixed;
@@ -1042,6 +1059,7 @@ input:focus {
     body {
         padding-bottom: 50px;
     }
+
     .header {
         position: fixed;
     }

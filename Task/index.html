@@ -184,15 +184,18 @@
                 <button onclick="HistoryManager.downloadAsExcel()">Tải xuống (Excel)</button>
                 <button onclick="HistoryManager.downloadAsJSON()">Tải xuống (JSON)</button>
                 <button disabled onclick="HistoryManager.clearHistory()">Xóa tất cả</button>
+
             </div>
             <div id="historylist"></div>
         </div>
 
         <div id="setting" class="tab-content">
             <div class="control">
-                <button id="sync-customers" onclick="loadCustomerData()"><i class="fa-solid fa-address-book"></i> Đồng Bộ Khách Hàng</button>
+                <button id="sync-customers" onclick="loadCustomerData()"><i class="fa-solid fa-address-book"></i> Đồng
+                    Bộ Khách Hàng</button>
                 <button onclick="UIManager.syncProducts()">
                     <i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
+                <!-- <button onclick="customerPoints()">customerPoints()</button> -->
             </div>
         </div>
 
@@ -210,6 +213,7 @@
     <!-- <script src="./Asset/main.js"></script> -->
     <script src="./Asset/mainPRO.js"></script>
     <script src="./Asset/Sync.js"></script>
+    <script src="./Asset/point.js"></script>
     <script src="./Asset/theme.js"></script>
 </body>
 
