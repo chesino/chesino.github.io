@@ -159,6 +159,8 @@ function showAddCustomerPopup() {
                 Social: document.getElementById('newCustomerSocial').value || '',
                 Address: document.getElementById('newCustomerAddress').value || '',
                 Role: document.getElementById('newCustomerRole').value,
+                Usage: 1,
+                Total: 0,
                 sheetName: "Customer"
             };
 

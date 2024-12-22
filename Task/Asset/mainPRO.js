@@ -1,4 +1,4 @@
-let version = '1.0.3'
+let version = '1.0.5'
 let dateUpdate = '22/12/2024'
 document.getElementById('version').innerHTML = 'Phiên bản ' + version + `<p>Ngày cập nhật ${dateUpdate}</p>`;
 
@@ -812,14 +812,21 @@ async function saveInvoice() {
         return;
     }
 
+    let hasRunCustomerPoints = false; // Cờ để đảm bảo chỉ chạy 1 lần
+
     try {
-        customerPoints(); // Gọi customerPoints và chờ hoàn thành
+        if (!hasRunCustomerPoints) {
+            hasRunCustomerPoints = true; // Đánh dấu là đã chạy
+            await customerPoints(); // Gọi hàm và chờ hoàn thành
+        }
     } catch (error) {
         console.error("Error calculating customer points:", error);
         UIManager.showError('Không thể lưu hoá đơn');
         saveButton.disabled = false; // Kích hoạt lại nút nếu có lỗi
+        hasRunCustomerPoints = false; // Đặt lại cờ nếu xảy ra lỗi
         return;
     }
+
 
     const itemsString = cart.map(item => `${item.product} (${item.quantity})`).join(', ');
     const finalTotal = CartManager.getFinalTotal();
