@@ -149,18 +149,43 @@
             color: #7f8c8d;
         }
 
+        .divCanvas .Pin {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .container {
                 display: block;
+                box-shadow: 5px 5px;
             }
 
+            .One {
+                position: sticky;
+                margin-bottom: 10px;
+            }
+
+            .One.Pin {
+                position: sticky;
+                top: 18px;
+            }
+
+            .Pin {
+                display: block;
+                margin-bottom: 10px;
+            }
+            .divCanvas {
+                margin: auto 0 auto auto;
+            }
             body {
                 display: block;
                 padding: 0;
             }
-
             canvas {
                 width: 100%;
+            }
+            .One.Pin canvas {
+                width: 100%;
+                max-height: 200px;
             }
 
             .controls {
@@ -243,6 +268,20 @@
             display: flex;
             gap: 10px;
         }
+
+        footer {
+            margin-top: 10px;
+            font-size: 12px;
+            width: 100%;
+            text-align: center;
+        }
+
+        footer a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
     </style>
 
 </head>
@@ -250,13 +289,13 @@
 <body>
 
     <div class="container">
-        <div class="One">
+        <button class="Pin" onclick="PinImg()">Ghim ảnh</button>
+        <div class="One" id="One">
+
             <div class="divCanvas">
                 <canvas id="canvas"></canvas>
                 <button id="download">Tải về</button>
             </div>
-
-
         </div>
         <div class="Two">
             <input type="file" id="upload" multiple accept="image/*">
@@ -305,6 +344,11 @@
                 </div>
             </div>
         </div>
+        <footer>
+            <p>Thiết kế và lập trình bởi: <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh
+                    Mạnh
+                    Hùng</a></p>
+        </footer>
     </div>
 
     <script>
@@ -474,6 +518,12 @@
             link.href = canvas.toDataURL();
             link.click();
         });
+
+
+        function PinImg() {
+            document.getElementById('One').classList.toggle('Pin');
+        }
+
     </script>
 </body>
 
