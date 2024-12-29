@@ -149,7 +149,7 @@
             color: #7f8c8d;
         }
 
-        .divCanvas .Pin {
+         .Pin {
             display: none;
         }
 
@@ -174,17 +174,23 @@
                 margin-bottom: 10px;
             }
             .divCanvas {
-                margin: auto 0 auto auto;
+                margin: auto;
+                width: auto;
             }
             body {
                 display: block;
                 padding: 0;
             }
             canvas {
-                width: 100%;
+                height: auto;
+                width: auto;
+            }
+            .One.Pin .divCanvas {
+                margin: auto 0 auto auto;
+                width: 50%;
             }
             .One.Pin canvas {
-                width: 100%;
+                width: auto;
                 max-height: 200px;
             }
 
