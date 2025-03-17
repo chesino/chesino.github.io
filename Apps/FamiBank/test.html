@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction List</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .transaction {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .transaction-left {
+      display: flex;
+    }
+    .transaction-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #2ecc71;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .transaction-info {
+      margin-left: 10px;
+    }
+    .transaction-title {
+      font-weight: bold;
+    }
+    .transaction-date {
+      font-size: 12px;
+      color: #777;
+    }
+    .transaction-amount {
+      font-weight: bold;
+      align-self: center;
+    }
+    .credit {
+      color: green;
+    }
+    .debit {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="transactions-container"></div>
+
+  <script>
+// Hàm lấy dữ liệu và cập nhật giao diện
+function fetchAndDisplayData() {
+  fetch('https://script.google.com/macros/s/AKfycbwbyOScSqh-S9uw18oRk-dmo6NS5yUUuzcaAM_r6qdupeec3H7f5jaCQCILyscXOoSmiw/exec?sheet=History')
+    .then(response => response.json())
+    .then(data => {
+      const transactionsContainer = document.getElementById('transactions-container');
+      transactionsContainer.innerHTML = ''; // Xóa dữ liệu cũ trước khi hiển thị dữ liệu mới
+      
+      data.forEach(transaction => {
+        const transactionElement = document.createElement('div');
+        transactionElement.classList.add('transaction');
+        
+        // Xác định loại giao dịch (credit hoặc debit)
+        const isCredit = transaction.Amount > 0;
+        const amountClass = isCredit ? 'credit' : 'debit';
+        const amountFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(transaction.Amount);
+        const iconClass = isCredit ? 'fa-arrow-up' : 'fa-arrow-down';
+        const iconBackground = isCredit ? '#2ecc71' : '#e74c3c';
+        
+        // Tạo giao diện giao dịch
+        transactionElement.innerHTML = `
+          <div class="transaction-left">
+            <div class="transaction-icon" style="background: ${iconBackground};">
+              <i class="fas ${iconClass}"></i>
+            </div>
+            <div class="transaction-info">
+              <div class="transaction-title">${transaction.Type}</div>
+              <div class="transaction-date">${new Date(transaction.Time).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
+            </div>
+          </div>
+          <div class="transaction-amount ${amountClass}">${isCredit ? '+' : ''}${amountFormatted}</div>
+        `;
+        
+        // Thêm giao dịch vào container
+        transactionsContainer.appendChild(transactionElement);
+      });
+    })
+    .catch(error => console.error('Lỗi khi lấy dữ liệu:', error));
+}
+
+// Gọi hàm fetchAndDisplayData ngay khi tải trang
+fetchAndDisplayData();
+
+// Cập nhật dữ liệu sau mỗi 30 giây (30000ms)
+setInterval(fetchAndDisplayData, 30000);
+  </script>
+</body>
+</html>

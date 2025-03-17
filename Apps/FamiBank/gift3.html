@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mở Hộp Quà May Mắn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --dark-color: #1a535c;
+            --light-color: #f7fff7;
+            --rare-color: #ffd166;
+            --super-rare-color: #e84855;
+            --common-color: #70c1b3;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f6f6f6 0%, #e9e9e9 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--dark-color);
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 20px 0;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .package-selection {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .package-btn {
+            padding: 12px 20px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .package-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        .package-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .redemption {
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .redemption h2 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: var(--dark-color);
+        }
+        .redemption input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #3db9b0;
+        }
+        .stats {
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .stats-row span:first-child {
+            font-weight: bold;
+        }
+        .gift-box-container {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gift-box:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 150px;
+            background-color: #ff8c8c;
+            top: -15px;
+            left: 65px;
+            z-index: -1;
+        }
+        .gift-box:after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 20px;
+            background-color: #ff8c8c;
+            top: 65px;
+            left: -15px;
+            z-index: -1;
+        }
+        .gift-box-lid {
+            width: 180px;
+            height: 30px;
+            background-color: #ff8c8c;
+            position: absolute;
+            top: -30px;
+            border-radius: 5px 5px 0 0;
+        }
+        .gift-package-icon {
+            font-size: 50px;
+            color: white;
+            z-index: 10;
+        }
+        .result-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        .result-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 90%;
+            width: 350px;
+            animation: bounceIn 0.5s;
+        }
+        .result-image {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin: 20px auto;
+            display: block;
+        }
+        .result-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .result-description {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .result-type {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .result-type.common {
+            background-color: var(--common-color);
+            color: white;
+        }
+        .result-type.rare {
+            background-color: var(--rare-color);
+            color: #333;
+        }
+        .result-type.super-rare {
+            background-color: var(--super-rare-color);
+            color: white;
+        }
+        .claim-btn {
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .claim-btn:hover {
+            background-color: #3db9b0;
+        }
+        .error-message {
+            color: var(--super-rare-color);
+            margin-top: 10px;
+            display: none;
+        }
+        .plays-left {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .shake-animation {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        @media (max-width: 400px) {
+            .package-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            .gift-box {
+                width: 130px;
+                height: 130px;
+            }
+            .gift-box:before {
+                height: 130px;
+                left: 55px;
+            }
+            .gift-box:after {
+                width: 130px;
+                top: 55px;
+            }
+            .gift-box-lid {
+                width: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mở Hộp Quà May Mắn</h1>
+            <p>Chọn gói và nhập mã để mở quà!</p>
+        </header>
+
+        <div class="package-selection">
+            <button class="package-btn active" data-package="A">Gói A</button>
+            <button class="package-btn" data-package="B">Gói B</button>
+            <button class="package-btn" data-package="C">Gói C</button>
+        </div>
+
+        <div class="redemption">
+            <h2>Nhập Mã Để Chơi</h2>
+            <input type="text" id="code-input" placeholder="Nhập mã của bạn..." maxlength="16">
+            <button class="btn" id="redeem-btn">Xác Nhận</button>
+            <div class="error-message" id="error-message"></div>
+            <div class="plays-left" id="plays-left">Số lượt chơi: 0</div>
+        </div>
+
+        <div class="stats">
+            <div class="stats-row">
+                <span>Gói hiện tại:</span>
+                <span id="current-package">A</span>
+            </div>
+            <div class="stats-row">
+                <span>Tỉ lệ Thường:</span>
+                <span id="common-rate">94.9%</span>
+            </div>
+            <div class="stats-row">
+                <span>Tỉ lệ Hiếm:</span>
+                <span id="rare-rate">5%</span>
+            </div>
+            <div class="stats-row">
+                <span>Tỉ lệ Siêu Hiếm:</span>
+                <span id="super-rare-rate">0.1%</span>
+            </div>
+        </div>
+
+        <div class="gift-box-container">
+            <div class="gift-box" id="gift-box">
+                <div class="gift-box-lid"></div>
+                <img src="A.png" alt="Package A" id="package-icon" class="gift-package-icon">
+            </div>
+        </div>
+    </div>
+
+    <div class="result-modal" id="result-modal">
+        <div class="result-content">
+            <div class="result-type" id="result-type">Thường</div>
+            <h2 class="result-title" id="result-title">Tên Phần Thưởng</h2>
+            <img src="" alt="Phần thưởng" class="result-image" id="result-image">
+            <p class="result-description" id="result-description">Mô tả phần thưởng</p>
+            <button class="claim-btn" id="claim-btn">Nhận Thưởng</button>
+        </div>
+    </div>
+
+    <script>
+        // App state
+        const state = {
+            currentPackage: 'A',
+            playsLeft: 0,
+            rates: {
+                common: 94.9,
+                rare: 5,
+                superRare: 0.1
+            },
+            redeemCodes: [],
+            gifts: [],
+            usedCodes: JSON.parse(localStorage.getItem('usedCodes') || '[]'),
+            rateIncrements: {
+                rare: 0.5,
+                superRare: 0.05
+            },
+            claimUrl: '',
+            redeemedCode: null
+        };
+
+        // DOM elements
+        const packageButtons = document.querySelectorAll('.package-btn');
+        const currentPackageEl = document.getElementById('current-package');
+        const commonRateEl = document.getElementById('common-rate');
+        const rareRateEl = document.getElementById('rare-rate');
+        const superRareRateEl = document.getElementById('super-rare-rate');
+        const giftBox = document.getElementById('gift-box');
+        const packageIcon = document.getElementById('package-icon');
+        const codeInput = document.getElementById('code-input');
+        const redeemBtn = document.getElementById('redeem-btn');
+        const playsLeftEl = document.getElementById('plays-left');
+        const errorMessage = document.getElementById('error-message');
+        const resultModal = document.getElementById('result-modal');
+        const resultType = document.getElementById('result-type');
+        const resultTitle = document.getElementById('result-title');
+        const resultImage = document.getElementById('result-image');
+        const resultDescription = document.getElementById('result-description');
+        const claimBtn = document.getElementById('claim-btn');
+
+        // Update UI
+        function updateUI() {
+            // Update package display
+            currentPackageEl.textContent = state.currentPackage;
+            
+            // Update rates display
+            commonRateEl.textContent = state.rates.common.toFixed(1) + '%';
+            rareRateEl.textContent = state.rates.rare.toFixed(1) + '%';
+            superRareRateEl.textContent = state.rates.superRare.toFixed(3) + '%';
+            
+            // Update plays left
+            playsLeftEl.textContent = `Số lượt chơi: ${state.playsLeft}`;
+            
+            // Update package icon
+            packageIcon.src = `${state.currentPackage}.png`;
+            
+            // Update gift box state
+            if (state.playsLeft > 0) {
+                giftBox.style.opacity = '1';
+                giftBox.style.cursor = 'pointer';
+            } else {
+                giftBox.style.opacity = '0.6';
+                giftBox.style.cursor = 'not-allowed';
+            }
+        }
+
+        // Load redemption codes
+        async function loadRedeemCodes() {
+            try {
+                const response = await fetch('/Redeem.json');
+                const data = await response.json();
+                state.redeemCodes = data;
+            } catch (error) {
+                console.error('Error loading redemption codes:', error);
+                // For testing, set some dummy codes
+                state.redeemCodes = [
+                    { code: "A", plays: 9999999 },
+                    { code: "DEMO456", plays: 5 }
+                ];
+            }
+        }
+
+        // Load gift data
+        async function loadGifts() {
+            try {
+                const response = await fetch('/Gift.json');
+                const data = await response.json();
+                state.gifts = data;
+            } catch (error) {
+                console.error('Error loading gifts:', error);
+                // For testing, set some dummy gifts
+                state.gifts = [
+                    {
+                        package: "A",
+                        name: "Thẻ Cào 10k",
+                        description: "Thẻ cào điện thoại 10.000đ",
+                        image: "card10k.png",
+                        value: 10000,
+                        type: "Thường",
+                        claimUrl: "https://example.com/claim/10k"
+                    },
+                    {
+                        package: "A",
+                        name: "Thẻ Cào 20k",
+                        description: "Thẻ cào điện thoại 20.000đ",
+                        image: "card20k.png",
+                        value: 20000,
+                        type: "Hiếm",
+                        claimUrl: "https://example.com/claim/20k"
+                    },
+                    {
+                        package: "A",
+                        name: "Thẻ Cào 50k",
+                        description: "Thẻ cào điện thoại 50.000đ",
+                        image: "card50k.png",
+                        value: 50000,
+                        type: "Siêu Hiếm",
+                        claimUrl: "https://example.com/claim/50k"
+                    },
+                    {
+                        package: "B",
+                        name: "Voucher 50k",
+                        description: "Voucher giảm giá 50.000đ",
+                        image: "voucher50k.png",
+                        value: 50000,
+                        type: "Thường",
+                        claimUrl: "https://example.com/claim/voucher50k"
+                    },
+                    {
+                        package: "B",
+                        name: "Voucher 100k",
+                        description: "Voucher giảm giá 100.000đ",
+                        image: "voucher100k.png",
+                        value: 100000,
+                        type: "Hiếm",
+                        claimUrl: "https://example.com/claim/voucher100k"
+                    },
+                    {
+                        package: "B",
+                        name: "Voucher 200k",
+                        description: "Voucher giảm giá 200.000đ",
+                        image: "voucher200k.png",
+                        value: 200000,
+                        type: "Siêu Hiếm",
+                        claimUrl: "https://example.com/claim/voucher200k"
+                    },
+                    {
+                        package: "C",
+                        name: "Mã Game 30k",
+                        description: "Mã nạp game 30.000đ",
+                        image: "game30k.png",
+                        value: 30000,
+                        type: "Thường",
+                        claimUrl: "https://example.com/claim/game30k"
+                    },
+                    {
+                        package: "C",
+                        name: "Mã Game 60k",
+                        description: "Mã nạp game 60.000đ",
+                        image: "game60k.png",
+                        value: 60000,
+                        type: "Hiếm",
+                        claimUrl: "https://example.com/claim/game60k"
+                    },
+                    {
+                        package: "C",
+                        name: "Mã Game 120k",
+                        description: "Mã nạp game 120.000đ",
+                        image: "game120k.png",
+                        value: 120000,
+                        type: "Siêu Hiếm",
+                        claimUrl: "https://example.com/claim/game120k"
+                    }
+                ];
+            }
+        }
+
+        // Redeem code
+        function redeemCode() {
+            const code = codeInput.value.trim();
+            
+            if (!code) {
+                showError("Vui lòng nhập mã!");
+                return;
+            }
+            
+            // Check if code already used
+            if (state.usedCodes.includes(code)) {
+                showError("Mã đã được sử dụng!");
+                return;
+            }
+            
+            // Find the code in our redemption codes
+            const codeData = state.redeemCodes.find(c => c.code === code);
+            
+            if (!codeData) {
+                showError("Mã không hợp lệ!");
+                return;
+            }
+            
+            // Add plays and mark code as used
+            state.playsLeft += codeData.plays;
+            state.usedCodes.push(code);
+            state.redeemedCode = code;
+            
+            // Save to localStorage
+            localStorage.setItem('usedCodes', JSON.stringify(state.usedCodes));
+            
+            // Clear input and error
+            codeInput.value = '';
+            hideError();
+            
+            // Update UI
+            updateUI();
+        }
+
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        // Hide error message
+        function hideError() {
+            errorMessage.style.display = 'none';
+        }
+
+        // Open gift box
+        function openGiftBox() {
+            if (state.playsLeft <= 0) {
+                giftBox.classList.add('shake-animation');
+                setTimeout(() => {
+                    giftBox.classList.remove('shake-animation');
+                }, 500);
+                return;
+            }
+            
+            // Decrease play count
+            state.playsLeft--;
+            
+            // Get a random gift based on weighted probability
+            const gift = getRandomGift();
+            
+            // Update rates based on the gift type
+            updateRates(gift.type);
+            
+            // Display result
+            showResult(gift);
+            
+            // Update UI
+            updateUI();
+        }
+
+        // Get random gift based on weighted probability
+        function getRandomGift() {
+            const random = Math.random() * 100;
+            let giftPool = state.gifts.filter(g => g.package === state.currentPackage);
+            
+            if (random < state.rates.superRare) {
+                // Super rare gift
+                const superRareGifts = giftPool.filter(g => g.type === "Siêu Hiếm");
+                return superRareGifts[Math.floor(Math.random() * superRareGifts.length)];
+            } else if (random < state.rates.superRare + state.rates.rare) {
+                // Rare gift
+                const rareGifts = giftPool.filter(g => g.type === "Hiếm");
+                return rareGifts[Math.floor(Math.random() * rareGifts.length)];
+            } else {
+                // Common gift
+                const commonGifts = giftPool.filter(g => g.type === "Thường");
+                return commonGifts[Math.floor(Math.random() * commonGifts.length)];
+            }
+        }
+
+        // Update rates based on the gift type
+        function updateRates(giftType) {
+            // Increase rates based on rarity
+            if (giftType !== "Siêu Hiếm") {
+                state.rates.superRare += state.rateIncrements.superRare;
+            }
+            
+            if (giftType !== "Hiếm") {
+                state.rates.rare += state.rateIncrements.rare;
+            }
+            
+            // Ensure common rate is calculated correctly
+            state.rates.common = 100 - state.rates.superRare - state.rates.rare;
+            
+            // Ensure rates don't exceed limits
+            if (state.rates.superRare > 1) state.rates.superRare = 1;
+            if (state.rates.rare > 10) state.rates.rare = 10;
+            if (state.rates.common < 89) state.rates.common = 89;
+        }
+
+        // Show result modal
+        function showResult(gift) {
+            resultTitle.textContent = gift.name;
+            resultDescription.textContent = gift.description;
+            resultImage.src = gift.image;
+            
+            // Set result type and styling
+            resultType.textContent = gift.type;
+            resultType.className = 'result-type';
+            
+            if (gift.type === "Thường") {
+                resultType.classList.add('common');
+            } else if (gift.type === "Hiếm") {
+                resultType.classList.add('rare');
+            } else {
+                resultType.classList.add('super-rare');
+            }
+            
+            // Set claim URL
+            state.claimUrl = gift.claimUrl;
+            
+            // Show modal
+            resultModal.style.display = 'flex';
+        }
+
+        // Initialize app
+        async function initApp() {
+            await Promise.all([loadRedeemCodes(), loadGifts()]);
+            updateUI();
+            
+            // Event listeners
+            packageButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    packageButtons.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Update current package
+                    state.currentPackage = btn.dataset.package;
+                    
+                    // Update UI
+                    updateUI();
+                });
+            });
+            
+            redeemBtn.addEventListener('click', redeemCode);
+            
+            giftBox.addEventListener('click', openGiftBox);
+            
+            claimBtn.addEventListener('click', () => {
+                if (state.claimUrl) {
+                    window.open(state.claimUrl, '_blank');
+                }
+                resultModal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            resultModal.addEventListener('click', (e) => {
+                if (e.target === resultModal) {
+                    resultModal.style.display = 'none';
+                }
+            });
+        }
+
+        // Start the app
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

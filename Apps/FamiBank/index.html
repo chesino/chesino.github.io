@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  
+  <title>FamiBank</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+</head>
+
+<body>
+  <div id="app">
+    <!-- Login Page -->
+    <div id="login-page" class="page active">
+      <div class="app-header">
+        <div>
+          <h1 class="app-title">FamiBank</h1>
+          <div class="subtitle">Ví gia đình thông minh</div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h2>Đăng nhập</h2>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="user-id">Mã người dùng</label>
+            <input type="text" id="user-id" placeholder="Nhập ID của bạn" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="remember">
+            <label for="remember">Ghi nhớ đăng nhập</label>
+          </div>
+          <button type="submit" class="btn">
+            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+          </button>
+        </form>
+        
+        <div class="biometric-auth">
+          <button class="biometric-btn">
+            <i class="fas fa-fingerprint"></i> Sử dụng vân tay
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- User Info Page -->
+    <div id="user-info-page" class="page">
+      <div class="app-header">
+        <h1 id="greeting" class="app-title">Xin chào</h1>
+        <button id="logout-btn" class="btn" style="width: auto; padding: 8px 16px; background: rgba(255,255,255,0.2);">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+      
+      <div class="reload-container">
+        <button id="reload-data" class="reload-btn">
+          <i class="fas fa-sync-alt"></i> Làm mới
+        </button>
+        <button id="auto-reload-toggle" class="reload-btn">
+          <i class="fas fa-clock"></i> Tự động
+        </button>
+      </div>
+      
+      <div class="card user-info-card">
+        <img id="user-avatar" class="user-avatar" src="https://via.placeholder.com/100" alt="User Avatar">
+        
+        <div class="info-row">
+          <span class="info-label">Tài khoản</span>
+          <span id="display-name" class="info-value">Nguyễn Văn A</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="info-label">ID</span>
+          <span id="display-id" class="info-value">VN123456789</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="info-label">Số dư</span>
+          <span id="display-balance" class="balance">25,000,000 ₫</span>
+        </div>
+        
+        <!--<div class="quick-stats" >
+          <div class="stat-item">
+            <div class="stat-value">4</div>
+            <div class="stat-label">Giao dịch gần đây</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">2</div>
+            <div class="stat-label">Thông báo mới</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">5.2%</div>
+            <div class="stat-label">Lãi suất</div>
+          </div>
+        </div> -->
+        
+      </div>
+      
+      <div class="card">
+        <h2>Dịch vụ</h2>
+        <div class="services-grid">
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="service-name">Nạp tiền</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <div class="service-name">Rút tiền</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-exchange-alt"></i>
+            </div>
+            <div class="service-name">Chuyển tiền</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-piggy-bank"></i>
+            </div>
+            <div class="service-name">Tiết kiệm</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="service-name">Đầu tư</div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-credit-card"></i>
+            </div>
+            <div class="service-name">Thanh toán</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- History Page -->
+    <div id="history-page" class="page">
+      <div class="app-header">
+        <h1 class="app-title">Lịch sử giao dịch</h1>
+      </div>
+      
+      <div class="card history-container">
+        <h2>Giao dịch gần đây</h2>
+        
+        <div id="transactions-container">
+          <div id="empty-transactions"></div>
+          <!-- Hiển thị danh sách giao dịch mẫu -->
+          <div class="transaction-item">
+            <div class="transaction-icon">
+              <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="transaction-details">
+              <div class="transaction-title">Nhận tiền từ Nguyễn B</div>
+              <div class="transaction-date">Hôm nay, 15:30</div>
+            </div>
+            <div class="transaction-amount positive">+1,500,000 ₫</div>
+          </div>
+          
+          <div class="transaction-item">
+            <div class="transaction-icon">
+              <i class="fas fa-arrow-up"></i>
+            </div>
+            <div class="transaction-details">
+              <div class="transaction-title">Chuyển tiền đến Trần C</div>
+              <div class="transaction-date">Hôm nay, 10:15</div>
+            </div>
+            <div class="transaction-amount negative">-2,000,000 ₫</div>
+          </div>
+          
+          <div class="transaction-item">
+            <div class="transaction-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="transaction-details">
+              <div class="transaction-title">Thanh toán hóa đơn</div>
+              <div class="transaction-date">Hôm qua, 18:45</div>
+            </div>
+            <div class="transaction-amount negative">-850,000 ₫</div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+    
+    <!-- Settings Page -->
+    <div id="settings-page" class="page">
+      <div class="app-header">
+        <h1 class="app-title">Cài đặt</h1>
+      </div>
+      
+      <div class="card settings-container">
+        <h2>Tài khoản</h2>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="setting-info">
+            <div class="setting-title">Thông tin cá nhân</div>
+            <div class="setting-description">Cập nhật thông tin tài khoản</div>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="setting-info">
+            <div class="setting-title">Bảo mật</div>
+            <div class="setting-description">Quản lý mật khẩu và xác thực</div>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div class="setting-info">
+            <div class="setting-title">Thông báo</div>
+            <div class="setting-description">Quản lý cài đặt thông báo</div>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+      
+      <div class="card settings-container">
+        <h2>Giao diện</h2>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-moon"></i>
+          </div>
+          <div class="setting-info">
+            <div class="setting-title">Chế độ tối</div>
+            <div class="setting-description">Thay đổi chế độ hiển thị</div>
+          </div>
+          <div class="theme-switch">
+            <label class="switch">
+              <input type="checkbox" id="dark-mode-toggle">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <div class="setting-info">
+            <div class="setting-title">Màu chủ đạo</div>
+            <div class="setting-description">Tùy chỉnh màu sắc ứng dụng</div>
+          </div>
+        </div>
+        
+        <div class="theme-options">
+          <div class="color-option active" style="background-color: #d4af37;" data-color="#d4af37"></div>
+          <div class="color-option" style="background-color: #2ecc71;" data-color="#2ecc71"></div>
+          <div class="color-option" style="background-color: #e74c3c;" data-color="#e74c3c"></div>
+          <div class="color-option" style="background-color: #9b59b6;" data-color="#9b59b6"></div>
+          <div class="color-option" style="background-color: #3498db;" data-color="#3498db"></div>
+        </div>
+      </div>
+      
+      <div class="card settings-container">
+        <h2>Khác</h2>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <div class="setting-info">
+            <div class="setting-title">Về ứng dụng</div>
+            <div class="setting-description">Phiên bản 1.0.0 Beta</div>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-question-circle"></i>
+          </div>
+          <div class="setting-info">
+            <a href="m.me/HunqD" target="_blank">
+              <div class="setting-title">Trợ giúp & Hỗ trợ</div>
+              <div class="setting-description">Liên hệ với anh Bi</div>
+            </a>
+            
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="setting-info">
+            <div class="setting-title">Điều khoản sử dụng</div>
+            <div class="setting-description">Chính sách và quy định</div>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-navbar">
+      <div class="nav-item active" data-page="user-info-page">
+        <div class="nav-icon"><i class="fas fa-home"></i></div>
+        <div class="nav-text">Trang chủ</div>
+      </div>
+      <div class="nav-item" data-page="history-page">
+        <div class="nav-icon"><i class="fas fa-history"></i></div>
+        <div class="nav-text">Lịch sử</div>
+      </div>
+      <div class="nav-item" data-page="settings-page">
+        <div class="nav-icon"><i class="fas fa-gear"></i></div>
+        <div class="nav-text">Cài đặt</div>
+      </div>
+    </div>
+    
+    <!-- Quick Action Button -->
+    <div class="action-buttons">
+      <div class="action-btn">
+        <i class="fas fa-plus"></i>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function() {
+        // Remove active class from all items
+        document.querySelectorAll('.nav-item').forEach(navItem => {
+          navItem.classList.remove('active');
+        });
+        
+        // Add active class to clicked item
+        this.classList.add('active');
+        
+        // Show corresponding page
+        const targetPage = this.getAttribute('data-page');
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+        document.getElementById(targetPage).classList.add('active');
+      });
+    });
+    
+    
+    // Dark mode toggle
+    document.getElementById('dark-mode-toggle').addEventListener('change', function() {
+      if (this.checked) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    });
+    
+    // Theme color options
+    document.querySelectorAll('.color-option').forEach(option => {
+      option.addEventListener('click', function() {
+        // Remove active class from all options
+        document.querySelectorAll('.color-option').forEach(opt => {
+          opt.classList.remove('active');
+        });
+        
+        // Add active class to clicked option
+        this.classList.add('active');
+        
+        // Change theme color
+        const color = this.getAttribute('data-color');
+        document.documentElement.style.setProperty('--secondary-color', color);
+        
+        // Change gradient based on color
+        const darkColor = adjustColor(color, -30); // Darker version of the color
+        document.documentElement.style.setProperty('--gradient', `linear-gradient(135deg, ${color}, ${darkColor})`);
+      });
+    });
+    
+    // Function to adjust color brightness
+    function adjustColor(color, amount) {
+      // Remove # if present
+      color = color.replace('#', '');
+      
+      // Convert to RGB
+      let r = parseInt(color.substring(0, 2), 16);
+      let g = parseInt(color.substring(2, 4), 16);
+      let b = parseInt(color.substring(4, 6), 16);
+      
+      // Adjust values
+      r = Math.max(0, Math.min(255, r + amount));
+      g = Math.max(0, Math.min(255, g + amount));
+      b = Math.max(0, Math.min(255, b + amount));
+      
+      // Convert back to hex
+      return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+    }
+    
+    // Auto reload functionality
+    
+    function toggleAutoReload2() {
+      if (isAutoReloadActive) {
+        // Stop auto reload
+        clearInterval(autoReloadInterval);
+        document.getElementById('auto-reload-toggle').innerHTML = '<i class="fas fa-clock"></i> Tự động tải';
+        isAutoReloadActive = false;
+      } else {
+        // Start auto reload
+        reloadData(); // Load immediately
+        autoReloadInterval = setInterval(reloadData, 10000); // Then every 10 seconds
+        document.getElementById('auto-reload-toggle').innerHTML = '<i class="fas fa-stop-circle"></i> Dừng tự động';
+        isAutoReloadActive = true;
+      }
+    }
+    
+    // Attach event listeners for reload buttons
+    
+    // Quick action button
+    document.querySelector('.action-btn').addEventListener('click', function() {
+      Swal.fire({
+        title: 'Thao tác nhanh',
+        html: `
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+            <button class="quick-action-item" style="background-color: rgba(212, 175, 55, 0.1); border: none; border-radius: 10px; padding: 15px; text-align: center;">
+              <i class="fas fa-money-bill-wave" style="font-size: 24px; color: #d4af37; margin-bottom: 10px;"></i>
+              <div style="font-weight: 600;">Nạp tiền</div>
+            </button>
+            <button class="quick-action-item" style="background-color: rgba(212, 175, 55, 0.1); border: none; border-radius: 10px; padding: 15px; text-align: center;">
+              <i class="fas fa-exchange-alt" style="font-size: 24px; color: #d4af37; margin-bottom: 10px;"></i>
+              <div style="font-weight: 600;">Chuyển tiền</div>
+            </button>
+            <button class="quick-action-item" style="background-color: rgba(212, 175, 55, 0.1); border: none; border-radius: 10px; padding: 15px; text-align: center;">
+              <i class="fas fa-qrcode" style="font-size: 24px; color: #d4af37; margin-bottom: 10px;"></i>
+              <div style="font-weight: 600;">Quét QR</div>
+            </button>
+            <button class="quick-action-item" style="background-color: rgba(212, 175, 55, 0.1); border: none; border-radius: 10px; padding: 15px; text-align: center;">
+              <i class="fas fa-credit-card" style="font-size: 24px; color: #d4af37; margin-bottom: 10px;"></i>
+              <div style="font-weight: 600;">Thanh toán</div>
+            </button>
+          </div>
+        `,
+        showConfirmButton: false,
+        showCloseButton: true,
+        customClass: {
+          container: 'quick-actions-modal'
+        }
+      });
+    });
+    
+    // Initialize with sample data
+    window.onload = function() {
+      // Set initial theme
+      const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDarkMode) {
+        document.getElementById('dark-mode-toggle').checked = true;
+        document.body.classList.add('dark-mode');
+      }
+    };
+  </script>
+  
+  <script src="script.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

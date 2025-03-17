@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhận Thưởng</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-button:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+
+        .tab-button:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .tab-button.active {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Form đổi mã */
+        .redeem-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .redeem-form input {
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 16px;
+        }
+
+        .redeem-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .redeem-form button {
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            background-color: #FF9800;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .redeem-form button:hover {
+            background-color: #F57C00;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        /* Thông tin người chơi */
+        .player-info {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .turns-left {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Mở rương */
+        .chest-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .chest {
+            width: 150px;
+            height: 150px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0JGOTUzRiIgZD0iTTUsMjBIMTlWMTJINVYyMFogTTEyLDE2QzEzLjEsMTYgMTQsMTUuMSAxNCwxNEMxNCwxMi45IDEzLjEsMTIgMTIsMTJTMTAsMTIuOSAxMCwxNEMxMCwxNS4xIDEwLjksMTYgMTIsMTZaIi8+PHBhdGggZmlsbD0iI0E1N0UzQiIgZD0iTTUsNEgxOVY4SDIwVjRBMSAxIDAgMCAwIDE5LDNINUE0IDQgMCAwIDAgNCw0VjhINVY0WiIvPjwvc3ZnPg==');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chest:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .chest-button {
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            background-color: #FF9800;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .chest-button:hover {
+            background-color: #F57C00;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .chest-button:disabled {
+            background-color: #9E9E9E;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Quay may mắn */
+        .spin-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .luck-wheel {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+            aspect-ratio: 1;
+        }
+
+        .wheel-item {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            padding: 5px;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wheel-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .spin-button {
+            grid-column: 2;
+            grid-row: 2;
+            background-color: #FF9800;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            z-index: 2;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .spin-button:hover {
+            background-color: #F57C00;
+            transform: scale(1.05);
+        }
+
+        .spin-button:disabled {
+            background-color: #9E9E9E;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .highlight {
+            animation: highlight 1s infinite;
+            box-shadow: 0 0 10px 5px gold;
+        }
+
+        /* Modal kết quả */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #4527a0 0%, #7b1fa2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 90%;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: modalAppear 0.5s forwards;
+        }
+
+        @keyframes modalAppear {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .reward-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .reward-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .reward-description {
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .reward-type {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .reward-type.common {
+            background-color: #78909C;
+        }
+
+        .reward-type.rare {
+            background-color: #5C6BC0;
+        }
+
+        .reward-type.super-rare {
+            background-color: #F9A825;
+        }
+
+        .claim-button {
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .claim-button:hover {
+            background-color: #388E3C;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .close-button {
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            background-color: #9E9E9E;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .close-button:hover {
+            background-color: #757575;
+        }
+
+        /* Animations */
+        @keyframes highlight {
+            0% {
+                box-shadow: 0 0 5px 2px gold;
+            }
+            50% {
+                box-shadow: 0 0 20px 5px gold;
+            }
+            100% {
+                box-shadow: 0 0 5px 2px gold;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .spinning {
+            animation: spin 0.2s infinite;
+        }
+
+        .probability-info {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .probability-bars {
+            display: flex;
+            height: 10px;
+            margin-top: 8px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .probability-common {
+            background-color: #78909C;
+            height: 100%;
+        }
+
+        .probability-rare {
+            background-color: #5C6BC0;
+            height: 100%;
+        }
+
+        .probability-super-rare {
+            background-color: #F9A825;
+            height: 100%;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 50px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .show-notification {
+            opacity: 1;
+        }
+
+        /* History Section */
+        .history-container {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .history-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .history-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-image {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .history-info {
+            flex: 1;
+        }
+
+        .history-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .history-type {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .history-type.common {
+            background-color: #78909C;
+        }
+
+        .history-type.rare {
+            background-color: #5C6BC0;
+        }
+
+        .history-type.super-rare {
+            background-color: #F9A825;
+        }
+
+        .no-history {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nhận Thưởng</h1>
+        
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="chest">Mở Rương</button>
+            <button class="tab-button" data-tab="wheel">Quay May Mắn</button>
+        </div>
+        
+        <div class="redeem-form">
+            <input type="text" id="redeem-code" placeholder="Nhập mã đổi thưởng...">
+            <button id="redeem-button">Đổi Mã</button>
+        </div>
+        
+        <div class="player-info">
+            <span class="turns-left">Lượt chơi: <span id="turns-count">0</span></span>
+        </div>
+        
+        <div class="tab-content active" id="chest-tab">
+            <div class="chest-container">
+                <div class="chest" id="chest-image"></div>
+                <button class="chest-button" id="open-chest-button" disabled>Mở Rương</button>
+                
+                <div class="probability-info">
+                    Tỉ lệ nhận quà:
+                    <div class="probability-bars">
+                        <div class="probability-common" id="common-bar"></div>
+                        <div class="probability-rare" id="rare-bar"></div>
+                        <div class="probability-super-rare" id="super-rare-bar"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 12px;">
+                        <span>Thường: <span id="common-percent">80</span>%</span>
+                        <span>Hiếm: <span id="rare-percent">19</span>%</span>
+                        <span>Siêu Hiếm: <span id="super-rare-percent">1</span>%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="wheel-tab">
+            <div class="spin-container">
+                <div class="luck-wheel">
+                    <div class="wheel-item" data-index="0"></div>
+                    <div class="wheel-item" data-index="1"></div>
+                    <div class="wheel-item" data-index="2"></div>
+                    <div class="wheel-item" data-index="3"></div>
+                    <button class="spin-button" id="spin-button" disabled>QUAY</button>
+                    <div class="wheel-item" data-index="4"></div>
+                    <div class="wheel-item" data-index="5"></div>
+                    <div class="wheel-item" data-index="6"></div>
+                    <div class="wheel-item" data-index="7"></div>
+                </div>
+                
+                <div class="probability-info">
+                    Tỉ lệ nhận quà:
+                    <div class="probability-bars">
+                        <div class="probability-common" id="common-bar-wheel"></div>
+                        <div class="probability-rare" id="rare-bar-wheel"></div>
+                        <div class="probability-super-rare" id="super-rare-bar-wheel"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 12px;">
+                        <span>Thường: <span id="common-percent-wheel">80</span>%</span>
+                        <span>Hiếm: <span id="rare-percent-wheel">19</span>%</span>
+                        <span>Siêu Hiếm: <span id="super-percent-wheel">1</span>%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container history-container">
+        <div class="history-title">Lịch Sử Nhận Thưởng</div>
+        <div class="history-list" id="history-list">
+            <div class="no-history">Chưa có lịch sử nhận thưởng</div>
+        </div>
+    </div>
+    
+    <div class="modal" id="reward-modal">
+        <div class="modal-content">
+            <div id="reward-image" class="reward-image"></div>
+            <div id="reward-title" class="reward-title">Tên phần thưởng</div>
+            <div id="reward-type" class="reward-type common">Thường</div>
+            <div id="reward-description" class="reward-description">Mô tả phần thưởng</div>
+            <button id="claim-button" class="claim-button">Nhận Thưởng</button>
+            <button id="close-button" class="close-button">Đóng</button>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">Thông báo</div>
+    
+    <script>
+    
+    
+        // Dữ liệu mẫu (sẽ được thay thế bằng dữ liệu từ API/JSON)
+        const giftData = [
+            {
+                id: 1,
+                name: "Thẻ Nạp 10k",
+                description: "Thẻ nạp điện thoại mệnh giá 10.000đ",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGQzEwNyIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiw4LjdzLjIuMDIyMC4wMmMtMS4xLDAtMi0uOS0yLTJzLjktMiAyLTJoMTJjMS4xLDAsMiwuOSwyLDJTMjEuMSw4LDIwLDhaIi8+PHBhdGggZmlsbD0iIzRDQUY1MCIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiwwLTQsMS44LTQsNHYyYzAsMi4yLDEuOCw0LDQsNGgxMmMyLjIsMCw0LTEuOCw0LTR2LTJDMjQsOS44LDIyLjIsOCwyMCw4WiIvPjwvc3ZnPg==",
+                value: 10000,
+                type: "common",
+                claimUrl: "https://example.com/claim/1"
+            },
+            {
+                id: 2,
+                name: "Thẻ Nạp 20k",
+                description: "Thẻ nạp điện thoại mệnh giá 20.000đ",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGQzEwNyIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiw4LjdzLjIuMDIyMC4wMmMtMS4xLDAtMi0uOS0yLTJzLjktMiAyLTJoMTJjMS4xLDAsMiwuOSwyLDJTMjEuMSw4LDIwLDhaIi8+PHBhdGggZmlsbD0iIzRDQUY1MCIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiwwLTQsMS44LTQsNHYyYzAsMi4yLDEuOCw0LDQsNGgxMmMyLjIsMCw0LTEuOCw0LTR2LTJDMjQsOS44LDIyLjIsOCwyMCw4WiIvPjwvc3ZnPg==",
+                value: 20000,
+                type: "common",
+                claimUrl: "https://example.com/claim/2"
+            },
+            {
+                id: 3,
+                name: "Thẻ Nạp 50k",
+                description: "Thẻ nạp điện thoại mệnh giá 50.000đ",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGQzEwNyIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiw4LjdzLjIuMDIyMC4wMmMtMS4xLDAtMi0uOS0yLTJzLjktMiAyLTJoMTJjMS4xLDAsMiwuOSwyLDJTMjEuMSw4LDIwLDhaIi8+PHBhdGggZmlsbD0iIzRDQUY1MCIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiwwLTQsMS44LTQsNHYyYzAsMi4yLDEuOCw0LDQsNGgxMmMyLjIsMCw0LTEuOCw0LTR2LTJDMjQsOS44LDIyLjIsOCwyMCw4WiIvPjwvc3ZnPg==",
+                value: 50000,
+                type: "common",
+                claimUrl: "https://example.com/claim/3"
+            },
+            {
+                id: 4,
+                name: "Thẻ Nạp 100k",
+                description: "Thẻ nạp điện thoại mệnh giá 100.000đ",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGQzEwNyIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiw4LjdzLjIuMDIyMC4wMmMtMS4xLDAtMi0uOS0yLTJzLjktMiAyLTJoMTJjMS4xLDAsMiwuOSwyLDJTMjEuMSw4LDIwLDhaIi8+PHBhdGggZmlsbD0iIzRDQUY1MCIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiwwLTQsMS44LTQsNHYyYzAsMi4yLDEuOCw0LDQsNGgxMmMyLjIsMCw0LTEuOCw0LTR2LTJDMjQsOS44LDIyLjIsOCwyMCw4WiIvPjwvc3ZnPg==",
+                value: 100000,
+                type: "rare",
+                claimUrl: "https://example.com/claim/4"
+            },
+            {
+                id: 5,
+                name: "Voucher 150k",
+                description: "Voucher giảm giá 150.000đ cho đơn hàng",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0U5MUU2MyIgZD0iTTIwLDZoLTIuMThjMC4xMS0uMzEuMTgtLjY1LjE4LTEgMC0xLjY2LTEuMzQtMy0zLTNINEMyLjksMyAyLDMuOSAyLDV2MTRjMCwxLjEuOSwyIDIsMmgxNmMxLjEsMCAyLS45IDItMlY4QzIyLDYuOSAyMS4xLDYgMjAsNlptLTIsMTNoLTVjLTEuNjYsMC0zLTEuMzQtMy0zczEuMzQtMyAzLTNoNVYxOVoiLz48L3N2Zz4=",
+                value: 150000,
+                type: "rare",
+                claimUrl: "https://example.com/claim/5"
+            },
+            {
+                id: 6,
+                name: "Voucher 200k",
+                description: "Voucher giảm giá 200.000đ cho đơn hàng",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0U5MUU2MyIgZD0iTTIwLDZoLTIuMThjMC4xMS0uMzEuMTgtLjY1LjE4LTEgMC0xLjY2LTEuMzQtMy0zLTNINEMyLjksMyAyLDMuOSAyLDV2MTRjMCwxLjEuOSwyIDIsMmgxNmMxLjEsMCAyLS45IDItMlY4QzIyLDYuOSAyMS4xLDYgMjAsNlptLTIsMTNoLTVjLTEuNjYsMC0zLTEuMzQtMy0zczEuMzQtMyAzLTNoNVYxOVoiLz48L3N2Zz4=",
+                value: 200000,
+                type: "rare",
+                claimUrl: "https://example.com/claim/6"
+            },
+            {
+                id: 7,
+                name: "iPhone 15",
+                description: "Điện thoại iPhone 15 mới nhất",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzNGNTFCNSIgZD0iTTE3LDJINywyQzYuNCwyIDYsMi40IDYsM1YyMWMwLC42LjQsMSAxLDFIMTdDMTcuNiwyMiAxOCwyMS42IDE4LDIxVjNDMTgsMi40IDE3LjYsMiAxNywyWiIvPjxwYXRoIGZpbGw9IiNDRkQ4RkZkIiBkPSJNMTMsOEgxMVYxMEgxM1Y4WiIvPjwvc3ZnPg==",
+                value: 20000000,
+                type: "super-rare",
+                claimUrl: "https://example.com/claim/7"
+            },
+            {
+                id: 8,
+                name: "Macbook Pro",
+                description: "Macbook Pro M2 chip, 16GB RAM, 512GB SSD",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx1c87kamOfLwCT5XsaSgZTNDBndF0FN2on2wpJlU2ZmRxR4ghw4M_it6K&s=10",
+                value: 35000000,
+                type: "super-rare",
+                claimUrl: "https://example.com/claim/8"
+            },
+            {
+                id: 9,
+                name: "Thẻ Nạp 30k",
+                description: "Thẻ nạp điện thoại mệnh giá 30.000đ",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGQzEwNyIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiw4LjdzLjIuMDIyMC4wMmMtMS4xLDAtMi0uOS0yLTJzLjktMiAyLTJoMTJjMS4xLDAsMiwuOSwyLDJTMjEuMSw4LDIwLDhaIi8+PHBhdGggZmlsbD0iIzRDQUY1MCIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiwwLTQsMS44LTQsNHYyYzAsMi4yLDEuOCw0LDQsNGgxMmMyLjIsMCw0LTEuOCw0LTR2LTJDMjQsOS44LDIyLjIsOCwyMCw4WiIvPjwvc3ZnPg==",
+                value: 30000,
+                type: "common",
+                claimUrl: "https://example.com/claim/9"
+            },
+            {
+                id: 10,
+                name: "Thẻ Nạp 500k",
+                description: "Thẻ nạp điện thoại mệnh giá 500.000đ",
+                image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI0ZGQzEwNyIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiw4LjdzLjIuMDIyMC4wMmMtMS4xLDAtMi0uOS0yLTJzLjktMiAyLTJoMTJjMS4xLDAsMiwuOSwyLDJTMjEuMSw4LDIwLDhaIi8+PHBhdGggZmlsbD0iIzRDQUY1MCIgZD0iTTIwLDhoLTRWNmgydjJoMlY0SDEwdjJoMnYySDhjLTIuMiwwLTQsMS44LTQsNHYyYzAsMi4yLDEuOCw0LDQsNGgxMmMyLjIsMCw0LTEuOCw0LTR2LTJDMjQsOS44LDIyLjIsOCwyMCw4WiIvPjwvc3ZnPg==",
+                value: 500000,
+                type: "rare",
+                claimUrl: "https://example.com/claim/10"
+            }
+        ];
+        
+        const redeemCodes = [
+            { code: "HACK", turns: 9999999 },
+            { code: "LUCKY888", turns: 5 },
+            { code: "QUATET2025", turns: 10 },
+            { code: "TEST123", turns: 1 }
+        ];
+        
+        // Các biến của trò chơi
+        let turnsLeft = 0;
+        let commonProbability = 90;
+        let rareProbability = 5.9;
+        let superRareProbability = 0.1;
+        let usedCodes = [];
+        let rewardHistory = [];
+        let currentReward = null;
+        
+        // Lấy các phần tử DOM
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const redeemCodeInput = document.getElementById('redeem-code');
+        const redeemButton = document.getElementById('redeem-button');
+        const turnsCountElement = document.getElementById('turns-count');
+        const openChestButton = document.getElementById('open-chest-button');
+        const spinButton = document.getElementById('spin-button');
+        const wheelItems = document.querySelectorAll('.wheel-item');
+        const rewardModal = document.getElementById('reward-modal');
+        const rewardImageElement = document.getElementById('reward-image');
+        const rewardTitleElement = document.getElementById('reward-title');
+        const rewardTypeElement = document.getElementById('reward-type');
+        const rewardDescriptionElement = document.getElementById('reward-description');
+        const claimButton = document.getElementById('claim-button');
+        const closeButton = document.getElementById('close-button');
+        const notification = document.getElementById('notification');
+        const historyList = document.getElementById('history-list');
+        
+        // Khởi tạo các thanh tỉ lệ
+        function updateProbabilityBars() {
+            // Cập nhật số phần trăm
+            document.getElementById('common-percent').textContent = commonProbability;
+            document.getElementById('rare-percent').textContent = rareProbability;
+            document.getElementById('super-rare-percent').textContent = superRareProbability;
+            
+            document.getElementById('common-percent-wheel').textContent = commonProbability;
+            document.getElementById('rare-percent-wheel').textContent = rareProbability;
+            document.getElementById('super-percent-wheel').textContent = superRareProbability;
+            
+            // Cập nhật chiều rộng thanh
+            document.getElementById('common-bar').style.width = `${commonProbability}%`;
+            document.getElementById('rare-bar').style.width = `${rareProbability}%`;
+            document.getElementById('super-rare-bar').style.width = `${superRareProbability}%`;
+            
+            document.getElementById('common-bar-wheel').style.width = `${commonProbability}%`;
+            document.getElementById('rare-bar-wheel').style.width = `${rareProbability}%`;
+            document.getElementById('super-rare-bar-wheel').style.width = `${superRareProbability}%`;
+        }
+        
+        // Khởi tạo dữ liệu từ local storage
+        function initFromLocalStorage() {
+            // Lấy dữ liệu từ localStorage
+            const storedTurnsLeft = localStorage.getItem('turnsLeft');
+            const storedCommonProbability = localStorage.getItem('commonProbability');
+            const storedRareProbability = localStorage.getItem('rareProbability');
+            const storedSuperRareProbability = localStorage.getItem('superRareProbability');
+            const storedUsedCodes = localStorage.getItem('usedCodes');
+            const storedRewardHistory = localStorage.getItem('rewardHistory');
+            
+            // Khôi phục số lượt chơi
+            if (storedTurnsLeft) {
+                turnsLeft = parseInt(storedTurnsLeft);
+                turnsCountElement.textContent = turnsLeft;
+                updateButtonState();
+            }
+            
+            // Khôi phục tỉ lệ xác suất
+            if (storedCommonProbability && storedRareProbability && storedSuperRareProbability) {
+                commonProbability = parseInt(storedCommonProbability);
+                rareProbability = parseInt(storedRareProbability);
+                superRareProbability = parseInt(storedSuperRareProbability);
+                updateProbabilityBars();
+            }
+            
+            // Khôi phục mã đã sử dụng
+            if (storedUsedCodes) {
+                usedCodes = JSON.parse(storedUsedCodes);
+            }
+            
+            // Khôi phục lịch sử nhận thưởng
+            if (storedRewardHistory) {
+                rewardHistory = JSON.parse(storedRewardHistory);
+                updateHistoryDisplay();
+            }
+        }
+        
+        // Lưu dữ liệu vào local storage
+        function saveToLocalStorage() {
+            localStorage.setItem('turnsLeft', turnsLeft);
+            localStorage.setItem('commonProbability', commonProbability);
+            localStorage.setItem('rareProbability', rareProbability);
+            localStorage.setItem('superRareProbability', superRareProbability);
+            localStorage.setItem('usedCodes', JSON.stringify(usedCodes));
+            localStorage.setItem('rewardHistory', JSON.stringify(rewardHistory));
+        }
+        
+        // Cập nhật trạng thái nút
+        function updateButtonState() {
+            if (turnsLeft > 0) {
+                openChestButton.disabled = false;
+                spinButton.disabled = false;
+            } else {
+                openChestButton.disabled = true;
+                spinButton.disabled = true;
+            }
+        }
+        
+        // Hiển thị thông báo
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show-notification');
+            
+            setTimeout(() => {
+                notification.classList.remove('show-notification');
+            }, 3000);
+        }
+        
+        // Xử lý tabs
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+                
+                // Gỡ class active từ tất cả tabs
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Thêm class active cho tab được chọn
+                button.classList.add('active');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            });
+        });
+        
+        // Xử lý nút đổi mã
+        redeemButton.addEventListener('click', () => {
+            const code = redeemCodeInput.value.trim();
+            
+            if (!code) {
+                showNotification('Vui lòng nhập mã đổi thưởng!');
+                return;
+            }
+            
+            // Kiểm tra xem mã đã được sử dụng chưa
+            if (usedCodes.includes(code)) {
+                showNotification('Mã đã được sử dụng!');
+                return;
+            }
+            
+            // Tìm mã trong danh sách
+            const foundCode = redeemCodes.find(item => item.code === code);
+            
+            if (foundCode) {
+                turnsLeft += foundCode.turns;
+                turnsCountElement.textContent = turnsLeft;
+                usedCodes.push(code);
+                saveToLocalStorage();
+                updateButtonState();
+                showNotification(`Đã thêm ${foundCode.turns} lượt chơi!`);
+                redeemCodeInput.value = '';
+            } else {
+                showNotification('Mã không hợp lệ!');
+            }
+        });
+        
+        // Xử lý nút mở rương
+        openChestButton.addEventListener('click', () => {
+            if (turnsLeft <= 0) {
+                showNotification('Bạn đã hết lượt chơi!');
+                return;
+            }
+            
+            // Giảm số lượt chơi
+            turnsLeft--;
+            turnsCountElement.textContent = turnsLeft;
+            updateButtonState();
+            saveToLocalStorage();
+            
+            // Hiệu ứng mở rương
+            const chestImage = document.getElementById('chest-image');
+            chestImage.classList.add('spinning');
+            
+            setTimeout(() => {
+                chestImage.classList.remove('spinning');
+                
+                // Xác định phần thưởng theo tỉ lệ
+                const reward = determineReward();
+                showReward(reward);
+                
+                // Tăng tỉ lệ cho lần tiếp theo
+                increaseProbability();
+                saveToLocalStorage();
+            }, 1000);
+        });
+        
+        // Xử lý nút quay may mắn
+        spinButton.addEventListener('click', () => {
+            if (turnsLeft <= 0) {
+                showNotification('Bạn đã hết lượt chơi!');
+                return;
+            }
+            
+            // Giảm số lượt chơi
+            turnsLeft--;
+            turnsCountElement.textContent = turnsLeft;
+            updateButtonState();
+            saveToLocalStorage();
+            
+            // Vô hiệu hóa nút quay
+            spinButton.disabled = true;
+            
+            // Hiệu ứng quay
+            spinLuckyWheel();
+        });
+        
+        // Hiệu ứng quay may mắn
+        function spinLuckyWheel() {
+            const items = document.querySelectorAll('.wheel-item');
+            let currentIndex = 0;
+            
+            // Chọn phần thưởng
+            const reward = determineReward();
+            
+            // Đặt phần thưởng vào một vị trí ngẫu nhiên trên bánh xe (trừ vị trí giữa)
+            const finalIndex = Math.floor(Math.random() * 8);
+            
+            const highlightInterval = setInterval(() => {
+                // Xóa highlight của tất cả các ô
+                items.forEach(item => item.classList.remove('highlight'));
+                
+                // Thêm highlight cho ô hiện tại
+                if (items[currentIndex].dataset.index) {
+                    items[currentIndex].classList.add('highlight');
+                }
+                
+                // Tăng index
+                currentIndex = (currentIndex + 1) % 8;
+                
+            }, 100);
+            
+            // Dừng sau 2 giây và hiển thị phần thưởng
+            setTimeout(() => {
+                clearInterval(highlightInterval);
+                
+                // Xóa highlight của tất cả các ô
+                items.forEach(item => item.classList.remove('highlight'));
+                
+                // Highlight ô chứa phần thưởng
+                items[finalIndex].classList.add('highlight');
+                
+                // Hiển thị phần thưởng
+                setTimeout(() => {
+                    showReward(reward);
+                    
+                    // Tăng tỉ lệ cho lần tiếp theo
+                    increaseProbability();
+                    saveToLocalStorage();
+                    
+                    // Bật lại nút quay nếu còn lượt
+                    if (turnsLeft > 0) {
+                        spinButton.disabled = false;
+                    }
+                }, 500);
+                
+            }, 2000);
+        }
+        
+        // Xác định phần thưởng theo tỉ lệ
+        function determineReward() {
+            const randomNumber = Math.random() * 100;
+            let rewardType;
+            
+            if (randomNumber < superRareProbability) {
+                rewardType = "super-rare";
+            } else if (randomNumber < superRareProbability + rareProbability) {
+                rewardType = "rare";
+            } else {
+                rewardType = "common";
+            }
+            
+            // Lọc phần thưởng theo loại
+            const filteredRewards = giftData.filter(gift => gift.type === rewardType);
+            
+            // Chọn ngẫu nhiên một phần thưởng từ danh sách đã lọc
+            const randomIndex = Math.floor(Math.random() * filteredRewards.length);
+            return filteredRewards[randomIndex];
+        }
+        
+        // Tăng tỉ lệ cho lần tiếp theo
+        function increaseProbability() {
+            // Giảm tỉ lệ phần thưởng thường
+            if (commonProbability > 50) {
+                commonProbability -= 1;
+            }
+            
+            // Phân bổ lại tỉ lệ giữa hiếm và siêu hiếm
+            if (rareProbability > 100) {
+                rareProbability += 0.5;
+                superRareProbability += 1.5;
+            } else {
+              rareProbability += 0.5;
+                superRareProbability += 0.1;
+            }
+            
+            // Làm tròn các giá trị
+            commonProbability = parseFloat(commonProbability.toFixed(1));
+            rareProbability = parseFloat(rareProbability.toFixed(1));
+            superRareProbability = parseFloat(superRareProbability.toFixed(1));
+            
+            // Đảm bảo tổng tỉ lệ bằng 100%
+            const total = commonProbability + rareProbability + superRareProbability;
+            if (total !== 100) {
+                const diff = 100 - total;
+                commonProbability += diff;
+            }
+            
+            updateProbabilityBars();
+        }
+  
+        // Hiển thị phần thưởng
+        function showReward(reward) {
+            currentReward = reward;
+            
+            // Cập nhật thông tin phần thưởng trong modal
+            rewardImageElement.style.backgroundImage = `url('${reward.image}')`;
+            rewardTitleElement.textContent = reward.name;
+            rewardDescriptionElement.textContent = reward.description;
+            
+            // Cập nhật loại phần thưởng
+            rewardTypeElement.className = 'reward-type';
+            
+            if (reward.type === 'common') {
+                rewardTypeElement.classList.add('common');
+                rewardTypeElement.textContent = 'Thường';
+            } else if (reward.type === 'rare') {
+                rewardTypeElement.classList.add('rare');
+                rewardTypeElement.textContent = 'Hiếm';
+            } else {
+                rewardTypeElement.classList.add('super-rare');
+                rewardTypeElement.textContent = 'Siêu Hiếm';
+            }
+            
+            // Cập nhật link nhận thưởng
+            claimButton.setAttribute('data-url', reward.claimUrl);
+            
+            // Hiển thị modal
+            rewardModal.style.display = 'flex';
+            
+            // Thêm vào lịch sử
+            addToHistory(reward);
+        }
+        
+        // Thêm vào lịch sử nhận thưởng
+        function addToHistory(reward) {
+            const historyItem = {
+                id: reward.id,
+                name: reward.name,
+                image: reward.image,
+                type: reward.type,
+                time: new Date().toISOString()
+            };
+            
+            rewardHistory.unshift(historyItem);
+            
+            // Giới hạn lịch sử 20 item
+            if (rewardHistory.length > 20) {
+                rewardHistory.pop();
+            }
+            
+            saveToLocalStorage();
+            updateHistoryDisplay();
+        }
+        
+        // Cập nhật hiển thị lịch sử
+        function updateHistoryDisplay() {
+            if (rewardHistory.length === 0) {
+                historyList.innerHTML = '<div class="no-history">Chưa có lịch sử nhận thưởng</div>';
+                return;
+            }
+            
+            let historyHTML = '';
+            
+            rewardHistory.forEach(item => {
+                const date = new Date(item.time);
+                const formattedDate = `${date.getDate()}/${date.getMonth() + 1} ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+                
+                let typeText = 'Thường';
+                let typeClass = 'common';
+                
+                if (item.type === 'rare') {
+                    typeText = 'Hiếm';
+                    typeClass = 'rare';
+                } else if (item.type === 'super-rare') {
+                    typeText = 'Siêu Hiếm';
+                    typeClass = 'super-rare';
+                }
+                
+                historyHTML += `
+                <div class="history-item">
+                    <div class="history-image" style="background-image: url('${item.image}')"></div>
+                    <div class="history-info">
+                        <div class="history-name">${item.name}</div>
+                        <div class="history-type ${typeClass}">${typeText}</div>
+                    </div>
+                    <div class="history-time">${formattedDate}</div>
+                </div>
+                `;
+            });
+            
+            historyList.innerHTML = historyHTML;
+        }
+        
+        // Xử lý nút nhận thưởng
+        claimButton.addEventListener('click', () => {
+            const claimUrl = claimButton.getAttribute('data-url');
+            
+            if (claimUrl) {
+                window.open(claimUrl, '_blank');
+            }
+            
+            rewardModal.style.display = 'none';
+        });
+        
+        // Xử lý nút đóng
+        closeButton.addEventListener('click', () => {
+            rewardModal.style.display = 'none';
+        });
+        
+        // Lấy 8 phần thưởng ngẫu nhiên để hiển thị trên bánh xe may mắn
+        function setWheelItems() {
+            const wheelItemElements = document.querySelectorAll('.wheel-item');
+            const selectedGifts = [];
+            
+            // Chọn ngẫu nhiên 8 phần thưởng không trùng lặp
+            while (selectedGifts.length < 8) {
+                const randomIndex = Math.floor(Math.random() * giftData.length);
+                const gift = giftData[randomIndex];
+                
+                if (!selectedGifts.includes(gift)) {
+                    selectedGifts.push(gift);
+                }
+            }
+            
+            // Hiển thị phần thưởng trên bánh xe
+            wheelItemElements.forEach((item, index) => {
+                if (item.classList.contains('spin-button')) return;
+                
+                const gift = selectedGifts[index];
+                item.style.backgroundImage = `url('${gift.image}')`;
+                item.setAttribute('data-id', gift.id);
+            });
+        }
+        
+        // Khởi tạo ứng dụng
+        function init() {
+            initFromLocalStorage();
+            updateProbabilityBars();
+            updateButtonState();
+            setWheelItems();
+            updateHistoryDisplay();
+        }
+        
+        // Khởi tạo khi trang được tải
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

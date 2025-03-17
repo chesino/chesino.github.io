@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mở Rương Kho Báu</title>
+    <style>
+        :root {
+            --primary-color: #ffd700;
+            --secondary-color: #8b4513;
+            --background-color: #0a3d62;
+            --text-color: #fff;
+            --common-color: #aaa;
+            --rare-color: #4287f5;
+            --super-rare-color: #ff5733;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            background-image: radial-gradient(circle, #0a4b76, #0a3d62);
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+        }
+
+        .plays-counter {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .redemption-section {
+            width: 100%;
+            max-width: 350px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .redemption-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .redemption-form input {
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        .redemption-form button {
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .redemption-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .redemption-form button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .chest-container {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chest {
+            width: 180px;
+            height: 180px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="15" y="40" width="70" height="50" fill="%238B4513" rx="5" ry="5"/><rect x="20" y="30" width="60" height="20" fill="%23A0522D" rx="5" ry="5"/><rect x="40" y="40" width="20" height="5" fill="%23FFD700"/><circle cx="50" cy="42.5" r="5" fill="%23FFD700"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease;
+            transform-origin: bottom center;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+        }
+
+        .chest.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .chest:not(.disabled):hover {
+            transform: scale(1.05);
+        }
+
+        .chest:not(.disabled):active {
+            transform: scale(0.95);
+        }
+
+        .chest.open {
+            animation: openChest 1s forwards;
+        }
+
+        @keyframes openChest {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.1); }
+            40% { transform: scale(0.9) rotateX(20deg); }
+            100% { transform: scale(1.2) rotateX(45deg); }
+        }
+
+        .reward-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .reward-popup.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .reward-content {
+            background-color: #fff;
+            border-radius: 20px;
+            max-width: 350px;
+            width: 90%;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .reward-popup.show .reward-content {
+            transform: scale(1);
+        }
+
+        .reward-type {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .reward-type.Common {
+            background-color: var(--common-color);
+            color: #333;
+        }
+
+        .reward-type.Rare {
+            background-color: var(--rare-color);
+            color: white;
+        }
+
+        .reward-type.SuperRare {
+            background-color: var(--super-rare-color);
+            color: white;
+        }
+
+        .reward-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .reward-name {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .reward-description {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .reward-value {
+            color: var(--primary-color);
+            background-color: #333;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .reward-redeem, .reward-close {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .reward-redeem {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .reward-close {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        .reward-redeem:hover, .reward-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .probability-display {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 350px;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .probability-item {
+            text-align: center;
+        }
+
+        .probability-label {
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .probability-value {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .history-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .history-button svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .history-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 300px;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: 50;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .history-panel.show {
+            right: 0;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-history {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .history-list {
+            list-style: none;
+        }
+
+        .history-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .history-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .history-item-type {
+            font-size: 0.8rem;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            opacity: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        @media (max-height: 700px) {
+            .main-content {
+                justify-content: flex-start;
+            }
+            
+            .redemption-section {
+                margin-bottom: 10px;
+                padding: 10px;
+            }
+            
+            .chest {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .redemption-section {
+                padding: 10px;
+            }
+            
+            .chest {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">Mở Rương Kho Báu</h1>
+        <div class="plays-counter">Lượt chơi: <span id="plays-count">0</span></div>
+    </div>
+
+    <div class="main-content">
+        <div class="redemption-section">
+            <form class="redemption-form" id="redeem-form">
+                <input type="text" id="code-input" placeholder="Nhập mã quà tặng" required>
+                <button type="submit">Nhận Lượt Chơi</button>
+            </form>
+        </div>
+
+        <div class="chest-container">
+            <div class="chest disabled" id="chest"></div>
+        </div>
+
+        <div class="probability-display">
+            <div class="probability-item">
+                <div class="probability-label">Thường</div>
+                <div class="probability-value" id="common-prob">80%</div>
+            </div>
+            <div class="probability-item">
+                <div class="probability-label">Hiếm</div>
+                <div class="probability-value" id="rare-prob">19%</div>
+            </div>
+            <div class="probability-item">
+                <div class="probability-label">Siêu Hiếm</div>
+                <div class="probability-value" id="super-rare-prob">1%</div>
+            </div>
+        </div>
+
+        <div class="history-button" id="history-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M13 3c-4.97 0-9 4.03-9 9H1l4 4 4-4H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 20.99 10.51 22 13 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+            </svg>
+        </div>
+    </div>
+
+    <div class="reward-popup" id="reward-popup">
+        <div class="reward-content">
+            <div class="reward-type" id="reward-type">Thường</div>
+            <div class="reward-image" id="reward-image"></div>
+            <h2 class="reward-name" id="reward-name">Tên phần thưởng</h2>
+            <p class="reward-description" id="reward-description">Mô tả phần thưởng</p>
+            <div class="reward-value" id="reward-value">100</div>
+            <div>
+                <button class="reward-redeem" id="reward-redeem">Nhận Thưởng</button>
+                <button class="reward-close" id="reward-close">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="history-panel" id="history-panel">
+        <div class="history-header">
+            <h2>Lịch Sử Phần Thưởng</h2>
+            <button class="close-history" id="close-history">&times;</button>
+        </div>
+        <ul class="history-list" id="history-list">
+            <!-- History items will be added here -->
+        </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        // Simulate JSON data
+        const redeemCodes = [
+            { code: "FREE2023", plays: 3 },
+            { code: "WELCOME", plays: 5 },
+            { code: "TEST123", plays: 1 },
+            { code: "BONUS", plays: 2 },
+            { code: "HACK", plays: 100000 }
+        ];
+
+        const gifts = [
+            { 
+                name: "Túi Vàng", 
+                description: "100 vàng để tiêu trong game", 
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M30,40 Q30,20 50,20 Q70,20 70,40 L70,70 Q50,80 30,70 Z' fill='%23D4AF37' stroke='%23AA8C2C' stroke-width='2'/><path d='M40,30 Q50,25 60,30' fill='none' stroke='%23AA8C2C' stroke-width='2'/><circle cx='40' cy='45' r='5' fill='%23FFF200'/><circle cx='50' cy='50' r='5' fill='%23FFF200'/><circle cx='60' cy='45' r='5' fill='%23FFF200'/><circle cx='45' cy='60' r='5' fill='%23FFF200'/><circle cx='55' cy='60' r='5' fill='%23FFF200'/></svg>", 
+                value: 100, 
+                type: "Common", 
+                redeemLink: "https://example.com/redeem/coins" 
+            },
+            { 
+                name: "Rương Bạc", 
+                description: "1000 bạc để mua vật phẩm đặc biệt", 
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='15' y='40' width='70' height='50' fill='%23C0C0C0' rx='5' ry='5'/><rect x='20' y='30' width='60' height='20' fill='%23A9A9A9' rx='5' ry='5'/><rect x='40' y='40' width='20' height='5' fill='%23707070'/><circle cx='50' cy='42.5' r='5' fill='%23707070'/></svg>", 
+                value: 1000, 
+                type: "Common", 
+                redeemLink: "https://example.com/redeem/silver" 
+            },
+            { 
+                name: "Kiếm Hiếm", 
+                description: "Vũ khí hiếm tăng 50% sức mạnh", 
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50,15 L55,25 L60,30 L70,80 L50,65 L30,80 L40,30 L45,25 Z' fill='%234287f5' stroke='%23333' stroke-width='1'/><circle cx='50' cy='30' r='5' fill='%23FFD700'/></svg>", 
+                value: 5000, 
+                type: "Rare", 
+                redeemLink: "https://example.com/redeem/rare-sword" 
+            },
+            { 
+                name: "Giáp Rồng", 
+                description: "Bộ giáp hiếm tăng 40% phòng thủ", 
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M30,30 L50,20 L70,30 L70,60 Q50,80 30,60 Z' fill='%234287f5' stroke='%23333' stroke-width='2'/><path d='M50,30 L50,70' fill='none' stroke='%23333' stroke-width='1'/><path d='M40,40 L60,40' fill='none' stroke='%23333' stroke-width='1'/></svg>", 
+                value: 4500, 
+                type: "Rare", 
+                redeemLink: "https://example.com/redeem/rare-armor" 
+            },
+            { 
+                name: "Nhẫn Thần", 
+                description: "Nhẫn huyền thoại tăng tất cả chỉ số 30%", 
+                image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='20' fill='none' stroke='%23ff5733' stroke-width='8'/><circle cx='50' cy='50' r='10' fill='%23ff5733'/><circle cx='50' cy='50' r='5' fill='yellow'/></svg>", 
+                value: 50000, 
+                type: "SuperRare", 
+                redeemLink: "https://example.com/redeem/legendary-ring" 
+            }
+        ];
+
+        // DOM Elements
+        const playsCountElement = document.getElementById('plays-count');
+        const chestElement = document.getElementById('chest');
+        const redeemForm = document.getElementById('redeem-form');
+        const codeInput = document.getElementById('code-input');
+        const rewardPopup = document.getElementById('reward-popup');
+        const rewardType = document.getElementById('reward-type');
+        const rewardImage = document.getElementById('reward-image');
+        const rewardName = document.getElementById('reward-name');
+        const rewardDescription = document.getElementById('reward-description');
+        const rewardValue = document.getElementById('reward-value');
+        const rewardRedeem = document.getElementById('reward-redeem');
+        const rewardClose = document.getElementById('reward-close');
+        const historyButton = document.getElementById('history-button');
+        const historyPanel = document.getElementById('history-panel');
+        const closeHistory = document.getElementById('close-history');
+        const historyList = document.getElementById('history-list');
+        const overlay = document.getElementById('overlay');
+        const commonProbElement = document.getElementById('common-prob');
+        const rareProbElement = document.getElementById('rare-prob');
+        const superRareProbElement = document.getElementById('super-rare-prob');
+
+        // Game state
+        let gameState = {
+            plays: 0,
+            usedCodes: [],
+            rewardsHistory: [],
+            probabilities: {
+                common: 80,
+                rare: 19,
+                superRare: 1
+            },
+            currentReward: null
+        };
+
+        // Load game state from localStorage
+        function loadGameState() {
+            const savedState = localStorage.getItem('treasureChestGame');
+            if (savedState) {
+                gameState = JSON.parse(savedState);
+                updateUI();
+            }
+        }
+
+        // Save game state to localStorage
+        function saveGameState() {
+            localStorage.setItem('treasureChestGame', JSON.stringify(gameState));
+        }
+
+        // Update UI based on game state
+        function updateUI() {
+            playsCountElement.textContent = gameState.plays;
+            
+            // Update chest state
+            if (gameState.plays > 0) {
+                chestElement.classList.remove('disabled');
+            } else {
+                chestElement.classList.add('disabled');
+            }
+            
+            // Update probability display
+            commonProbElement.textContent = gameState.probabilities.common + '%';
+            rareProbElement.textContent = gameState.probabilities.rare + '%';
+            superRareProbElement.textContent = gameState.probabilities.superRare + '%';
+            
+            // Update history
+            renderHistoryList();
+        }
+
+        // Render history list
+        function renderHistoryList() {
+            historyList.innerHTML = '';
+            
+            if (gameState.rewardsHistory.length === 0) {
+                const emptyItem = document.createElement('li');
+                emptyItem.textContent = 'Chưa có phần thưởng nào';
+                historyList.appendChild(emptyItem);
+                return;
+            }
+            
+            gameState.rewardsHistory.forEach((reward, index) => {
+                const item = document.createElement('li');
+                item.className = 'history-item';
+                
+                const nameElement = document.createElement('div');
+                nameElement.className = 'history-item-name';
+                nameElement.textContent = reward.name;
+                
+                const typeElement = document.createElement('div');
+                typeElement.className = `history-item-type ${reward.type}`;
+                typeElement.textContent = reward.type === 'Common' ? 'Thường' : 
+                                         reward.type === 'Rare' ? 'Hiếm' : 'Siêu Hiếm';
+                typeElement.style.backgroundColor = reward.type === 'Common' ? 'var(--common-color)' : 
+                                                   reward.type === 'Rare' ? 'var(--rare-color)' : 'var(--super-rare-color)';
+                
+                const valueElement = document.createElement('div');
+                valueElement.textContent = `Giá trị: ${reward.value}`;
+                
+                item.appendChild(nameElement);
+                item.appendChild(typeElement);
+                item.appendChild(valueElement);
+                
+                historyList.appendChild(item);
+            });
+        }
+
+        // Form submission (redeem code)
+        redeemForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredCode = codeInput.value.trim();
+            
+            // Check if code has been used
+            if (gameState.usedCodes.includes(enteredCode)) {
+                alert('Mã này đã được sử dụng!');
+                return;
+            }
+            
+            // Find code in our "database"
+            const codeData = redeemCodes.find(code => code.code === enteredCode);
+            
+            if (codeData) {
+                // Add plays
+                gameState.plays += codeData.plays;
+                
+                // Mark code as used
+                gameState.usedCodes.push(enteredCode);
+                
+                // Clear input
+                codeInput.value = '';
+                
+                // Save and update UI
+                saveGameState();
+                updateUI();
+                
+                alert(`Đã thêm ${codeData.plays} lượt chơi!`);
+            } else {
+                alert('Mã không hợp lệ!');
+            }
+        });
+
+        // Open chest
+        chestElement.addEventListener('click', function() {
+            if (gameState.plays <= 0) return;
+            
+            // Decrease play count
+            gameState.plays--;
+            
+            // Open animation
+            chestElement.classList.add('open');
+            
+            // Determine reward based on probabilities
+            setTimeout(() => {
+                const reward = determineReward();
+                showReward(reward);
+                
+                // Add to history
+                gameState.rewardsHistory.unshift(reward);
+                
+                // Adjust probabilities for next roll
+                adjustProbabilities();
+                
+                // Save and update UI
+                saveGameState();
+                updateUI();
+                
+                // Reset chest after animation
+                setTimeout(() => {
+                    chestElement.classList.remove('open');
+                }, 500);
+            }, 1000);
+        });
+
+        // Determine reward based on probabilities
+        function determineReward() {
+            const roll = Math.random() * 100;
+            let selectedReward;
+            
+            if (roll < gameState.probabilities.superRare) {
+                // Super Rare reward
+                selectedReward = gifts.filter(gift => gift.type === 'SuperRare')[Math.floor(Math.random() * gifts.filter(gift => gift.type === 'SuperRare').length)];
+            } else if (roll < gameState.probabilities.superRare + gameState.probabilities.rare) {
+                // Rare reward
+                selectedReward = gifts.filter(gift => gift.type === 'Rare')[Math.floor(Math.random() * gifts.filter(gift => gift.type === 'Rare').length)];
+            } else {
+                // Common reward
+                selectedReward = gifts.filter(gift => gift.type === 'Common')[Math.floor(Math.random() * gifts.filter(gift => gift.type === 'Common').length)];
+            }
+            
+            return { ...selectedReward };
+        }
+
+        // Adjust probabilities after each roll
+        function adjustProbabilities() {
+            // Increase super rare chance
+            gameState.probabilities.superRare += 1;
+            
+            // Adjust other probabilities
+            gameState.probabilities.rare = Math.max(0, 100 - gameState.probabilities.common - gameState.probabilities.superRare);
+            
+            // If probability is too high, reset
+            if (gameState.probabilities.superRare >= 20) {
+                gameState.probabilities.superRare = 1;
+                gameState.probabilities.rare = 19;
+                gameState.probabilities.common = 80;
+            }
+        }
+
+        // Show reward popup
+        function showReward(reward) {
+            gameState.currentReward = reward;
+            
+            rewardType.textContent = reward.type === 'Common' ? 'Thường' : 
+                                    reward.type === 'Rare' ? 'Hiếm' : 'Siêu Hiếm';
+            rewardType.className = `reward-type ${reward.type}`;
+            
+            rewardImage.style.backgroundImage = `url(${reward.image})`;
+            rewardName.textContent = reward.name;
+            rewardDescription.textContent = reward.description;
+            rewardValue.textContent = `Giá trị: ${reward.value}`;
+            
+            rewardRedeem.dataset.link = reward.redeemLink;
+            
+            rewardPopup.classList.add('show');
+            
+            // Add confetti effect for rare and super rare
+            if (reward.type === 'Rare' || reward.type === 'SuperRare') {
+                createConfetti(reward.type === 'SuperRare' ? 100 : 50);
+            }
+        }
+
+        // Create confetti effect
+        function createConfetti(count) {
+            const colors = ['#ffd700', '#ff5733', '#4287f5', '#ff33a8', '#33ff57'];
+            
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.opacity = 1;
+                
+                document.body.appendChild(confetti);
+                
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                
+                const dest = {
+                    x: confetti.offsetLeft + (Math.random() - 0.5) * 100,
+                    y: window.innerHeight + 100
+                };
+                
+                const animation = confetti.animate([
+                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translate(${(Math.random() - 0.5) * 200}px, ${window.innerHeight/2}px) rotate(${Math.random() * 360}deg)`, opacity: 1 },
+                    { transform: `translate(${dest.x - confetti.offsetLeft}px, ${dest.y}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                });
+                
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+
+        // Close reward popup
+        rewardClose.addEventListener('click', function() {
+            rewardPopup.classList.remove('show');
+        });
+
+        // Redeem reward
+        rewardRedeem.addEventListener('click', function() {
+            const link = this.dataset.link;
+            if (link) {
+                window.open(link, '_blank');
+            }
+        });
+
+        // Toggle history panel
+        historyButton.addEventListener('click', function() {
+            historyPanel.classList.add('show');
+            overlay.classList.add('show');
+        });
+
+        closeHistory.addEventListener('click', function() {
+            historyPanel.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+        overlay.addEventListener('click', function() {
+            historyPanel.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+        // Initialize game
+        loadGameState();
+        updateUI();
+    </script>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Banking App</title>
+    <style>
+        :root {
+            --primary-color: #1e1e2f;
+            --accent-color: #d4af37;
+            --text-light: #ffffff;
+            --text-dark: #1e1e2f;
+            --grey-light: #f5f5f7;
+            --grey-dark: #7a7a7a;
+            --success: #28a745;
+            --danger: #dc3545;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            
+        }
+        
+        .phone {
+            width: 100%;
+            background-color: white;
+            border-radius: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .app-content {
+            height: calc(100% - 44px - 83px);
+            overflow-y: auto;
+            background: linear-gradient(to bottom, var(--primary-color) 0%, var(--primary-color) 30%, #f8f9fa 30%, #f8f9fa 100%);
+            padding: 20px;
+        }
+        
+        .user-info-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .user-info-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, transparent 50%, rgba(212, 175, 55, 0.1) 50%);
+        }
+        
+        .user-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            object-fit: cover;
+            margin-bottom: 16px;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .greeting {
+            font-size: 14px;
+            color: var(--grey-dark);
+            margin-bottom: 4px;
+        }
+        
+        .user-name {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .info-label {
+            font-size: 14px;
+            color: var(--grey-dark);
+        }
+        
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .balance {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 16px;
+            padding: 16px 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .action-icon {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+        
+        .action-label {
+            font-size: 12px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .see-all {
+            font-size: 14px;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .card-section {
+            margin-bottom: 24px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .card-section::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .cards-container {
+            display: flex;
+            gap: 16px;
+            padding-bottom: 8px;
+        }
+        
+        .credit-card {
+            min-width: 280px;
+            height: 160px;
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .luxury-card {
+            background: linear-gradient(135deg, #1e1e2f 0%, #2d2d4a 100%);
+            color: var(--text-light);
+        }
+        
+        .platinum-card {
+            background: linear-gradient(135deg, #616161 0%, #9bc5c3 100%);
+            color: var(--text-light);
+        }
+        
+        .card-chip {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 30px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+            opacity: 0.8;
+        }
+        
+        .card-type {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .card-number {
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin: 8px 0;
+        }
+        
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+        
+        .transaction-section {
+            background-color: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--grey-light);
+        }
+        
+        .transaction-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .transaction-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+        
+        .income {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+        
+        .expense {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+        
+        .transaction-details {
+            flex: 1;
+        }
+        
+        .transaction-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        
+        .transaction-date {
+            font-size: 12px;
+            color: var(--grey-dark);
+        }
+        
+        .transaction-amount {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .amount-income {
+            color: var(--success);
+        }
+        
+        .amount-expense {
+            color: var(--danger);
+        }
+        
+        .bottom-nav {
+            height: 83px;
+            background-color: white;
+            border-top: 1px solid var(--grey-light);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 16px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            color: var(--grey-dark);
+        }
+        
+        .nav-icon.active {
+            color: var(--accent-color);
+        }
+        
+        .nav-label {
+            font-size: 12px;
+            color: var(--grey-dark);
+        }
+        
+        .nav-label.active {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        
+        <div class="app-content">
+            <div class="user-info-card">
+                <p class="greeting">Xin chào,</p>
+                <h2 class="user-name">Nguyễn Văn A</h2>
+                
+                <div class="info-row">
+                  <span class="info-label">Mã người dùng</span>
+                  <span class="info-value">LUX023456789</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="info-label">Số dư tài khoản</span>
+                  <span class="balance">2,468,000,000 ₫</span>
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <div class="action-btn">
+                    <div class="action-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                    </div>
+                    <span class="action-label">Chuyển tiền</span>
+                </div>
+                <div class="action-btn">
+                    <div class="action-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5z"/>
+                        </svg>
+                    </div>
+                    <span class="action-label">Bảo mật</span>
+                </div>
+                <div class="action-btn">
+                    <div class="action-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/>
+                            <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-4 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-4 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-4 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        </svg>
+                    </div>
+                    <span class="action-label">Quét mã</span>
+                </div>
+                <div class="action-btn">
+                    <div class="action-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </div>
+                    <span class="action-label">Tùy chọn</span>
+                </div>
+            </div>
+            
+            <div class="section-header">
+                <h3 class="section-title">Thẻ của tôi</h3>
+                <span class="see-all">Xem tất cả</span>
+            </div>
+            
+            <div class="card-section">
+                <div class="cards-container">
+                    <div class="credit-card luxury-card">
+                        <div class="card-chip"></div>
+                        <span class="card-type">Luxury Black</span>
+                        <div class="card-number">**** **** **** 1234</div>
+                        <div class="card-details">
+                            <span>Nguyễn Văn A</span>
+                            <span>12/28</span>
+                        </div>
+                    </div>
+                    <div class="credit-card platinum-card">
+                        <div class="card-chip"></div>
+                        <span class="card-type">Platinum</span>
+                        <div class="card-number">**** **** **** 5678</div>
+                        <div class="card-details">
+                            <span>Nguyễn Văn A</span>
+                            <span>06/26</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-header">
+                <h3 class="section-title">Giao dịch gần đây</h3>
+                <span class="see-all">Xem tất cả</span>
+            </div>
+            
+            <div class="transaction-section">
+                <div class="transaction-list">
+                    <div class="transaction-item">
+                        <div class="transaction-icon income">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                            </svg>
+                        </div>
+                        <div class="transaction-details">
+                            <h4 class="transaction-title">Nhận tiền</h4>
+                            <p class="transaction-date">13 Th3, 2025 - 08:45</p>
+                        </div>
+                        <span class="transaction-amount amount-income">+15,000,000 ₫</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon expense">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                            </svg>
+                        </div>
+                        <div class="transaction-details">
+                            <h4 class="transaction-title">Thanh toán</h4>
+                            <p class="transaction-date">12 Th3, 2025 - 14:22</p>
+                        </div>
+                        <span class="transaction-amount amount-expense">-3,500,000 ₫</span>
+                    </div>
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon expense">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                            </svg>
+                        </div>
+                        <div class="transaction-details">
+                            <h4 class="transaction-title">Chuyển tiền</h4>
+                            <p class="transaction-date">10 Th3, 2025 - 09:15</p>
+                        </div>
+                        <span class="transaction-amount amount-expense">-8,200,000 ₫</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <svg class="nav-icon active" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+                    <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+                </svg>
+                <span class="nav-label active">Trang chủ</span>
+            </div>
+            <div class="nav-item">
+                <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                </svg>
+                <span class="nav-label">Giao dịch</span>
+            </div>
+            <div class="nav-item">
+                <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z"/>
+                </svg>
+                <span class="nav-label">Đầu tư</span>
+            </div>
+            <div class="nav-item">
+                <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+                <span class="nav-label">Tài khoản</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
