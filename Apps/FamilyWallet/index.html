@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+
+<head>
+  <!-- Tiêu đề trang -->
+  <title>Quản Lý Công Việc</title>
+  
+  <!-- Bộ giải mã và phân loại thiết bị -->
+  <meta charset="UTF-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover , user-scalable=no" >
+  
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /> -->
+  
+  <!-- Đảm bảo đặt meta tag sau -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <!-- Biểu tượng cho web -->
+  <link rel="icon" href="/Asset/logo/logo.png" />
+  <link rel="apple-touch-icon" href="/Asset/logo/logo.png" sizes="150x150" />
+  
+  <!-- Ảnh cho phương tiện chia sẻ -->
+  <meta property="og:image" content="/Asset/img/Banner.png" />
+  <meta property="og:title" content="Hunq - Trang cá nhân" />
+  <meta property="og:description" content="Thiết kế và lập trình Đinh Mạnh Hùng" />
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Light theme colors */
+            --primary-color: #8FCE3C;
+            --primary-light: #a29bfe;
+            --primary-dark: #5549d9;
+            --success-color: #00b894;#ABFF3B
+            --danger-color: #ff6b6b;
+            --warning-color: #fdcb6e;
+            --info-color: #0984e3;
+            --background-color: #f5f7fa;
+            --surface-color: #ffffff;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --border-color: #e1e4e8;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --tab-bar-color: #ffffff;
+
+            /* Common variables */
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #6c5ce7;
+            --primary-light: #a29bfe;
+            --primary-dark: #5549d9;
+            --success-color: #00b894;
+            --danger-color: #ff6b6b;
+            --warning-color: #fdcb6e;
+            --info-color: #0984e3;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-primary: #f5f6fa;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --tab-bar-color: #1e1e1e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .container {
+            max-width: 550px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 16px;
+            padding-bottom: 80px;
+        }
+        
+        /* Header */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            margin-bottom: 20px;
+        }
+        
+        .app-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .app-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .icon-button {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            background-color: var(--surface-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        
+        .icon-button i {
+            font-size: 18px;
+        }
+        
+        .icon-button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Cards */
+        .card {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+            color: white;
+            padding: 20px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius-lg);
+        }
+        
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0.4;
+        }
+        
+        .balance-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        
+        .balance-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .balance-card .card-number {
+            margin-top: 20px;
+            font-size: 18px;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+        
+        /* Button Styles */
+        .btn {
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .btn i {
+            font-size: 18px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-light {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+        }
+        
+        .btn-light:hover {
+            background-color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            opacity: 0.9;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .section-action {
+            font-size: 14px;
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Transaction List */
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            transition: var(--transition);
+        }
+        
+        .transaction-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+        
+        .transaction-icon.deposit {
+            background-color: rgba(0, 184, 148, 0.1);
+            color: var(--success-color);
+        }
+        
+        .transaction-icon.withdraw {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .transaction-icon i {
+            font-size: 18px;
+        }
+        
+        .transaction-details {
+            flex: 1;
+        }
+        
+        .transaction-type {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .transaction-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .transaction-note {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        .transaction-amount {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .transaction-amount.deposit {
+            color: var(--success-color);
+        }
+        
+        .transaction-amount.withdraw {
+            color: var(--danger-color);
+        }
+        
+        .transaction-status {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        
+        .transaction-status.pending {
+            background-color: rgba(253, 203, 110, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .transaction-status.completed {
+            background-color: rgba(0, 184, 148, 0.2);
+            color: var(--success-color);
+        }
+        
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--tab-bar-color);
+            border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+            padding: 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 -2px 10px var(--shadow-color);
+            z-index: 100;
+            transition: var(--transition);
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 0;
+            flex: 1;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .tab-item.active {
+            color: var(--primary-color);
+        }
+        
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        .tab-icon {
+            margin-bottom: 4px;
+        }
+        
+        .tab-icon i {
+            font-size: 20px;
+        }
+        
+        .tab-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Login Form */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 32px 24px;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 16px var(--shadow-color);
+            margin: 40px auto;
+            max-width: 400px;
+            transition: var(--transition);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .login-logo {
+            font-size: 32px;
+            margin-bottom: 16px;
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .login-logo i {
+            font-size: 36px;
+        }
+        
+        .login-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        
+        .form-control {
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            font-size: 16px;
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2);
+        }
+        
+        .form-icon {
+            position: absolute;
+            right: 16px;
+            top: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .error-message {
+            color: var(--danger-color);
+            font-size: 13px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .btn-login {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px;
+            width: 100%;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 16px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 8px 24px var(--shadow-color);
+            transition: var(--transition);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--background-color);
+        }
+        
+        .modal-close i {
+            font-size: 16px;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        /* Loading and Empty States */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(108, 92, 231, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        .empty-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        /* User Info */
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            margin-bottom: 24px;
+        }
+        
+        .user-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 600;
+            overflow: hidden;
+        }
+        .user-avatar img {
+          display: block;
+          max-width: 100%;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .user-id {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Settings Tab */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        
+        .settings-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: rgba(108, 92, 231, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+        
+        .settings-icon i {
+            font-size: 18px;
+        }
+        
+        .settings-icon.logout {
+            color: var(--danger-color);
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+        
+        .settings-details {
+            flex: 1;
+        }
+        
+        .settings-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .settings-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            padding: 12px 24px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 90%;
+            width: 90%;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .toast-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .toast-success .toast-icon {
+            color: var(--success-color);
+        }
+        
+        .toast-error .toast-icon {
+            color: var(--danger-color);
+        }
+        
+        .toast-info .toast-icon {
+            color: var(--info-color);
+        }
+        
+        /* Auto Refresh Indicator */
+        .refresh-indicator {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--surface-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            z-index: 99;
+            animation: pulse 2s infinite;
+            display: none;
+        }
+        
+        .refresh-indicator.active {
+            display: flex;
+        }
+        
+        .refresh-indicator i {
+            font-size: 16px;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Additional Animation for Cards */
+        .card, .transaction-item, .settings-item, .user-card {
+            transition: transform 0.2s ease;
+        }
+        
+        .card:active, .transaction-item:active, .settings-item:active, .user-card:active {
+            transform: scale(0.98);
+        }
+        
+        /* App Settings */
+        .app-container {
+            display: none;
+        }
+        
+        .hidden{
+          display: none!important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div class="login-container" id="loginContainer">
+            <div class="login-header">
+                <div class="login-logo">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h1 class="login-title">Family Wallet</h1>
+                <p class="login-subtitle">Đăng nhập để quản lý tài chính của bạn</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="userId" class="form-label">ID Người dùng</label>
+                <input type="text" id="userId" class="form-control" placeholder="Nhập ID của bạn">
+                <i class="fas fa-user form-icon"></i>
+                <div class="error-message" id="userIdError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu">
+                <i class="fas fa-lock form-icon"></i>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+            
+            <button class="btn btn-login" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i> Đăng nhập
+            </button>
+        </div>
+
+        <!-- Main App Container -->
+        <div class="app-container" id="appContainer">
+            <!-- Tab Content -->
+            <div class="tab-content active" id="homeTab">
+                <!-- App Header -->
+                <div class="app-header">
+                    <h1 class="app-title">Family Wallet</h1>
+                    <div class="app-actions">
+                        <button class="icon-button" id="themeToggleBtn">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button class="icon-button" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                           <button class="icon-button" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                          </button>
+                    </div>
+                </div>
+                
+                <!-- User Info Card -->
+                <div class="user-card">
+                    <div class="user-avatar">
+                      <img id="userAvatar" src="/avatar.jpeg" alt="" />
+                      
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name" id="userName">User Name</div>
+                        <div class="user-id" id="userIdDisplay">ID: 12345</div>
+                    </div>
+                 
+                </div>
+                
+                <!-- Balance Card -->
+                <div class="balance-card">
+                    <div class="balance-title">Số dư tài khoản</div>
+                    <div class="balance-amount" id="userBalance">0 VND</div>
+                    <div class="action-buttons hidden" id="withdrawBtn">
+                        <button class="btn btn-light">
+                            <i class="fas fa-money-bill-wave"></i> Rút tiền
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recent Transactions -->
+                <div class="section-header">
+                    <h2 class="section-title">Giao dịch gần đây</h2>
+                    <div class="section-action" id="viewAllTransactions">Xem tất cả</div>
+                </div>
+                
+                <div id="recentTransactions" class="transaction-list">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div class="tab-content" id="transactionsTab">
+                <div class="app-header">
+                    <h1 class="app-title">Lịch sử giao dịch</h1>
+                </div>
+                
+                <div id="allTransactions" class="transaction-list">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settingsTab">
+                <div class="app-header">
+                    <h1 class="app-title">Cài đặt</h1>
+                </div>
+                
+                
+                
+                <div class="settings-list">
+                    <!-- Theme Setting -->
+                    <div class="settings-item">
+                        <div class="settings-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="settings-details">
+                            <div class="settings-title">Chế độ tối</div>
+                            <div class="settings-description">Thay đổi giao diện sang chế độ tối</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <!-- Auto Refresh Setting -->
+                    <div class="settings-item">
+                        <div class="settings-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="settings-details">
+                            <div class="settings-title">Tự động cập nhật</div>
+                            <div class="settings-description">Cập nhật dữ liệu mỗi 15 giây</div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="autoRefreshToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <!-- Logout Option -->
+                    <div class="settings-item" id="logoutOption">
+                        <div class="settings-icon logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="settings-details">
+                            <div class="settings-title">Đăng xuất</div>
+                            <div class="settings-description">Đăng xuất khỏi tài khoản của bạn</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <div class="tab-item active" data-tab="home">
+                    <div class="tab-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="tab-label">Trang chủ</div>
+                </div>
+                <div class="tab-item" data-tab="transactions">
+                    <div class="tab-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="tab-label">Giao dịch</div>
+                </div>
+                <div class="tab-item" data-tab="settings">
+                    <div class="tab-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="tab-label">Cài đặt</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Rút tiền</div>
+                <button class="modal-close" id="closeWithdrawModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="form-group">
+                <label for="withdrawAmount" class="form-label">Số tiền</label>
+                <input type="number" id="withdrawAmount" class="form-control" placeholder="Nhập số tiền cần rút">
+                <i class="fas fa-money-bill-wave form-icon"></i>
+                <div class="error-message" id="withdrawAmountError"></div>
+            </div>
+            <div class="form-group">
+                <label for="withdrawNote" class="form-label">Ghi chú</label>
+                <input type="text" id="withdrawNote" class="form-control" placeholder="Nhập ghi chú (không bắt buộc)">
+                <i class="fas fa-sticky-note form-icon"></i>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="confirmWithdrawBtn">
+                    <i class="fas fa-check"></i> Xác nhận rút tiền
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toastIcon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="toast-message" id="toastMessage">Thông báo thành công!</div>
+    </div>
+    
+    <!-- Auto Refresh Indicator -->
+    <div class="refresh-indicator" id="refreshIndicator">
+        <i class="fas fa-sync-alt fa-spin"></i>
+    </div>
+
+    <script>
+        // API URLs
+        //https://script.google.com/macros/s/AKfycbxH3_hZq62ilVcw-w0oT4SJFfJ7gy_6DPCnCCrFrXjZU8H-UrQroUCExBqPPcnjcU6vtg/exec
+        
+        const USERS_API = 'https://script.google.com/macros/s/AKfycbxH3_hZq62ilVcw-w0oT4SJFfJ7gy_6DPCnCCrFrXjZU8H-UrQroUCExBqPPcnjcU6vtg/exec?sheet=Users';
+        const HISTORY_API = 'https://script.google.com/macros/s/AKfycbxH3_hZq62ilVcw-w0oT4SJFfJ7gy_6DPCnCCrFrXjZU8H-UrQroUCExBqPPcnjcU6vtg/exec?sheet=History';
+        const HISTORY_POST_API = 'https://script.google.com/macros/s/AKfycbxH3_hZq62ilVcw-w0oT4SJFfJ7gy_6DPCnCCrFrXjZU8H-UrQroUCExBqPPcnjcU6vtg/exec';
+        
+        // DOM Elements
+        const loginContainer = document.getElementById('loginContainer');
+        const appContainer = document.getElementById('appContainer');
+        const userIdInput = document.getElementById('userId');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        const userIdError = document.getElementById('userIdError');
+        const passwordError = document.getElementById('passwordError');
+        const userAvatar = document.getElementById('userAvatar');
+        const userName = document.getElementById('userName');
+        const userIdDisplay = document.getElementById('userIdDisplay');
+        const userBalance = document.getElementById('userBalance');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const logoutOption = document.getElementById('logoutOption');
+       // const withdrawBtn = document.getElementById('withdrawBtn');
+        const withdrawModal = document.getElementById('withdrawModal');
+        const closeWithdrawModal = document.getElementById('closeWithdrawModal');
+        const withdrawAmount = document.getElementById('withdrawAmount');
+        const withdrawNote = document.getElementById('withdrawNote');
+        const withdrawAmountError = document.getElementById('withdrawAmountError');
+        const confirmWithdrawBtn = document.getElementById('confirmWithdrawBtn');
+        const recentTransactions = document.getElementById('recentTransactions');
+        const allTransactions = document.getElementById('allTransactions');
+        const tabItems = document.querySelectorAll('.tab-item');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const viewAllTransactions = document.getElementById('viewAllTransactions');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const autoRefreshToggle = document.getElementById('autoRefreshToggle');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const refreshIndicator = document.getElementById('refreshIndicator');
+        const toast = document.getElementById('toast');
+        const toastIcon = document.getElementById('toastIcon');
+        const toastMessage = document.getElementById('toastMessage');
+        
+        // Global Variables
+        let currentUser = null;
+        let transactions = [];
+        let users = [];
+        let autoRefreshInterval = null;
+        let isDarkMode = false;
+        
+        // Theme Management
+        function initTheme() {
+            // Check if user has a preference in localStorage
+            const savedTheme = localStorage.getItem('walletTheme');
+            if (savedTheme === 'dark') {
+                enableDarkMode();
+                darkModeToggle.checked = true;
+            } else {
+                disableDarkMode();
+                darkModeToggle.checked = false;
+            }
+        }
+        
+        function toggleTheme() {
+            if (isDarkMode) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+            
+            // Save user preference
+            localStorage.setItem('walletTheme', isDarkMode ? 'dark' : 'light');
+            darkModeToggle.checked = isDarkMode;
+        }
+        
+        function enableDarkMode() {
+            document.body.setAttribute('data-theme', 'dark');
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            isDarkMode = true;
+        }
+        
+        function disableDarkMode() {
+            document.body.removeAttribute('data-theme');
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            isDarkMode = false;
+        }
+        
+        // Auto Refresh Management
+        function toggleAutoRefresh() {
+            if (autoRefreshToggle.checked) {
+                startAutoRefresh();
+                showToast('Đã bật tự động cập nhật', 'info');
+                localStorage.setItem('walletAutoRefresh', 'true');
+            } else {
+                stopAutoRefresh();
+                showToast('Đã tắt tự động cập nhật', 'info');
+                localStorage.setItem('walletAutoRefresh', 'false');
+            }
+        }
+        
+        function startAutoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+            }
+            
+            autoRefreshInterval = setInterval(() => {
+                if (currentUser) {
+                    refreshIndicator.classList.add('active');
+                    loadUserData();
+                    loadTransactions();
+                    
+                    // Hide indicator after 1 second
+                    setTimeout(() => {
+                        refreshIndicator.classList.remove('active');
+                    }, 1000);
+                }
+            }, 15000); // Refresh every 15 seconds
+        }
+        
+        function stopAutoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+            }
+            refreshIndicator.classList.remove('active');
+        }
+        
+        function initAutoRefresh() {
+            const savedAutoRefresh = localStorage.getItem('walletAutoRefresh');
+            if (savedAutoRefresh === 'true') {
+                autoRefreshToggle.checked = true;
+                startAutoRefresh();
+            } else {
+                autoRefreshToggle.checked = false;
+            }
+        }
+        
+        // Toast Notifications
+        function showToast(message, type = 'success') {
+            toastMessage.textContent = message;
+            
+            // Set icon based on type
+            if (type === 'success') {
+                toastIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+                toast.className = 'toast toast-success';
+            } else if (type === 'error') {
+                toastIcon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+                toast.className = 'toast toast-error';
+            } else if (type === 'info') {
+                toastIcon.innerHTML = '<i class="fas fa-info-circle"></i>';
+                toast.className = 'toast toast-info';
+            }
+            
+            // Show toast
+            toast.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Check if user is logged in
+        function checkAuth() {
+            const storedUser = localStorage.getItem('walletUser');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                loginContainer.style.display = 'none';
+                appContainer.style.display = 'block';
+                loadUserData();
+                loadTransactions();
+            }
+        }
+        
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+        
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+        
+        // Load user data
+        async function loadUserData() {
+            try {
+                const response = await fetch(USERS_API);
+                users = await response.json();
+                
+                // Find current user
+                const user = users.find(u => u.ID.toString() === currentUser.ID.toString());
+                if (user) {
+                    currentUser = user;
+                    localStorage.setItem('walletUser', JSON.stringify(user));
+                    
+                    // Update UI
+                    userAvatar.src = `https://graph.facebook.com/${user.Avatar}/picture?width=9999&access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662`;
+                    userName.textContent = user.FullName;
+                    userIdDisplay.textContent = `ID: ${user.ID}`;
+                    userBalance.textContent = formatCurrency(user.Amount);
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                showToast('Không thể tải dữ liệu người dùng', 'error');
+            }
+        }
+        
+        // Load transactions
+        async function loadTransactions() {
+            try {
+                recentTransactions.innerHTML = '<div class="loading"><div class="loading-spinner"></div></div>';
+                allTransactions.innerHTML = '<div class="loading"><div class="loading-spinner"></div></div>';
+                
+                const response = await fetch(HISTORY_API);
+                transactions = await response.json();
+                
+                // Filter user transactions
+                const userTransactions = transactions.filter(t => t.ID.toString() === currentUser.ID.toString());
+                
+                // Sort by time (newest first)
+                userTransactions.sort((a, b) => new Date(b.Time) - new Date(a.Time));
+                
+                // Render recent transactions (up to 3)
+                const recentTrans = userTransactions.slice(0, 3);
+                if (recentTrans.length > 0) {
+                    renderTransactions(recentTrans, recentTransactions);
+                } else {
+                    recentTransactions.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon"><i class="fas fa-file-alt"></i></div>
+                            <div>Chưa có giao dịch nào</div>
+                        </div>
+                    `;
+                }
+                
+                // Render all transactions
+                if (userTransactions.length > 0) {
+                    renderTransactions(userTransactions, allTransactions);
+                } else {
+                    allTransactions.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon"><i class="fas fa-file-alt"></i></div>
+                            <div>Chưa có giao dịch nào</div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading transactions:', error);
+                recentTransactions.innerHTML = '<div class="empty-state">Đã xảy ra lỗi khi tải dữ liệu</div>';
+                allTransactions.innerHTML = '<div class="empty-state">Đã xảy ra lỗi khi tải dữ liệu</div>';
+                showToast('Không thể tải lịch sử giao dịch', 'error');
+            }
+        }
+        
+        // Render transactions
+        function renderTransactions(transactions, container) {
+            let html = '';
+            
+            transactions.forEach(transaction => {
+                const isDeposit = parseFloat(transaction.Amount) > 0;
+                const iconClass = isDeposit ? 'deposit' : 'withdraw';
+                const icon = isDeposit ? '<i class="fas fa-arrow-down"></i>' : '<i class="fas fa-arrow-up"></i>';
+                
+                const statusClass = transaction.Status === 'Đang xử lý' ? 'pending' : 'completed';
+                const statusHtml = `<div class="transaction-status ${statusClass}">${transaction.Status}</div>`;
+                
+                html += `
+                    <div class="transaction-item">
+                        <div class="transaction-icon ${iconClass}">${icon}</div>
+                        <div class="transaction-details">
+                            <div class="transaction-type">${transaction.Type}</div>
+                            <div class="transaction-meta">
+                                <span><i class="far fa-clock"></i> ${formatDate(transaction.Time)}</span>
+                            </div>
+                            ${transaction.Note ? `<div class="transaction-note">${transaction.Note}</div>` : ''}
+                            ${statusHtml}
+                        </div>
+                        <div class="transaction-amount ${iconClass}">${formatCurrency(Math.abs(transaction.Amount))}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Handle login
+        loginBtn.addEventListener('click', async () => {
+            const userId = userIdInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            // Reset error messages
+            userIdError.style.display = 'none';
+            passwordError.style.display = 'none';
+            
+            // Validate inputs
+            let hasError = false;
+            
+            if (!userId) {
+                userIdError.textContent = 'Vui lòng nhập ID';
+                userIdError.style.display = 'block';
+                hasError = true;
+            }
+            
+            if (!password) {
+                passwordError.textContent = 'Vui lòng nhập mật khẩu';
+                passwordError.style.display = 'block';
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            try {
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đăng nhập...';
+                loginBtn.disabled = true;
+                
+                // Fetch users data
+                const response = await fetch(USERS_API);
+                users = await response.json();
+                
+                // Find user
+                const user = users.find(u => u.ID.toString() === userId && u.Password === password);
+                
+                if (user) {
+                    // Login success
+                    currentUser = user;
+                    localStorage.setItem('walletUser', JSON.stringify(user));
+                    
+                    showToast(`Xin chào, ${user.FullName}!`, 'success');
+                    
+                    loginContainer.style.display = 'none';
+                    appContainer.style.display = 'block';
+                    
+                    // Load user data and transactions
+                    loadUserData();
+                    loadTransactions();
+                    
+                    // Initialize auto refresh if enabled
+                    initAutoRefresh();
+                } else {
+                    // Login failed
+                    passwordError.textContent = 'ID hoặc mật khẩu không đúng';
+                    passwordError.style.display = 'block';
+                    showToast('Đăng nhập thất bại', 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                passwordError.textContent = 'Đã xảy ra lỗi. Vui lòng thử lại sau.';
+                passwordError.style.display = 'block';
+                showToast('Đã xảy ra lỗi khi đăng nhập', 'error');
+            } finally {
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Đăng nhập';
+                loginBtn.disabled = false;
+            }
+        });
+        
+        // Handle logout
+        function logout() {
+            localStorage.removeItem('walletUser');
+            stopAutoRefresh();
+            currentUser = null;
+            appContainer.style.display = 'none';
+            loginContainer.style.display = 'flex';
+            userIdInput.value = '';
+            passwordInput.value = '';
+            showToast('Đã đăng xuất thành công', 'info');
+            
+            // Reset to home tab
+            tabItems.forEach(item => item.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            tabItems[0].classList.add('active');
+            tabContents[0].classList.add('active');
+        }
+        
+        logoutBtn.addEventListener('click', logout);
+        logoutOption.addEventListener('click', logout);
+        
+        // Show withdraw modal
+        withdrawBtn.addEventListener('click', () => {
+        
+            withdrawAmount.value = '';
+            withdrawNote.value = '';
+            withdrawModal.style.display = 'block';
+            withdrawAmountError.style.display = 'none';
+            
+        });
+        
+        // Close withdraw modal
+        closeWithdrawModal.addEventListener('click', () => {
+            withdrawModal.style.display = 'none';
+        
+        });
+        
+        // Handle withdraw
+        confirmWithdrawBtn.addEventListener('click', async () => {
+            const amount = parseFloat(withdrawAmount.value.trim());
+            const note = withdrawNote.value.trim() || 'Rút tiền';
+            
+            // Validate amount
+            if (!amount || isNaN(amount) || amount <= 0) {
+                withdrawAmountError.textContent = 'Vui lòng nhập số tiền hợp lệ';
+                withdrawAmountError.style.display = 'block';
+                return;
+            }
+            
+            if (amount > currentUser.Amount) {
+                withdrawAmountError.textContent = 'Số dư không đủ';
+                withdrawAmountError.style.display = 'block';
+                return;
+            }
+            
+            try {
+                confirmWithdrawBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+                confirmWithdrawBtn.disabled = true;
+                
+                // Prepare data for the POST request
+                const withdrawData = {
+                    sheet: "History",
+                    data: {
+                        Time: new Date().toISOString(),
+                        ID: currentUser.ID,
+                        Amount: -amount, // Negative amount for withdraw
+                        Type: "Rút tiền",
+                        Note: note,
+                        Status: "Đang xử lý"
+                    }
+                };
+                
+                // Send withdrawal request to Google Sheets
+                const response = await fetch(HISTORY_POST_API, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(withdrawData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Add temporary transaction to the UI (will be refreshed when data reloads)
+                    const newTransaction = withdrawData.data;
+                    transactions.unshift(newTransaction);
+                    
+                    // Close modal
+                    withdrawModal.style.display = 'none';
+                    
+                    // Show success toast
+                    showToast('Yêu cầu rút tiền đã được gửi và đang chờ xử lý', 'success');
+                    
+                    // Reload transactions to show new transaction
+                    loadTransactions();
+                } else {
+                    throw new Error('Failed to submit withdrawal request');
+                }
+                
+            } catch (error) {
+                console.error('Withdraw error:', error);
+                showToast('Đã xảy ra lỗi khi gửi yêu cầu rút tiền', 'error');
+            } finally {
+                confirmWithdrawBtn.innerHTML = '<i class="fas fa-check"></i> Xác nhận rút tiền';
+                confirmWithdrawBtn.disabled = false;
+            }
+        });
+        
+        // Handle tabs
+        tabItems.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabItems.forEach(item => item.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show active content
+                tabContents.forEach(content => content.classList.remove('active'));
+                document.getElementById(`${tabId}Tab`).classList.add('active');
+            });
+        });
+        
+        // View all transactions
+        viewAllTransactions.addEventListener('click', () => {
+            // Switch to transactions tab
+            tabItems.forEach(item => item.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Find transactions tab and activate it
+            tabItems[1].classList.add('active');
+            document.getElementById('transactionsTab').classList.add('active');
+        });
+        
+        // Manual refresh
+        refreshBtn.addEventListener('click', () => {
+            if (currentUser) {
+                refreshIndicator.classList.add('active');
+                loadUserData();
+                loadTransactions();
+                showToast('Dữ liệu đã được cập nhật', 'info');
+                
+                // Hide indicator after 1 second
+                setTimeout(() => {
+                    refreshIndicator.classList.remove('active');
+                }, 1000);
+            }
+        });
+        
+        // Theme toggle
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        darkModeToggle.addEventListener('change', toggleTheme);
+        
+        // Auto refresh toggle
+        autoRefreshToggle.addEventListener('change', toggleAutoRefresh);
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === withdrawModal) {
+                withdrawModal.style.display = 'none';
+            }
+        });
+        
+        // Initialize app
+        initTheme();
+        checkAuth();
+    </script>
+</body>
+</html>
