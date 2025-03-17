@@ -5,7 +5,7 @@
 
 <head>
   <!-- Tiêu đề trang -->
-  <title>Quản Lý Công Việc</title>
+  <title>Family Wallet</title>
   
   <!-- Bộ giải mã và phân loại thiết bị -->
   <meta charset="UTF-8" />
@@ -24,7 +24,7 @@
   
   <!-- Ảnh cho phương tiện chia sẻ -->
   <meta property="og:image" content="/Asset/img/Banner.png" />
-  <meta property="og:title" content="Hunq - Trang cá nhân" />
+  <meta property="og:title" content="Hunq - Family" />
   <meta property="og:description" content="Thiết kế và lập trình Đinh Mạnh Hùng" />
   
   <!-- CSS -->
@@ -1372,14 +1372,22 @@
                     <div class="transaction-item">
                         <div class="transaction-icon ${iconClass}">${icon}</div>
                         <div class="transaction-details">
-                            <div class="transaction-type">${transaction.Type}</div>
+                        <div class="flex">
+                        <div class="transaction-type">${transaction.Type}</div>
+                        </div>
+
                             <div class="transaction-meta">
                                 <span><i class="far fa-clock"></i> ${formatDate(transaction.Time)}</span>
                             </div>
                             ${transaction.Note ? `<div class="transaction-note">${transaction.Note}</div>` : ''}
-                            ${statusHtml}
+
                         </div>
+                        <div class="flex">
                         <div class="transaction-amount ${iconClass}">${formatCurrency(Math.abs(transaction.Amount))}</div>
+                        ${statusHtml}
+                        </div>
+                      
+                        
                     </div>
                 `;
             });
