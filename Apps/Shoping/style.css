@@ -1,0 +1,503 @@
+:root {
+  --primary-color: #007BFF;
+  --primary-dark: #0056B3;
+  --primary-light: #cce5ff;
+  --secondary-color: #6c757d;
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --border-color: #dee2e6;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  
+  --header-height: 60px;
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --primary-color: #0d6efd;
+  --primary-dark: #0a58ca;
+  --primary-light: #084298;
+  --secondary-color: #adb5bd;
+  --bg-color: #121212;
+  --text-color: #f8f9fa;
+  --border-color: #343a40;
+  --card-bg: #1e1e1e;
+  --input-bg: #2c2c2c;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+:root {
+  --primary-color: #007bff;
+  --font-size: 16px; /* Mặc định */
+}
+
+/* Áp dụng font-size cho toàn bộ trang */
+body, input, button, select, textarea {
+  font-size: var(--font-size);
+}
+input:focus {
+  outline: none !important;
+}
+/* Cập nhật màu chủ đạo */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: var(--transition);
+  min-height: 100vh;
+  padding-bottom: 20px;
+  font-size: var(--font-size, 16px);
+}
+
+/* Header & Navigation */
+header {
+  position: sticky;
+  top: 0;
+  background-color: var(--primary-color);
+  color: white;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  z-index: 100;
+}
+
+.header-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.theme-switcher-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.theme-toggle {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: var(--card-bg);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.theme-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  transition: var(--transition);
+}
+
+[data-theme="dark"] .theme-slider {
+  transform: translateX(26px);
+}
+
+.color-picker {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Main Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* Card Styling */
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: var(--transition);
+}
+
+.card-title {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 15px;
+}
+.card label {
+  font-size: 14px;
+}
+.card label span{
+  font-size: var(--font-size);
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none ;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.quantity-control input {
+  width: 60px;
+  text-align: center;
+  margin: 0 10px;
+}
+
+/* Button styling */
+.btn, .btn-small {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  text-align: center;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.btn:hover, .btn-small:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn:active, .btn-small:active {
+  transform: translateY(1px);
+}
+
+/* Discount buttons */
+.discount-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.discount-btn, .discount-btn-custom {
+  flex: 1;
+  min-width: 60px;
+  padding: 8px;
+  color: var(--primary-color);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.discount-btn:hover, .discount-btn-custom:hover {
+  background-color: var(--primary-color) ;
+  border-color: var(--primary-color);
+}
+
+/* Radio button styling */
+.radio-group {
+  display: flex;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  margin-right: 5px;
+  accent-color: var(--primary-color);
+}
+
+/* Table styling */
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* For mobile, make table scroll horizontally */
+@media (max-width: 768px) {
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+/* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-title {
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+/* History items styling */
+.history-container {
+  margin-top: 20px;
+}
+
+.history-item {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.history-item:hover {
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.history-item ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.history-item .btn-small {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+/* Total amount display */
+.total-display {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid var(--primary-color);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Utilities */
+.hidden {
+  display: none;
+}
+
+/* Responsiveness */
+@media (min-width: 768px) {
+  .form-row {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .form-col {
+    flex: 1;
+  }
+  
+  .btn {
+    width: auto;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  
+  .header-title {
+    font-size: 1.1rem;
+  }
+  
+  .discount-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .card {
+    padding: 15px;
+  }
+  
+  .history-item .btn-small {
+    margin-top: 8px;
+    display: inline-block;
+  }
+  
+  /* Bottom navigation for mobile */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px var(--shadow-color);
+    z-index: 90;
+  }
+  
+  .mobile-nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+  
+  .mobile-nav-btn i {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+    color: var(--secondary-color);
+  }
+  
+  .mobile-nav-btn.active i {
+    color: var(--primary-color);
+  }
+  
+  body {
+    padding-bottom: 70px;
+  }
+}
+
+/* Floating action button for mobile */
+.fab {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 80;
+}
+
+.fab:hover {
+  background-color: var(--primary-dark);
+  transform: scale(1.05);
+}
+

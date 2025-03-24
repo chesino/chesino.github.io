@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý Hóa đơn</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div id="totalAmountHead" class="header-title">Quản lý Hóa đơn</div>
+    <div class="theme-switcher-container">
+      <div class="theme-toggle" id="themeToggle">
+        <div class="theme-slider"></div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="card">
+      <div class="form-group">
+        <label for="productName">Tên sản phẩm</label>
+        <input type="text" id="productName" list="productList" placeholder="Nhập tên sản phẩm">
+        <datalist id="productList"></datalist>
+      </div>
+      
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="priceMode" value="exclude" checked>
+          <span>Chưa Thuế</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="priceMode" value="include">
+          <span>Sau Thuế</span>
+        </label>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-col">
+          <div class="form-group">
+            <label for="basePrice">Giá gốc (chưa bao gồm thuế)</label>
+            <input type="number" pattern="[0-9]*" onfocus="this.value=''" id="basePrice" placeholder="0">
+          </div>
+        </div>
+        <div class="form-col" id="taxGroup">
+          <div class="form-group">
+            <label for="tax">Thuế (%)</label>
+            <input type="number" id="tax" value="8" min="0" max="100" pattern="[0-9]*" >
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="quantity">Số lượng</label>
+        <div class="quantity-control">
+          <button id="decreaseQty" class="btn-small">-</button>
+          <input type="number" id="quantity" value="1" min="1" pattern="[0-9]*" onfocus="this.value=''">
+          <button id="increaseQty" class="btn-small">+</button>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Giảm giá</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="discountType" value="percent" checked>
+            <span>Phần trăm</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="discountType" pattern="[0-9]*" onfocus="this.value=''" value="fixed">
+            <span>Giá cố định</span>
+          </label>
+        </div>
+      </div>
+      
+      <div id="discountPercentSection">
+        <input type="hidden" id="discountPercent" value="0">
+        <div class="discount-buttons">
+          <button class="discount-btn" data-value="0">0%</button>
+          <button class="discount-btn" data-value="10">10%</button>
+          <button class="discount-btn" data-value="20">20%</button>
+          <button class="discount-btn" data-value="30">30%</button>
+          <button class="discount-btn" data-value="50">50%</button>
+          <button class="discount-btn-custom">Tùy chỉnh</button>
+        </div>
+        <input type="number" id="discountCustomInput" placeholder="Nhập % giảm giá" style="display:none; margin-top:10px;">
+      </div>
+      
+      <div id="discountFixedSection" style="display:none;">
+        <div class="form-group">
+          <input type="number" id="discountFixed" placeholder="Nhập số tiền giảm giá">
+        </div>
+      </div>
+      <div id="pricePreviewContainer" style="display: none; margin-top: 15px;">
+        <div class="form-group">
+          <label>Thành tiền:</label>
+          <div class="total-preview">
+            <span id="pricePreview">0</span>
+          </div>
+        </div>
+      </div>
+      
+      <button id="addToListBtn" class="btn">Thêm vào danh sách</button>
+    </div>
+    
+    <div class="card">
+      <h2 class="card-title">Danh sách mua</h2>
+      <div style="text-align: right; margin-bottom: 10px;">
+        <button id="toggleViewBtn" class="btn-small" onclick="toggleCartView()">
+          Hiển thị ngắn gọn
+        </button>
+      </div>
+      <div class="table-container">
+        <table id="purchaseTable">
+          <thead>
+            <tr>
+              <th>Tên</th>
+              <th>Giá</th>
+              <th>Thuế</th>
+              <th>Giảm giá</th>
+              <th>Số lượng</th>
+              <th>Thành tiền</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="total-display">
+        <div>Tổng tiền:</div>
+        <div id="totalAmount">0</div>
+      </div>
+      <button id="saveInvoiceBtn" class="btn">Lưu hóa đơn</button>
+    </div>
+    
+    <div class="card">
+      <h2 class="card-title">Lịch sử mua hàng</h2>
+      <div id="historyList" class="history-container"></div>
+    </div>
+    
+    <div class="card hidden" id="settings">
+      <h2 class="card-title">Cài đặt</h2>
+      
+      <div class="form-group">
+        <label for="fontSizeRange">Kích thước chữ</label>
+        <input type="range" id="fontSizeRange" min="12" max="24" value="16">
+        <span id="fontSizeValue">16px</span>
+      </div>
+      
+      <div class="form-group">
+        <label for="colorPicker">Chọn màu chủ đạo</label>
+        <input type="color" id="colorPicker">
+      </div>
+    </div>
+    <div class="card hidden" id="productListContainer">
+      <h2 class="card-title">Danh sách sản phẩm</h2>
+      
+      <div class="form-group">
+        <label for="newProductName">Tên sản phẩm</label>
+        <input type="text" id="newProductName" placeholder="Nhập tên sản phẩm">
+      </div>
+      
+      <div class="form-group">
+        <label for="newProductPrice">Giá sản phẩm</label>
+        <input type="number" id="newProductPrice" placeholder="Nhập giá sản phẩm">
+      </div>
+      
+      <button id="addProductBtn" class="btn">Thêm sản phẩm</button>
+      
+      <h3 class="card-title">Danh sách</h3>
+      <table id="productTable">
+        <thead>
+          <tr>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <button id="loadProductsBtn" class="btn">Tải file product.json</button>
+  </div>
+  
+  <!-- Mobile navigation -->
+  <nav class="mobile-nav">
+    <a href="#" class="mobile-nav-btn active" data-section="add-product">
+      <i class="fas fa-plus"></i>
+      <span>Thêm</span>
+    </a>
+    <a href="#" class="mobile-nav-btn" data-section="purchase-list">
+      <i class="fas fa-shopping-cart"></i>
+      <span>Giỏ hàng</span>
+    </a>
+    <a href="#" class="mobile-nav-btn" data-section="history">
+      <i class="fas fa-history"></i>
+      <span>Lịch sử</span>
+    </a>
+    <a href="#" class="mobile-nav-btn" data-section="settings">
+      <i class="fas fa-cog"></i>
+      <span>Cài đặt</span>
+    </a>
+    <a href="#" class="mobile-nav-btn" data-section="product-list">
+      <i class="fas fa-box"></i>
+      <span>Sản phẩm</span>
+    </a>
+  </nav>
+  
+  <!-- Floating action button for quick add -->
+  <div class="fab" id="quickAddBtn">
+    <i class="fas fa-plus"></i>
+  </div>
+  
+  <!-- Modal for invoice saving -->
+  <div id="invoiceModal" class="modal">
+    <div class="modal-content">
+      <button id="closeModal" class="close-btn">&times;</button>
+      <h3 class="modal-title">Lưu hóa đơn</h3>
+      <div class="form-group">
+        <label for="invoiceTime">Thời gian</label>
+        <input type="text" id="invoiceTime" readonly>
+      </div>
+      <div class="form-group">
+        <label for="invoiceNote">Ghi chú</label>
+        <textarea id="invoiceNote" rows="3"></textarea>
+      </div>
+      <button id="confirmSaveInvoice" class="btn">Lưu hóa đơn</button>
+    </div>
+  </div>
+  
+  <!-- Message Modal -->
+  <div id="messageModal" class="modal">
+    <div class="modal-content">
+      <button id="closeMessageModal" class="close-btn">&times;</button>
+      <h3 class="modal-title">Thông báo</h3>
+      <p id="messageText"></p>
+      <button id="messageModalOk" class="btn">Ok</button>
+    </div>
+  </div>
+  
+  <!-- Confirm Modal -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <button id="closeConfirmModal" class="close-btn">&times;</button>
+      <h3 class="modal-title">Xác nhận</h3>
+      <p id="confirmText"></p>
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <button id="confirmYes" class="btn">Đồng ý</button>
+        <button id="confirmNo" class="btn">Hủy</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Additional JavaScript for theme switching and mobile navigation -->
+  <script>
+    // Theme switching functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const colorPicker = document.getElementById('colorPicker');
+    const htmlElement = document.documentElement;
+    
+    // Check for saved theme preference or use default
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedColor = localStorage.getItem('primaryColor') || '#007bff';
+    
+    // Apply saved theme and color
+    htmlElement.setAttribute('data-theme', savedTheme);
+    document.documentElement.style.setProperty('--primary-color', savedColor);
+    colorPicker.value = savedColor;
+    
+    // Calculate and set derived colors
+    function setDerivedColors(hexColor) {
+      // Create darker variant
+      const darken = (hex, percent) => {
+        let r = parseInt(hex.substring(1, 3), 16);
+        let g = parseInt(hex.substring(3, 5), 16);
+        let b = parseInt(hex.substring(5, 7), 16);
+        
+        r = Math.floor(r * (1 - percent / 100));
+        g = Math.floor(g * (1 - percent / 100));
+        b = Math.floor(b * (1 - percent / 100));
+        
+        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+      };
+      
+      // Create lighter variant
+      const lighten = (hex, percent) => {
+        let r = parseInt(hex.substring(1, 3), 16);
+        let g = parseInt(hex.substring(3, 5), 16);
+        let b = parseInt(hex.substring(5, 7), 16);
+        
+        r = Math.min(255, Math.floor(r + (255 - r) * (percent / 100)));
+        g = Math.min(255, Math.floor(g + (255 - g) * (percent / 100)));
+        b = Math.min(255, Math.floor(b + (255 - b) * (percent / 100)));
+        
+        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+      };
+      
+      document.documentElement.style.setProperty('--primary-dark', darken(hexColor, 15));
+      document.documentElement.style.setProperty('--primary-light', lighten(hexColor, 85));
+    }
+    
+    setDerivedColors(savedColor);
+    
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      htmlElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+    
+    // Change primary color
+    colorPicker.addEventListener('input', (e) => {
+      const newColor = e.target.value;
+      document.documentElement.style.setProperty('--primary-color', newColor);
+      localStorage.setItem('primaryColor', newColor);
+      setDerivedColors(newColor);
+    });
+    
+    // Mobile navigation
+    const mobileNavBtns = document.querySelectorAll('.mobile-nav-btn');
+    const sections = {
+      'add-product': document.querySelector('.card:nth-child(1)'),
+      'purchase-list': document.querySelector('.card:nth-child(2)'),
+      'history': document.querySelector('.card:nth-child(3)'),
+      'settings': document.getElementById('loadProductsBtn')
+    };
+    
+    // Initially hide all except the first section
+    for (const key in sections) {
+      if (key !== 'add-product') {
+        sections[key].classList.add('hidden');
+      }
+    }
+    
+    mobileNavBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Remove active class from all buttons
+        mobileNavBtns.forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        // Show selected section, hide others
+        const sectionToShow = btn.getAttribute('data-section');
+        for (const key in sections) {
+          if (key === sectionToShow) {
+            sections[key].classList.remove('hidden');
+          } else {
+            sections[key].classList.add('hidden');
+          }
+        }
+      });
+    });
+    
+    // Quick add button functionality
+    document.getElementById('quickAddBtn').addEventListener('click', () => {
+      // Show the add product section
+      for (const key in sections) {
+        if (key === 'add-product') {
+          sections[key].classList.remove('hidden');
+        } else {
+          sections[key].classList.add('hidden');
+        }
+      }
+      
+      // Update nav button active state
+      mobileNavBtns.forEach(btn => {
+        if (btn.getAttribute('data-section') === 'add-product') {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Focus the product name input
+      document.getElementById('productName').focus();
+    });
+    
+    // Show modals properly by setting display:flex
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+      // Override the style.display = 'block' in the JavaScript
+      const originalSetDisplay = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'style').set;
+      
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+          if (mutation.attributeName === 'style' && modal.style.display === 'block') {
+            modal.style.display = 'flex';
+          }
+        });
+      });
+      
+      observer.observe(modal, { attributes: true });
+    });
+  </script>
+  
+  <script src="main.js"></script>
+</body>
+
+</html>
