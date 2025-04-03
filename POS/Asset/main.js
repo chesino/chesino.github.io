@@ -1,7 +1,20 @@
-let version = '1.0.6'
-let dateUpdate = '29/12/2024'
-document.getElementById('version').innerHTML = 'Phiên bản ' + version + `<p>Ngày cập nhật ${dateUpdate}</p>`;
+fetch('/POS/Asset/Version.json')
+  .then(response => response.json()) // Chuyển đổi dữ liệu JSON
+  .then(data => {
+    // Tìm phiên bản có ngày cập nhật mới nhất
+    const latestVersion = data.reduce((latest, current) => {
+      const latestDate = new Date(latest.dateUpdate.split('/').reverse().join('-'));
+      const currentDate = new Date(current.dateUpdate.split('/').reverse().join('-'));
 
+      return currentDate > latestDate ? current : latest;
+    });
+
+    // Hiển thị thông tin phiên bản mới nhất
+    document.getElementById('version').innerHTML = `Phiên bản ${latestVersion.version} <p>Ngày cập nhật: ${latestVersion.dateUpdate}</p>`;
+  })
+  .catch(error => {
+    console.error('Lỗi khi tải file Version.json:', error);
+  });
 
 const STORAGE_KEY = 'pos_cart';
 let products = [];
@@ -705,6 +718,7 @@ class HistoryManager {
         historyList.innerHTML = history.map((invoice, index) => `
         <div class="history-item">
           <p>Thời gian: ${invoice.datetime}</p>
+          <p>Khách hàng: ${invoice.branch}</p>
           <p>Khách hàng: ${invoice.customer}</p>
           <p>Thu ngân: ${invoice.cashier}</p>
           <p>Sản phẩm: ${invoice.items}</p>
@@ -734,15 +748,15 @@ class HistoryManager {
 
     static downloadAsExcel() {
         const history = this.getHistory();
-        const worksheet = XLSX.utils.json_to_sheet(history, { header: ["datetime", "customer", "cashier", "items", "payment", "total"] });
+        const worksheet = XLSX.utils.json_to_sheet(history, { header: ["datetime", "branch", "customer", "cashier", "items", "payment", "total"] });
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Hóa Đơn");
         XLSX.writeFile(workbook, "invoice_history.xlsx");
         UIManager.showToast('Đã tải xuống lịch sử hóa đơn dưới dạng Excel.');
     }
 
-    static printInvoice(datetime, customer, cashier, items, payment, total) {
-        const billHTML = BillManager.generateBillHTML(datetime, customer, cashier, items, payment, total);
+    static printInvoice(datetime, branch, customer, cashier, items, payment, total) {
+        const billHTML = BillManager.generateBillHTML(datetime, branch , customer, cashier, items, payment, total);
         BillManager.printBill(billHTML);
     }
 }
@@ -802,7 +816,8 @@ async function saveInvoice() {
     const saveButton = document.querySelector('.sync-data-btn');
     saveButton.disabled = true; // Vô hiệu hóa nút
     showOverlay();
-
+    
+    const branch = document.getElementById('branch').value;
     const customer = document.getElementById('customer-name').value;
     const cashier = document.getElementById('staff-name').value;
     const discount = document.getElementById('discount-info').textContent;
@@ -833,6 +848,7 @@ async function saveInvoice() {
     const finalTotal = CartManager.getFinalTotal();
     const invoiceData = {
         datetime: new Date().toISOString(),
+        branch: branch,
         customer: customer,
         cashier: cashier,
         items: itemsString,

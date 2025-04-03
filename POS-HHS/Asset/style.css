@@ -9,8 +9,8 @@
 }
 
 @font-face {
-    font-family: Ephesis;
-    src: url(./Font/Ephesis/Ephesis-Regular.ttf);
+    font-family: LogoFont;
+    src: url(./Font/LogoFont.otf);
 }
 
 h1,
@@ -86,24 +86,24 @@ h3 {
 /* Theme */
 .light {
     /* Body */
-    --body-bg: #e8ecf3;
+    --body-bg: #e3e3e3;
     --body-text: #333333;
 
     /* Button */
-    --btn-bg: #2196F3;
+    --btn-bg: #000000;
     --btn-text: #ffffff;
-    --btn-hover: #00BCD4;
-    --btn-border: #2196F3;
+    --btn-hover: #303030;
+    --btn-border: #000000;
 
     /* Header */
     --header-bg: #ffffff;
-    --header-text: #2196F3;
+    --header-text: #000000;
 
     /* Cart */
     --cart-bg: #ffffff;
     --cart-text: #333333;
-    --cart-color-primary: #2196F3;
-    --cart-toggle-bg: #2196F3;
+    --cart-color-primary: #000000;
+    --cart-toggle-bg: #000000;
     --cart-toggle-text: #ffffff;
     --cart-count-bg: rgb(250, 90, 90);
     --cart-count-text: #fff;
@@ -111,10 +111,10 @@ h3 {
     --card-bg: #ffffff;
     --card-text: #333333;
     --card-shadow: rgba(0, 0, 0, 0.1);
-    --card-color-primary: #2196F3;
+    --card-color-primary: #000000;
 
     /* MORE */
-    --primary: #2196F3;
+    --primary: #ff5c5c;
     --border: #111;
 }
 
@@ -153,41 +153,144 @@ h3 {
     --border: #333333;
 }
 
-
-.xmas {
+.luxury {
     /* Body */
-    --body-bg: #e8ecf3;
-    --body-text: #333333;
+    --body-bg: #1a1a1a;
+    --body-text: #e5e5e5;
 
     /* Button */
-    --btn-bg: #ffffff;
-    --btn-text: #c0143a;
-    --btn-hover: #ff717b;
-    --btn-border: #ffffff;
+    --btn-bg: #b18c57;
+    --btn-text: #ffffff;
+    --btn-hover: #d4af37;
+    --btn-border: #b18c57;
 
     /* Header */
-    --header-bg: #c0143a;
-    --header-text: #fff;
+    --header-bg: #0e0e0e;
+    --header-text: #d4af37;
+
+    /* Cart */
+    --cart-bg: #1a1a1a;
+    --cart-text: #e5e5e5;
+    --cart-color-primary: #b18c57;
+    --cart-toggle-bg: #b18c57;
+    --cart-toggle-text: #ffffff;
+    --cart-count-bg: #d9534f;
+    --cart-count-text: #ffffff;
+
+    /* Service-card */
+    --card-bg: #262626;
+    --card-text: #e5e5e5;
+    --card-shadow: rgba(255, 255, 255, 0.1);
+    --card-color-primary: #b18c57;
+
+    /* MORE */
+    --primary: #b18c57;
+    --border: #4a4a4a;
+}
+
+.warm {
+    /* Body */
+    --body-bg: #fff3e0;
+    --body-text: #4e342e;
+
+    /* Button */
+    --btn-bg: #ff7043;
+    --btn-text: #ffffff;
+    --btn-hover: #f4511e;
+    --btn-border: #ff7043;
+
+    /* Header */
+    --header-bg: #ffe0b2;
+    --header-text: #d84315;
 
     /* Cart */
     --cart-bg: #ffffff;
-    --cart-text: #333333;
-    --cart-color-primary: #c0143a;
-    --cart-toggle-bg: #c0143a;
+    --cart-text: #4e342e;
+    --cart-color-primary: #ff7043;
+    --cart-toggle-bg: #ff7043;
     --cart-toggle-text: #ffffff;
-    --cart-count-bg: rgb(250, 90, 90);
+    --cart-count-bg: rgb(255, 193, 7);
     --cart-count-text: #fff;
 
     /* Service-card */
     --card-bg: #ffffff;
-    --card-text: #333333;
-    --card-shadow: rgba(0, 0, 0, 0.1);
-    --card-color-primary: #c0143a;
+    --card-text: #4e342e;
+    --card-shadow: rgba(0, 0, 0, 0.2);
+    --card-color-primary: #ff7043;
 
     /* MORE */
-    --primary: #c0143a;
-    --border: #111;
+    --primary: #ff7043;
+    --border: #d84315;
+}
 
+.pink {
+    /* Body */
+    --body-bg: #fce4ec;
+    --body-text: #880e4f;
+
+    /* Button */
+    --btn-bg: #f48fb1;
+    --btn-text: #ffffff;
+    --btn-hover: #f06292;
+    --btn-border: #f48fb1;
+
+    /* Header */
+    --header-bg: #f8bbd0;
+    --header-text: #d81b60;
+
+    /* Cart */
+    --cart-bg: #ffffff;
+    --cart-text: #880e4f;
+    --cart-color-primary: #f48fb1;
+    --cart-toggle-bg: #f48fb1;
+    --cart-toggle-text: #ffffff;
+    --cart-count-bg: rgb(255, 82, 82);
+    --cart-count-text: #fff;
+
+    /* Service-card */
+    --card-bg: #ffffff;
+    --card-text: #880e4f;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --card-color-primary: #f48fb1;
+
+    /* MORE */
+    --primary: #f48fb1;
+    --border: #d81b60;
+}
+
+.neon {
+    /* Body */
+    --body-bg: #000000; /* Màu nền tối để làm nổi bật các màu neon */
+    --body-text: #e0e0e0; /* Màu chữ sáng trên nền tối */
+
+    /* Button */
+    --btn-bg: #00e5ff; /* Màu nền nút xanh */
+    --btn-text: #000000; /* Màu chữ đen trên nút */
+    --btn-hover: #00b0ff; /* Màu nền nút khi hover */
+    --btn-border: #00e5ff; /* Màu viền nút xanh */
+
+    /* Header */
+    --header-bg: #ff0080; /* Màu nền header hồng */
+    --header-text: #ffffff; /* Màu chữ trắng trên header */
+
+    /* Cart */
+    --cart-bg: #1e1e1e; /* Màu nền giỏ hàng tối */
+    --cart-text: #e0e0e0; /* Màu chữ sáng trong giỏ hàng */
+    --cart-color-primary: #00e5ff; /* Màu chính cho các thành phần trong giỏ hàng */
+    --cart-toggle-bg: #ff0080; /* Màu nền của nút toggle giỏ hàng hồng */
+    --cart-toggle-text: #ffffff; /* Màu chữ trắng trên nút toggle giỏ hàng */
+    --cart-count-bg: rgb(255, 38, 0); /* Màu nền của số lượng trong giỏ hàng */
+    --cart-count-text: #fff; /* Màu chữ trắng cho số lượng trong giỏ hàng */
+
+    /* Service-card */
+    --card-bg: #1e1e1e; /* Màu nền của thẻ dịch vụ tối */
+    --card-text: #e0e0e0; /* Màu chữ sáng trong thẻ dịch vụ */
+    --card-shadow: rgba(255, 255, 255, 0.2); /* Đổ bóng sáng cho thẻ dịch vụ */
+    --card-color-primary: #00e5ff; /* Màu chính cho các thành phần trong thẻ dịch vụ */
+
+    /* MORE */
+    --primary: #00e5ff; /* Màu chính cho ứng dụng */
+    --border: #ff0080; /* Màu viền hồng */
 }
 
 body {
@@ -198,14 +301,6 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body.xmas {
-    background: url(./xmas/christmas.png);
-    background-size: cover;
-}
-
-.xmas .service-card {
-    background-color: #ffffffea;
-}
 
 button {
     font-size: 18px;
@@ -309,16 +404,15 @@ input:focus {
 }
 
 .header .logo h1 {
-    font-family: Ephesis;
+    font-family: LogoFont !important;
     font-size: 40px;
+    font-weight: bold;
 }
 
 .header .logo span {
-    position: absolute;
+    position: relative;
     font-family: BeFont;
     font-size: 14px;
-    margin-top: 12px;
-    margin-left: 5px;
 }
 
 
@@ -835,7 +929,6 @@ input:focus {
 .bill-info-inputs label {
     display: block;
     font-weight: bold;
-    margin-bottom: var(--spacing-sm);
 }
 
 
@@ -843,17 +936,33 @@ input:focus {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    gap: 5px;
+}
+
+
+.input-group #addNewCustomerBtn {
+    all: unset;
+    min-height: 50px;
+    min-width: 50px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: var(--border-radius-md);
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .input-group label {
-    width: 100px;
+    width: 110px;
     font-weight: bold;
 }
 
 .input-group input,
 .input-group select {
     flex: 1;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 6px;
     line-height: 1.5;
     padding: 5px 10px;
@@ -862,7 +971,7 @@ input:focus {
     color: rgb(14, 14, 16);
     background: #dee1e2;
     display: block;
-    height: 36px;
+    min-height: 50px;
 
     :hover {
         border-color: #ccc;
@@ -933,6 +1042,7 @@ input:focus {
 #suggestions div h1 {
     font-size: 18px;
 }
+
 #suggestions div h1 span {
     font-size: 12px;
 }
@@ -946,10 +1056,8 @@ input:focus {
     background-color: var(--body-bg);
 }
 
-#addNewCustomerBtn {
-    margin-top: 0;
-    padding: 10px;
-    background-color: var(--primary);
+#newCustomerName {
+    text-transform: capitalize;
 }
 
 /* Print */
@@ -1052,6 +1160,54 @@ input:focus {
     font-weight: 600;
 }
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#overlay span {
+    color: white;
+    font-size: 1.5em;
+}
+
+#tutorial h1 {
+    color: var(--primary);
+}
+
+.keyboard-shortcuts {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.keyboard-shortcuts h2 {
+    color: #333;
+}
+
+.keyboard-shortcuts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.keyboard-shortcuts li {
+    margin-bottom: 8px;
+}
+
+kbd {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+}
 
 
 /* Mobile  */
@@ -1068,19 +1224,19 @@ input:focus {
         display: flex;
         align-items: center;
     }
-
+/* 
     .header .logo h1 {
         font-family: Ephesis;
-        font-size: 24px;
+        font-size: 30px;
     }
 
     .header .logo span {
         font-size: 10px;
         display: block;
-        position: absolute;
+        position: relative;
         top: 0;
         margin-left: 80px;
-    }
+    } */
 
     .container {
         padding: 10px 0;
