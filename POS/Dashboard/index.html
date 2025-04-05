@@ -3,1218 +3,1643 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mai Tây Hair Salon - Thống Kê</title>
+    <title>Mai Tây Hair Salon - Thống Kê Doanh Thu</title>
     <style>
         :root {
-            --primary-color: #1976d2;
-            --primary-light: #4791db;
-            --primary-dark: #115293;
-            --secondary-color: #f5f5f5;
-            --text-color: #333;
-            --light-text: #666;
-            --border-color: #ddd;
-            --success-color: #4caf50;
-            --warning-color: #ff9800;
+            --primary: #1976D2;
+            --primary-light: #42a5f5;
+            --primary-dark: #0d47a1;
+            --secondary: #03A9F4;
+            --text: #212121;
+            --text-light: #757575;
+            --background: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --border-radius: 8px;
         }
         
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f9f9f9;
-            color: var(--text-color);
+            background-color: var(--background);
+            color: var(--text);
             line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 1rem;
         }
         
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .filter-panel {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
         }
         
-        h1, h2, h3 {
-            color: var(--primary-dark);
-            margin-bottom: 15px;
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
         
-        header h1 {
-            color: white;
-        }
-        
-        .control-panel {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-        
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 15px;
-            align-items: center;
-        }
-        
-        .filter-item {
-            display: flex;
-            flex-direction: column;
-            min-width: 200px;
+        .form-group {
+            margin-bottom: 1rem;
         }
         
         label {
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: var(--primary-dark);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
         }
         
         select, input {
-            padding: 10px;
-            border: 1px solid var(--border-color);
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 1rem;
         }
         
-        button {
-            background-color: var(--primary-color);
+        .btn {
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 0.75rem 1.5rem;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             transition: background-color 0.3s;
         }
         
-        button:hover {
+        .btn:hover {
             background-color: var(--primary-dark);
         }
+
+        .btn-reset {
+            background-color: #f44336;
+        }
         
-        .stats-container {
+        .btn-reset:hover {
+            background-color: #d32f2f;
+        }
+        
+        .statistics-panel {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             text-align: center;
         }
         
         .stat-value {
-            font-size: 28px;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-color);
-            margin: 10px 0;
+            color: var(--primary);
+            margin: 0.5rem 0;
         }
         
         .chart-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .transactions-panel {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-radius: 8px;
-            overflow: hidden;
+            margin-top: 1rem;
         }
         
         th, td {
-            padding: 12px 15px;
+            padding: 0.75rem;
             text-align: left;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #ddd;
         }
         
         th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: 500;
+            background-color: var(--primary-light);
+            color: var(--white);
         }
         
-        tr:nth-child(even) {
-            background-color: var(--secondary-color);
+        tr:hover {
+            background-color: rgba(25, 118, 210, 0.05);
         }
         
         .pagination {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
-            gap: 5px;
+            margin-top: 1.5rem;
         }
         
         .pagination button {
-            min-width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .current-page {
-            background-color: var(--primary-dark);
-        }
-        
-        .chart-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        canvas {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-        }
-        
-        .legend-color {
-            width: 15px;
-            height: 15px;
-            border-radius: 3px;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 50px;
-            font-size: 20px;
-            color: var(--light-text);
-        }
-        
-        .top-services {
-            margin-top: 20px;
-        }
-        
-        .service-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .service-name {
-            font-weight: 500;
-        }
-        
-        .service-count {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        
-        .date-range-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .date-btn {
-            background-color: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            padding: 8px 15px;
-            border-radius: 4px;
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
             cursor: pointer;
-            font-weight: 500;
             transition: all 0.3s;
         }
         
-        .date-btn.active {
-            background-color: var(--primary-color);
-            color: white;
+        .pagination button:hover, .pagination button.active {
+            background-color: var(--primary);
+            color: var(--white);
         }
-        
-        .date-btn:hover {
-            background-color: var(--primary-light);
-            color: white;
+
+        .service-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
         }
-        
-        @media (max-width: 768px) {
-            .filter-item {
-                min-width: 100%;
-            }
-            
-            .chart-row {
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .btn-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .filter-form {
                 grid-template-columns: 1fr;
             }
             
-            .stat-card {
-                padding: 15px;
+            .btn-actions {
+                flex-direction: column;
             }
             
-            table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            th, td {
-                padding: 8px 10px;
-                font-size: 14px;
+            .statistics-panel {
+                grid-template-columns: 1fr;
             }
         }
+        .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: #555;
+}
+
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error-container {
+    padding: 20px;
+    background: #ffebee;
+    border-radius: 5px;
+    max-width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.error-details {
+    margin: 15px 0;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 50px;
+    color: #777;
+}
     </style>
 </head>
 <body>
     <header>
         <h1>Mai Tây Hair Salon</h1>
-        <p>Hệ thống thống kê và quản lý doanh thu</p>
+        <p>Hệ thống thống kê doanh thu</p>
     </header>
     
     <div class="container">
-        <div class="control-panel">
-            <div class="date-range-buttons">
-                <button class="date-btn" data-range="today">Hôm nay</button>
-                <button class="date-btn" data-range="yesterday">Hôm qua</button>
-                <button class="date-btn" data-range="thisWeek">Tuần này</button>
-                <button class="date-btn" data-range="lastWeek">Tuần trước</button>
-                <button class="date-btn active" data-range="thisMonth">Tháng này</button>
-                <button class="date-btn" data-range="lastMonth">Tháng trước</button>
-                <button class="date-btn" data-range="thisYear">Năm nay</button>
-                <button class="date-btn" data-range="all">Tất cả</button>
-            </div>
-            
-            <div class="filter-group">
-                <div class="filter-item">
-                    <label for="startDate">Từ ngày</label>
-                    <input type="date" id="startDate">
-                </div>
-                <div class="filter-item">
-                    <label for="endDate">Đến ngày</label>
-                    <input type="date" id="endDate">
-                </div>
-                <div class="filter-item">
-                    <label for="specificDay">Ngày cụ thể</label>
-                    <input type="date" id="specificDay">
-                </div>
-                <div class="filter-item">
-                    <label for="month">Tháng</label>
-                    <select id="month">
-                        <option value="">Chọn tháng</option>
-                        <option value="1">Tháng 1</option>
-                        <option value="2">Tháng 2</option>
-                        <option value="3">Tháng 3</option>
-                        <option value="4">Tháng 4</option>
-                        <option value="5">Tháng 5</option>
-                        <option value="6">Tháng 6</option>
-                        <option value="7">Tháng 7</option>
-                        <option value="8">Tháng 8</option>
-                        <option value="9">Tháng 9</option>
-                        <option value="10">Tháng 10</option>
-                        <option value="11">Tháng 11</option>
-                        <option value="12">Tháng 12</option>
+        <div class="filter-panel">
+            <h2 class="section-title">Bộ lọc</h2>
+            <div class="filter-form">
+                <div class="form-group">
+                    <label for="filter-type">Loại thống kê</label>
+                    <select id="filter-type">
+                        <option value="all">Toàn bộ</option>
+                        <option value="date">Theo ngày</option>
+                        <option value="month">Theo tháng</option>
+                        <option value="year">Theo năm</option>
+                        <option value="range">Từ ngày đến ngày</option>
                     </select>
                 </div>
-                <div class="filter-item">
-                    <label for="year">Năm</label>
-                    <select id="year">
-                        <option value="">Chọn năm</option>
+                
+                <div class="form-group" id="date-filter" style="display: none;">
+                    <label for="specific-date">Chọn ngày</label>
+                    <input type="date" id="specific-date">
+                </div>
+                
+                <div class="form-group" id="month-filter" style="display: none;">
+                    <label for="specific-month">Chọn tháng</label>
+                    <input type="month" id="specific-month">
+                </div>
+                
+                <div class="form-group" id="year-filter" style="display: none;">
+                    <label for="specific-year">Chọn năm</label>
+                    <select id="specific-year">
                         <option value="2024">2024</option>
                         <option value="2025">2025</option>
                     </select>
                 </div>
-                <div class="filter-item">
-                    <label>&nbsp;</label>
-                    <button id="applyFilter">Áp dụng</button>
+                
+                <div class="form-group" id="range-start-filter" style="display: none;">
+                    <label for="start-date">Từ ngày</label>
+                    <input type="date" id="start-date">
+                </div>
+                
+                <div class="form-group" id="range-end-filter" style="display: none;">
+                    <label for="end-date">Đến ngày</label>
+                    <input type="date" id="end-date">
+                </div>
+                
+                <div class="form-group">
+                    <label for="branch-filter">Chi nhánh</label>
+                    <select id="branch-filter">
+                        <option value="all">Tất cả chi nhánh</option>
+                        <option value="Mai Tây Hair Salon">Mai Tây Hair Salon</option>
+                        <option value="Mai Tây Hair Salon 2">Mai Tây Hair Salon 2</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="btn-actions">
+                <button id="apply-filters" class="btn">Áp dụng bộ lọc</button>
+                <button id="reset-filters" class="btn btn-reset">Đặt lại</button>
+            </div>
+        </div>
+        
+        <div class="statistics-panel">
+            <div class="stat-card">
+                <h3>Tổng doanh thu</h3>
+                <div class="stat-value" id="total-revenue">0đ</div>
+                <p>Tổng cộng</p>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Số giao dịch</h3>
+                <div class="stat-value" id="total-transactions">0</div>
+                <p>Tổng lượt khách</p>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Giá trị trung bình</h3>
+                <div class="stat-value" id="average-transaction">0đ</div>
+                <p>Mỗi giao dịch</p>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Tổng giảm giá</h3>
+                <div class="stat-value" id="total-discount">0đ</div>
+                <p>Đã áp dụng</p>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="overview">Tổng quan</div>
+            <div class="tab" data-tab="services">Dịch vụ</div>
+            <div class="tab" data-tab="customers">Khách hàng</div>
+            <div class="tab" data-tab="transactions">Danh sách giao dịch</div>
+        </div>
+        
+        <div class="tab-content active" id="overview-tab">
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h2 class="section-title">Doanh thu theo thời gian</h2>
+                    <canvas id="revenue-chart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h2 class="section-title">Top 5 dịch vụ phổ biến</h2>
+                    <canvas id="services-chart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h2 class="section-title">Doanh thu theo chi nhánh</h2>
+                    <canvas id="branch-chart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h2 class="section-title">Phương thức thanh toán</h2>
+                    <canvas id="payment-chart"></canvas>
                 </div>
             </div>
         </div>
         
-        <div class="stats-container">
-            <div class="stat-card">
-                <h3>Tổng doanh thu</h3>
-                <div id="totalRevenue" class="stat-value">0đ</div>
-                <div id="comparisonRevenue" class="stat-comparison"></div>
-            </div>
-            <div class="stat-card">
-                <h3>Số đơn hàng</h3>
-                <div id="totalOrders" class="stat-value">0</div>
-                <div id="comparisonOrders" class="stat-comparison"></div>
-            </div>
-            <div class="stat-card">
-                <h3>Đơn hàng trung bình</h3>
-                <div id="avgOrderValue" class="stat-value">0đ</div>
-                <div id="comparisonAvg" class="stat-comparison"></div>
-            </div>
-            <div class="stat-card">
-                <h3>Doanh thu cao nhất</h3>
-                <div id="maxOrderValue" class="stat-value">0đ</div>
-                <div id="maxOrderDate" class="stat-comparison"></div>
+        <div class="tab-content" id="services-tab">
+            <div class="chart-container">
+                <h2 class="section-title">Chi tiết dịch vụ</h2>
+                <div class="service-stats">
+                    <div class="chart-container">
+                        <h3>Số lượng theo dịch vụ</h3>
+                        <canvas id="service-count-chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Doanh thu theo dịch vụ</h3>
+                        <canvas id="service-revenue-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="services-table">
+                        <thead>
+                            <tr>
+                                <th>Dịch vụ</th>
+                                <th>Số lượng</th>
+                                <th>Doanh thu</th>
+                                <th>% Tổng doanh thu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Services data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         
-        <div class="chart-row">
+        <div class="tab-content" id="customers-tab">
             <div class="chart-container">
-                <h2>Doanh thu theo thời gian</h2>
-                <canvas id="revenueChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <h2>Dịch vụ phổ biến</h2>
-                <canvas id="servicesChart"></canvas>
-                <div id="topServices" class="top-services"></div>
+                <h2 class="section-title">Thống kê khách hàng</h2>
+                <div class="service-stats">
+                    <div class="chart-container">
+                        <h3>Top 10 khách hàng</h3>
+                        <canvas id="top-customers-chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Sự trung thành của khách hàng</h3>
+                        <canvas id="customer-loyalty-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="customers-table">
+                        <thead>
+                            <tr>
+                                <th>Khách hàng</th>
+                                <th>Số lần ghé</th>
+                                <th>Tổng chi tiêu</th>
+                                <th>Giá trị trung bình</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Customer data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         
-        <div class="chart-row">
-            <div class="chart-container">
-                <h2>Phân bố doanh thu theo thời gian trong ngày</h2>
-                <canvas id="timeDistributionChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <h2>Khách hàng thường xuyên</h2>
-                <canvas id="customersChart"></canvas>
-                <div id="topCustomers" class="top-services"></div>
-            </div>
-        </div>
-        
-        <div class="chart-container">
-            <h2>Dữ liệu chi tiết</h2>
-            <div id="tableContainer">
-                <table id="transactionsTable">
-                    <thead>
-                        <tr>
-                            <th>Ngày giờ</th>
-                            <th>Khách hàng</th>
-                            <th>Dịch vụ</th>
-                            <th>Thanh toán</th>
-                            <th>Giảm giá</th>
-                            <th>Tổng tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <!-- Table data will be populated here -->
-                    </tbody>
-                </table>
-                <div class="pagination" id="pagination"></div>
+        <div class="tab-content" id="transactions-tab">
+            <div class="transactions-panel">
+                <h2 class="section-title">Danh sách giao dịch</h2>
+                <div class="table-responsive">
+                    <table id="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Ngày & Giờ</th>
+                                <th>Chi nhánh</th>
+                                <th>Khách hàng</th>
+                                <th>Dịch vụ</th>
+                                <th>Giảm giá</th>
+                                <th>Thanh toán</th>
+                                <th>Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Transaction data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- Pagination buttons will be inserted here -->
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Data handling
-        let rawData = [];
+        // Global variables
+        let data = [];
         let filteredData = [];
         const itemsPerPage = 10;
         let currentPage = 1;
         
-        // Parse the data from JSON
-        const jsonData = [{"datetime":"13:10:29 17/12/2024","agency":"Mai Tây Hair Salon","customer":"Nguyễn Hồng Nhi","cashier":"Chủ tiệm","items":"Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"14:36:18 17/12/2024","agency":"Mai Tây Hair Salon","customer":"c.Thư","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân + làm phồng đỉnh  (1)","payment":"Tiền mặt","discount":"","total":1300000},{"datetime":"21:58:06 17/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân + Xả uốn phồng chân (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2000000},{"datetime":"15:36:44 18/12/2024","agency":"Mai Tây Hair Salon","customer":"Dang thuy hang","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Phục hồi keratin  (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1500000},{"datetime":"16:02:37 18/12/2024","agency":"Mai Tây Hair Salon","customer":"hang ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"16:37:33 18/12/2024","agency":"Mai Tây Hair Salon","customer":"chị linh","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân (1), Phục hồi Keratin (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1800000},{"datetime":"13:12:59 19/12/2024","agency":"Mai Tây Hair Salon","customer":"huyền lý","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1100000},{"datetime":"17:47:47 19/12/2024","agency":"Mai Tây Hair Salon","customer":"chị huyền tân hiệp","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:03:23 20/12/2024","agency":"Mai Tây Hair Salon","customer":"chị tâm","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Cắt uốn tóc dài (1)","payment":"Tiền mặt","discount":"","total":1600000},{"datetime":"10:49:16 21/12/2024","agency":"Mai Tây Hair Salon","customer":"huyền lý","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Cắt gội (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"17:38:59 21/12/2024","agency":"Mai Tây Hair Salon","customer":"trâm trâm","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1),  Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"23:53:39 21/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":1200000},{"datetime":"11:32:50 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:42:37 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Dặm chân tóc (1)","payment":"Tiền mặt","discount":"","total":300000},{"datetime":"14:05:33 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Cô ","cashier":"Chủ tiệm","items":"Cắt Nhuộm  (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"","total":1500000},{"datetime":"14:36:34 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt thiết kế+ uốn phục hồi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1350000},{"datetime":"17:17:07 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc ngắn (1)","payment":"Tiền mặt","discount":"","total":600000},{"datetime":"15:41:22 23/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"17:33:48 23/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"19:04:45 23/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1300000},{"datetime":"15:06:40 24/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi tự nhiên (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"09:46:06 26/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"21:27:58 26/12/2024","agency":"Mai Tây Hair Salon","customer":"chị nhớ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"19:07:13 27/12/2024","agency":"Mai Tây Hair Salon","customer":"em Mận","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1100000},{"datetime":"19:31:11 27/12/2024","agency":"Mai Tây Hair Salon","customer":"em Đào","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1200000},{"datetime":"13:41:35 28/12/2024","agency":"Mai Tây Hair Salon","customer":"chị thanh","cashier":"Chủ tiệm","items":"Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"10:02:00 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:44:20 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Serum moroccanoil (1), Phục hồi olaplex (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"13:36:13 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn tóc (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":1900000},{"datetime":"14:58:42 29/12/2024","agency":"Mai Tây Hair Salon","customer":"chị hà","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"15:12:04 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Cắt thiết kế + uốn Loreal (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":2050000},{"datetime":"17:41:22 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":100000},{"datetime":"17:47:57 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"18:01:45 29/12/2024","agency":"Mai Tây Hair Salon","customer":"em thư","cashier":"Chủ tiệm","items":"uốn sóng cao (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":850000},{"datetime":"18:33:01 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"20:13:39 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi tóc dài (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"12:47:10 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"16:05:35 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Huyền 67","cashier":"Chủ tiệm","items":"Phá ngôi mái (1), Uốn phồng chân (1), Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":1500000},{"datetime":"17:31:15 30/12/2024","agency":"Mai Tây Hair Salon","customer":"em trâm","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"19:26:51 30/12/2024","agency":"Mai Tây Hair Salon","customer":"","cashier":"Chủ tiệm","items":"Cắt tóc (2)","payment":"Tiền mặt","discount":"","total":300000},{"datetime":"19:27:54 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"20:04:02 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt +gội (2), Uốn phồng chân (2), Cắt Duỗi tóc Loreal (1), Phục hồi Keratin (1), Cắt Duỗi tóc Loreal  (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":4400000},{"datetime":"14:12:56 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt+ gội (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":150000},{"datetime":"14:45:24 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"15:37:17 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:53:40 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phục hồi olaplex (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"23:17:25 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1),  Nhuộm tóc  (1), Phục hồi Keratin (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2200000},{"datetime":"12:39:39 1/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:08:19 1/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phục hồi Keratin (2), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":2700000},{"datetime":"11:23:06 2/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:29:19 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"14:45:42 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt gội (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":350000},{"datetime":"16:14:39 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1), Uốn phồng chân (1), Nhuộm tóc  (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2650000},{"datetime":"17:09:26 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc ngắn (1), Cắt tóc em bé (1)","payment":"Tiền mặt","discount":"","total":650000},{"datetime":"18:49:39 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Cắt Duỗi tóc  (1), Uốn phồng chân (1), Phục hồi Keratin (1)","payment":"Tiền mặt","discount":"","total":2750000},{"datetime":"21:19:30 6/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"16:59:19 7/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn hippi (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"18:05:17 7/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"16:26:10 9/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1200000},{"datetime":"19:36:17 9/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1050000},{"datetime":"16:32:48 10/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1)","payment":"Tiền mặt","discount":"","total":600000},{"datetime":"17:31:00 11/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"20:39:01 11/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Phục hồi Keratin tóc ngắn (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1600000},{"datetime":"20:45:46 11/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Duỗi chân tóc (1)","payment":"Tiền mặt","discount":"","total":400000},{"datetime":"14:55:57 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc (1), Uồn mái (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"16:51:13 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1050000},{"datetime":"16:52:50 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Phục hồi Keratin  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2050000},{"datetime":"17:07:30 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn hippie tóc dài (1)","payment":"Tiền mặt","discount":"","total":1200000},{"datetime":"18:13:51 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi tóc Loreal (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"18:15:25 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt- uốn bung (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"18:25:38 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"19:17:55 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"19:51:42 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":850000},{"datetime":"22:45:19 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt nhuộm (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"11:20:56 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"12:01:52 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân full đầu (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"15:14:48 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"18:24:53 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"19:21:54 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi tóc  (1), Nhuộm tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -200.000đTổng chiết khấu: -200.000đ","total":1850000},{"datetime":"16:32:33 15/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:55:27 15/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"15:48:19 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế  (1),  Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1400000},{"datetime":"16:23:31 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"17:54:51 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế  (1), Uốn phồng chân full đầu (1)","payment":"Tiền mặt","discount":"","total":1400000},{"datetime":"18:32:53 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1)","payment":"Tiền mặt","discount":"","total":900000},{"datetime":"19:49:04 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân (1), Phục hồi Keratin tóc  (1)","payment":"Tiền mặt","discount":"","total":2100000},{"datetime":"00:35:41 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"01:02:58 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng tóc dài (1), Uốn phồng chân (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":2350000},{"datetime":"19:24:09 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế (1),  Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1600000},{"datetime":"19:28:46 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"21:14:32 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phục hồi Keratin  (1), Uốn phồng chân full đầu (1), uốn mái (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1500000},{"datetime":"15:14:51 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn duỗi thiết kế (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1200000},{"datetime":"15:31:43 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"16:26:09 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt uốn thiết kế (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"17:00:45 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng lơi (1), Uốn phồng chân (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":2050000},{"datetime":"17:54:20 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi+ uốn ngọn (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1550000},{"datetime":"19:52:04 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn mái (1)","payment":"Tiền mặt","discount":"","total":250000},{"datetime":"21:12:49 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"11:20:49 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1), Nhuộm chân tóc (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"13:02:27 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Duỗi Lớp ngoài + xả uốn phồng (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"16:37:59 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng tóc dài (1), Uốn phồng chân (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":2350000},{"datetime":"22:42:32 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":800000},{"datetime":"11:08:22 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"12:19:02 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm chân tóc (1)","payment":"Tiền mặt","discount":"","total":350000},{"datetime":"13:22:03 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1),  Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"17:38:01 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Cắt nhuộm tóc nam (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"23:45:12 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Phá ngôi mái (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"23:46:11 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Uốn Mái (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1000000},{"datetime":"23:48:21 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:06:30 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phá ngôi mái (1), Uốn phồng chân (1), Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1450000},{"datetime":"18:56:45 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc  (1), Cắt Duỗi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1900000},{"datetime":"20:24:55 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"22:35:40 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm chân tóc (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":550000},{"datetime":"19:57:56 22/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc thiết kế (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1800000},{"datetime":"20:47:35 22/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"12:15:38 23/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"14:16:52 23/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phá ngôi mái (1)","payment":"Tiền mặt","discount":"","total":250000},{"datetime":"17:41:28 23/1/2025","agency":"Mai Tây Hair Salon","customer":"MẸ TRINH","cashier":"Chủ tiệm","items":"Cắt duỗi thiết kế (1), Uốn phồng chân (1), phục hồi  KARATIN (1), serium   MOROCCAOIL (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":3000000},{"datetime":"20:11:11 24/1/2025","agency":"Mai Tây Hair Salon","customer":"C trang","cashier":"Chủ tiệm","items":"UỐN hippi (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"20:12:52 24/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi thiết kế (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"20:12:52 24/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi thiết kế (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"23:07:00 24/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi thiết kế (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"13:27:30 8/2/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:28:48 26/2/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"phá ngôi duỗi mái (1)","payment":"Tiền mặt","discount":"","total":300000}];
+        // DOM Elements
+        const filterType = document.getElementById('filter-type');
+        const specificDate = document.getElementById('specific-date');
+        const specificMonth = document.getElementById('specific-month');
+        const specificYear = document.getElementById('specific-year');
+        const startDate = document.getElementById('start-date');
+        const endDate = document.getElementById('end-date');
+        const branchFilter = document.getElementById('branch-filter');
+        const applyFiltersBtn = document.getElementById('apply-filters');
+        const resetFiltersBtn = document.getElementById('reset-filters');
         
-        // Process the data
-        rawData = jsonData.map(item => {
-            // Parse the datetime string into Date object
-            const parts = item.datetime.split(' ');
-            const timeParts = parts[0].split(':');
-            const dateParts = parts[1].split('/');
+        // Stats Elements
+        const totalRevenue = document.getElementById('total-revenue');
+        const totalTransactions = document.getElementById('total-transactions');
+        const averageTransaction = document.getElementById('average-transaction');
+        const totalDiscount = document.getElementById('total-discount');
+        
+        // Table Elements
+        const transactionsTable = document.getElementById('transactions-table').querySelector('tbody');
+        const paginationContainer = document.getElementById('pagination');
+        
+        // Chart Elements
+        const revenueChart = document.getElementById('revenue-chart');
+        const servicesChart = document.getElementById('services-chart');
+        const branchChart = document.getElementById('branch-chart');
+        const paymentChart = document.getElementById('payment-chart');
+        const serviceCountChart = document.getElementById('service-count-chart');
+        const serviceRevenueChart = document.getElementById('service-revenue-chart');
+        const topCustomersChart = document.getElementById('top-customers-chart');
+        const customerLoyaltyChart = document.getElementById('customer-loyalty-chart');
+        
+        // Chart instances
+        let revenueChartInstance = null;
+        let servicesChartInstance = null;
+        let branchChartInstance = null;
+        let paymentChartInstance = null;
+        let serviceCountChartInstance = null;
+        let serviceRevenueChartInstance = null;
+        let topCustomersChartInstance = null;
+        let customerLoyaltyChartInstance = null;
+    
+        // Initialize the application
+        function init() {
+            setupEventListeners();
+            updateFilterVisibility();
+            fetchData();
+        }
+    
+        // Set up all event listeners
+        function setupEventListeners() {
+            filterType.addEventListener('change', updateFilterVisibility);
+            applyFiltersBtn.addEventListener('click', applyFilters);
+            resetFiltersBtn.addEventListener('click', resetFilters);
             
-            const date = new Date(Number(dateParts[2]), Number(dateParts[1]) - 1, Number(dateParts[0]), 
-                                 Number(timeParts[0]), Number(timeParts[1]), Number(timeParts[2]));
-            
-            return {
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Update charts for the selected tab
+                    if (tabId === 'overview') {
+                        updateCharts();
+                    } else if (tabId === 'services') {
+                        updateServiceStats();
+                    } else if (tabId === 'customers') {
+                        updateCustomerStats();
+                    }
+                });
+            });
+        }
+    
+        // Fetch data from Google Script API
+        async function fetchData() {
+    try {
+        // Hiển thị trạng thái loading
+        document.getElementById('overview-tab').innerHTML = `
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Đang tải dữ liệu...</p>
+            </div>
+        `;
+        
+        // Thêm timestamp để tránh cache
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec?token=PRO&sheet=Database&t=' + Date.now();
+        
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const jsonData = await response.json();
+        
+        // Kiểm tra dữ liệu trả về
+        if (!jsonData || jsonData.length === 0) {
+            throw new Error('Dữ liệu trống hoặc không hợp lệ');
+        }
+        
+        // Xử lý dữ liệu
+        processData(jsonData);
+        
+        // Cập nhật giao diện
+        updateUI();
+        
+    } catch (error) {
+        console.error('Lỗi khi tải dữ liệu:', error);
+        showError(error);
+        
+        // Hiển thị dữ liệu mẫu nếu có lỗi (cho mục đích debug)
+        // console.log('Sử dụng dữ liệu mẫu để kiểm tra...');
+        // processData(getSampleData());
+        // updateUI();
+    }
+}
+
+function validateData(data) {
+    if (!Array.isArray(data)) {
+        throw new Error('Dữ liệu không phải là mảng');
+    }
+    
+    // Kiểm tra các trường bắt buộc
+    const requiredFields = ['datetime', 'items', 'total'];
+    data.forEach((item, index) => {
+        requiredFields.forEach(field => {
+            if (!item[field]) {
+                console.warn(`Mục ${index} thiếu trường bắt buộc: ${field}`, item);
+            }
+        });
+    });
+    
+    return true;
+}
+    
+        // Process the raw data
+        function processData(rawData) {
+    try {
+        // Kiểm tra dữ liệu đầu vào
+        validateData(rawData);
+        
+        data = rawData.map(item => {
+            // Xử lý các trường hợp thiếu dữ liệu
+            const processedItem = {
                 ...item,
-                date: date,
-                formattedDate: `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`,
-                formattedTime: parts[0],
-                total: Number(item.total) // Ensure total is a number
+                branch: item.branch || item.agency || 'Không xác định',
+                customer: item.customer || 'Khách lẻ',
+                payment: item.payment || 'Không xác định',
+                discount: item.discount || '-'
             };
+            
+            // Xử lý ngày giờ
+            if (item.datetime) {
+                try {
+                    const [time, date] = item.datetime.split(' ');
+                    const [day, month, year] = date.split('/');
+                    processedItem.standardDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+                    processedItem.standardDateTime = `${processedItem.standardDate}T${time}`;
+                    processedItem.dateObj = new Date(processedItem.standardDateTime);
+                    
+                    if (isNaN(processedItem.dateObj.getTime())) {
+                        console.warn('Ngày không hợp lệ:', item.datetime);
+                        processedItem.dateObj = new Date(); // Sử dụng ngày hiện tại nếu không hợp lệ
+                    }
+                } catch (e) {
+                    console.warn('Lỗi xử lý datetime:', e);
+                    processedItem.dateObj = new Date();
+                }
+            } else {
+                processedItem.dateObj = new Date();
+            }
+            
+            // Xử lý items
+            processedItem.itemsArray = [];
+            if (item.items) {
+                try {
+                    processedItem.itemsArray = item.items.split(', ').map(itemStr => {
+                        const match = itemStr.match(/(.+) \((\d+)\)$/);
+                        return match ? {
+                            name: match[1].trim(),
+                            count: parseInt(match[2])
+                        } : {
+                            name: itemStr.trim(),
+                            count: 1
+                        };
+                    });
+                } catch (e) {
+                    console.warn('Lỗi xử lý items:', e);
+                }
+            }
+            
+            // Xử lý discount
+            processedItem.discountAmount = 0;
+            if (item.discount && typeof item.discount === 'string') {
+                const match = item.discount.match(/-([0-9.,]+)\.?000?đ/);
+                if (match) {
+                    processedItem.discountAmount = parseFloat(match[1].replace(',', '')) * 1000;
+                }
+            }
+            
+            return processedItem;
         });
         
-        // Sort data by date (newest first)
-        rawData.sort((a, b) => b.date - a.date);
+        // Sắp xếp dữ liệu
+        data.sort((a, b) => b.dateObj - a.dateObj);
+        filteredData = [...data];
         
-        // Date handling functions
-        function getStartOfDay(date) {
-            const newDate = new Date(date);
-            newDate.setHours(0, 0, 0, 0);
-            return newDate;
+    } catch (error) {
+        console.error('Lỗi xử lý dữ liệu:', error);
+        throw error;
+    }
+}
+        // Update all UI components
+        function updateUI() {
+            updateStats();
+            updateTransactionsTable();
+            updatePagination();
+            updateCharts();
+            updateServiceStats();
+            updateCustomerStats();
         }
-        
-        function getEndOfDay(date) {
-            const newDate = new Date(date);
-            newDate.setHours(23, 59, 59, 999);
-            return newDate;
+    
+        // Show error message
+        function showError(error) {
+    const errorHtml = `
+        <div class="error-container">
+            <h3>Đã xảy ra lỗi</h3>
+            <div class="error-details">
+                <p><strong>Lỗi:</strong> ${error.message}</p>
+                <p>Vui lòng thử lại hoặc liên hệ bộ phận kỹ thuật.</p>
+            </div>
+            <div class="error-actions">
+                <button class="btn retry-btn" onclick="fetchData()">Thử lại</button>
+                <button class="btn report-btn" onclick="reportError()">Báo lỗi</button>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('overview-tab').innerHTML = errorHtml;
+}
+
+function reportError() {
+    // Gửi thông báo lỗi đến server hoặc email
+    console.log('Đã báo cáo lỗi');
+    alert('Cảm ơn bạn đã báo cáo lỗi. Chúng tôi sẽ khắc phục sớm nhất.');
+}
+    
+        // Update filter visibility based on selected filter type
+        function updateFilterVisibility() {
+            // Hide all filter inputs
+            document.getElementById('date-filter').style.display = 'none';
+            document.getElementById('month-filter').style.display = 'none';
+            document.getElementById('year-filter').style.display = 'none';
+            document.getElementById('range-start-filter').style.display = 'none';
+            document.getElementById('range-end-filter').style.display = 'none';
+            
+            // Show only the relevant filter inputs
+            const selectedFilter = filterType.value;
+            
+            if (selectedFilter === 'date') {
+                document.getElementById('date-filter').style.display = 'block';
+            } else if (selectedFilter === 'month') {
+                document.getElementById('month-filter').style.display = 'block';
+            } else if (selectedFilter === 'year') {
+                document.getElementById('year-filter').style.display = 'block';
+            } else if (selectedFilter === 'range') {
+                document.getElementById('range-start-filter').style.display = 'block';
+                document.getElementById('range-end-filter').style.display = 'block';
+            }
         }
-        
-        function getStartOfWeek(date) {
-            const newDate = new Date(date);
-            const day = newDate.getDay();
-            const diff = newDate.getDate() - day + (day === 0 ? -6 : 1); // Adjust for Sunday
-            newDate.setDate(diff);
-            newDate.setHours(0, 0, 0, 0);
-            return newDate;
-        }
-        
-        function getEndOfWeek(date) {
-            const newDate = getStartOfWeek(date);
-            newDate.setDate(newDate.getDate() + 6);
-            newDate.setHours(23, 59, 59, 999);
-            return newDate;
-        }
-        
-        function getStartOfMonth(date) {
-            return new Date(date.getFullYear(), date.getMonth(), 1);
-        }
-        
-        function getEndOfMonth(date) {
-            return new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999);
-        }
-        
-        function getStartOfYear(date) {
-            return new Date(date.getFullYear(), 0, 1);
-        }
-        
-        function getEndOfYear(date) {
-            return new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999);
-        }
-        
+    
         // Format currency
         function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount)
-                .replace('₫', 'đ');
+            return new Intl.NumberFormat('vi-VN', { 
+                style: 'currency', 
+                currency: 'VND',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
         }
-        
-        // Format numbers
-        function formatNumber(num) {
-            return new Intl.NumberFormat('vi-VN').format(num);
-        }
-        
-        // Extract services from items
-        function extractServices(itemsStr) {
-            // Split items by comma and extract service names
-            const items = itemsStr.split(',').map(item => item.trim());
-            const services = [];
+    
+        // Apply filters to data
+        function applyFilters() {
+            const selectedFilter = filterType.value;
+            const selectedBranch = branchFilter.value;
             
-            for (const item of items) {
-                // Extract service name (everything before the parenthesis)
-                const match = item.match(/(.*)\s*\(\d+\)/);
-                if (match && match[1]) {
-                    services.push(match[1].trim());
-                } else {
-                    services.push(item); // In case there's no quantity pattern
-                }
-            }
-            
-            return services;
-        }
-        
-        // Count service frequencies
-        function getTopServices(data, limit = 10) {
-            const serviceCount = {};
-            
-            for (const item of data) {
-                const services = extractServices(item.items);
-                for (const service of services) {
-                    serviceCount[service] = (serviceCount[service] || 0) + 1;
-                }
-            }
-            
-            // Convert to array and sort
-            return Object.entries(serviceCount)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, limit);
-        }
-        
-        // Count customer frequencies
-        function getTopCustomers(data, limit = 10) {
-            const customerCount = {};
-            
-            for (const item of data) {
-                const customer = item.customer || 'Không có tên';
-                if (customer !== 'Khách lẻ') {
-                    customerCount[customer] = (customerCount[customer] || 0) + 1;
-                }
-            }
-            
-            // Convert to array and sort
-            return Object.entries(customerCount)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, limit);
-        }
-        
-        // Group data by time periods for charts
-        function groupDataByDay(data) {
-            const grouped = {};
-            
-            for (const item of data) {
-                const dateStr = item.formattedDate;
-                if (!grouped[dateStr]) {
-                    grouped[dateStr] = {
-                        count: 0,
-                        total: 0
-                    };
-                }
+            // Filter by date
+            if (selectedFilter === 'date' && specificDate.value) {
+                const filterDate = specificDate.value;
+                filteredData = data.filter(item => item.standardDate === filterDate);
+            } 
+            // Filter by month
+            else if (selectedFilter === 'month' && specificMonth.value) {
+                const [year, month] = specificMonth.value.split('-');
+                filteredData = data.filter(item => {
+                    const itemDate = new Date(item.standardDateTime);
+                    return itemDate.getFullYear() === parseInt(year) && 
+                           itemDate.getMonth() + 1 === parseInt(month);
+                });
+            } 
+            // Filter by year
+            else if (selectedFilter === 'year') {
+                const year = parseInt(specificYear.value);
+                filteredData = data.filter(item => {
+                    const itemDate = new Date(item.standardDateTime);
+                    return itemDate.getFullYear() === year;
+                });
+            } 
+            // Filter by date range
+            else if (selectedFilter === 'range' && startDate.value && endDate.value) {
+                const start = new Date(startDate.value);
+                // Set end date to end of day
+                const end = new Date(endDate.value);
+                end.setHours(23, 59, 59, 999);
                 
-                grouped[dateStr].count++;
-                grouped[dateStr].total += item.total;
+                filteredData = data.filter(item => {
+                    const itemDate = new Date(item.standardDateTime);
+                    return itemDate >= start && itemDate <= end;
+                });
+            } 
+            else {
+                filteredData = [...data];
             }
             
-            return grouped;
+            // Apply branch filter if not "all"
+            if (selectedBranch !== 'all') {
+                filteredData = filteredData.filter(item => item.branch === selectedBranch);
+            }
+            
+            // Reset pagination to first page
+            currentPage = 1;
+            
+            // Update UI
+            updateUI();
         }
-        
-        function groupDataByHour(data) {
-            const grouped = {};
+    
+        // Reset all filters
+        function resetFilters() {
+            // Reset filter selections
+            filterType.value = 'all';
+            specificDate.value = '';
+            specificMonth.value = '';
+            specificYear.value = '2024';
+            startDate.value = '';
+            endDate.value = '';
+            branchFilter.value = 'all';
             
-            for (let i = 0; i < 24; i++) {
-                grouped[i] = {
-                    count: 0,
-                    total: 0
-                };
-            }
+            // Reset filter visibility
+            updateFilterVisibility();
             
-            for (const item of data) {
-                const hour = item.date.getHours();
-                grouped[hour].count++;
-                grouped[hour].total += item.total;
-            }
+            // Reset data filters
+            filteredData = [...data];
+            currentPage = 1;
             
-            return grouped;
+            // Update UI
+            updateUI();
         }
-        
-        // Filter data based on criteria
-        function filterData() {
-            const startDateInput = document.getElementById('startDate').value;
-            const endDateInput = document.getElementById('endDate').value;
-            const specificDayInput = document.getElementById('specificDay').value;
-            const monthInput = document.getElementById('month').value;
-            const yearInput = document.getElementById('year').value;
+    
+        // Update statistics
+        function updateStats() {
+            // Calculate statistics
+            const revenue = filteredData.reduce((sum, item) => sum + item.total, 0);
+            const count = filteredData.length;
+            const avg = count > 0 ? revenue / count : 0;
+            const discounts = filteredData.reduce((sum, item) => sum + (item.discountAmount || 0), 0);
             
-            let startDate = null;
-            let endDate = null;
+            // Update DOM
+            totalRevenue.textContent = formatCurrency(revenue);
+            totalTransactions.textContent = count;
+            averageTransaction.textContent = formatCurrency(avg);
+            totalDiscount.textContent = formatCurrency(discounts);
+        }
+    
+        // Update transactions table
+        function updateTransactionsTable() {
+            // Clear existing rows
+            transactionsTable.innerHTML = '';
             
-            // Reset all date buttons
-            document.querySelectorAll('.date-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredData.length);
+            const pageData = filteredData.slice(startIndex, endIndex);
             
-            // Handle specific filtering criteria
-            if (specificDayInput) {
-                startDate = getStartOfDay(new Date(specificDayInput));
-                endDate = getEndOfDay(new Date(specificDayInput));
-            } else if (startDateInput && endDateInput) {
-                startDate = getStartOfDay(new Date(startDateInput));
-                endDate = getEndOfDay(new Date(endDateInput));
-            } else if (monthInput && yearInput) {
-                startDate = new Date(yearInput, monthInput - 1, 1);
-                endDate = new Date(yearInput, monthInput, 0, 23, 59, 59);
-            } else if (monthInput) {
-                const currentYear = new Date().getFullYear();
-                startDate = new Date(currentYear, monthInput - 1, 1);
-                endDate = new Date(currentYear, monthInput, 0, 23, 59, 59);
-            } else if (yearInput) {
-                startDate = new Date(yearInput, 0, 1);
-                endDate = new Date(yearInput, 11, 31, 23, 59, 59);
-            } else {
-                // Default to all data
-                filteredData = [...rawData];
-                updateUI();
+            // If no data, show message
+            if (pageData.length === 0) {
+                const emptyRow = document.createElement('tr');
+                emptyRow.innerHTML = `<td colspan="7" class="no-data">Không có dữ liệu</td>`;
+                transactionsTable.appendChild(emptyRow);
                 return;
             }
             
-            // Apply the filter
-            filteredData = rawData.filter(item => {
-                return item.date >= startDate && item.date <= endDate;
+            // Create table rows
+            pageData.forEach(transaction => {
+                const row = document.createElement('tr');
+                
+                // Format datetime for display
+                const date = new Date(transaction.standardDateTime);
+                const formattedDate = date.toLocaleDateString('vi-VN', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                row.innerHTML = `
+                    <td>${formattedDate}</td>
+                    <td>${transaction.branch || 'N/A'}</td>
+                    <td>${transaction.customer || 'Khách lẻ'}</td>
+                    <td>${transaction.items}</td>
+                    <td>${transaction.discount || '-'}</td>
+                    <td>${transaction.payment}</td>
+                    <td>${formatCurrency(transaction.total)}</td>
+                `;
+                
+                transactionsTable.appendChild(row);
+            });
+        }
+    
+        // Update pagination controls
+        function updatePagination() {
+            // Clear existing pagination
+            paginationContainer.innerHTML = '';
+            
+            // Calculate total pages
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+            
+            // If only one page or no data, don't show pagination
+            if (totalPages <= 1) return;
+            
+            // Create pagination buttons
+            createPaginationButton('<<', currentPage === 1, () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateTransactionsTable();
+                    updatePagination();
+                }
             });
             
-            updateUI();
-        }
-        
-        // Apply predefined date ranges
-        function applyDateRange(range) {
-            const today = new Date();
+            // Page buttons
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(totalPages, startPage + 4);
             
-            // Reset inputs
-            document.getElementById('startDate').value = '';
-            document.getElementById('endDate').value = '';
-            document.getElementById('specificDay').value = '';
-            document.getElementById('month').value = '';
-            document.getElementById('year').value = '';
+            // Adjust start if we're near the end
+            if (endPage - startPage < 4 && startPage > 1) {
+                startPage = Math.max(1, endPage - 4);
+            }
             
-            // Reset button states
-            document.querySelectorAll('.date-btn').forEach(btn => {
-                btn.classList.remove('active');
+            for (let i = startPage; i <= endPage; i++) {
+                createPaginationButton(i, false, () => {
+                    currentPage = i;
+                    updateTransactionsTable();
+                    updatePagination();
+                }, i === currentPage);
+            }
+            
+            // Next button
+            createPaginationButton('>>', currentPage === totalPages, () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updateTransactionsTable();
+                    updatePagination();
+                }
             });
-            document.querySelector(`.date-btn[data-range="${range}"]`).classList.add('active');
-            
-            let startDate, endDate;
-            
-            switch (range) {
-                case 'today':
-                    startDate = getStartOfDay(today);
-                    endDate = getEndOfDay(today);
-                    break;
-                case 'yesterday':
-                    const yesterday = new Date(today);
-                    yesterday.setDate(yesterday.getDate() - 1);
-                    startDate = getStartOfDay(yesterday);
-                    endDate = getEndOfDay(yesterday);
-                    break;
-                case 'thisWeek':
-                    startDate = getStartOfWeek(today);
-                    endDate = getEndOfDay(today);
-                    break;
-                case 'lastWeek':
-                    const lastWeekStart = new Date(today);
-                    lastWeekStart.setDate(lastWeekStart.getDate() - 7);
-                    startDate = getStartOfWeek(lastWeekStart);
-                    endDate = getEndOfWeek(lastWeekStart);
-                    break;
-                case 'thisMonth':
-                    startDate = getStartOfMonth(today);
-                    endDate = getEndOfDay(today);
-                    break;
-                case 'lastMonth':
-                    const lastMonth = new Date(today);
-                    lastMonth.setMonth(lastMonth.getMonth() - 1);
-                    startDate = getStartOfMonth(lastMonth);
-                    endDate = getEndOfMonth(lastMonth);
-                    break;
-                case 'thisYear':
-                    startDate = getStartOfYear(today);
-                    endDate = getEndOfDay(today);
-                    break;
-                case 'all':
-                default:
-                    filteredData = [...rawData];
-                    updateUI();
-                    return;
-            }
-            
-            // Apply the filter
-            filteredData = rawData.filter(item => {
-                return item.date >= startDate && item.date <= endDate;
-            });
-            
-            updateUI();
         }
-        
-        // Update UI with filtered data
-        function updateUI() {
-            updateStats();
-            updateCharts();
-            updateTable();
-        }
-        
-        // Update statistics
-        function updateStats() {
-            // Calculate stats
-            const totalRevenue = filteredData.reduce((sum, item) => sum + item.total, 0);
-            const totalOrders = filteredData.length;
-            const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
-            
-            // Find max order
-            let maxOrder = { total: 0 };
-            if (filteredData.length > 0) {
-                maxOrder = filteredData.reduce((max, item) => item.total > max.total ? item : max, filteredData[0]);
+    
+        // Helper function to create pagination buttons
+        function createPaginationButton(text, disabled, onClick, isActive = false) {
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.disabled = disabled;
+            if (isActive) {
+                button.classList.add('active');
             }
-            
-            // Update the UI
-            document.getElementById('totalRevenue').textContent = formatCurrency(totalRevenue);
-            document.getElementById('totalOrders').textContent = formatNumber(totalOrders);
-            document.getElementById('avgOrderValue').textContent = formatCurrency(avgOrderValue);
-            document.getElementById('maxOrderValue').textContent = formatCurrency(maxOrder.total);
-            
-            // Show the date of max order if available
-            if (maxOrder.date) {
-                document.getElementById('maxOrderDate').textContent = `${maxOrder.formattedDate} ${maxOrder.formattedTime}`;
-            } else {
-                document.getElementById('maxOrderDate').textContent = '';
-            }
+            button.addEventListener('click', onClick);
+            paginationContainer.appendChild(button);
         }
-        
-        // Update charts based on filtered data
+    
+        // Update all charts
         function updateCharts() {
             updateRevenueChart();
             updateServicesChart();
-            updateTimeDistributionChart();
-            updateCustomersChart();
+            updateBranchChart();
+            updatePaymentChart();
         }
-        
-        // Chart objects
-        let revenueChart, servicesChart, timeDistributionChart, customersChart;
-        
+    
+        // Update revenue chart
         function updateRevenueChart() {
-            const ctx = document.getElementById('revenueChart').getContext('2d');
+            // Group data by date for the chart
+            const revenueByDate = {};
             
-            // Group data by day
-            const groupedData = groupDataByDay(filteredData);
-            
-            // Prepare chart data
-            const labels = Object.keys(groupedData).sort();
-            const revenues = labels.map(date => groupedData[date].total);
-            const counts = labels.map(date => groupedData[date].count);
-            
-            // Create/update chart
-            if (revenueChart) {
-                revenueChart.data.labels = labels;
-                revenueChart.data.datasets[0].data = revenues;
-                revenueChart.data.datasets[1].data = counts;
-                revenueChart.update();
-            } else {
-                revenueChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: 'Doanh thu (VNĐ)',
-                                data: revenues,
-                                backgroundColor: 'rgba(25, 118, 210, 0.7)',
-                                borderColor: 'rgba(25, 118, 210, 1)',
-                                borderWidth: 1,
-                                yAxisID: 'y'
-                            },
-                            {
-                                label: 'Số đơn hàng',
-                                data: counts,
-                                type: 'line',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderWidth: 2,
-                                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-                                pointRadius: 4,
-                                fill: false,
-                                tension: 0.1,
-                                yAxisID: 'y1'
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                position: 'left',
-                                title: {
-                                    display: true,
-                                    text: 'Doanh thu (VNĐ)'
-                                },
-                                ticks: {
-                                    callback: function(value) {
-                                        if (value >= 1000000) return (value / 1000000) + 'tr';
-                                        if (value >= 1000) return (value / 1000) + 'k';
-                                        return value;
-                                    }
-                                }
-                            },
-                            y1: {
-                                beginAtZero: true,
-                                position: 'right',
-                                title: {
-                                    display: true,
-                                    text: 'Số đơn hàng'
-                                },
-                                grid: {
-                                    drawOnChartArea: false
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        if (context.dataset.label === 'Doanh thu (VNĐ)') {
-                                            return context.dataset.label + ': ' + formatCurrency(context.raw);
-                                        } else {
-                                            return context.dataset.label + ': ' + context.raw;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-        
-        function updateServicesChart() {
-            const ctx = document.getElementById('servicesChart').getContext('2d');
-            
-            // Get top services
-            const topServices = getTopServices(filteredData, 7);
-            
-            // Prepare chart data
-            const labels = topServices.map(service => service[0]);
-            const counts = topServices.map(service => service[1]);
-            
-            // Generate colors
-            const backgroundColors = [
-                'rgba(25, 118, 210, 0.7)',
-                'rgba(76, 175, 80, 0.7)',
-                'rgba(255, 152, 0, 0.7)',
-                'rgba(244, 67, 54, 0.7)',
-                'rgba(156, 39, 176, 0.7)',
-                'rgba(0, 188, 212, 0.7)',
-                'rgba(63, 81, 181, 0.7)'
-            ];
-            
-            // Create/update chart
-            if (servicesChart) {
-                servicesChart.data.labels = labels;
-                servicesChart.data.datasets[0].data = counts;
-                servicesChart.update();
-            } else {
-                servicesChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            data: counts,
-                            backgroundColor: backgroundColors,
-                            borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.label || '';
-                                        const value = context.raw || 0;
-                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                        const percentage = Math.round((value / total) * 100);
-                                        return `${label}: ${value} (${percentage}%)`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-            
-            // Update top services list
-            const topServicesList = document.getElementById('topServices');
-            topServicesList.innerHTML = '';
-            
-            topServices.forEach((service, index) => {
-                const item = document.createElement('div');
-                item.className = 'service-item';
-                item.innerHTML = `
-                    <span class="service-name">${index + 1}. ${service[0]}</span>
-                    <span class="service-count">${service[1]} lần</span>
-                `;
-                topServicesList.appendChild(item);
-            });
-        }
-        
-        function updateTimeDistributionChart() {
-            const ctx = document.getElementById('timeDistributionChart').getContext('2d');
-            
-            // Group data by hour
-            const groupedData = groupDataByHour(filteredData);
-            
-            // Prepare chart data
-            const hours = Array.from({ length: 24 }, (_, i) => i);
-            const counts = hours.map(hour => groupedData[hour].count);
-            const revenues = hours.map(hour => groupedData[hour].total);
-            
-            // Format hour labels
-            const labels = hours.map(hour => {
-                if (hour === 0) return '12 AM';
-                if (hour < 12) return `${hour} AM`;
-                if (hour === 12) return '12 PM';
-                return `${hour - 12} PM`;
-            });
-            
-            // Create/update chart
-            if (timeDistributionChart) {
-                timeDistributionChart.data.labels = labels;
-                timeDistributionChart.data.datasets[0].data = counts;
-                timeDistributionChart.data.datasets[1].data = revenues;
-                timeDistributionChart.update();
-            } else {
-                timeDistributionChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: 'Số đơn hàng',
-                                data: counts,
-                                backgroundColor: 'rgba(25, 118, 210, 0.7)',
-                                borderColor: 'rgba(25, 118, 210, 1)',
-                                borderWidth: 1,
-                                yAxisID: 'y'
-                            },
-                            {
-                                label: 'Doanh thu (VNĐ)',
-                                data: revenues,
-                                type: 'line',
-                                borderColor: 'rgba(76, 175, 80, 1)',
-                                backgroundColor: 'rgba(76, 175, 80, 0.2)',
-                                borderWidth: 2,
-                                pointBackgroundColor: 'rgba(76, 175, 80, 1)',
-                                pointRadius: 4,
-                                fill: false,
-                                tension: 0.1,
-                                yAxisID: 'y1'
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                position: 'left',
-                                title: {
-                                    display: true,
-                                    text: 'Số đơn hàng'
-                                }
-                            },
-                            y1: {
-                                beginAtZero: true,
-                                position: 'right',
-                                title: {
-                                    display: true,
-                                    text: 'Doanh thu (VNĐ)'
-                                },
-                                grid: {
-                                    drawOnChartArea: false
-                                },
-                                ticks: {
-                                    callback: function(value) {
-                                        if (value >= 1000000) return (value / 1000000) + 'tr';
-                                        if (value >= 1000) return (value / 1000) + 'k';
-                                        return value;
-                                    }
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        if (context.dataset.label === 'Doanh thu (VNĐ)') {
-                                            return context.dataset.label + ': ' + formatCurrency(context.raw);
-                                        } else {
-                                            return context.dataset.label + ': ' + context.raw;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-        
-        function updateCustomersChart() {
-            const ctx = document.getElementById('customersChart').getContext('2d');
-            
-            // Get top customers
-            const topCustomers = getTopCustomers(filteredData, 7);
-            
-            // Prepare chart data
-            const labels = topCustomers.map(customer => customer[0]);
-            const counts = topCustomers.map(customer => customer[1]);
-            
-            // Generate colors
-            const backgroundColors = [
-                'rgba(25, 118, 210, 0.7)',
-                'rgba(76, 175, 80, 0.7)',
-                'rgba(255, 152, 0, 0.7)',
-                'rgba(244, 67, 54, 0.7)',
-                'rgba(156, 39, 176, 0.7)',
-                'rgba(0, 188, 212, 0.7)',
-                'rgba(63, 81, 181, 0.7)'
-            ];
-            
-            // Create/update chart
-            if (customersChart) {
-                customersChart.data.labels = labels;
-                customersChart.data.datasets[0].data = counts;
-                customersChart.update();
-            } else {
-                customersChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            data: counts,
-                            backgroundColor: backgroundColors,
-                            borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const label = context.label || '';
-                                        const value = context.raw || 0;
-                                        return `${label}: ${value} lần`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-            
-            // Update top customers list
-            const topCustomersList = document.getElementById('topCustomers');
-            topCustomersList.innerHTML = '';
-            
-            topCustomers.forEach((customer, index) => {
-                const item = document.createElement('div');
-                item.className = 'service-item';
-                item.innerHTML = `
-                    <span class="service-name">${index + 1}. ${customer[0]}</span>
-                    <span class="service-count">${customer[1]} lần</span>
-                `;
-                topCustomersList.appendChild(item);
-            });
-        }
-        
-        // Update the table with paginated data
-        function updateTable() {
-            const tableBody = document.getElementById('tableBody');
-            const paginationContainer = document.getElementById('pagination');
-            
-            // Clear table
-            tableBody.innerHTML = '';
-            
-            // Calculate pagination
-            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-            if (currentPage > totalPages && totalPages > 0) {
-                currentPage = totalPages;
-            }
-            
-            // Get current page data
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = Math.min(start + itemsPerPage, filteredData.length);
-            const currentData = filteredData.slice(start, end);
-            
-            // Populate table
-            for (const item of currentData) {
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
-                    <td>${item.formattedDate} ${item.formattedTime}</td>
-                    <td>${item.customer || 'Không có tên'}</td>
-                    <td>${item.items}</td>
-                    <td>${item.payment}</td>
-                    <td>${item.discount || 'Không'}</td>
-                    <td>${formatCurrency(item.total)}</td>
-                `;
-                
-                tableBody.appendChild(row);
-            }
-            
-            // Update pagination
-            paginationContainer.innerHTML = '';
-            if (totalPages > 1) {
-                // Previous button
-                const prevBtn = document.createElement('button');
-                prevBtn.innerHTML = '&laquo;';
-                prevBtn.disabled = currentPage === 1;
-                prevBtn.addEventListener('click', () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        updateTable();
-                    }
-                });
-                paginationContainer.appendChild(prevBtn);
-                
-                // Page buttons
-                const maxButtons = 5;
-                const startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
-                const endPage = Math.min(totalPages, startPage + maxButtons - 1);
-                
-                for (let i = startPage; i <= endPage; i++) {
-                    const pageBtn = document.createElement('button');
-                    pageBtn.textContent = i;
-                    if (i === currentPage) {
-                        pageBtn.classList.add('current-page');
-                    }
-                    
-                    pageBtn.addEventListener('click', () => {
-                        currentPage = i;
-                        updateTable();
-                    });
-                    
-                    paginationContainer.appendChild(pageBtn);
+            filteredData.forEach(item => {
+                const date = item.standardDate;
+                if (!revenueByDate[date]) {
+                    revenueByDate[date] = 0;
                 }
-                
-                // Next button
-                const nextBtn = document.createElement('button');
-                nextBtn.innerHTML = '&raquo;';
-                nextBtn.disabled = currentPage === totalPages;
-                nextBtn.addEventListener('click', () => {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        updateTable();
-                    }
-                });
-                paginationContainer.appendChild(nextBtn);
+                revenueByDate[date] += item.total;
+            });
+            
+            // Convert to arrays for Chart.js
+            const dates = Object.keys(revenueByDate).sort();
+            const revenues = dates.map(date => revenueByDate[date]);
+            
+            // Format dates for display
+            const formattedDates = dates.map(date => {
+                const [year, month, day] = date.split('-');
+                return `${day}/${month}/${year}`;
+            });
+            
+            // Create or update chart
+            if (revenueChartInstance) {
+                revenueChartInstance.destroy();
             }
-        }
-        
-        // Initialize the app
-        function initApp() {
-            // Set default filter to this month
-            filteredData = [...rawData];
-            applyDateRange('thisMonth');
             
-            // Add event listeners
-            document.getElementById('applyFilter').addEventListener('click', filterData);
-            
-            // Date range buttons
-            document.querySelectorAll('.date-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    applyDateRange(btn.getAttribute('data-range'));
-                });
+            revenueChartInstance = new Chart(revenueChart, {
+                type: 'line',
+                data: {
+                    labels: formattedDates,
+                    datasets: [{
+                        label: 'Doanh thu',
+                        data: revenues,
+                        backgroundColor: 'rgba(25, 118, 210, 0.2)',
+                        borderColor: 'rgba(25, 118, 210, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(25, 118, 210, 1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return formatCurrency(context.raw);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
             });
         }
-        
-        // Initialize the app when document is loaded
-        window.addEventListener('DOMContentLoaded', initApp);
+    
+        // Update services chart
+        function updateServicesChart() {
+            // Extract all services and count them
+            const serviceCount = {};
+            
+            filteredData.forEach(transaction => {
+                transaction.itemsArray.forEach(item => {
+                    const serviceName = item.name.trim();
+                    if (!serviceCount[serviceName]) {
+                        serviceCount[serviceName] = 0;
+                    }
+                    serviceCount[serviceName] += item.count;
+                });
+            });
+            
+            // Sort services by count and get top 5
+            const sortedServices = Object.entries(serviceCount)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+            
+            const serviceNames = sortedServices.map(item => item[0]);
+            const serviceCounts = sortedServices.map(item => item[1]);
+            
+            // Create or update chart
+            if (servicesChartInstance) {
+                servicesChartInstance.destroy();
+            }
+            
+            servicesChartInstance = new Chart(servicesChart, {
+                type: 'bar',
+                data: {
+                    labels: serviceNames,
+                    datasets: [{
+                        label: 'Số lượng',
+                        data: serviceCounts,
+                        backgroundColor: 'rgba(3, 169, 244, 0.7)',
+                        borderColor: 'rgba(3, 169, 244, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        // Update branch chart
+        function updateBranchChart() {
+            // Group data by branch
+            const branchRevenue = {};
+            
+            filteredData.forEach(item => {
+                const branch = item.branch || 'Không xác định';
+                if (!branchRevenue[branch]) {
+                    branchRevenue[branch] = 0;
+                }
+                branchRevenue[branch] += item.total;
+            });
+            
+            // Convert to arrays for Chart.js
+            const branches = Object.keys(branchRevenue);
+            const revenues = branches.map(branch => branchRevenue[branch]);
+            
+            // Create or update chart
+            if (branchChartInstance) {
+                branchChartInstance.destroy();
+            }
+            
+            branchChartInstance = new Chart(branchChart, {
+                type: 'doughnut',
+                data: {
+                    labels: branches,
+                    datasets: [{
+                        data: revenues,
+                        backgroundColor: [
+                            'rgba(25, 118, 210, 0.7)',
+                            'rgba(3, 169, 244, 0.7)',
+                            'rgba(0, 150, 136, 0.7)',
+                            'rgba(76, 175, 80, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(25, 118, 210, 1)',
+                            'rgba(3, 169, 244, 1)',
+                            'rgba(0, 150, 136, 1)',
+                            'rgba(76, 175, 80, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = formatCurrency(context.raw);
+                                    const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((context.raw / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        // Update payment chart
+        function updatePaymentChart() {
+            // Group data by payment method
+            const paymentCount = {};
+            
+            filteredData.forEach(item => {
+                const payment = item.payment || 'Không xác định';
+                if (!paymentCount[payment]) {
+                    paymentCount[payment] = 0;
+                }
+                paymentCount[payment]++;
+            });
+            
+            // Convert to arrays for Chart.js
+            const paymentMethods = Object.keys(paymentCount);
+            const counts = paymentMethods.map(method => paymentCount[method]);
+            
+            // Create or update chart
+            if (paymentChartInstance) {
+                paymentChartInstance.destroy();
+            }
+            
+            paymentChartInstance = new Chart(paymentChart, {
+                type: 'pie',
+                data: {
+                    labels: paymentMethods,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: [
+                            'rgba(25, 118, 210, 0.7)',
+                            'rgba(3, 169, 244, 0.7)',
+                            'rgba(0, 150, 136, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(25, 118, 210, 1)',
+                            'rgba(3, 169, 244, 1)',
+                            'rgba(0, 150, 136, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw;
+                                    const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((context.raw / total) * 100);
+                                    return `${label}: ${value} giao dịch (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        // Update service statistics
+        function updateServiceStats() {
+            // Calculate service statistics
+            const serviceStats = {};
+            const totalRevenue = filteredData.reduce((sum, transaction) => sum + transaction.total, 0);
+            
+            // First pass: count services and their occurrences
+            filteredData.forEach(transaction => {
+                // Estimate per-service revenue from the total
+                const itemCount = transaction.itemsArray.reduce((sum, item) => sum + item.count, 0);
+                const estimatedValuePerItem = transaction.total / itemCount;
+                
+                transaction.itemsArray.forEach(item => {
+                    const serviceName = item.name.trim();
+                    if (!serviceStats[serviceName]) {
+                        serviceStats[serviceName] = {
+                            count: 0,
+                            revenue: 0
+                        };
+                    }
+                    serviceStats[serviceName].count += item.count;
+                    serviceStats[serviceName].revenue += estimatedValuePerItem * item.count;
+                });
+            });
+            
+            // Convert to array and sort by revenue
+            const servicesArray = Object.entries(serviceStats).map(([name, stats]) => ({
+                name,
+                count: stats.count,
+                revenue: stats.revenue,
+                percentage: (stats.revenue / totalRevenue) * 100
+            })).sort((a, b) => b.revenue - a.revenue);
+            
+            // Update service charts and table
+            updateServiceCountChart(servicesArray);
+            updateServiceRevenueChart(servicesArray);
+            updateServicesTable(servicesArray);
+        }
+    
+        // Update service count chart
+        function updateServiceCountChart(servicesArray) {
+            // Take top 10 services by count
+            const topServicesByCount = [...servicesArray]
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 10);
+            
+            const serviceNames = topServicesByCount.map(item => item.name);
+            const serviceCounts = topServicesByCount.map(item => item.count);
+            
+            // Create or update chart
+            if (serviceCountChartInstance) {
+                serviceCountChartInstance.destroy();
+            }
+            
+            serviceCountChartInstance = new Chart(serviceCountChart, {
+                type: 'bar',
+                data: {
+                    labels: serviceNames,
+                    datasets: [{
+                        label: 'Số lượng',
+                        data: serviceCounts,
+                        backgroundColor: 'rgba(3, 169, 244, 0.7)',
+                        borderColor: 'rgba(3, 169, 244, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        // Update service revenue chart
+        function updateServiceRevenueChart(servicesArray) {
+            // Take top 10 services by revenue
+            const topServicesByRevenue = servicesArray.slice(0, 10);
+            
+            const serviceNames = topServicesByRevenue.map(item => item.name);
+            const serviceRevenues = topServicesByRevenue.map(item => item.revenue);
+            
+            // Create or update chart
+            if (serviceRevenueChartInstance) {
+                serviceRevenueChartInstance.destroy();
+            }
+            
+            serviceRevenueChartInstance = new Chart(serviceRevenueChart, {
+                type: 'bar',
+                data: {
+                    labels: serviceNames,
+                    datasets: [{
+                        label: 'Doanh thu',
+                        data: serviceRevenues,
+                        backgroundColor: 'rgba(25, 118, 210, 0.7)',
+                        borderColor: 'rgba(25, 118, 210, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return formatCurrency(context.raw);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        // Update services table
+        function updateServicesTable(servicesArray) {
+            const servicesTable = document.getElementById('services-table').querySelector('tbody');
+            servicesTable.innerHTML = '';
+            
+            servicesArray.forEach(service => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${service.name}</td>
+                    <td>${service.count}</td>
+                    <td>${formatCurrency(service.revenue)}</td>
+                    <td>${service.percentage.toFixed(1)}%</td>
+                `;
+                servicesTable.appendChild(row);
+            });
+        }
+    
+        // Update customer statistics
+        function updateCustomerStats() {
+            // Calculate customer statistics
+            const customerStats = {};
+            
+            filteredData.forEach(transaction => {
+                const customer = transaction.customer || 'Khách lẻ';
+                if (!customerStats[customer]) {
+                    customerStats[customer] = {
+                        visits: 0,
+                        totalSpend: 0,
+                        averageSpend: 0
+                    };
+                }
+                customerStats[customer].visits++;
+                customerStats[customer].totalSpend += transaction.total;
+                customerStats[customer].averageSpend = customerStats[customer].totalSpend / customerStats[customer].visits;
+            });
+            
+            // Convert to array and sort by total spend
+            const customersArray = Object.entries(customerStats).map(([name, stats]) => ({
+                name,
+                visits: stats.visits,
+                totalSpend: stats.totalSpend,
+                averageSpend: stats.averageSpend
+            })).sort((a, b) => b.totalSpend - a.totalSpend);
+            
+            // Update customer charts and table
+            updateTopCustomersChart(customersArray);
+            updateCustomerLoyaltyChart(customersArray);
+            updateCustomersTable(customersArray);
+        }
+    
+        // Update top customers chart
+        function updateTopCustomersChart(customersArray) {
+            // Take top 10 customers by spend
+            const topCustomers = customersArray.slice(0, 10);
+            
+            const customerNames = topCustomers.map(item => item.name);
+            const customerSpends = topCustomers.map(item => item.totalSpend);
+            
+            // Create or update chart
+            if (topCustomersChartInstance) {
+                topCustomersChartInstance.destroy();
+            }
+            
+            topCustomersChartInstance = new Chart(topCustomersChart, {
+                type: 'bar',
+                data: {
+                    labels: customerNames,
+                    datasets: [{
+                        label: 'Tổng chi tiêu',
+                        data: customerSpends,
+                        backgroundColor: 'rgba(25, 118, 210, 0.7)',
+                        borderColor: 'rgba(25, 118, 210, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return formatCurrency(context.raw);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        // Update customer loyalty chart
+        function updateCustomerLoyaltyChart(customersArray) {
+            // Categorize customers by number of visits
+            const visitCategories = {
+                '1 lần': 0,
+                '2-3 lần': 0,
+                '4-5 lần': 0,
+                'Trên 5 lần': 0
+            };
+            
+            customersArray.forEach(customer => {
+                if (customer.visits === 1) {
+                    visitCategories['1 lần']++;
+                } else if (customer.visits >= 2 && customer.visits <= 3) {
+                    visitCategories['2-3 lần']++;
+                } else if (customer.visits >= 4 && customer.visits <= 5) {
+                    visitCategories['4-5 lần']++;
+                } else {
+                    visitCategories['Trên 5 lần']++;
+                }
+            });
+            
+            const categories = Object.keys(visitCategories);
+            const counts = categories.map(category => visitCategories[category]);
+            
+            // Create or update chart
+            if (customerLoyaltyChartInstance) {
+                customerLoyaltyChartInstance.destroy();
+            }
+            
+            customerLoyaltyChartInstance = new Chart(customerLoyaltyChart, {
+                type: 'pie',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        data: counts,
+                        backgroundColor: [
+                            'rgba(25, 118, 210, 0.7)',
+                            'rgba(3, 169, 244, 0.7)',
+                            'rgba(0, 150, 136, 0.7)',
+                            'rgba(76, 175, 80, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(25, 118, 210, 1)',
+                            'rgba(3, 169, 244, 1)',
+                            'rgba(0, 150, 136, 1)',
+                            'rgba(76, 175, 80, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw;
+                                    const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((context.raw / total) * 100);
+                                    return `${label}: ${value} khách hàng (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        // Update customers table
+        function updateCustomersTable(customersArray) {
+            const customersTable = document.getElementById('customers-table').querySelector('tbody');
+            customersTable.innerHTML = '';
+            
+            customersArray.forEach(customer => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${customer.name}</td>
+                    <td>${customer.visits}</td>
+                    <td>${formatCurrency(customer.totalSpend)}</td>
+                    <td>${formatCurrency(customer.averageSpend)}</td>
+                `;
+                customersTable.appendChild(row);
+            });
+        }
+    
+        // Initialize the application
+        init();
     </script>
 </body>
 </html>

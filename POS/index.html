@@ -99,6 +99,13 @@
                                 <input type="datetime-local" id="bill-time" readonly>
                             </div>
                             <div class="input-group">
+                                <label>Chi nhánh:</label>
+                                <select name="branch" id="branch">
+                                    <option value="Mai Tây Hair Salon" selected >Mai Tây Hair Salon</option>
+                                    <option value="H Hair Studio" disabled >H Hair Studio</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
                                 <label>Khách hàng:</label>
                                 <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
                                     placeholder="Nhập tên khách hàng">
@@ -154,9 +161,13 @@
                                 <button onclick="BillManager.printBill()" class="print-btn">
                                     <i class="fas fa-print"></i> In hóa đơn
                                 </button>
+                                <button class="sync-data-btn" onclick="BillManager.printBilltoSave()">
+                                    <i class="fas fa-save"></i> In & lưu hoá đơn
+                                </button>
                                 <button class="sync-data-btn" onclick="saveInvoice()">
                                     <i class="fas fa-save"></i> Lưu hoá đơn
                                 </button>
+                                
                             </div>
                         </div>
                     </div>
@@ -194,7 +205,7 @@
             <div class="history-controls">
                 <button onclick="HistoryManager.downloadAsExcel()">Tải xuống (Excel)</button>
                 <button onclick="HistoryManager.downloadAsJSON()">Tải xuống (JSON)</button>
-                <button disabled onclick="HistoryManager.clearHistory()">Xóa tất cả</button>
+                <button onclick="HistoryManager.clearHistory()">Xóa tất cả</button>
 
             </div>
             <div id="historylist"></div>

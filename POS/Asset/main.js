@@ -462,6 +462,41 @@ class BillManager {
                 </html>
             `);
             printWindow.document.close(); // Close the document stream after writing
+
+        }
+    }
+
+    static printBilltoSave() {
+        saveInvoice();
+        const printWindow = window.open('', '', 'width=500,height=1000,scrollbars=yes');
+
+        if (printWindow) {
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>In hóa đơn</title>
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                        <style>
+                            /* Your existing CSS styles here */
+                        </style>
+                    </head>
+                    <body>
+                        ${this.generateBillHTML()}
+                        <script>
+                            window.onload = function() {
+                                setTimeout(function() {
+                                
+                                    window.print();
+                                    window.close(); // Optionally close the print window afterward
+                                    alert("Nhớ lưu hoá đơn");
+                                }, 500); // Adjust timeout as necessary
+                            };
+                        </script>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close(); // Close the document stream after writing
+
         }
     }
 
@@ -704,9 +739,16 @@ class HistoryManager {
     static saveInvoice(invoiceData) {
         const history = this.getHistory();
         history.push(invoiceData);
+    
+        // Nếu số lượng hóa đơn vượt quá 20, xóa 10 hóa đơn cũ nhất
+        if (history.length > 20) {
+            history.splice(0, 10); // Xóa 10 phần tử đầu tiên (cũ nhất)
+        }
+    
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(history));
         cart = [];
     }
+    
 
     static getHistory() {
         return JSON.parse(localStorage.getItem(this.STORAGE_KEY) || '[]');
@@ -729,10 +771,34 @@ class HistoryManager {
     }
 
     static clearHistory() {
-        localStorage.removeItem(this.STORAGE_KEY);
-        this.renderHistory();
-        UIManager.showToast('Đã xóa lịch sử');
+        Swal.fire({
+            title: 'Xác nhận xóa lịch sử',
+            input: 'password',
+            inputLabel: 'Nhập mật khẩu để xác nhận',
+            inputPlaceholder: 'Mật khẩu...',
+            inputAttributes: {
+                maxlength: 10,
+                autocapitalize: 'off',
+                autocorrect: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy',
+            preConfirm: (password) => {
+                if (password !== 'hunqd') {
+                    Swal.showValidationMessage('Mật khẩu không đúng');
+                    return false;
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem(this.STORAGE_KEY);
+                this.renderHistory();
+                UIManager.showToast('Đã xóa lịch sử');
+            }
+        });
     }
+    
 
     static downloadAsJSON() {
         const history = this.getHistory();
