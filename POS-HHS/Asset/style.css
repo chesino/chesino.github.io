@@ -1350,3 +1350,52 @@ kbd {
         border-top-right-radius: 10px;
     }
 }
+
+.password-protect-section {
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 100%;
+    background: var(--header-bg);
+  }
+
+  .password-protect-section .password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .password-protect-section input[type="password"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .password-protect-section button {
+    padding: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .password-protect-section button:hover {
+    background-color: #0056b3;
+  }
+
+  .password-protect-section .hidden-link {
+    margin-top: 15px;
+  }
+
+  .password-protect-section a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .password-protect-section a:hover {
+    text-decoration: underline;
+  }

@@ -231,3 +231,21 @@ document.addEventListener('click', (event) => {
     }
 });
 
+
+
+
+function checkPassword() {
+    const correctPassword = "123456"; // thay mật khẩu tại đây
+    const input = document.getElementById("password").value;
+    const hiddenDiv = document.querySelector(".password-protect-section .hidden-link");
+
+    if (input === correctPassword) {
+      hiddenDiv.style.display = "block";
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Sai mật khẩu',
+        text: 'Vui lòng thử lại!'
+      });
+    }
+  }
