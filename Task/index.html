@@ -1,1124 +1,156 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mai Tây Hair Salon - Báo Cáo Doanh Thu</title>
-    <style>
-        :root {
-            --primary: #7852a9;
-            --secondary: #f39bc0;
-            --dark: #333;
-            --light: #f5f5f5;
-            --success: #4CAF50;
-            --warning: #FFC107;
-            --danger: #f44336;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f0f0f0;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1, h2, h3 {
-            margin-bottom: 15px;
-        }
-        
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .card-value {
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .card-title {
-            color: var(--dark);
-            font-size: 16px;
-        }
-        
-        .data-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .chart-container {
-            height: 300px;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            background-color: var(--primary);
-            color: white;
-            position: sticky;
-            top: 0;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        
-        .pagination button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            margin: 0 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .pagination button:hover {
-            background-color: #654295;
-        }
-        
-        .pagination button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        select, input {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: white;
-        }
-        
-        .date-filter {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        
-        .service-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .service-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-name {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .service-count {
-            color: var(--primary);
-            font-size: 18px;
-        }
-        
-        .service-revenue {
-            color: var(--dark);
-        }
-        
-        .customer-list {
-            margin-top: 20px;
-        }
-        
-        .highlight {
-            background-color: #fff9c4;
-        }
-        
-        @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .filters {
-                flex-direction: column;
-            }
-            
-            th, td {
-                padding: 8px 10px;
-                font-size: 14px;
-            }
-            
-            .hide-mobile {
-                display: none;
-            }
-        }
-
-        #top-services-chart, #daily-revenue-chart {
-            width: 100%;
-            height: 300px;
-        }
-
-        .tab-container {
-            margin-bottom: 20px;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            border-bottom: none;
-            margin-right: 5px;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .tab.active {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-top: none;
-            background-color: white;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .search-container {
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .filter-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .filter-btn:hover {
-            background-color: #654295;
-        }
-
-        .summary-box {
-            background-color: #f9f9f9;
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-        }
-
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LocalStorage Manager</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      background: #f9fafb;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .actions {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    .actions button {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .actions button:hover {
+      background: #dc2626;
+    }
+    .table-container {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+    td button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    td button:hover {
+      background: #2563eb;
+    }
+    @media (max-width: 600px) {
+      body {
+        margin: 10px;
+      }
+      .container {
+        padding: 15px;
+      }
+      th, td {
+        padding: 10px;
+      }
+      .actions button {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Mai Tây Hair Salon</h1>
-            <p>Báo cáo doanh thu và phân tích kinh doanh</p>
-        </header>
-        
-        <div class="dashboard">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tổng doanh thu</h3>
-                </div>
-                <div class="card-value" id="total-revenue">0đ</div>
-                <div id="avg-daily-revenue">Trung bình: 0đ/ngày</div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tổng số hóa đơn</h3>
-                </div>
-                <div class="card-value" id="total-orders">0</div>
-                <div id="avg-order-value">Giá trị trung bình: 0đ/hóa đơn</div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Dịch vụ phổ biến nhất</h3>
-                </div>
-                <div id="top-service">-</div>
-                <div id="top-service-count">Số lượt: 0</div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Khách hàng thân thiết</h3>
-                </div>
-                <div id="loyal-customer">-</div>
-                <div id="loyal-customer-visits">Số lần ghé thăm: 0</div>
-            </div>
-        </div>
-        
-        <div class="tab-container">
-            <div class="tabs">
-                <div class="tab active" data-tab="overview">Tổng quan</div>
-                <div class="tab" data-tab="transactions">Giao dịch</div>
-                <div class="tab" data-tab="services">Dịch vụ</div>
-                <div class="tab" data-tab="customers">Khách hàng</div>
-            </div>
-            
-            <div class="tab-content active" id="overview">
-                <div class="summary-box">
-                    <h3>Tóm tắt doanh thu</h3>
-                    <p id="summary-text">Đang tải dữ liệu...</p>
-                </div>
-                
-                <div class="data-section">
-                    <h2>Doanh thu theo ngày</h2>
-                    <div class="chart-container">
-                        <canvas id="daily-revenue-chart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="data-section">
-                    <h2>Top dịch vụ theo doanh thu</h2>
-                    <div class="chart-container">
-                        <canvas id="top-services-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="transactions">
-                <div class="filters">
-                    <div class="filter-group">
-                        <label for="date-from">Từ ngày:</label>
-                        <input type="date" id="date-from">
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="date-to">Đến ngày:</label>
-                        <input type="date" id="date-to">
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="payment-filter">Phương thức thanh toán:</label>
-                        <select id="payment-filter">
-                            <option value="">Tất cả</option>
-                            <option value="Tiền mặt">Tiền mặt</option>
-                            <option value="Chuyển khoản">Chuyển khoản</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label>&nbsp;</label>
-                        <button class="filter-btn" id="apply-filters">Áp dụng</button>
-                    </div>
-                </div>
-                
-                <div class="search-container">
-                    <input type="text" class="search-input" id="transaction-search" placeholder="Tìm kiếm giao dịch theo khách hàng, dịch vụ...">
-                </div>
-                
-                <div class="data-section">
-                    <h2>Danh sách giao dịch</h2>
-                    <table id="transactions-table">
-                        <thead>
-                            <tr>
-                                <th>Thời gian</th>
-                                <th>Khách hàng</th>
-                                <th>Dịch vụ</th>
-                                <th>Thanh toán</th>
-                                <th>Giảm giá</th>
-                                <th>Tổng tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transactions-body">
-                            <tr>
-                                <td colspan="6" class="loading">
-                                    <div class="spinner"></div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="pagination" id="transactions-pagination">
-                        <button id="prev-page" disabled>Trang trước</button>
-                        <span id="page-info">Trang 1 / 1</span>
-                        <button id="next-page" disabled>Trang sau</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="services">
-                <div class="search-container">
-                    <input type="text" class="search-input" id="service-search" placeholder="Tìm kiếm dịch vụ...">
-                </div>
-                
-                <div class="data-section">
-                    <h2>Phân tích dịch vụ</h2>
-                    <div class="chart-container">
-                        <canvas id="services-distribution-chart"></canvas>
-                    </div>
-                    
-                    <h3>Danh sách dịch vụ</h3>
-                    <div class="service-list" id="service-list">
-                        <div class="loading">
-                            <div class="spinner"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="customers">
-                <div class="search-container">
-                    <input type="text" class="search-input" id="customer-search" placeholder="Tìm kiếm khách hàng...">
-                </div>
-                
-                <div class="data-section">
-                    <h2>Thống kê khách hàng</h2>
-                    <div id="customer-stats">
-                        <p>Tổng số khách hàng: <span id="total-customers">0</span></p>
-                        <p>Khách hàng thân thiết (>= 3 lần): <span id="loyal-customers-count">0</span></p>
-                        <p>Khách lẻ: <span id="one-time-customers">0</span></p>
-                    </div>
-                    
-                    <h3>Danh sách khách hàng</h3>
-                    <table id="customers-table">
-                        <thead>
-                            <tr>
-                                <th>Khách hàng</th>
-                                <th>Số lần ghé thăm</th>
-                                <th>Tổng chi tiêu</th>
-                                <th>Dịch vụ yêu thích</th>
-                                <th>Lần ghé gần nhất</th>
-                            </tr>
-                        </thead>
-                        <tbody id="customers-body">
-                            <tr>
-                                <td colspan="5" class="loading">
-                                    <div class="spinner"></div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="pagination" id="customers-pagination">
-                        <button id="customers-prev-page" disabled>Trang trước</button>
-                        <span id="customers-page-info">Trang 1 / 1</span>
-                        <button id="customers-next-page" disabled>Trang sau</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Parse và xử lý dữ liệu
-        const rawData = [{"datetime":"13:10:29 17/12/2024","agency":"Mai Tây Hair Salon","customer":"Nguyễn Hồng Nhi","cashier":"Chủ tiệm","items":"Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"14:36:18 17/12/2024","agency":"Mai Tây Hair Salon","customer":"c.Thư","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân + làm phồng đỉnh  (1)","payment":"Tiền mặt","discount":"","total":1300000},{"datetime":"21:58:06 17/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân + Xả uốn phồng chân (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2000000},{"datetime":"15:36:44 18/12/2024","agency":"Mai Tây Hair Salon","customer":"Dang thuy hang","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Phục hồi keratin  (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1500000},{"datetime":"16:02:37 18/12/2024","agency":"Mai Tây Hair Salon","customer":"hang ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"16:37:33 18/12/2024","agency":"Mai Tây Hair Salon","customer":"chị linh","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân (1), Phục hồi Keratin (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1800000},{"datetime":"13:12:59 19/12/2024","agency":"Mai Tây Hair Salon","customer":"huyền lý","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1100000},{"datetime":"17:47:47 19/12/2024","agency":"Mai Tây Hair Salon","customer":"chị huyền tân hiệp","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:03:23 20/12/2024","agency":"Mai Tây Hair Salon","customer":"chị tâm","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Cắt uốn tóc dài (1)","payment":"Tiền mặt","discount":"","total":1600000},{"datetime":"10:49:16 21/12/2024","agency":"Mai Tây Hair Salon","customer":"huyền lý","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Cắt gội (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"17:38:59 21/12/2024","agency":"Mai Tây Hair Salon","customer":"trâm trâm","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1),  Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"23:53:39 21/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":1200000},{"datetime":"11:32:50 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:42:37 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Dặm chân tóc (1)","payment":"Tiền mặt","discount":"","total":300000},{"datetime":"14:05:33 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Cô ","cashier":"Chủ tiệm","items":"Cắt Nhuộm  (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"","total":1500000},{"datetime":"14:36:34 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt thiết kế+ uốn phục hồi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1350000},{"datetime":"17:17:07 22/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc ngắn (1)","payment":"Tiền mặt","discount":"","total":600000},{"datetime":"15:41:22 23/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"17:33:48 23/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"19:04:45 23/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1300000},{"datetime":"15:06:40 24/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi tự nhiên (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"09:46:06 26/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"21:27:58 26/12/2024","agency":"Mai Tây Hair Salon","customer":"chị nhớ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"19:07:13 27/12/2024","agency":"Mai Tây Hair Salon","customer":"em Mận","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1100000},{"datetime":"19:31:11 27/12/2024","agency":"Mai Tây Hair Salon","customer":"em Đào","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1200000},{"datetime":"13:41:35 28/12/2024","agency":"Mai Tây Hair Salon","customer":"chị thanh","cashier":"Chủ tiệm","items":"Nhuộm tóc dài (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"10:02:00 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:44:20 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Serum moroccanoil (1), Phục hồi olaplex (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"13:36:13 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn tóc (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":1900000},{"datetime":"14:58:42 29/12/2024","agency":"Mai Tây Hair Salon","customer":"chị hà","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"15:12:04 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Cắt thiết kế + uốn Loreal (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":2050000},{"datetime":"17:41:22 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":100000},{"datetime":"17:47:57 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"18:01:45 29/12/2024","agency":"Mai Tây Hair Salon","customer":"em thư","cashier":"Chủ tiệm","items":"uốn sóng cao (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":850000},{"datetime":"18:33:01 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"20:13:39 29/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi tóc dài (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"12:47:10 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"16:05:35 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Huyền 67","cashier":"Chủ tiệm","items":"Phá ngôi mái (1), Uốn phồng chân (1), Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":1500000},{"datetime":"17:31:15 30/12/2024","agency":"Mai Tây Hair Salon","customer":"em trâm","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"19:26:51 30/12/2024","agency":"Mai Tây Hair Salon","customer":"","cashier":"Chủ tiệm","items":"Cắt tóc (2)","payment":"Tiền mặt","discount":"","total":300000},{"datetime":"19:27:54 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"20:04:02 30/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt +gội (2), Uốn phồng chân (2), Cắt Duỗi tóc Loreal (1), Phục hồi Keratin (1), Cắt Duỗi tóc Loreal  (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":4400000},{"datetime":"14:12:56 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt+ gội (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":150000},{"datetime":"14:45:24 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"15:37:17 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:53:40 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phục hồi olaplex (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"23:17:25 31/12/2024","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1),  Nhuộm tóc  (1), Phục hồi Keratin (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2200000},{"datetime":"12:39:39 1/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:08:19 1/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phục hồi Keratin (2), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":2700000},{"datetime":"11:23:06 2/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:29:19 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"14:45:42 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt gội (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":350000},{"datetime":"16:14:39 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1), Uốn phồng chân (1), Nhuộm tóc  (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2650000},{"datetime":"17:09:26 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc ngắn (1), Cắt tóc em bé (1)","payment":"Tiền mặt","discount":"","total":650000},{"datetime":"18:49:39 5/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Cắt Duỗi tóc  (1), Uốn phồng chân (1), Phục hồi Keratin (1)","payment":"Tiền mặt","discount":"","total":2750000},{"datetime":"21:19:30 6/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"16:59:19 7/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn hippi (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"18:05:17 7/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"16:26:10 9/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1200000},{"datetime":"19:36:17 9/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1050000},{"datetime":"16:32:48 10/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc (1)","payment":"Tiền mặt","discount":"","total":600000},{"datetime":"17:31:00 11/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"20:39:01 11/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Phục hồi Keratin tóc ngắn (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1600000},{"datetime":"20:45:46 11/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Duỗi chân tóc (1)","payment":"Tiền mặt","discount":"","total":400000},{"datetime":"14:55:57 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc (1), Uồn mái (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"16:51:13 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":1050000},{"datetime":"16:52:50 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Phục hồi Keratin  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":2050000},{"datetime":"17:07:30 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn hippie tóc dài (1)","payment":"Tiền mặt","discount":"","total":1200000},{"datetime":"18:13:51 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi tóc Loreal (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"18:15:25 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt- uốn bung (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"18:25:38 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1), Phục hồi Keratin  (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"19:17:55 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"19:51:42 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":850000},{"datetime":"22:45:19 12/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt nhuộm (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"11:20:56 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"12:01:52 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân full đầu (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"15:14:48 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"18:24:53 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"19:21:54 14/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi tóc  (1), Nhuộm tóc (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -200.000đTổng chiết khấu: -200.000đ","total":1850000},{"datetime":"16:32:33 15/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:55:27 15/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"15:48:19 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế  (1),  Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1400000},{"datetime":"16:23:31 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"17:54:51 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế  (1), Uốn phồng chân full đầu (1)","payment":"Tiền mặt","discount":"","total":1400000},{"datetime":"18:32:53 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc dài (1)","payment":"Tiền mặt","discount":"","total":900000},{"datetime":"19:49:04 16/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc dài (1), Uốn phồng chân (1), Phục hồi Keratin tóc  (1)","payment":"Tiền mặt","discount":"","total":2100000},{"datetime":"00:35:41 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"01:02:58 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng tóc dài (1), Uốn phồng chân (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":2350000},{"datetime":"19:24:09 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn thiết kế (1),  Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1600000},{"datetime":"19:28:46 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"21:14:32 17/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phục hồi Keratin  (1), Uốn phồng chân full đầu (1), uốn mái (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1500000},{"datetime":"15:14:51 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn duỗi thiết kế (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1200000},{"datetime":"15:31:43 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"16:26:09 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt uốn thiết kế (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"17:00:45 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng lơi (1), Uốn phồng chân (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":2050000},{"datetime":"17:54:20 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi+ uốn ngọn (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"","total":1550000},{"datetime":"19:52:04 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn mái (1)","payment":"Tiền mặt","discount":"","total":250000},{"datetime":"21:12:49 18/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"11:20:49 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1), Nhuộm chân tóc (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"13:02:27 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Duỗi Lớp ngoài + xả uốn phồng (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"16:37:59 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt uốn sóng tóc dài (1), Uốn phồng chân (1), Serum Moroccanoil (1)","payment":"Tiền mặt","discount":"","total":2350000},{"datetime":"22:42:32 19/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -100.000đTổng chiết khấu: -100.000đ","total":800000},{"datetime":"11:08:22 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"12:19:02 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm chân tóc (1)","payment":"Tiền mặt","discount":"","total":350000},{"datetime":"13:22:03 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1),  Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"17:38:01 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Cắt nhuộm tóc nam (1)","payment":"Tiền mặt","discount":"","total":1150000},{"datetime":"23:45:12 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc  (1), Phá ngôi mái (1)","payment":"Tiền mặt","discount":"","total":1000000},{"datetime":"23:46:11 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1), Uốn Mái (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1000000},{"datetime":"23:48:21 20/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"18:06:30 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phá ngôi mái (1), Uốn phồng chân (1), Cắt Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1450000},{"datetime":"18:56:45 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm tóc  (1), Cắt Duỗi tóc  (1), Uốn phồng chân (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":1900000},{"datetime":"20:24:55 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc  (1)","payment":"Tiền mặt","discount":"","total":700000},{"datetime":"22:35:40 21/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Nhuộm chân tóc (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":550000},{"datetime":"19:57:56 22/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Duỗi tóc thiết kế (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1800000},{"datetime":"20:47:35 22/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":" Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"12:15:38 23/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt tóc (1)","payment":"Tiền mặt","discount":"","total":500000},{"datetime":"14:16:52 23/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Phá ngôi mái (1)","payment":"Tiền mặt","discount":"","total":250000},{"datetime":"17:41:28 23/1/2025","agency":"Mai Tây Hair Salon","customer":"MẸ TRINH","cashier":"Chủ tiệm","items":"Cắt duỗi thiết kế (1), Uốn phồng chân (1), phục hồi  KARATIN (1), serium   MOROCCAOIL (1)","payment":"Tiền mặt","discount":"Giảm giá trực tiếp: -50.000đTổng chiết khấu: -50.000đ","total":3000000},{"datetime":"20:11:11 24/1/2025","agency":"Mai Tây Hair Salon","customer":"C trang","cashier":"Chủ tiệm","items":"UỐN hippi (1), Nhuộm tóc (1)","payment":"Tiền mặt","discount":"","total":1700000},{"datetime":"20:12:52 24/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi thiết kế (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"20:12:52 24/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Uốn phồng chân (1), Cắt Duỗi thiết kế (1)","payment":"Tiền mặt","discount":"","total":1250000},{"datetime":"23:07:00 24/1/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt duỗi thiết kế (1)","payment":"Tiền mặt","discount":"","total":800000},{"datetime":"13:27:30 8/2/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"Cắt Tóc (1)","payment":"Tiền mặt","discount":"","total":150000},{"datetime":"11:28:48 26/2/2025","agency":"Mai Tây Hair Salon","customer":"Khách lẻ","cashier":"Chủ tiệm","items":"phá ngôi duỗi mái (1)","payment":"Tiền mặt","discount":"","total":300000}];
-        
-        // Hàm tiện ích
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-        }
-        
-        function parseDate(dateStr) {
-            // Format: HH:MM:SS DD/MM/YYYY
-            const [time, date] = dateStr.split(' ');
-            const [day, month, year] = date.split('/');
-            return new Date(`${year}-${month}-${day}T${time}`);
-        }
-        
-        function formatDate(date) {
-            return date.toLocaleDateString('vi-VN');
-        }
-        
-        // Xử lý dữ liệu
-        const transactions = rawData.map(item => {
-            const date = parseDate(item.datetime);
-            return {
-                ...item,
-                date,
-                formattedDate: formatDate(date),
-                formattedTotal: formatCurrency(item.total)
-            };
-        });
-        
-        // Xử lý cho tổng quan
-        let totalRevenue = transactions.reduce((sum, t) => sum + t.total, 0);
-        let totalOrders = transactions.length;
-        let avgOrderValue = totalRevenue / totalOrders;
-        
-        // Tính doanh thu theo ngày
-        const dailyRevenue = {};
-        transactions.forEach(t => {
-            const dateKey = t.formattedDate;
-            if (!dailyRevenue[dateKey]) {
-                dailyRevenue[dateKey] = 0;
-            }
-            dailyRevenue[dateKey] += t.total;
-        });
-        
-        // Xử lý dịch vụ
-        const servicesMap = {};
-        transactions.forEach(t => {
-            const services = t.items.split(', ');
-            services.forEach(service => {
-                // Trích xuất tên dịch vụ và số lượng
-                const match = service.match(/(.*?)\s*\((\d+)\)$/);
-                if (match) {
-                    const [_, serviceName, count] = match;
-                    const trimmedServiceName = serviceName.trim();
-                    
-                    if (!servicesMap[trimmedServiceName]) {
-                        servicesMap[trimmedServiceName] = {
-                            count: 0,
-                            revenue: 0,
-                            transactions: []
-                        };
-                    }
-                    
-                    servicesMap[trimmedServiceName].count += parseInt(count);
-                    
-                    // Ước tính doanh thu dựa trên tỷ lệ đóng góp
-                    const estimatedRevenue = t.total / services.length;
-                    servicesMap[trimmedServiceName].revenue += estimatedRevenue;
-                    servicesMap[trimmedServiceName].transactions.push(t);
-                }
-            });
-        });
-        
-        // Tìm dịch vụ phổ biến nhất
-        let topService = null;
-        let topServiceCount = 0;
-        
-        for (const [name, data] of Object.entries(servicesMap)) {
-            if (data.count > topServiceCount) {
-                topService = name;
-                topServiceCount = data.count;
-            }
-        }
-        
-        // Xử lý khách hàng
-        const customersMap = {};
-        transactions.forEach(t => {
-            const customerName = t.customer || 'Khách lẻ';
-            if (!customersMap[customerName]) {
-                customersMap[customerName] = {
-                    visits: 0,
-                    totalSpend: 0,
-                    favoriteServices: {},
-                    lastVisit: null
-                };
-            }
-            
-            customersMap[customerName].visits += 1;
-            customersMap[customerName].totalSpend += t.total;
-            
-            if (!customersMap[customerName].lastVisit || t.date > customersMap[customerName].lastVisit) {
-                customersMap[customerName].lastVisit = t.date;
-            }
-            
-            // Theo dõi dịch vụ yêu thích
-            const services = t.items.split(', ');
-            services.forEach(service => {
-                const match = service.match(/(.*?)\s*\((\d+)\)$/);
-                if (match) {
-                    const [_, serviceName, count] = match;
-                    const trimmedServiceName = serviceName.trim();
-                    
-                    if (!customersMap[customerName].favoriteServices[trimmedServiceName]) {
-                        customersMap[customerName].favoriteServices[trimmedServiceName] = 0;
-                    }
-                    
-                    customersMap[customerName].favoriteServices[trimmedServiceName] += parseInt(count);
-                }
-            });
-        });
-        
-        // Tìm khách hàng thân thiết
-        let loyalCustomer = null;
-        let maxVisits = 0;
-        
-        for (const [name, data] of Object.entries(customersMap)) {
-            if (name !== 'Khách lẻ' && data.visits > maxVisits) {
-                loyalCustomer = name;
-                maxVisits = data.visits;
-            }
-        }
-        
-        // Cập nhật giao diện
-        document.getElementById('total-revenue').textContent = formatCurrency(totalRevenue);
-        document.getElementById('avg-daily-revenue').textContent = `Trung bình: ${formatCurrency(totalRevenue / Object.keys(dailyRevenue).length)}/ngày`;
-        
-        document.getElementById('total-orders').textContent = totalOrders;
-        document.getElementById('avg-order-value').textContent = `Giá trị trung bình: ${formatCurrency(avgOrderValue)}/hóa đơn`;
-        
-        document.getElementById('top-service').textContent = topService;
-        document.getElementById('top-service-count').textContent = `Số lượt: ${topServiceCount}`;
-        
-        document.getElementById('loyal-customer').textContent = loyalCustomer || 'Không có';
-        document.getElementById('loyal-customer-visits').textContent = `Số lần ghé thăm: ${maxVisits}`;
-        
-        // Hiển thị tóm tắt
-        const summaryText = `
-            Từ 17/12/2024 đến 26/02/2025, Mai Tây Hair Salon phục vụ tổng cộng ${totalOrders} khách hàng, 
-            với tổng doanh thu đạt ${formatCurrency(totalRevenue)}. Dịch vụ phổ biến nhất là "${topService}" 
-            với ${topServiceCount} lượt sử dụng. Khách hàng "${loyalCustomer || 'Không xác định'}" 
-            là khách hàng thân thiết nhất với ${maxVisits} lần ghé thăm.
-        `;
-        document.getElementById('summary-text').textContent = summaryText;
-        
-        // Vẽ biểu đồ doanh thu theo ngày
-        const dailyRevenueCtx = document.getElementById('daily-revenue-chart').getContext('2d');
-        const dailyRevenueLabels = Object.keys(dailyRevenue);
-        const dailyRevenueData = Object.values(dailyRevenue);
-        
-        new Chart(dailyRevenueCtx, {
-            type: 'line',
-            data: {
-                labels: dailyRevenueLabels,
-                datasets: [{
-                    label: 'Doanh thu (VNĐ)',
-                    data: dailyRevenueData,
-                    backgroundColor: 'rgba(120, 82, 169, 0.2)',
-                    borderColor: '#7852a9',
-                    tension: 0.2,
-                    fill: true,
-                    pointBackgroundColor: '#7852a9',
-                    pointRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return formatCurrency(value);
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return formatCurrency(context.parsed.y);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Vẽ biểu đồ top dịch vụ
-        const servicesRevenueData = [];
-        for (const [name, data] of Object.entries(servicesMap)) {
-            servicesRevenueData.push({
-                name,
-                revenue: data.revenue,
-                count: data.count
-            });
-        }
-        
-        // Sắp xếp theo doanh thu
-        servicesRevenueData.sort((a, b) => b.revenue - a.revenue);
-        
-        // Lấy top 10 dịch vụ
-        const top10Services = servicesRevenueData.slice(0, 10);
-        
-        const topServicesCtx = document.getElementById('top-services-chart').getContext('2d');
-        
-        new Chart(topServicesCtx, {
-            type: 'bar',
-            data: {
-                labels: top10Services.map(s => s.name),
-                datasets: [{
-                    label: 'Doanh thu',
-                    data: top10Services.map(s => s.revenue),
-                    backgroundColor: [
-                        '#7852a9', '#9160c7', '#a87fe0', '#bc9de7', 
-                        '#cfbced', '#e3dcf4', '#f6f5fa', '#f39bc0', 
-                        '#f7b8d1', '#f9d5e2'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                indexAxis: 'y',
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return formatCurrency(value);
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                const service = top10Services[context.dataIndex];
-                                return [
-                                    `Doanh thu: ${formatCurrency(service.revenue)}`,
-                                    `Số lượt: ${service.count}`
-                                ];
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Biểu đồ phân phối dịch vụ
-        const serviceDistributionCtx = document.getElementById('services-distribution-chart').getContext('2d');
-        
-        // Nhóm các dịch vụ có doanh thu thấp vào "Khác"
-        const topServicesForPie = servicesRevenueData.slice(0, 7);
-        const otherServices = servicesRevenueData.slice(7);
-        let otherServicesRevenue = 0;
-        otherServices.forEach(s => {
-            otherServicesRevenue += s.revenue;
-        });
-        
-        if (otherServicesRevenue > 0) {
-            topServicesForPie.push({
-                name: 'Khác',
-                revenue: otherServicesRevenue,
-                count: otherServices.reduce((sum, s) => sum + s.count, 0)
-            });
-        }
-        
-        new Chart(serviceDistributionCtx, {
-            type: 'pie',
-            data: {
-                labels: topServicesForPie.map(s => s.name),
-                datasets: [{
-                    data: topServicesForPie.map(s => s.revenue),
-                    backgroundColor: [
-                        '#7852a9', '#9160c7', '#a87fe0', '#bc9de7', 
-                        '#cfbced', '#e3dcf4', '#f6f5fa', '#f39bc0'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                const service = topServicesForPie[context.dataIndex];
-                                const percentage = ((service.revenue / totalRevenue) * 100).toFixed(1);
-                                return [
-                                    `${service.name}: ${formatCurrency(service.revenue)}`,
-                                    `${percentage}% tổng doanh thu`
-                                ];
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Danh sách giao dịch với phân trang
-        const transactionsPerPage = 10;
-        let currentTransactionsPage = 1;
-        let filteredTransactions = [...transactions];
-        
-        function updateTransactionsTable() {
-            const tableBody = document.getElementById('transactions-body');
-            tableBody.innerHTML = '';
-            
-            const startIndex = (currentTransactionsPage - 1) * transactionsPerPage;
-            const endIndex = Math.min(startIndex + transactionsPerPage, filteredTransactions.length);
-            
-            for (let i = startIndex; i < endIndex; i++) {
-                const t = filteredTransactions[i];
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
-                    <td>${t.datetime}</td>
-                    <td>${t.customer || 'Khách lẻ'}</td>
-                    <td>${t.items}</td>
-                    <td>${t.payment}</td>
-                    <td>${t.discount || '-'}</td>
-                    <td>${t.formattedTotal}</td>
-                `;
-                
-                tableBody.appendChild(row);
-            }
-            
-            // Cập nhật thông tin phân trang
-            document.getElementById('page-info').textContent = `Trang ${currentTransactionsPage} / ${Math.ceil(filteredTransactions.length / transactionsPerPage)}`;
-            document.getElementById('prev-page').disabled = currentTransactionsPage === 1;
-            document.getElementById('next-page').disabled = currentTransactionsPage === Math.ceil(filteredTransactions.length / transactionsPerPage);
-        }
-        
-        document.getElementById('prev-page').addEventListener('click', function() {
-            if (currentTransactionsPage > 1) {
-                currentTransactionsPage--;
-                updateTransactionsTable();
-            }
-        });
-        
-        document.getElementById('next-page').addEventListener('click', function() {
-            if (currentTransactionsPage < Math.ceil(filteredTransactions.length / transactionsPerPage)) {
-                currentTransactionsPage++;
-                updateTransactionsTable();
-            }
-        });
-        
-        // Tìm kiếm giao dịch
-        document.getElementById('transaction-search').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            
-            filteredTransactions = transactions.filter(t => {
-                return (
-                    (t.customer && t.customer.toLowerCase().includes(searchTerm)) ||
-                    t.items.toLowerCase().includes(searchTerm) ||
-                    t.datetime.toLowerCase().includes(searchTerm) ||
-                    t.formattedTotal.toLowerCase().includes(searchTerm)
-                );
-            });
-            
-            currentTransactionsPage = 1;
-            updateTransactionsTable();
-        });
-        
-        // Bộ lọc
-        document.getElementById('apply-filters').addEventListener('click', function() {
-            const dateFrom = document.getElementById('date-from').value;
-            const dateTo = document.getElementById('date-to').value;
-            const paymentMethod = document.getElementById('payment-filter').value;
-            
-            filteredTransactions = transactions.filter(t => {
-                let matches = true;
-                
-                if (dateFrom) {
-                    const fromDate = new Date(dateFrom);
-                    matches = matches && t.date >= fromDate;
-                }
-                
-                if (dateTo) {
-                    const toDate = new Date(dateTo);
-                    toDate.setHours(23, 59, 59);
-                    matches = matches && t.date <= toDate;
-                }
-                
-                if (paymentMethod) {
-                    matches = matches && t.payment === paymentMethod;
-                }
-                
-                return matches;
-            });
-            
-            currentTransactionsPage = 1;
-            updateTransactionsTable();
-        });
-        
-        // Hiển thị danh sách dịch vụ
-        function updateServicesList() {
-            const serviceListContainer = document.getElementById('service-list');
-            serviceListContainer.innerHTML = '';
-            
-            const searchTerm = document.getElementById('service-search').value.toLowerCase();
-            let filteredServices = servicesRevenueData.filter(s => 
-                s.name.toLowerCase().includes(searchTerm)
-            );
-            
-            filteredServices.forEach(service => {
-                const serviceCard = document.createElement('div');
-                serviceCard.className = 'service-card';
-                
-                serviceCard.innerHTML = `
-                    <div class="service-name">${service.name}</div>
-                    <div class="service-count">${service.count} lượt</div>
-                    <div class="service-revenue">${formatCurrency(service.revenue)}</div>
-                `;
-                
-                serviceListContainer.appendChild(serviceCard);
-            });
-        }
-        
-        document.getElementById('service-search').addEventListener('input', updateServicesList);
-        
-        // Hiển thị danh sách khách hàng
-        const customersPerPage = 10;
-        let currentCustomersPage = 1;
-        let filteredCustomers = [];
-        
-        for (const [name, data] of Object.entries(customersMap)) {
-            // Tìm dịch vụ yêu thích
-            let favoriteService = null;
-            let maxServiceCount = 0;
-            
-            for (const [serviceName, count] of Object.entries(data.favoriteServices)) {
-                if (count > maxServiceCount) {
-                    favoriteService = serviceName;
-                    maxServiceCount = count;
-                }
-            }
-            
-            filteredCustomers.push({
-                name,
-                visits: data.visits,
-                totalSpend: data.totalSpend,
-                favoriteService,
-                lastVisit: data.lastVisit
-            });
-        }
-        
-        // Sắp xếp khách hàng theo số lần thăm
-        filteredCustomers.sort((a, b) => b.visits - a.visits);
-        
-        function updateCustomersTable() {
-            const tableBody = document.getElementById('customers-body');
-            tableBody.innerHTML = '';
-            
-            const startIndex = (currentCustomersPage - 1) * customersPerPage;
-            const endIndex = Math.min(startIndex + customersPerPage, filteredCustomers.length);
-            
-            for (let i = startIndex; i < endIndex; i++) {
-                const c = filteredCustomers[i];
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
-                    <td>${c.name}</td>
-                    <td>${c.visits}</td>
-                    <td>${formatCurrency(c.totalSpend)}</td>
-                    <td>${c.favoriteService || '-'}</td>
-                    <td>${formatDate(c.lastVisit)}</td>
-                `;
-                
-                if (c.visits >= 3) {
-                    row.classList.add('highlight');
-                }
-                
-                tableBody.appendChild(row);
-            }
-            
-            // Cập nhật thông tin phân trang
-            document.getElementById('customers-page-info').textContent = `Trang ${currentCustomersPage} / ${Math.ceil(filteredCustomers.length / customersPerPage)}`;
-            document.getElementById('customers-prev-page').disabled = currentCustomersPage === 1;
-            document.getElementById('customers-next-page').disabled = currentCustomersPage === Math.ceil(filteredCustomers.length / customersPerPage);
-        }
-        
-        document.getElementById('customers-prev-page').addEventListener('click', function() {
-            if (currentCustomersPage > 1) {
-                currentCustomersPage--;
-                updateCustomersTable();
-            }
-        });
-        
-        document.getElementById('customers-next-page').addEventListener('click', function() {
-            if (currentCustomersPage < Math.ceil(filteredCustomers.length / customersPerPage)) {
-                currentCustomersPage++;
-                updateCustomersTable();
-            }
-        });
-        
-        // Tìm kiếm khách hàng
-        document.getElementById('customer-search').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            
-            filteredCustomers = [];
-            for (const [name, data] of Object.entries(customersMap)) {
-                if (name.toLowerCase().includes(searchTerm)) {
-                    // Tìm dịch vụ yêu thích
-                    let favoriteService = null;
-                    let maxServiceCount = 0;
-                    
-                    for (const [serviceName, count] of Object.entries(data.favoriteServices)) {
-                        if (count > maxServiceCount) {
-                            favoriteService = serviceName;
-                            maxServiceCount = count;
-                        }
-                    }
-                    
-                    filteredCustomers.push({
-                        name,
-                        visits: data.visits,
-                        totalSpend: data.totalSpend,
-                        favoriteService,
-                        lastVisit: data.lastVisit
-                    });
-                }
-            }
-            
-            // Sắp xếp khách hàng theo số lần thăm
-            filteredCustomers.sort((a, b) => b.visits - a.visits);
-            
-            currentCustomersPage = 1;
-            updateCustomersTable();
-        });
-        
-        // Cập nhật thống kê khách hàng
-        const totalCustomers = Object.keys(customersMap).filter(name => name !== 'Khách lẻ').length + 1; // +1 cho "Khách lẻ"
-        const loyalCustomers = Object.values(customersMap).filter(c => c.visits >= 3).length;
-        const oneTimeCustomers = Object.values(customersMap).filter(c => c.visits === 1).length;
-        
-        document.getElementById('total-customers').textContent = totalCustomers;
-        document.getElementById('loyal-customers-count').textContent = loyalCustomers;
-        document.getElementById('one-time-customers').textContent = oneTimeCustomers;
-        
-        // Xử lý tab
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const tabId = this.getAttribute('data-tab');
-                
-                // Loại bỏ active class từ tất cả các tab
-                document.querySelectorAll('.tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                
-                // Ẩn tất cả nội dung tab
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Thêm active class cho tab được chọn
-                this.classList.add('active');
-                
-                // Hiển thị nội dung tab tương ứng
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-        
-        // Khởi tạo các bảng
-        updateTransactionsTable();
-        updateServicesList();
-        updateCustomersTable();
-    </script>
+
+<div class="container">
+  <h2>Quản Lý LocalStorage</h2>
+
+  <div class="actions">
+    <button onclick="clearAll()">🗑️ Xoá Tất Cả</button>
+  </div>
+
+  <div class="table-container">
+    <table id="storageTable">
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+          <th>Thao Tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Render dữ liệu ở đây -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function renderTable() {
+  const tableBody = document.querySelector("#storageTable tbody");
+  tableBody.innerHTML = ''; // Xóa dữ liệu cũ
+
+  if (localStorage.length === 0) {
+    const row = `<tr><td colspan="3" style="text-align:center;">Không có dữ liệu</td></tr>`;
+    tableBody.innerHTML = row;
+    return;
+  }
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    const row = `
+      <tr>
+        <td>${key}</td>
+        <td>${value.length > 100 ? value.substring(0, 100) + "..." : value}</td>
+        <td><button onclick="deleteItem('${key}')">Xoá</button></td>
+      </tr>
+    `;
+    tableBody.innerHTML += row;
+  }
+}
+
+function deleteItem(key) {
+  if (confirm(`Bạn có chắc chắn muốn xoá "${key}"?`)) {
+    localStorage.removeItem(key);
+    renderTable();
+  }
+}
+
+function clearAll() {
+  if (confirm('Bạn có chắc chắn muốn xoá toàn bộ dữ liệu LocalStorage?')) {
+    localStorage.clear();
+    renderTable();
+  }
+}
+
+// Khi mở trang, load bảng
+renderTable();
+</script>
+
 </body>
 </html>

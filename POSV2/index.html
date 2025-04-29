@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mai Tây Hair Salon</title>
+
+    <!-- Đảm bảo đặt meta tag sau -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Biểu tượng cho web -->
+    <link rel="icon" href="../Task/Asset/Logo.png">
+
+    <!-- Biểu tượng iPhone -->
+    <link rel="apple-touch-icon" href="../Task/Asset/Logo.png" sizes="150x150">
+
+    <!-- Ảnh -->
+    <meta property="og:image" content="/DATA/Banner/PriorityDark.png">
+    <meta property="og:title" content="Hunq POS">
+    <meta property="og:description" content="Thiết kế và lập trình Hùng Đinh">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <script src="/DATA/Extend/jquery.min.js"></script>
+    <script src="/DATA/Extend/qrcode.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <link href="./Asset/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="overlay">
+        <!-- <span>Đang xử lý, vui lòng chờ...</span> -->
+    </div>
+    <header class="header">
+        <div class="logo">
+            <h1>Mai Tây <span>Hair Salon</span></h1>
+        </div>
+
+        <div class="flex">
+            <div class="tab-buttons">
+                <div class="flex">
+                    <div class="tab-button" onclick="switchTab('pos')"><i class="fas fa-cash-register"></i>
+                        <span>POS</span>
+                    </div>
+                    <div class="tab-button" onclick="switchTab('history')"><i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Lịch sử</span>
+                    </div>
+                    <div class="tab-button" onclick="switchTab('setting')"><i class="fa-solid fa-gear"></i> <span> Cài
+                            đặt</span></div>
+                    <div class="tab-button" onclick="switchTab('tutorial')"><i class="fas fa-question-circle"></i>
+                        <span>Hướng dẫn</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="tab-container">
+        <div id="pos" class="tab-content">
+            <div class="pos-container">
+                <div class="product-selection">
+                    <div class="search-bar">
+                        <input type="text" id="product-search" placeholder="Tìm kiếm dịch vụ...">
+                        <button id="scan-barcode"><i class="fas fa-barcode"></i></button>
+                       
+                    </div>
+
+                    <div class="categories-wrapper">
+                        <button class="scroll-button scroll-left" id="scrollLeft"><i
+                                class="fas fa-arrow-circle-left"></i></button>
+                        <div class="categories" id="categories">
+                        </div>
+                        <button class="scroll-button scroll-right" id="scrollRight"><i
+                                class="fas fa-arrow-circle-right"></i></button>
+                    </div>
+
+
+                    <div class="products-grid" id="products"></div>
+
+                </div>
+
+                <div class="mod">
+                    <!-- Edit Popup -->
+                    <div id="editPopup" class="edit-popup">
+                        <div class="edit-popup-content">
+                            <textarea id="popupTextarea" class="edit-popup-textarea"></textarea>
+                            <div class="edit-popup-actions">
+                                <button class="edit-popup-button save" onclick="savePopup()">Xác nhận</button>
+                                <button class="edit-popup-button cancel" onclick="closePopup()">Huỷ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-section">
+                    <div class="customer-info">
+                        <div class="invoice-div">
+                            <button onclick="CartManager.startScan()"><i class="fa-solid fa-mobile-screen-button"></i></button>
+                            <select id="invoiceSelect" onchange="CartManager.switchInvoice(this.value)">
+                                <!-- Option sẽ tự động sinh ra -->
+                            </select>
+                            <button onclick="CartManager.createNewInvoice()"><i class="fas fa-plus"></i></button>
+                            <button onclick="CartManager.deleteInvoice()"><i class="fas fa-trash"></i></button>
+                            <button id="select-customer"><i class="fas fa-user-tag"></i></button>
+                            <div class="input-group">
+                                <label>Thu ngân</label>
+                                <select name="staff-name" id="staff-name">
+                                    <option value="Chủ tiệm">Chủ tiệm</option>
+                                    <option value="Nhân viên">Nhân viên</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bill-info-inputs">
+                            <div class="input-group hidden">
+                                <label>Thời gian</label>
+                                <input type="datetime-local" id="bill-time" readonly>
+                            </div>
+                            <div class="input-group hidden">
+                                <label>Chi nhánh</label>
+                                <select name="branch" id="branch">
+                                    <option value="Mai Tây Hair Salon" selected>Mai Tây Hair Salon</option>
+                                    <option value="H Hair Studio" disabled>H Hair Studio</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Khách hàng</label>
+                                <div class="flex">
+                                    <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
+                                        placeholder="Nhập tên hoặc sđt khách hàng">
+                                    <button onclick="showAddCustomerPopup()" id="addNewCustomerBtn"><i
+                                            class="fas fa-user-plus"></i></button>
+                                </div>
+                            </div>
+                            <div id="suggestions"></div>
+                            <div id="error-message" class="error"></div>
+                        </div>
+                    </div>
+                    <div class="cart-items" id="cart-items">
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <p>Giỏ hàng trống</p>
+                        </div>
+                    </div>
+                    <div class="cart-summary">
+                        <div class="flex summary-row-first">
+                            <div class="summary-div payment-method">
+                                <p>Thanh toán</p>
+                                <select name="payment method" id="payment-method">
+                                    <option value="Tiền mặt">Tiền mặt</option>
+                                    <option value="Chuyển tiền">Chuyển tiền</option>
+                                </select>
+                            </div>
+                            <!-- Phần chiết khấu -->
+                            <div class="summary-div">
+                                <p>Chiết khấu</p>
+                                <div class="flex">
+                                    <div class="switch-group">
+                                        <label class="switch">
+                                            <input type="checkbox" id="discountType" onchange="toggleDiscountType()">
+                                            <div class="switch-inner">
+                                                <div class="option-left">%</div>
+                                                <div class="option-right">đ</div>
+                                                <div class="switch-toggle"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="flex">
+                                        <input type="number" id="discount" min="0" max="100" placeholder="%"
+                                            style="display: block;">
+                                        <input type="text" id="discountAmount" placeholder="Số tiền"
+                                            style="display: none;" oninput="formatPriceInput(this)"
+                                            onchange="unformatPrice(this.value)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-row hidden">
+                            <span>Số lượng</span>
+                            <span id="total-items">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tổng tiền:</span>
+                            <span id="subtotal">0&nbsp;₫</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Chiết khấu:</span>
+                            <span id="discount-info">0</span>
+                        </div>
+
+                        <div class="summary-row total">
+                            <span>Thanh toán:</span>
+                            <span id="total">0&nbsp;₫</span>
+                        </div>
+
+                    </div>
+                    <div class="cart-actions">
+                        <button class="mini clear-cart" onclick="CartManager.clearCart()"><i
+                                class="fas fa-trash"></i></button>
+                        <button class="mini"><i class="fas fa-file-invoice"></i></button>
+                        <button><i class="fas fa-save"></i> Lưu</button>
+                        <button><i class="fas fa-print"></i> In & Lưu</button>
+
+                    </div>
+                </div>
+
+                <!-- Popup Thêm Khách Hàng -->
+                <div id="addCustomerPopup" class="popup">
+                    <div class="popup-content" onclick="event.stopPropagation();">
+                        <h2>Thêm khách hàng mới</h2>
+                        <input type="text" id="newCustomerName" placeholder="Tên khách hàng">
+                        <input type="text" id="newCustomerPhone" placeholder="Số điện thoại">
+                        <input type="email" id="newCustomerEmail" placeholder="Email">
+                        <input type="date" id="newCustomerBirthday" placeholder="Ngày sinh">
+                        <select id="newCustomerSex">
+                            <option value="Nữ">Nữ</option>
+                            <option value="Nam">Nam</option>
+                        </select>
+                        <input type="text" id="newCustomerSocial" placeholder="Mạng xã hội">
+                        <input type="text" id="newCustomerAddress" placeholder="Địa chỉ">
+                        <select id="newCustomerRole">
+                            <option value="Thành viên">Thành viên</option>
+                            <option value="VIP">VIP</option>
+                        </select>
+                        <div class="popup-buttons">
+                            <button onclick="submitNewCustomer()">Thêm</button>
+                            <button onclick="closeAddCustomerPopup()">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="history" class="tab-content">
+
+            <div class="history-controls">
+                <button onclick="HistoryManager.downloadAsExcel()">Tải xuống (Excel)</button>
+                <button onclick="HistoryManager.downloadAsJSON()">Tải xuống (JSON)</button>
+                <button onclick="HistoryManager.clearHistory()">Xóa tất cả</button>
+
+            </div>
+            <div id="historylist"></div>
+        </div>
+
+        <div id="setting" class="tab-content">
+            <div class="control">
+                <button id="sync-customers" onclick="loadCustomerData()"><i class="fa-solid fa-address-book"></i> Đồng
+                    Bộ Khách Hàng</button>
+                <button onclick="UIManager.syncProducts()">
+                    <i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
+                <!-- <button onclick="customerPoints()">customerPoints()</button> -->
+                <button onclick="localStorage.clear()">Xoá dữ liệu</button>
+            </div>
+            <div class="dev">
+                <div>
+                    <h3>Cài đặt hóa đơn mặc định</h3>
+                    <textarea id="defaultInvoicesInput" placeholder="Nhập tên hóa đơn, phân cách bởi dấu ;"></textarea>
+                    <button onclick="CartManager.saveDefaultInvoices()">Lưu mặc định</button>
+                </div>
+                <br>
+
+                <button onclick="CartManager.generateQRCode()">Tạo mã QR giỏ hàng</button>
+                <div id="qrcode"></div> <!-- QR code sẽ hiển thị tại đây -->
+
+
+                <button onclick="CartManager.startScan()">Quét mã QR</button>
+
+                <div class="dev-product">
+                    <div id="productManager">
+                        <div style="margin-bottom: 10px;">
+                            <button id="addProduct" class="pm-btn">➕ Thêm sản phẩm</button>
+                            <button id="saveProducts" class="pm-btn">💾 Lưu thay đổi</button>
+                        </div>
+
+                        <table id="productTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Phân loại</th>
+                                    <th>Giá</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Render sản phẩm tại đây -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="version" id="version">
+
+            </div>
+        </div>
+
+        <div id="tutorial" class="tab-content">
+            <h1>Hướng dẫn dẫn sử dụng</h1>
+            <div class="keyboard-shortcuts">
+                <h2>Phím tắt</h2>
+                <ul>
+                    <li><strong>Lưu hóa đơn:</strong> <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd></li>
+                    <li><strong>Đóng giỏ hàng:</strong> <kbd>Esc</kbd></li>
+                    <li><strong>Mở giỏ hàng:</strong> <kbd>Alt</kbd> + <kbd>1</kbd></li>
+                    <li><strong>In hóa đơn:</strong> <kbd>Alt</kbd> + <kbd>P</kbd></li>
+                    <li><strong>Xem trước hóa đơn:</strong> <kbd>Alt</kbd> + <kbd>V</kbd></li>
+                    <li><strong>Xóa giỏ hàng:</strong> <kbd>Ctrl</kbd> + <kbd>Delete</kbd></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="reader-popup">
+        <div id="reader-container">
+            <button id="close-reader">✖</button>
+            <div id="reader"></div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        Powered by <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a>
+    </footer>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+
+    <script src="/DATA/Extend/SweetAlert2.js"></script>
+    <script src="/DATA/Extend/html5-qrcode.min.js"></script>
+    <script src="./Asset/main.js"></script>
+    <script src="./Asset/Sync.js"></script>
+    <script src="./Asset/point.js"></script>
+</body>
+
+</html>

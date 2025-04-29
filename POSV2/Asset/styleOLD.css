@@ -9,8 +9,8 @@
 }
 
 @font-face {
-    font-family: LogoFont;
-    src: url(./Font/LogoFont.otf);
+    font-family: Ephesis;
+    src: url(./Font/Ephesis/Ephesis-Regular.ttf);
 }
 
 h1,
@@ -86,24 +86,24 @@ h3 {
 /* Theme */
 .light {
     /* Body */
-    --body-bg: #e3e3e3;
+    --body-bg: #e8ecf3;
     --body-text: #333333;
 
     /* Button */
-    --btn-bg: #000000;
+    --btn-bg: #2196F3;
     --btn-text: #ffffff;
-    --btn-hover: #303030;
-    --btn-border: #000000;
+    --btn-hover: #00BCD4;
+    --btn-border: #2196F3;
 
     /* Header */
     --header-bg: #ffffff;
-    --header-text: #000000;
+    --header-text: #2196F3;
 
     /* Cart */
     --cart-bg: #ffffff;
     --cart-text: #333333;
-    --cart-color-primary: #000000;
-    --cart-toggle-bg: #000000;
+    --cart-color-primary: #2196F3;
+    --cart-toggle-bg: #2196F3;
     --cart-toggle-text: #ffffff;
     --cart-count-bg: rgb(250, 90, 90);
     --cart-count-text: #fff;
@@ -111,10 +111,10 @@ h3 {
     --card-bg: #ffffff;
     --card-text: #333333;
     --card-shadow: rgba(0, 0, 0, 0.1);
-    --card-color-primary: #000000;
+    --card-color-primary: #2196F3;
 
     /* MORE */
-    --primary: #ff5c5c;
+    --primary: #2196F3;
     --border: #111;
 }
 
@@ -390,7 +390,6 @@ input:focus {
 }
 
 
-
 /* Header */
 .header {
     justify-content: space-between;
@@ -404,15 +403,16 @@ input:focus {
 }
 
 .header .logo h1 {
-    font-family: LogoFont !important;
+    font-family: Ephesis;
     font-size: 40px;
-    font-weight: bold;
 }
 
 .header .logo span {
-    position: relative;
+    position: absolute;
     font-family: BeFont;
     font-size: 14px;
+    margin-top: 12px;
+    margin-left: 5px;
 }
 
 
@@ -717,8 +717,8 @@ input:focus {
 .price {
     color: var(--card-color-primary);
     font-weight: bold;
-    margin-top: 5px;
-    font-size: 14px;
+    margin-top: 10px;
+    font-size: 1.2em;
 }
 
 /* .button {
@@ -736,7 +736,7 @@ input:focus {
 .service-card h3 {
     text-transform: capitalize;
     color: var(--text-color);
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 5px;
     line-height: 1.4;
 }
@@ -1224,19 +1224,19 @@ kbd {
         display: flex;
         align-items: center;
     }
-/* 
+
     .header .logo h1 {
         font-family: Ephesis;
-        font-size: 30px;
+        font-size: 24px;
     }
 
     .header .logo span {
         font-size: 10px;
         display: block;
-        position: relative;
+        position: absolute;
         top: 0;
         margin-left: 80px;
-    } */
+    }
 
     .container {
         padding: 10px 0;
@@ -1350,52 +1350,3 @@ kbd {
         border-top-right-radius: 10px;
     }
 }
-
-.password-protect-section {
-    font-family: Arial, sans-serif;
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 100%;
-    background: var(--header-bg);
-  }
-
-  .password-protect-section .password-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .password-protect-section input[type="password"] {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-
-  .password-protect-section button {
-    padding: 8px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .password-protect-section button:hover {
-    background-color: #0056b3;
-  }
-
-  .password-protect-section .hidden-link {
-    margin-top: 15px;
-  }
-
-  .password-protect-section a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .password-protect-section a:hover {
-    text-decoration: underline;
-  }
