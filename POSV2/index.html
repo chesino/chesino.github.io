@@ -204,10 +204,18 @@
                     <div class="cart-actions">
                         <button class="mini clear-cart" onclick="CartManager.clearCart()"><i
                                 class="fas fa-trash"></i></button>
-                        <button class="mini"><i class="fas fa-file-invoice"></i></button>
-                        <button><i class="fas fa-save"></i> Lưu</button>
-                        <button><i class="fas fa-print"></i> In & Lưu</button>
-
+                        <button onclick="BillManager.printBill()" class="print-btn mini">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <button onclick="CartManager.generateQRCode()" class="print-btn mini">
+                            <i class="fas fa-qrcode"></i>
+                        </button>
+                        <button class="sync-data-btn" onclick="BillManager.printBilltoSave()">
+                            <i class="fas fa-print"></i> In & lưu
+                        </button>
+                        <button class="sync-data-btn" onclick="saveInvoice()">
+                            <i class="fas fa-save"></i> Lưu
+                        </button>
                     </div>
                 </div>
 
@@ -268,7 +276,6 @@
                 <br>
 
                 <button onclick="CartManager.generateQRCode()">Tạo mã QR giỏ hàng</button>
-                <div id="qrcode"></div> <!-- QR code sẽ hiển thị tại đây -->
 
 
                 <button onclick="CartManager.startScan()">Quét mã QR</button>
@@ -323,11 +330,44 @@
 
     <div id="reader-popup">
         <div id="reader-container">
+            <button id="flip-camera">🔄</button>
             <button id="close-reader">✖</button>
             <div id="reader"></div>
         </div>
     </div>
-
+    <div id="qr-popup" style="display: none;">
+        <div id="qr-overlay" style="
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        ">
+          <div id="qr-modal" style="
+              background: white;
+              padding: 20px;
+              border-radius: 10px;
+              text-align: center;
+              position: relative;
+          ">
+            <button id="qr-close" style="
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: transparent;
+                border: none;
+                font-size: 18px;
+                cursor: pointer;
+            ">&times;</button>
+            <div id="qrcode"></div>
+          </div>
+        </div>
+      </div>
+      
+      
 
     <footer class="footer">
         Powered by <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a>

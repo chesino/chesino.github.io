@@ -188,9 +188,15 @@ function getLocalStorageSizeInKB() {
     return (total * 2) / 1024;
 }
 
+
+
 // Ví dụ:
 const sizeInKB = getLocalStorageSizeInKB();
 console.log(`LocalStorage đang dùng khoảng ${sizeInKB.toFixed(2)} KB`);
+
+
+
+
 
 // Quét sản phẩm bằng QR, Barcode
 let isScanning = false;
@@ -217,7 +223,7 @@ const ScanManager = {
             if (cameras && cameras.length) {
                 await html5QrCode.start(
                     { facingMode: "environment" },
-                    { fps: 10, qrbox: 250 },
+                    { fps: 30 },
                     async (decodedText, decodedResult) => {
                         await successCallback(decodedText, decodedResult);
 
@@ -248,6 +254,7 @@ const ScanManager = {
             popupDiv.style.display = 'none';
             isScanning = false;
             console.log('Đã dừng quét');
+
         }
     }
 };
@@ -274,8 +281,8 @@ document.getElementById('scan-barcode').addEventListener('click', async () => {
                 const { value: formValues } = await Swal.fire({
                     title: 'Nhập thông tin sản phẩm mới',
                     html: `<input id="swal-input-name" class="swal2-input" placeholder="Tên sản phẩm">` +
-                          `<input id="swal-input-category" class="swal2-input" placeholder="Phân loại">` +
-                          `<input id="swal-input-price" type="number" class="swal2-input" placeholder="Giá">`,
+                        `<input id="swal-input-category" class="swal2-input" placeholder="Phân loại">` +
+                        `<input id="swal-input-price" type="number" class="swal2-input" placeholder="Giá">`,
                     focusConfirm: false,
                     preConfirm: () => {
                         const name = document.getElementById('swal-input-name').value.trim();
@@ -327,6 +334,33 @@ popupDiv.addEventListener('click', async (event) => {
         await ScanManager.stopScan();
     }
 });
+document.getElementById("flip-camera").addEventListener("click", () => {
+    const video = document.querySelector("#reader video");
+    if (video) {
+        video.classList.toggle("flipped");
+    }
+});
+
+async function logCameraInfo() {
+    try {
+        const devices = await navigator.mediaDevices.enumerateDevices();
+
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+        console.log('Danh sách camera:');
+        videoDevices.forEach((device, index) => {
+            console.log(`Camera ${index + 1}:`);
+            console.log(`- Label: ${device.label || 'Không có (cần cấp quyền)'}`);
+            console.log(`- Device ID: ${device.deviceId}`);
+            console.log(`- Group ID: ${device.groupId}`);
+            console.log('--------------------------');
+        });
+    } catch (err) {
+        console.error('Không thể lấy thông tin thiết bị:', err);
+    }
+}
+
+
 
 
 // DEV
@@ -376,7 +410,7 @@ class CartManager {
         this.updateDisplay();
         UIManager.showToast('Đã thêm vào giỏ hàng');
     }
-    
+
 
     static updateItem(index, field, value) {
         if (cart[index]) {
@@ -388,7 +422,7 @@ class CartManager {
     static changeQuantity(index, delta) {
         if (cart[index]) {
             let currentQuantity = Number(cart[index].quantity);
-            
+
             if (currentQuantity === 1 && delta === -1) {
                 // Nếu đang là 1 và nhấn giảm nữa -> Xoá sản phẩm
                 if (confirm("Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng không?")) {
@@ -403,7 +437,7 @@ class CartManager {
             }
         }
     }
-    
+
     static removeItem(index) {
         // Swal.fire({
         //     title: 'Xác nhận xóa?',
@@ -480,6 +514,16 @@ class CartManager {
             this.loadInvoices();
         });
     }
+    static loadDefaultInvoicesInput() {
+        const saved = localStorage.getItem(STORAGE_KEY_DEFAULT_INVOICES);
+        if (saved) {
+            const invoices = JSON.parse(saved);
+            console.log(invoices);
+            
+            document.getElementById('defaultInvoicesInput').value = invoices.join('; ');
+        }
+    }
+    
 
     static createNewInvoice() {
         Swal.fire({
@@ -603,10 +647,8 @@ class CartManager {
                             onchange="CartManager.updateItem(${index}, 'price', unformatPrice(this.value))">
                         </div>
                        <div class="cart-item-quantity">
-                            <button type="button" class="quantity-btn" onclick="CartManager.changeQuantity(${index}, -1)">-</button>
                             <input class="quantity-value" type="number" value="${item.quantity}" min="1"
                                 onchange="CartManager.updateItem(${index}, 'quantity', this.value)">
-                            <button type="button" class="quantity-btn" onclick="CartManager.changeQuantity(${index}, 1)">+</button>
                         </div>
                         <div class="cart-item-total">${(item.quantity * item.price).toLocaleString('vi-VN')}đ</div>
                         <div class="cart-item-del">
@@ -671,35 +713,50 @@ class CartManager {
         const currentCart = carts[currentInvoiceId] || [];
 
         if (currentCart.length === 0) {
-            Swal.fire('Giỏ hàng trống', 'Không có sản phẩm để tạo mã QR.', 'warning');
+            alert('Giỏ hàng trống. Không có sản phẩm để tạo mã QR.');
             return;
         }
 
-        // Chỉ lấy id và quantity, viết ngắn: i, q
         const minimalCart = currentCart.map(item => ({
             i: item.id,
             q: item.quantity
         }));
 
-        console.log(minimalCart);
-
         const compressedData = LZString.compressToBase64(JSON.stringify(minimalCart));
 
         if (compressedData.length > 1000) {
-            Swal.fire('Giỏ hàng quá lớn', 'Dữ liệu giỏ hàng quá lớn để tạo QR.', 'error');
+            alert('Giỏ hàng quá lớn để tạo mã QR.');
             return;
         }
 
-        // Tạo QR
+        // Hiển thị popup
+        const popup = document.getElementById('qr-popup');
         const qrCodeContainer = document.getElementById('qrcode');
         qrCodeContainer.innerHTML = '';
+        popup.style.display = 'block';
 
         new QRCode(qrCodeContainer, {
             text: compressedData,
             width: 300,
             height: 300
         });
+
+        // Đóng khi click ra ngoài modal
+        document.getElementById('qr-close').onclick = () => {
+            popup.style.display = 'none';
+            qrCodeContainer.innerHTML = '';
+        };
+
+        document.getElementById('qr-overlay').onclick = (e) => {
+            if (e.target.id === 'qr-overlay') {
+                popup.style.display = 'none';
+                qrCodeContainer.innerHTML = '';
+            }
+        };
+
     }
+
+
 
     static async startScan() {
         try {
@@ -707,30 +764,30 @@ class CartManager {
                 console.log('Đã có phiên quét đang chạy.');
                 return;
             }
-    
+
             if (!html5QrCode) {
                 html5QrCode = new Html5Qrcode("reader");
             }
-    
+
             // Hiện popup trước khi quét
             const popupDiv = document.getElementById('reader-popup');
             popupDiv.style.display = 'flex';
-    
+
             const cameras = await Html5Qrcode.getCameras();
             if (cameras && cameras.length) {
                 await html5QrCode.start(
                     { facingMode: "environment" },
-                    { fps: 30, qrbox: 250 },
+                    { fps: 30 },
                     async (decodedText, decodedResult) => {
                         try {
                             const decompressed = LZString.decompressFromBase64(decodedText);
                             const importedCart = JSON.parse(decompressed);
-                            
+
                             cart = [];
                             if (Array.isArray(importedCart)) {
                                 for (const item of importedCart) {
                                     const product = products.find(p => p.id == item.i);
-    
+
                                     if (product) {
                                         const cartItem = {
                                             id: product.id,
@@ -738,13 +795,13 @@ class CartManager {
                                             price: product.price,
                                             quantity: item.q
                                         };
-                                        
-                                        CartManager.addItem(cartItem);                                        
+
+                                        CartManager.addItem(cartItem);
                                     } else {
                                         UIManager.showError(`Không tìm thấy sản phẩm ID: ${item.i}`);
                                     }
                                 }
-                                
+
                                 CartManager.saveCart();
                                 CartManager.updateDisplay();
                                 UIManager.showToast('Đã nhập giỏ hàng từ QR');
@@ -754,7 +811,7 @@ class CartManager {
                         } catch (e) {
                             Swal.fire('Lỗi', 'Không thể đọc dữ liệu.', 'error');
                         }
-    
+
                         // Sau khi quét thành công, dừng camera và ẩn popup
                         await html5QrCode.stop();
                         popupDiv.style.display = 'none';
@@ -778,7 +835,7 @@ class CartManager {
             popupDiv.style.display = 'none'; // Đóng popup nếu lỗi
         }
     }
-    
+
 
 }
 
@@ -787,6 +844,11 @@ window.addEventListener('DOMContentLoaded', () => {
     CartManager.loadInvoices();
     CartManager.loadCart();
 });
+// Khi trang load hoặc khi cần cập nhật ô input
+document.addEventListener('DOMContentLoaded', () => {
+    CartManager.loadDefaultInvoicesInput();
+});
+
 
 
 // UI Management
@@ -893,7 +955,7 @@ class UIManager {
             ? filteredProducts.map(product => `
                 <div class="product-item" data-id="${product.id}" onclick="CartManager.addItem(${JSON.stringify(product).replace(/"/g, "'")})">
                     <div class="product-image">
-                        <img src="./Asset/logo.png" alt="${product.name}" onerror="this.src='./Asset/logo.png'">
+                        <img src="./Asset/Logo.png" alt="${product.name}" onerror="this.src='./Asset/logo.png'">
                     </div>
                     <div class="product-name">${product.name}</div>
                     <div class="product-id">ID:${product.id}</div>

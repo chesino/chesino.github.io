@@ -608,7 +608,7 @@ input:focus {
 
 .cart-item {
   display: grid;
-  grid-template-columns: 3fr auto 3fr 30px;
+  grid-template-columns: 3fr 40px 2fr 20px;
   gap: 5px;
   align-items: center;
   padding: 5px;
@@ -640,68 +640,10 @@ input:focus {
 
 .cart-item-quantity {
   display: flex;
-  /* Để các phần tử con nằm trên cùng một hàng */
   width: 100%;
-  /* Giới hạn chiều rộng */
   border: 1px solid #ccc;
-  /* Thêm border để dễ nhìn */
   border-radius: 5px;
-  /* Bo tròn nhẹ các góc */
   overflow: hidden;
-  /* Ẩn các phần tử con tràn ra ngoài */
-}
-
-.quantity-btn {
-  background: none;
-  border: none;
-  padding: 5px;
-  font-size: 14px;
-  /* Giảm kích thước font */
-  font-weight: bold;
-  cursor: pointer;
-  width: 20px;
-  /* Thu nhỏ chiều rộng nút */
-  display: flex;
-  justify-content: center;
-  /* Căn giữa nội dung */
-  align-items: center;
-  /* Căn giữa nội dung theo chiều dọc */
-  user-select: none;
-  /* Ngăn người dùng chọn chữ */
-}
-
-.quantity-btn:hover {
-  background-color: #f0f0f0;
-}
-
-.quantity-btn:active {
-  background-color: #e0e0e0;
-}
-
-.quantity-value {
-  width: 30px;
-  /* Thu nhỏ chiều rộng input */
-  height: auto;
-  /* Để chiều cao tự động điều chỉnh theo padding */
-  border: none;
-  text-align: center;
-  font-size: 14px;
-  /* Giảm kích thước font */
-  -webkit-appearance: none;
-  /* Loại bỏ kiểu mặc định của trình duyệt Chrome, Safari */
-  -moz-appearance: textfield;
-  /* Loại bỏ kiểu mặc định của trình duyệt Firefox */
-}
-
-/* Loại bỏ các nút tăng giảm số mặc định của input number */
-.quantity-value::-webkit-outer-spin-button,
-.quantity-value::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.quantity-value[type=number] {
-  -moz-appearance: textfield;
 }
 
 
@@ -720,8 +662,8 @@ input:focus {
 }
 
 .cart-item-remove {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   background: none;
   display: block;
   color: var(--danger-color);
@@ -979,11 +921,6 @@ input:focus {
   transform: scale(0.95);
 }
 
-.invoice-div .input-group select:focus,
-.invoice-div .input-group select:hover {
-  border: none !important;
-}
-
 .invoice-div .input-group label {
   position: absolute;
   font-size: 10px;
@@ -1024,16 +961,38 @@ input:focus {
 
 #reader {
   width: 500px;
-  height: 400px;
+  height: 375px;
 }
-
+#reader video.flipped {
+  transform: scaleX(-1);
+}
+#reader video {
+  transform: scaleX(-1);
+}
+#flip-camera {
+  position: absolute;
+  display: flex;
+  z-index: 99;
+  top: 5px;
+  left: 5px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px 0  10px 0 ;
+  width: 40px;
+  height: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
 #close-reader {
   position: absolute;
   display: flex;
   z-index: 99;
   top: 5px;
   right: 5px;
-  background: #333;
+  background: var(--primary-color);
   color: white;
   border: none;
   border-radius: 0 12px 0 10px;
@@ -1045,9 +1004,7 @@ input:focus {
   align-items: center;
 }
 
-#reader video {
-  transform: scaleX(-1);
-}
+
 
 .summary-div {
   display: flex;
@@ -1337,4 +1294,235 @@ input:focus {
 
 #productManager .pm-delete-btn:hover {
   background-color: #dc2626;
+}
+
+
+/* Styles for the history controls */
+.history-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #eee;
+}
+
+.history-controls button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.history-controls button:hover {
+  background-color: #0056b3;
+}
+
+#historylist {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/* Styles for the settings tab */
+#setting .control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #eee;
+}
+
+#setting .control button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#setting .control button i {
+  margin-right: 5px;
+}
+
+#setting .control button:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+#setting .dev {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#setting .dev > div {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#defaultInvoicesInput {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+#setting .dev button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  margin-right: 10px;
+}
+
+#setting .dev button:hover {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.dev-product {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#productManager {
+  /* Styles for the product manager */
+}
+
+.pm-btn {
+  padding: 10px 15px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.pm-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+#productTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#productTable th, #productTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#productTable th {
+  background-color: #f2f2f2;
+}
+
+#productTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#productTable .action-buttons button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#productTable .action-buttons button:hover {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+#version {
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Styles for the tutorial tab */
+#tutorial {
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#tutorial h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.keyboard-shortcuts {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.keyboard-shortcuts h2 {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.keyboard-shortcuts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.keyboard-shortcuts li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.keyboard-shortcuts strong {
+  font-weight: bold;
+}
+
+.keyboard-shortcuts kbd {
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: monospace;
+  background-color: #e7e7e7;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
