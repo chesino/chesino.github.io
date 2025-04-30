@@ -1,4 +1,4 @@
-fetch('/POS/Asset/Version.json')
+fetch('/POSV2/Asset/Version.json')
     .then(response => response.json()) // Chuyển đổi dữ liệu JSON
     .then(data => {
         // Tìm phiên bản có ngày cập nhật mới nhất
@@ -106,19 +106,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Mở rộng tuỳ chỉnh
-const toggleButton = document.getElementById('select-customer');
-const billInfo = document.querySelector('.bill-info-inputs');
+// const toggleButton = document.getElementById('select-customer');
+// const billInfo = document.querySelector('.bill-info-inputs');
 
-toggleButton.addEventListener('click', () => {
-    billInfo.classList.toggle('expanded');
+// toggleButton.addEventListener('click', () => {
+//     billInfo.classList.toggle('expanded');
 
-    // Đổi text nút
-    if (billInfo.classList.contains('expanded')) {
-        toggleButton.innerHTML = '<i class="fas fa-chevron-up"></i>';
-    } else {
-        toggleButton.innerHTML = '<i class="fas fa-user-tag"></i>';
-    }
-});
+//     // Đổi text nút
+//     if (billInfo.classList.contains('expanded')) {
+//         toggleButton.innerHTML = '<i class="fas fa-chevron-up"></i>';
+//     } else {
+//         toggleButton.innerHTML = '<i class="fas fa-user-tag"></i>';
+//     }
+// });
 
 
 // Cuộn danh mục
@@ -900,7 +900,7 @@ class UIManager {
                         <img src="./Asset/Logo.png" alt="${product.name}" onerror="this.src='./Asset/logo.png'">
                     </div>
                     <div class="product-name">${product.name}</div>
-                    <div class="product-id">ID:${product.id}</div>
+                    <div class="product-id">${product.id}</div>
                     <div class="product-price">${product.price.toLocaleString()}đ</div>
                 </div>
             `).join('')

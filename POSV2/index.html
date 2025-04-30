@@ -12,10 +12,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- Biểu tượng cho web -->
-    <link rel="icon" href="../Task/Asset/Logo.png">
+    <link rel="icon" href="./Asset/Logo.png">
 
     <!-- Biểu tượng iPhone -->
-    <link rel="apple-touch-icon" href="../Task/Asset/Logo.png" sizes="150x150">
+    <link rel="apple-touch-icon" href="./Asset/Logo.png" sizes="150x150">
 
     <!-- Ảnh -->
     <meta property="og:image" content="/DATA/Banner/PriorityDark.png">
@@ -101,14 +101,26 @@
                 <div class="cart-section">
                     <div class="customer-info">
                         <div class="invoice-div">
-                            <button onclick="CartManager.startScan()"><i
-                                    class="fa-solid fa-mobile-screen-button"></i></button>
-                            <select id="invoiceSelect" onchange="CartManager.switchInvoice(this.value)">
-                                <!-- Option sẽ tự động sinh ra -->
-                            </select>
-                            <button onclick="CartManager.createNewInvoice()"><i class="fas fa-plus"></i></button>
-                            <button onclick="CartManager.deleteInvoice()"><i class="fas fa-trash"></i></button>
-                            <button id="select-customer"><i class="fas fa-user-tag"></i></button>
+                            <div class="input-group">
+                                <label>Hoá đơn</label>
+                                <select id="invoiceSelect" onchange="CartManager.switchInvoice(this.value)">
+                                    <!-- Option sẽ tự động sinh ra -->
+                                </select>
+                            </div>
+                            
+                            <!-- <button class="hidden" onclick="CartManager.createNewInvoice()"><i class="fas fa-plus"></i></button>
+                            <button class="hidden" onclick="CartManager.deleteInvoice()"><i class="fas fa-trash"></i></button> -->
+                            <div class="input-group">
+                                <label>Khách hàng</label>
+                                <div class="flex customer-input">
+                                    <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
+                                        placeholder="Nhập tên hoặc sđt khách hàng">
+                                    <button onclick="showAddCustomerPopup()" id="addNewCustomerBtn"><i
+                                            class="fas fa-user-plus"></i></button>
+                                </div>
+                            </div>
+
+
                             <div class="input-group">
                                 <label>Thu ngân</label>
                                 <select name="staff-name" id="staff-name">
@@ -117,6 +129,8 @@
                                 </select>
                             </div>
                         </div>
+                        <div id="suggestions"></div>
+                        <div id="error-message" class="error"></div>
 
                         <div class="bill-info-inputs">
                             <div class="input-group hidden">
@@ -130,17 +144,7 @@
                                     <option value="H Hair Studio" disabled>H Hair Studio</option>
                                 </select>
                             </div>
-                            <div class="input-group">
-                                <label>Khách hàng</label>
-                                <div class="flex">
-                                    <input type="text" value="Khách lẻ" onfocus="this.value=''" id="customer-name"
-                                        placeholder="Nhập tên hoặc sđt khách hàng">
-                                    <button onclick="showAddCustomerPopup()" id="addNewCustomerBtn"><i
-                                            class="fas fa-user-plus"></i></button>
-                                </div>
-                            </div>
-                            <div id="suggestions"></div>
-                            <div id="error-message" class="error"></div>
+
                         </div>
                     </div>
                     <div class="cart-items" id="cart-items">
@@ -245,7 +249,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div id="history" class="tab-content">
@@ -267,7 +270,7 @@
                     <i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
                 <!-- <button onclick="customerPoints()">customerPoints()</button> -->
                 <div class="dev-pass">
-                    <input type="password" id="passwordInput" placeholder="Developer PAss" />
+                    <input type="password" id="passwordInput" placeholder="Developer" />
                     <button onclick="checkPassword()"><i class="fa-solid fa-lock"></i></button>
                 </div>
                 <div class="version" id="version">
@@ -359,7 +362,7 @@
 
     <div id="reader-popup">
         <div id="reader-container">
-            <button id="flip-camera">🔄</button>
+            <button id="flip-camera">HunqDScanQR</button>
             <button id="close-reader">✖</button>
             <div id="reader"></div>
         </div>

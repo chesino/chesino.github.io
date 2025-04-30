@@ -252,7 +252,7 @@ input:focus {
 /* POS */
 .pos-container {
   display: flex;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 68px);
   gap: 5px;
 }
 
@@ -329,6 +329,7 @@ input:focus {
 
 .category {
   padding: 8px 15px;
+  color: var(--body-text);
   background-color: var(--gray-200);
   border: none;
   border-radius: 20px;
@@ -399,24 +400,27 @@ input:focus {
   padding: 15px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-rows: repeat(auto-fill, min(100px, 1fr));
   gap: 15px;
   overflow-y: auto;
-  flex: 1;
+  /* flex: 1; */
 }
 
 .product-item {
+  user-select: none;
+  position: relative;
   background-color: var(--white);
-  border: 1px solid var(--gray-200);
+  border: 2px solid var(--gray-200);
   border-radius: var(--border-radius);
-  padding: 10px 5px;
+  padding: 5px;
   text-align: center;
   cursor: pointer;
   transition: var(--transition);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
 .product-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -437,7 +441,7 @@ input:focus {
 
 .product-name {
   font-size: 0.85rem;
-  flex: 1;
+  /* flex: 1; */
   overflow: visible;
   white-space: normal;
   display: block;
@@ -446,7 +450,15 @@ input:focus {
 
 
 .product-id {
-  font-size: 10px;
+  color: var(--white);
+  background-color: var(--gray-300);
+  font-size: 8px;
+  padding: 2px 4px;
+  min-width: 18px;
+  border-radius: 0 6px 0 6px ;
+  position: absolute;
+  top: 1px;
+  right: 1px;
 }
 
 .product-price {
@@ -517,6 +529,7 @@ input:focus {
 
 .input-group input,
 .input-group select {
+  color: var(--body-text);
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #ddd;
@@ -600,6 +613,7 @@ input:focus {
   align-items: center;
   justify-content: center;
 }
+
 .empty-cart button i {
   font-size: 18px;
   display: block;
@@ -732,6 +746,8 @@ input:focus {
 
 .cart-actions button {
   flex: 1;
+  width: 35px;
+  height: 35px;
   padding: 12px;
   border: none;
   border-radius: var(--border-radius);
@@ -887,12 +903,24 @@ input:focus {
 .invoice-div {
   width: 100%;
   display: grid;
-  grid-template-columns: 30px 80px 30px 30px 30px auto;
+  grid-template-columns: 80px auto auto;
   gap: 5px;
   border-radius: 12px;
 }
 
-.invoice-div select {
+.invoice-div .flex.customer-input{
+  gap: 0;
+}
+.invoice-div .flex.customer-input input {
+  border-radius:  8px 0 0 8px;
+}
+.invoice-div .flex.customer-input button {
+  font-size: 14px;
+  padding: 0 4px !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.invoice-div select, .invoice-div input{
   display: block;
   font-size: 14px;
   padding: 5px;
@@ -925,7 +953,7 @@ input:focus {
   position: absolute;
   font-size: 10px;
   margin-top: -8px;
-  background-color: var(--gray-300);
+  background-color: var(--white);
   border-radius: 4px;
   padding: 0 4px 0 2px;
 }
@@ -963,29 +991,33 @@ input:focus {
   width: 500px;
   height: 375px;
 }
+
 #reader.flipped {
   transform: scaleX(-1);
 }
+
 #reader video {
   transform: scaleX(-1);
 }
+
 #flip-camera {
   position: absolute;
   display: flex;
   z-index: 99;
-  top: 5px;
+  bottom: 5px;
   left: 5px;
-  background: var(--primary-color);
+  background: var(--gray-800);
   color: white;
   border: none;
-  border-radius: 12px 0  10px 0 ;
-  width: 40px;
+  border-radius: 0 12px 0 10px;
+  padding: 0 5px;
   height: 25px;
   font-size: 14px;
   cursor: pointer;
   justify-content: center;
   align-items: center;
 }
+
 #close-reader {
   position: absolute;
   display: flex;
@@ -1342,7 +1374,8 @@ input:focus {
 }
 
 #setting .control button {
-  padding: 10px 15px;
+  text-align: center;
+  padding: 10px ;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: white;
@@ -1352,9 +1385,6 @@ input:focus {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-#setting .control button i {
-  margin-right: 5px;
-}
 
 #setting .control button:hover {
   background-color: #007bff;
@@ -1404,7 +1434,7 @@ input:focus {
   background-color: white;
 }
 
-#setting .dev > div {
+#setting .dev>div {
   margin-bottom: 20px;
   padding: 15px;
   border: 1px solid #eee;
@@ -1446,9 +1476,6 @@ input:focus {
   background-color: #f9f9f9;
 }
 
-#productManager {
-  /* Styles for the product manager */
-}
 
 .pm-btn {
   padding: 10px 15px;
@@ -1472,7 +1499,8 @@ input:focus {
   margin-top: 10px;
 }
 
-#productTable th, #productTable td {
+#productTable th,
+#productTable td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -1585,15 +1613,15 @@ input:focus {
 
 #suggestions .VIP {
   background: linear-gradient(50deg,
-          hsla(43, 68%, 64%, 1) 0%,
-          /* Gold base */
-          hsla(60, 100%, 90%, 1) 20%,
-          /* Light Gold */
-          hsla(42, 69%, 55%, 1) 80%,
-          /* Gold darker */
-          hsla(39, 57%, 52%, 1) 100%
-          /* Deep Gold */
-      );
+      hsla(43, 68%, 64%, 1) 0%,
+      /* Gold base */
+      hsla(60, 100%, 90%, 1) 20%,
+      /* Light Gold */
+      hsla(42, 69%, 55%, 1) 80%,
+      /* Gold darker */
+      hsla(39, 57%, 52%, 1) 100%
+      /* Deep Gold */
+    );
 }
 
 #suggestions div h1 {
@@ -1633,4 +1661,72 @@ input:focus {
 #overlay span {
   color: white;
   font-size: 1.5em;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .pos-container {
+      flex-direction: column;
+      height: auto;
+  }
+
+  .product-selection, .cart-section {
+      height: 500px;
+  }
+
+  .charts-container {
+      grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+  }
+
+  .sidebar {
+      width: 100%;
+      height: auto;
+      padding: 10px 0;
+  }
+
+  .logo {
+      padding: 10px 20px;
+      margin-bottom: 10px;
+  }
+
+  .nav-menu {
+      display: flex;
+      overflow-x: auto;
+  }
+
+  .nav-item {
+      padding: 10px 15px;
+      white-space: nowrap;
+  }
+
+  .content {
+      height: calc(100vh - 80px);
+  }
+
+  .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+
+  .stats-cards {
+      grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .modal-content {
+      width: 95%;
+      margin: 20px auto;
+  }
+
+  .payment-options {
+      flex-direction: column;
+  }
 }
