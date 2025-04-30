@@ -421,6 +421,7 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
+
 .product-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -455,7 +456,7 @@ input:focus {
   font-size: 8px;
   padding: 2px 4px;
   min-width: 18px;
-  border-radius: 0 6px 0 6px ;
+  border-radius: 0 6px 0 6px;
   position: absolute;
   top: 1px;
   right: 1px;
@@ -625,8 +626,9 @@ input:focus {
   grid-template-columns: 3fr 40px 2fr 20px;
   gap: 5px;
   align-items: center;
-  padding: 5px;
+  padding: 5px 5px 5px 20px;
   border-bottom: 1px solid var(--gray-200);
+  position: relative;
 }
 
 .cart-item:last-child {
@@ -634,18 +636,27 @@ input:focus {
 }
 
 .cart-item-index {
-  font-family: beFont;
+  color: var(--body-text);
+  background-color: var(--gray-300);
   font-size: 12px;
+  padding: 2px;
+  border-radius: 0 0 6px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.cart-item-info {
-  flex: 1;
-}
 
 .cart-item-name {
   font-weight: bold;
   margin-bottom: 5px;
+  width: 100%;
 }
+
+.cart-item-info input {
+  width: 90%;
+}
+
 
 .cart-item-price {
   color: var(--gray-600);
@@ -653,13 +664,15 @@ input:focus {
 }
 
 .cart-item-quantity {
-  display: flex;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
 }
 
+.cart-item-quantity input {
+  text-align: center;
+  font-size: 14px;
+}
 
 .cart-item-total {
   font-size: 14px;
@@ -732,7 +745,7 @@ input:focus {
 .cart-actions {
   padding: 5px 10px;
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 .cart-actions .mini {
@@ -908,19 +921,22 @@ input:focus {
   border-radius: 12px;
 }
 
-.invoice-div .flex.customer-input{
+.invoice-div .flex.customer-input {
   gap: 0;
 }
+
 .invoice-div .flex.customer-input input {
-  border-radius:  8px 0 0 8px;
+  border-radius: 8px 0 0 8px;
 }
+
 .invoice-div .flex.customer-input button {
   font-size: 14px;
   padding: 0 4px !important;
   border-radius: 0 8px 8px 0 !important;
 }
 
-.invoice-div select, .invoice-div input{
+.invoice-div select,
+.invoice-div input {
   display: block;
   font-size: 14px;
   padding: 5px;
@@ -1096,7 +1112,7 @@ input:focus {
   top: 2px;
   left: 2px;
   width: 26px;
-  height: 24px;
+  height: calc(100% - 4px);
   background-color: white;
   border-radius: 8px;
   transition: 0.4s;
@@ -1375,7 +1391,7 @@ input:focus {
 
 #setting .control button {
   text-align: center;
-  padding: 10px ;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: white;
@@ -1666,67 +1682,119 @@ input:focus {
 /* Responsive Design */
 @media (max-width: 992px) {
   .pos-container {
-      flex-direction: column;
-      height: auto;
+    flex-direction: column;
+    height: auto;
   }
 
-  .product-selection, .cart-section {
-      height: 500px;
+  .product-selection,
+  .cart-section {
+    height: 500px;
   }
 
   .charts-container {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
   .container {
-      flex-direction: column;
-  }
-
-  .sidebar {
-      width: 100%;
-      height: auto;
-      padding: 10px 0;
-  }
-
-  .logo {
-      padding: 10px 20px;
-      margin-bottom: 10px;
+    flex-direction: column;
   }
 
   .nav-menu {
-      display: flex;
-      overflow-x: auto;
+    display: flex;
+    overflow-x: auto;
   }
 
   .nav-item {
-      padding: 10px 15px;
-      white-space: nowrap;
+    padding: 10px 15px;
+    white-space: nowrap;
   }
 
   .content {
-      height: calc(100vh - 80px);
+    height: calc(100vh - 80px);
   }
 
   .page-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .stats-cards {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 576px) {
   .modal-content {
-      width: 95%;
-      margin: 20px auto;
+    width: 95%;
+    margin: 20px auto;
   }
 
   .payment-options {
-      flex-direction: column;
+    flex-direction: column;
   }
+}
+
+.UpSize .category {
+  font-size: 14px;
+}
+
+.UpSize .invoice-div {
+  grid-template-columns: 120px auto auto;
+}
+
+.UpSize .invoice-div select,
+.UpSize .invoice-div input {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.UpSize .invoice-div label {
+  scale: 1.1;
+}
+
+.UpSize .invoice-div .flex.customer-input button {
+  padding: 10px !important;
+}
+
+.UpSize .cart-item-price {
+  font-size: 0.8em;
+}
+
+.UpSize .cart-item-info input {
+  font-size: 1.0em;
+}
+
+.UpSize .summary-div .flex input,
+.UpSize .summary-div select {
+  font-size: 16px;
+  padding: 6px 8px;
+}
+
+.UpSize .summary-div .switch {
+  height: 100%;
+}
+
+.UpSize .summary-div .switch-inner {
+  font-size: 16px;
+}
+
+.UpSize .summary-row {
+  font-size: 14px;
+}
+
+.UpSize .summary-row.total {
+  font-size: 18px;
+}
+
+.UpSize .cart-actions button {
+  font-size: 18px;
+  min-height: 50px;
+  min-width: 50px;
+}
+
+.UnIMG .product-image {
+  display: none;
 }

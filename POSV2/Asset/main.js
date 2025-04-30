@@ -174,6 +174,58 @@ categories.addEventListener('scroll', updateScrollButtons);
 window.addEventListener('load', updateScrollButtons);
 window.addEventListener('resize', updateScrollButtons);
 
+// Upsize UnIMG
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true
+  });
+
+  // Hàm cập nhật localStorage
+  function updateBodyClassState() {
+    const classList = Array.from(document.body.classList);
+    localStorage.setItem('bodyClassList', JSON.stringify(classList));
+  }
+
+  // Áp dụng class từ localStorage khi tải trang
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('bodyClassList');
+    if (saved) {
+      const classes = JSON.parse(saved);
+      document.body.classList.add(...classes);
+    }
+  });
+
+  // Toggle UnIMG
+  document.getElementById('hideImageBtn').addEventListener('click', function () {
+    document.body.classList.toggle('UnIMG');
+    updateBodyClassState();
+
+    Toast.fire({
+      icon: 'info',
+      title: document.body.classList.contains('UnIMG')
+        ? 'Đã ẩn ảnh sản phẩm'
+        : 'Đã hiện ảnh sản phẩm'
+    });
+  });
+
+  // Toggle UpSize
+  document.getElementById('increaseSizeBtn').addEventListener('click', function () {
+    document.body.classList.toggle('UpSize');
+    updateBodyClassState();
+
+    Toast.fire({
+      icon: 'info',
+      title: document.body.classList.contains('UpSize')
+        ? 'Đã tăng kích thước'
+        : 'Đã trở lại kích thước ban đầu'
+    });
+  });
+
+
+
 
 // Quét sản phẩm bằng QR, Barcode
 let isScanning = false;
@@ -590,7 +642,7 @@ class CartManager {
                 domElements.cartContainer.innerHTML = cart.map((item, index) => `
                     <div class="cart-item" id="${index}">
                         <div class="cart-item-info">
-                            <span class="cart-item-index">${index + 1}.</span><input type="text" value="${item.name}" onclick="openPopup(this)" onchange="CartManager.updateItem(${index}, 'name', this.value)">
+                            <span class="cart-item-index">${index + 1}</span><input type="text" value="${item.name}" onclick="openPopup(this)" onchange="CartManager.updateItem(${index}, 'name', this.value)">
                             <input class="cart-item-price" type="text" value="${item.price.toLocaleString('vi-VN')}" 
                             oninput="formatPriceInput(this)" 
                             onchange="CartManager.updateItem(${index}, 'price', unformatPrice(this.value))">
@@ -660,41 +712,41 @@ class CartManager {
     static generateQRCode() {
         const carts = JSON.parse(localStorage.getItem(STORAGE_KEY_CARTS)) || {};
         const currentCart = carts[currentInvoiceId] || [];
-    
+
         if (currentCart.length === 0) {
             Swal.fire('Giỏ hàng trống', 'Không có sản phẩm để tạo mã QR.', 'warning');
             return;
         }
-    
+
         // Rút gọn: chuyển sang chuỗi dạng "name|price|qty;..."
         const cartString = currentCart
             .map(item => `${item.name}|${+item.price.toFixed(0)}|${item.quantity}`)
             .join(';');
-                
+
         const compressedData = LZString.compressToEncodedURIComponent(cartString);
-    
+
         if (compressedData.length > 1000) {
             Swal.fire('Giỏ hàng quá lớn', 'Dữ liệu giỏ hàng quá lớn để tạo QR.', 'error');
             return;
         }
-    
+
         // Hiển thị popup QR như trước
         const popup = document.getElementById('qr-popup');
         const qrCodeContainer = document.getElementById('qrcode');
         qrCodeContainer.innerHTML = '';
         popup.style.display = 'block';
-    
+
         new QRCode(qrCodeContainer, {
             text: compressedData,
             width: 300,
             height: 300
         });
-    
+
         document.getElementById('qr-close').onclick = () => {
             popup.style.display = 'none';
             qrCodeContainer.innerHTML = '';
         };
-    
+
         document.getElementById('qr-overlay').onclick = (e) => {
             if (e.target.id === 'qr-overlay') {
                 popup.style.display = 'none';
@@ -702,7 +754,7 @@ class CartManager {
             }
         };
     }
-    
+
 
 
     static startScan() {
@@ -710,11 +762,11 @@ class CartManager {
             console.log('Đang quét, không khởi động lại.');
             return;
         }
-    
+
         html5QrCode = new Html5Qrcode("reader");
         popupDiv.style.display = 'flex';
         isScanning = true;
-    
+
         Html5Qrcode.getCameras().then(cameras => {
             if (cameras && cameras.length) {
                 html5QrCode.start(
@@ -731,7 +783,7 @@ class CartManager {
                                     quantity: +quantity
                                 };
                             });
-    
+
                             if (Array.isArray(importedCart)) {
                                 cart = importedCart;
                                 this.saveCart();
@@ -762,20 +814,20 @@ class CartManager {
             isScanning = false;
             popupDiv.style.display = 'none';
         });
-    
+
         // Đóng khi click nút đóng hoặc ngoài vùng reader
         closeButton.onclick = async () => {
             await ScanManager.stopScan();
         };
-    
+
         popupDiv.onclick = async (event) => {
             if (!readerDiv.contains(event.target)) {
                 await ScanManager.stopScan();
             }
         };
     }
-    
-    
+
+
 
 
 
