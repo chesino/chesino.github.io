@@ -1,20 +1,20 @@
-// fetch('/POS/Asset/Version.json')
-//     .then(response => response.json()) // Chuyển đổi dữ liệu JSON
-//     .then(data => {
-//         // Tìm phiên bản có ngày cập nhật mới nhất
-//         const latestVersion = data.reduce((latest, current) => {
-//             const latestDate = new Date(latest.dateUpdate.split('/').reverse().join('-'));
-//             const currentDate = new Date(current.dateUpdate.split('/').reverse().join('-'));
+fetch('/POS/Asset/Version.json')
+    .then(response => response.json()) // Chuyển đổi dữ liệu JSON
+    .then(data => {
+        // Tìm phiên bản có ngày cập nhật mới nhất
+        const latestVersion = data.reduce((latest, current) => {
+            const latestDate = new Date(latest.dateUpdate.split('/').reverse().join('-'));
+            const currentDate = new Date(current.dateUpdate.split('/').reverse().join('-'));
 
-//             return currentDate > latestDate ? current : latest;
-//         });
+            return currentDate > latestDate ? current : latest;
+        });
 
-//         // Hiển thị thông tin phiên bản mới nhất
-//         document.getElementById('version').innerHTML = `Phiên bản ${latestVersion.version} <p>Ngày cập nhật: ${latestVersion.dateUpdate}</p>`;
-//     })
-//     .catch(error => {
-//         console.error('Lỗi khi tải file Version.json:', error);
-//     });
+        // Hiển thị thông tin phiên bản mới nhất
+        document.getElementById('version').innerHTML = `Phiên bản ${latestVersion.version} <p>Ngày cập nhật: ${latestVersion.dateUpdate}</p>`;
+    })
+    .catch(error => {
+        console.error('Lỗi khi tải file Version.json:', error);
+    });
 
 const STORAGE_KEY = 'pos_cart';
 let products = [];
@@ -175,29 +175,6 @@ window.addEventListener('load', updateScrollButtons);
 window.addEventListener('resize', updateScrollButtons);
 
 
-// Xem dung lượng đã lưu
-function getLocalStorageSizeInKB() {
-    let total = 0;
-    for (let key in localStorage) {
-        if (localStorage.hasOwnProperty(key)) {
-            const value = localStorage.getItem(key);
-            total += key.length + value.length;
-        }
-    }
-    // mỗi ký tự ~2 bytes (UTF-16), chuyển ra KB
-    return (total * 2) / 1024;
-}
-
-
-
-// Ví dụ:
-const sizeInKB = getLocalStorageSizeInKB();
-console.log(`LocalStorage đang dùng khoảng ${sizeInKB.toFixed(2)} KB`);
-
-
-
-
-
 // Quét sản phẩm bằng QR, Barcode
 let isScanning = false;
 let html5QrCode;
@@ -334,38 +311,11 @@ popupDiv.addEventListener('click', async (event) => {
         await ScanManager.stopScan();
     }
 });
+
 document.getElementById("flip-camera").addEventListener("click", () => {
-    const video = document.querySelector("#reader video");
-    if (video) {
-        video.classList.toggle("flipped");
-    }
+    const video = document.querySelector("#reader");
+    video.classList.toggle("flipped");
 });
-
-async function logCameraInfo() {
-    try {
-        const devices = await navigator.mediaDevices.enumerateDevices();
-
-        const videoDevices = devices.filter(device => device.kind === 'videoinput');
-
-        console.log('Danh sách camera:');
-        videoDevices.forEach((device, index) => {
-            console.log(`Camera ${index + 1}:`);
-            console.log(`- Label: ${device.label || 'Không có (cần cấp quyền)'}`);
-            console.log(`- Device ID: ${device.deviceId}`);
-            console.log(`- Group ID: ${device.groupId}`);
-            console.log('--------------------------');
-        });
-    } catch (err) {
-        console.error('Không thể lấy thông tin thiết bị:', err);
-    }
-}
-
-
-
-
-// DEV
-
-
 
 // DOM Elements
 const domElements = {
@@ -518,12 +468,11 @@ class CartManager {
         const saved = localStorage.getItem(STORAGE_KEY_DEFAULT_INVOICES);
         if (saved) {
             const invoices = JSON.parse(saved);
-            console.log(invoices);
-            
+
             document.getElementById('defaultInvoicesInput').value = invoices.join('; ');
         }
     }
-    
+
 
     static createNewInvoice() {
         Swal.fire({
@@ -711,130 +660,123 @@ class CartManager {
     static generateQRCode() {
         const carts = JSON.parse(localStorage.getItem(STORAGE_KEY_CARTS)) || {};
         const currentCart = carts[currentInvoiceId] || [];
-
+    
         if (currentCart.length === 0) {
-            alert('Giỏ hàng trống. Không có sản phẩm để tạo mã QR.');
+            Swal.fire('Giỏ hàng trống', 'Không có sản phẩm để tạo mã QR.', 'warning');
             return;
         }
-
-        const minimalCart = currentCart.map(item => ({
-            i: item.id,
-            q: item.quantity
-        }));
-
-        const compressedData = LZString.compressToBase64(JSON.stringify(minimalCart));
-
+    
+        // Rút gọn: chuyển sang chuỗi dạng "name|price|qty;..."
+        const cartString = currentCart
+            .map(item => `${item.name}|${+item.price.toFixed(0)}|${item.quantity}`)
+            .join(';');
+                
+        const compressedData = LZString.compressToEncodedURIComponent(cartString);
+    
         if (compressedData.length > 1000) {
-            alert('Giỏ hàng quá lớn để tạo mã QR.');
+            Swal.fire('Giỏ hàng quá lớn', 'Dữ liệu giỏ hàng quá lớn để tạo QR.', 'error');
             return;
         }
-
-        // Hiển thị popup
+    
+        // Hiển thị popup QR như trước
         const popup = document.getElementById('qr-popup');
         const qrCodeContainer = document.getElementById('qrcode');
         qrCodeContainer.innerHTML = '';
         popup.style.display = 'block';
-
+    
         new QRCode(qrCodeContainer, {
             text: compressedData,
             width: 300,
             height: 300
         });
-
-        // Đóng khi click ra ngoài modal
+    
         document.getElementById('qr-close').onclick = () => {
             popup.style.display = 'none';
             qrCodeContainer.innerHTML = '';
         };
-
+    
         document.getElementById('qr-overlay').onclick = (e) => {
             if (e.target.id === 'qr-overlay') {
                 popup.style.display = 'none';
                 qrCodeContainer.innerHTML = '';
             }
         };
-
     }
+    
 
 
-
-    static async startScan() {
-        try {
-            if (isScanning) {
-                console.log('Đã có phiên quét đang chạy.');
-                return;
-            }
-
-            if (!html5QrCode) {
-                html5QrCode = new Html5Qrcode("reader");
-            }
-
-            // Hiện popup trước khi quét
-            const popupDiv = document.getElementById('reader-popup');
-            popupDiv.style.display = 'flex';
-
-            const cameras = await Html5Qrcode.getCameras();
+    static startScan() {
+        if (isScanning) {
+            console.log('Đang quét, không khởi động lại.');
+            return;
+        }
+    
+        html5QrCode = new Html5Qrcode("reader");
+        popupDiv.style.display = 'flex';
+        isScanning = true;
+    
+        Html5Qrcode.getCameras().then(cameras => {
             if (cameras && cameras.length) {
-                await html5QrCode.start(
+                html5QrCode.start(
                     { facingMode: "environment" },
                     { fps: 30 },
                     async (decodedText, decodedResult) => {
                         try {
-                            const decompressed = LZString.decompressFromBase64(decodedText);
-                            const importedCart = JSON.parse(decompressed);
-
-                            cart = [];
+                            const decompressed = LZString.decompressFromEncodedURIComponent(decodedText);
+                            const importedCart = decompressed.split(';').map(entry => {
+                                const [name, price, quantity] = entry.split('|');
+                                return {
+                                    name,
+                                    price: +price,
+                                    quantity: +quantity
+                                };
+                            });
+    
                             if (Array.isArray(importedCart)) {
-                                for (const item of importedCart) {
-                                    const product = products.find(p => p.id == item.i);
-
-                                    if (product) {
-                                        const cartItem = {
-                                            id: product.id,
-                                            name: product.name,
-                                            price: product.price,
-                                            quantity: item.q
-                                        };
-
-                                        CartManager.addItem(cartItem);
-                                    } else {
-                                        UIManager.showError(`Không tìm thấy sản phẩm ID: ${item.i}`);
-                                    }
-                                }
-
-                                CartManager.saveCart();
-                                CartManager.updateDisplay();
+                                cart = importedCart;
+                                this.saveCart();
+                                this.updateDisplay();
                                 UIManager.showToast('Đã nhập giỏ hàng từ QR');
                             } else {
                                 Swal.fire('Lỗi dữ liệu', 'Dữ liệu không hợp lệ.', 'error');
                             }
                         } catch (e) {
+                            console.error('Lỗi khi xử lý dữ liệu QR:', e);
                             Swal.fire('Lỗi', 'Không thể đọc dữ liệu.', 'error');
+                        } finally {
+                            await ScanManager.stopScan();
                         }
-
-                        // Sau khi quét thành công, dừng camera và ẩn popup
-                        await html5QrCode.stop();
-                        popupDiv.style.display = 'none';
-                        isScanning = false;
                     },
                     (errorMessage) => {
-                        // console.log(`QR code scan error: ${errorMessage}`);
+                        // Bỏ qua lỗi quét tạm thời
                     }
                 );
-                isScanning = true;
-                console.log('Bắt đầu quét QR để nhập giỏ hàng');
             } else {
-                console.error('Không tìm thấy camera');
                 UIManager.showError('Không tìm thấy camera');
-                popupDiv.style.display = 'none'; // Đóng popup nếu lỗi
+                isScanning = false;
+                popupDiv.style.display = 'none';
             }
-        } catch (err) {
-            console.error('Lỗi khởi động quét QR:', err);
-            UIManager.showError('Lỗi khởi động quét QR');
-            const popupDiv = document.getElementById('reader-popup');
-            popupDiv.style.display = 'none'; // Đóng popup nếu lỗi
-        }
+        }).catch(err => {
+            console.error('Lỗi truy cập camera:', err);
+            UIManager.showError('Lỗi truy cập camera');
+            isScanning = false;
+            popupDiv.style.display = 'none';
+        });
+    
+        // Đóng khi click nút đóng hoặc ngoài vùng reader
+        closeButton.onclick = async () => {
+            await ScanManager.stopScan();
+        };
+    
+        popupDiv.onclick = async (event) => {
+            if (!readerDiv.contains(event.target)) {
+                await ScanManager.stopScan();
+            }
+        };
     }
+    
+    
+
 
 
 }
@@ -1373,7 +1315,7 @@ class BillManager {
 
         const subtotal = cart.reduce((sum, item) => sum + (item.quantity * item.price), 0);
         const discountPercent = Number(domElements.discountPercent?.value) || 0;
-        const discountAmount = Number(domElements.discountAmount?.value) || 0;
+        const discountAmount = Number((domElements.discountAmount?.value || '0').replace(/\./g, '')) || 0;
         const percentDiscount = subtotal * (discountPercent / 100);
         const totalDiscount = percentDiscount + discountAmount;
         const total = subtotal - totalDiscount;

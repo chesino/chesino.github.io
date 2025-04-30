@@ -33,7 +33,7 @@
 
 <body>
     <div id="overlay">
-        <!-- <span>Đang xử lý, vui lòng chờ...</span> -->
+        <span>Đang xử lý, vui lòng chờ...</span>
     </div>
     <header class="header">
         <div class="logo">
@@ -68,7 +68,7 @@
                     <div class="search-bar">
                         <input type="text" id="product-search" placeholder="Tìm kiếm dịch vụ...">
                         <button id="scan-barcode"><i class="fas fa-barcode"></i></button>
-                       
+
                     </div>
 
                     <div class="categories-wrapper">
@@ -101,7 +101,8 @@
                 <div class="cart-section">
                     <div class="customer-info">
                         <div class="invoice-div">
-                            <button onclick="CartManager.startScan()"><i class="fa-solid fa-mobile-screen-button"></i></button>
+                            <button onclick="CartManager.startScan()"><i
+                                    class="fa-solid fa-mobile-screen-button"></i></button>
                             <select id="invoiceSelect" onchange="CartManager.switchInvoice(this.value)">
                                 <!-- Option sẽ tự động sinh ra -->
                             </select>
@@ -265,9 +266,38 @@
                 <button onclick="UIManager.syncProducts()">
                     <i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
                 <!-- <button onclick="customerPoints()">customerPoints()</button> -->
-                <button onclick="localStorage.clear()">Xoá dữ liệu</button>
+                <div class="dev-pass">
+                    <input type="password" id="passwordInput" placeholder="Developer PAss" />
+                    <button onclick="checkPassword()"><i class="fa-solid fa-lock"></i></button>
+                </div>
+                <div class="version" id="version">
+
+                </div>
             </div>
+
             <div class="dev">
+                <div class="dev dev-command"
+                    style="display:none; border:1px solid #ccc; padding:10px; margin-top:10px;">
+                    <h3>🛠️ Dev Command Console</h3>
+                    <textarea id="commandInput" placeholder="Nhập lệnh JavaScript tại đây..."
+                        style="width:100%; height:80px;"></textarea>
+                    <button onclick="runDevCommand()">▶️ Chạy lệnh</button>
+                    <pre id="commandOutput"
+                        style="background:#f0f0f0; padding:10px; margin-top:10px; max-height:200px; overflow:auto;"></pre>
+
+                    <hr>
+
+                    <button onclick="showLocalStorageSize()">📦 LocalStorage Size</button>
+                    <button onclick="logCameraInfo()">📷 Camera Info</button>
+                    <button onclick="listGlobalFunctions()">📑 Hàm toàn cục</button>
+                    <button onclick="listGlobalVariables()">🌐 Biến toàn cục</button>
+                    <button onclick="clearConsole()">🧹 Xóa Console</button>
+                    <button onclick="localStorage.clear()">Xoá dữ liệu</button>
+
+
+                    <h4>📃 Danh sách hàm có thể chạy:</h4>
+                    <ul id="functionList" style="max-height:200px; overflow:auto; padding:0; list-style:none;"></ul>
+                </div>
                 <div>
                     <h3>Cài đặt hóa đơn mặc định</h3>
                     <textarea id="defaultInvoicesInput" placeholder="Nhập tên hóa đơn, phân cách bởi dấu ;"></textarea>
@@ -282,10 +312,6 @@
 
                 <div class="dev-product">
                     <div id="productManager">
-                        <div style="margin-bottom: 10px;">
-                            <button id="addProduct" class="pm-btn">➕ Thêm sản phẩm</button>
-                            <button id="saveProducts" class="pm-btn">💾 Lưu thay đổi</button>
-                        </div>
 
                         <table id="productTable">
                             <thead>
@@ -301,14 +327,17 @@
                                 <!-- Render sản phẩm tại đây -->
                             </tbody>
                         </table>
+                        <div class="productManager-btn" style="margin-top: 10px;">
+                            <button id="addProduct" class="pm-btn">➕ Thêm sản phẩm</button>
+                            <button id="saveProducts" class="pm-btn">💾 Lưu thay đổi</button>
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
-            <div class="version" id="version">
 
-            </div>
         </div>
 
         <div id="tutorial" class="tab-content">
@@ -346,14 +375,14 @@
             align-items: center;
             z-index: 9999;
         ">
-          <div id="qr-modal" style="
+            <div id="qr-modal" style="
               background: white;
               padding: 20px;
               border-radius: 10px;
               text-align: center;
               position: relative;
           ">
-            <button id="qr-close" style="
+                <button id="qr-close" style="
                 position: absolute;
                 top: 10px;
                 right: 10px;
@@ -362,12 +391,12 @@
                 font-size: 18px;
                 cursor: pointer;
             ">&times;</button>
-            <div id="qrcode"></div>
-          </div>
+                <div id="qrcode"></div>
+            </div>
         </div>
-      </div>
-      
-      
+    </div>
+
+
 
     <footer class="footer">
         Powered by <a href="http://fb.com/HunqD" target="_blank" rel="noopener noreferrer">Đinh Mạnh Hùng</a>
@@ -380,6 +409,7 @@
     <script src="./Asset/main.js"></script>
     <script src="./Asset/Sync.js"></script>
     <script src="./Asset/point.js"></script>
+    <script src="./Asset/dev.js"></script>
 </body>
 
 </html>

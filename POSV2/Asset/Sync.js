@@ -136,21 +136,95 @@ input.addEventListener('input', () => {
 });
 
 // Mở popup
+// Hiển thị SweetAlert2 để thêm khách hàng mới
 function showAddCustomerPopup() {
-    const popup = document.getElementById('addCustomerPopup');
-    popup.style.display = 'flex';
-  }
-  
-  // Đóng popup
-  function closeAddCustomerPopup() {
-    const popup = document.getElementById('addCustomerPopup');
-    popup.style.display = 'none';
-  }
-  
-  // Bắt sự kiện click ra ngoài để đóng popup
-  document.getElementById('addCustomerPopup').addEventListener('click', function() {
-    closeAddCustomerPopup();
+  Swal.fire({
+      title: 'Thêm khách hàng mới',
+      html: `
+          <input type="text" id="newCustomerName" class="swal2-input" placeholder="Tên khách hàng">
+          <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại">
+          <input type="email" id="newCustomerEmail" class="swal2-input" placeholder="Email">
+          <input type="date" id="newCustomerBirthday" class="swal2-input" placeholder="Ngày sinh">
+          <select class="swal2-select" name="newCustomerSex" id="newCustomerSex">
+              <option value="Nữ">Nữ</option>
+              <option value="Nam">Nam</option>
+          </select>
+          <input type="text" id="newCustomerSocial" class="swal2-input" placeholder="Mạng xã hội">
+          <input type="text" id="newCustomerAddress" class="swal2-input" placeholder="Địa chỉ">
+          <select class="swal2-select" name="newCustomerRole" id="newCustomerRole">
+              <option value="Thành viên">Thành viên</option>
+              <option value="VIP">VIP</option>
+          </select>
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Thêm',
+      cancelButtonText: 'Hủy',
+      preConfirm: () => {
+          showOverlay();
+          const newCustomerName = document.getElementById('newCustomerName').value;
+          const capitalizeName = newCustomerName
+              .split(' ') // Tách tên thành các từ
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Viết hoa chữ cái đầu tiên, còn lại là chữ thường
+              .join(' '); // Kết hợp lại các từ thành một chuỗi
+              
+          const newCustomerPhone = document.getElementById('newCustomerPhone').value;
+
+          const newCustomer = {
+              Name: capitalizeName,
+              Phone: newCustomerPhone, // Giữ nguyên số điện thoại, bao gồm cả số 0
+              Email: document.getElementById('newCustomerEmail').value || '',
+              Birthday: document.getElementById('newCustomerBirthday').value || '',
+              Sex: document.getElementById('newCustomerSex').value,
+              Social: document.getElementById('newCustomerSocial').value || '',
+              Address: document.getElementById('newCustomerAddress').value || '',
+              Role: document.getElementById('newCustomerRole').value,
+              Usage: 0,
+              Total: 0,
+              sheetName: "Customer"
+          };
+
+          // Kiểm tra xem các trường có trống không
+          const isValid = Object.values(newCustomer);
+          if (!isValid) { Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin.'); return false; }
+          return newCustomer;
+      }
+  }).then((result) => {
+      if (result.isConfirmed) {
+          //Mới
+          function jsonToQueryString(json) {
+              return Object.keys(json)
+                  .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined) // Lọc các giá trị rỗng, null hoặc undefined
+                  .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key])) // Mã hóa và ghép cặp key=value
+                  .join("&"); // Nối các cặp bằng '&'
+          }
+
+          const newCustomer = jsonToQueryString(result.value);
+
+          // Gửi dữ liệu khách hàng mới vào Google Sheets
+          fetch(scriptURL, {
+              redirect: "follow",
+              method: "POST",
+              body: newCustomer,
+              headers: {
+                  "Content-Type": "text/plain;charset=utf-8",
+              }
+          })
+              .then(response => response.json())
+              .then(result => {
+                  Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                  loadCustomerData(); // Tải lại dữ liệu khách hàng
+                  hideOverlay();
+              })
+              .catch(error => {
+                  Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                  loadCustomerData(); // Tải lại dữ liệu khách hàng
+                  hideOverlay();
+              });
+      }
   });
+}
+  
   
   // Gửi dữ liệu khách hàng
   function submitNewCustomer() {
