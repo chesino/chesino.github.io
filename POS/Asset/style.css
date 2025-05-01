@@ -936,11 +936,15 @@ input:focus {
   z-index: 999;
 }
 
+
 .footer a {
   font-size: 12px;
   text-decoration: none;
   color: var(--primary-color);
   font-weight: 600;
+}
+.HHS .footer a {
+  color: greenyellow;
 }
 
 /* Sắp xếp lại */

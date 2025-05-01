@@ -1909,7 +1909,7 @@ class BillManager {
 
 <body>
     <div class="preview-header">
-        <img src="/POS-HHS/Asset/Head-Logo.png" alt="Logo">
+        <img src="./Asset/Head-Logo.png" alt="Logo">
         <!-- <h2>H Hair Studio</h2> -->
         <div class="info-Salon">
             <p class="location">
