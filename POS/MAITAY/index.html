@@ -28,7 +28,7 @@
     <script src="/DATA/Extend/jquery.min.js"></script>
     <script src="/DATA/Extend/qrcode.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-    <link href="./Asset/style.css" rel="stylesheet">
+    <link href="../Asset/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
     </div>
     <header class="header">
         <div class="logo">
-            <h1>Mai Tây <span>Hair Salon</span></h1>
+            <h1 id="logoText">Mai Tây <span>Hair Salon</span></h1>
         </div>
 
         <div class="flex">
@@ -51,8 +51,8 @@
                     </div>
                     <div class="tab-button" onclick="switchTab('setting')"><i class="fa-solid fa-gear"></i> <span> Cài
                             đặt</span></div>
-                    <div class="tab-button" onclick="switchTab('tutorial')"><i class="fas fa-question-circle"></i>
-                        <span>Hướng dẫn</span>
+                    <div class="tab-button" onclick="switchTab('dashboard')"><i class="fas fa-chart-pie"></i>
+                        <span>Thông kế</span>
                     </div>
 
                 </div>
@@ -264,33 +264,56 @@
 
         <div id="setting" class="tab-content active">
             <div class="control">
+                <h1><i class="fas fa-cog"></i> Cài đặt</h1>
                 <button id="sync-customers" onclick="loadCustomerData()"><i class="fa-solid fa-address-book"></i> Đồng
                     Bộ Khách Hàng</button>
                 <button onclick="UIManager.syncProducts()">
                     <i class="fa-solid fa-rotate"></i> Đồng bộ sản phẩm</button>
                 <!-- <button onclick="customerPoints()">customerPoints()</button> -->
-                <button id="hideImageBtn">Ẩn ảnh sản phẩm</button>
-                <button id="increaseSizeBtn">Kích thước</button>
+                <button id="hideImageBtn"><i class="far fa-file-image"></i> Ẩn ảnh sản phẩm</button>
+                <button id="increaseSizeBtn"><i class="fas fa-expand"></i> Kích thước</button>
+            </div>
 
-                
+            <div class="control">
+                <h1><i class="fas fa-user-tie"></i> Quản lý</h1>
+                <h2>Tuỳ biến hoá đơn</h2>
+                <p>Tính năng đang phát triển</p>
+
+            </div>
+
+            <div class="control">
+                <h1><i class="fas fa-info-circle"></i> Giới thiệu</h1>
+                <h2>Phiên bản phần mềm</h2>
                 <div class="version" id="version">
-
+                    <p>Phiên bản</p>
+                    <p>Nội dung</p>
                 </div>
-            </div>
-            
-
-            <div class="control">
-                <h1>Kích hoạt</h1>
+                <h2>Bản quyền</h2>
                 <div class="Activate">
-                    <input type="text" id="ActivateKey" placeholder="Nhập mã kích hoạt">
-                    <button id="saveActivateKey">Kích hoạt</button>
-                    <button id="clearActivateKey">Xoá mã kích hoạt</button>
-                    <p id="StatusActivete"></p>
+                    <div id="StatusActivete"></div>
+                    <div class="flex">
+                        <input type="text" id="ActivateKey" placeholder="Nhập mã kích hoạt">
+                        <button id="saveActivateKey">Kích hoạt</button>
+                        <button id="clearActivateKey">Thu hồi</button>
+                    </div>
+                </div>
+            </div>
+            <div class="control">
+                <h1><i class="fas fa-universal-access"></i> Phím tắt</h1>
+                <div class="keyboard-shortcuts">
+                    <ul>
+                        <li><strong>Lưu hóa đơn:</strong> <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd></li>
+                        <li><strong>Đóng giỏ hàng:</strong> <kbd>Esc</kbd></li>
+                        <li><strong>Mở giỏ hàng:</strong> <kbd>Alt</kbd> + <kbd>1</kbd></li>
+                        <li><strong>In hóa đơn:</strong> <kbd>Alt</kbd> + <kbd>P</kbd></li>
+                        <li><strong>Xem trước hóa đơn:</strong> <kbd>Alt</kbd> + <kbd>V</kbd></li>
+                        <li><strong>Xóa giỏ hàng:</strong> <kbd>Ctrl</kbd> + <kbd>Delete</kbd></li>
+                    </ul>
                 </div>
             </div>
 
             <div class="control">
-                <h1>Dành cho lập trình viên</h1>
+                <h1><i class="fab fa-dev"></i> HunqDEV</h1>
                 <div class="dev-pass">
                     <input type="password" id="passwordInput" placeholder="Developer" />
                     <button onclick="checkPassword()"><i class="fa-solid fa-lock"></i></button>
@@ -299,7 +322,7 @@
                     <div class="actions">
                         <button onclick="clearAll()">🗑️ Xoá Tất Cả</button>
                     </div>
-    
+
                     <div class="table-container">
                         <table id="storageTable">
                             <thead>
@@ -322,35 +345,36 @@
                         <button onclick="runDevCommand()">▶️ Chạy lệnh</button>
                         <pre id="commandOutput"
                             style="background:#f0f0f0; padding:10px; margin-top:10px; max-height:200px; overflow:auto;"></pre>
-    
+
                         <hr>
-    
+
                         <button onclick="showLocalStorageSize()">📦 LocalStorage Size</button>
                         <button onclick="logCameraInfo()">📷 Camera Info</button>
                         <button onclick="listGlobalFunctions()">📑 Hàm toàn cục</button>
                         <button onclick="listGlobalVariables()">🌐 Biến toàn cục</button>
                         <button onclick="clearConsole()">🧹 Xóa Console</button>
                         <button onclick="localStorage.clear()">Xoá dữ liệu</button>
-    
-    
+
+
                         <h4>📃 Danh sách hàm có thể chạy:</h4>
                         <ul id="functionList" style="max-height:200px; overflow:auto; padding:0; list-style:none;"></ul>
                     </div>
                     <div>
                         <h3>Cài đặt hóa đơn mặc định</h3>
-                        <textarea id="defaultInvoicesInput" placeholder="Nhập tên hóa đơn, phân cách bởi dấu ;"></textarea>
+                        <textarea id="defaultInvoicesInput"
+                            placeholder="Nhập tên hóa đơn, phân cách bởi dấu ;"></textarea>
                         <button onclick="CartManager.saveDefaultInvoices()">Lưu mặc định</button>
                     </div>
                     <br>
-    
+
                     <button onclick="CartManager.generateQRCode()">Tạo mã QR giỏ hàng</button>
-    
-    
+
+
                     <button onclick="CartManager.startScan()">Quét mã QR</button>
-    
+
                     <div class="dev-product">
                         <div id="productManager">
-    
+
                             <table id="productTable">
                                 <thead>
                                     <tr>
@@ -369,32 +393,23 @@
                                 <button id="addProduct" class="pm-btn">➕ Thêm sản phẩm</button>
                                 <button id="saveProducts" class="pm-btn">💾 Lưu thay đổi</button>
                             </div>
-    
+
                         </div>
-    
+
                     </div>
-    
+
                 </div>
             </div>
 
-          
+
 
         </div>
 
-        <div id="tutorial" class="tab-content">
-            <h1>Hướng dẫn dẫn sử dụng</h1>
-            <div class="keyboard-shortcuts">
-                <h2>Phím tắt</h2>
-                <ul>
-                    <li><strong>Lưu hóa đơn:</strong> <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd></li>
-                    <li><strong>Đóng giỏ hàng:</strong> <kbd>Esc</kbd></li>
-                    <li><strong>Mở giỏ hàng:</strong> <kbd>Alt</kbd> + <kbd>1</kbd></li>
-                    <li><strong>In hóa đơn:</strong> <kbd>Alt</kbd> + <kbd>P</kbd></li>
-                    <li><strong>Xem trước hóa đơn:</strong> <kbd>Alt</kbd> + <kbd>V</kbd></li>
-                    <li><strong>Xóa giỏ hàng:</strong> <kbd>Ctrl</kbd> + <kbd>Delete</kbd></li>
-                </ul>
+        <div id="dashboard" class="tab-content">
+            <div class="card">
+                <h1>Thông kế doanh thu</h1>
+                <p>Đang phát triển</p>
             </div>
-
         </div>
     </div>
 
@@ -411,7 +426,7 @@
                 <button id="qr-close">&times;</button>
                 <div id="qrcode"></div>
             </div>
-        </div>        
+        </div>
     </div>
 
 
@@ -424,10 +439,10 @@
 
     <script src="/DATA/Extend/SweetAlert2.js"></script>
     <script src="/DATA/Extend/html5-qrcode.min.js"></script>
-    <script src="./Asset/main.js"></script>
-    <script src="./Asset/Sync.js"></script>
-    <script src="./Asset/point.js"></script>
-    <script src="./Asset/dev.js"></script>
+    <script src="../Asset/main.js"></script>
+    <script src="../Asset/Sync.js"></script>
+    <script src="../Asset/point.js"></script>
+    <script src="../Asset/dev.js"></script>
 </body>
 
 </html>
