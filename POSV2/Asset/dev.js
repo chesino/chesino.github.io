@@ -153,38 +153,79 @@ function clearConsole() {
 
 function listGlobalFunctions() {
     const funcs = Object.entries(window)
-      .filter(([key, val]) => typeof val === 'function' && !key.startsWith('on'))
-      .map(([key]) => key)
-      .sort();
-  
+        .filter(([key, val]) => typeof val === 'function' && !key.startsWith('on'))
+        .map(([key]) => key)
+        .sort();
+
     const ul = document.getElementById("functionList");
     ul.innerHTML = "";
-  
+
     funcs.forEach(fnName => {
-      const li = document.createElement("li");
-      li.style.cursor = "pointer";
-      li.style.padding = "4px 8px";
-      li.style.borderBottom = "1px solid #ddd";
-      li.textContent = fnName;
-      li.title = `Chạy thử ${fnName}()`;
-  
-      li.onclick = () => {
-        try {
-          const result = window[fnName]();
-          logOutput(`▶️ Gọi ${fnName}():\n` + formatResult(result));
-        } catch (e) {
-          logOutput(`❌ Lỗi khi chạy ${fnName}(): ${e.message}`);
-        }
-      };
-  
-      ul.appendChild(li);
+        const li = document.createElement("li");
+        li.style.cursor = "pointer";
+        li.style.padding = "4px 8px";
+        li.style.borderBottom = "1px solid #ddd";
+        li.textContent = fnName;
+        li.title = `Chạy thử ${fnName}()`;
+
+        li.onclick = () => {
+            try {
+                const result = window[fnName]();
+                logOutput(`▶️ Gọi ${fnName}():\n` + formatResult(result));
+            } catch (e) {
+                logOutput(`❌ Lỗi khi chạy ${fnName}(): ${e.message}`);
+            }
+        };
+
+        ul.appendChild(li);
     });
-  
+
     console.log("📑 Đã liệt kê " + funcs.length + " hàm toàn cục.");
-  }
-  
-  function logOutput(message) {
+}
+
+function logOutput(message) {
     const outputEl = document.getElementById("commandOutput");
     outputEl.textContent += message + "\n";
-  }
-  
+}
+
+
+function renderTable() {
+    const tableBody = document.querySelector("#storageTable tbody");
+    tableBody.innerHTML = ''; // Xóa dữ liệu cũ
+
+    if (localStorage.length === 0) {
+        const row = `<tr><td colspan="3" style="text-align:center;">Không có dữ liệu</td></tr>`;
+        tableBody.innerHTML = row;
+        return;
+    }
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key);
+        const row = `
+        <tr>
+          <td>${key}</td>
+          <td>${value.length > 100 ? value.substring(0, 100) + "..." : value}</td>
+          <td><button onclick="deleteItem('${key}')">Xoá</button></td>
+        </tr>
+      `;
+        tableBody.innerHTML += row;
+    }
+}
+
+function deleteItem(key) {
+    if (confirm(`Bạn có chắc chắn muốn xoá "${key}"?`)) {
+        localStorage.removeItem(key);
+        renderTable();
+    }
+}
+
+function clearAll() {
+    if (confirm('Bạn có chắc chắn muốn xoá toàn bộ dữ liệu LocalStorage?')) {
+        localStorage.clear();
+        renderTable();
+    }
+}
+
+// Khi mở trang, load bảng
+renderTable();

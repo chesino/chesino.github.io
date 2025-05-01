@@ -384,21 +384,17 @@ input:focus {
 .scroll-left {
   left: 0;
   background: #ffffff;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0) 100%);
 }
 
 .scroll-right {
   right: 0;
   background: #ffffff;
-  background: linear-gradient(
-    270deg,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(270deg,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0) 100%);
 }
 
 .scroll-button svg {
@@ -459,6 +455,7 @@ input:focus {
   display: block;
   /* thay vì -webkit-box */
 }
+
 
 .product-id {
   color: var(--white);
@@ -656,6 +653,7 @@ input:focus {
   left: 0;
 }
 
+
 .cart-item-name {
   font-weight: bold;
   margin-bottom: 5px;
@@ -665,6 +663,7 @@ input:focus {
 .cart-item-info input {
   width: 90%;
 }
+
 
 .cart-item-price {
   color: var(--gray-600);
@@ -711,6 +710,7 @@ input:focus {
 .cart-item-remove:hover {
   color: #fff;
   background-color: #ef4444;
+
 }
 
 .cart-summary {
@@ -1061,6 +1061,8 @@ input:focus {
   align-items: center;
 }
 
+
+
 .summary-div {
   display: flex;
   width: 100%;
@@ -1127,7 +1129,7 @@ input:focus {
 }
 
 /* Quan trọng: sửa phần checked đúng input:checked + .switch-inner .switch-toggle */
-.summary-div .switch input:checked + .switch-inner .switch-toggle {
+.summary-div .switch input:checked+.switch-inner .switch-toggle {
   transform: translateX(30px);
 }
 
@@ -1350,6 +1352,7 @@ input:focus {
   background-color: #dc2626;
 }
 
+
 /* Styles for the history controls */
 .history-controls {
   display: flex;
@@ -1409,9 +1412,9 @@ input:focus {
   color: #333;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
 
 #setting .control button:hover {
   background-color: #007bff;
@@ -1429,7 +1432,7 @@ input:focus {
 
 #setting .dev .table-container th,
 #setting .dev td {
-  padding: 0;
+  padding: 0 ; 
   border-bottom: 1px solid var(--gray-300);
   text-align: left;
 }
@@ -1438,7 +1441,8 @@ input:focus {
   font-size: 12px;
 }
 
-#setting .dev > div {
+
+#setting .dev>div {
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #eee;
@@ -1462,8 +1466,7 @@ input:focus {
   color: #333;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 #setting .dev button:hover {
@@ -1510,8 +1513,7 @@ input:focus {
   cursor: pointer;
   font-size: 12px;
   margin-right: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 #productTable .action-buttons button:hover {
@@ -1577,6 +1579,7 @@ input:focus {
   border-radius: 3px;
 }
 
+
 /* Suggestions */
 #suggestions {
   border: 2px solid var(--primary-color);
@@ -1599,13 +1602,16 @@ input:focus {
 }
 
 #suggestions .VIP {
-  background: linear-gradient(
-    50deg,
-    hsla(43, 68%, 64%, 1) 0%,
-    /* Gold base */ hsla(60, 100%, 90%, 1) 20%,
-    /* Light Gold */ hsla(42, 69%, 55%, 1) 80%,
-    /* Gold darker */ hsla(39, 57%, 52%, 1) 100% /* Deep Gold */
-  );
+  background: linear-gradient(50deg,
+      hsla(43, 68%, 64%, 1) 0%,
+      /* Gold base */
+      hsla(60, 100%, 90%, 1) 20%,
+      /* Light Gold */
+      hsla(42, 69%, 55%, 1) 80%,
+      /* Gold darker */
+      hsla(39, 57%, 52%, 1) 100%
+      /* Deep Gold */
+    );
 }
 
 #suggestions div h1 {
@@ -1615,6 +1621,7 @@ input:focus {
 #suggestions div h1 span {
   font-size: 12px;
 }
+
 
 #suggestions div p {
   font-size: 12px;
@@ -1645,36 +1652,6 @@ input:focus {
   color: white;
   font-size: 1.5em;
 }
-#qr-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#qr-modal {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  position: relative;
-}
-
-#qr-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
 
 /* Responsive Design */
 @media (max-width: 992px) {
@@ -1697,6 +1674,7 @@ input:focus {
   .container {
     flex-direction: column;
   }
+
 }
 
 .UpSize .category {
@@ -1727,7 +1705,7 @@ input:focus {
 }
 
 .UpSize .cart-item-info input {
-  font-size: 1em;
+  font-size: 1.0em;
 }
 
 .UpSize .summary-div .flex input,
@@ -1762,8 +1740,10 @@ input:focus {
   display: none;
 }
 
+
+
 .Activate {
   display: flex;
   gap: 5px;
-  align-items: center;
+  align-items: center
 }

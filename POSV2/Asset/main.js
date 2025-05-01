@@ -1,20 +1,155 @@
-fetch('/POSV2/Asset/Version.json')
-    .then(response => response.json()) // Chuyển đổi dữ liệu JSON
-    .then(data => {
-        // Tìm phiên bản có ngày cập nhật mới nhất
-        const latestVersion = data.reduce((latest, current) => {
-            const latestDate = new Date(latest.dateUpdate.split('/').reverse().join('-'));
-            const currentDate = new Date(current.dateUpdate.split('/').reverse().join('-'));
+// Tạo chuỗi ngẫu nhiên
+function generateRandomString(length) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
 
+const tokenInput = document.getElementById("ActivateKey");
+const saveBtn = document.getElementById("saveActivateKey");
+const clearBtn = document.getElementById("clearActivateKey");
+
+// Khi tải trang, nếu đã có token -> hiển thị chuỗi ngẫu nhiên
+const savedToken = localStorage.getItem("ActivateKey");
+if (savedToken) {
+    tokenInput.value = generateRandomString(12); // Không để lộ token
+}
+
+// Lưu token
+saveBtn.addEventListener("click", () => {
+    const actualToken = tokenInput.value.trim();
+
+    if (!actualToken) {
+        alert("Vui lòng nhập token trước khi lưu!");
+        return;
+    }
+
+    // Lưu token thật
+    localStorage.setItem("ActivateKey", actualToken);
+
+    // Chỉ sau khi lưu mới random hiển thị
+    tokenInput.value = generateRandomString(12);
+
+    // Tải lại trang sau một chút
+    setTimeout(() => location.reload(), 300);
+});
+
+// Xoá token
+clearBtn.addEventListener("click", () => {
+    localStorage.removeItem("ActivateKey");
+    tokenInput.value = "";
+    alert("Token đã bị xoá!");
+});
+
+
+async function getScriptURL(sheetName) {
+    const StatusActivete = document.getElementById("StatusActivete") ;
+    const token = localStorage.getItem("ActivateKey");
+    if (!token) {
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Chưa kích hoạt',
+            text: 'Nhập mã kích hoạt ở phần cài đặt để sử dụng dịch vụ.',
+            confirmButtonText: 'OK'
+        });
+        return null;
+    } else {
+        StatusActivete.innerHTML = `<i class="far fa-check-circle"></i> Đã kích hoạt`;
+    }
+
+    const baseURL = "https://script.google.com/macros/s/AKfycbyVmeNbN2atgCJP8uf4YPdrjQFoFQMg-ooPGW0msgju0UE2dNMDVFmoIPpwWJYu6Jb-LA/exec";
+    const url = sheetName ? `${baseURL}?token=${token}&sheet=${sheetName}` : `${baseURL}?token=${token}`;
+
+    try {
+        const response = await fetch(url, { method: "GET" });
+        const responseData = await response.json();
+
+        // Kiểm tra nếu dữ liệu trả về chứa lỗi Unauthorized
+        if (responseData.error === 'Unauthorized') {
+            await Swal.fire({
+                icon: 'error',
+                title: 'Mã kích hoạt không hợp lệ',
+                text: 'Vui lòng nhập lại mã kích hoạt hoặc liên hệ Đinh Mạnh Hùng.',
+                confirmButtonText: 'Liên hệ',
+                showCancelButton: true,
+                cancelButtonText: 'Thử lại',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem("ActivateKey"); // Xóa token
+                    // Mở link liên hệ khi nhấn vào nút "Liên hệ"
+                    window.open('http://facebook.com/HunqD', '_blank');
+                }
+            });
+
+            return null;
+        }
+
+        // Kiểm tra lỗi khác (nếu có)
+        if (!response.ok) {
+            throw new Error(`Lỗi khi kết nối tới server: ${response.statusText}`);
+        }
+
+        return url; // Trả về URL nếu không có lỗi
+    } catch (error) {
+        console.error("Lỗi khi kiểm tra token:", error);
+        await Swal.fire({
+            icon: 'error',
+            title: 'Lỗi mạng',
+            text: 'Không thể kết nối đến máy chủ hoặc có sự cố mạng.',
+            confirmButtonText: 'OK'
+        });
+        return null;
+    }
+}
+
+
+
+async function loadLatestVersion() {
+    const url = await getScriptURL('Version');
+    if (!url) return; // Dừng lại nếu token sai hoặc thiếu
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        const versions = Array.isArray(data) ? data : [data];
+
+        const latestVersion = versions.reduce((latest, current) => {
+            const latestDate = new Date(latest.dateUpdate);
+            const currentDate = new Date(current.dateUpdate);
             return currentDate > latestDate ? current : latest;
         });
 
-        // Hiển thị thông tin phiên bản mới nhất
-        document.getElementById('version').innerHTML = `Phiên bản ${latestVersion.version} <p>Ngày cập nhật: ${latestVersion.dateUpdate}</p>`;
-    })
-    .catch(error => {
+        // Sử dụng thời gian trong JSON mà không thay đổi múi giờ
+        const vnDate = new Date(latestVersion.dateUpdate);
+
+        // Chuyển đổi thời gian UTC sang múi giờ Việt Nam
+        const formattedDate = vnDate.toLocaleString('vi-VN', {
+            hour: '2-digit',
+            minute: '2-digit',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            timeZone: 'Asia/Ho_Chi_Minh'  // Cung cấp múi giờ Việt Nam để đảm bảo thời gian chính xác
+        });
+
+        document.getElementById('version').innerHTML = `
+    Phiên bản ${latestVersion.version}
+    <p>Ngày cập nhật: ${formattedDate}</p>
+`;
+
+    } catch (error) {
         console.error('Lỗi khi tải file Version.json:', error);
-    });
+    }
+
+}
+document.addEventListener("DOMContentLoaded", () => {
+    loadLatestVersion();
+});
+
 
 const STORAGE_KEY = 'pos_cart';
 let products = [];
@@ -181,48 +316,48 @@ const Toast = Swal.mixin({
     showConfirmButton: false,
     timer: 1500,
     timerProgressBar: true
-  });
+});
 
-  // Hàm cập nhật localStorage
-  function updateBodyClassState() {
+// Hàm cập nhật localStorage
+function updateBodyClassState() {
     const classList = Array.from(document.body.classList);
     localStorage.setItem('bodyClassList', JSON.stringify(classList));
-  }
+}
 
-  // Áp dụng class từ localStorage khi tải trang
-  window.addEventListener('DOMContentLoaded', () => {
+// Áp dụng class từ localStorage khi tải trang
+window.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('bodyClassList');
     if (saved) {
-      const classes = JSON.parse(saved);
-      document.body.classList.add(...classes);
+        const classes = JSON.parse(saved);
+        document.body.classList.add(...classes);
     }
-  });
+});
 
-  // Toggle UnIMG
-  document.getElementById('hideImageBtn').addEventListener('click', function () {
+// Toggle UnIMG
+document.getElementById('hideImageBtn').addEventListener('click', function () {
     document.body.classList.toggle('UnIMG');
     updateBodyClassState();
 
     Toast.fire({
-      icon: 'info',
-      title: document.body.classList.contains('UnIMG')
-        ? 'Đã ẩn ảnh sản phẩm'
-        : 'Đã hiện ảnh sản phẩm'
+        icon: 'info',
+        title: document.body.classList.contains('UnIMG')
+            ? 'Đã ẩn ảnh sản phẩm'
+            : 'Đã hiện ảnh sản phẩm'
     });
-  });
+});
 
-  // Toggle UpSize
-  document.getElementById('increaseSizeBtn').addEventListener('click', function () {
+// Toggle UpSize
+document.getElementById('increaseSizeBtn').addEventListener('click', function () {
     document.body.classList.toggle('UpSize');
     updateBodyClassState();
 
     Toast.fire({
-      icon: 'info',
-      title: document.body.classList.contains('UpSize')
-        ? 'Đã tăng kích thước'
-        : 'Đã trở lại kích thước ban đầu'
+        icon: 'info',
+        title: document.body.classList.contains('UpSize')
+            ? 'Đã tăng kích thước'
+            : 'Đã trở lại kích thước ban đầu'
     });
-  });
+});
 
 
 
@@ -867,14 +1002,18 @@ class UIManager {
             }
         } catch (error) {
             console.error('Error loading products:', error);
-            this.showError('Không thể tải dữ liệu sản phẩm');
+            document.getElementById('products').innerHTML = '<div class="no-product">Không thể tải dữ liệu sản phẩm.</div>';
         }
     }
 
     static async syncProducts() {
         UIManager.Loading();
+
+        const url = await getScriptURL('Product');
+        if (!url) return; // Token sai hoặc thiếu, không tiếp tục
+
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec?token=PRO&sheet=Product');
+            const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
             const newData = await response.json();
@@ -892,9 +1031,10 @@ class UIManager {
             }
         } catch (error) {
             console.error('Error syncing products:', error);
-            this.showError('Không thể đồng bộ dữ liệu sản phẩm');
+            document.getElementById('products').innerHTML = '<div class="no-product">Không thể đồng bộ dữ liệu sản phẩm.</div>';
         }
     }
+
 
 
     static renderCategoryButtons() {
@@ -1919,39 +2059,33 @@ async function SendToGoogleSheet(jsonData) {
     // Định dạng datetime
     function formatDate(datetime) {
         const dateObj = new Date(datetime);
-
         const time = dateObj.toLocaleTimeString("vi-VN", { hour12: false }); // "10:26:53"
         const date = dateObj.toLocaleDateString("vi-VN"); // "15/12/2024"
-
         return `${time} ${date}`;
     }
 
-    // Thay đổi giá trị datetime
     jsonData.datetime = formatDate(jsonData.datetime);
 
-    // Hàm chuyển JSON sang query string
     function jsonToQueryString(json) {
         return Object.keys(json)
             .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
             .join('&');
     }
 
-    // Sử dụng hàm
     const queryString = jsonToQueryString(jsonData);
 
+    const url = await getScriptURL(); // Không truyền sheet => post vào sheet mặc định
+    if (!url) return; // Token sai hoặc mất → dừng gửi
+
     try {
-        // Gửi request (Thay URL bằng URL Google Apps Script của bạn)
-        const response = await fetch(
-            "https://script.google.com/macros/s/AKfycbzXoV0BNeooHkKGONwtFyfJrdPG_aGKlMWihXzw6f_sLkQoMESSEKw7ahN77J7wFxOO_Q/exec",
-            {
-                redirect: "follow",
-                method: "POST",
-                body: queryString,
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8",
-                }
+        const response = await fetch(url, {
+            redirect: "follow",
+            method: "POST",
+            body: queryString,
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8",
             }
-        );
+        });
 
         if (response.ok) {
             console.log("Gửi thành công");
@@ -1959,10 +2093,10 @@ async function SendToGoogleSheet(jsonData) {
             throw new Error("Lỗi khi gửi đơn hàng");
         }
     } catch (error) {
-        console.error(error);
-        console.log("Đã xảy ra lỗi trong quá trình gửi dữ liệu");
+        console.error("Đã xảy ra lỗi trong quá trình gửi dữ liệu:", error);
     }
 }
+
 
 // Lưu hóa đơn vào LocalStorage
 async function saveInvoice() {

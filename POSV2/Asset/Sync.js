@@ -1,56 +1,61 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec?token=PRO&sheet=Customer";
 let customers = [];
 
 // Hàm tải dữ liệu khách hàng
 let isDataLoaded = false; // Biến trạng thái để đảm bảo chỉ chạy một lần
 let isFetching = false; // Biến để kiểm soát quá trình fetch đang diễn ra
 
-function loadCustomerData() {
-
+async function loadCustomerData() {
     if (isDataLoaded || isFetching) {
         console.log("Dữ liệu đang được tải hoặc đã tải xong. Không cần tải lại.");
         return;
     }
-    showOverlay(); // Hiển thị lớp phủ
-    UIManager.Loading();
 
-    isFetching = true; // Đặt trạng thái đang tải dữ liệu
+    showOverlay();
+    UIManager.Loading();
+    isFetching = true;
 
     const localData = localStorage.getItem("customers");
     const localDataArray = JSON.parse(localData || '[]');
 
-    fetch(scriptURL)
-        .then(response => response.json())
-        .then(data => {
-            if (localDataArray.length === 0) {
+    const url = await getScriptURL("Customer");
+    if (!url) {
+        isFetching = false;
+        hideOverlay();
+        return;
+    }
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (localDataArray.length === 0) {
+            customers = data;
+            localStorage.setItem("customers", JSON.stringify(customers));
+            UIManager.showToast('Đã đồng bộ khách hàng.');
+        } else {
+            const isSameData = JSON.stringify(localDataArray) === JSON.stringify(data);
+
+            if (isSameData) {
+                UIManager.showToast('Không có khách hàng mới.');
+                customers = localDataArray;
+            } else {
                 customers = data;
                 localStorage.setItem("customers", JSON.stringify(customers));
-                UIManager.showToast('Đã đồng bộ khách hàng.');
-            } else {
-                const isSameData = JSON.stringify(localDataArray) === JSON.stringify(data);
-
-                if (isSameData) {
-                    UIManager.showToast('Không có khách hàng mới.');
-                    customers = localDataArray;
-                } else {
-                    customers = data;
-                    localStorage.setItem("customers", JSON.stringify(customers));
-                    UIManager.showToast('Đã cập nhật danh sách khách hàng.');
-                }
+                UIManager.showToast('Đã cập nhật danh sách khách hàng.');
             }
+        }
 
-            isDataLoaded = true; // Đặt trạng thái đã tải xong
-        })
-        .catch(error => {
-            console.error("Error loading customer data:", error);
-            document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
-        })
-        .finally(() => {
-            isFetching = false; // Dọn dẹp trạng thái fetch
-            document.getElementById("customer-name").disabled = false;
-            hideOverlay(); // Ẩn lớp phủ
-        });
+        isDataLoaded = true;
+    } catch (error) {
+        console.error("Error loading customer data:", error);
+        document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
+    } finally {
+        isFetching = false;
+        document.getElementById("customer-name").disabled = false;
+        hideOverlay();
+    }
 }
+
 
 // Hàm chọn khách hàng
 // Thêm sự kiện để gọi loadCustomerData khi nhấn nút "Đồng Bộ Khách Hàng"
@@ -137,157 +142,169 @@ input.addEventListener('input', () => {
 
 // Mở popup
 // Hiển thị SweetAlert2 để thêm khách hàng mới
-function showAddCustomerPopup() {
-  Swal.fire({
-      title: 'Thêm khách hàng mới',
-      html: `
-          <input type="text" id="newCustomerName" class="swal2-input" placeholder="Tên khách hàng">
-          <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại">
-          <input type="email" id="newCustomerEmail" class="swal2-input" placeholder="Email">
-          <input type="date" id="newCustomerBirthday" class="swal2-input" placeholder="Ngày sinh">
-          <select class="swal2-select" name="newCustomerSex" id="newCustomerSex">
-              <option value="Nữ">Nữ</option>
-              <option value="Nam">Nam</option>
-          </select>
-          <input type="text" id="newCustomerSocial" class="swal2-input" placeholder="Mạng xã hội">
-          <input type="text" id="newCustomerAddress" class="swal2-input" placeholder="Địa chỉ">
-          <select class="swal2-select" name="newCustomerRole" id="newCustomerRole">
-              <option value="Thành viên">Thành viên</option>
-              <option value="VIP">VIP</option>
-          </select>
-      `,
-      focusConfirm: false,
-      showCancelButton: true,
-      confirmButtonText: 'Thêm',
-      cancelButtonText: 'Hủy',
-      preConfirm: () => {
-          showOverlay();
-          const newCustomerName = document.getElementById('newCustomerName').value;
-          const capitalizeName = newCustomerName
-              .split(' ') // Tách tên thành các từ
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Viết hoa chữ cái đầu tiên, còn lại là chữ thường
-              .join(' '); // Kết hợp lại các từ thành một chuỗi
-              
-          const newCustomerPhone = document.getElementById('newCustomerPhone').value;
+async function showAddCustomerPopup() {
+    const { value: result } = await Swal.fire({
+        title: 'Thêm khách hàng mới',
+        html: `
+            <input type="text" id="newCustomerName" class="swal2-input" placeholder="Tên khách hàng">
+            <input type="text" id="newCustomerPhone" class="swal2-input" placeholder="Số điện thoại">
+            <input type="email" id="newCustomerEmail" class="swal2-input" placeholder="Email">
+            <input type="date" id="newCustomerBirthday" class="swal2-input" placeholder="Ngày sinh">
+            <select class="swal2-select" name="newCustomerSex" id="newCustomerSex">
+                <option value="Nữ">Nữ</option>
+                <option value="Nam">Nam</option>
+            </select>
+            <input type="text" id="newCustomerSocial" class="swal2-input" placeholder="Mạng xã hội">
+            <input type="text" id="newCustomerAddress" class="swal2-input" placeholder="Địa chỉ">
+            <select class="swal2-select" name="newCustomerRole" id="newCustomerRole">
+                <option value="Thành viên">Thành viên</option>
+                <option value="VIP">VIP</option>
+            </select>
+        `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: 'Thêm',
+        cancelButtonText: 'Hủy',
+        preConfirm: async () => {
+            const newCustomerName = document.getElementById('newCustomerName').value.trim();
+            const capitalizeName = newCustomerName
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
 
-          const newCustomer = {
-              Name: capitalizeName,
-              Phone: newCustomerPhone, // Giữ nguyên số điện thoại, bao gồm cả số 0
-              Email: document.getElementById('newCustomerEmail').value || '',
-              Birthday: document.getElementById('newCustomerBirthday').value || '',
-              Sex: document.getElementById('newCustomerSex').value,
-              Social: document.getElementById('newCustomerSocial').value || '',
-              Address: document.getElementById('newCustomerAddress').value || '',
-              Role: document.getElementById('newCustomerRole').value,
-              Usage: 0,
-              Total: 0,
-              sheetName: "Customer"
-          };
+            const newCustomerPhone = document.getElementById('newCustomerPhone').value.trim();
 
-          // Kiểm tra xem các trường có trống không
-          const isValid = Object.values(newCustomer);
-          if (!isValid) { Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin.'); return false; }
-          return newCustomer;
-      }
-  }).then((result) => {
-      if (result.isConfirmed) {
-          //Mới
-          function jsonToQueryString(json) {
-              return Object.keys(json)
-                  .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined) // Lọc các giá trị rỗng, null hoặc undefined
-                  .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key])) // Mã hóa và ghép cặp key=value
-                  .join("&"); // Nối các cặp bằng '&'
-          }
+            if (!capitalizeName || !newCustomerPhone) {
+                Swal.showValidationMessage('Vui lòng điền đầy đủ Tên và Số điện thoại.');
+                return false; // Không cho phép tiếp tục nếu thông tin chưa đầy đủ
+            }
 
-          const newCustomer = jsonToQueryString(result.value);
+            const newCustomer = {
+                Name: capitalizeName,
+                Phone: newCustomerPhone,
+                Email: document.getElementById('newCustomerEmail').value.trim() || '',
+                Birthday: document.getElementById('newCustomerBirthday').value || '',
+                Sex: document.getElementById('newCustomerSex').value,
+                Social: document.getElementById('newCustomerSocial').value.trim() || '',
+                Address: document.getElementById('newCustomerAddress').value.trim() || '',
+                Role: document.getElementById('newCustomerRole').value,
+                Usage: 0,
+                Total: 0,
+                sheetName: "Customer"
+            };
 
-          // Gửi dữ liệu khách hàng mới vào Google Sheets
-          fetch(scriptURL, {
-              redirect: "follow",
-              method: "POST",
-              body: newCustomer,
-              headers: {
-                  "Content-Type": "text/plain;charset=utf-8",
-              }
-          })
-              .then(response => response.json())
-              .then(result => {
-                  Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
-                  loadCustomerData(); // Tải lại dữ liệu khách hàng
-                  hideOverlay();
-              })
-              .catch(error => {
-                  Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
-                  loadCustomerData(); // Tải lại dữ liệu khách hàng
-                  hideOverlay();
-              });
-      }
-  });
+            // Kiểm tra thông tin của khách hàng có hợp lệ
+            const isValid = Object.values(newCustomer).every(value => value !== "");
+            if (!isValid) {
+                Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin.');
+                return false; // Không cho phép tiếp tục nếu thiếu dữ liệu
+            }
+
+            // Kiểm tra token trước khi gửi dữ liệu
+            const url = await getScriptURL("Customer");
+            if (!url) {
+                Swal.showValidationMessage('Token không hợp lệ. Vui lòng thử lại.');
+                return false; // Dừng nếu không có token hợp lệ
+            }
+
+            return newCustomer; // Trả lại dữ liệu nếu tất cả hợp lệ
+        }
+    });
+
+    if (result) {
+        // Chuyển đối tượng thành query string
+        const newCustomerData = jsonToQueryString(result);
+
+        try {
+            showOverlay(); // Hiển thị lớp phủ khi đang gửi dữ liệu
+
+            const response = await fetch(getScriptURL("Customer"), {
+                redirect: "follow",
+                method: "POST",
+                body: newCustomerData,
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                }
+            });
+
+            const responseData = await response.json(); // Đảm bảo xử lý dữ liệu trả về
+            Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+            loadCustomerData(); // Tải lại dữ liệu khách hàng
+            closeAddCustomerPopup(); // Đóng popup
+        } catch (error) {
+            console.error("Lỗi khi thêm khách hàng:", error);
+            Swal.fire('Thất bại!', 'Không thể thêm khách hàng. Vui lòng thử lại.', 'error');
+        } finally {
+            hideOverlay(); // Ẩn lớp phủ
+        }
+    }
 }
   
-  
   // Gửi dữ liệu khách hàng
-  function submitNewCustomer() {
+  async function submitNewCustomer() {
     const newCustomerName = document.getElementById('newCustomerName').value.trim();
     const capitalizeName = newCustomerName
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(' ');
-  
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+
     const newCustomerPhone = document.getElementById('newCustomerPhone').value.trim();
-  
+
     if (!capitalizeName || !newCustomerPhone) {
-      alert('Vui lòng điền đầy đủ Tên và Số điện thoại.');
-      return;
+        alert('Vui lòng điền đầy đủ Tên và Số điện thoại.');
+        return;
     }
-  
+
     const newCustomer = {
-      Name: capitalizeName,
-      Phone: newCustomerPhone,
-      Email: document.getElementById('newCustomerEmail').value.trim() || '',
-      Birthday: document.getElementById('newCustomerBirthday').value || '',
-      Sex: document.getElementById('newCustomerSex').value,
-      Social: document.getElementById('newCustomerSocial').value.trim() || '',
-      Address: document.getElementById('newCustomerAddress').value.trim() || '',
-      Role: document.getElementById('newCustomerRole').value,
-      Usage: 0,
-      Total: 0,
-      sheetName: "Customer"
+        Name: capitalizeName,
+        Phone: newCustomerPhone,
+        Email: document.getElementById('newCustomerEmail').value.trim() || '',
+        Birthday: document.getElementById('newCustomerBirthday').value || '',
+        Sex: document.getElementById('newCustomerSex').value,
+        Social: document.getElementById('newCustomerSocial').value.trim() || '',
+        Address: document.getElementById('newCustomerAddress').value.trim() || '',
+        Role: document.getElementById('newCustomerRole').value,
+        Usage: 0,
+        Total: 0,
+        sheetName: "Customer"
     };
-  
-    // Chuyển object thành query string
+
     function jsonToQueryString(json) {
-      return Object.keys(json)
-        .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key]))
-        .join("&");
+        return Object.keys(json)
+            .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key]))
+            .join("&");
     }
-  
+
     const newCustomerData = jsonToQueryString(newCustomer);
-  
-    showOverlay(); // Nếu bạn có overlay loading
-  
-    fetch(scriptURL, {
-      redirect: "follow",
-      method: "POST",
-      body: newCustomerData,
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
+    const url = await getScriptURL("Customer");
+    if (!url) return; // Dừng nếu token không hợp lệ
+
+    showOverlay();
+
+    try {
+        const response = await fetch(url, {
+            redirect: "follow",
+            method: "POST",
+            body: newCustomerData,
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8",
+            }
+        });
+
+        await response.json();
+
         alert('Khách hàng mới đã được thêm thành công!');
-        loadCustomerData(); // Tải lại danh sách khách hàng
+        loadCustomerData();
         closeAddCustomerPopup();
-        hideOverlay();
-      })
-      .catch(error => {
+    } catch (error) {
+        console.error("Lỗi khi thêm khách hàng mới:", error);
         alert('Có lỗi xảy ra. Vui lòng thử lại.');
+    } finally {
         hideOverlay();
-      });
-  }
-  
+    }
+}
+
 
 // Đóng hộp gợi ý khi click ra ngoài
 document.addEventListener('click', (event) => {
