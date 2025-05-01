@@ -1020,8 +1020,8 @@ class UIManager {
         UIManager.Loading();
         const branchName = document.getElementById('branch')?.value || '';
         let url = '';
-        console.log(branchName);
-        
+    
+
         if (branchName === "Mai Tây Hair Salon") {
             url = await getScriptURL('Product');
         } else {
@@ -1449,6 +1449,11 @@ class BillManager {
     }
 
     static printBill() {
+        if (cart.length === 0) {
+            UIManager.showError('Giỏ hàng trống');
+            return;
+        }
+
         const printWindow = window.open('', '', 'width=500,height=1000,scrollbars=yes');
 
         if (printWindow) {
@@ -1482,6 +1487,10 @@ class BillManager {
     }
 
     static printBilltoSave() {
+        if (cart.length === 0) {
+            UIManager.showError('Giỏ hàng trống');
+            return;
+        }
         saveInvoice();
         const printWindow = window.open('', '', 'width=500,height=1000,scrollbars=yes');
 
@@ -2126,9 +2135,29 @@ async function saveInvoice() {
     const cashier = document.getElementById('staff-name').value;
     const discount = document.getElementById('discount-info').textContent;
 
-    if (!cashier || cart.length === 0) {
-        UIManager.showError('Vui lòng điền đầy đủ thông tin và thêm sản phẩm');
+
+    if (cart.length === 0) {
+        UIManager.showError('Giỏ hàng trống');
         saveButton.disabled = false; // Kích hoạt lại nút
+        saveButton.disabled = false; // Kích hoạt lại nút sau khi hoàn thành
+        hideOverlay();
+        return;
+    } else if (!customer) {
+        Swal.fire({
+            title: 'Thiếu thông tin khách hàng',
+            text: 'Có thể bỏ qua hệ thống sẽ đặt là khách lẻ.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Bỏ qua',
+            cancelButtonText: 'Hủy',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                customer = "Khách lẻ";
+            } else {
+                hideOverlay();
+                return;
+            }
+        });
         return;
     }
 
@@ -2183,7 +2212,6 @@ async function customerPoints() {
     // Sử dụng exportedCustomer trong các hàm khác
     function useMatches() {
         exportedCustomer.forEach(match => {
-            console.log(match.Name);
         });
     }
 
