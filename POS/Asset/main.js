@@ -49,12 +49,10 @@ clearBtn.addEventListener("click", () => {
     alert("Mã kích hoạt đã bị xoá!");
 });
 
-
-
-
 async function getScriptURL(sheetName) {
     const StatusActivete = document.getElementById("StatusActivete");
     const token = localStorage.getItem("ActivateKey");
+
     if (!token) {
         await Swal.fire({
             icon: 'warning',
@@ -68,15 +66,20 @@ async function getScriptURL(sheetName) {
         StatusActivete.innerHTML = `<p class="green"><i class="fas fa-check-circle"></i> Đã mua bản quyền.</p>`;
     }
 
-    const baseURL = "https://script.google.com/macros/s/AKfycbyVmeNbN2atgCJP8uf4YPdrjQFoFQMg-ooPGW0msgju0UE2dNMDVFmoIPpwWJYu6Jb-LA/exec";
-    const url = sheetName ? `${baseURL}?token=${token}&sheet=${sheetName}` : `${baseURL}?token=${token}`;
+    // URL cơ bản của Google Apps Script
+    const baseURL = "https://script.google.com/macros/s/AKfycbz5qwK5i4unjLDmhpccqS7ULybUmtc3xxRt1vOw0FxryDGKO24Hf5wS_CHh9iBJlR6-yg/exec";
+
+    // Gắn token và sheetName vào URL
+    const urlParams = new URLSearchParams({ token });
+    if (sheetName) urlParams.append("sheet", sheetName);
+
+    const fullURL = `${baseURL}?${urlParams.toString()}`;
 
     try {
-        const response = await fetch(url, { method: "GET" });
+        const response = await fetch(fullURL, { method: "GET" });
         const responseData = await response.json();
 
-        // Kiểm tra nếu dữ liệu trả về chứa lỗi Unauthorized
-        if (responseData.error === 'Unauthorized') {
+        if (responseData.error === "Unauthorized") {
             await Swal.fire({
                 icon: 'error',
                 title: 'Mã kích hoạt không hợp lệ',
@@ -86,23 +89,25 @@ async function getScriptURL(sheetName) {
                 cancelButtonText: 'Thử lại',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    localStorage.removeItem("ActivateKey"); // Xóa token
-                    // Mở link liên hệ khi nhấn vào nút "Liên hệ"
-                    window.open('http://facebook.com/HunqD', '_blank');
+                    localStorage.removeItem("ActivateKey");
+                    window.open("http://facebook.com/HunqD", "_blank");
                 }
             });
-            tokenInput.disabled = false;
-            saveBtn.style.display = "block";
+
+            const tokenInput = document.getElementById("tokenInput");
+            const saveBtn = document.getElementById("saveBtn");
+            if (tokenInput) tokenInput.disabled = false;
+            if (saveBtn) saveBtn.style.display = "block";
+
             StatusActivete.innerHTML = `<p class="red"><i class="fas fa-times-circle"></i> Bản quyền không hợp lệ <a href="http://facebook.com/HunqD" target="_blank">Mua bản quyền</a> </p>`;
             return null;
         }
 
-        // Kiểm tra lỗi khác (nếu có)
         if (!response.ok) {
             throw new Error(`Lỗi khi kết nối tới server: ${response.statusText}`);
         }
 
-        return url; // Trả về URL nếu không có lỗi
+        return fullURL;
     } catch (error) {
         console.error("Lỗi khi kiểm tra token:", error);
         await Swal.fire({
@@ -114,6 +119,8 @@ async function getScriptURL(sheetName) {
         return null;
     }
 }
+
+
 
 
 
@@ -154,7 +161,6 @@ async function loadLatestVersion() {
     } catch (error) {
         console.error('Lỗi khi tải file Version.json:', error);
     }
-
 }
 document.addEventListener("DOMContentLoaded", () => {
     loadLatestVersion();
@@ -368,9 +374,6 @@ document.getElementById('increaseSizeBtn').addEventListener('click', function ()
             : 'Đã trở lại kích thước ban đầu'
     });
 });
-
-
-
 
 // Quét sản phẩm bằng QR, Barcode
 let isScanning = false;
@@ -988,8 +991,6 @@ document.addEventListener('DOMContentLoaded', () => {
     CartManager.loadDefaultInvoicesInput();
 });
 
-
-
 // UI Management
 class UIManager {
     static async initialize() {
@@ -1229,7 +1230,6 @@ class UIManager {
         })
     }
 }
-
 
 class ProductManager {
     static products = [];
@@ -2079,32 +2079,52 @@ class HistoryManager {
         BillManager.printBill(billHTML);
     }
 }
-
-// Tải hóa đơn ra Google Sheets
-async function SendToGoogleSheet(jsonData) {
+// Tải hóa đơn lên Google Sheet
+async function SendToGoogleSheet(jsonData, sheetName) {
     // Định dạng datetime
     function formatDate(datetime) {
         const dateObj = new Date(datetime);
-        const time = dateObj.toLocaleTimeString("vi-VN", { hour12: false }); // "10:26:53"
-        const date = dateObj.toLocaleDateString("vi-VN"); // "15/12/2024"
+        const time = dateObj.toLocaleTimeString("vi-VN", { hour12: false });
+        const date = dateObj.toLocaleDateString("vi-VN");
         return `${time} ${date}`;
     }
 
     jsonData.datetime = formatDate(jsonData.datetime);
 
+    // Lấy token từ localStorage
+    const token = localStorage.getItem("ActivateKey");
+    if (!token) {
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Chưa kích hoạt',
+            text: 'Nhập mã kích hoạt ở phần cài đặt để sử dụng dịch vụ.',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    // Gộp token và sheetName vào jsonData
+    const postData = {
+        ...jsonData,
+        token: token,
+        sheet: sheetName
+    };
+
+    // Chuyển JSON thành query string
     function jsonToQueryString(json) {
         return Object.keys(json)
             .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
             .join('&');
     }
 
-    const queryString = jsonToQueryString(jsonData);
-
-    const url = await getScriptURL(); // Không truyền sheet => post vào sheet mặc định
-    if (!url) return; // Token sai hoặc mất → dừng gửi
+    const queryString = jsonToQueryString(postData);
 
     try {
-        const response = await fetch(url, {
+        const scriptURL = await getScriptURL(); // chỉ trả về baseURL
+        
+        if (!scriptURL) return;
+
+        const response = await fetch(scriptURL, {
             redirect: "follow",
             method: "POST",
             body: queryString,
@@ -2114,14 +2134,21 @@ async function SendToGoogleSheet(jsonData) {
         });
 
         if (response.ok) {
-            console.log("Gửi thành công");
+            console.log("✅ Gửi thành công");
         } else {
-            throw new Error("Lỗi khi gửi đơn hàng");
+            throw new Error("❌ Lỗi khi gửi đơn hàng");
         }
     } catch (error) {
-        console.error("Đã xảy ra lỗi trong quá trình gửi dữ liệu:", error);
+        console.error("🚫 Lỗi:", error.message);
+        console.log("Đã xảy ra lỗi trong quá trình gửi dữ liệu");
     }
 }
+
+
+
+
+
+
 
 
 // Lưu hóa đơn vào LocalStorage
@@ -2193,7 +2220,8 @@ async function saveInvoice() {
     HistoryManager.saveInvoice(invoiceData); // Lưu vào LocalStorage
 
     try {
-        await SendToGoogleSheet(invoiceData);
+        await SendToGoogleSheet(invoiceData, "DataBase");
+
     } catch (error) {
         console.error("Error sending data:", error);
     }

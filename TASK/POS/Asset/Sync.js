@@ -1,61 +1,56 @@
+const scriptURL = "https://script.google.com/macros/s/AKfycbxiKd7SUO5-IWB0Kr2YTuDFSOyw9DsG_G8dZgY1mGDbPlpkbor3iUP9EOmE7PA1vHO3oQ/exec?token=PRO&sheet=Customer";
 let customers = [];
 
 // Hàm tải dữ liệu khách hàng
 let isDataLoaded = false; // Biến trạng thái để đảm bảo chỉ chạy một lần
 let isFetching = false; // Biến để kiểm soát quá trình fetch đang diễn ra
 
-async function loadCustomerData() {
+function loadCustomerData() {
+
     if (isDataLoaded || isFetching) {
         console.log("Dữ liệu đang được tải hoặc đã tải xong. Không cần tải lại.");
         return;
     }
-
-    showOverlay();
+    showOverlay(); // Hiển thị lớp phủ
     UIManager.Loading();
-    isFetching = true;
+
+    isFetching = true; // Đặt trạng thái đang tải dữ liệu
 
     const localData = localStorage.getItem("customers");
     const localDataArray = JSON.parse(localData || '[]');
 
-    const url = await getScriptURL("Customer");
-    if (!url) {
-        isFetching = false;
-        hideOverlay();
-        return;
-    }
-
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (localDataArray.length === 0) {
-            customers = data;
-            localStorage.setItem("customers", JSON.stringify(customers));
-            UIManager.showToast('Đã đồng bộ khách hàng.');
-        } else {
-            const isSameData = JSON.stringify(localDataArray) === JSON.stringify(data);
-
-            if (isSameData) {
-                UIManager.showToast('Không có khách hàng mới.');
-                customers = localDataArray;
-            } else {
+    fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+            if (localDataArray.length === 0) {
                 customers = data;
                 localStorage.setItem("customers", JSON.stringify(customers));
-                UIManager.showToast('Đã cập nhật danh sách khách hàng.');
+                UIManager.showToast('Đã đồng bộ khách hàng.');
+            } else {
+                const isSameData = JSON.stringify(localDataArray) === JSON.stringify(data);
+
+                if (isSameData) {
+                    UIManager.showToast('Không có khách hàng mới.');
+                    customers = localDataArray;
+                } else {
+                    customers = data;
+                    localStorage.setItem("customers", JSON.stringify(customers));
+                    UIManager.showToast('Đã cập nhật danh sách khách hàng.');
+                }
             }
-        }
 
-        isDataLoaded = true;
-    } catch (error) {
-        console.error("Error loading customer data:", error);
-        document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
-    } finally {
-        isFetching = false;
-        document.getElementById("customer-name").disabled = false;
-        hideOverlay();
-    }
+            isDataLoaded = true; // Đặt trạng thái đã tải xong
+        })
+        .catch(error => {
+            console.error("Error loading customer data:", error);
+            document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
+        })
+        .finally(() => {
+            isFetching = false; // Dọn dẹp trạng thái fetch
+            document.getElementById("customer-name").disabled = false;
+            hideOverlay(); // Ẩn lớp phủ
+        });
 }
-
 
 // Hàm chọn khách hàng
 // Thêm sự kiện để gọi loadCustomerData khi nhấn nút "Đồng Bộ Khách Hàng"
@@ -132,7 +127,7 @@ input.addEventListener('input', () => {
         // Gợi ý thêm khách hàng mới
         suggestionsBox.innerHTML = `
                 <div>
-                    Không tìm thấy khách hàng, vui lòng thêm mới. <button onclick="showAddCustomerPopup()"><i class="fas fa-user-plus"></i></button>
+                    Không tìm thấy khách hàng, vui lòng thêm mới
                 </div>
             `;
         // document.getElementById('addNewCustomerBtn').addEventListener('click', showAddCustomerPopup);
@@ -140,7 +135,6 @@ input.addEventListener('input', () => {
     }
 });
 
-// Mở popup
 // Hiển thị SweetAlert2 để thêm khách hàng mới
 function showAddCustomerPopup() {
     Swal.fire({
@@ -194,26 +188,20 @@ function showAddCustomerPopup() {
             if (!isValid) { Swal.showValidationMessage('Vui lòng điền đầy đủ thông tin.'); return false; }
             return newCustomer;
         }
-    }).then(async (result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
+            //Mới
             function jsonToQueryString(json) {
                 return Object.keys(json)
-                    .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined)
-                    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key]))
-                    .join("&");
-            }
-    
-            const newCustomer = jsonToQueryString(result.value);
-    
-            
-            
-            const url = await getScriptURL('Customer');
-            if (!url) {
-                hideOverlay();
-                return;
+                    .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined) // Lọc các giá trị rỗng, null hoặc undefined
+                    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key])) // Mã hóa và ghép cặp key=value
+                    .join("&"); // Nối các cặp bằng '&'
             }
 
-            fetch(url, {
+            const newCustomer = jsonToQueryString(result.value);
+
+            // Gửi dữ liệu khách hàng mới vào Google Sheets
+            fetch(scriptURL, {
                 redirect: "follow",
                 method: "POST",
                 body: newCustomer,
@@ -221,98 +209,20 @@ function showAddCustomerPopup() {
                     "Content-Type": "text/plain;charset=utf-8",
                 }
             })
-            .then(response => response.json())
-            .then(result => {
-                Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
-                loadCustomerData();
-                hideOverlay();
-            })
-            .catch(error => {
-                Swal.fire('Lỗi!', 'Không thể thêm khách hàng mới.', 'error');
-                console.error("Lỗi khi gửi dữ liệu:", error);
-                hideOverlay();
-            });
+                .then(response => response.json())
+                .then(result => {
+                    Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                    loadCustomerData(); // Tải lại dữ liệu khách hàng
+                    hideOverlay();
+                })
+                .catch(error => {
+                    Swal.fire('Thành công!', 'Khách hàng mới đã được thêm.', 'success');
+                    loadCustomerData(); // Tải lại dữ liệu khách hàng
+                    hideOverlay();
+                });
         }
     });
-    
 }
-
-// Gửi dữ liệu khách hàng
-async function submitNewCustomer() {
-    const newCustomerName = document.getElementById('newCustomerName').value.trim();
-    const capitalizeName = newCustomerName
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-        .join(' ');
-
-    const newCustomerPhone = document.getElementById('newCustomerPhone').value.trim();
-
-    if (!capitalizeName || !newCustomerPhone) {
-        alert('Vui lòng điền đầy đủ Tên và Số điện thoại.');
-        return;
-    }
-    const token = localStorage.getItem("ActivateKey");
-    if (!token) {
-        await Swal.fire({
-            icon: 'warning',
-            title: 'Chưa kích hoạt',
-            text: 'Nhập mã kích hoạt ở phần cài đặt để sử dụng dịch vụ.',
-            confirmButtonText: 'OK'
-        });
-        return;
-    }
-
-    const newCustomer = {
-        Name: capitalizeName,
-        Phone: newCustomerPhone,
-        Email: document.getElementById('newCustomerEmail').value.trim() || '',
-        Birthday: document.getElementById('newCustomerBirthday').value || '',
-        Sex: document.getElementById('newCustomerSex').value,
-        Social: document.getElementById('newCustomerSocial').value.trim() || '',
-        Address: document.getElementById('newCustomerAddress').value.trim() || '',
-        Role: document.getElementById('newCustomerRole').value,
-        Usage: 0,
-        Total: 0,
-        Token: token,
-        sheetName: "Customer"
-    };
-
-    function jsonToQueryString(json) {
-        return Object.keys(json)
-            .filter(key => json[key] !== "" && json[key] !== null && json[key] !== undefined)
-            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(json[key]))
-            .join("&");
-    }
-
-    const newCustomerData = jsonToQueryString(newCustomer);
-    const url = await getScriptURL("Customer");
-    if (!url) return; // Dừng nếu token không hợp lệ
-
-    showOverlay();
-
-    try {
-        const response = await fetch(url, {
-            redirect: "follow",
-            method: "POST",
-            body: newCustomerData,
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8",
-            }
-        });
-
-        await response.json();
-
-        alert('Khách hàng mới đã được thêm thành công!');
-        loadCustomerData();
-        closeAddCustomerPopup();
-    } catch (error) {
-        console.error("Lỗi khi thêm khách hàng mới:", error);
-        alert('Có lỗi xảy ra. Vui lòng thử lại.');
-    } finally {
-        hideOverlay();
-    }
-}
-
 
 // Đóng hộp gợi ý khi click ra ngoài
 document.addEventListener('click', (event) => {
@@ -330,12 +240,12 @@ function checkPassword() {
     const hiddenDiv = document.querySelector(".password-protect-section .hidden-link");
 
     if (input === correctPassword) {
-        hiddenDiv.style.display = "block";
+      hiddenDiv.style.display = "block";
     } else {
-        Swal.fire({
-            icon: 'error',
-            title: 'Sai mật khẩu',
-            text: 'Vui lòng thử lại!'
-        });
+      Swal.fire({
+        icon: 'error',
+        title: 'Sai mật khẩu',
+        text: 'Vui lòng thử lại!'
+      });
     }
-}
+  }
