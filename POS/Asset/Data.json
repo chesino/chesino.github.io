@@ -1,0 +1,215 @@
+[
+  {
+    "keywords": [
+      "chào",
+      "hi",
+      "hello"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Chào bạn! Tôi có thể giúp gì cho bạn hôm nay?"
+      },
+      {
+        "type": "text",
+        "content": "Chào bạn nha."
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "video hướng dẫn",
+      "xem video"
+    ],
+    "replies": [
+      {
+        "type": "video",
+        "content": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "liên hệ",
+      "hỗ trợ"
+    ],
+    "replies": [
+      {
+        "type": "button",
+        "content": {
+          "label": "Gọi hỗ trợ",
+          "action": "callSupport"
+        }
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "bạn là ai?",
+      "bạn là gì?",
+      "ai là bạn"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Mình là chatbot thân thiện, luôn sẵn sàng giúp bạn... và đôi khi còn biết cả trò đùa nữa đấy!"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "tôi có thể làm gì với trang web này?",
+      "trang web này làm gì?",
+      "công dụng của trang web"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Chắc chắn rồi! Bạn có thể xây dựng đội hình, tìm hiểu tướng và trang bị... hoặc có thể tham gia cuộc thi 'Tìm người xấu trong game' nữa!"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "làm sao để chơi game này?",
+      "cách chơi game",
+      "hướng dẫn chơi game"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Chơi game này à? Đơn giản thôi! Chỉ cần chọn tướng, tạo đội hình, rồi ngồi thư giãn và hy vọng chiến thắng... hoặc tìm cách tránh bị thua!"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "có gì mới trên trang web?",
+      "cập nhật mới",
+      "tin mới trên trang web"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "À, một bí mật đang chờ bạn! Chúng tôi liên tục cập nhật tướng, đội hình và chiến thuật, giống như cập nhật trang phục mới cho các vị tướng vậy!"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "bạn có thể giúp tôi xây dựng đội hình không?",
+      "xây dựng đội hình",
+      "tư vấn đội hình"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Đội hình của bạn có thể mạnh mẽ như Avengers! Cho mình biết các tướng bạn muốn, và mình sẽ giúp bạn xây dựng đội hình hoành tráng!"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "tôi có thể xem video hướng dẫn ở đâu?",
+      "xem video hướng dẫn",
+      "video hướng dẫn"
+    ],
+    "replies": [
+      {
+        "type": "video",
+        "content": "https://www.youtube.com/"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "làm sao để liên hệ với đội hỗ trợ?",
+      "liên hệ hỗ trợ",
+      "gọi hỗ trợ"
+    ],
+    "replies": [
+      {
+        "type": "button",
+        "content": {
+          "label": "Gọi hỗ trợ",
+          "action": "callSupport"
+        }
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "trang web này có gì đặc biệt?",
+      "đặc điểm trang web",
+      "tính năng đặc biệt"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Ồ, ngoài việc đầy đủ thông tin về game, chúng tôi còn có một đội chatbot với tính cách vui nhộn. Bạn sẽ không cảm thấy buồn tẻ khi ở đây đâu!"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "có thể chơi game này trên điện thoại không?",
+      "chơi game trên điện thoại",
+      "có chơi được trên điện thoại không?"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Dĩ nhiên! Game này có thể chơi trên điện thoại... nhưng nếu bạn dùng tay cầm game, sẽ cảm thấy như một huyền thoại thực thụ!"
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "bạn có biết gì về Đấu Trường Chân Lý?",
+      "Đấu Trường Chân Lý là gì?",
+      "giới thiệu về Đấu Trường Chân Lý"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Đấu Trường Chân Lý? Làm sao mình không biết được! Nếu bạn muốn, mình có thể kể cho bạn nghe mọi thứ từ A đến Z... hoặc đến L, nếu bạn đang bận."
+      }
+    ]
+  },
+  {
+    "keywords": [
+      "hướng dẫn giỏ hàng"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Được rồi tôi sẽ hướng dẫn bạn sử dụng giỏ hàng."
+      }
+    ],
+    "action": "startIntroPart1(); startIntroAndCloseChat()"
+  },
+  {
+    "keywords": [
+      "hướng dẫn thanh toán"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Được rồi tôi sẽ hướng dẫn bạn sử dụng thanh toán."
+      }
+    ],
+    "action": "startIntroPart2(); startIntroAndCloseChat()"
+  },
+  {
+    "keywords": [
+      "hướng dẫn toàn bộ"
+    ],
+    "replies": [
+      {
+        "type": "text",
+        "content": "Được rồi tôi sẽ hướng dẫn bạn sử dụng POS."
+      }
+    ],
+    "action": "startIntroAll(); startIntroAndCloseChat()"
+  }
+]

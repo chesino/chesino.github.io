@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <div id="app" class="p-4 max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+      <h1 class="text-2xl font-bold">HunqD Shop</h1>
+      <div class="flex flex-wrap gap-2 items-center">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm..." class="border rounded px-3 py-2 w-60">
+        <select id="categorySelect" class="border rounded px-3 py-2">
+          <option value="Tất cả">Tất cả danh mục</option>
+        </select>
+        <select id="sortSelect" class="border rounded px-3 py-2">
+          <option value="none">Sắp xếp</option>
+          <option value="name">Tên A-Z</option>
+          <option value="price">Giá tăng dần</option>
+        </select>
+        <button onclick="openCart()" class="px-4 py-2 bg-blue-600 text-white rounded flex items-center">
+          🛒 <span id="cartCount" class="ml-2">(0)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="productGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Products render here -->
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+    <div class="bg-white max-w-3xl w-full p-6 rounded-lg shadow-lg relative">
+      <button class="absolute top-3 right-3 text-xl" onclick="closeCart()">×</button>
+      <h2 class="text-xl font-bold mb-4">Giỏ hàng</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div id="cartItems" class="space-y-2"></div>
+        <div class="border p-4 rounded space-y-2">
+          <p class="text-muted">Tổng sản phẩm: <span id="totalItems">0</span></p>
+          <p class="font-bold text-xl">Tổng: <span id="totalPrice">0đ</span></p>
+          <button onclick="showQRCode()" class="w-full py-2 bg-green-600 text-white rounded">Thanh toán</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Payment Modal -->
+  <div id="qrModal" class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center relative">
+      <button onclick="closeQRCode()" class="absolute top-2 right-2 text-xl">×</button>
+      <h3 class="text-lg font-bold mb-2">Quét mã QR để thanh toán</h3>
+      <img src="https://img.vietqr.io/image/MB-0123456789-compact.png" alt="QR" class="mx-auto w-full border rounded mb-2">
+      <p class="text-sm text-muted">Ghi rõ nội dung: số điện thoại / mã đơn</p>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { STT: "1", name: "4English chính chủ", duration: "1 năm", price: "560k", warranty: "FULL-TIME", note: "GỬI TÀI KHOẢN+ PASS TÀI KHOẢN", image: "https://via.placeholder.com/300x200?text=4English", category: "Ngôn ngữ" },
+      { STT: "2", name: "AdGuard Premium Lifetime Key", duration: "Vĩnh viễn", price: "180k", warranty: "3 tháng", note: "Hỗ trợ 1 thiết bị", image: "https://via.placeholder.com/300x200?text=AdGuard", category: "Bảo mật" },
+      { STT: "3", name: "Adobe Creative Cloud 3D substance app", duration: "12 tháng", price: "780k", warranty: "FULL-TIME", note: "Gửi mỗi mail là được anh em", image: "https://via.placeholder.com/300x200?text=Adobe+3D", category: "Thiết kế" },
+      { STT: "4", name: "Adobe Creative Cloud FULL APP 100GB", duration: "12 tháng", price: "599k", warranty: "FULL-TIME", note: "GỬI TÀI KHOẢN+ PASS TÀI KHOẢN", image: "https://via.placeholder.com/300x200?text=Adobe+100GB", category: "Thiết kế" },
+      { STT: "5", name: "Adobe Creative FULL APP ( Renew Trial)", duration: "12 tháng", price: "380k", warranty: "FULL-TIME", note: "Gửi mỗi mail là được anh em (ƯU TIÊN MUA LOẠI NÀY)", image: "https://via.placeholder.com/300x200?text=Adobe+Trial", category: "Thiết kế" }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let filterCategory = "Tất cả";
+    let sort = "none";
+    let search = "";
+
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      const filtered = products
+        .filter(p => filterCategory === "Tất cả" || p.category === filterCategory)
+        .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+        .sort((a, b) => {
+          if (sort === "name") return a.name.localeCompare(b.name);
+          if (sort === "price") return parseInt(a.price) - parseInt(b.price);
+          return 0;
+        });
+
+      filtered.forEach(p => {
+        const inCart = cart.find(item => item.STT === p.STT);
+        grid.innerHTML += `
+          <div class="bg-white rounded-lg shadow p-4 space-y-2">
+            <img src="${p.image}" class="w-full h-40 object-cover rounded" />
+            <h2 class="font-bold">${p.name}</h2>
+            <p><strong>Thời hạn:</strong> ${p.duration}</p>
+            <p><strong>Giá:</strong> ${p.price}</p>
+            <p class="text-sm text-gray-500">${p.note}</p>
+            <button class="w-full py-2 ${inCart ? 'bg-gray-400' : 'bg-blue-600'} text-white rounded" onclick="addToCart('${p.STT}')">
+              ${inCart ? '✔ Đã thêm' : '🛒 Thêm vào giỏ'}
+            </button>
+          </div>
+        `;
+      });
+    }
+
+    function addToCart(STT) {
+      const product = products.find(p => p.STT === STT);
+      if (!cart.find(item => item.STT === STT)) {
+        cart.push(product);
+        saveCart();
+        renderProducts();
+      }
+    }
+
+    function removeFromCart(STT) {
+      cart = cart.filter(item => item.STT !== STT);
+      saveCart();
+      renderCart();
+      renderProducts();
+    }
+
+    function renderCart() {
+      document.getElementById("cartItems").innerHTML = "";
+      document.getElementById("cartCount").textContent = `(${cart.length})`;
+
+      let total = 0;
+      cart.forEach(item => {
+        total += parseInt(item.price.replace(/[^\d]/g, ""));
+        document.getElementById("cartItems").innerHTML += `
+          <div class="flex justify-between items-center border rounded p-2">
+            <div><strong>${item.name}</strong><br><span class="text-sm">${item.price}</span></div>
+            <button onclick="removeFromCart('${item.STT}')">🗑</button>
+          </div>
+        `;
+      });
+
+      document.getElementById("totalItems").textContent = cart.length;
+      document.getElementById("totalPrice").textContent = total.toLocaleString() + "đ";
+    }
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function openCart() {
+      renderCart();
+      document.getElementById("cartModal").classList.remove("hidden");
+      document.getElementById("cartModal").classList.add("flex");
+    }
+
+    function closeCart() {
+      document.getElementById("cartModal").classList.add("hidden");
+    }
+
+    function showQRCode() {
+      document.getElementById("qrModal").classList.remove("hidden");
+      document.getElementById("qrModal").classList.add("flex");
+    }
+
+    function closeQRCode() {
+      document.getElementById("qrModal").classList.add("hidden");
+    }
+
+    // Event listeners
+    document.getElementById("searchInput").addEventListener("input", e => {
+      search = e.target.value;
+      renderProducts();
+    });
+
+    document.getElementById("categorySelect").addEventListener("change", e => {
+      filterCategory = e.target.value;
+      renderProducts();
+    });
+
+    document.getElementById("sortSelect").addEventListener("change", e => {
+      sort = e.target.value;
+      renderProducts();
+    });
+
+    // Init categories
+    const categories = ["Tất cả", ...new Set(products.map(p => p.category))];
+    const catSelect = document.getElementById("categorySelect");
+    categories.forEach(cat => {
+      const opt = document.createElement("option");
+      opt.value = cat;
+      opt.textContent = cat;
+      catSelect.appendChild(opt);
+    });
+
+    // Initial render
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>

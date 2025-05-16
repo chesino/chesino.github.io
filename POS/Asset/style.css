@@ -314,9 +314,14 @@ input:focus {
   padding: 10px;
   display: flex;
   gap: 10px;
+  width: 100%;
 }
-
+.search-bar .search-box {
+  width: 100%;
+}
 .search-bar input {
+  min-height: 40px;
+  width: 100%;
   flex: 1;
   padding: 10px 15px;
   border: 1px solid var(--gray-300);
@@ -325,6 +330,7 @@ input:focus {
 }
 
 .search-bar button {
+  min-height: 40px;
   background-color: var(--primary-color);
   color: var(--white);
   border: none;
@@ -1843,4 +1849,233 @@ input:focus {
   position: relative;
   font-family: BeFont;
   font-size: 12px;
+}
+
+
+
+/* #chatAiBtn {
+  position: fixed;
+  bottom: 25px;
+  left: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1000;
+} */
+/* Cấu trúc chính của giao diện chat */
+.chat-container {
+  position: fixed;
+  bottom: 22px;
+  left: 2px;
+  width: 260px;
+  height: 350px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  overflow: hidden;
+  display: none;
+  border: 1px solid #ccc;
+}
+
+/* Header của chat */
+.chat-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+.chat-header h1 {
+  font-size: 12px;
+}
+
+
+.chat-header h3 {
+  margin: 0;
+}
+
+/* Nút đóng popup */
+#chatCloseBtn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Khung tin nhắn */
+.chat-box {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-container .btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  max-width: 100%;
+}
+.chat-container .btn-group button {
+  cursor: pointer !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border:none;
+}
+
+/* Tin nhắn */
+.chat-box div {
+  font-family: BeFont;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  max-width: 90%;
+}
+
+.chat-box .user {
+  color: #fff;
+  background-color: var(--primary-color);
+  align-self: flex-end;
+  border-radius: 15px 15px 0 15px;
+}
+
+.chat-box .bot {
+  background-color: var(--gray-300);
+  align-self: flex-start;
+  border-radius: 15px 15px 15px 0;
+}
+
+/* Khung nhập tin nhắn */
+.chat-input-container {
+  display: flex;
+  padding: 10px;
+  gap: 5px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input-container input {
+  flex-grow: 1;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.chat-input-container button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  font-size: 16px;
+
+}
+
+/* Nút chat nổi */
+.chat-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+}
+.typing-indicator .typing-dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  height: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 3px;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite ease-in-out;
+  transform-origin: center bottom;
+}
+
+.dot span:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 0.6;
+  }
+  40% {
+      transform: translateY(-8px);
+      opacity: 1;
+  }
+}
+
+.btn-group {
+  margin-top: 5px;
+}
+.video-link {
+  color: blue;
+  text-decoration: underline;
+  display: inline-block;
+  margin-top: 10px;
+}
+.chat-box .user {
+  padding-left: 10px;
+}
+.chat-box .bot,
+.chat-box .user {
+  position: relative;
+}
+.copy-btn {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: var(--gray-100);
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+}
+.chat-box .user .copy-btn{
+  display: none;
+  right: unset;
+  left: -5px;
+}
+.copy-btn
+.copy-btn:hover {
+  background-color: #e0e0e0;
 }

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mai Tây Hair Salon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Dashboard Báo Cáo Kinh Doanh - Mai Tây Hair Salon</h1>
+
+        <div class="view-toggle-container">
+            <span>Chế độ xem: Cơ bản</span>
+            <label class="switch" title="Bật để hiển thị biểu đồ">
+                <input type="checkbox" id="chartToggle">
+                <span class="slider round"></span>
+            </label>
+            <span>Chi tiết (Biểu đồ)</span>
+        </div>
+
+
+        <div class="filter-section">
+            <h2>Bộ Lọc Dữ Liệu</h2>
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="dateFilterType">Lọc Theo Thời Gian:</label>
+                    <select id="dateFilterType">
+                        <option value="all">Tất Cả</option>
+                        <option value="range">Khoảng Ngày</option>
+                        <option value="specific_date">Ngày Cụ Thể</option>
+                        <option value="month">Tháng</option>
+                        <option value="year">Năm</option>
+                    </select>
+                </div>
+
+                <div id="dateFiltersContainer">
+                    <div class="filter-group date-range">
+                        <label for="startDate">Từ ngày:</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div class="filter-group date-range">
+                        <label for="endDate">Đến ngày:</label>
+                        <input type="date" id="endDate">
+                    </div>
+
+                    <div class="filter-group specific-date hidden">
+                        <label for="specificDate">Ngày:</label>
+                        <input type="date" id="specificDate">
+                    </div>
+
+                    <div class="filter-group month-year hidden">
+                        <label for="filterMonthYear">Tháng/Năm:</label>
+                        <select id="filterMonthYear">
+                            <option value="">Chọn Tháng/Năm</option>
+                            </select>
+                    </div>
+
+                    <div class="filter-group year-only hidden">
+                        <label for="filterYearOnly">Năm:</label>
+                        <select id="filterYearOnly">
+                             <option value="">Chọn Năm</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filterBranch">Chi nhánh:</label>
+                    <select id="filterBranch">
+                        <option value="">Tất cả</option>
+                        </select>
+                </div>
+                 <div class="filter-group">
+                    <label for="filterCashier">Nhân viên:</label>
+                    <select id="filterCashier">
+                        <option value="">Tất cả</option>
+                        </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterCustomerInput">Khách hàng:</label>
+                    <input type="text" id="filterCustomerInput" list="customerSuggestions" placeholder="Nhập tên khách hàng">
+                    <datalist id="customerSuggestions"></datalist>
+                </div>
+                <div class="filter-group">
+                    <label for="filterPayment">Thanh toán:</label>
+                    <select id="filterPayment">
+                        <option value="">Tất cả</option>
+                        </select>
+                </div>
+                 <div class="filter-group">
+                    <label for="filterService">Dịch vụ:</label>
+                    <select id="filterService">
+                        <option value="">Tất cả</option>
+                        </select>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button id="applyFilters">Áp dụng Bộ Lọc</button>
+                <button id="resetFilters">Đặt lại Bộ Lọc</button>
+            </div>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card">
+                <h2>Tổng Doanh Thu</h2>
+                <p id="totalRevenue">-</p>
+            </div>
+            <div class="card">
+                <h2>Tổng Giao Dịch</h2>
+                <p id="transactionsCount">-</p>
+            </div>
+            <div class="card">
+                <h2>Giá Trị Trung Bình Giao Dịch</h2>
+                <p id="avgTransactionValue">-</p>
+            </div>
+            <div class="card">
+                <h2>Tổng Chiết Khấu</h2>
+                <p id="totalDiscount">-</p>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-card full-width">
+                 <h2>Doanh Thu Theo Thời Gian</h2>
+                 <canvas id="revenueOverTimeChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2>Doanh Thu Theo Phương Thức Thanh Toán</h2>
+                <canvas id="paymentMethodChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h2>Số Lượng Giao Dịch Theo Nhân Viên</h2>
+                <canvas id="cashierChart"></canvas>
+            </div>
+             <div class="chart-card full-width">
+                <h2>Số Lượng Giao Dịch Chứa Dịch Vụ Này</h2>
+                 <canvas id="serviceTransactionCountChart"></canvas>
+             </div>
+        </div>
+
+        <div class="transaction-list-section">
+            <h2>Chi Tiết Giao Dịch</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thời gian</th>
+                        <th>Chi nhánh</th>
+                        <th>Khách hàng</th>
+                        <th>Nhân viên</th>
+                        <th>Dịch vụ</th>
+                        <th>Thanh toán</th>
+                        <th>Chiết khấu</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

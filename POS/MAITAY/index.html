@@ -25,6 +25,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css" rel="stylesheet">
 
+    <!-- Driver.js -->
+    <script src="https://cdn.jsdelivr.net/npm/driver.js@latest/dist/driver.js.iife.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@latest/dist/driver.css" />
+
+
     <script src="/DATA/Extend/jquery.min.js"></script>
     <script src="/DATA/Extend/qrcode.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
@@ -39,7 +44,6 @@
         <div class="logo">
             <h1 id="logoText">Mai Tây <span>Hair Salon</span></h1>
         </div>
-
         <div class="flex">
             <div class="tab-buttons">
                 <div class="flex">
@@ -54,7 +58,9 @@
                     <div class="tab-button" onclick="switchTab('dashboard')"><i class="fas fa-chart-pie"></i>
                         <span>Thông kế</span>
                     </div>
-
+                    <div class="tab-button" id="chatAiBtn">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
                 </div>
 
             </div>
@@ -66,8 +72,12 @@
             <div class="pos-container">
                 <div class="product-selection">
                     <div class="search-bar">
-                        <input type="text" id="product-search" placeholder="Tìm kiếm dịch vụ...">
-                        <button id="scan-barcode"><i class="fas fa-barcode"></i></button>
+                        <div class="search-box">
+                            <input type="text" id="product-search" placeholder="Tìm kiếm dịch vụ...">
+                        </div>
+                        <div class="barcode-scan">
+                            <button id="scan-barcode"><i class="fas fa-barcode"></i></button>
+                        </div>
 
                     </div>
 
@@ -212,10 +222,10 @@
                         <button onclick="BillManager.printBill()" class="print-btn mini">
                             <i class="fas fa-print"></i>
                         </button>
-                        <button onclick="CartManager.generateQRCode()" class="print-btn mini">
+                        <button onclick="CartManager.generateQRCode()" class="qr-btn mini">
                             <i class="fas fa-qrcode"></i>
                         </button>
-                        <button class="sync-data-btn" onclick="BillManager.printBilltoSave()">
+                        <button class="print-sync-data-btn" onclick="BillManager.printBilltoSave()">
                             <i class="fas fa-print"></i> In & lưu
                         </button>
                         <button class="sync-data-btn" onclick="saveInvoice()">
@@ -382,8 +392,52 @@
 
         <div id="dashboard" class="tab-content">
             <div class="card">
-                <h1>Thông kế doanh thu</h1>
-                <p>Đang phát triển</p>
+                <div id="dashboard" class="p-6 bg-white rounded-2xl shadow-lg">
+                    <div class="filters grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <input type="date" id="filter-date" class="border p-2 rounded w-full" />
+                        <select id="filter-branch" class="border p-2 rounded w-full">
+                            <option value="">Tất cả chi nhánh</option>
+                            <!-- Thêm chi nhánh từ JS -->
+                        </select>
+                        <select id="filter-type" class="border p-2 rounded w-full">
+                            <option value="all">Tất cả</option>
+                            <option value="service">Dịch vụ</option>
+                            <option value="customer">Khách hàng</option>
+                        </select>
+                    </div>
+
+                    <div class="summary grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="card p-4 bg-gray-100 rounded-xl text-center">
+                            <h2 class="text-xl font-bold">Tổng doanh thu</h2>
+                            <p id="total-revenue" class="text-2xl text-green-600">0 đ</p>
+                        </div>
+                        <div class="card p-4 bg-gray-100 rounded-xl text-center">
+                            <h2 class="text-xl font-bold">Số khách hàng</h2>
+                            <p id="total-customers" class="text-2xl text-blue-600">0</p>
+                        </div>
+                        <div class="card p-4 bg-gray-100 rounded-xl text-center">
+                            <h2 class="text-xl font-bold">Số dịch vụ</h2>
+                            <p id="total-services" class="text-2xl text-purple-600">0</p>
+                        </div>
+                    </div>
+
+                    <div class="charts grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="ranking bg-white p-4 shadow rounded-xl">
+                            <h3 class="text-lg font-bold mb-2">Xếp hạng doanh thu</h3>
+                            <ul id="ranking-list" class="list-disc list-inside"></ul>
+                        </div>
+                        <div class="trend bg-white p-4 shadow rounded-xl">
+                            <h3 class="text-lg font-bold mb-2">Xu hướng doanh thu</h3>
+                            <canvas id="revenueChart" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="suggestions mt-6 bg-yellow-50 p-4 rounded-xl">
+                        <h3 class="text-lg font-bold text-yellow-800">Phân tích & Gợi ý cải thiện</h3>
+                        <ul id="insight-list" class="list-disc list-inside mt-2 text-yellow-700"></ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -395,6 +449,7 @@
             <div id="reader"></div>
         </div>
     </div>
+
     <div id="qr-popup" style="display: none;">
         <div id="qr-overlay">
             <div id="qr-modal">
@@ -403,6 +458,33 @@
             </div>
         </div>
     </div>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1 id="botStatus" >BIMO AI</h1>
+            <button id="chatCloseBtn">✖</button>
+        </div>
+        <div id="chatBox" class="chat-box">
+            <div class="bot">Chào bạn! Tôi có thể giúp gì cho bạn ?
+                <div class="btn-group">
+                    <button onclick="startIntroPart1()">Hướng dẫn giỏ hàng</button>
+                    <button onclick="startIntroPart2()">Hướng dẫn thanh toán</button>
+                    <button onclick="startIntroAll()">Hướng dẫn toàn bộ</button>
+                </div>
+
+            </div>
+            <!-- Tin nhắn sẽ được hiển thị ở đây -->
+        </div>
+
+        <div class="chat-input-container">
+            <!-- <button onclick="setBotMode()"><i class="fas fa-sync"></i></button> -->
+            <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." autocomplete="off" />
+            <button id="chatSendBtn" aria-label="Gửi tin nhắn"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+
+
 
 
 

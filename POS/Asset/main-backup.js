@@ -792,23 +792,20 @@ class CartManager {
                 domElements.cartContainer.innerHTML = cart.map((item, index) => `
                     <div class="cart-item" id="${index}">
                         <div class="cart-item-info">
-                            <span class="cart-item-index">${index + 1}</span>
-                            <input type="text" value="${item.name}" onclick="openPopup(this)" 
-                                onchange="CartManager.updateItem(${index}, 'name', this.value)">
-                                
-                            <input class="cart-item-price" type="text" value="${item.price}" 
-                                onchange="CartManager.updateItem(${index}, 'price', this.value)">
+                            <span class="cart-item-index">${index + 1}</span><input type="text" value="${item.name}" onclick="openPopup(this)" onchange="CartManager.updateItem(${index}, 'name', this.value)">
+                            <input class="cart-item-price" type="text" value="${item.price.toLocaleString('vi-VN')}" 
+                            oninput="formatPriceInput(this)" 
+                            onchange="CartManager.updateItem(${index}, 'price', unformatPrice(this.value))">
                         </div>
-                        <div class="cart-item-quantity">
+                       <div class="cart-item-quantity">
                             <input class="quantity-value" type="number" value="${item.quantity}" min="1"
                                 onchange="CartManager.updateItem(${index}, 'quantity', this.value)">
                         </div>
                         <div class="cart-item-total">${(item.quantity * item.price).toLocaleString('vi-VN')}đ</div>
                         <div class="cart-item-del">
-                            <button class="cart-item-remove" onclick="CartManager.removeItem(${index})">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                            <button class="cart-item-remove" onclick="CartManager.removeItem(${index})"><i class="fas fa-trash"></i></button>
                         </div>
+                        
                     </div>
                 `).join('');
             }
@@ -1026,7 +1023,7 @@ class UIManager {
         UIManager.Loading();
         const branchName = document.getElementById('branch')?.value || '';
         let url = '';
-
+    
 
         if (branchName === "Mai Tây Hair Salon") {
             url = await getScriptURL('Product');
@@ -2126,7 +2123,7 @@ async function SendToGoogleSheet(jsonData, sheetName) {
 
     try {
         const scriptURL = await getScriptURL(); // chỉ trả về baseURL
-
+        
         if (!scriptURL) return;
 
         const response = await fetch(scriptURL, {
