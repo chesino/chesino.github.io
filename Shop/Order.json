@@ -1,0 +1,10 @@
+[
+    {
+      "orderId": "ORD-1715942170000-123",
+      "name": "Nguyen Van A",
+      "email": "test@example.com",
+      "total": 560000,
+      "status": "Chờ thanh toán"
+    }
+  ]
+  
