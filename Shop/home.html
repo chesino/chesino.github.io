@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cửa hàng Digital - Phiên bản mới</title>
+  <link rel="stylesheet" href="./Asset/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body class="body">
+  <header class="header">
+    <div class="container flex-between">
+      <h1 class="logo">Digital Shop</h1>
+      <nav class="nav-desktop">
+        <ul class="nav-list">
+          <li><button class="nav-link" data-view="product-list-view">Sản phẩm</button></li>
+          <li><button class="nav-link" data-view="order-status-view">Kiểm tra đơn hàng</button></li>
+        </ul>
+      </nav>
+      <div class="cart-wrapper">
+        <button id="cart-icon" class="cart-icon">
+          <i class="fas fa-shopping-bag"></i>
+          <span id="cart-count" class="cart-count">0</span>
+        </button>
+        <div id="cart-dropdown" class="cart-dropdown hidden">
+          <div class="cart-header"><h4>Giỏ hàng</h4></div>
+          <div id="cart-items-dropdown" class="cart-items">Giỏ hàng trống</div>
+          <div class="cart-footer">
+            <p>Tổng cộng: <span id="cart-total-dropdown" class="cart-total">0đ</span></p>
+            <button id="go-to-checkout-btn-dropdown" class="btn-primary">Tiến hành thanh toán</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <aside id="sidebar" class="sidebar">
+      <!-- bộ lọc & tìm kiếm sản phẩm -->
+    </aside>
+
+    <section id="main-content-area" class="main-content">
+      <div id="product-list-view" class="view-section active">
+        <div id="product-list" class="product-grid"></div>
+        <div id="no-products-message" class="no-products hidden">Không tìm thấy sản phẩm nào phù hợp.</div>
+      </div>
+      <div id="order-status-view" class="view-section">
+        <!-- Kiểm tra đơn hàng -->
+      </div>
+      <div id="checkout-view" class="view-section">
+        <!-- Các bước thanh toán -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2023 Digital Shop Demo. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="./Asset/script.js"></script>
+</body>
+
+</html>

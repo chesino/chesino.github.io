@@ -1,0 +1,95 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  /* Prevent scrollbar flickering */
+  overflow-y: scroll;
+}
+
+/* Show the active checkout step */
+#checkout-view>div {
+  display: none;
+}
+
+/* Show only the active step */
+#checkout-view>div.active {
+  display: block;
+}
+
+
+.view-section {
+  display: none;
+  /* Hide all main view sections by default */
+}
+
+.view-section.active {
+  display: block;
+  /* Show active view section */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Add padding to the bottom of the main content on mobile to avoid being hidden by fixed bar */
+@media (max-width: 767px) {
+
+  /* Tailwind's 'md' breakpoint is 768px */
+  #product-list-view {
+    padding-bottom: 80px;
+    /* Adjust based on the height of your mobile filter bar */
+  }
+}
+
+@media (min-width: 768px) {
+  #mobile-nav {
+    display: none;
+  }
+}
+
+/* Custom style for radio button checkmark */
+input[type="radio"]:checked+label::before {
+  content: '\f058';
+  /* Font Awesome check-circle icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #10b981;
+  /* emerald-500 */
+  margin-right: 0.5rem;
+}
+
+input[type="radio"]+label::before {
+  content: '\f111';
+  /* Font Awesome circle icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 400;
+  /* Regular weight */
+  color: #d1d5db;
+  /* gray-300 */
+  margin-right: 0.5rem;
+}
+
+input[type="radio"] {
+  display: none;
+  /* Hide the default radio button */
+}
+
+input[type="radio"]+label {
+  cursor: pointer;
+  display: flex;
+  /* Use flex to align icon and text */
+  align-items: center;
+}
