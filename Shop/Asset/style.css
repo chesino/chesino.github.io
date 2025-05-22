@@ -93,3 +93,63 @@ input[type="radio"]+label {
   /* Use flex to align icon and text */
   align-items: center;
 }
+.contact-switch {
+  position: relative;
+  width: 80px;
+  height: 40px;
+  user-select: none;
+}
+
+.switch-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eb493d;
+  border-radius: 20px;
+  padding: 0 8px;
+  cursor: pointer;
+  position: relative;
+  height: 100%;
+  width: 80px;
+  box-sizing: border-box;
+  transition: background-color 0.3s;
+}
+
+.icon i {
+  font-size: 20px;
+  color: #fff;
+  z-index: 2;
+  transition: color 0.3s;
+}
+
+.switch-ball {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 32px;
+  height: 32px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.15);
+  transition: left 0.3s;
+  z-index: 1;
+}
+
+/* Khi checked - nút trượt sang phải, background đổi màu */
+#contact-toggle:checked + .switch-label {
+  background: #2563eb;
+}
+
+/* Khi checked - nút trượt sang bên phải */
+#contact-toggle:checked + .switch-label .switch-ball {
+  left: 44px; 
+}
+
+/* Icon màu trắng khi được chọn */
+#contact-toggle:not(:checked) + .switch-label .email-icon {
+  color: white;
+}
+
+#contact-toggle:checked + .switch-label .messenger-icon {
+  color: white;
+}

@@ -1,67 +1,123 @@
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwfw07aPUP2262oJMYjAqD_MvwvO5I_xRXaAI_dpsqFexT3TdO7ur_-LF09dZCmSDw/exec";
+// --- Product Data (Hardcoded) ---
+const products = [
+    {
+        "id": 1,
+        "name": "Youtube Premium Chính Chủ",
+        "duration": "1 Tháng",
+        "priceroot": 79000,
+        "priceNumeric": 45000,
+        "warranty": "Đến khi hết hạn",
+        "notes": "Youtube Premium chính chủ",
+        "catelogy": "Giải trí",
+        "imageUrl": "https://placehold.co/200x200/FF0000/FFFFFF?text=Youtube"
+    },
+    {
+        "id": 2,
+        "name": "Youtube Premium Chính Chủ",
+        "duration": "6 Tháng",
+        "priceroot": 79000,
+        "priceNumeric": 250000,
+        "warranty": "Đến khi hết hạn",
+        "notes": "Youtube Premium chính chủ",
+        "catelogy": "Giải trí",
+        "imageUrl": "https://placehold.co/200x200/FF0000/FFFFFF?text=Youtube"
+    },
+    {
+        "id": 3,
+        "name": "Youtube Premium Chính Chủ",
+        "duration": "12 Tháng",
+        "priceroot": 79000,
+        "priceNumeric": 450000,
+        "warranty": "Đến khi hết hạn",
+        "notes": "Youtube Premium chính chủ",
+        "catelogy": "Giải trí",
+        "imageUrl": "https://placehold.co/200x200/FF0000/FFFFFF?text=Youtube"
+    },
+    {
+        "id": 4,
+        "name": "Key Windown 10/11 Pro",
+        "duration": "Vĩnh viễn",
+        "priceroot": 500000,
+        "priceNumeric": 150000,
+        "warranty": "Đến khi hết hạn",
+        "notes": "Key kích hoạt Windows 10 & 11 Pro",
+        "catelogy": "Máy tính",
+        "imageUrl": "https://placehold.co/200x200/19b1f0/FFFFFF?text=Windows"
+    },
+    {
+        "id": 5,
+        "name": "Canva Pro Chính Chủ",
+        "duration": "12 Tháng",
+        "priceroot": 1300000,
+        "priceNumeric": 250000,
+        "warranty": "Đến khi hết hạn",
+        "notes": "Nâng cấp chính chủ Canva PRO, Giá 1.300.000đ/năm",
+        "catelogy": "Phần mềm",
+        "imageUrl": "https://placehold.co/200x200/2591d6/FFFFFF?text=Canva"
+    },
+    {
+        "id": 6,
+        "name": "Capcut Pro Chính Chủ",
+        "duration": "12 Tháng",
+        "priceroot": 1500000,
+        "priceNumeric": 850000,
+        "warranty": "Đến khi hết hạn",
+        "notes": "Capcut Pro nâng cấp chính chủ 1 năm",
+        "catelogy": "Phần mềm",
+        "imageUrl": "https://placehold.co/200x200/FFFFFF/000000?text=Capcut"
+    },
+    {
+        "id": 7,
+        "name": "Capcut Pro Dùng Chung",
+        "duration": "12 Tháng",
+        "priceroot": 1500000,
+        "priceNumeric": 200000,
+        "warranty": "Đến khi hết hạn",
+        "notes": "Tài khoản sẵn Capcut Pro, dùng chung",
+        "catelogy": "Phần mềm",
+        "imageUrl": "https://placehold.co/200x200/FFFFFF/000000?text=Capcut"
+    }
+    // Add more products here if needed
+];
+
+// URL của Google Apps Script đã triển khai để nhận dữ liệu đơn hàng
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyuiJCuC1I4Es1KF9m-HheZzjtSKk8iLODZM6ahih_Q026Er_GdETbmDdIZgBRgJzMh/exec";
+// Mã xác thực để gửi dữ liệu an toàn hơn (cần khớp với mã trong Google Apps Script)
 const AUTH_TOKEN = "fullaccesskey456";
 
-let products = [];
-let discountCodes = {};
-let referralCodes = {};
-
-async function fetchSheetData(sheetName) {
-    const url = `${WEB_APP_URL}?token=${encodeURIComponent(AUTH_TOKEN)}&sheet=${encodeURIComponent(sheetName)}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Error fetching ${sheetName}`);
-    return await res.json();
+async function getScriptURL() {
+    return WEB_APP_URL;
 }
 
-async function initData() {
-    try {
-        const [productData, discountData, referralData] = await Promise.all([
-            fetchSheetData("Products"),
-            fetchSheetData("DiscountCodes"),
-            fetchSheetData("ReferralCodes")
-        ]);
-
-        products = productData.map(item => ({
-            id: Number(item.id),
-            name: item.name,
-            duration: item.duration,
-            priceDisplay: item.priceDisplay,
-            priceNumeric: Number(item.priceNumeric),
-            warranty: item.warranty,
-            notes: item.notes,
-            category: item.category,
-            imageUrl: item.imageUrl
-        }));
-
-        discountCodes = {};
-        discountData.forEach(row => {
-            discountCodes[row.code] = {
-                type: row.type,
-                value: Number(row.value)
-            };
-        });
-
-        referralCodes = {};
-        referralData.forEach(row => {
-            referralCodes[row.code] = {
-                message: row.message
-            };
-        });
-
-        // ✅ Sau khi đã có dữ liệu => chạy các hàm cần thiết
-        populateCategoryFilter();
-        applyFiltersAndSort(); // Initial render of products
-        updateCartCount();
-        renderCartDropdown();
-        showView('product-list-view');
-
-    } catch (error) {
-        console.error("Lỗi khi tải dữ liệu từ sheet:", error);
-        alert("Không thể tải dữ liệu. Vui lòng thử lại sau.");
+const discountCodes = [
+    {
+        code: "GIAM50K",
+        type: "fixed", // Loại giảm giá: "fixed" (số tiền cố định) hoặc "percentage" (phần trăm)
+        value: 50000, // Giá trị giảm: 50000đ
+        appliesToAll: false, // Áp dụng cho tất cả sản phẩm?
+        productIds: [1, 3], // ID của sản phẩm áp dụng (nếu appliesToAll là false). Sử dụng ID số của sản phẩm, không phải "P01"
+        minAmount: 200000, // Số tiền tối thiểu của giỏ hàng để áp dụng mã
+        maxDiscount: null // Số tiền giảm tối đa (null nếu không có giới hạn)
+    },
+    {
+        code: "GIAM20PHANTRAM",
+        type: "percentage",
+        value: 0.2, // 20%
+        appliesToAll: true,
+        productIds: [], // Không cần nếu appliesToAll là true
+        minAmount: 0,
+        maxDiscount: 100000 // Giảm tối đa 100.000đ
+    },
+    {
+        code: "FREE4ENGLISH",
+        type: "fixed",
+        value: 100000, // Giảm 100k, ví dụ cho sản phẩm 4English
+        appliesToAll: false,
+        productIds: [1], // Chỉ áp dụng cho 4English (ID 1)
+        minAmount: 500000,
+        maxDiscount: null
     }
-}
-
-
-
+];
 
 // --- DOM Elements ---
 const productListDiv = document.getElementById('product-list');
@@ -107,10 +163,8 @@ const cartTotalSpan = checkoutStep1.querySelector('#cart-total');
 const continueShoppingBtn = checkoutStep1.querySelector('#continue-shopping-btn');
 const goShoppingFromCartBtn = checkoutStep1.querySelector('#go-shopping-from-cart');
 const discountCodeInput = checkoutStep1.querySelector('#discount-code');
-const referralCodeInput = checkoutStep1.querySelector('#referral-code');
 const applyCodesBtn = checkoutStep1.querySelector('#apply-codes-btn');
 const discountMessage = checkoutStep1.querySelector('#discount-message');
-const referralMessage = checkoutStep1.querySelector('#referral-message');
 const nextStep2Btn = checkoutStep1.querySelector('#next-step-2-btn'); // Button to move from step 1 to 2
 
 
@@ -150,8 +204,6 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentStep = 1; // Current step within the checkout process (1 to 4)
 let currentOrder = {}; // To store order details during checkout (simulated)
 let appliedDiscount = 0; // Simulated applied discount amount
-let appliedReferral = null; // Simulated applied referral code
-
 
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
@@ -231,7 +283,8 @@ function renderProducts(productsToRender) {
             <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-48 object-cover">
             <div class="p-4 flex flex-col flex-grow">
                 <h3 class="text-lg font-semibold text-gray-900 mb-1">${product.name}</h3>
-                <p class="text-gray-600 text-sm mb-2 flex-grow">${product.duration} | Bảo hành: ${product.warranty}</p>
+                <p class="text-gray-600 text-sm mb-2 flex-grow">Thời hạn: ${product.duration}</p>
+                <p class="text-gray-600 text-sm mb-2 flex-grow">Bảo hành: ${product.warranty}</p>
                 <div class="flex items-center justify-between mt-auto">
                     <p class="text-blue-600 text-xl font-bold">${formatPrice(product.priceNumeric)}</p>
                      <button class="add-to-cart-btn bg-blue-600 text-white text-sm py-2 px-4 rounded-md font-semibold hover:bg-blue-700 transition-colors duration-200 shadow-sm" data-id="${product.id}">
@@ -285,7 +338,7 @@ function updateCartCount() {
 
         // Reset discount/referral if cart becomes empty
         appliedDiscount = 0;
-        appliedReferral = null;
+        // appliedReferral = null; // Removed referral logic
         updateDiscountReferralDisplay(); // Clear messages in step 1 if visible
     }
 }
@@ -363,23 +416,15 @@ function renderOrderSummaryStep1() {
 
 // Update display messages for discount/referral codes
 function updateDiscountReferralDisplay() {
-    if (appliedDiscount > 0) {
-        if (discountMessage) {
+    if (discountMessage) {
+        if (appliedDiscount > 0) {
             discountMessage.textContent = `Đã áp dụng giảm giá: -${formatPrice(appliedDiscount)}`;
             discountMessage.classList.remove('hidden');
+        } else {
+            discountMessage.classList.add('hidden');
         }
-    } else {
-        if (discountMessage) discountMessage.classList.add('hidden');
     }
-
-    if (appliedReferral) {
-        if (referralMessage) {
-            referralMessage.textContent = `Mã giới thiệu: ${appliedReferral.message}`;
-            referralMessage.classList.remove('hidden');
-        }
-    } else {
-        if (referralMessage) referralMessage.classList.add('hidden');
-    }
+    // Không còn xử lý referralMessage
 }
 
 
@@ -485,11 +530,9 @@ function showView(viewId) {
             currentStep = 1;
             showCheckoutStep(currentStep);
 
-            // Reset mã giảm giá và mã giới thiệu
+            // Reset mã giảm giá
             if (discountCodeInput) discountCodeInput.value = '';
-            if (referralCodeInput) referralCodeInput.value = '';
             appliedDiscount = 0;
-            appliedReferral = null;
             updateDiscountReferralDisplay();
         }
     } else {
@@ -558,7 +601,7 @@ function showCheckoutStep(step) {
         const paymentMethod = paymentMethodElement ? paymentMethodElement.value : 'unknown'; // Handle case where none is checked
         currentOrder.paymentMethod = paymentMethod;
 
-        currentOrder.orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`; // Simulate Order ID
+        currentOrder.orderId = Math.random().toString(36).slice(2, 10).toUpperCase();  // Ví dụ: 'X3GK8VZL'
         if (orderIdSpan) orderIdSpan.textContent = currentOrder.orderId;
         if (orderIdInInstructionSpan) orderIdInInstructionSpan.textContent = currentOrder.orderId;
 
@@ -587,17 +630,99 @@ function showCheckoutStep(step) {
             if (paymentAccountInfoP) paymentAccountInfoP.textContent = "Không có thông tin thanh toán.";
         }
 
+        // Gửi đơn hàng đến Google Sheet
+        sendOrderToGoogleSheet(currentOrder);
+
         // Simulate clearing cart after "placing" order
         cart = [];
         saveCart();
         updateCartCount();
         renderCartDropdown();
-        // Reset discount/referral state after order completion
+        // Reset discount state after order completion
         appliedDiscount = 0;
-        appliedReferral = null;
         updateDiscountReferralDisplay(); // Clear messages
     }
 }
+
+
+/**
+ * Gửi dữ liệu đơn hàng đến Google Sheet thông qua Google Apps Script.
+ * @param {object} orderData Đối tượng chứa thông tin đơn hàng.
+ */
+async function sendOrderToGoogleSheet(orderData) {
+    // Định dạng ngày giờ kiểu Việt Nam
+    function formatDate(datetime) {
+        const dateObj = new Date(datetime);
+        const time = dateObj.toLocaleTimeString("vi-VN", { hour12: false });
+        const date = dateObj.toLocaleDateString("vi-VN");
+        return `${time} ${date}`;
+    }
+
+    const itemsSummary = orderData.items.map(item => `${item.name} (x${item.quantity})`).join('; ');
+    const formattedTimestamp = formatDate(orderData.orderTimestamp);
+
+    // Sử dụng AUTH_TOKEN đã khai báo toàn cục
+    if (!AUTH_TOKEN) {
+        await Swal.fire({
+            icon: 'warning',
+            title: 'Thiếu mã xác thực',
+            text: 'Không tìm thấy AUTH_TOKEN. Vui lòng kiểm tra cấu hình.',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    const dataToSend = {
+        orderId: orderData.orderId,
+        timestamp: formattedTimestamp,
+        customerName: orderData.recipientInfo.name,
+        customerEmail: orderData.recipientInfo.email || '',
+        customerMessenger: orderData.recipientInfo.messenger || '',
+        totalAmount: orderData.totalAmount,
+        discountAmount: orderData.discountAmount,
+        paymentMethod: orderData.paymentMethod,
+        items: orderData.items.map(item => item.name).join('; '),  // chỉ tên sản phẩm, ngăn cách bằng dấu chấm phẩy
+        notes: orderData.recipientInfo.notes || '',
+        status: "Chờ thanh toán",
+        token: AUTH_TOKEN,
+        sheet: "Order"
+    };
+
+
+
+    function jsonToQueryString(json) {
+        return Object.keys(json)
+            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
+            .join('&');
+    }
+
+    const queryString = jsonToQueryString(dataToSend);
+
+    try {
+        const scriptURL = await getScriptURL(); // Phải định nghĩa sẵn hàm này để trả URL Web App
+        if (!scriptURL) return;
+
+        const response = await fetch(scriptURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            },
+            body: queryString
+        });
+
+        if (response.ok) {
+            showMessage("Đơn hàng đã được gửi thành công!", 3000);
+        } else {
+            const text = await response.text();
+            console.error("Lỗi khi gửi đơn hàng:", text);
+            showMessage(`Lỗi: Không thể gửi đơn hàng. ${text}`, 5000, true);
+        }
+    } catch (error) {
+        console.error("Lỗi mạng hoặc server:", error);
+        showMessage("Lỗi kết nối: Không thể gửi đơn hàng. Vui lòng thử lại.", 5000, true);
+    }
+}
+
 
 
 // --- Filter and Sort Logic ---
@@ -765,43 +890,79 @@ if (continueShoppingBtn) { // Check if element exists
 // --- Checkout Step Navigation ---
 
 // Step 1: Apply Codes button
-if (applyCodesBtn && discountCodeInput && referralCodeInput && discountMessage && referralMessage) { // Check if elements exist
+if (applyCodesBtn && discountCodeInput && discountMessage) {
     applyCodesBtn.addEventListener('click', () => {
-        const discountCode = discountCodeInput.value.trim().toUpperCase();
-        const referralCode = referralCodeInput.value.trim();
-
+        const inputCode = discountCodeInput.value.trim().toUpperCase();
         appliedDiscount = 0; // Reset previous discount
-        appliedReferral = null; // Reset previous referral
 
-        // Simulate applying discount code
-        if (discountCode && discountCodes[discountCode]) {
-            const discount = discountCodes[discountCode];
-            const subtotal = cart.reduce((sum, item) => sum + item.priceNumeric * item.quantity, 0);
-            if (discount.type === "percentage") {
-                appliedDiscount = subtotal * discount.value;
-            } else if (discount.type === "fixed") {
-                appliedDiscount = discount.value;
+        if (!inputCode) {
+            showMessage("Vui lòng nhập mã giảm giá.", 3000, true);
+            updateDiscountReferralDisplay(); // Xóa thông báo giảm giá cũ nếu có
+            return;
+        }
+
+        const foundCode = discountCodes.find(c => c.code === inputCode);
+
+        if (!foundCode) {
+            showMessage(`Mã giảm giá "${inputCode}" không hợp lệ.`, 3000, true);
+            updateDiscountReferralDisplay();
+            return;
+        }
+
+        const subtotal = cart.reduce((sum, item) => item.priceNumeric * item.quantity, 0);
+
+        // Kiểm tra sản phẩm áp dụng
+        if (!foundCode.appliesToAll && foundCode.productIds && foundCode.productIds.length > 0) {
+            const validItemsInCart = cart.some(item => foundCode.productIds.includes(item.id));
+            if (!validItemsInCart) {
+                showMessage("Mã này không áp dụng cho bất kỳ sản phẩm nào trong giỏ hàng của bạn.", 4000, true);
+                updateDiscountReferralDisplay();
+                return;
             }
-            showMessage(`Mã giảm giá "${discountCode}" đã được áp dụng!`, 3000);
-        } else if (discountCode) {
-            showMessage(`Mã giảm giá "${discountCode}" không hợp lệ.`, 3000, true);
         }
 
-        // Simulate applying referral code
-        if (referralCode && referralCodes[referralCode]) {
-            appliedReferral = referralCodes[referralCode];
-            showMessage(`Mã giới thiệu "${referralCode}" đã được áp dụng!`, 3000);
-        } else if (referralCode) {
-            showMessage(`Mã giới thiệu "${referralCode}" không hợp lệ.`, 3000, true);
+        // Tính toán số tiền giảm giá
+        let applicableSubtotal = 0;
+        if (foundCode.appliesToAll) {
+            // Nếu áp dụng cho tất cả, tính tổng từ toàn bộ giỏ hàng
+            applicableSubtotal = cart.reduce((sum, item) => sum + item.priceNumeric * item.quantity, 0);
+        } else {
+            // Nếu áp dụng cho sản phẩm cụ thể, chỉ tính tổng từ các sản phẩm đó
+            applicableSubtotal = cart.filter(item => foundCode.productIds && foundCode.productIds.includes(item.id))
+                .reduce((sum, item) => sum + item.priceNumeric * item.quantity, 0);
         }
 
-        // Update summary and total display
-        renderOrderSummaryStep1(); // Update summary area in step 1
-        updateDiscountReferralDisplay(); // Update messages in step 1
-        updateCartCount(); // Update total in cart icon/dropdown as well
+        // Kiểm tra giá trị tối thiểu dựa trên applicableSubtotal
+        if (applicableSubtotal < foundCode.minAmount) {
+            showMessage(`Giá trị các sản phẩm đủ điều kiện cần tối thiểu ${formatPrice(foundCode.minAmount)} để áp dụng mã này.`, 4000, true);
+            updateDiscountReferralDisplay();
+            return;
+        }
+
+        // Tiếp tục phần tính discountAmount như bạn đã sửa đổi trước đó
+        let discountAmount = 0;
+        if (foundCode.type === "fixed") {
+            discountAmount = foundCode.value;
+            if (discountAmount > applicableSubtotal) {
+                discountAmount = applicableSubtotal;
+            }
+        } else if (foundCode.type === "percentage") {
+            discountAmount = applicableSubtotal * foundCode.value;
+        }
+
+        // Áp dụng giảm giá tối đa nếu có
+        if (foundCode.maxDiscount !== null && discountAmount > foundCode.maxDiscount) {
+            discountAmount = foundCode.maxDiscount;
+        }
+
+        appliedDiscount = discountAmount;
+        showMessage(`Áp dụng mã "${inputCode}" thành công! Giảm ${formatPrice(appliedDiscount)}.`, 3000);
+
+        // Cập nhật hiển thị sau khi áp dụng mã
+        updateCartCount(); // Cập nhật tổng tiền giỏ hàng
+        updateDiscountReferralDisplay(); // Hiển thị thông báo giảm giá
     });
 }
-
 
 // Next Step 2 button (from Step 1 to Step 2)
 if (nextStep2Btn) { // Check if element exists
@@ -828,28 +989,50 @@ if (prevStep1Btn) { // Check if element exists
 
 
 // Next Step 3 button (from Step 2 to Step 3 - Payment Method Selection)
-if (nextStep3Btn && recipientNameInput && recipientEmailInput) { // Check if elements exist
+if (nextStep3Btn && recipientNameInput) {
     nextStep3Btn.addEventListener('click', () => {
-        // Validation for Step 2 (Recipient Info)
         const recipientName = recipientNameInput.value.trim();
-        const recipientEmail = recipientEmailInput.value.trim();
-        const orderNotes = orderNotesInput ? orderNotesInput.value.trim() : ''; // Notes are optional, handle if element doesn't exist
+        const orderNotes = orderNotesInput ? orderNotesInput.value.trim() : '';
 
-        if (!recipientName || !recipientEmail) {
-            showMessage("Vui lòng điền đầy đủ Tên người nhận và Email.", 3000, true);
+        const useMessenger = toggle.checked;
+        const recipientEmailInputGroup = document.getElementById('recipient-email');
+        const recipientMessengerInputGroup = document.getElementById('recipient-messenger');
+        const recipientEmail = recipientEmailInputGroup ? recipientEmailInputGroup.value.trim() : '';
+        const recipientMessenger = recipientMessengerInputGroup ? recipientMessengerInputGroup.value.trim() : '';
+
+        if (!recipientName) {
+            showMessage("Vui lòng điền Tên người nhận.", 3000, true);
             return;
         }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(recipientEmail)) {
-            showMessage("Định dạng Email không hợp lệ.", 3000, true);
-            return;
-        }
-        // Phone is not required in this version based on the request
 
-        // Store recipient info temporarily
+        if (useMessenger) {
+            if (!recipientMessenger) {
+                showMessage("Vui lòng nhập liên kết Facebook/Messenger.", 3000, true);
+                return;
+            }
+            // Optionally, validate URL:
+            const urlRegex = /^(https?:\/\/)?(www\.)?(facebook\.com|m\.me|fb\.com)\/.+$/i;
+            if (!urlRegex.test(recipientMessenger)) {
+                showMessage("Định dạng liên kết Messenger không hợp lệ.", 3000, true);
+                return;
+            }
+        } else {
+            if (!recipientEmail) {
+                showMessage("Vui lòng nhập Email.", 3000, true);
+                return;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(recipientEmail)) {
+                showMessage("Định dạng Email không hợp lệ.", 3000, true);
+                return;
+            }
+        }
+
+        // Lưu thông tin người nhận
         currentOrder.recipientInfo = {
             name: recipientName,
-            email: recipientEmail,
+            email: useMessenger ? null : recipientEmail,
+            messenger: useMessenger ? recipientMessenger : null,
             notes: orderNotes
         };
 
@@ -857,6 +1040,7 @@ if (nextStep3Btn && recipientNameInput && recipientEmailInput) { // Check if ele
         showCheckoutStep(currentStep);
     });
 }
+
 
 // Previous Step 2 button (from Step 3 to Step 2)
 if (prevStep2Btn) { // Check if element exists
@@ -884,7 +1068,6 @@ if (completeOrderBtn) { // Check if element exists
         currentOrder.items = cart;
         currentOrder.subtotal = cart.reduce((sum, item) => sum + item.priceNumeric * item.quantity, 0);
         currentOrder.discountAmount = appliedDiscount;
-        currentOrder.referralCode = appliedReferral ? (referralCodeInput ? referralCodeInput.value.trim() : null) : null; // Store the code string, handle if input doesn't exist
         currentOrder.totalAmount = calculateCartTotal();
         currentOrder.orderTimestamp = new Date().toISOString(); // ISO format timestamp
 
@@ -896,7 +1079,7 @@ if (completeOrderBtn) { // Check if element exists
         showCheckoutStep(currentStep);
 
         // Cart clearing and order ID generation moved into showCheckoutStep(4)
-        // Discount/Referral state reset moved into showCheckoutStep(4)
+        // Discount state reset moved into showCheckoutStep(4)
     });
 }
 
@@ -931,7 +1114,6 @@ window.addEventListener('resize', () => {
 
 // --- Initialization ---
 window.onload = function () {
-    initData();
     // Products are hardcoded
     populateCategoryFilter();
     applyFiltersAndSort(); // Initial render of products
@@ -942,6 +1124,8 @@ window.onload = function () {
 
     // Ensure product list view is active initially and filter bars are set correctly
     showView('product-list-view');
+
+    // initData(); // Removed this as discount codes are now hardcoded
 };
 
 
@@ -949,39 +1133,141 @@ const checkOrderBtn = document.getElementById('check-order-btn');
 const orderCodeInput = document.getElementById('order-code-input');
 const orderResultDiv = document.getElementById('order-result');
 
+// Hàm lấy class màu cho trạng thái đơn hàng
+function getStatusClass(status) {
+    const s = status?.toLowerCase() || '';
+
+    if (['đã huỷ', 'hủy', 'đã hủy'].includes(s)) {
+        return 'text-red-700 bg-red-100';
+    } else if (['chờ thanh toán', 'chờ xác nhận thanh toán'].includes(s)) {
+        return 'text-yellow-800 bg-yellow-100';
+    } else if (['đã thanh toán', 'đang hoạt động'].includes(s)) {
+        return 'text-green-700 bg-green-100';
+    } else {
+        return 'text-gray-700 bg-gray-100';
+    }
+}
+
+
 if (checkOrderBtn && orderCodeInput && orderResultDiv) {
     checkOrderBtn.addEventListener('click', async () => {
-        const code = orderCodeInput.value.trim();
-        orderResultDiv.classList.add('hidden');
+        const rawInput = orderCodeInput.value.trim();
 
-        if (!code) {
+        if (!rawInput) {
             showMessage("Vui lòng nhập mã đơn hàng để kiểm tra.", 3000, true);
             return;
         }
 
+        // Tách mã đơn theo dấu phẩy, tối đa 5 mã, lọc bỏ rỗng, trim khoảng trắng
+        let codes = rawInput.split(',')
+            .map(c => c.trim())
+            .filter(c => c.length > 0)
+            .slice(0, 5);
+
+        if (codes.length === 0) {
+            showMessage("Vui lòng nhập ít nhất một mã đơn hợp lệ.", 3000, true);
+            return;
+        }
+
+        checkOrderBtn.disabled = true;
+        checkOrderBtn.textContent = "Đang kiểm tra...";
+        orderResultDiv.classList.add('hidden');
+        orderResultDiv.innerHTML = ''; // reset kết quả cũ
+
         try {
-            const res = await fetch('./Order.json');
+            const url = `${WEB_APP_URL}?sheet=Order&token=${AUTH_TOKEN}`;
+            const res = await fetch(url);
             if (!res.ok) throw new Error("Không thể tải dữ liệu đơn hàng");
 
             const orders = await res.json();
-            const found = orders.find(order => order.orderId === code);
 
-            if (found) {
-                orderResultDiv.innerHTML = `
-            <p><strong>Mã đơn:</strong> ${found.orderId}</p>
-            <p><strong>Tên người nhận:</strong> ${found.name}</p>
-            <p><strong>Email:</strong> ${found.email}</p>
-            <p><strong>Tổng tiền:</strong> ${formatPrice(found.total)}</p>
-            <p><strong>Trạng thái:</strong> ${found.status}</p>
-        `;
-            } else {
-                orderResultDiv.innerHTML = `<p class="text-red-600 font-semibold">Không tìm thấy đơn hàng với mã <strong>${code}</strong>.</p>`;
-            }
+            let htmlResults = '';
+
+            codes.forEach(code => {
+                const found = orders.find(order => order.orderId === code);
+
+                if (found) {
+                    const statusClass = getStatusClass(found.status);
+
+                    htmlResults += `
+                      <div class="space-y-1">
+                        <!-- Thông tin tóm tắt -->
+                        <div class="grid grid-cols-2 gap-y-2">
+                            <span class="text-gray-500 font-medium">Mã đơn:</span><span>${found.orderId}</span>
+                            <span class="text-gray-500 font-medium">Thời gian:</span><span>${found.timestamp}</span>
+                            <span class="text-gray-500 font-medium">Khách hàng:</span><span>${found.customerName}</span>
+                            <span class="text-gray-500 font-medium">Sản phẩm:</span><span>${found.items}</span>
+                            <span class="text-gray-500 font-medium">Bảo hành:</span><span>${found.warranty || 'Chưa kích hoạt'}</span>
+                            <span class="text-gray-500 font-medium">Tổng tiền:</span><span class="text-red-600 font-semibold">${formatPrice(found.totalAmount)}</span>
+                            <span class="text-gray-500 font-medium">Trạng thái:</span>
+                            <span><span class="${statusClass} px-2 py-0.5 rounded text-xs font-medium w-fit">${found.status || 'Đang xử lý'}</span></span>
+                        </div>
+
+                        <!-- Nút xem chi tiết -->
+                        <button class="toggleDetailsBtn mt-3 text-blue-600 hover:underline focus:outline-none">
+                            Xem chi tiết
+                        </button>
+
+                        <!-- Phần chi tiết ẩn -->
+                        <div class="orderDetails hidden mt-3 border-t border-gray-200 pt-3 text-gray-600 text-xs space-y-1">
+                            <p><strong>Email:</strong> ${found.customerEmail || 'Không có'}</p>
+                            <p><strong>Facebook/Messenger:</strong> ${found.customerMessenger || 'Không có'}</p>
+                            <p><strong>Giảm giá:</strong> ${formatPrice(found.discountAmount || 0)}</p>
+                            <p><strong>Phương thức thanh toán:</strong> ${found.paymentMethod === 'qr' ? 'Chuyển khoản/QR' : found.paymentMethod}</p>
+                            <p><strong>Ghi chú:</strong> ${found.notes || 'Không có'}</p>
+                          </div>
+                        </div>
+                    `;
+                } else {
+                    htmlResults += `<p class="text-red-600 font-semibold mb-6">Không tìm thấy đơn hàng với mã <strong>${code}</strong>.</p>`;
+                }
+            });
+
+            orderResultDiv.innerHTML = htmlResults;
+
+            // Gắn sự kiện cho tất cả nút xem chi tiết mới tạo
+            const toggleButtons = orderResultDiv.querySelectorAll('.toggleDetailsBtn');
+            toggleButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const detailsDiv = btn.nextElementSibling;
+                    if (detailsDiv.classList.contains('hidden')) {
+                        detailsDiv.classList.remove('hidden');
+                        btn.textContent = "Ẩn chi tiết";
+                    } else {
+                        detailsDiv.classList.add('hidden');
+                        btn.textContent = "Xem chi tiết";
+                    }
+                });
+            });
 
             orderResultDiv.classList.remove('hidden');
         } catch (err) {
             console.error(err);
             showMessage("Lỗi khi kiểm tra đơn hàng.", 3000, true);
+        } finally {
+            checkOrderBtn.disabled = false;
+            checkOrderBtn.textContent = "Kiểm tra đơn hàng";
         }
     });
 }
+
+
+
+
+
+
+
+
+const toggle = document.getElementById('contact-toggle');
+
+toggle.addEventListener('change', () => {
+    if (toggle.checked) {
+        // Messenger được chọn
+        document.getElementById('email-input-group').classList.add('hidden');
+        document.getElementById('messenger-input-group').classList.remove('hidden');
+    } else {
+        // Email được chọn
+        document.getElementById('email-input-group').classList.remove('hidden');
+        document.getElementById('messenger-input-group').classList.add('hidden');
+    }
+});

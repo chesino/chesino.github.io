@@ -1,83 +1,66 @@
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwfw07aPUP2262oJMYjAqD_MvwvO5I_xRXaAI_dpsqFexT3TdO7ur_-LF09dZCmSDw/exec";
+const AUTH_TOKEN = "fullaccesskey456";
 
-// --- Product Data (Hardcoded) ---
-const products = [
-    {
-        "id": 1,
-        "name": "4English chính chủ",
-        "duration": "1 năm",
-        "priceDisplay": "560k",
-        "priceNumeric": 560000,
-        "warranty": "FULL-TIME",
-        "notes": "GỬI TÀI KHOẢN+ PASS TÀI KHOẢN",
-        "category": "Học tập",
-        "imageUrl": "https://placehold.co/150x150/E2E8F0/000000?text=4English" // Placeholder image
-    },
-    {
-        "id": 2,
-        "name": "AdGuard Premium Lifetime Key",
-        "duration": "Vĩnh viễn",
-        "priceDisplay": "180k",
-        "priceNumeric": 180000,
-        "warranty": "3 tháng",
-        "notes": "Hỗ trợ 1 thiết bị",
-        "category": "Phần mềm bảo mật",
-        "imageUrl": "https://placehold.co/150x150/E2E8F0/000000?text=AdGuard" // Placeholder image
-    },
-    {
-        "id": 3,
-        "name": "Adobe Creative Cloud 3D substance app",
-        "duration": "12 tháng",
-        "priceDisplay": "780k",
-        "priceNumeric": 780000,
-        "warranty": "FULL-TIME",
-        "notes": "Gửi mỗi mail là được anh em",
-        "category": "Phần mềm sáng tạo",
-        "imageUrl": "https://placehold.co/150x150/E2E8F0/000000?text=Adobe+3D" // Placeholder image
-    },
-    {
-        "id": 4,
-        "name": "Adobe Creative Cloud FULL APP 100GB",
-        "duration": "12 tháng",
-        "priceDisplay": "599k",
-        "priceNumeric": 599000,
-        "warranty": "FULL-TIME",
-        "notes": "GỬI TÀI KHOẢN+ PASS TÀI KHOẢN",
-        "category": "Phần mềm sáng tạo",
-        "imageUrl": "https://placehold.co/150x150/E2E8F0/000000?text=Adobe+Full" // Placeholder image
-    },
-    {
-        "id": 5,
-        "name": "Adobe Creative FULL APP ( Renew Trial)",
-        "duration": "12 tháng",
-        "priceDisplay": "380k",
-        "priceNumeric": 380000,
-        "warranty": "FULL-TIME",
-        "notes": "Gửi mỗi mail là được anh em (ƯU TIÊN MUA LOẠI NÀY)",
-        "category": "Phần mềm sáng tạo",
-        "imageUrl": "https://placehold.co/150x150/E2E8F0/000000?text=Adobe+Trial" // Placeholder image
-    }
-    // Add more products here if needed
-];
+let products = [];
+let discountCodes = {};
+let referralCodes = {};
 
-const discountCodes = [
-    {
-      code: "GIAM50",
-      value: 50000,
-      appliesToAll: false,
-      productIds: ["P01", "P03", "P07"],
-      minAmount: 200000,
-      maxDiscount: 50000
-    },
-    {
-      code: "GIAM20TOANBO",
-      value: 0.2, // 20% giảm
-      appliesToAll: true,
-      productIds: [],
-      minAmount: 0,
-      maxDiscount: 100000
+async function fetchSheetData(sheetName) {
+    const url = `${WEB_APP_URL}?token=${encodeURIComponent(AUTH_TOKEN)}&sheet=${encodeURIComponent(sheetName)}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Error fetching ${sheetName}`);
+    return await res.json();
+}
+
+async function initData() {
+    try {
+        const [productData, discountData, referralData] = await Promise.all([
+            fetchSheetData("Products"),
+            fetchSheetData("DiscountCodes"),
+            fetchSheetData("ReferralCodes")
+        ]);
+
+        products = productData.map(item => ({
+            id: Number(item.id),
+            name: item.name,
+            duration: item.duration,
+            priceDisplay: item.priceDisplay,
+            priceNumeric: Number(item.priceNumeric),
+            warranty: item.warranty,
+            notes: item.notes,
+            category: item.category,
+            imageUrl: item.imageUrl
+        }));
+
+        discountCodes = {};
+        discountData.forEach(row => {
+            discountCodes[row.code] = {
+                type: row.type,
+                value: Number(row.value)
+            };
+        });
+
+        referralCodes = {};
+        referralData.forEach(row => {
+            referralCodes[row.code] = {
+                message: row.message
+            };
+        });
+
+        // ✅ Sau khi đã có dữ liệu => chạy các hàm cần thiết
+        populateCategoryFilter();
+        applyFiltersAndSort(); // Initial render of products
+        updateCartCount();
+        renderCartDropdown();
+        showView('product-list-view');
+
+    } catch (error) {
+        console.error("Lỗi khi tải dữ liệu từ sheet:", error);
+        alert("Không thể tải dữ liệu. Vui lòng thử lại sau.");
     }
-  ];
-  
+}
+
+
 
 
 // --- DOM Elements ---
@@ -948,6 +931,7 @@ window.addEventListener('resize', () => {
 
 // --- Initialization ---
 window.onload = function () {
+    initData();
     // Products are hardcoded
     populateCategoryFilter();
     applyFiltersAndSort(); // Initial render of products

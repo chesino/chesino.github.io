@@ -122,11 +122,14 @@
                         class="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors duration-200">
                         Kiểm tra
                     </button>
+                    
 
                     <div id="order-result"
                         class="mt-6 hidden bg-gray-50 border border-gray-200 p-4 rounded-md text-sm text-gray-700">
                         <!-- Kết quả đơn hàng sẽ hiển thị ở đây -->
+                         
                     </div>
+                    
                 </div>
             </div>
             <div id="info-section" class="view-section bg-white p-6 rounded-lg shadow-xl">
@@ -165,7 +168,9 @@
                         <ul class="list-disc pl-5 space-y-2">
                             <li><strong>Q:</strong> Tài khoản cấp sẵn là gì?<br><strong>A:</strong>
                                 Là tài khoản Hunq Store tạo sẵn và sẽ gửi tới Mail hoặc Messenger cho khách hàng.</li>
-                            <li><strong>Q:</strong> Dùng chung là gì ?<br><strong>A:</strong> Là tài khoản dùng chung 2 hoặc nhiều người. Khách hàng không được phép đổi mật khẩu (Nếu vi phạm sẽ từ chối bảo hành và không hoàn tiền).</li>
+                            <li><strong>Q:</strong> Dùng chung là gì ?<br><strong>A:</strong> Là tài khoản dùng chung 2
+                                hoặc nhiều người. Khách hàng không được phép đổi mật khẩu (Nếu vi phạm sẽ từ chối bảo
+                                hành và không hoàn tiền).</li>
                         </ul>
                     </section>
 
@@ -204,28 +209,26 @@
                             tục mua sắm</button>
                     </div>
 
-                    <h4 class="text-lg font-semibold mb-3 text-gray-800 mt-8">Mã ưu đãi (Mô phỏng)</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
+                    <h4 class="text-lg font-semibold mb-3 text-gray-800 mt-8">Mã ưu đãi</h4>
+                    <div class="flex items-end gap-2 mb-4">
+                        <!-- Input -->
+                        <div class="flex-grow">
                             <label for="discount-code" class="block text-sm font-medium text-gray-700 mb-2">Mã giảm
                                 giá</label>
                             <input type="text" id="discount-code"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 placeholder="Nhập mã giảm giá">
                         </div>
+
+                        <!-- Nút áp dụng -->
                         <div>
-                            <label for="referral-code" class="block text-sm font-medium text-gray-700 mb-2">Mã giới
-                                thiệu</label>
-                            <input type="text" id="referral-code"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                                placeholder="Nhập mã giới thiệu">
+                            <button id="apply-codes-btn"
+                                class="bg-gray-300 text-gray-800 py-2 px-6 rounded-md font-semibold hover:bg-gray-400 transition-colors duration-200">
+                                Áp dụng mã
+                            </button>
                         </div>
                     </div>
-                    <div class="text-right mb-6">
-                        <button id="apply-codes-btn"
-                            class="bg-gray-300 text-gray-800 py-2 px-6 rounded-md font-semibold hover:bg-gray-400 transition-colors duration-200">Áp
-                            dụng mã</button>
-                    </div>
+
                     <div id="discount-message" class="text-green-600 text-sm mt-2 hidden"></div>
                     <div id="referral-message" class="text-green-600 text-sm mt-1 hidden"></div>
 
@@ -257,12 +260,45 @@
                             <input type="text" id="recipient-name"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                         </div>
-                        <div>
-                            <label for="recipient-email"
-                                class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" id="recipient-email"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+
+                        <div class="flex items-end gap-3">
+
+                            <!-- Email input -->
+                            <div id="email-input-group" class="flex-grow">
+                                <label for="recipient-email"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="recipient-email"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                    placeholder="Nhập email">
+                            </div>
+
+                            <!-- Messenger input -->
+                            <div id="messenger-input-group" class="hidden flex-grow">
+                                <label for="recipient-messenger"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Link Facebook, Messenger</label>
+                                <input type="url" id="recipient-messenger" placeholder="https://facebook.com/..."
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                            </div>
+
+                            <!-- Toggle switch -->
+                            <div class="contact-switch flex-shrink-0">
+                                <input type="checkbox" id="contact-toggle" hidden>
+                                <label for="contact-toggle"
+                                    class="switch-label cursor-pointer inline-flex items-center justify-between rounded-full px-2 py-1 relative h-10">
+                                    <span class="icon email-icon text-xl" title="Email">
+                                        <i class="fab fa-facebook-messenger"></i>
+                                    </span>
+                                    <span class="icon messenger-icon text-xl" title="Messenger">
+                                        <i class="fas fa-envelope-open-text"></i></span>
+                                    <span
+                                        class="switch-ball absolute top-1 left-1 w-8 h-8 bg-white rounded-full shadow-md transition-left duration-300"></span>
+                                </label>
+                            </div>
+
                         </div>
+                        <p class="text-red-600 font-bold">Lưu ý: Hoá đơn và tài khoản sẽ được gửi qua email hoặc messenger, vui lòng kiểm tra kỹ để không nhầm lẫn thông tin.</p>
+
+
                         <div>
                             <label for="order-notes" class="block text-sm font-medium text-gray-700 mb-2">Nội dung / Ghi
                                 chú đơn hàng</label>
@@ -282,6 +318,7 @@
                     </div>
                 </div>
 
+
                 <div id="checkout-step-3" class="checkout-step">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Bước 3: Thanh toán</h3>
 
@@ -293,14 +330,13 @@
                                 checked>
                             <label for="payment-qr"
                                 class="ml-3 block text-base font-medium text-gray-700 cursor-pointer">Chuyển khoản Ngân
-                                hàng (Scan QR Code)</label>
+                                hàng</label>
                         </div>
-                        <div class="flex items-center bg-gray-50 p-4 rounded-md border border-gray-200">
+                        <div class="flex items-center bg-pink-500 p-4 rounded-md border border-gray-200">
                             <input type="radio" id="payment-momo" name="payment-method" value="momo"
                                 class="focus:ring-blue-500 h-5 w-5 text-blue-600 border-gray-300 cursor-pointer">
                             <label for="payment-momo"
-                                class="ml-3 block text-base font-medium text-gray-700 cursor-pointer">Ví điện tử Momo
-                                (Scan QR Code)</label>
+                                class="ml-3 block text-base font-medium text-white cursor-pointer">Ví điện tử Momo</label>
                         </div>
                     </div>
 
