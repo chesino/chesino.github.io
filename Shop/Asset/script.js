@@ -8,7 +8,7 @@ const products = [
         "priceNumeric": 45000,
         "warranty": "Đến khi hết hạn",
         "notes": "Youtube Premium chính chủ",
-        "catelogy": "Giải trí",
+        "category": "Giải trí",
         "imageUrl": "https://placehold.co/200x200/FF0000/FFFFFF?text=Youtube"
     },
     {
@@ -19,7 +19,7 @@ const products = [
         "priceNumeric": 250000,
         "warranty": "Đến khi hết hạn",
         "notes": "Youtube Premium chính chủ",
-        "catelogy": "Giải trí",
+        "category": "Giải trí",
         "imageUrl": "https://placehold.co/200x200/FF0000/FFFFFF?text=Youtube"
     },
     {
@@ -30,7 +30,7 @@ const products = [
         "priceNumeric": 450000,
         "warranty": "Đến khi hết hạn",
         "notes": "Youtube Premium chính chủ",
-        "catelogy": "Giải trí",
+        "category": "Giải trí",
         "imageUrl": "https://placehold.co/200x200/FF0000/FFFFFF?text=Youtube"
     },
     {
@@ -41,7 +41,7 @@ const products = [
         "priceNumeric": 150000,
         "warranty": "Đến khi hết hạn",
         "notes": "Key kích hoạt Windows 10 & 11 Pro",
-        "catelogy": "Máy tính",
+        "category": "Máy tính",
         "imageUrl": "https://placehold.co/200x200/19b1f0/FFFFFF?text=Windows"
     },
     {
@@ -52,7 +52,7 @@ const products = [
         "priceNumeric": 250000,
         "warranty": "Đến khi hết hạn",
         "notes": "Nâng cấp chính chủ Canva PRO, Giá 1.300.000đ/năm",
-        "catelogy": "Phần mềm",
+        "category": "Phần mềm",
         "imageUrl": "https://placehold.co/200x200/2591d6/FFFFFF?text=Canva"
     },
     {
@@ -63,7 +63,7 @@ const products = [
         "priceNumeric": 850000,
         "warranty": "Đến khi hết hạn",
         "notes": "Capcut Pro nâng cấp chính chủ 1 năm",
-        "catelogy": "Phần mềm",
+        "category": "Phần mềm",
         "imageUrl": "https://placehold.co/200x200/FFFFFF/000000?text=Capcut"
     },
     {
@@ -74,7 +74,7 @@ const products = [
         "priceNumeric": 200000,
         "warranty": "Đến khi hết hạn",
         "notes": "Tài khoản sẵn Capcut Pro, dùng chung",
-        "catelogy": "Phần mềm",
+        "category": "Phần mềm",
         "imageUrl": "https://placehold.co/200x200/FFFFFF/000000?text=Capcut"
     }
     // Add more products here if needed
@@ -601,34 +601,56 @@ function showCheckoutStep(step) {
         const paymentMethod = paymentMethodElement ? paymentMethodElement.value : 'unknown'; // Handle case where none is checked
         currentOrder.paymentMethod = paymentMethod;
 
-        currentOrder.orderId = Math.random().toString(36).slice(2, 10).toUpperCase();  // Ví dụ: 'X3GK8VZL'
+        currentOrder.orderId = formatName(currentOrder.recipientInfo.name) + ' ' + Math.random().toString(36).slice(2, 10).toUpperCase();  // Ví dụ: 'X3GK8VZL'
         if (orderIdSpan) orderIdSpan.textContent = currentOrder.orderId;
         if (orderIdInInstructionSpan) orderIdInInstructionSpan.textContent = currentOrder.orderId;
 
 
         if (paymentMethod === 'qr') {
-            if (paymentQrImg) paymentQrImg.src = `https://placehold.co/200x200/000000/FFFFFF?text=Bank+QR`;
+            if (paymentQrImg) paymentQrImg.src = `https://img.vietqr.io/image/970454-99MM24030M09540726-qr_only.png?amount=${currentOrder.totalAmount}&addInfo=${currentOrder.orderId}`;
             if (paymentAccountInfoP) {
                 paymentAccountInfoP.innerHTML = `
-                      <strong>Ngân hàng:</strong> Tên Ngân hàng<br>
-                      <strong>Số tài khoản:</strong> 1234567890<br>
-                      <strong>Chủ tài khoản:</strong> Nguyen Van A
-                  `;
+                  <strong>Ngân hàng:</strong> VietCapitalBank Bank<br>
+                  <strong>Số tài khoản:</strong> 
+                  <span id="momo-id">99MM24030M09540726</span>
+                  <i id="copy-momo" class="fas fa-copy" style="cursor:pointer; margin-left:6px;"></i><br>
+                  <strong>Tên tài khoản:</strong> MOMO_DINH MANH HUNG <br>
+                  <strong>Nội dung:</strong> ${currentOrder.orderId} <i id="copy-orderId" class="fas fa-copy" style="cursor:pointer; margin-left:6px;"></i>
+
+                `;
             }
             if (paymentQrImg) paymentQrImg.classList.remove('hidden');
         } else if (paymentMethod === 'momo') {
-            if (paymentQrImg) paymentQrImg.src = `https://placehold.co/200x200/C21373/FFFFFF?text=Momo+QR`;
+            if (paymentQrImg) paymentQrImg.src = `https://img.vietqr.io/image/970454-99MM24030M09540726-qr_only.png?amount=${currentOrder.totalAmount}&addInfo=${currentOrder.orderId}`;
             if (paymentAccountInfoP) {
                 paymentAccountInfoP.innerHTML = `
-                      <strong>Ví Momo:</strong> 0912 345 678<br>
-                      <strong>Chủ ví:</strong> Nguyen Van A
-                  `;
+                  <strong>Ngân hàng:</strong> VietCapitalBank Bank<br>
+                  <strong>Số tài khoản:</strong> 
+                  <span id="momo-id">99MM24030M09540726</span>
+                  <i id="copy-momo" class="fas fa-copy" style="cursor:pointer; margin-left:6px;"></i><br>
+                  <strong>Tên tài khoản:</strong> MOMO_DINH MANH HUNG <br>
+                  <strong>Nội dung:</strong> ${currentOrder.orderId} <i id="copy-orderId" class="fas fa-copy" style="cursor:pointer; margin-left:6px;"></i>
+                `;
             }
             if (paymentQrImg) paymentQrImg.classList.remove('hidden');
         } else {
             if (paymentQrImg) paymentQrImg.classList.add('hidden');
             if (paymentAccountInfoP) paymentAccountInfoP.textContent = "Không có thông tin thanh toán.";
         }
+
+        const icon = document.getElementById("copy-momo");
+        icon.onclick = () => {
+            navigator.clipboard.writeText(document.getElementById("momo-id").innerText);
+            icon.classList.replace("fa-copy", "fa-check");
+            setTimeout(() => icon.classList.replace("fa-check", "fa-copy"), 1500);
+        };
+
+        const copyIcon = document.getElementById("copy-orderId");
+        copyIcon.onclick = () => {
+            navigator.clipboard.writeText(currentOrder.orderId);
+            copyIcon.classList.replace("fa-copy", "fa-check");
+            setTimeout(() => copyIcon.classList.replace("fa-check", "fa-copy"), 1500);
+        };
 
         // Gửi đơn hàng đến Google Sheet
         sendOrderToGoogleSheet(currentOrder);
@@ -643,6 +665,34 @@ function showCheckoutStep(step) {
         updateDiscountReferralDisplay(); // Clear messages
     }
 }
+
+function formatName(name) {
+    // Bước 1: Chuẩn hóa unicode và loại bỏ dấu
+    let normalized = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    // Bước 2: Loại bỏ emoji và các ký tự đặc biệt, chỉ giữ a-z A-Z và khoảng trắng
+    normalized = normalized.replace(/[^a-zA-Z\s]/g, "");
+
+    // Bước 3: Chuẩn hóa khoảng trắng dư thừa và chuyển về thường
+    normalized = normalized.trim().replace(/\s+/g, " ").toLowerCase();
+
+    // Bước 4: Cắt lấy cụm từ cuối cùng tối đa 10 ký tự
+    const words = normalized.split(" ");
+    let result = "";
+
+    // Duyệt từ cuối lên để lấy cụm từ cuối cùng đủ tối đa 10 ký tự
+    for (let i = words.length - 1; i >= 0; i--) {
+        const word = words[i];
+        if ((word + " " + result).trim().length <= 10) {
+            result = word + " " + result;
+        } else {
+            break;
+        }
+    }
+
+    return result.trim();
+}
+
 
 
 /**
@@ -1073,7 +1123,7 @@ if (completeOrderBtn) { // Check if element exists
 
         // Simulate placing order by going to step 4
         // No actual backend call happens here
-        console.log("Simulated Order Placed:", currentOrder); // LOG
+        // console.log("Simulated Order Placed:", currentOrder); // LOG
 
         currentStep = 4; // Move to the final confirmation step
         showCheckoutStep(currentStep);
