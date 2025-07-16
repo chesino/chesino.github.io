@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình Gọi Số Bingo</title>
+    <style>
+        /* --- Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+        /* --- THEME DEFINITIONS --- */
+        .theme-light {
+            --bg: #e0e5ec; --primary: #0d6efd; --text: #3b4d66; --surface: #e0e5ec;
+            --success: #198754; --history-bg: #ffc107; --history-text: #212529;
+            --shadow-light: #ffffff; --shadow-dark: #a3b1c6; --font-main: 'Be Vietnam Pro', sans-serif;
+        }
+        .theme-dark {
+            --bg: #212529; --primary: #0d6efd; --text: #e0e5ec; --surface: #2c3034;
+            --success: #198754; --history-bg: #ffc107; --history-text: #212529;
+            --shadow-light: #363a3e; --shadow-dark: #1a1d20; --font-main: 'Be Vietnam Pro', sans-serif;
+        }
+        .theme-cute {
+            --bg: #fdf0f7; --primary: #f55a9b; --text: #5c3c4c; --surface: #ffffff;
+            --success: #54d2a1; --history-bg: #f9d648; --history-text: #5c3c4c;
+            --shadow-light: rgba(0,0,0,0); --shadow-dark: rgba(0,0,0,0.1); --font-main: 'Patrick Hand', cursive;
+        }
+        .theme-doraemon {
+            --bg: #a0d3f1; --primary: #004b8c; --text: #004b8c; --surface: #ffffff;
+            --success: #009688; --history-bg: #f8d147; --history-text: #004b8c;
+            --shadow-light: rgba(0,0,0,0); --shadow-dark: rgba(0,0,0,0.15); --font-main: 'Be Vietnam Pro', sans-serif;
+        }
+
+        /* --- General Styles --- */
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            font-family: var(--font-main); background-color: var(--bg); color: var(--text);
+            display: flex; justify-content: center; align-items: flex-start; /* Default alignment for mobile (allows scrolling) */
+            min-height: 100vh; /* Ensure body can grow taller than screen */
+            margin: 0; padding: 20px; transition: background-color 0.3s ease;
+        }
+        
+        /* --- Layout Structure --- */
+        .container {
+            width: 100%; 
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile first: single column */
+            gap: 20px;
+        }
+        .left-panel, .right-panel {
+            display: flex; flex-direction: column;
+            min-width: 0; 
+        }
+        .left-panel { justify-content: center; align-items: center; text-align: center; }
+        
+        /* --- DESKTOP LAYOUT OVERRIDES (>= 1024px) --- */
+        @media (min-width: 1024px) {
+            body {
+                align-items: center; /* Vertically center the container on desktop */
+                overflow: hidden; /* Prevent body from scrolling on desktop */
+            }
+            .container {
+                grid-template-columns: 40% 1fr; /* Two-column layout */
+                gap: 40px;
+                height: calc(100vh - 40px); /* Fill viewport height minus body padding */
+            }
+        }
+
+        header { position: relative; width: 100%; text-align: center; }
+        header h1 { font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 900; color: var(--text); margin: 0 0 20px 0; }
+        h2 { font-size: 1.5rem; color: var(--text); margin: 0 0 15px 0; text-align: left; border-bottom: 2px solid var(--shadow-dark); padding-bottom: 10px; flex-shrink: 0; }
+        .main-display { margin-bottom: 20px; }
+        #game-status { font-size: 1.1rem; font-weight: 500; min-height: 1.5em; }
+        footer { margin-top: 20px; font-size: 0.9rem; color: var(--text); opacity: 0.7; }
+        .right-panel { overflow: hidden; /* Prevent the panel itself from overflowing */ }
+        .called-history-container { flex-shrink: 0; }
+        .bingo-board-container { flex-grow: 1; overflow-y: auto; padding-right: 10px; }
+
+
+        /* --- THEMED ELEMENTS --- */
+        #current-number {
+            width: clamp(180px, 30vw, 220px); height: clamp(180px, 30vw, 220px); margin: 0 auto 20px auto;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: clamp(5rem, 12vw, 7rem); font-weight: 900; color: var(--primary); background: var(--surface);
+            box-shadow: inset 8px 8px 16px var(--shadow-dark), inset -8px -8px 16px var(--light-shadow);
+            transition: all 0.3s ease;
+        }
+        .theme-cute #current-number, .theme-doraemon #current-number { border: 5px solid var(--text); }
+        #current-number.popped { transform: scale(1.05); }
+
+        .controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 20px; width: 100%; max-width: 500px;}
+        .button {
+            padding: 15px 30px; font-size: 1rem; font-weight: 700; border: none;
+            border-radius: 50px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
+            font-family: 'Be Vietnam Pro', sans-serif; background: var(--surface); color: var(--text);
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--light-shadow); flex: 1; min-width: 150px;
+        }
+        #call-button { background: var(--primary); color: white; }
+        #call-button:disabled { background-color: #6c757d; box-shadow: none; cursor: not-allowed; }
+        #reset-button { color: #dc3545; }
+        .theme-cute .button, .theme-doraemon .button { border-radius: 12px; box-shadow: 0 4px 10px var(--shadow-dark); }
+        .theme-doraemon #reset-button { color: white; background: var(--primary); }
+        .theme-doraemon #call-button { background: #e60012; }
+        
+        #called-history { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 15px; border-radius: 12px; background: var(--surface); box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); }
+        .history-number { width: 40px; height: 40px; background-color: var(--history-bg); color: var(--history-text); font-weight: 700; display: flex; justify-content: center; align-items: center; border-radius: 50%; animation: fadeIn 0.5s ease; flex-shrink: 0;}
+        .theme-doraemon .history-number { border: 2px solid var(--text); }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        
+        #bingo-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 8px; }
+        .number-cell {
+            aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; border-radius: 12px;
+            font-weight: 700; font-size: clamp(0.9rem, 2.5vw, 1.1rem); transition: all 0.3s ease;
+            background: var(--surface); box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--light-shadow);
+        }
+        .number-cell.called { background-color: var(--success); color: white; font-weight: 900; box-shadow: inset 4px 4px 8px rgba(0,0,0,0.2), inset -4px -4px 8px rgba(255,255,255,0.2); }
+
+        /* --- SETTINGS MODAL --- */
+        #settings-button {
+            position: absolute; top: 0; right: 0; width: 50px; height: 50px; font-size: 1.8rem;
+            border: none; border-radius: 50%; cursor: pointer; color: var(--text); background: var(--surface);
+            box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--light-shadow);
+        }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: var(--bg); padding: 30px; border-radius: 15px; width: 90%; max-width: 500px;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.2); position: relative; text-align: left;
+            max-height: 80vh; overflow-y: auto;
+        }
+        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: var(--text); }
+        .setting-group { margin-bottom: 25px; }
+        .setting-group label { display: block; margin-bottom: 10px; font-weight: 700; }
+        select, .range-slider-group { width: 100%; padding: 10px; border-radius: 8px; border: 2px solid var(--shadow-dark); background: var(--bg); color: var(--text); font-family: var(--font-main); }
+        .range-slider-group { display: flex; align-items: center; gap: 15px; border: none; padding: 0;}
+        .range-slider-group input[type="range"] { flex-grow: 1; }
+        .theme-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+        .theme-button { padding: 10px 15px; border-radius: 8px; font-weight: 700; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; }
+        .theme-button.active { border-color: var(--primary); }
+    </style>
+</head>
+<body class="theme-light">
+    <main class="container">
+        <!-- Cột trái: Điều khiển chính -->
+        <div class="left-panel">
+            <header>
+                <h1>Bingo</h1>
+                <button id="settings-button" aria-label="Cài đặt">⚙️</button>
+            </header>
+            <section class="main-display">
+                <div id="current-number">...</div>
+                <p id="game-status">Sẵn sàng để bắt đầu!</p>
+            </section>
+            <section class="controls">
+                <button id="call-button" class="button">GỌI SỐ</button>
+                <button id="reset-button" class="button">CHƠI LẠI</button>
+            </section>
+            <footer><p>Thiết kế bởi HunqD &copy; 2025</p></footer>
+        </div>
+
+        <!-- Cột phải: Thông tin & Bảng dò -->
+        <div class="right-panel">
+            <section class="called-history-container">
+                <h2>Lịch sử đã gọi</h2>
+                <div id="called-history"></div>
+            </section>
+            <section class="bingo-board-container">
+                <h2>Bảng Dò</h2>
+                <div id="bingo-board"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close">&times;</button>
+            <h2>Cài đặt</h2>
+            <div class="setting-group">
+                <label for="language-select">Ngôn ngữ đọc</label>
+                <select id="language-select"></select>
+            </div>
+            <div class="setting-group">
+                <label for="voice-select">Giọng nói</label>
+                <select id="voice-select"></select>
+            </div>
+            <div class="setting-group">
+                <label for="rate-slider">Tốc độ đọc: <span id="rate-value">1.0</span></label>
+                <div class="range-slider-group">
+                    <span>Chậm</span>
+                    <input type="range" id="rate-slider" min="0.5" max="2" step="0.1" value="1">
+                    <span>Nhanh</span>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label for="pitch-slider">Cao độ giọng: <span id="pitch-value">1.0</span></label>
+                <div class="range-slider-group">
+                    <span>Thấp</span>
+                    <input type="range" id="pitch-slider" min="0.1" max="2" step="0.1" value="1">
+                    <span>Cao</span>
+                </div>
+            </div>
+            <div class="setting-group">
+                <label>Giao diện (Theme)</label>
+                <div id="theme-buttons" class="theme-buttons">
+                    <button class="theme-button" data-theme="theme-light">3D Sáng</button>
+                    <button class="theme-button" data-theme="theme-dark">3D Tối</button>
+                    <button class="theme-button" data-theme="theme-cute">Dễ thương</button>
+                    <button class="theme-button" data-theme="theme-doraemon">Doraemon</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // DOM Elements
+        const callButton = document.getElementById('call-button');
+        const resetButton = document.getElementById('reset-button');
+        const bingoBoard = document.getElementById('bingo-board');
+        const gameStatus = document.getElementById('game-status');
+        const currentNumberDisplay = document.getElementById('current-number');
+        const calledHistory = document.getElementById('called-history');
+        // Settings elements
+        const settingsButton = document.getElementById('settings-button');
+        const settingsModal = document.getElementById('settings-modal');
+        const modalClose = document.getElementById('modal-close');
+        const languageSelect = document.getElementById('language-select');
+        const voiceSelect = document.getElementById('voice-select');
+        const rateSlider = document.getElementById('rate-slider');
+        const rateValue = document.getElementById('rate-value');
+        const pitchSlider = document.getElementById('pitch-slider');
+        const pitchValue = document.getElementById('pitch-value');
+        const themeButtons = document.getElementById('theme-buttons');
+
+        // --- Game & Settings State ---
+        const TOTAL_NUMBERS = 75;
+        let availableNumbers = [], calledNumbers = [];
+        let voices = [];
+        let settings = {
+            lang: 'vi-VN',
+            voice: null,
+            rate: 1,
+            pitch: 1,
+            theme: 'theme-light'
+        };
+        const speechPrefix = { 'vi-VN': 'Số', 'en-US': 'Number', 'ja-JP': '' };
+        
+        // --- Settings Functions ---
+        function saveSettings() {
+            localStorage.setItem('bingoSettings', JSON.stringify(settings));
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('bingoSettings');
+            if (saved) {
+                settings = JSON.parse(saved);
+            }
+            applySettings();
+        }
+
+        function applySettings() {
+            // Apply theme
+            document.body.className = '';
+            document.body.classList.add(settings.theme);
+            document.querySelectorAll('.theme-button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === settings.theme);
+            });
+            
+            // Apply speech settings
+            rateSlider.value = settings.rate;
+            rateValue.textContent = settings.rate;
+            pitchSlider.value = settings.pitch;
+            pitchValue.textContent = settings.pitch;
+            
+            // Apply language (which will trigger voice population)
+            languageSelect.value = settings.lang;
+            populateVoiceList();
+        }
+
+        function populateLanguageList() {
+            const supportedLangs = {'vi-VN': 'Tiếng Việt', 'en-US': 'English', 'ja-JP': '日本語'};
+            languageSelect.innerHTML = '';
+            for (const [code, name] of Object.entries(supportedLangs)) {
+                const option = document.createElement('option');
+                option.value = code;
+                option.textContent = name;
+                languageSelect.appendChild(option);
+            }
+        }
+
+        function populateVoiceList() {
+            voices = speechSynthesis.getVoices();
+            voiceSelect.innerHTML = '';
+            const filteredVoices = voices.filter(voice => voice.lang.replace('_', '-') === settings.lang);
+            
+            filteredVoices.forEach(voice => {
+                const option = document.createElement('option');
+                option.value = voice.name;
+                option.textContent = `${voice.name} (${voice.lang})`;
+                voiceSelect.appendChild(option);
+            });
+
+            if (settings.voice && filteredVoices.some(v => v.name === settings.voice)) {
+                voiceSelect.value = settings.voice;
+            } else if (filteredVoices.length > 0) {
+                settings.voice = filteredVoices[0].name;
+            }
+        }
+
+        // --- Game Functions ---
+        function initializeGame() {
+            availableNumbers = Array.from({ length: TOTAL_NUMBERS }, (_, i) => i + 1);
+            calledNumbers = [];
+            callButton.disabled = false;
+            callButton.textContent = 'GỌI SỐ';
+            currentNumberDisplay.textContent = '...';
+            currentNumberDisplay.classList.remove('popped');
+            gameStatus.textContent = `Sẵn sàng! Còn lại ${TOTAL_NUMBERS} số.`;
+            calledHistory.innerHTML = '';
+            createBingoBoard();
+        }
+
+        function createBingoBoard() {
+            bingoBoard.innerHTML = '';
+            for (let i = 1; i <= TOTAL_NUMBERS; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('number-cell');
+                cell.id = `cell-${i}`;
+                cell.textContent = i;
+                bingoBoard.appendChild(cell);
+            }
+        }
+
+        function callNextNumber() {
+            if (availableNumbers.length === 0) {
+                endGame(); return;
+            }
+            callButton.disabled = true;
+
+            const randomIndex = Math.floor(Math.random() * availableNumbers.length);
+            const newNumber = availableNumbers.splice(randomIndex, 1)[0];
+            calledNumbers.push(newNumber);
+
+            updateDisplay(newNumber);
+            const prefix = speechPrefix[settings.lang] || '';
+            speakNumber(`${prefix} ${newNumber}`, () => {
+                 if (availableNumbers.length > 0) callButton.disabled = false;
+            });
+        }
+        
+        function updateDisplay(num) {
+            currentNumberDisplay.textContent = num;
+            currentNumberDisplay.classList.add('popped');
+            setTimeout(() => currentNumberDisplay.classList.remove('popped'), 200);
+            const cell = document.getElementById(`cell-${num}`);
+            if (cell) cell.classList.add('called');
+            gameStatus.textContent = `Còn lại ${availableNumbers.length} số.`;
+            const historyBubble = document.createElement('div');
+            historyBubble.classList.add('history-number');
+            historyBubble.textContent = num;
+            calledHistory.prepend(historyBubble);
+        }
+
+        function endGame() {
+            callButton.disabled = true;
+            callButton.textContent = 'HẾT SỐ!';
+            gameStatus.textContent = `Đã gọi tất cả ${TOTAL_NUMBERS} số!`;
+        }
+
+        function speakNumber(text, onEndCallback) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = settings.lang;
+                utterance.rate = settings.rate;
+                utterance.pitch = settings.pitch;
+                
+                const selectedVoice = voices.find(v => v.name === settings.voice);
+                if (selectedVoice) utterance.voice = selectedVoice;
+                
+                utterance.onend = onEndCallback;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                if (onEndCallback) onEndCallback();
+            }
+        }
+
+        // --- Event Listeners ---
+        callButton.addEventListener('click', callNextNumber);
+        resetButton.addEventListener('click', initializeGame);
+
+        // Settings Modal Listeners
+        settingsButton.addEventListener('click', () => settingsModal.classList.add('active'));
+        modalClose.addEventListener('click', () => settingsModal.classList.remove('active'));
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) settingsModal.classList.remove('active');
+        });
+
+        // Settings Change Listeners
+        languageSelect.addEventListener('change', (e) => {
+            settings.lang = e.target.value;
+            settings.voice = null;
+            populateVoiceList();
+            saveSettings();
+        });
+        voiceSelect.addEventListener('change', (e) => {
+            settings.voice = e.target.value;
+            saveSettings();
+        });
+        rateSlider.addEventListener('input', (e) => {
+            settings.rate = parseFloat(e.target.value);
+            rateValue.textContent = settings.rate.toFixed(1);
+            saveSettings();
+        });
+        pitchSlider.addEventListener('input', (e) => {
+            settings.pitch = parseFloat(e.target.value);
+            pitchValue.textContent = settings.pitch.toFixed(1);
+            saveSettings();
+        });
+        themeButtons.addEventListener('click', (e) => {
+            if (e.target.classList.contains('theme-button')) {
+                settings.theme = e.target.dataset.theme;
+                applySettings();
+                saveSettings();
+            }
+        });
+        
+        // --- Initial Load ---
+        window.addEventListener('load', () => {
+            populateLanguageList();
+            loadSettings();
+            initializeGame();
+            
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = populateVoiceList;
+            }
+        });
+    </script>
+</body>
+</html>
