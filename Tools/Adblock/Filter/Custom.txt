@@ -37,3 +37,13 @@
 ###209
 ##.samCodeUnit
 ##.samVideoOverlay
+##.js-notices.notices--block.notices
+##.u-clearFix.brmsLeftTabs.BRMSContainerDark.BRMSContainer
+##.samVideoOverlay
+nohu.top
+###catfish
+phimmoi15.net##.footer
+##.block-movie-content
+##.block-comments.page-single.block-wrapper
+##.block-tags
+||phimmoi15.net/wp-content/themes/halimmovies/img/logo.png$image

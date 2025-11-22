@@ -316,9 +316,11 @@ input:focus {
   gap: 10px;
   width: 100%;
 }
+
 .search-bar .search-box {
   width: 100%;
 }
+
 .search-bar input {
   min-height: 40px;
   width: 100%;
@@ -949,6 +951,7 @@ input:focus {
   color: var(--primary-color);
   font-weight: 600;
 }
+
 .HHS .footer a {
   color: greenyellow;
 }
@@ -1897,6 +1900,7 @@ input:focus {
   font-size: 16px;
   border-bottom: 1px solid #ddd;
 }
+
 .chat-header h1 {
   font-size: 12px;
 }
@@ -1924,6 +1928,7 @@ input:focus {
   flex-direction: column;
   gap: 10px;
 }
+
 .chat-container .btn-group {
   display: flex;
   flex-direction: column;
@@ -1931,6 +1936,7 @@ input:focus {
   padding: 0;
   max-width: 100%;
 }
+
 .chat-container .btn-group button {
   cursor: pointer !important;
   font-size: 14px;
@@ -1939,7 +1945,7 @@ input:focus {
   border-radius: 10px;
   background-color: var(--btn-bg);
   color: var(--btn-text);
-  border:none;
+  border: none;
 }
 
 /* Tin nhắn */
@@ -2005,6 +2011,7 @@ input:focus {
   cursor: pointer;
   border: none;
 }
+
 .typing-indicator .typing-dots {
   display: inline-flex;
   align-items: center;
@@ -2025,40 +2032,50 @@ input:focus {
 .dot span:nth-child(1) {
   animation-delay: 0s;
 }
+
 .typing-dots span:nth-child(2) {
   animation-delay: 0.2s;
 }
+
 .typing-dots span:nth-child(3) {
   animation-delay: 0.4s;
 }
 
 @keyframes bounce {
-  0%, 80%, 100% {
-      transform: translateY(0);
-      opacity: 0.6;
+
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
   }
+
   40% {
-      transform: translateY(-8px);
-      opacity: 1;
+    transform: translateY(-8px);
+    opacity: 1;
   }
 }
 
 .btn-group {
   margin-top: 5px;
 }
+
 .video-link {
   color: blue;
   text-decoration: underline;
   display: inline-block;
   margin-top: 10px;
 }
+
 .chat-box .user {
   padding-left: 10px;
 }
+
 .chat-box .bot,
 .chat-box .user {
   position: relative;
 }
+
 .copy-btn {
   position: absolute;
   right: -5px;
@@ -2070,12 +2087,123 @@ input:focus {
   cursor: pointer;
   font-size: 10px;
 }
-.chat-box .user .copy-btn{
+
+.chat-box .user .copy-btn {
   display: none;
   right: unset;
   left: -5px;
 }
-.copy-btn
-.copy-btn:hover {
+
+.copy-btn .copy-btn:hover {
   background-color: #e0e0e0;
+}
+
+/* CSS cho màn hình đăng nhập */
+#login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  /* Nền đen che kín */
+  z-index: 10000;
+  /* Đảm bảo nằm trên cùng */
+  display: flex;
+  /* Mặc định hiển thị */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  width: 350px;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.btn-login-submit {
+  width: 100%;
+  padding: 12px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.btn-login-submit:hover {
+  background: #333;
+}
+
+#login-error {
+  color: red;
+  margin-top: 15px;
+  font-size: 14px;
+  display: none;
+}
+
+/* Nút đăng xuất (Thêm vào header) */
+#logout-btn {
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 12px;
+  display: none;
+  /* Ẩn mặc định */
+}
+
+/* Nút thêm nhanh sản phẩm khi không tìm thấy */
+.no-product {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  width: 100%;
+}
+
+.btn-add-quick {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  /* Màu xanh lá */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s;
+}
+
+.btn-add-quick:hover {
+  background-color: #218838;
+}
+
+.btn-add-quick i {
+  font-size: 18px;
 }

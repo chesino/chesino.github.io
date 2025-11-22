@@ -3,164 +3,767 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Mai Tây Hair Salon</title>
-    <link rel="stylesheet" href="style.css">
+    <title>FTS PRO POS - All In One</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; overflow: hidden; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        
+        /* POS Tab Styles */
+        .tab-active { background-color: #4f46e5; color: white; border-bottom: none; }
+        .tab-inactive { background-color: #f1f5f9; color: #64748b; border-bottom: 2px solid #cbd5e1; }
+        
+        /* Print Styles - Quan trọng cho máy in nhiệt */
+        @media print {
+            @page { margin: 0; size: auto; }
+            body * { visibility: hidden; height: 0; overflow: hidden; }
+            #receipt-print-area, #receipt-print-area * { visibility: visible; height: auto; overflow: visible; }
+            #receipt-print-area { position: absolute; left: 0; top: 0; width: 100%; padding: 10px; font-family: 'Roboto Mono', monospace; color: black; background: white; }
+            .no-print { display: none !important; }
+        }
+    </style>
 </head>
-<body>
+<body class="h-screen flex flex-col text-slate-800">
 
-    <div class="container">
-        <h1>Dashboard Báo Cáo Kinh Doanh - Mai Tây Hair Salon</h1>
-
-        <div class="view-toggle-container">
-            <span>Chế độ xem: Cơ bản</span>
-            <label class="switch" title="Bật để hiển thị biểu đồ">
-                <input type="checkbox" id="chartToggle">
-                <span class="slider round"></span>
-            </label>
-            <span>Chi tiết (Biểu đồ)</span>
-        </div>
-
-
-        <div class="filter-section">
-            <h2>Bộ Lọc Dữ Liệu</h2>
-            <div class="filters">
-                <div class="filter-group">
-                    <label for="dateFilterType">Lọc Theo Thời Gian:</label>
-                    <select id="dateFilterType">
-                        <option value="all">Tất Cả</option>
-                        <option value="range">Khoảng Ngày</option>
-                        <option value="specific_date">Ngày Cụ Thể</option>
-                        <option value="month">Tháng</option>
-                        <option value="year">Năm</option>
-                    </select>
+    <div id="login-screen" class="fixed inset-0 z-[100] bg-slate-900 flex items-center justify-center transition-opacity duration-500">
+        <div class="bg-white p-10 rounded-2xl shadow-2xl w-[400px]">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 text-indigo-600 mb-4">
+                    <i class="fa-solid fa-cash-register text-3xl"></i>
                 </div>
-
-                <div id="dateFiltersContainer">
-                    <div class="filter-group date-range">
-                        <label for="startDate">Từ ngày:</label>
-                        <input type="date" id="startDate">
-                    </div>
-                    <div class="filter-group date-range">
-                        <label for="endDate">Đến ngày:</label>
-                        <input type="date" id="endDate">
-                    </div>
-
-                    <div class="filter-group specific-date hidden">
-                        <label for="specificDate">Ngày:</label>
-                        <input type="date" id="specificDate">
-                    </div>
-
-                    <div class="filter-group month-year hidden">
-                        <label for="filterMonthYear">Tháng/Năm:</label>
-                        <select id="filterMonthYear">
-                            <option value="">Chọn Tháng/Năm</option>
-                            </select>
-                    </div>
-
-                    <div class="filter-group year-only hidden">
-                        <label for="filterYearOnly">Năm:</label>
-                        <select id="filterYearOnly">
-                             <option value="">Chọn Năm</option>
-                            </select>
-                    </div>
+                <h1 class="text-3xl font-bold text-slate-800">FTS SYSTEM</h1>
+                <p class="text-slate-500 text-sm">Đăng nhập hệ thống bán lẻ</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-xs font-bold text-slate-500 uppercase">Mã Chi Nhánh</label>
+                    <input type="text" id="login-branch" class="w-full p-3 border border-slate-300 rounded-lg font-mono font-bold uppercase focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="VD: CN01">
                 </div>
-
-                <div class="filter-group">
-                    <label for="filterBranch">Chi nhánh:</label>
-                    <select id="filterBranch">
-                        <option value="">Tất cả</option>
-                        </select>
+                <div>
+                    <label class="text-xs font-bold text-slate-500 uppercase">Email</label>
+                    <input type="email" id="login-email" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
-                 <div class="filter-group">
-                    <label for="filterCashier">Nhân viên:</label>
-                    <select id="filterCashier">
-                        <option value="">Tất cả</option>
-                        </select>
+                <div>
+                    <label class="text-xs font-bold text-slate-500 uppercase">Mật Khẩu</label>
+                    <input type="password" id="login-pass" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
-                <div class="filter-group">
-                    <label for="filterCustomerInput">Khách hàng:</label>
-                    <input type="text" id="filterCustomerInput" list="customerSuggestions" placeholder="Nhập tên khách hàng">
-                    <datalist id="customerSuggestions"></datalist>
-                </div>
-                <div class="filter-group">
-                    <label for="filterPayment">Thanh toán:</label>
-                    <select id="filterPayment">
-                        <option value="">Tất cả</option>
-                        </select>
-                </div>
-                 <div class="filter-group">
-                    <label for="filterService">Dịch vụ:</label>
-                    <select id="filterService">
-                        <option value="">Tất cả</option>
-                        </select>
-                </div>
+                <button onclick="authLogin()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition shadow-lg transform active:scale-95">
+                    ĐĂNG NHẬP
+                </button>
+                <p id="login-error" class="text-red-500 text-xs text-center min-h-[20px]"></p>
             </div>
-            <div class="filter-actions">
-                <button id="applyFilters">Áp dụng Bộ Lọc</button>
-                <button id="resetFilters">Đặt lại Bộ Lọc</button>
-            </div>
-        </div>
-
-        <div class="summary-cards">
-            <div class="card">
-                <h2>Tổng Doanh Thu</h2>
-                <p id="totalRevenue">-</p>
-            </div>
-            <div class="card">
-                <h2>Tổng Giao Dịch</h2>
-                <p id="transactionsCount">-</p>
-            </div>
-            <div class="card">
-                <h2>Giá Trị Trung Bình Giao Dịch</h2>
-                <p id="avgTransactionValue">-</p>
-            </div>
-            <div class="card">
-                <h2>Tổng Chiết Khấu</h2>
-                <p id="totalDiscount">-</p>
-            </div>
-        </div>
-
-        <div class="charts-section">
-            <div class="chart-card full-width">
-                 <h2>Doanh Thu Theo Thời Gian</h2>
-                 <canvas id="revenueOverTimeChart"></canvas>
-            </div>
-            <div class="chart-card">
-                <h2>Doanh Thu Theo Phương Thức Thanh Toán</h2>
-                <canvas id="paymentMethodChart"></canvas>
-            </div>
-            <div class="chart-card">
-                <h2>Số Lượng Giao Dịch Theo Nhân Viên</h2>
-                <canvas id="cashierChart"></canvas>
-            </div>
-             <div class="chart-card full-width">
-                <h2>Số Lượng Giao Dịch Chứa Dịch Vụ Này</h2>
-                 <canvas id="serviceTransactionCountChart"></canvas>
-             </div>
-        </div>
-
-        <div class="transaction-list-section">
-            <h2>Chi Tiết Giao Dịch</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Thời gian</th>
-                        <th>Chi nhánh</th>
-                        <th>Khách hàng</th>
-                        <th>Nhân viên</th>
-                        <th>Dịch vụ</th>
-                        <th>Thanh toán</th>
-                        <th>Chiết khấu</th>
-                        <th>Tổng tiền</th>
-                    </tr>
-                </thead>
-                <tbody id="transactionTableBody">
-                    </tbody>
-            </table>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="pin-modal" class="fixed inset-0 z-[90] bg-black/80 hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-2xl p-6 w-80 text-center shadow-2xl">
+            <div class="mb-4 text-indigo-600"><i class="fa-solid fa-shield-halved text-4xl"></i></div>
+            <h3 class="font-bold text-lg text-slate-800">Nhập mã PIN Bảo Mật</h3>
+            <p class="text-xs text-slate-500 mb-4">Khu vực dành cho quản lý</p>
+            <input type="password" id="pin-input" maxlength="4" class="w-full text-center text-3xl tracking-[1em] font-bold border-b-2 border-indigo-500 focus:outline-none mb-6 py-2" placeholder="••••">
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="closePinModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 py-2 rounded-lg font-bold">Hủy</button>
+                <button onclick="verifyPin()" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-bold">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-layout" class="flex h-full hidden">
+        <aside class="w-20 lg:w-64 bg-slate-900 text-slate-300 flex flex-col shadow-xl z-10">
+            <div class="h-16 flex items-center justify-center lg:justify-start lg:px-6 bg-slate-950 border-b border-slate-800 font-bold text-white truncate">
+                <i class="fa-solid fa-cube text-xl mr-3"></i> <span class="hidden lg:block" id="lbl-branch-name">BRANCH</span>
+            </div>
+            
+            <nav class="flex-1 py-4 space-y-1">
+                <a onclick="nav('pos')" id="nav-pos" class="cursor-pointer flex items-center px-4 lg:px-6 py-3 hover:bg-slate-800 hover:text-white transition border-l-4 border-transparent hover:border-indigo-500">
+                    <i class="fa-solid fa-store text-xl w-8 text-center"></i> <span class="hidden lg:block font-medium">Thu Ngân</span>
+                </a>
+                <a onclick="nav('customers')" id="nav-customers" class="cursor-pointer flex items-center px-4 lg:px-6 py-3 hover:bg-slate-800 hover:text-white transition border-l-4 border-transparent hover:border-indigo-500">
+                    <i class="fa-solid fa-users text-xl w-8 text-center"></i> <span class="hidden lg:block font-medium">Khách Hàng</span>
+                </a>
+                <div class="my-2 border-t border-slate-800"></div>
+                <a onclick="secureNav('dashboard')" id="nav-dashboard" class="cursor-pointer flex items-center px-4 lg:px-6 py-3 hover:bg-slate-800 hover:text-white transition border-l-4 border-transparent hover:border-red-500">
+                    <i class="fa-solid fa-chart-pie text-xl w-8 text-center"></i> <span class="hidden lg:block font-medium">Báo Cáo <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50"></i></span>
+                </a>
+                <a onclick="secureNav('inventory')" id="nav-inventory" class="cursor-pointer flex items-center px-4 lg:px-6 py-3 hover:bg-slate-800 hover:text-white transition border-l-4 border-transparent hover:border-red-500">
+                    <i class="fa-solid fa-boxes-stacked text-xl w-8 text-center"></i> <span class="hidden lg:block font-medium">Kho Hàng <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50"></i></span>
+                </a>
+                <a onclick="secureNav('staff')" id="nav-staff" class="cursor-pointer flex items-center px-4 lg:px-6 py-3 hover:bg-slate-800 hover:text-white transition border-l-4 border-transparent hover:border-red-500">
+                    <i class="fa-solid fa-id-card text-xl w-8 text-center"></i> <span class="hidden lg:block font-medium">Nhân Sự <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50"></i></span>
+                </a>
+                <a onclick="secureNav('settings')" id="nav-settings" class="cursor-pointer flex items-center px-4 lg:px-6 py-3 hover:bg-slate-800 hover:text-white transition border-l-4 border-transparent hover:border-red-500">
+                    <i class="fa-solid fa-sliders text-xl w-8 text-center"></i> <span class="hidden lg:block font-medium">Cấu Hình <i class="fa-solid fa-lock text-[10px] ml-1 opacity-50"></i></span>
+                </a>
+            </nav>
+
+            <div class="p-4 bg-slate-950 border-t border-slate-800">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded bg-indigo-600 flex items-center justify-center text-white font-bold text-xs" id="avatar-char">U</div>
+                    <div class="overflow-hidden hidden lg:block">
+                        <div class="text-sm font-bold text-white truncate" id="lbl-username">User</div>
+                        <div class="text-[10px] text-slate-400 uppercase" id="lbl-role">Staff</div>
+                    </div>
+                </div>
+                <button onclick="logout()" class="w-full bg-red-600/20 hover:bg-red-600 text-red-500 hover:text-white py-2 rounded text-xs font-bold transition">
+                    <i class="fa-solid fa-power-off mr-1"></i> Đăng Xuất
+                </button>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col bg-slate-100 overflow-hidden relative">
+            <div id="screen-pos" class="h-full flex flex-col lg:flex-row p-2 gap-2 hidden">
+                <div class="flex-1 bg-white rounded-xl shadow-sm border flex flex-col overflow-hidden">
+                    <div class="p-3 border-b flex gap-2 bg-white">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400"></i>
+                            <input type="text" id="pos-search" onkeyup="renderProducts()" placeholder="Tìm kiếm (F1)" class="w-full pl-10 pr-4 py-2 border rounded-lg bg-slate-50 focus:bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition">
+                        </div>
+                        <select id="pos-cat-filter" onchange="renderProducts()" class="border rounded-lg px-4 bg-slate-50"><option value="all">Tất cả</option></select>
+                    </div>
+                    <div id="product-grid" class="flex-1 overflow-y-auto p-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 content-start bg-slate-50/50">
+                        </div>
+                </div>
+
+                <div class="w-full lg:w-[420px] bg-white rounded-xl shadow-lg border flex flex-col z-20">
+                    <div class="flex overflow-x-auto bg-slate-100 border-b scrollbar-hide" id="tab-container">
+                        </div>
+                    
+                    <div class="px-4 py-2 bg-indigo-50 border-b border-indigo-100 flex justify-between items-center h-12">
+                        <div onclick="openCustomerSelect()" class="flex-1 cursor-pointer group">
+                            <div class="text-[10px] text-slate-500 font-bold uppercase">Khách Hàng</div>
+                            <div class="font-bold text-indigo-800 flex items-center">
+                                <span id="cart-cust-name">Khách Lẻ</span>
+                                <span id="cart-cust-tier" class="ml-2 px-1.5 py-0.5 bg-yellow-400 text-yellow-900 text-[10px] rounded hidden">GOLD</span>
+                                <i class="fa-solid fa-chevron-down ml-auto text-xs opacity-0 group-hover:opacity-100"></i>
+                            </div>
+                        </div>
+                        <button onclick="resetCustomer()" class="ml-2 w-6 h-6 rounded hover:bg-indigo-200 text-indigo-600 flex items-center justify-center"><i class="fa-solid fa-user-minus text-xs"></i></button>
+                    </div>
+
+                    <div id="cart-list" class="flex-1 overflow-y-auto p-2 space-y-1">
+                        </div>
+
+                    <div class="p-4 bg-white border-t shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-30">
+                        <div class="space-y-2 text-sm mb-3">
+                            <div class="flex justify-between text-slate-500">
+                                <span>Tạm tính</span>
+                                <span id="val-subtotal">0 ₫</span>
+                            </div>
+                            <div class="flex justify-between text-green-600">
+                                <span>Giảm hạng khách (<span id="lbl-discount-percent">0</span>%)</span>
+                                <span>- <span id="val-discount">0 ₫</span></span>
+                            </div>
+                            <div class="flex justify-between text-blue-600 items-center">
+                                <span>Giảm thêm (Voucher)</span>
+                                <input type="number" id="inp-manual-disc" onchange="updateCartTotals()" class="w-20 text-right border-b border-blue-200 focus:border-blue-600 outline-none text-blue-700 font-bold" placeholder="VNĐ">
+                            </div>
+                            <div class="border-t border-dashed border-slate-300 my-2"></div>
+                            <div class="flex justify-between items-end">
+                                <span class="font-bold text-lg text-slate-800">TỔNG CỘNG</span>
+                                <span class="font-bold text-2xl text-indigo-700" id="val-total">0 ₫</span>
+                            </div>
+                        </div>
+                        <button onclick="processCheckout()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold text-lg shadow-lg shadow-indigo-200 active:translate-y-0.5 transition flex justify-center items-center">
+                            <i class="fa-solid fa-print mr-2"></i> THANH TOÁN
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="screen-dashboard" class="hidden h-full p-6 overflow-y-auto">
+                <h2 class="text-2xl font-bold mb-4 text-slate-800">Báo Cáo Doanh Thu</h2>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-indigo-500">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Hôm nay</p>
+                        <p class="text-2xl font-bold text-slate-800" id="rpt-today">0 ₫</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-green-500">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Tháng này</p>
+                        <p class="text-2xl font-bold text-slate-800" id="rpt-month">0 ₫</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-orange-500">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Đơn hàng</p>
+                        <p class="text-2xl font-bold text-slate-800" id="rpt-orders">0</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm h-80">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <div id="screen-inventory" class="hidden h-full p-6 overflow-y-auto flex flex-col">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-slate-800">Quản Lý Kho</h2>
+                    <div class="flex gap-2">
+                        <button onclick="exportJSON()" class="px-4 py-2 bg-green-600 text-white rounded font-bold text-sm"><i class="fa-solid fa-download"></i> Xuất JSON</button>
+                        <label class="px-4 py-2 bg-blue-600 text-white rounded font-bold text-sm cursor-pointer"><i class="fa-solid fa-upload"></i> Nhập JSON <input type="file" class="hidden" onchange="importJSON(this)"></label>
+                        <button onclick="openProductModal()" class="px-4 py-2 bg-indigo-600 text-white rounded font-bold text-sm"><i class="fa-solid fa-plus"></i> Thêm SP</button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow flex-1 overflow-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-100 sticky top-0">
+                            <tr>
+                                <th class="p-3">Tên Sản Phẩm</th>
+                                <th class="p-3 text-right">Giá Bán</th>
+                                <th class="p-3 text-right">Giá Vốn</th>
+                                <th class="p-3 text-center">Tồn Kho</th>
+                                <th class="p-3 text-center">Tác vụ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table" class="divide-y"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="screen-customers" class="hidden h-full p-6 overflow-y-auto flex flex-col">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-slate-800">Khách Hàng (CRM)</h2>
+                    <button onclick="addNewCustomer()" class="px-4 py-2 bg-indigo-600 text-white rounded font-bold"><i class="fa-solid fa-user-plus"></i> Thêm mới</button>
+                </div>
+                <div class="bg-white rounded-xl shadow flex-1 overflow-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-100 sticky top-0"><tr><th class="p-3">Tên</th><th class="p-3">SĐT</th><th class="p-3">Hạng</th><th class="p-3 text-right">Chi Tiêu</th><th class="p-3 text-right">Điểm</th></tr></thead>
+                        <tbody id="crm-table" class="divide-y"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="screen-staff" class="hidden h-full p-6 overflow-y-auto">
+                <div class="flex justify-between mb-4">
+                    <h2 class="text-2xl font-bold">Nhân Sự & Phân Quyền</h2>
+                    <button onclick="addStaff()" class="bg-indigo-600 text-white px-4 py-2 rounded font-bold">Thêm Nhân Viên</button>
+                </div>
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-slate-100"><tr><th class="p-4">Email</th><th class="p-4">Tên</th><th class="p-4">Vai Trò</th><th class="p-4">Mã PIN</th><th class="p-4">Hành động</th></tr></thead>
+                        <tbody id="staff-table" class="divide-y"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="screen-settings" class="hidden h-full p-6 overflow-y-auto max-w-2xl mx-auto w-full">
+                <h2 class="text-2xl font-bold mb-6">Cấu Hình Hệ Thống</h2>
+                <div class="bg-white p-6 rounded-xl shadow space-y-4">
+                    <h3 class="font-bold border-b pb-2">Thông Tin Hóa Đơn</h3>
+                    <div><label class="block text-xs font-bold text-slate-500">Tên Cửa Hàng</label><input type="text" id="cfg-store-name" class="w-full border p-2 rounded"></div>
+                    <div><label class="block text-xs font-bold text-slate-500">Địa Chỉ</label><input type="text" id="cfg-store-addr" class="w-full border p-2 rounded"></div>
+                    <div><label class="block text-xs font-bold text-slate-500">SĐT Hotline</label><input type="text" id="cfg-store-phone" class="w-full border p-2 rounded"></div>
+                    <div><label class="block text-xs font-bold text-slate-500">Lời Chào Cuối Bill</label><textarea id="cfg-store-footer" class="w-full border p-2 rounded h-20"></textarea></div>
+                    <button onclick="saveSettings()" class="w-full bg-indigo-600 text-white py-2 rounded font-bold">Lưu Cấu Hình</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal-product" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white p-6 rounded-xl w-96 space-y-3">
+            <h3 class="font-bold text-lg">Thông Tin Sản Phẩm</h3>
+            <input type="hidden" id="prod-id">
+            <input type="text" id="prod-name" placeholder="Tên sản phẩm" class="w-full border p-2 rounded">
+            <div class="flex gap-2">
+                <input type="number" id="prod-price" placeholder="Giá bán" class="w-full border p-2 rounded">
+                <input type="number" id="prod-cost" placeholder="Giá vốn" class="w-full border p-2 rounded">
+            </div>
+            <div class="flex gap-2">
+                <input type="number" id="prod-stock" placeholder="Tồn kho" class="w-full border p-2 rounded">
+                <input type="text" id="prod-cat" placeholder="Danh mục" class="w-full border p-2 rounded" list="cat-list">
+                <datalist id="cat-list"></datalist>
+            </div>
+            <div class="flex gap-2 pt-2">
+                <button onclick="document.getElementById('modal-product').classList.add('hidden')" class="flex-1 bg-slate-200 py-2 rounded font-bold">Hủy</button>
+                <button onclick="saveProduct()" class="flex-1 bg-indigo-600 text-white py-2 rounded font-bold">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-customer-select" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white p-6 rounded-xl w-[500px] h-[400px] flex flex-col">
+            <div class="flex justify-between mb-3">
+                <h3 class="font-bold">Chọn Khách Hàng</h3>
+                <button onclick="document.getElementById('modal-customer-select').classList.add('hidden')"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <input type="text" id="cust-search-key" onkeyup="searchCustomerInternal()" class="border p-2 rounded w-full mb-2" placeholder="Nhập tên hoặc SĐT...">
+            <div id="cust-list-result" class="flex-1 overflow-y-auto border rounded bg-slate-50 p-2 space-y-1"></div>
+        </div>
+    </div>
+
+    <div id="receipt-print-area" class="hidden">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <h2 style="font-size: 18px; font-weight: bold; margin: 0;" id="print-store-name">MY STORE</h2>
+            <p style="font-size: 12px; margin: 2px 0;" id="print-store-addr">123 Street, City</p>
+            <p style="font-size: 12px; margin: 2px 0;">Tel: <span id="print-store-phone">0909090909</span></p>
+        </div>
+        <div style="border-bottom: 1px dashed #000; margin-bottom: 5px;"></div>
+        <div style="display: flex; justify-content: space-between; font-size: 12px;">
+            <span>Date: <span id="print-date"></span></span>
+            <span>No: <span id="print-id"></span></span>
+        </div>
+        <div style="border-bottom: 1px dashed #000; margin: 5px 0;"></div>
+        <table style="width: 100%; font-size: 12px; border-collapse: collapse;">
+            <thead><tr style="text-align: left;"><th>Item</th><th style="text-align: right;">Qty</th><th style="text-align: right;">Total</th></tr></thead>
+            <tbody id="print-items"></tbody>
+        </table>
+        <div style="border-bottom: 1px dashed #000; margin: 5px 0;"></div>
+        <div style="text-align: right; font-size: 12px;">
+            <p style="margin: 2px 0;">Subtotal: <span id="print-subtotal"></span></p>
+            <p style="margin: 2px 0;">Discount: <span id="print-discount"></span></p>
+            <p style="margin: 5px 0; font-size: 16px; font-weight: bold;">TOTAL: <span id="print-total"></span></p>
+        </div>
+        <div style="text-align: center; margin-top: 15px; font-size: 12px;">
+            <p id="print-footer">Thank you!</p>
+            <p>--- Administered by FTS ---</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, query, where, orderBy, serverTimestamp, onSnapshot, writeBatch, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFVEewFQpvq7awQi4xobqNvOq2Fmsso1E",
+            authDomain: "pos-hunq.firebaseapp.com",
+            projectId: "pos-hunq",
+            storageBucket: "pos-hunq.firebasestorage.app",
+            messagingSenderId: "723349111259",
+            appId: "1:723349111259:web:84d6d982b838c68da7e7fe",
+            measurementId: "G-6Z229N0WFX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- GLOBAL STORE ---
+        let store = {
+            user: null,
+            branchId: null,
+            products: [],
+            ordersTabs: [],
+            activeTabId: 0,
+            settings: {},
+            customers: []
+        };
+        
+        // --- AUTH ---
+        window.authLogin = async () => {
+            const branch = document.getElementById('login-branch').value.trim().toUpperCase();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
+            const err = document.getElementById('login-error');
+
+            if(!branch) return err.innerText = "Vui lòng nhập mã chi nhánh!";
+
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                localStorage.setItem('fts_branch', branch);
+                window.location.reload();
+            } catch (e) {
+                err.innerText = "Lỗi: " + e.message;
+            }
+        }
+
+        window.logout = () => {
+            signOut(auth);
+            localStorage.removeItem('fts_branch');
+            window.location.reload();
+        }
+
+        onAuthStateChanged(auth, async (u) => {
+            const branch = localStorage.getItem('fts_branch');
+            if(u && branch) {
+                store.branchId = branch;
+                // Fetch User Role
+                const userSnap = await getDoc(doc(db, "users", u.uid));
+                store.user = userSnap.exists() ? {uid: u.uid, ...userSnap.data()} : {uid: u.uid, role: 'staff', name: u.email, pin: '0000'};
+                
+                // UI Update
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('app-layout').classList.remove('hidden');
+                document.getElementById('lbl-branch-name').innerText = "CN: " + branch;
+                document.getElementById('lbl-username').innerText = store.user.name;
+                document.getElementById('lbl-role').innerText = store.user.role.toUpperCase();
+                document.getElementById('avatar-char').innerText = store.user.name.charAt(0).toUpperCase();
+
+                // Init Data
+                initListeners();
+                loadSettings();
+                
+                // Create first tab
+                if(store.ordersTabs.length === 0) addTab();
+                nav('pos');
+            } else {
+                document.getElementById('login-screen').classList.remove('hidden');
+            }
+        });
+
+        function initListeners() {
+            // Products
+            const qProd = query(collection(db, "products"), where("branchId", "==", store.branchId));
+            onSnapshot(qProd, (snap) => {
+                store.products = [];
+                snap.forEach(d => store.products.push({id: d.id, ...d.data()}));
+                renderProducts();
+                renderInventory();
+            });
+
+            // Customers (For caching search)
+            const qCust = query(collection(db, "customers"), where("branchId", "==", store.branchId));
+            onSnapshot(qCust, (snap) => {
+                store.customers = [];
+                snap.forEach(d => store.customers.push({id: d.id, ...d.data()}));
+                renderCRM();
+            });
+        }
+
+        // --- POS LOGIC ---
+        window.addTab = () => {
+            const id = Date.now();
+            store.ordersTabs.push({
+                id: id,
+                items: [],
+                customer: null,
+                manualDiscount: 0
+            });
+            switchTab(id);
+        }
+
+        window.switchTab = (id) => {
+            store.activeTabId = id;
+            renderTabs();
+            updateCartUI();
+        }
+
+        window.closeTab = (e, id) => {
+            e.stopPropagation();
+            if(store.ordersTabs.length <= 1) return alert("Giữ ít nhất 1 đơn!");
+            store.ordersTabs = store.ordersTabs.filter(t => t.id !== id);
+            if(store.activeTabId === id) switchTab(store.ordersTabs[0].id);
+            else renderTabs();
+        }
+
+        function renderTabs() {
+            const el = document.getElementById('tab-container');
+            el.innerHTML = store.ordersTabs.map((t, i) => `
+                <div onclick="switchTab(${t.id})" class="flex-shrink-0 px-4 py-3 text-sm font-bold cursor-pointer flex items-center gap-2 border-r ${t.id === store.activeTabId ? 'tab-active' : 'tab-inactive'}">
+                    Đơn ${i + 1}
+                    <span onclick="closeTab(event, ${t.id})" class="hover:text-red-500 ml-1 text-xs"><i class="fa-solid fa-times"></i></span>
+                </div>
+            `).join('') + `<button onclick="addTab()" class="px-3 hover:bg-slate-200 text-slate-500"><i class="fa-solid fa-plus"></i></button>`;
+        }
+
+        window.renderProducts = () => {
+            const key = document.getElementById('pos-search').value.toLowerCase();
+            const cat = document.getElementById('pos-cat-filter').value;
+            const grid = document.getElementById('product-grid');
+            
+            // Unique Cats
+            const cats = [...new Set(store.products.map(p => p.category))];
+            const sel = document.getElementById('pos-cat-filter');
+            if(sel.options.length === 1) cats.forEach(c => sel.innerHTML += `<option value="${c}">${c}</option>`);
+
+            grid.innerHTML = store.products
+                .filter(p => (cat === 'all' || p.category === cat) && (p.name.toLowerCase().includes(key)))
+                .map(p => `
+                    <div onclick="addToCart('${p.id}')" class="bg-white p-3 rounded-lg shadow hover:shadow-md cursor-pointer border border-slate-100 flex flex-col justify-between h-24 group hover:border-indigo-500 transition">
+                        <div class="font-bold text-sm line-clamp-2 text-slate-700 group-hover:text-indigo-600 leading-tight">${p.name}</div>
+                        <div class="flex justify-between items-end">
+                            <span class="font-bold text-indigo-700">${p.price.toLocaleString()}</span>
+                            <span class="text-[10px] text-slate-400 bg-slate-100 px-1 rounded">Kho: ${p.stock}</span>
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        window.addToCart = (pid) => {
+            const tab = store.ordersTabs.find(t => t.id === store.activeTabId);
+            const prod = store.products.find(p => p.id === pid);
+            if(prod.stock <= 0) return alert("Hết hàng!");
+
+            const exist = tab.items.find(i => i.id === pid);
+            if(exist) exist.qty++;
+            else tab.items.push({...prod, qty: 1});
+            updateCartUI();
+        }
+
+        window.updateCartTotals = () => {
+             const tab = store.ordersTabs.find(t => t.id === store.activeTabId);
+             tab.manualDiscount = Number(document.getElementById('inp-manual-disc').value);
+             updateCartUI();
+        }
+
+        function updateCartUI() {
+            const tab = store.ordersTabs.find(t => t.id === store.activeTabId);
+            const list = document.getElementById('cart-list');
+            
+            // Calc
+            const subtotal = tab.items.reduce((s, i) => s + (i.price * i.qty), 0);
+            let tierDiscount = 0;
+            let tierPercent = 0;
+
+            if(tab.customer) {
+                const spent = tab.customer.totalSpent || 0;
+                if(spent > 20000000) { tierPercent = 10; document.getElementById('cart-cust-tier').innerText="DIAMOND"; }
+                else if(spent > 5000000) { tierPercent = 5; document.getElementById('cart-cust-tier').innerText="GOLD"; }
+                else if(spent > 1000000) { tierPercent = 2; document.getElementById('cart-cust-tier').innerText="SILVER"; }
+                else { document.getElementById('cart-cust-tier').innerText="NEW"; }
+                
+                document.getElementById('cart-cust-tier').classList.remove('hidden');
+                document.getElementById('cart-cust-name').innerText = tab.customer.name;
+                tierDiscount = subtotal * (tierPercent/100);
+            } else {
+                document.getElementById('cart-cust-name').innerText = "Khách Lẻ";
+                document.getElementById('cart-cust-tier').classList.add('hidden');
+            }
+
+            const total = subtotal - tierDiscount - tab.manualDiscount;
+
+            // Render List
+            list.innerHTML = tab.items.map((item, idx) => `
+                <div class="flex justify-between items-center bg-slate-50 p-2 rounded text-sm border border-slate-100">
+                    <div class="flex-1">
+                        <div class="font-medium text-slate-700 truncate w-32">${item.name}</div>
+                        <div class="text-[10px] text-slate-400">${item.price.toLocaleString()}</div>
+                    </div>
+                    <div class="flex items-center bg-white border rounded">
+                        <button onclick="modQty(${idx}, -1)" class="w-6 h-6 hover:bg-slate-100">-</button>
+                        <span class="w-6 text-center font-bold text-xs">${item.qty}</span>
+                        <button onclick="modQty(${idx}, 1)" class="w-6 h-6 hover:bg-slate-100">+</button>
+                    </div>
+                    <div class="w-20 text-right font-bold text-slate-700">${(item.price*item.qty).toLocaleString()}</div>
+                </div>
+            `).join('');
+
+            // Update Footer
+            document.getElementById('val-subtotal').innerText = subtotal.toLocaleString() + ' ₫';
+            document.getElementById('lbl-discount-percent').innerText = tierPercent;
+            document.getElementById('val-discount').innerText = tierDiscount.toLocaleString() + ' ₫';
+            document.getElementById('val-total').innerText = (total < 0 ? 0 : total).toLocaleString() + ' ₫';
+        }
+
+        window.modQty = (idx, delta) => {
+            const tab = store.ordersTabs.find(t => t.id === store.activeTabId);
+            tab.items[idx].qty += delta;
+            if(tab.items[idx].qty <= 0) tab.items.splice(idx, 1);
+            updateCartUI();
+        }
+
+        // --- CUSTOMER & SEARCH ---
+        window.openCustomerSelect = () => {
+            document.getElementById('modal-customer-select').classList.remove('hidden');
+            searchCustomerInternal();
+        }
+        window.searchCustomerInternal = () => {
+            const k = document.getElementById('cust-search-key').value.toLowerCase();
+            const res = document.getElementById('cust-list-result');
+            res.innerHTML = store.customers
+                .filter(c => c.name.toLowerCase().includes(k) || c.phone.includes(k))
+                .map(c => `
+                    <div onclick="selectCustomer('${c.id}')" class="p-2 border-b hover:bg-slate-100 cursor-pointer flex justify-between">
+                        <span>${c.name} (${c.phone})</span>
+                        <span class="text-xs font-bold text-indigo-600">${(c.points||0).toLocaleString()} pts</span>
+                    </div>
+                `).join('');
+        }
+        window.selectCustomer = (cid) => {
+            const tab = store.ordersTabs.find(t => t.id === store.activeTabId);
+            tab.customer = store.customers.find(c => c.id === cid);
+            document.getElementById('modal-customer-select').classList.add('hidden');
+            updateCartUI();
+        }
+        window.resetCustomer = () => {
+            const tab = store.ordersTabs.find(t => t.id === store.activeTabId);
+            tab.customer = null;
+            updateCartUI();
+        }
+        window.addNewCustomer = async () => {
+            const n = prompt("Tên:"); const p = prompt("SĐT:");
+            if(n && p) await addDoc(collection(db, "customers"), { branchId: store.branchId, name: n, phone: p, points: 0, totalSpent: 0, createdAt: serverTimestamp() });
+        }
+
+        // --- CHECKOUT & PRINT ---
+        window.processCheckout = async () => {
+            const tab = store.ordersTabs.find(t => t.id === store.activeTabId);
+            if(tab.items.length === 0) return alert("Giỏ hàng trống!");
+            
+            const totalText = document.getElementById('val-total').innerText.replace(/[^\d]/g,'');
+            const totalVal = parseInt(totalText);
+
+            if(!confirm("Xác nhận thanh toán?")) return;
+
+            const orderData = {
+                branchId: store.branchId,
+                items: tab.items,
+                total: totalVal,
+                subtotal: parseInt(document.getElementById('val-subtotal').innerText.replace(/[^\d]/g,'')),
+                discount: parseInt(document.getElementById('val-discount').innerText.replace(/[^\d]/g,'')) + tab.manualDiscount,
+                customerId: tab.customer ? tab.customer.id : null,
+                staffName: store.user.name,
+                timestamp: serverTimestamp()
+            };
+
+            // Write DB
+            const batch = writeBatch(db);
+            const ordRef = doc(collection(db, "orders"));
+            batch.set(ordRef, orderData);
+
+            tab.items.forEach(i => {
+                batch.update(doc(db, "products", i.id), { stock: increment(-i.qty) });
+            });
+
+            if(tab.customer) {
+                const pts = Math.floor(totalVal / 100000);
+                batch.update(doc(db, "customers", tab.customer.id), { totalSpent: increment(totalVal), points: increment(pts) });
+            }
+
+            await batch.commit();
+            
+            // Print
+            printReceipt(orderData, ordRef.id);
+
+            // Reset
+            store.ordersTabs = store.ordersTabs.filter(t => t.id !== store.activeTabId);
+            if(store.ordersTabs.length === 0) addTab();
+            else switchTab(store.ordersTabs[0].id);
+        }
+
+        function printReceipt(order, oid) {
+            document.getElementById('print-store-name').innerText = store.settings.name || "MY STORE";
+            document.getElementById('print-store-addr').innerText = store.settings.addr || "";
+            document.getElementById('print-store-phone').innerText = store.settings.phone || "";
+            document.getElementById('print-footer').innerText = store.settings.footer || "Thank you!";
+            
+            document.getElementById('print-id').innerText = oid.substr(0, 8).toUpperCase();
+            document.getElementById('print-date').innerText = new Date().toLocaleString('vi-VN');
+            
+            document.getElementById('print-items').innerHTML = order.items.map(i => `
+                <tr>
+                    <td style="padding: 2px 0;">${i.name}</td>
+                    <td style="text-align: right;">${i.qty}</td>
+                    <td style="text-align: right;">${(i.price*i.qty).toLocaleString()}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('print-subtotal').innerText = order.subtotal.toLocaleString();
+            document.getElementById('print-discount').innerText = order.discount.toLocaleString();
+            document.getElementById('print-total').innerText = order.total.toLocaleString();
+
+            window.print();
+        }
+
+        // --- SETTINGS & STAFF ---
+        async function loadSettings() {
+            const d = await getDoc(doc(db, "settings", store.branchId));
+            if(d.exists()) {
+                store.settings = d.data();
+                document.getElementById('cfg-store-name').value = store.settings.name||"";
+                document.getElementById('cfg-store-addr').value = store.settings.addr||"";
+                document.getElementById('cfg-store-phone').value = store.settings.phone||"";
+                document.getElementById('cfg-store-footer').value = store.settings.footer||"";
+            }
+        }
+        window.saveSettings = async () => {
+            const s = {
+                name: document.getElementById('cfg-store-name').value,
+                addr: document.getElementById('cfg-store-addr').value,
+                phone: document.getElementById('cfg-store-phone').value,
+                footer: document.getElementById('cfg-store-footer').value
+            };
+            await setDoc(doc(db, "settings", store.branchId), s);
+            store.settings = s;
+            alert("Đã lưu!");
+        }
+
+        window.addStaff = async () => {
+            const email = prompt("Email nhân viên:");
+            const pin = prompt("Mã PIN (4 số):");
+            const role = prompt("Vai trò (admin/staff):", "staff");
+            if(email && pin) {
+                // Note: This only creates the DB record. Auth User must be created in Firebase Console manually or via Admin SDK backend.
+                // For this demo, we assume the Auth User exists or will be created.
+                const uid = "user_" + Date.now(); // Fake UID for display list
+                await addDoc(collection(db, "users"), { name: email.split('@')[0], email, pin, role, branchId: store.branchId });
+                loadStaff();
+            }
+        }
+        
+        async function loadStaff() {
+            const s = await getDocs(query(collection(db, "users"))); // Should filter by branch in real logic if strict
+            const tb = document.getElementById('staff-table');
+            tb.innerHTML = "";
+            s.forEach(d => {
+                const u = d.data();
+                tb.innerHTML += `<tr><td class="p-4">${u.email}</td><td class="p-4">${u.name}</td><td class="p-4 uppercase font-bold text-xs">${u.role}</td><td class="p-4">****</td><td class="p-4"><button class="text-red-500" onclick="delStaff('${d.id}')">Xóa</button></td></tr>`;
+            });
+        }
+        window.delStaff = async (id) => { if(confirm("Xóa?")) { await deleteDoc(doc(db, "users", id)); loadStaff(); } }
+
+        // --- INVENTORY (Basic) ---
+        window.openProductModal = () => document.getElementById('modal-product').classList.remove('hidden');
+        window.saveProduct = async () => {
+            const p = {
+                name: document.getElementById('prod-name').value,
+                price: Number(document.getElementById('prod-price').value),
+                cost: Number(document.getElementById('prod-cost').value),
+                stock: Number(document.getElementById('prod-stock').value),
+                category: document.getElementById('prod-cat').value,
+                branchId: store.branchId
+            };
+            await addDoc(collection(db, "products"), p);
+            document.getElementById('modal-product').classList.add('hidden');
+        }
+        function renderInventory() {
+            document.getElementById('inventory-table').innerHTML = store.products.map(p => `
+                <tr class="border-b hover:bg-slate-50">
+                    <td class="p-3">${p.name}</td>
+                    <td class="p-3 text-right font-bold">${p.price.toLocaleString()}</td>
+                    <td class="p-3 text-right text-slate-500">${(p.cost||0).toLocaleString()}</td>
+                    <td class="p-3 text-center">${p.stock}</td>
+                    <td class="p-3 text-center"><button class="text-indigo-600 text-xs font-bold">Sửa</button></td>
+                </tr>
+            `).join('');
+        }
+        window.exportJSON = () => {
+            const data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(store.products));
+            const a = document.createElement('a'); a.href = data; a.download = "products.json"; a.click();
+        }
+
+        // --- NAVIGATION & SECURITY ---
+        let pendingView = null;
+        window.nav = (v) => {
+            document.querySelectorAll('[id^="screen-"]').forEach(e => e.classList.add('hidden'));
+            document.getElementById('screen-' + v).classList.remove('hidden');
+        }
+        window.secureNav = (v) => {
+            pendingView = v;
+            document.getElementById('pin-input').value = "";
+            document.getElementById('pin-modal').classList.remove('hidden');
+            document.getElementById('pin-input').focus();
+        }
+        window.closePinModal = () => document.getElementById('pin-modal').classList.add('hidden');
+        window.verifyPin = () => {
+            const p = document.getElementById('pin-input').value;
+            if(p === store.user.pin || p === "9999") { // 9999 is master key
+                closePinModal();
+                nav(pendingView);
+                if(pendingView === 'staff') loadStaff();
+            } else alert("Sai mã PIN!");
+        }
+
+        // F1 Shortcut for Search
+        document.addEventListener('keydown', (e) => {
+            if(e.key === "F1") { e.preventDefault(); document.getElementById('pos-search').focus(); }
+        });
+
+    </script>
 </body>
 </html>

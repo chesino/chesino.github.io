@@ -1022,44 +1022,38 @@ class UIManager {
         }
     }
 
-    static async syncProducts() {
+  static async syncProducts() {
         UIManager.Loading();
-        const branchName = document.getElementById('branch')?.value || '';
-        let url = '';
-
-
-        if (branchName === "Mai Tây Hair Salon") {
-            url = await getScriptURL('Product');
-        } else {
-            url = await getScriptURL('Product2');
-        }
-
-        if (!url) return; // Token sai hoặc thiếu, không tiếp tục
-
+        // Không cần check URL nữa
+        
         try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            // --- LOGIC FIREBASE MỚI ---
+            // Lấy dữ liệu từ collection "products"
+            const querySnapshot = await window.getDocs(window.collection(window.db, "products"));
+            const newData = [];
+            querySnapshot.forEach((doc) => {
+                // Lấy data và gộp ID của document vào nếu cần thiết
+                newData.push({ ...doc.data(), firebaseId: doc.id });
+            });
+            // --------------------------
 
-            const newData = await response.json();
             const localData = JSON.parse(localStorage.getItem('products')) || [];
 
+            // So sánh và cập nhật
             if (JSON.stringify(localData) !== JSON.stringify(newData)) {
                 localStorage.setItem('products', JSON.stringify(newData));
-                this.showToast('Dữ liệu đã được đồng bộ và cập nhật, Vui lòng chờ 3 giây.');
+                this.showToast('Dữ liệu sản phẩm đã được cập nhật.');
                 setTimeout(() => {
                     location.reload();
-                }, 3000);
+                }, 1500);
             } else {
-                console.log('Local data is up to date. No changes made.');
-                this.showToast('Dữ liệu đã được đồng bộ, không có thay đổi.');
+                this.showToast('Dữ liệu đã đồng bộ, không có thay đổi.');
             }
         } catch (error) {
             console.error('Error syncing products:', error);
-            document.getElementById('products').innerHTML = '<div class="no-product">Không thể đồng bộ dữ liệu sản phẩm.</div>';
+            document.getElementById('products').innerHTML = '<div class="no-product">Không thể kết nối Firebase.</div>';
         }
-
     }
-
 
 
     static renderCategoryButtons() {
@@ -1089,11 +1083,12 @@ class UIManager {
     }
 
 
-    static renderProducts(filterCategory = null, keyword = '') {
+   static renderProducts(filterCategory = null, keyword = '') {
         if (!domElements.productsContainer) return;
 
         let filteredProducts = products;
 
+        // Lọc theo danh mục
         if (filterCategory && filterCategory !== 'Tất cả') {
             filteredProducts = filteredProducts.filter(p => {
                 const categories = (p.category || 'Khác').split('+').map(c => c.trim());
@@ -1101,6 +1096,7 @@ class UIManager {
             });
         }
 
+        // Lọc theo từ khóa
         if (keyword) {
             const lowerKeyword = keyword.toLowerCase();
             filteredProducts = filteredProducts.filter(p =>
@@ -1109,9 +1105,9 @@ class UIManager {
             );
         }
 
-
-        domElements.productsContainer.innerHTML = filteredProducts.length
-            ? filteredProducts.map(product => `
+        // --- PHẦN CẬP NHẬT HIỂN THỊ (ĐÃ SỬA) ---
+        if (filteredProducts.length > 0) {
+            domElements.productsContainer.innerHTML = filteredProducts.map(product => `
                 <div class="product-item" data-id="${product.id}" onclick="CartManager.addItem(${JSON.stringify(product).replace(/"/g, "'")})">
                     <div class="product-image">
                         <img src="./Asset/Logo.png" alt="${product.name}" onerror="this.src='./Asset/logo.png'">
@@ -1120,10 +1116,27 @@ class UIManager {
                     <div class="product-id">${product.id}</div>
                     <div class="product-price">${product.price.toLocaleString()}đ</div>
                 </div>
-            `).join('')
-            : `<div class="no-product">Không tìm thấy sản phẩm nào.</div>`;
-    }
+            `).join('');
+        } else {
+            // Luôn hiện nút thêm mới dù có từ khóa hay không
+            const message = keyword 
+                ? `Không tìm thấy sản phẩm nào khớp với "<strong>${keyword}</strong>"` 
+                : `Danh sách sản phẩm trống hoặc chưa có dữ liệu.`;
+            
+            const btnText = keyword 
+                ? `Thêm nhanh sản phẩm này` 
+                : `Thêm sản phẩm mới`;
 
+            domElements.productsContainer.innerHTML = `
+                <div class="no-product">
+                    <p>${message}</p>
+                    <button onclick="ProductManager.quickAddProduct('${keyword}')" class="btn-add-quick">
+                        <i class="fas fa-plus-circle"></i> ${btnText}
+                    </button>
+                </div>
+            `;
+        }
+    }
     static loadProductsForSale() {
         this.renderCategoryButtons();
         this.renderProducts(); // Ban đầu render tất cả sản phẩm
@@ -1239,11 +1252,76 @@ class UIManager {
 class ProductManager {
     static products = [];
 
+    // --- THÊM HÀM MỚI NÀY VÀO ---
+    static async quickAddProduct(defaultName = '') {
+        const { value: formValues } = await Swal.fire({
+            title: 'Thêm nhanh sản phẩm',
+            html: `
+                <input id="swal-input-name" class="swal2-input" placeholder="Tên sản phẩm" value="${defaultName}">
+                <input id="swal-input-price" type="number" class="swal2-input" placeholder="Giá bán">
+                <input id="swal-input-category" class="swal2-input" placeholder="Phân loại (VD: Dịch vụ)">
+            `,
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Lưu & Thêm vào đơn',
+            cancelButtonText: 'Hủy',
+            preConfirm: () => {
+                const name = document.getElementById('swal-input-name').value.trim();
+                const price = parseInt(document.getElementById('swal-input-price').value) || 0;
+                const category = document.getElementById('swal-input-category').value.trim() || 'Khác';
+
+                if (!name) {
+                    Swal.showValidationMessage('Tên sản phẩm không được để trống');
+                    return false;
+                }
+                if (!price) {
+                    Swal.showValidationMessage('Vui lòng nhập giá tiền');
+                    return false;
+                }
+                
+                // Tự động tạo ID dựa trên thời gian để không trùng
+                const id = 'SP_' + Date.now(); 
+                return { id, name, price, category };
+            }
+        });
+
+        if (formValues) {
+            // 1. Thêm vào danh sách sản phẩm hiện tại (RAM)
+            products.push(formValues);
+            
+            // 2. Lưu vào LocalStorage
+            localStorage.setItem('products', JSON.stringify(products));
+            
+            // 3. Lưu lên Firebase (nếu có kết nối)
+            if (window.db && window.addDoc && window.collection) {
+                try {
+                    await window.addDoc(window.collection(window.db, "products"), formValues);
+                    console.log("Đã lưu sản phẩm mới lên Firebase");
+                } catch (e) {
+                    console.error("Lỗi lưu Firebase (chỉ lưu offline):", e);
+                }
+            }
+
+            // 4. Cập nhật giao diện & Thêm ngay vào giỏ hàng
+            UIManager.showToast(`Đã thêm: ${formValues.name}`);
+            
+            // Xóa từ khóa tìm kiếm để hiện lại danh sách
+            document.getElementById('product-search').value = '';
+            
+            // Render lại danh sách sản phẩm
+            UIManager.loadProductsForSale(); 
+            
+            // Thêm sản phẩm vừa tạo vào giỏ hàng luôn
+            CartManager.addItem(formValues); 
+        }
+    }
+
     static async init() {
         this.products = JSON.parse(localStorage.getItem('products')) || [];
         this.renderProductTable();
         this.attachHandlers();
     }
+
 
     static renderProductTable() {
         const tableBody = document.querySelector('#productTable tbody');
@@ -2084,68 +2162,59 @@ class HistoryManager {
         BillManager.printBill(billHTML);
     }
 }
-// Tải hóa đơn lên Google Sheet
-async function SendToGoogleSheet(jsonData, sheetName) {
-    // Định dạng datetime
-    function formatDate(datetime) {
-        const dateObj = new Date(datetime);
-        const time = dateObj.toLocaleTimeString("vi-VN", { hour12: false });
-        const date = dateObj.toLocaleDateString("vi-VN");
-        return `${time} ${date}`;
-    }
 
-    jsonData.datetime = formatDate(jsonData.datetime);
-
-    // Lấy token từ localStorage
-    const token = localStorage.getItem("ActivateKey");
-    if (!token) {
+/**
+ * Gửi dữ liệu lên Firebase Firestore
+ * @param {Object} jsonData - Dữ liệu cần gửi (dạng JSON object)
+ * @param {String} collectionName - Tên collection trên Firestore (ví dụ: 'invoices', 'customers')
+ */
+async function SendToFirebase(jsonData, collectionName) {
+    // Kiểm tra xem Firebase đã được khởi tạo chưa
+    if (!window.db || !window.addDoc || !window.collection) {
+        console.error("Firebase chưa được khởi tạo đúng cách trong index.html");
         await Swal.fire({
-            icon: 'warning',
-            title: 'Chưa kích hoạt',
-            text: 'Nhập mã kích hoạt ở phần cài đặt để sử dụng dịch vụ.',
-            confirmButtonText: 'OK'
+            icon: 'error',
+            title: 'Lỗi hệ thống',
+            text: 'Không thể kết nối đến cơ sở dữ liệu Firebase.',
         });
-        return;
+        throw new Error("Firebase not initialized");
     }
-
-    // Gộp token và sheetName vào jsonData
-    const postData = {
-        ...jsonData,
-        token: token,
-        sheet: sheetName
-    };
-
-    // Chuyển JSON thành query string
-    function jsonToQueryString(json) {
-        return Object.keys(json)
-            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
-            .join('&');
-    }
-
-    const queryString = jsonToQueryString(postData);
 
     try {
-        const scriptURL = await getScriptURL(); // chỉ trả về baseURL
+        // Tạo bản sao dữ liệu để xử lý
+        const docData = { ...jsonData };
 
-        if (!scriptURL) return;
-
-        const response = await fetch(scriptURL, {
-            redirect: "follow",
-            method: "POST",
-            body: queryString,
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8",
-            }
-        });
-
-        if (response.ok) {
-            console.log("✅ Gửi thành công");
-        } else {
-            throw new Error("❌ Lỗi khi gửi đơn hàng");
+        // 1. Xử lý ngày tháng: Thêm timestamp để tiện sắp xếp trên Firebase
+        // Nếu dữ liệu chưa có datetime, tự tạo mới. 
+        // Lưu ý: Firebase thích format ISO hoặc Timestamp object hơn là format chuỗi tiếng Việt tùy biến.
+        if (!docData.datetime) {
+            docData.datetime = new Date().toISOString();
         }
+        // Thêm trường createdAt chuẩn của hệ thống để sort
+        docData.createdAt = new Date().toISOString();
+
+        // 2. Làm sạch dữ liệu: Xóa các trường thừa kế thừa từ logic Google Sheet cũ (nếu có)
+        delete docData.token;
+        delete docData.sheet;
+
+        // 3. Gửi lên Firestore
+        // Sử dụng các hàm global đã được export từ index.html
+        const docRef = await window.addDoc(window.collection(window.db, collectionName), docData);
+
+        console.log(`✅ Đã lưu thành công vào ${collectionName} với ID: ${docRef.id}`);
+        return docRef.id; // Trả về ID của document vừa tạo
+
     } catch (error) {
-        console.error("🚫 Lỗi:", error.message);
-        console.log("Đã xảy ra lỗi trong quá trình gửi dữ liệu");
+        console.error(`❌ Lỗi khi gửi dữ liệu vào ${collectionName}:`, error);
+        
+        // Hiển thị thông báo lỗi nhỏ nếu cần thiết, hoặc để hàm gọi bên ngoài xử lý
+        await Swal.fire({
+            icon: 'error',
+            title: 'Lỗi lưu dữ liệu',
+            text: 'Không thể lưu đơn hàng lên server. Vui lòng kiểm tra kết nối mạng.',
+        });
+        
+        throw error; // Ném lỗi ra ngoài để hàm saveInvoice biết là thất bại
     }
 }
 
@@ -2155,42 +2224,49 @@ async function SendToGoogleSheet(jsonData, sheetName) {
 
 
 
-
 // Lưu hóa đơn vào LocalStorage
+// Lưu hóa đơn vào LocalStorage và gửi lên Firebase
 async function saveInvoice() {
     const saveButton = document.querySelector('.sync-data-btn');
-    saveButton.disabled = true; // Vô hiệu hóa nút
+    // Kiểm tra nút tồn tại trước khi thao tác để tránh lỗi
+    if (saveButton) saveButton.disabled = true; 
+    
     showOverlay();
 
     const branch = document.getElementById('branch').value;
-    const customer = document.getElementById('customer-name').value;
+    // Lấy giá trị khách hàng, nếu người dùng chọn 'Bỏ qua' ở dưới thì biến này sẽ được cập nhật
+    let customer = document.getElementById('customer-name').value; 
     const cashier = document.getElementById('staff-name').value;
     const discount = document.getElementById('discount-info').textContent;
 
-
+    // 1. Kiểm tra giỏ hàng
     if (cart.length === 0) {
         UIManager.showError('Giỏ hàng trống');
-        saveButton.disabled = false; // Kích hoạt lại nút
-        saveButton.disabled = false; // Kích hoạt lại nút sau khi hoàn thành
+        if (saveButton) saveButton.disabled = false;
         hideOverlay();
         return;
-    } else if (!customer) {
-        Swal.fire({
+    } 
+    
+    // 2. Kiểm tra thông tin khách hàng
+    if (!customer) {
+        const result = await Swal.fire({
             title: 'Thiếu thông tin khách hàng',
             text: 'Có thể bỏ qua hệ thống sẽ đặt là khách lẻ.',
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Bỏ qua',
             cancelButtonText: 'Hủy',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                customer = "Khách lẻ";
-            } else {
-                hideOverlay();
-                return;
-            }
         });
-        return;
+
+        if (result.isConfirmed) {
+            customer = "Khách lẻ";
+            // Cập nhật lại giá trị hiển thị trên input nếu muốn (tuỳ chọn)
+            // document.getElementById('customer-name').value = "Khách lẻ";
+        } else {
+            hideOverlay();
+            if (saveButton) saveButton.disabled = false;
+            return;
+        }
     }
 
     let hasRunCustomerPoints = false; // Cờ để đảm bảo chỉ chạy 1 lần
@@ -2198,45 +2274,57 @@ async function saveInvoice() {
     try {
         if (!hasRunCustomerPoints) {
             hasRunCustomerPoints = true; // Đánh dấu là đã chạy
-            await customerPoints(); // Gọi hàm và chờ hoàn thành
+            await customerPoints(); // Gọi hàm tính điểm và chờ hoàn thành
         }
     } catch (error) {
         console.error("Error calculating customer points:", error);
-        UIManager.showError('Không thể lưu hoá đơn');
-        saveButton.disabled = false; // Kích hoạt lại nút nếu có lỗi
-        hasRunCustomerPoints = false; // Đặt lại cờ nếu xảy ra lỗi
+        UIManager.showError('Không thể lưu hoá đơn do lỗi tính điểm');
+        if (saveButton) saveButton.disabled = false;
+        hasRunCustomerPoints = false;
+        hideOverlay();
         return;
     }
 
-
     const itemsString = cart.map(item => `${item.name} (${item.quantity})`).join(', ');
     const finalTotal = CartManager.getFinalTotal();
+    
+    // Tạo object dữ liệu hóa đơn
     const invoiceData = {
-        datetime: new Date().toISOString(),
+        datetime: new Date().toLocaleString('vi-VN'), // Lưu format dễ đọc cho LocalStorage
+        isoDate: new Date().toISOString(), // Lưu thêm format chuẩn máy
         branch: branch,
         customer: customer,
         cashier: cashier,
         items: itemsString,
         discount: discount,
         total: finalTotal.toLocaleString(),
+        totalRaw: finalTotal, // Lưu số nguyên để dễ tính toán sau này
         payment: document.getElementById('payment-method').value || 'Chưa xác định',
     };
 
-    HistoryManager.saveInvoice(invoiceData); // Lưu vào LocalStorage
+    // Lưu lịch sử vào trình duyệt (Offline)
+    HistoryManager.saveInvoice(invoiceData); 
 
+    // Gửi dữ liệu lên Firebase (Online)
     try {
-        await SendToGoogleSheet(invoiceData, "DataBase");
+        // Sử dụng hàm SendToFirebase mới thay cho SendToGoogleSheet
+        // "invoices" là tên collection trên Firestore
+        await SendToFirebase(invoiceData, "invoices");
 
     } catch (error) {
-        console.error("Error sending data:", error);
+        console.error("Error sending data to Firebase:", error);
+        // Vẫn cho phép lưu thành công ở local dù server lỗi
+        // Có thể thêm logic lưu vào hàng đợi (queue) để gửi lại sau nếu muốn
     }
 
-    CartManager.saveCart(); // Cập nhật giỏ hàng
+    // Dọn dẹp và cập nhật giao diện
+    CartManager.saveCart(); // Cập nhật/Xóa giỏ hàng (tuỳ logic CartManager của bạn)
     CartManager.updateDisplay();
     UIManager.showToast('Đã lưu hóa đơn thành công');
 
+    // Mở lại nút sau 1 giây
     setTimeout(() => {
-        saveButton.disabled = false; // Kích hoạt lại nút sau khi hoàn thành
+        if (saveButton) saveButton.disabled = false; 
         hideOverlay();
     }, 1000);
 }

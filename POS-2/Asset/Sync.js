@@ -6,7 +6,7 @@ let isFetching = false; // Biến để kiểm soát quá trình fetch đang di�
 
 async function loadCustomerData() {
     if (isDataLoaded || isFetching) {
-        console.log("Dữ liệu đang được tải hoặc đã tải xong. Không cần tải lại.");
+        console.log("Dữ liệu đang tải hoặc đã xong.");
         return;
     }
 
@@ -17,25 +17,23 @@ async function loadCustomerData() {
     const localData = localStorage.getItem("customers");
     const localDataArray = JSON.parse(localData || '[]');
 
-    const url = await getScriptURL("Customer");
-    if (!url) {
-        isFetching = false;
-        hideOverlay();
-        return;
-    }
-
     try {
-        const response = await fetch(url);
-        const data = await response.json();
+        // --- LOGIC FIREBASE MỚI ---
+        // Lấy dữ liệu từ collection "customers" trên Firestore
+        const querySnapshot = await window.getDocs(window.collection(window.db, "customers"));
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            data.push(doc.data());
+        });
+        // --------------------------
 
         if (localDataArray.length === 0) {
             customers = data;
             localStorage.setItem("customers", JSON.stringify(customers));
             UIManager.showToast('Đã đồng bộ khách hàng.');
         } else {
-            const isSameData = JSON.stringify(localDataArray) === JSON.stringify(data);
-
-            if (isSameData) {
+            // So sánh đơn giản độ dài hoặc nội dung (có thể tối ưu sau)
+            if (JSON.stringify(localDataArray) === JSON.stringify(data)) {
                 UIManager.showToast('Không có khách hàng mới.');
                 customers = localDataArray;
             } else {
@@ -44,11 +42,11 @@ async function loadCustomerData() {
                 UIManager.showToast('Đã cập nhật danh sách khách hàng.');
             }
         }
-
         isDataLoaded = true;
+
     } catch (error) {
-        console.error("Error loading customer data:", error);
-        document.getElementById("error-message").textContent = "Không thể tải dữ liệu khách hàng. Bạn có thể nhập thủ công.";
+        console.error("Lỗi tải khách hàng từ Firebase:", error);
+        document.getElementById("error-message").textContent = "Lỗi kết nối Firebase.";
     } finally {
         isFetching = false;
         document.getElementById("customer-name").disabled = false;
